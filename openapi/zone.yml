@@ -1,0 +1,147 @@
+definitions:
+  Zone:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The zone ID (auto-generated).
+      name:
+        type: string
+        description: The zone name.
+      description:
+        type: string
+        description: The zone description.
+
+paths:
+  /zone:
+    get:
+      tags:
+        - zone
+      operationId: GetAllZones
+      description: Returns the IDs of registered zones.
+      responses:
+        200:
+          description: Returns the an array of zone IDs.
+          schema:
+            type: array
+            items:
+              type: string
+
+  /zone/{zoneId}:
+    get:
+      tags:
+        - zone
+      operationId: GetZone
+      description: Returns a description of the zone
+      parameters:
+        - name: zoneId
+          in: path
+          type: string
+          required: true
+          description: The ID of the zone to get.
+      responses:
+        200:
+          description: Returns the zone object.
+          schema:
+            $ref: '#/definitions/Zone'
+        404:
+          description: Invalid zone ID was provided.
+    put:
+      tags:
+        - zone
+      operationId: UpdateZone
+      description: Updates a zone configuration.
+      parameters:
+        - name: zoneId
+          in: path
+          type: string
+          required: true
+          description: The ID of the zone to get.
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/Zone'
+      responses:
+        200:
+          description: Returns the updated zone object.
+          schema:
+            $ref: '#/definitions/Zone'
+        400:
+          description: Bad parameters were provided.
+        404:
+          description: Invalid zone ID was provided.
+    delete:
+      tags:
+        - zone
+      operationId: DeleteZone
+      description: Deletes an existing zone.
+      parameters:
+        - name: zoneId
+          in: path
+          type: string
+          required: true
+          description: The ID of the zone to get.
+      responses:
+        200:
+          description: The zone has been successfully removed.
+        404:
+          description: Invalid zone ID was provided.
+        409:
+          description: The zone is not empty or still being referenced.
+        500:
+          description: Unable to delete zone.
+
+  /zone/{zoneId}/host:
+    post:
+      tags:
+        - zone
+        - host
+      operationId: CreateHost
+      description: Creates a new host.
+      parameters:
+        - name: zoneId
+          in: path
+          type: string
+          required: true
+          description: the ID of the associated zone.
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/HostConfiguration'
+      responses:
+        201:
+          description: Returns the newly created host object.
+          schema:
+            $ref: '#/definitions/Host'
+        400:
+          description: Bad parameters were provided.
+        404:
+          description: Invalid zone ID was provided.
+        409:
+          description: Host already exists.
+        500:
+          description: Unable to connect to host's libvirt.
+
+  /zone/{zoneId}/hosts:
+    get:
+      tags:
+        - zone
+        - host
+      operationId: GetZoneHosts
+      description: Returns the UUIDs of the hosts existing in the zone.
+      parameters:
+        - name: zoneId
+          in: path
+          type: string
+          required: true
+          description: The ID of the zone to query.
+      responses:
+        200:
+          description: Returns an array of host UUIDs.
+          schema:
+            type: array
+            items:
+              type: string
+        404:
+          description: Invalid zone ID was provided.

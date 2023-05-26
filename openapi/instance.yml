@@ -1,0 +1,269 @@
+definitions:
+  Instance:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The instance ID  (auto-generated).
+      vm_id:
+        type: string
+        description: the ID of the Virtual Machine
+      vm_uuid:
+        type: string
+        description: the UUID of the Virtual Machine
+      name:
+        type: string
+        description: the name of the Virtual Machine
+      template:
+        type: boolean
+        description: is the VM a template ?
+      topology:
+        $ref: '#/definitions/InstanceTopology'
+  InstanceTopology:
+    type: object
+    properties:
+      memory:
+        type: integer
+        description: the memory size of the VM in bytes
+      vcpus:
+        type: integer
+        description: the memory size of the VM in bytes
+      disks:
+        type: array
+        items:
+          $ref: '#/definitions/Disk'
+      nics:
+        type: array
+        items:
+          $ref: '#/definitions/NIC'
+  Disk:
+    type: object
+    properties:
+      device:
+        type: string
+        description: name of the disk block device
+      rbd:
+        type: object
+        properties:
+          image:
+            type: string
+            description: disk image name on RBD pool
+          host:
+            type: string
+            description: RBD pool server address
+          port:
+            type: integer
+            description: RBD pool server port
+  NIC:
+    type: object
+    properties:
+      bridge:
+        type: string
+        description: name of the host's network bridge interface the interface is currently mapped to
+      mac:
+        type: string
+        description: MAC address of the interface
+  InstanceState:
+    type: object
+    properties:
+      state:
+        type: string
+        description: the state of the VM
+      reason:
+        type: string
+        description: the reason of the state of the VM
+
+paths:
+  /instance:
+    get:
+      tags:
+        - instance
+      operationId: GetAllInstances
+      description: Returns the IDs of registered virtual machines.
+      responses:
+        200:
+          description: Returns the an array of virtual machines UUIDs.
+          schema:
+            type: array
+            items:
+              type: string
+
+  /instance/{instanceId}:
+    get:
+      tags:
+        - instance
+      operationId: GetInstance
+      description: Returns the description of the virtual machine.
+      parameters:
+        - name: instanceId
+          in: path
+          type: string
+          required: true
+          description: The ID of the virtual machine to query.
+      responses:
+        200:
+          description: Returns the virtual machine object.
+          schema:
+            $ref: '#/definitions/Instance'
+        404:
+          description: Invalid instance ID was provided.
+
+  /instance/{instanceId}/state:
+    get:
+      tags:
+        - instance
+      operationId: GetInstanceState
+      description: Returns the state of the virtual machine.
+      parameters:
+        - name: instanceId
+          in: path
+          type: string
+          required: true
+          description: The ID of the virtual machine to query.
+      responses:
+        200:
+          description: Returns the virtual machine state object.
+          schema:
+            $ref: '#/definitions/InstanceState'
+        404:
+          description: Invalid instance ID was provided.
+
+  /instance/{instanceId}/reboot:
+    post:
+      tags:
+        - instance
+      operationId: RebootInstance
+      description: Perform a virtual machine software reboot.
+      parameters:
+        - name: instanceId
+          in: path
+          type: string
+          required: true
+          description: The ID of the virtual machine to query.
+      responses:
+        200:
+          description: The virtual machine has been rebooted successfully.
+        404:
+          description: Invalid instance ID was provided.
+        500:
+          description: An error occurred when trying to reboot the virtual machine.
+
+  /instance/{instanceId}/reset:
+    post:
+      tags:
+        - instance
+      operationId: ResetInstance
+      description: Perform a virtual machine hardware reset.
+      parameters:
+        - name: instanceId
+          in: path
+          type: string
+          required: true
+          description: The ID of the virtual machine to query.
+      responses:
+        200:
+          description: The virtual machine has been reseted successfully.
+        404:
+          description: Invalid instance ID was provided.
+        500:
+          description: An error occurred when trying to reset the virtual machine.
+
+  /instance/{instanceId}/suspend:
+    post:
+      tags:
+        - instance
+      operationId: SuspendInstance
+      description: Perform a virtual machine software PM suspend.
+      parameters:
+        - name: instanceId
+          in: path
+          type: string
+          required: true
+          description: The ID of the virtual machine to query.
+      responses:
+        200:
+          description: The virtual machine has been suspended successfully.
+        404:
+          description: Invalid instance ID was provided.
+        500:
+          description: An error occurred when trying to suspend the virtual machine.
+
+  /instance/{instanceId}/resume:
+    post:
+      tags:
+        - instance
+      operationId: ResumeInstance
+      description: Perform a virtual machine software PM resume.
+      parameters:
+        - name: instanceId
+          in: path
+          type: string
+          required: true
+          description: The ID of the virtual machine to query.
+      responses:
+        200:
+          description: The virtual machine has been resumed successfully.
+        404:
+          description: Invalid instance ID was provided.
+        500:
+          description: An error occurred when trying to resume the virtual machine.
+
+  /instance/{instanceId}/start:
+    post:
+      tags:
+        - instance
+      operationId: StartInstance
+      description: Boot up a virtual machine.
+      parameters:
+        - name: instanceId
+          in: path
+          type: string
+          required: true
+          description: The ID of the virtual machine to query.
+      responses:
+        200:
+          description: The virtual machine has been started successfully.
+        404:
+          description: Invalid instance ID was provided.
+        500:
+          description: An error occurred when trying to start the virtual machine.
+
+  /instance/{instanceId}/stop:
+    post:
+      tags:
+        - instance
+      operationId: StopInstance
+      description: Initiate a hardware stop of a virtual machine.
+      parameters:
+        - name: instanceId
+          in: path
+          type: string
+          required: true
+          description: The ID of the virtual machine to query.
+      responses:
+        200:
+          description: The virtual machine has been stopped successfully.
+        404:
+          description: Invalid instance ID was provided.
+        500:
+          description: An error occurred when trying to stop the virtual machine.
+
+  /instance/{instanceId}/shutdown:
+    post:
+      tags:
+        - instance
+      operationId: ShutdownInstance
+      description: Initiate a software shutdown of a virtual machine.
+      parameters:
+        - name: instanceId
+          in: path
+          type: string
+          required: true
+          description: The ID of the virtual machine to query.
+      responses:
+        200:
+          description: The virtual machine has been shut down successfully.
+        404:
+          description: Invalid instance ID was provided.
+        500:
+          description: An error occurred when trying to shut down the virtual machine.

@@ -1,0 +1,215 @@
+definitions:
+  Project:
+    type: object
+    properties:
+      id:
+        type: string
+        description: The project ID (auto-generated).
+      name:
+        type: string
+        description: The project short name.
+      description:
+        type: string
+        description: The project description.
+  ProjectResources:
+    type: object
+    description: The global project quotas (0 for unlimited).
+    properties:
+      vcpus:
+        type: integer
+        format: uint16
+        description: the maximum total number of vCPUs allowed to be consumed by sum of all instances.
+      memory:
+        type: integer
+        format: uint64
+        description: the maximum total memory (in bytes) allowed to be consumed by sum of all instances.
+      storage:
+        type: integer
+        format: uint64
+        description: the maximum total disk capacity allowed to be consumed by sum of all instances.
+      instances:
+        type: integer
+        format: uint16
+        description: the maximum number of instances allowed to be spawned.
+
+paths:
+  /project:
+    get:
+      tags:
+        - project
+      operationId: GetAllProjects
+      description: Returns the IDs of registered projects.
+      responses:
+        200:
+          description: Returns the an array of project IDs.
+          schema:
+            type: array
+            items:
+              type: string
+    post:
+      tags:
+        - project
+      operationId: CreateProject
+      description: Creates a new project.
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Project'
+      responses:
+        201:
+          description: Returns the newly created project object.
+          schema:
+            $ref: '#/definitions/Project'
+        400:
+          description: Bad parameters were provided.
+        409:
+          description: Project already exists.
+        500:
+          description: Unable to create the requested project.
+
+  /project/{projectId}:
+    get:
+      tags:
+        - project
+      operationId: GetProject
+      description: Returns a description of the project
+      parameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: The ID of the project to get.
+      responses:
+        200:
+          description: Returns the project object.
+          schema:
+            $ref: '#/definitions/Project'
+        404:
+          description: Invalid project ID was provided.
+    put:
+      tags:
+        - project
+      operationId: UpdateProject
+      description: Updates a project configuration.
+      parameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: The ID of the project to update.
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/Project'
+      responses:
+        200:
+          description: Returns the updated project object.
+          schema:
+            $ref: '#/definitions/Project'
+        400:
+          description: Bad parameters were provided.
+        404:
+          description: Invalid project ID was provided.
+    delete:
+      tags:
+        - project
+      operationId: DeleteProject
+      description: Deletes an existing project.
+      parameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: The ID of the project to delete.
+      responses:
+        200:
+          description: The project has been successfully removed.
+        404:
+          description: Invalid project ID was provided.
+        409:
+          description: The project is not empty or still being referenced.
+        500:
+          description: Unable to delete project.
+
+  /project/{projectId}/usage:
+    get:
+      tags:
+        - project
+      operationId: GetProjectUsage
+      description: Returns the current resources usage for the project.
+      parameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: The ID of the project to query.
+      responses:
+        200:
+          description: Returns the project resources object.
+          schema:
+            $ref: '#/definitions/ProjectResources'
+        404:
+          description: Invalid project ID was provided.
+
+  /project/{projectId}/quotas:
+    get:
+      tags:
+        - project
+      operationId: GetProjectQuotas
+      description: Returns the quotas set for the project.
+      parameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: The ID of the project to query.
+      responses:
+        200:
+          description: Returns the project resources object.
+          schema:
+            $ref: '#/definitions/ProjectResources'
+        404:
+          description: Invalid project ID was provided.
+    put:
+      tags:
+        - project
+      operationId: UpdateProjectQuotas
+      description: Updates a project's quotas.
+      parameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: The ID of the project to update.
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ProjectResources'
+      responses:
+        200:
+          description: Returns the updated project resources object.
+          schema:
+            $ref: '#/definitions/ProjectResources'
+        404:
+          description: Invalid project ID was provided.
+    delete:
+      tags:
+        - project
+      operationId: ResetProjectQuotas
+      description: Reset project's quotas to default value.
+      parameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: The ID of the project to query.
+      responses:
+        200:
+          description: The project quotas have been successfully reset.
+        404:
+          description: Invalid project ID was provided.
+
+# /project/id/instance Create
