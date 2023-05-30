@@ -1,0 +1,108 @@
+definitions:
+  VNet:
+    type: object
+    required: [name, subnetId, interface, cidr, gateway, dns]
+    properties:
+      id:
+        type: string
+        description: The virtual network ID (auto-generated).
+      name:
+        type: string
+        description: The virtual network name.
+      description:
+        type: string
+        description: The virtual network description.
+      subnetId:
+        type: integer
+        description: The subnet identifier.
+      interface:
+        type: string
+        description: The libvirt's bridge network interface (brX).
+      cidr:
+        type: string
+        description: The virtual network CIDR (e.g. 192.168.0.0/24).
+      gateway:
+        type: string
+        description: The virtual network router/gateway IP address (e.g. 192.168.0.254).
+      dns:
+        type: string
+        description: The virtual network DNS server IP address (e.g. 192.168.0.254).
+
+paths:
+  /vnet:
+    get:
+      tags:
+        - vnet
+      operationId: GetAllVNets
+      description: Returns the IDs of virtual networks.
+      responses:
+        200:
+          description: Returns the an array of virtual network IDs.
+          schema:
+            type: array
+            items:
+              type: string
+
+  /vnet/{vnetId}:
+    get:
+      tags:
+        - bnet
+      operationId: GetVNet
+      description: Returns a description of the virtual network
+      parameters:
+        - name: vnetId
+          in: path
+          type: string
+          required: true
+          description: The ID of the virtual network to get.
+      responses:
+        200:
+          description: Returns the virtual network object.
+          schema:
+            $ref: '#/definitions/VNet'
+        404:
+          description: Invalid virtual network ID was provided.
+    put:
+      tags:
+        - vnet
+      operationId: UpdateVNet
+      description: Updates a virtual network configuration.
+      parameters:
+        - name: vnetId
+          in: path
+          type: string
+          required: true
+          description: The ID of the virtual network to get.
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/VNet'
+      responses:
+        200:
+          description: Returns the updated virtual network object.
+          schema:
+            $ref: '#/definitions/VNet'
+        400:
+          description: Bad parameters were provided.
+        404:
+          description: Invalid virtual network ID was provided.
+    delete:
+      tags:
+        - vnet
+      operationId: DeleteVNet
+      description: Deletes an existing virtual network.
+      parameters:
+        - name: vnetId
+          in: path
+          type: string
+          required: true
+          description: The ID of the virtual network to get.
+      responses:
+        200:
+          description: The virtual network has been successfully removed.
+        404:
+          description: Invalid virtual network ID was provided.
+        409:
+          description: The virtual network is not empty or still being referenced.
+        500:
+          description: Unable to delete virtual network.
