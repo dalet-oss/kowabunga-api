@@ -19,7 +19,6 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/dalet-oss/kowabunga-api/server/api/bnet"
 	"github.com/dalet-oss/kowabunga-api/server/api/host"
 	"github.com/dalet-oss/kowabunga-api/server/api/instance"
 	"github.com/dalet-oss/kowabunga-api/server/api/pool"
@@ -142,8 +141,8 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		RegionGetRegionZonesHandler: region.GetRegionZonesHandlerFunc(func(params region.GetRegionZonesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation region.GetRegionZones has not yet been implemented")
 		}),
-		BnetGetVNetHandler: bnet.GetVNetHandlerFunc(func(params bnet.GetVNetParams, principal interface{}) middleware.Responder {
-			return middleware.NotImplemented("operation bnet.GetVNet has not yet been implemented")
+		VnetGetVNetHandler: vnet.GetVNetHandlerFunc(func(params vnet.GetVNetParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation vnet.GetVNet has not yet been implemented")
 		}),
 		ZoneGetZoneHandler: zone.GetZoneHandlerFunc(func(params zone.GetZoneParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.GetZone has not yet been implemented")
@@ -318,8 +317,8 @@ type KowabungaAPI struct {
 	RegionGetRegionHandler region.GetRegionHandler
 	// RegionGetRegionZonesHandler sets the operation handler for the get region zones operation
 	RegionGetRegionZonesHandler region.GetRegionZonesHandler
-	// BnetGetVNetHandler sets the operation handler for the get v net operation
-	BnetGetVNetHandler bnet.GetVNetHandler
+	// VnetGetVNetHandler sets the operation handler for the get v net operation
+	VnetGetVNetHandler vnet.GetVNetHandler
 	// ZoneGetZoneHandler sets the operation handler for the get zone operation
 	ZoneGetZoneHandler zone.GetZoneHandler
 	// ZoneGetZoneHostsHandler sets the operation handler for the get zone hosts operation
@@ -534,8 +533,8 @@ func (o *KowabungaAPI) Validate() error {
 	if o.RegionGetRegionZonesHandler == nil {
 		unregistered = append(unregistered, "region.GetRegionZonesHandler")
 	}
-	if o.BnetGetVNetHandler == nil {
-		unregistered = append(unregistered, "bnet.GetVNetHandler")
+	if o.VnetGetVNetHandler == nil {
+		unregistered = append(unregistered, "vnet.GetVNetHandler")
 	}
 	if o.ZoneGetZoneHandler == nil {
 		unregistered = append(unregistered, "zone.GetZoneHandler")
@@ -819,7 +818,7 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/vnet/{vnetId}"] = bnet.NewGetVNet(o.context, o.BnetGetVNetHandler)
+	o.handlers["GET"]["/vnet/{vnetId}"] = vnet.NewGetVNet(o.context, o.VnetGetVNetHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}

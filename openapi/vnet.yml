@@ -46,7 +46,7 @@ paths:
   /vnet/{vnetId}:
     get:
       tags:
-        - bnet
+        - vnet
       operationId: GetVNet
       description: Returns a description of the virtual network
       parameters:

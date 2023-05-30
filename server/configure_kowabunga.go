@@ -11,7 +11,6 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 
 	swaggerapi "github.com/dalet-oss/kowabunga-api/server/api"
-	"github.com/dalet-oss/kowabunga-api/server/api/bnet"
 	"github.com/dalet-oss/kowabunga-api/server/api/host"
 	"github.com/dalet-oss/kowabunga-api/server/api/instance"
 	"github.com/dalet-oss/kowabunga-api/server/api/pool"
@@ -209,9 +208,9 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation region.GetRegionZones has not yet been implemented")
 		})
 	}
-	if api.BnetGetVNetHandler == nil {
-		api.BnetGetVNetHandler = bnet.GetVNetHandlerFunc(func(params bnet.GetVNetParams, principal interface{}) middleware.Responder {
-			return middleware.NotImplemented("operation bnet.GetVNet has not yet been implemented")
+	if api.VnetGetVNetHandler == nil {
+		api.VnetGetVNetHandler = vnet.GetVNetHandlerFunc(func(params vnet.GetVNetParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation vnet.GetVNet has not yet been implemented")
 		})
 	}
 	if api.ZoneGetZoneHandler == nil {

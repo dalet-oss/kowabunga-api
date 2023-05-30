@@ -1150,7 +1150,7 @@ func init() {
       "get": {
         "description": "Returns a description of the virtual network",
         "tags": [
-          "bnet"
+          "vnet"
         ],
         "operationId": "GetVNet",
         "parameters": [
@@ -3149,7 +3149,7 @@ func init() {
       "get": {
         "description": "Returns a description of the virtual network",
         "tags": [
-          "bnet"
+          "vnet"
         ],
         "operationId": "GetVNet",
         "parameters": [
