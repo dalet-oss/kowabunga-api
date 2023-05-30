@@ -13,6 +13,7 @@ import (
 	swaggerapi "github.com/dalet-oss/kowabunga-api/server/api"
 	"github.com/dalet-oss/kowabunga-api/server/api/host"
 	"github.com/dalet-oss/kowabunga-api/server/api/instance"
+	"github.com/dalet-oss/kowabunga-api/server/api/pool"
 	"github.com/dalet-oss/kowabunga-api/server/api/project"
 	"github.com/dalet-oss/kowabunga-api/server/api/region"
 	"github.com/dalet-oss/kowabunga-api/server/api/zone"
@@ -61,6 +62,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation zone.CreateHost has not yet been implemented")
 		})
 	}
+	if api.ZoneCreatePoolHandler == nil {
+		api.ZoneCreatePoolHandler = zone.CreatePoolHandlerFunc(func(params zone.CreatePoolParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation zone.CreatePool has not yet been implemented")
+		})
+	}
 	if api.ProjectCreateProjectHandler == nil {
 		api.ProjectCreateProjectHandler = project.CreateProjectHandlerFunc(func(params project.CreateProjectParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.CreateProject has not yet been implemented")
@@ -79,6 +85,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.HostDeleteHostHandler == nil {
 		api.HostDeleteHostHandler = host.DeleteHostHandlerFunc(func(params host.DeleteHostParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation host.DeleteHost has not yet been implemented")
+		})
+	}
+	if api.PoolDeletePoolHandler == nil {
+		api.PoolDeletePoolHandler = pool.DeletePoolHandlerFunc(func(params pool.DeletePoolParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation pool.DeletePool has not yet been implemented")
 		})
 	}
 	if api.ProjectDeleteProjectHandler == nil {
@@ -104,6 +115,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.InstanceGetAllInstancesHandler == nil {
 		api.InstanceGetAllInstancesHandler = instance.GetAllInstancesHandlerFunc(func(params instance.GetAllInstancesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.GetAllInstances has not yet been implemented")
+		})
+	}
+	if api.PoolGetAllPoolsHandler == nil {
+		api.PoolGetAllPoolsHandler = pool.GetAllPoolsHandlerFunc(func(params pool.GetAllPoolsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation pool.GetAllPools has not yet been implemented")
 		})
 	}
 	if api.ProjectGetAllProjectsHandler == nil {
@@ -146,6 +162,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation instance.GetInstanceState has not yet been implemented")
 		})
 	}
+	if api.PoolGetPoolHandler == nil {
+		api.PoolGetPoolHandler = pool.GetPoolHandlerFunc(func(params pool.GetPoolParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation pool.GetPool has not yet been implemented")
+		})
+	}
 	if api.ProjectGetProjectHandler == nil {
 		api.ProjectGetProjectHandler = project.GetProjectHandlerFunc(func(params project.GetProjectParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProject has not yet been implemented")
@@ -179,6 +200,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.ZoneGetZoneHostsHandler == nil {
 		api.ZoneGetZoneHostsHandler = zone.GetZoneHostsHandlerFunc(func(params zone.GetZoneHostsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.GetZoneHosts has not yet been implemented")
+		})
+	}
+	if api.ZoneGetZonePoolsHandler == nil {
+		api.ZoneGetZonePoolsHandler = zone.GetZonePoolsHandlerFunc(func(params zone.GetZonePoolsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation zone.GetZonePools has not yet been implemented")
 		})
 	}
 	if api.HealthzHandler == nil {
@@ -229,6 +255,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.HostUpdateHostHandler == nil {
 		api.HostUpdateHostHandler = host.UpdateHostHandlerFunc(func(params host.UpdateHostParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation host.UpdateHost has not yet been implemented")
+		})
+	}
+	if api.PoolUpdatePoolHandler == nil {
+		api.PoolUpdatePoolHandler = pool.UpdatePoolHandlerFunc(func(params pool.UpdatePoolParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation pool.UpdatePool has not yet been implemented")
 		})
 	}
 	if api.ProjectUpdateProjectHandler == nil {

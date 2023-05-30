@@ -32,6 +32,8 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	CreateHost(params *CreateHostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateHostCreated, error)
 
+	CreatePool(params *CreatePoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePoolCreated, error)
+
 	DeleteZone(params *DeleteZoneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteZoneOK, error)
 
 	GetAllZones(params *GetAllZonesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllZonesOK, error)
@@ -39,6 +41,8 @@ type ClientService interface {
 	GetZone(params *GetZoneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetZoneOK, error)
 
 	GetZoneHosts(params *GetZoneHostsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetZoneHostsOK, error)
+
+	GetZonePools(params *GetZonePoolsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetZonePoolsOK, error)
 
 	UpdateZone(params *UpdateZoneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateZoneOK, error)
 
@@ -81,6 +85,45 @@ func (a *Client) CreateHost(params *CreateHostParams, authInfo runtime.ClientAut
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateHost: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreatePool Creates a new storage pool.
+*/
+func (a *Client) CreatePool(params *CreatePoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePoolCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreatePoolParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreatePool",
+		Method:             "POST",
+		PathPattern:        "/zone/{zoneId}/pool",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreatePoolReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreatePoolCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreatePool: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -237,6 +280,45 @@ func (a *Client) GetZoneHosts(params *GetZoneHostsParams, authInfo runtime.Clien
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetZoneHosts: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetZonePools Returns the IDs of the pools existing in the zone.
+*/
+func (a *Client) GetZonePools(params *GetZonePoolsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetZonePoolsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetZonePoolsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetZonePools",
+		Method:             "GET",
+		PathPattern:        "/zone/{zoneId}/pools",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetZonePoolsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetZonePoolsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetZonePools: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

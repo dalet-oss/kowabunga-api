@@ -1,0 +1,106 @@
+definitions:
+  StoragePool:
+    type: object
+    required: [name, pool, address]
+    properties:
+      id:
+        type: string
+        description: The storage pool ID (auto-generated).
+      name:
+        type: string
+        description: The storage pool name.
+      description:
+        type: string
+        description: The storage pool description.
+      pool:
+        type: string
+        description: The local Ceph RBD pool name.
+      address:
+        type: string
+        description: The local Ceph Monitor(s) address or FQDN.
+      port:
+        type: integer
+        description: The local Ceph Monitor(s) port (default 3300).
+        default: 3300
+      secret_uuid:
+        type: string
+        description: The libvirt secret UUID for CephX authentication.
+
+paths:
+  /pool:
+    get:
+      tags:
+        - pool
+      operationId: GetAllPools
+      description: Returns the IDs of registered pools.
+      responses:
+        200:
+          description: Returns the an array of pool IDs.
+          schema:
+            type: array
+            items:
+              type: string
+
+  /pool/{poolId}:
+    get:
+      tags:
+        - pool
+      operationId: GetPool
+      description: Returns a description of the pool
+      parameters:
+        - name: poolId
+          in: path
+          type: string
+          required: true
+          description: The ID of the pool to get.
+      responses:
+        200:
+          description: Returns the pool object.
+          schema:
+            $ref: '#/definitions/StoragePool'
+        404:
+          description: Invalid pool ID was provided.
+    put:
+      tags:
+        - pool
+      operationId: UpdatePool
+      description: Updates a pool configuration.
+      parameters:
+        - name: poolId
+          in: path
+          type: string
+          required: true
+          description: The ID of the pool to get.
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/StoragePool'
+      responses:
+        200:
+          description: Returns the updated pool object.
+          schema:
+            $ref: '#/definitions/StoragePool'
+        400:
+          description: Bad parameters were provided.
+        404:
+          description: Invalid pool ID was provided.
+    delete:
+      tags:
+        - pool
+      operationId: DeletePool
+      description: Deletes an existing pool.
+      parameters:
+        - name: poolId
+          in: path
+          type: string
+          required: true
+          description: The ID of the pool to get.
+      responses:
+        200:
+          description: The pool has been successfully removed.
+        404:
+          description: Invalid pool ID was provided.
+        409:
+          description: The pool is not empty or still being referenced.
+        500:
+          description: Unable to delete pool.

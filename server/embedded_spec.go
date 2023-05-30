@@ -513,6 +513,122 @@ func init() {
         }
       }
     },
+    "/pool": {
+      "get": {
+        "description": "Returns the IDs of registered pools.",
+        "tags": [
+          "pool"
+        ],
+        "operationId": "GetAllPools",
+        "responses": {
+          "200": {
+            "description": "Returns the an array of pool IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pool/{poolId}": {
+      "get": {
+        "description": "Returns a description of the pool",
+        "tags": [
+          "pool"
+        ],
+        "operationId": "GetPool",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the pool to get.",
+            "name": "poolId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the pool object.",
+            "schema": {
+              "$ref": "#/definitions/StoragePool"
+            }
+          },
+          "404": {
+            "description": "Invalid pool ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a pool configuration.",
+        "tags": [
+          "pool"
+        ],
+        "operationId": "UpdatePool",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the pool to get.",
+            "name": "poolId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/StoragePool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated pool object.",
+            "schema": {
+              "$ref": "#/definitions/StoragePool"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid pool ID was provided."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing pool.",
+        "tags": [
+          "pool"
+        ],
+        "operationId": "DeletePool",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the pool to get.",
+            "name": "poolId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The pool has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid pool ID was provided."
+          },
+          "409": {
+            "description": "The pool is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete pool."
+          }
+        }
+      }
+    },
     "/project": {
       "get": {
         "description": "Returns the IDs of registered projects.",
@@ -1205,6 +1321,86 @@ func init() {
           }
         }
       }
+    },
+    "/zone/{zoneId}/pool": {
+      "post": {
+        "description": "Creates a new storage pool.",
+        "tags": [
+          "zone",
+          "pool"
+        ],
+        "operationId": "CreatePool",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated zone.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StoragePool"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created storage pool object.",
+            "schema": {
+              "$ref": "#/definitions/StoragePool"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid zone ID was provided."
+          },
+          "409": {
+            "description": "Pool already exists."
+          },
+          "500": {
+            "description": "Unable to create storage pool."
+          }
+        }
+      }
+    },
+    "/zone/{zoneId}/pools": {
+      "get": {
+        "description": "Returns the IDs of the pools existing in the zone.",
+        "tags": [
+          "zone",
+          "pool"
+        ],
+        "operationId": "GetZonePools",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the zone to query.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of storage pool IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid zone ID was provided."
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1502,6 +1698,45 @@ func init() {
         },
         "name": {
           "description": "The region name.",
+          "type": "string"
+        }
+      }
+    },
+    "StoragePool": {
+      "type": "object",
+      "required": [
+        "name",
+        "pool",
+        "address"
+      ],
+      "properties": {
+        "address": {
+          "description": "The local Ceph Monitor(s) address or FQDN.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The storage pool description.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The storage pool ID (auto-generated).",
+          "type": "string"
+        },
+        "name": {
+          "description": "The storage pool name.",
+          "type": "string"
+        },
+        "pool": {
+          "description": "The local Ceph RBD pool name.",
+          "type": "string"
+        },
+        "port": {
+          "description": "The local Ceph Monitor(s) port (default 3300).",
+          "type": "integer",
+          "default": 3300
+        },
+        "secret_uuid": {
+          "description": "The libvirt secret UUID for CephX authentication.",
           "type": "string"
         }
       }
@@ -2036,6 +2271,122 @@ func init() {
         }
       }
     },
+    "/pool": {
+      "get": {
+        "description": "Returns the IDs of registered pools.",
+        "tags": [
+          "pool"
+        ],
+        "operationId": "GetAllPools",
+        "responses": {
+          "200": {
+            "description": "Returns the an array of pool IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pool/{poolId}": {
+      "get": {
+        "description": "Returns a description of the pool",
+        "tags": [
+          "pool"
+        ],
+        "operationId": "GetPool",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the pool to get.",
+            "name": "poolId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the pool object.",
+            "schema": {
+              "$ref": "#/definitions/StoragePool"
+            }
+          },
+          "404": {
+            "description": "Invalid pool ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a pool configuration.",
+        "tags": [
+          "pool"
+        ],
+        "operationId": "UpdatePool",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the pool to get.",
+            "name": "poolId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/StoragePool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated pool object.",
+            "schema": {
+              "$ref": "#/definitions/StoragePool"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid pool ID was provided."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing pool.",
+        "tags": [
+          "pool"
+        ],
+        "operationId": "DeletePool",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the pool to get.",
+            "name": "poolId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The pool has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid pool ID was provided."
+          },
+          "409": {
+            "description": "The pool is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete pool."
+          }
+        }
+      }
+    },
     "/project": {
       "get": {
         "description": "Returns the IDs of registered projects.",
@@ -2728,6 +3079,86 @@ func init() {
           }
         }
       }
+    },
+    "/zone/{zoneId}/pool": {
+      "post": {
+        "description": "Creates a new storage pool.",
+        "tags": [
+          "zone",
+          "pool"
+        ],
+        "operationId": "CreatePool",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated zone.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StoragePool"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created storage pool object.",
+            "schema": {
+              "$ref": "#/definitions/StoragePool"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid zone ID was provided."
+          },
+          "409": {
+            "description": "Pool already exists."
+          },
+          "500": {
+            "description": "Unable to create storage pool."
+          }
+        }
+      }
+    },
+    "/zone/{zoneId}/pools": {
+      "get": {
+        "description": "Returns the IDs of the pools existing in the zone.",
+        "tags": [
+          "zone",
+          "pool"
+        ],
+        "operationId": "GetZonePools",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the zone to query.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of storage pool IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid zone ID was provided."
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3072,6 +3503,45 @@ func init() {
         },
         "name": {
           "description": "The region name.",
+          "type": "string"
+        }
+      }
+    },
+    "StoragePool": {
+      "type": "object",
+      "required": [
+        "name",
+        "pool",
+        "address"
+      ],
+      "properties": {
+        "address": {
+          "description": "The local Ceph Monitor(s) address or FQDN.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The storage pool description.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The storage pool ID (auto-generated).",
+          "type": "string"
+        },
+        "name": {
+          "description": "The storage pool name.",
+          "type": "string"
+        },
+        "pool": {
+          "description": "The local Ceph RBD pool name.",
+          "type": "string"
+        },
+        "port": {
+          "description": "The local Ceph Monitor(s) port (default 3300).",
+          "type": "integer",
+          "default": 3300
+        },
+        "secret_uuid": {
+          "description": "The libvirt secret UUID for CephX authentication.",
           "type": "string"
         }
       }
