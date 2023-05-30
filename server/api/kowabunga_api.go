@@ -19,11 +19,13 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
+	"github.com/dalet-oss/kowabunga-api/server/api/bnet"
 	"github.com/dalet-oss/kowabunga-api/server/api/host"
 	"github.com/dalet-oss/kowabunga-api/server/api/instance"
 	"github.com/dalet-oss/kowabunga-api/server/api/pool"
 	"github.com/dalet-oss/kowabunga-api/server/api/project"
 	"github.com/dalet-oss/kowabunga-api/server/api/region"
+	"github.com/dalet-oss/kowabunga-api/server/api/vnet"
 	"github.com/dalet-oss/kowabunga-api/server/api/zone"
 )
 
@@ -62,6 +64,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		RegionCreateRegionHandler: region.CreateRegionHandlerFunc(func(params region.CreateRegionParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation region.CreateRegion has not yet been implemented")
 		}),
+		ZoneCreateVNetHandler: zone.CreateVNetHandlerFunc(func(params zone.CreateVNetParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation zone.CreateVNet has not yet been implemented")
+		}),
 		RegionCreateZoneHandler: region.CreateZoneHandlerFunc(func(params region.CreateZoneParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation region.CreateZone has not yet been implemented")
 		}),
@@ -76,6 +81,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		RegionDeleteRegionHandler: region.DeleteRegionHandlerFunc(func(params region.DeleteRegionParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation region.DeleteRegion has not yet been implemented")
+		}),
+		VnetDeleteVNetHandler: vnet.DeleteVNetHandlerFunc(func(params vnet.DeleteVNetParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation vnet.DeleteVNet has not yet been implemented")
 		}),
 		ZoneDeleteZoneHandler: zone.DeleteZoneHandlerFunc(func(params zone.DeleteZoneParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.DeleteZone has not yet been implemented")
@@ -94,6 +102,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		RegionGetAllRegionsHandler: region.GetAllRegionsHandlerFunc(func(params region.GetAllRegionsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation region.GetAllRegions has not yet been implemented")
+		}),
+		VnetGetAllVNetsHandler: vnet.GetAllVNetsHandlerFunc(func(params vnet.GetAllVNetsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation vnet.GetAllVNets has not yet been implemented")
 		}),
 		ZoneGetAllZonesHandler: zone.GetAllZonesHandlerFunc(func(params zone.GetAllZonesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.GetAllZones has not yet been implemented")
@@ -131,6 +142,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		RegionGetRegionZonesHandler: region.GetRegionZonesHandlerFunc(func(params region.GetRegionZonesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation region.GetRegionZones has not yet been implemented")
 		}),
+		BnetGetVNetHandler: bnet.GetVNetHandlerFunc(func(params bnet.GetVNetParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation bnet.GetVNet has not yet been implemented")
+		}),
 		ZoneGetZoneHandler: zone.GetZoneHandlerFunc(func(params zone.GetZoneParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.GetZone has not yet been implemented")
 		}),
@@ -139,6 +153,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		ZoneGetZonePoolsHandler: zone.GetZonePoolsHandlerFunc(func(params zone.GetZonePoolsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.GetZonePools has not yet been implemented")
+		}),
+		ZoneGetZoneVNetsHandler: zone.GetZoneVNetsHandlerFunc(func(params zone.GetZoneVNetsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation zone.GetZoneVNets has not yet been implemented")
 		}),
 		HealthzHandler: HealthzHandlerFunc(func(params HealthzParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation Healthz has not yet been implemented")
@@ -181,6 +198,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		RegionUpdateRegionHandler: region.UpdateRegionHandlerFunc(func(params region.UpdateRegionParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation region.UpdateRegion has not yet been implemented")
+		}),
+		VnetUpdateVNetHandler: vnet.UpdateVNetHandlerFunc(func(params vnet.UpdateVNetParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation vnet.UpdateVNet has not yet been implemented")
 		}),
 		ZoneUpdateZoneHandler: zone.UpdateZoneHandlerFunc(func(params zone.UpdateZoneParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.UpdateZone has not yet been implemented")
@@ -246,6 +266,8 @@ type KowabungaAPI struct {
 	ProjectCreateProjectHandler project.CreateProjectHandler
 	// RegionCreateRegionHandler sets the operation handler for the create region operation
 	RegionCreateRegionHandler region.CreateRegionHandler
+	// ZoneCreateVNetHandler sets the operation handler for the create v net operation
+	ZoneCreateVNetHandler zone.CreateVNetHandler
 	// RegionCreateZoneHandler sets the operation handler for the create zone operation
 	RegionCreateZoneHandler region.CreateZoneHandler
 	// HostDeleteHostHandler sets the operation handler for the delete host operation
@@ -256,6 +278,8 @@ type KowabungaAPI struct {
 	ProjectDeleteProjectHandler project.DeleteProjectHandler
 	// RegionDeleteRegionHandler sets the operation handler for the delete region operation
 	RegionDeleteRegionHandler region.DeleteRegionHandler
+	// VnetDeleteVNetHandler sets the operation handler for the delete v net operation
+	VnetDeleteVNetHandler vnet.DeleteVNetHandler
 	// ZoneDeleteZoneHandler sets the operation handler for the delete zone operation
 	ZoneDeleteZoneHandler zone.DeleteZoneHandler
 	// HostGetAllHostsHandler sets the operation handler for the get all hosts operation
@@ -268,6 +292,8 @@ type KowabungaAPI struct {
 	ProjectGetAllProjectsHandler project.GetAllProjectsHandler
 	// RegionGetAllRegionsHandler sets the operation handler for the get all regions operation
 	RegionGetAllRegionsHandler region.GetAllRegionsHandler
+	// VnetGetAllVNetsHandler sets the operation handler for the get all v nets operation
+	VnetGetAllVNetsHandler vnet.GetAllVNetsHandler
 	// ZoneGetAllZonesHandler sets the operation handler for the get all zones operation
 	ZoneGetAllZonesHandler zone.GetAllZonesHandler
 	// HostGetHostHandler sets the operation handler for the get host operation
@@ -292,12 +318,16 @@ type KowabungaAPI struct {
 	RegionGetRegionHandler region.GetRegionHandler
 	// RegionGetRegionZonesHandler sets the operation handler for the get region zones operation
 	RegionGetRegionZonesHandler region.GetRegionZonesHandler
+	// BnetGetVNetHandler sets the operation handler for the get v net operation
+	BnetGetVNetHandler bnet.GetVNetHandler
 	// ZoneGetZoneHandler sets the operation handler for the get zone operation
 	ZoneGetZoneHandler zone.GetZoneHandler
 	// ZoneGetZoneHostsHandler sets the operation handler for the get zone hosts operation
 	ZoneGetZoneHostsHandler zone.GetZoneHostsHandler
 	// ZoneGetZonePoolsHandler sets the operation handler for the get zone pools operation
 	ZoneGetZonePoolsHandler zone.GetZonePoolsHandler
+	// ZoneGetZoneVNetsHandler sets the operation handler for the get zone v nets operation
+	ZoneGetZoneVNetsHandler zone.GetZoneVNetsHandler
 	// HealthzHandler sets the operation handler for the healthz operation
 	HealthzHandler HealthzHandler
 	// InstanceRebootInstanceHandler sets the operation handler for the reboot instance operation
@@ -326,6 +356,8 @@ type KowabungaAPI struct {
 	ProjectUpdateProjectQuotasHandler project.UpdateProjectQuotasHandler
 	// RegionUpdateRegionHandler sets the operation handler for the update region operation
 	RegionUpdateRegionHandler region.UpdateRegionHandler
+	// VnetUpdateVNetHandler sets the operation handler for the update v net operation
+	VnetUpdateVNetHandler vnet.UpdateVNetHandler
 	// ZoneUpdateZoneHandler sets the operation handler for the update zone operation
 	ZoneUpdateZoneHandler zone.UpdateZoneHandler
 
@@ -424,6 +456,9 @@ func (o *KowabungaAPI) Validate() error {
 	if o.RegionCreateRegionHandler == nil {
 		unregistered = append(unregistered, "region.CreateRegionHandler")
 	}
+	if o.ZoneCreateVNetHandler == nil {
+		unregistered = append(unregistered, "zone.CreateVNetHandler")
+	}
 	if o.RegionCreateZoneHandler == nil {
 		unregistered = append(unregistered, "region.CreateZoneHandler")
 	}
@@ -438,6 +473,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.RegionDeleteRegionHandler == nil {
 		unregistered = append(unregistered, "region.DeleteRegionHandler")
+	}
+	if o.VnetDeleteVNetHandler == nil {
+		unregistered = append(unregistered, "vnet.DeleteVNetHandler")
 	}
 	if o.ZoneDeleteZoneHandler == nil {
 		unregistered = append(unregistered, "zone.DeleteZoneHandler")
@@ -456,6 +494,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.RegionGetAllRegionsHandler == nil {
 		unregistered = append(unregistered, "region.GetAllRegionsHandler")
+	}
+	if o.VnetGetAllVNetsHandler == nil {
+		unregistered = append(unregistered, "vnet.GetAllVNetsHandler")
 	}
 	if o.ZoneGetAllZonesHandler == nil {
 		unregistered = append(unregistered, "zone.GetAllZonesHandler")
@@ -493,6 +534,9 @@ func (o *KowabungaAPI) Validate() error {
 	if o.RegionGetRegionZonesHandler == nil {
 		unregistered = append(unregistered, "region.GetRegionZonesHandler")
 	}
+	if o.BnetGetVNetHandler == nil {
+		unregistered = append(unregistered, "bnet.GetVNetHandler")
+	}
 	if o.ZoneGetZoneHandler == nil {
 		unregistered = append(unregistered, "zone.GetZoneHandler")
 	}
@@ -501,6 +545,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.ZoneGetZonePoolsHandler == nil {
 		unregistered = append(unregistered, "zone.GetZonePoolsHandler")
+	}
+	if o.ZoneGetZoneVNetsHandler == nil {
+		unregistered = append(unregistered, "zone.GetZoneVNetsHandler")
 	}
 	if o.HealthzHandler == nil {
 		unregistered = append(unregistered, "HealthzHandler")
@@ -543,6 +590,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.RegionUpdateRegionHandler == nil {
 		unregistered = append(unregistered, "region.UpdateRegionHandler")
+	}
+	if o.VnetUpdateVNetHandler == nil {
+		unregistered = append(unregistered, "vnet.UpdateVNetHandler")
 	}
 	if o.ZoneUpdateZoneHandler == nil {
 		unregistered = append(unregistered, "zone.UpdateZoneHandler")
@@ -665,6 +715,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
+	o.handlers["POST"]["/zone/{zoneId}/vnet"] = zone.NewCreateVNet(o.context, o.ZoneCreateVNetHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
 	o.handlers["POST"]["/region/{regionId}/zone"] = region.NewCreateZone(o.context, o.RegionCreateZoneHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
@@ -682,6 +736,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
 	o.handlers["DELETE"]["/region/{regionId}"] = region.NewDeleteRegion(o.context, o.RegionDeleteRegionHandler)
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
+	o.handlers["DELETE"]["/vnet/{vnetId}"] = vnet.NewDeleteVNet(o.context, o.VnetDeleteVNetHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
@@ -706,6 +764,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/region"] = region.NewGetAllRegions(o.context, o.RegionGetAllRegionsHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/vnet"] = vnet.NewGetAllVNets(o.context, o.VnetGetAllVNetsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -757,6 +819,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
+	o.handlers["GET"]["/vnet/{vnetId}"] = bnet.NewGetVNet(o.context, o.BnetGetVNetHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
 	o.handlers["GET"]["/zone/{zoneId}"] = zone.NewGetZone(o.context, o.ZoneGetZoneHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
@@ -766,6 +832,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/zone/{zoneId}/pools"] = zone.NewGetZonePools(o.context, o.ZoneGetZonePoolsHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/zone/{zoneId}/vnets"] = zone.NewGetZoneVNets(o.context, o.ZoneGetZoneVNetsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -822,6 +892,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
 	o.handlers["PUT"]["/region/{regionId}"] = region.NewUpdateRegion(o.context, o.RegionUpdateRegionHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/vnet/{vnetId}"] = vnet.NewUpdateVNet(o.context, o.VnetUpdateVNetHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}

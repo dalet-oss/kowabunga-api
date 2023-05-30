@@ -1126,6 +1126,122 @@ func init() {
         }
       }
     },
+    "/vnet": {
+      "get": {
+        "description": "Returns the IDs of virtual networks.",
+        "tags": [
+          "vnet"
+        ],
+        "operationId": "GetAllVNets",
+        "responses": {
+          "200": {
+            "description": "Returns the an array of virtual network IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vnet/{vnetId}": {
+      "get": {
+        "description": "Returns a description of the virtual network",
+        "tags": [
+          "bnet"
+        ],
+        "operationId": "GetVNet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual network to get.",
+            "name": "vnetId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the virtual network object.",
+            "schema": {
+              "$ref": "#/definitions/VNet"
+            }
+          },
+          "404": {
+            "description": "Invalid virtual network ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a virtual network configuration.",
+        "tags": [
+          "vnet"
+        ],
+        "operationId": "UpdateVNet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual network to get.",
+            "name": "vnetId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VNet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated virtual network object.",
+            "schema": {
+              "$ref": "#/definitions/VNet"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid virtual network ID was provided."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing virtual network.",
+        "tags": [
+          "vnet"
+        ],
+        "operationId": "DeleteVNet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual network to get.",
+            "name": "vnetId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The virtual network has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid virtual network ID was provided."
+          },
+          "409": {
+            "description": "The virtual network is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete virtual network."
+          }
+        }
+      }
+    },
     "/zone": {
       "get": {
         "description": "Returns the IDs of registered zones.",
@@ -1389,6 +1505,86 @@ func init() {
         "responses": {
           "200": {
             "description": "Returns an array of storage pool IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid zone ID was provided."
+          }
+        }
+      }
+    },
+    "/zone/{zoneId}/vnet": {
+      "post": {
+        "description": "Creates a new virtual network.",
+        "tags": [
+          "zone",
+          "vnet"
+        ],
+        "operationId": "CreateVNet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated zone.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VNet"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created virtual network object.",
+            "schema": {
+              "$ref": "#/definitions/VNet"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid zone ID was provided."
+          },
+          "409": {
+            "description": "Virtual network already exists."
+          },
+          "500": {
+            "description": "Unable to create virtual network."
+          }
+        }
+      }
+    },
+    "/zone/{zoneId}/vnets": {
+      "get": {
+        "description": "Returns the IDs of the virtual networks existing in the zone.",
+        "tags": [
+          "zone",
+          "vnet"
+        ],
+        "operationId": "GetZoneVNets",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the zone to query.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of virtual network IDs.",
             "schema": {
               "type": "array",
               "items": {
@@ -1738,6 +1934,51 @@ func init() {
         "secret_uuid": {
           "description": "The libvirt secret UUID for CephX authentication.",
           "type": "string"
+        }
+      }
+    },
+    "VNet": {
+      "type": "object",
+      "required": [
+        "name",
+        "subnetId",
+        "interface",
+        "cidr",
+        "gateway",
+        "dns"
+      ],
+      "properties": {
+        "cidr": {
+          "description": "The virtual network CIDR (e.g. 192.168.0.0/24).",
+          "type": "string"
+        },
+        "description": {
+          "description": "The virtual network description.",
+          "type": "string"
+        },
+        "dns": {
+          "description": "The virtual network DNS server IP address (e.g. 192.168.0.254).",
+          "type": "string"
+        },
+        "gateway": {
+          "description": "The virtual network router/gateway IP address (e.g. 192.168.0.254).",
+          "type": "string"
+        },
+        "id": {
+          "description": "The virtual network ID (auto-generated).",
+          "type": "string"
+        },
+        "interface": {
+          "description": "The libvirt's bridge network interface (brX).",
+          "type": "string"
+        },
+        "name": {
+          "description": "The virtual network name.",
+          "type": "string"
+        },
+        "subnetId": {
+          "description": "The subnet identifier.",
+          "type": "integer"
         }
       }
     },
@@ -2884,6 +3125,122 @@ func init() {
         }
       }
     },
+    "/vnet": {
+      "get": {
+        "description": "Returns the IDs of virtual networks.",
+        "tags": [
+          "vnet"
+        ],
+        "operationId": "GetAllVNets",
+        "responses": {
+          "200": {
+            "description": "Returns the an array of virtual network IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vnet/{vnetId}": {
+      "get": {
+        "description": "Returns a description of the virtual network",
+        "tags": [
+          "bnet"
+        ],
+        "operationId": "GetVNet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual network to get.",
+            "name": "vnetId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the virtual network object.",
+            "schema": {
+              "$ref": "#/definitions/VNet"
+            }
+          },
+          "404": {
+            "description": "Invalid virtual network ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a virtual network configuration.",
+        "tags": [
+          "vnet"
+        ],
+        "operationId": "UpdateVNet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual network to get.",
+            "name": "vnetId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VNet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated virtual network object.",
+            "schema": {
+              "$ref": "#/definitions/VNet"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid virtual network ID was provided."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing virtual network.",
+        "tags": [
+          "vnet"
+        ],
+        "operationId": "DeleteVNet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual network to get.",
+            "name": "vnetId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The virtual network has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid virtual network ID was provided."
+          },
+          "409": {
+            "description": "The virtual network is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete virtual network."
+          }
+        }
+      }
+    },
     "/zone": {
       "get": {
         "description": "Returns the IDs of registered zones.",
@@ -3147,6 +3504,86 @@ func init() {
         "responses": {
           "200": {
             "description": "Returns an array of storage pool IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid zone ID was provided."
+          }
+        }
+      }
+    },
+    "/zone/{zoneId}/vnet": {
+      "post": {
+        "description": "Creates a new virtual network.",
+        "tags": [
+          "zone",
+          "vnet"
+        ],
+        "operationId": "CreateVNet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated zone.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VNet"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created virtual network object.",
+            "schema": {
+              "$ref": "#/definitions/VNet"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid zone ID was provided."
+          },
+          "409": {
+            "description": "Virtual network already exists."
+          },
+          "500": {
+            "description": "Unable to create virtual network."
+          }
+        }
+      }
+    },
+    "/zone/{zoneId}/vnets": {
+      "get": {
+        "description": "Returns the IDs of the virtual networks existing in the zone.",
+        "tags": [
+          "zone",
+          "vnet"
+        ],
+        "operationId": "GetZoneVNets",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the zone to query.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of virtual network IDs.",
             "schema": {
               "type": "array",
               "items": {
@@ -3543,6 +3980,51 @@ func init() {
         "secret_uuid": {
           "description": "The libvirt secret UUID for CephX authentication.",
           "type": "string"
+        }
+      }
+    },
+    "VNet": {
+      "type": "object",
+      "required": [
+        "name",
+        "subnetId",
+        "interface",
+        "cidr",
+        "gateway",
+        "dns"
+      ],
+      "properties": {
+        "cidr": {
+          "description": "The virtual network CIDR (e.g. 192.168.0.0/24).",
+          "type": "string"
+        },
+        "description": {
+          "description": "The virtual network description.",
+          "type": "string"
+        },
+        "dns": {
+          "description": "The virtual network DNS server IP address (e.g. 192.168.0.254).",
+          "type": "string"
+        },
+        "gateway": {
+          "description": "The virtual network router/gateway IP address (e.g. 192.168.0.254).",
+          "type": "string"
+        },
+        "id": {
+          "description": "The virtual network ID (auto-generated).",
+          "type": "string"
+        },
+        "interface": {
+          "description": "The libvirt's bridge network interface (brX).",
+          "type": "string"
+        },
+        "name": {
+          "description": "The virtual network name.",
+          "type": "string"
+        },
+        "subnetId": {
+          "description": "The subnet identifier.",
+          "type": "integer"
         }
       }
     },

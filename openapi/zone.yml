@@ -200,3 +200,58 @@ paths:
               type: string
         404:
           description: Invalid zone ID was provided.
+
+  /zone/{zoneId}/vnet:
+    post:
+      tags:
+        - zone
+        - vnet
+      operationId: CreateVNet
+      description: Creates a new virtual network.
+      parameters:
+        - name: zoneId
+          in: path
+          type: string
+          required: true
+          description: the ID of the associated zone.
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/VNet'
+      responses:
+        201:
+          description: Returns the newly created virtual network object.
+          schema:
+            $ref: '#/definitions/VNet'
+        400:
+          description: Bad parameters were provided.
+        404:
+          description: Invalid zone ID was provided.
+        409:
+          description: Virtual network already exists.
+        500:
+          description: Unable to create virtual network.
+
+  /zone/{zoneId}/vnets:
+    get:
+      tags:
+        - zone
+        - vnet
+      operationId: GetZoneVNets
+      description: Returns the IDs of the virtual networks existing in the zone.
+      parameters:
+        - name: zoneId
+          in: path
+          type: string
+          required: true
+          description: The ID of the zone to query.
+      responses:
+        200:
+          description: Returns an array of virtual network IDs.
+          schema:
+            type: array
+            items:
+              type: string
+        404:
+          description: Invalid zone ID was provided.

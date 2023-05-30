@@ -10,12 +10,14 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
+	"github.com/dalet-oss/kowabunga-api/client/bnet"
 	"github.com/dalet-oss/kowabunga-api/client/host"
 	"github.com/dalet-oss/kowabunga-api/client/instance"
 	"github.com/dalet-oss/kowabunga-api/client/operations"
 	"github.com/dalet-oss/kowabunga-api/client/pool"
 	"github.com/dalet-oss/kowabunga-api/client/project"
 	"github.com/dalet-oss/kowabunga-api/client/region"
+	"github.com/dalet-oss/kowabunga-api/client/vnet"
 	"github.com/dalet-oss/kowabunga-api/client/zone"
 )
 
@@ -61,12 +63,14 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Kowabunga 
 
 	cli := new(Kowabunga)
 	cli.Transport = transport
+	cli.Bnet = bnet.New(transport, formats)
 	cli.Host = host.New(transport, formats)
 	cli.Instance = instance.New(transport, formats)
 	cli.Operations = operations.New(transport, formats)
 	cli.Pool = pool.New(transport, formats)
 	cli.Project = project.New(transport, formats)
 	cli.Region = region.New(transport, formats)
+	cli.Vnet = vnet.New(transport, formats)
 	cli.Zone = zone.New(transport, formats)
 	return cli
 }
@@ -112,6 +116,8 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 
 // Kowabunga is a client for kowabunga
 type Kowabunga struct {
+	Bnet bnet.ClientService
+
 	Host host.ClientService
 
 	Instance instance.ClientService
@@ -124,6 +130,8 @@ type Kowabunga struct {
 
 	Region region.ClientService
 
+	Vnet vnet.ClientService
+
 	Zone zone.ClientService
 
 	Transport runtime.ClientTransport
@@ -132,11 +140,13 @@ type Kowabunga struct {
 // SetTransport changes the transport on the client and all its subresources
 func (c *Kowabunga) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
+	c.Bnet.SetTransport(transport)
 	c.Host.SetTransport(transport)
 	c.Instance.SetTransport(transport)
 	c.Operations.SetTransport(transport)
 	c.Pool.SetTransport(transport)
 	c.Project.SetTransport(transport)
 	c.Region.SetTransport(transport)
+	c.Vnet.SetTransport(transport)
 	c.Zone.SetTransport(transport)
 }
