@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -19,20 +20,8 @@ import (
 // swagger:model VNet
 type VNet struct {
 
-	// The virtual network CIDR (e.g. 192.168.0.0/24).
-	// Required: true
-	Cidr *string `json:"cidr"`
-
 	// The virtual network description.
 	Description string `json:"description,omitempty"`
-
-	// The virtual network DNS server IP address (e.g. 192.168.0.254).
-	// Required: true
-	DNS *string `json:"dns"`
-
-	// The virtual network router/gateway IP address (e.g. 192.168.0.254).
-	// Required: true
-	Gateway *string `json:"gateway"`
 
 	// The virtual network ID (auto-generated).
 	ID string `json:"id,omitempty"`
@@ -45,26 +34,20 @@ type VNet struct {
 	// Required: true
 	Name *string `json:"name"`
 
-	// The subnet identifier.
+	// Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?
+	Private *bool `json:"private,omitempty"`
+
+	// An array of associated subnets
+	Subnets []*Subnet `json:"subnets"`
+
+	// The VLAN identifier.
 	// Required: true
-	SubnetID *int64 `json:"subnetId"`
+	Vlan *int64 `json:"vlan"`
 }
 
 // Validate validates this v net
 func (m *VNet) Validate(formats strfmt.Registry) error {
 	var res []error
-
-	if err := m.validateCidr(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateDNS(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateGateway(formats); err != nil {
-		res = append(res, err)
-	}
 
 	if err := m.validateInterface(formats); err != nil {
 		res = append(res, err)
@@ -74,40 +57,17 @@ func (m *VNet) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateSubnetID(formats); err != nil {
+	if err := m.validateSubnets(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVlan(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *VNet) validateCidr(formats strfmt.Registry) error {
-
-	if err := validate.Required("cidr", "body", m.Cidr); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *VNet) validateDNS(formats strfmt.Registry) error {
-
-	if err := validate.Required("dns", "body", m.DNS); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *VNet) validateGateway(formats strfmt.Registry) error {
-
-	if err := validate.Required("gateway", "body", m.Gateway); err != nil {
-		return err
-	}
-
 	return nil
 }
 
@@ -129,17 +89,72 @@ func (m *VNet) validateName(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *VNet) validateSubnetID(formats strfmt.Registry) error {
+func (m *VNet) validateSubnets(formats strfmt.Registry) error {
+	if swag.IsZero(m.Subnets) { // not required
+		return nil
+	}
 
-	if err := validate.Required("subnetId", "body", m.SubnetID); err != nil {
+	for i := 0; i < len(m.Subnets); i++ {
+		if swag.IsZero(m.Subnets[i]) { // not required
+			continue
+		}
+
+		if m.Subnets[i] != nil {
+			if err := m.Subnets[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("subnets" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("subnets" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *VNet) validateVlan(formats strfmt.Registry) error {
+
+	if err := validate.Required("vlan", "body", m.Vlan); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-// ContextValidate validates this v net based on context it is used
+// ContextValidate validate this v net based on the context it is used
 func (m *VNet) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateSubnets(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *VNet) contextValidateSubnets(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Subnets); i++ {
+
+		if m.Subnets[i] != nil {
+			if err := m.Subnets[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("subnets" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("subnets" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

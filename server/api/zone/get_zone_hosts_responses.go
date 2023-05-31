@@ -15,7 +15,7 @@ import (
 const GetZoneHostsOKCode int = 200
 
 /*
-GetZoneHostsOK Returns an array of host UUIDs.
+GetZoneHostsOK Returns an array of host IDs.
 
 swagger:response getZoneHostsOK
 */

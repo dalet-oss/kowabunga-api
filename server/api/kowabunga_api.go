@@ -21,6 +21,7 @@ import (
 
 	"github.com/dalet-oss/kowabunga-api/server/api/host"
 	"github.com/dalet-oss/kowabunga-api/server/api/instance"
+	"github.com/dalet-oss/kowabunga-api/server/api/netgw"
 	"github.com/dalet-oss/kowabunga-api/server/api/pool"
 	"github.com/dalet-oss/kowabunga-api/server/api/project"
 	"github.com/dalet-oss/kowabunga-api/server/api/region"
@@ -54,6 +55,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		ZoneCreateHostHandler: zone.CreateHostHandlerFunc(func(params zone.CreateHostParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.CreateHost has not yet been implemented")
 		}),
+		ZoneCreateNetGWHandler: zone.CreateNetGWHandlerFunc(func(params zone.CreateNetGWParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation zone.CreateNetGW has not yet been implemented")
+		}),
 		ZoneCreatePoolHandler: zone.CreatePoolHandlerFunc(func(params zone.CreatePoolParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.CreatePool has not yet been implemented")
 		}),
@@ -71,6 +75,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		HostDeleteHostHandler: host.DeleteHostHandlerFunc(func(params host.DeleteHostParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation host.DeleteHost has not yet been implemented")
+		}),
+		NetgwDeleteNetGWHandler: netgw.DeleteNetGWHandlerFunc(func(params netgw.DeleteNetGWParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation netgw.DeleteNetGW has not yet been implemented")
 		}),
 		PoolDeletePoolHandler: pool.DeletePoolHandlerFunc(func(params pool.DeletePoolParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation pool.DeletePool has not yet been implemented")
@@ -92,6 +99,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		InstanceGetAllInstancesHandler: instance.GetAllInstancesHandlerFunc(func(params instance.GetAllInstancesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.GetAllInstances has not yet been implemented")
+		}),
+		NetgwGetAllNetGWsHandler: netgw.GetAllNetGWsHandlerFunc(func(params netgw.GetAllNetGWsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation netgw.GetAllNetGWs has not yet been implemented")
 		}),
 		PoolGetAllPoolsHandler: pool.GetAllPoolsHandlerFunc(func(params pool.GetAllPoolsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation pool.GetAllPools has not yet been implemented")
@@ -123,6 +133,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		InstanceGetInstanceStateHandler: instance.GetInstanceStateHandlerFunc(func(params instance.GetInstanceStateParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.GetInstanceState has not yet been implemented")
 		}),
+		NetgwGetNetGWHandler: netgw.GetNetGWHandlerFunc(func(params netgw.GetNetGWParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation netgw.GetNetGW has not yet been implemented")
+		}),
 		PoolGetPoolHandler: pool.GetPoolHandlerFunc(func(params pool.GetPoolParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation pool.GetPool has not yet been implemented")
 		}),
@@ -149,6 +162,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		ZoneGetZoneHostsHandler: zone.GetZoneHostsHandlerFunc(func(params zone.GetZoneHostsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.GetZoneHosts has not yet been implemented")
+		}),
+		ZoneGetZoneNetGWsHandler: zone.GetZoneNetGWsHandlerFunc(func(params zone.GetZoneNetGWsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation zone.GetZoneNetGWs has not yet been implemented")
 		}),
 		ZoneGetZonePoolsHandler: zone.GetZonePoolsHandlerFunc(func(params zone.GetZonePoolsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.GetZonePools has not yet been implemented")
@@ -186,6 +202,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		HostUpdateHostHandler: host.UpdateHostHandlerFunc(func(params host.UpdateHostParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation host.UpdateHost has not yet been implemented")
 		}),
+		NetgwUpdateNetGWHandler: netgw.UpdateNetGWHandlerFunc(func(params netgw.UpdateNetGWParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation netgw.UpdateNetGW has not yet been implemented")
+		}),
 		PoolUpdatePoolHandler: pool.UpdatePoolHandlerFunc(func(params pool.UpdatePoolParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation pool.UpdatePool has not yet been implemented")
 		}),
@@ -203,6 +222,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		ZoneUpdateZoneHandler: zone.UpdateZoneHandlerFunc(func(params zone.UpdateZoneParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.UpdateZone has not yet been implemented")
+		}),
+		ZoneUpdateZoneDefaultVNetHandler: zone.UpdateZoneDefaultVNetHandlerFunc(func(params zone.UpdateZoneDefaultVNetParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation zone.UpdateZoneDefaultVNet has not yet been implemented")
 		}),
 
 		// Applies when the "x-token" header is set
@@ -259,6 +281,8 @@ type KowabungaAPI struct {
 
 	// ZoneCreateHostHandler sets the operation handler for the create host operation
 	ZoneCreateHostHandler zone.CreateHostHandler
+	// ZoneCreateNetGWHandler sets the operation handler for the create net g w operation
+	ZoneCreateNetGWHandler zone.CreateNetGWHandler
 	// ZoneCreatePoolHandler sets the operation handler for the create pool operation
 	ZoneCreatePoolHandler zone.CreatePoolHandler
 	// ProjectCreateProjectHandler sets the operation handler for the create project operation
@@ -271,6 +295,8 @@ type KowabungaAPI struct {
 	RegionCreateZoneHandler region.CreateZoneHandler
 	// HostDeleteHostHandler sets the operation handler for the delete host operation
 	HostDeleteHostHandler host.DeleteHostHandler
+	// NetgwDeleteNetGWHandler sets the operation handler for the delete net g w operation
+	NetgwDeleteNetGWHandler netgw.DeleteNetGWHandler
 	// PoolDeletePoolHandler sets the operation handler for the delete pool operation
 	PoolDeletePoolHandler pool.DeletePoolHandler
 	// ProjectDeleteProjectHandler sets the operation handler for the delete project operation
@@ -285,6 +311,8 @@ type KowabungaAPI struct {
 	HostGetAllHostsHandler host.GetAllHostsHandler
 	// InstanceGetAllInstancesHandler sets the operation handler for the get all instances operation
 	InstanceGetAllInstancesHandler instance.GetAllInstancesHandler
+	// NetgwGetAllNetGWsHandler sets the operation handler for the get all net g ws operation
+	NetgwGetAllNetGWsHandler netgw.GetAllNetGWsHandler
 	// PoolGetAllPoolsHandler sets the operation handler for the get all pools operation
 	PoolGetAllPoolsHandler pool.GetAllPoolsHandler
 	// ProjectGetAllProjectsHandler sets the operation handler for the get all projects operation
@@ -305,6 +333,8 @@ type KowabungaAPI struct {
 	InstanceGetInstanceHandler instance.GetInstanceHandler
 	// InstanceGetInstanceStateHandler sets the operation handler for the get instance state operation
 	InstanceGetInstanceStateHandler instance.GetInstanceStateHandler
+	// NetgwGetNetGWHandler sets the operation handler for the get net g w operation
+	NetgwGetNetGWHandler netgw.GetNetGWHandler
 	// PoolGetPoolHandler sets the operation handler for the get pool operation
 	PoolGetPoolHandler pool.GetPoolHandler
 	// ProjectGetProjectHandler sets the operation handler for the get project operation
@@ -323,6 +353,8 @@ type KowabungaAPI struct {
 	ZoneGetZoneHandler zone.GetZoneHandler
 	// ZoneGetZoneHostsHandler sets the operation handler for the get zone hosts operation
 	ZoneGetZoneHostsHandler zone.GetZoneHostsHandler
+	// ZoneGetZoneNetGWsHandler sets the operation handler for the get zone net g ws operation
+	ZoneGetZoneNetGWsHandler zone.GetZoneNetGWsHandler
 	// ZoneGetZonePoolsHandler sets the operation handler for the get zone pools operation
 	ZoneGetZonePoolsHandler zone.GetZonePoolsHandler
 	// ZoneGetZoneVNetsHandler sets the operation handler for the get zone v nets operation
@@ -347,6 +379,8 @@ type KowabungaAPI struct {
 	InstanceSuspendInstanceHandler instance.SuspendInstanceHandler
 	// HostUpdateHostHandler sets the operation handler for the update host operation
 	HostUpdateHostHandler host.UpdateHostHandler
+	// NetgwUpdateNetGWHandler sets the operation handler for the update net g w operation
+	NetgwUpdateNetGWHandler netgw.UpdateNetGWHandler
 	// PoolUpdatePoolHandler sets the operation handler for the update pool operation
 	PoolUpdatePoolHandler pool.UpdatePoolHandler
 	// ProjectUpdateProjectHandler sets the operation handler for the update project operation
@@ -359,6 +393,8 @@ type KowabungaAPI struct {
 	VnetUpdateVNetHandler vnet.UpdateVNetHandler
 	// ZoneUpdateZoneHandler sets the operation handler for the update zone operation
 	ZoneUpdateZoneHandler zone.UpdateZoneHandler
+	// ZoneUpdateZoneDefaultVNetHandler sets the operation handler for the update zone default v net operation
+	ZoneUpdateZoneDefaultVNetHandler zone.UpdateZoneDefaultVNetHandler
 
 	// ServeError is called when an error is received, there is a default handler
 	// but you can set your own with this
@@ -446,6 +482,9 @@ func (o *KowabungaAPI) Validate() error {
 	if o.ZoneCreateHostHandler == nil {
 		unregistered = append(unregistered, "zone.CreateHostHandler")
 	}
+	if o.ZoneCreateNetGWHandler == nil {
+		unregistered = append(unregistered, "zone.CreateNetGWHandler")
+	}
 	if o.ZoneCreatePoolHandler == nil {
 		unregistered = append(unregistered, "zone.CreatePoolHandler")
 	}
@@ -463,6 +502,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.HostDeleteHostHandler == nil {
 		unregistered = append(unregistered, "host.DeleteHostHandler")
+	}
+	if o.NetgwDeleteNetGWHandler == nil {
+		unregistered = append(unregistered, "netgw.DeleteNetGWHandler")
 	}
 	if o.PoolDeletePoolHandler == nil {
 		unregistered = append(unregistered, "pool.DeletePoolHandler")
@@ -484,6 +526,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.InstanceGetAllInstancesHandler == nil {
 		unregistered = append(unregistered, "instance.GetAllInstancesHandler")
+	}
+	if o.NetgwGetAllNetGWsHandler == nil {
+		unregistered = append(unregistered, "netgw.GetAllNetGWsHandler")
 	}
 	if o.PoolGetAllPoolsHandler == nil {
 		unregistered = append(unregistered, "pool.GetAllPoolsHandler")
@@ -515,6 +560,9 @@ func (o *KowabungaAPI) Validate() error {
 	if o.InstanceGetInstanceStateHandler == nil {
 		unregistered = append(unregistered, "instance.GetInstanceStateHandler")
 	}
+	if o.NetgwGetNetGWHandler == nil {
+		unregistered = append(unregistered, "netgw.GetNetGWHandler")
+	}
 	if o.PoolGetPoolHandler == nil {
 		unregistered = append(unregistered, "pool.GetPoolHandler")
 	}
@@ -541,6 +589,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.ZoneGetZoneHostsHandler == nil {
 		unregistered = append(unregistered, "zone.GetZoneHostsHandler")
+	}
+	if o.ZoneGetZoneNetGWsHandler == nil {
+		unregistered = append(unregistered, "zone.GetZoneNetGWsHandler")
 	}
 	if o.ZoneGetZonePoolsHandler == nil {
 		unregistered = append(unregistered, "zone.GetZonePoolsHandler")
@@ -578,6 +629,9 @@ func (o *KowabungaAPI) Validate() error {
 	if o.HostUpdateHostHandler == nil {
 		unregistered = append(unregistered, "host.UpdateHostHandler")
 	}
+	if o.NetgwUpdateNetGWHandler == nil {
+		unregistered = append(unregistered, "netgw.UpdateNetGWHandler")
+	}
 	if o.PoolUpdatePoolHandler == nil {
 		unregistered = append(unregistered, "pool.UpdatePoolHandler")
 	}
@@ -595,6 +649,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.ZoneUpdateZoneHandler == nil {
 		unregistered = append(unregistered, "zone.UpdateZoneHandler")
+	}
+	if o.ZoneUpdateZoneDefaultVNetHandler == nil {
+		unregistered = append(unregistered, "zone.UpdateZoneDefaultVNetHandler")
 	}
 
 	if len(unregistered) > 0 {
@@ -702,6 +759,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
+	o.handlers["POST"]["/zone/{zoneId}/netgw"] = zone.NewCreateNetGW(o.context, o.ZoneCreateNetGWHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
 	o.handlers["POST"]["/zone/{zoneId}/pool"] = zone.NewCreatePool(o.context, o.ZoneCreatePoolHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
@@ -723,6 +784,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
 	o.handlers["DELETE"]["/host/{hostId}"] = host.NewDeleteHost(o.context, o.HostDeleteHostHandler)
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
+	o.handlers["DELETE"]["/netgw/{netgwId}"] = netgw.NewDeleteNetGW(o.context, o.NetgwDeleteNetGWHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
@@ -751,6 +816,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/instance"] = instance.NewGetAllInstances(o.context, o.InstanceGetAllInstancesHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/netgw"] = netgw.NewGetAllNetGWs(o.context, o.NetgwGetAllNetGWsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -794,6 +863,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
+	o.handlers["GET"]["/netgw/{netgwId}"] = netgw.NewGetNetGW(o.context, o.NetgwGetNetGWHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
 	o.handlers["GET"]["/pool/{poolId}"] = pool.NewGetPool(o.context, o.PoolGetPoolHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
@@ -827,6 +900,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/zone/{zoneId}/hosts"] = zone.NewGetZoneHosts(o.context, o.ZoneGetZoneHostsHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/zone/{zoneId}/netgws"] = zone.NewGetZoneNetGWs(o.context, o.ZoneGetZoneNetGWsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -878,6 +955,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
+	o.handlers["PUT"]["/netgw/{netgwId}"] = netgw.NewUpdateNetGW(o.context, o.NetgwUpdateNetGWHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
 	o.handlers["PUT"]["/pool/{poolId}"] = pool.NewUpdatePool(o.context, o.PoolUpdatePoolHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
@@ -899,6 +980,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
 	o.handlers["PUT"]["/zone/{zoneId}"] = zone.NewUpdateZone(o.context, o.ZoneUpdateZoneHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/zone/{zoneId}/vnet/{vnetId}/default"] = zone.NewUpdateZoneDefaultVNet(o.context, o.ZoneUpdateZoneDefaultVNetHandler)
 }
 
 // Serve creates a http handler to serve the API over HTTP

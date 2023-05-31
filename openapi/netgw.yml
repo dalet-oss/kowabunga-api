@@ -1,0 +1,103 @@
+definitions:
+  NetGW:
+    type: object
+    required: [name, address, token]
+    properties:
+      id:
+        type: string
+        description: The network gateway ID (auto-generated).
+      name:
+        type: string
+        description: The network gateway name.
+      description:
+        type: string
+        description: The network gateway description.
+      address:
+        type: string
+        description: The network gateway IPv4 address.
+      port:
+        type: integer
+        description: The network gateway service port (default to 8080).
+        default: 8080
+      token:
+        type: string
+        description: The network gateway admin API token.
+
+paths:
+  /netgw:
+    get:
+      tags:
+        - netgw
+      operationId: GetAllNetGWs
+      description: Returns the IDs of network gateways.
+      responses:
+        200:
+          description: Returns an array of network gateway IDs.
+          schema:
+            type: array
+            items:
+              type: string
+
+  /netgw/{netgwId}:
+    get:
+      tags:
+        - netgw
+      operationId: GetNetGW
+      description: Returns a description of the network gateway
+      parameters:
+        - name: netgwId
+          in: path
+          type: string
+          required: true
+          description: The ID of the network gateway to get.
+      responses:
+        200:
+          description: Returns the network gateway object.
+          schema:
+            $ref: '#/definitions/NetGW'
+        404:
+          description: Invalid network gateway ID was provided.
+    put:
+      tags:
+        - netgw
+      operationId: UpdateNetGW
+      description: Updates a network gateway configuration.
+      parameters:
+        - name: netgwId
+          in: path
+          type: string
+          required: true
+          description: The ID of the network gateway to get.
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/NetGW'
+      responses:
+        200:
+          description: Returns the updated network gateway object.
+          schema:
+            $ref: '#/definitions/NetGW'
+        400:
+          description: Bad parameters were provided.
+        404:
+          description: Invalid network gateway ID was provided.
+    delete:
+      tags:
+        - netgw
+      operationId: DeleteNetGW
+      description: Deletes an existing network gateway.
+      parameters:
+        - name: netgwId
+          in: path
+          type: string
+          required: true
+          description: The ID of the network gateway to get.
+      responses:
+        200:
+          description: The network gateway has been successfully removed.
+        404:
+          description: Invalid network gateway ID was provided.
+        409:
+          description: The network gateway is not empty or still being referenced.
+        500:
+          description: Unable to delete network gateway.

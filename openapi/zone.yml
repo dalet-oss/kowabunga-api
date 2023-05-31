@@ -91,6 +91,61 @@ paths:
         500:
           description: Unable to delete zone.
 
+  /zone/{zoneId}/netgw:
+    post:
+      tags:
+        - zone
+        - netgw
+      operationId: CreateNetGW
+      description: Creates a new network gateway.
+      parameters:
+        - name: zoneId
+          in: path
+          type: string
+          required: true
+          description: the ID of the associated zone.
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/NetGW'
+      responses:
+        201:
+          description: Returns the newly created network gateway object.
+          schema:
+            $ref: '#/definitions/NetGW'
+        400:
+          description: Bad parameters were provided.
+        404:
+          description: Invalid zone ID was provided.
+        409:
+          description: Network gateway already exists.
+        500:
+          description: Unable to connect to network gateway.
+
+  /zone/{zoneId}/netgws:
+    get:
+      tags:
+        - zone
+        - netgw
+      operationId: GetZoneNetGWs
+      description: Returns the IDs of the hosts existing in the zone.
+      parameters:
+        - name: zoneId
+          in: path
+          type: string
+          required: true
+          description: The ID of the zone to query.
+      responses:
+        200:
+          description: Returns an array of network gateway IDs.
+          schema:
+            type: array
+            items:
+              type: string
+        404:
+          description: Invalid zone ID was provided.
+
   /zone/{zoneId}/host:
     post:
       tags:
@@ -129,7 +184,7 @@ paths:
         - zone
         - host
       operationId: GetZoneHosts
-      description: Returns the UUIDs of the hosts existing in the zone.
+      description: Returns the IDs of the hosts existing in the zone.
       parameters:
         - name: zoneId
           in: path
@@ -138,7 +193,7 @@ paths:
           description: The ID of the zone to query.
       responses:
         200:
-          description: Returns an array of host UUIDs.
+          description: Returns an array of host IDs.
           schema:
             type: array
             items:
@@ -232,6 +287,32 @@ paths:
           description: Virtual network already exists.
         500:
           description: Unable to create virtual network.
+
+  /zone/{zoneId}/vnet/{vnetId}/default:
+    put:
+      tags:
+        - zone
+        - vnet
+      operationId: UpdateZoneDefaultVNet
+      description: Set a zone's default virtual network.
+      parameters:
+        - name: zoneId
+          in: path
+          type: string
+          required: true
+          description: The ID of the zone to update.
+        - name: vnetId
+          in: path
+          type: string
+          required: true
+          description: The ID of the virtual network to set as default.
+      responses:
+        200:
+          description: Returns the updated project resources object.
+        404:
+          description: Invalid zone ID or virtual network ID was provided.
+        500:
+          description: Unable to assign the requested virtual network as zone's default.
 
   /zone/{zoneId}/vnets:
     get:

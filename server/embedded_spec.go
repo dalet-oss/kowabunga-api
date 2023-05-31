@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.2.1"
+    "version": "0.2.2"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -509,6 +509,122 @@ func init() {
           },
           "500": {
             "description": "An error occurred when trying to suspend the virtual machine."
+          }
+        }
+      }
+    },
+    "/netgw": {
+      "get": {
+        "description": "Returns the IDs of network gateways.",
+        "tags": [
+          "netgw"
+        ],
+        "operationId": "GetAllNetGWs",
+        "responses": {
+          "200": {
+            "description": "Returns an array of network gateway IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/netgw/{netgwId}": {
+      "get": {
+        "description": "Returns a description of the network gateway",
+        "tags": [
+          "netgw"
+        ],
+        "operationId": "GetNetGW",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the network gateway to get.",
+            "name": "netgwId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the network gateway object.",
+            "schema": {
+              "$ref": "#/definitions/NetGW"
+            }
+          },
+          "404": {
+            "description": "Invalid network gateway ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a network gateway configuration.",
+        "tags": [
+          "netgw"
+        ],
+        "operationId": "UpdateNetGW",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the network gateway to get.",
+            "name": "netgwId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/NetGW"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated network gateway object.",
+            "schema": {
+              "$ref": "#/definitions/NetGW"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid network gateway ID was provided."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing network gateway.",
+        "tags": [
+          "netgw"
+        ],
+        "operationId": "DeleteNetGW",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the network gateway to get.",
+            "name": "netgwId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The network gateway has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid network gateway ID was provided."
+          },
+          "409": {
+            "description": "The network gateway is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete network gateway."
           }
         }
       }
@@ -1407,7 +1523,7 @@ func init() {
     },
     "/zone/{zoneId}/hosts": {
       "get": {
-        "description": "Returns the UUIDs of the hosts existing in the zone.",
+        "description": "Returns the IDs of the hosts existing in the zone.",
         "tags": [
           "zone",
           "host"
@@ -1424,7 +1540,87 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Returns an array of host UUIDs.",
+            "description": "Returns an array of host IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid zone ID was provided."
+          }
+        }
+      }
+    },
+    "/zone/{zoneId}/netgw": {
+      "post": {
+        "description": "Creates a new network gateway.",
+        "tags": [
+          "zone",
+          "netgw"
+        ],
+        "operationId": "CreateNetGW",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated zone.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetGW"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created network gateway object.",
+            "schema": {
+              "$ref": "#/definitions/NetGW"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid zone ID was provided."
+          },
+          "409": {
+            "description": "Network gateway already exists."
+          },
+          "500": {
+            "description": "Unable to connect to network gateway."
+          }
+        }
+      }
+    },
+    "/zone/{zoneId}/netgws": {
+      "get": {
+        "description": "Returns the IDs of the hosts existing in the zone.",
+        "tags": [
+          "zone",
+          "netgw"
+        ],
+        "operationId": "GetZoneNetGWs",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the zone to query.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of network gateway IDs.",
             "schema": {
               "type": "array",
               "items": {
@@ -1561,6 +1757,43 @@ func init() {
           },
           "500": {
             "description": "Unable to create virtual network."
+          }
+        }
+      }
+    },
+    "/zone/{zoneId}/vnet/{vnetId}/default": {
+      "put": {
+        "description": "Set a zone's default virtual network.",
+        "tags": [
+          "zone",
+          "vnet"
+        ],
+        "operationId": "UpdateZoneDefaultVNet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the zone to update.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the virtual network to set as default.",
+            "name": "vnetId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated project resources object."
+          },
+          "404": {
+            "description": "Invalid zone ID or virtual network ID was provided."
+          },
+          "500": {
+            "description": "Unable to assign the requested virtual network as zone's default."
           }
         }
       }
@@ -1838,6 +2071,41 @@ func init() {
         }
       }
     },
+    "NetGW": {
+      "type": "object",
+      "required": [
+        "name",
+        "address",
+        "token"
+      ],
+      "properties": {
+        "address": {
+          "description": "The network gateway IPv4 address.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The network gateway description.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The network gateway ID (auto-generated).",
+          "type": "string"
+        },
+        "name": {
+          "description": "The network gateway name.",
+          "type": "string"
+        },
+        "port": {
+          "description": "The network gateway service port (default to 8080).",
+          "type": "integer",
+          "default": 8080
+        },
+        "token": {
+          "description": "The network gateway admin API token.",
+          "type": "string"
+        }
+      }
+    },
     "Project": {
       "type": "object",
       "properties": {
@@ -1937,31 +2205,37 @@ func init() {
         }
       }
     },
-    "VNet": {
+    "Subnet": {
       "type": "object",
       "required": [
-        "name",
-        "subnetId",
-        "interface",
         "cidr",
-        "gateway",
-        "dns"
+        "gateway"
       ],
       "properties": {
         "cidr": {
           "description": "The virtual network CIDR (e.g. 192.168.0.0/24).",
           "type": "string"
         },
-        "description": {
-          "description": "The virtual network description.",
-          "type": "string"
-        },
         "dns": {
-          "description": "The virtual network DNS server IP address (e.g. 192.168.0.254).",
+          "description": "The virtual network DNS server IP address (gateway value if unspecified).",
           "type": "string"
         },
         "gateway": {
           "description": "The virtual network router/gateway IP address (e.g. 192.168.0.254).",
+          "type": "string"
+        }
+      }
+    },
+    "VNet": {
+      "type": "object",
+      "required": [
+        "name",
+        "vlan",
+        "interface"
+      ],
+      "properties": {
+        "description": {
+          "description": "The virtual network description.",
           "type": "string"
         },
         "id": {
@@ -1976,8 +2250,20 @@ func init() {
           "description": "The virtual network name.",
           "type": "string"
         },
-        "subnetId": {
-          "description": "The subnet identifier.",
+        "private": {
+          "description": "Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?",
+          "type": "boolean",
+          "default": true
+        },
+        "subnets": {
+          "description": "An array of associated subnets",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Subnet"
+          }
+        },
+        "vlan": {
+          "description": "The VLAN identifier.",
           "type": "integer"
         }
       }
@@ -2030,7 +2316,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.2.1"
+    "version": "0.2.2"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -2508,6 +2794,122 @@ func init() {
           },
           "500": {
             "description": "An error occurred when trying to suspend the virtual machine."
+          }
+        }
+      }
+    },
+    "/netgw": {
+      "get": {
+        "description": "Returns the IDs of network gateways.",
+        "tags": [
+          "netgw"
+        ],
+        "operationId": "GetAllNetGWs",
+        "responses": {
+          "200": {
+            "description": "Returns an array of network gateway IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/netgw/{netgwId}": {
+      "get": {
+        "description": "Returns a description of the network gateway",
+        "tags": [
+          "netgw"
+        ],
+        "operationId": "GetNetGW",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the network gateway to get.",
+            "name": "netgwId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the network gateway object.",
+            "schema": {
+              "$ref": "#/definitions/NetGW"
+            }
+          },
+          "404": {
+            "description": "Invalid network gateway ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a network gateway configuration.",
+        "tags": [
+          "netgw"
+        ],
+        "operationId": "UpdateNetGW",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the network gateway to get.",
+            "name": "netgwId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/NetGW"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated network gateway object.",
+            "schema": {
+              "$ref": "#/definitions/NetGW"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid network gateway ID was provided."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing network gateway.",
+        "tags": [
+          "netgw"
+        ],
+        "operationId": "DeleteNetGW",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the network gateway to get.",
+            "name": "netgwId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The network gateway has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid network gateway ID was provided."
+          },
+          "409": {
+            "description": "The network gateway is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete network gateway."
           }
         }
       }
@@ -3406,7 +3808,7 @@ func init() {
     },
     "/zone/{zoneId}/hosts": {
       "get": {
-        "description": "Returns the UUIDs of the hosts existing in the zone.",
+        "description": "Returns the IDs of the hosts existing in the zone.",
         "tags": [
           "zone",
           "host"
@@ -3423,7 +3825,87 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "Returns an array of host UUIDs.",
+            "description": "Returns an array of host IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid zone ID was provided."
+          }
+        }
+      }
+    },
+    "/zone/{zoneId}/netgw": {
+      "post": {
+        "description": "Creates a new network gateway.",
+        "tags": [
+          "zone",
+          "netgw"
+        ],
+        "operationId": "CreateNetGW",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated zone.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetGW"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created network gateway object.",
+            "schema": {
+              "$ref": "#/definitions/NetGW"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid zone ID was provided."
+          },
+          "409": {
+            "description": "Network gateway already exists."
+          },
+          "500": {
+            "description": "Unable to connect to network gateway."
+          }
+        }
+      }
+    },
+    "/zone/{zoneId}/netgws": {
+      "get": {
+        "description": "Returns the IDs of the hosts existing in the zone.",
+        "tags": [
+          "zone",
+          "netgw"
+        ],
+        "operationId": "GetZoneNetGWs",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the zone to query.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of network gateway IDs.",
             "schema": {
               "type": "array",
               "items": {
@@ -3560,6 +4042,43 @@ func init() {
           },
           "500": {
             "description": "Unable to create virtual network."
+          }
+        }
+      }
+    },
+    "/zone/{zoneId}/vnet/{vnetId}/default": {
+      "put": {
+        "description": "Set a zone's default virtual network.",
+        "tags": [
+          "zone",
+          "vnet"
+        ],
+        "operationId": "UpdateZoneDefaultVNet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the zone to update.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the virtual network to set as default.",
+            "name": "vnetId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated project resources object."
+          },
+          "404": {
+            "description": "Invalid zone ID or virtual network ID was provided."
+          },
+          "500": {
+            "description": "Unable to assign the requested virtual network as zone's default."
           }
         }
       }
@@ -3884,6 +4403,41 @@ func init() {
         }
       }
     },
+    "NetGW": {
+      "type": "object",
+      "required": [
+        "name",
+        "address",
+        "token"
+      ],
+      "properties": {
+        "address": {
+          "description": "The network gateway IPv4 address.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The network gateway description.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The network gateway ID (auto-generated).",
+          "type": "string"
+        },
+        "name": {
+          "description": "The network gateway name.",
+          "type": "string"
+        },
+        "port": {
+          "description": "The network gateway service port (default to 8080).",
+          "type": "integer",
+          "default": 8080
+        },
+        "token": {
+          "description": "The network gateway admin API token.",
+          "type": "string"
+        }
+      }
+    },
     "Project": {
       "type": "object",
       "properties": {
@@ -3983,31 +4537,37 @@ func init() {
         }
       }
     },
-    "VNet": {
+    "Subnet": {
       "type": "object",
       "required": [
-        "name",
-        "subnetId",
-        "interface",
         "cidr",
-        "gateway",
-        "dns"
+        "gateway"
       ],
       "properties": {
         "cidr": {
           "description": "The virtual network CIDR (e.g. 192.168.0.0/24).",
           "type": "string"
         },
-        "description": {
-          "description": "The virtual network description.",
-          "type": "string"
-        },
         "dns": {
-          "description": "The virtual network DNS server IP address (e.g. 192.168.0.254).",
+          "description": "The virtual network DNS server IP address (gateway value if unspecified).",
           "type": "string"
         },
         "gateway": {
           "description": "The virtual network router/gateway IP address (e.g. 192.168.0.254).",
+          "type": "string"
+        }
+      }
+    },
+    "VNet": {
+      "type": "object",
+      "required": [
+        "name",
+        "vlan",
+        "interface"
+      ],
+      "properties": {
+        "description": {
+          "description": "The virtual network description.",
           "type": "string"
         },
         "id": {
@@ -4022,8 +4582,20 @@ func init() {
           "description": "The virtual network name.",
           "type": "string"
         },
-        "subnetId": {
-          "description": "The subnet identifier.",
+        "private": {
+          "description": "Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?",
+          "type": "boolean",
+          "default": true
+        },
+        "subnets": {
+          "description": "An array of associated subnets",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Subnet"
+          }
+        },
+        "vlan": {
+          "description": "The VLAN identifier.",
           "type": "integer"
         }
       }

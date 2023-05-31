@@ -46,7 +46,7 @@ func NewGetZoneHostsOK() *GetZoneHostsOK {
 /*
 GetZoneHostsOK describes a response with status code 200, with default header values.
 
-Returns an array of host UUIDs.
+Returns an array of host IDs.
 */
 type GetZoneHostsOK struct {
 	Payload []string

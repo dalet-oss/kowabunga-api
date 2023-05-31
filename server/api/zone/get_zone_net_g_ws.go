@@ -11,40 +11,40 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 )
 
-// GetZoneHostsHandlerFunc turns a function with the right signature into a get zone hosts handler
-type GetZoneHostsHandlerFunc func(GetZoneHostsParams, interface{}) middleware.Responder
+// GetZoneNetGWsHandlerFunc turns a function with the right signature into a get zone net g ws handler
+type GetZoneNetGWsHandlerFunc func(GetZoneNetGWsParams, interface{}) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn GetZoneHostsHandlerFunc) Handle(params GetZoneHostsParams, principal interface{}) middleware.Responder {
+func (fn GetZoneNetGWsHandlerFunc) Handle(params GetZoneNetGWsParams, principal interface{}) middleware.Responder {
 	return fn(params, principal)
 }
 
-// GetZoneHostsHandler interface for that can handle valid get zone hosts params
-type GetZoneHostsHandler interface {
-	Handle(GetZoneHostsParams, interface{}) middleware.Responder
+// GetZoneNetGWsHandler interface for that can handle valid get zone net g ws params
+type GetZoneNetGWsHandler interface {
+	Handle(GetZoneNetGWsParams, interface{}) middleware.Responder
 }
 
-// NewGetZoneHosts creates a new http.Handler for the get zone hosts operation
-func NewGetZoneHosts(ctx *middleware.Context, handler GetZoneHostsHandler) *GetZoneHosts {
-	return &GetZoneHosts{Context: ctx, Handler: handler}
+// NewGetZoneNetGWs creates a new http.Handler for the get zone net g ws operation
+func NewGetZoneNetGWs(ctx *middleware.Context, handler GetZoneNetGWsHandler) *GetZoneNetGWs {
+	return &GetZoneNetGWs{Context: ctx, Handler: handler}
 }
 
 /*
-	GetZoneHosts swagger:route GET /zone/{zoneId}/hosts zone host getZoneHosts
+	GetZoneNetGWs swagger:route GET /zone/{zoneId}/netgws zone netgw getZoneNetGWs
 
 Returns the IDs of the hosts existing in the zone.
 */
-type GetZoneHosts struct {
+type GetZoneNetGWs struct {
 	Context *middleware.Context
-	Handler GetZoneHostsHandler
+	Handler GetZoneNetGWsHandler
 }
 
-func (o *GetZoneHosts) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
+func (o *GetZoneNetGWs) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
 		*r = *rCtx
 	}
-	var Params = NewGetZoneHostsParams()
+	var Params = NewGetZoneNetGWsParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
 	if err != nil {
 		o.Context.Respond(rw, r, route.Produces, route, err)

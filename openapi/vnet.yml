@@ -1,7 +1,7 @@
 definitions:
   VNet:
     type: object
-    required: [name, subnetId, interface, cidr, gateway, dns]
+    required: [name, vlan, interface]
     properties:
       id:
         type: string
@@ -12,12 +12,26 @@ definitions:
       description:
         type: string
         description: The virtual network description.
-      subnetId:
+      vlan:
         type: integer
-        description: The subnet identifier.
+        description: The VLAN identifier.
       interface:
         type: string
         description: The libvirt's bridge network interface (brX).
+      private:
+        type: boolean
+        description: Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?
+        default: true
+      subnets:
+        type: array
+        description: An array of associated subnets
+        items:
+          $ref: '#/definitions/Subnet'
+
+  Subnet:
+    type: object
+    required: [cidr, gateway]
+    properties:
       cidr:
         type: string
         description: The virtual network CIDR (e.g. 192.168.0.0/24).
@@ -26,7 +40,7 @@ definitions:
         description: The virtual network router/gateway IP address (e.g. 192.168.0.254).
       dns:
         type: string
-        description: The virtual network DNS server IP address (e.g. 192.168.0.254).
+        description: The virtual network DNS server IP address (gateway value if unspecified).
 
 paths:
   /vnet:

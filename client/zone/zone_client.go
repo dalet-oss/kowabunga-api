@@ -32,6 +32,8 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	CreateHost(params *CreateHostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateHostCreated, error)
 
+	CreateNetGW(params *CreateNetGWParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateNetGWCreated, error)
+
 	CreatePool(params *CreatePoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePoolCreated, error)
 
 	CreateVNet(params *CreateVNetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVNetCreated, error)
@@ -44,11 +46,15 @@ type ClientService interface {
 
 	GetZoneHosts(params *GetZoneHostsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetZoneHostsOK, error)
 
+	GetZoneNetGWs(params *GetZoneNetGWsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetZoneNetGWsOK, error)
+
 	GetZonePools(params *GetZonePoolsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetZonePoolsOK, error)
 
 	GetZoneVNets(params *GetZoneVNetsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetZoneVNetsOK, error)
 
 	UpdateZone(params *UpdateZoneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateZoneOK, error)
+
+	UpdateZoneDefaultVNet(params *UpdateZoneDefaultVNetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateZoneDefaultVNetOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -89,6 +95,45 @@ func (a *Client) CreateHost(params *CreateHostParams, authInfo runtime.ClientAut
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateHost: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateNetGW Creates a new network gateway.
+*/
+func (a *Client) CreateNetGW(params *CreateNetGWParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateNetGWCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateNetGWParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateNetGW",
+		Method:             "POST",
+		PathPattern:        "/zone/{zoneId}/netgw",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateNetGWReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateNetGWCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateNetGW: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -288,7 +333,7 @@ func (a *Client) GetZone(params *GetZoneParams, authInfo runtime.ClientAuthInfoW
 }
 
 /*
-GetZoneHosts Returns the UUIDs of the hosts existing in the zone.
+GetZoneHosts Returns the IDs of the hosts existing in the zone.
 */
 func (a *Client) GetZoneHosts(params *GetZoneHostsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetZoneHostsOK, error) {
 	// TODO: Validate the params before sending
@@ -323,6 +368,45 @@ func (a *Client) GetZoneHosts(params *GetZoneHostsParams, authInfo runtime.Clien
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetZoneHosts: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetZoneNetGWs Returns the IDs of the hosts existing in the zone.
+*/
+func (a *Client) GetZoneNetGWs(params *GetZoneNetGWsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetZoneNetGWsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetZoneNetGWsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetZoneNetGWs",
+		Method:             "GET",
+		PathPattern:        "/zone/{zoneId}/netgws",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetZoneNetGWsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetZoneNetGWsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetZoneNetGWs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -440,6 +524,45 @@ func (a *Client) UpdateZone(params *UpdateZoneParams, authInfo runtime.ClientAut
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateZone: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateZoneDefaultVNet Set a zone's default virtual network.
+*/
+func (a *Client) UpdateZoneDefaultVNet(params *UpdateZoneDefaultVNetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateZoneDefaultVNetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateZoneDefaultVNetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateZoneDefaultVNet",
+		Method:             "PUT",
+		PathPattern:        "/zone/{zoneId}/vnet/{vnetId}/default",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateZoneDefaultVNetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateZoneDefaultVNetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateZoneDefaultVNet: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
