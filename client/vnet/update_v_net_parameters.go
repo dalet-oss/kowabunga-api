@@ -68,7 +68,7 @@ type UpdateVNetParams struct {
 
 	/* VnetID.
 
-	   The ID of the virtual network to get.
+	   The ID of the virtual network to update.
 	*/
 	VnetID string
 

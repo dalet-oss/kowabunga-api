@@ -22,25 +22,6 @@ definitions:
         type: boolean
         description: Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?
         default: true
-      subnets:
-        type: array
-        description: An array of associated subnets
-        items:
-          $ref: '#/definitions/Subnet'
-
-  Subnet:
-    type: object
-    required: [cidr, gateway]
-    properties:
-      cidr:
-        type: string
-        description: The virtual network CIDR (e.g. 192.168.0.0/24).
-      gateway:
-        type: string
-        description: The virtual network router/gateway IP address (e.g. 192.168.0.254).
-      dns:
-        type: string
-        description: The virtual network DNS server IP address (gateway value if unspecified).
 
 paths:
   /vnet:
@@ -86,7 +67,7 @@ paths:
           in: path
           type: string
           required: true
-          description: The ID of the virtual network to get.
+          description: The ID of the virtual network to update.
         - name: body
           in: body
           schema:
@@ -110,7 +91,7 @@ paths:
           in: path
           type: string
           required: true
-          description: The ID of the virtual network to get.
+          description: The ID of the virtual network to delete.
       responses:
         200:
           description: The virtual network has been successfully removed.
@@ -120,3 +101,84 @@ paths:
           description: The virtual network is not empty or still being referenced.
         500:
           description: Unable to delete virtual network.
+
+  /vnet/{vnetId}/subnet:
+    post:
+      tags:
+        - vnet
+        - subnet
+      operationId: CreateSubnet
+      description: Creates a new subnet.
+      parameters:
+        - name: vnetId
+          in: path
+          type: string
+          required: true
+          description: the ID of the associated virtual network.
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Subnet'
+      responses:
+        201:
+          description: Returns the newly created subnet object.
+          schema:
+            $ref: '#/definitions/Subnet'
+        400:
+          description: Bad parameters were provided.
+        404:
+          description: Invalid virtual network ID was provided.
+        409:
+          description: Subnet already exists.
+        500:
+          description: Unable to create subnet.
+
+  /vnet/{vnetId}/subnet/{subnetId}/default:
+    put:
+      tags:
+        - vnet
+        - subnet
+      operationId: UpdateVNetDefaultSubnet
+      description: Set a virtual network default subnet.
+      parameters:
+        - name: vnetId
+          in: path
+          type: string
+          required: true
+          description: The ID of the virtual network to update.
+        - name: subnetId
+          in: path
+          type: string
+          required: true
+          description: The ID of the subnet to set as default.
+      responses:
+        200:
+          description: Returns the updated subnet object.
+        404:
+          description: Invalid virtual network ID or subnet ID was provided.
+        500:
+          description: Unable to assign the requested subnet as virtual network default.
+
+  /vnet/{vnetId}/subnets:
+    get:
+      tags:
+        - vnet
+        - subnet
+      operationId: GetVNetSubnets
+      description: Returns the IDs of the subnets existing in the virtual network.
+      parameters:
+        - name: vnetId
+          in: path
+          type: string
+          required: true
+          description: The ID of the virtual network to query.
+      responses:
+        200:
+          description: Returns an array of subnet IDs.
+          schema:
+            type: array
+            items:
+              type: string
+        404:
+          description: Invalid virtual network ID was provided.

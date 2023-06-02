@@ -17,6 +17,7 @@ import (
 	"github.com/dalet-oss/kowabunga-api/server/api/pool"
 	"github.com/dalet-oss/kowabunga-api/server/api/project"
 	"github.com/dalet-oss/kowabunga-api/server/api/region"
+	"github.com/dalet-oss/kowabunga-api/server/api/subnet"
 	"github.com/dalet-oss/kowabunga-api/server/api/vnet"
 	"github.com/dalet-oss/kowabunga-api/server/api/zone"
 )
@@ -84,6 +85,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation region.CreateRegion has not yet been implemented")
 		})
 	}
+	if api.VnetCreateSubnetHandler == nil {
+		api.VnetCreateSubnetHandler = vnet.CreateSubnetHandlerFunc(func(params vnet.CreateSubnetParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation vnet.CreateSubnet has not yet been implemented")
+		})
+	}
 	if api.ZoneCreateVNetHandler == nil {
 		api.ZoneCreateVNetHandler = zone.CreateVNetHandlerFunc(func(params zone.CreateVNetParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.CreateVNet has not yet been implemented")
@@ -117,6 +123,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.RegionDeleteRegionHandler == nil {
 		api.RegionDeleteRegionHandler = region.DeleteRegionHandlerFunc(func(params region.DeleteRegionParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation region.DeleteRegion has not yet been implemented")
+		})
+	}
+	if api.SubnetDeleteSubnetHandler == nil {
+		api.SubnetDeleteSubnetHandler = subnet.DeleteSubnetHandlerFunc(func(params subnet.DeleteSubnetParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation subnet.DeleteSubnet has not yet been implemented")
 		})
 	}
 	if api.VnetDeleteVNetHandler == nil {
@@ -157,6 +168,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.RegionGetAllRegionsHandler == nil {
 		api.RegionGetAllRegionsHandler = region.GetAllRegionsHandlerFunc(func(params region.GetAllRegionsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation region.GetAllRegions has not yet been implemented")
+		})
+	}
+	if api.SubnetGetAllSubnetsHandler == nil {
+		api.SubnetGetAllSubnetsHandler = subnet.GetAllSubnetsHandlerFunc(func(params subnet.GetAllSubnetsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation subnet.GetAllSubnets has not yet been implemented")
 		})
 	}
 	if api.VnetGetAllVNetsHandler == nil {
@@ -229,9 +245,19 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation region.GetRegionZones has not yet been implemented")
 		})
 	}
+	if api.SubnetGetSubnetHandler == nil {
+		api.SubnetGetSubnetHandler = subnet.GetSubnetHandlerFunc(func(params subnet.GetSubnetParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation subnet.GetSubnet has not yet been implemented")
+		})
+	}
 	if api.VnetGetVNetHandler == nil {
 		api.VnetGetVNetHandler = vnet.GetVNetHandlerFunc(func(params vnet.GetVNetParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation vnet.GetVNet has not yet been implemented")
+		})
+	}
+	if api.VnetGetVNetSubnetsHandler == nil {
+		api.VnetGetVNetSubnetsHandler = vnet.GetVNetSubnetsHandlerFunc(func(params vnet.GetVNetSubnetsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation vnet.GetVNetSubnets has not yet been implemented")
 		})
 	}
 	if api.ZoneGetZoneHandler == nil {
@@ -334,9 +360,19 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation region.UpdateRegion has not yet been implemented")
 		})
 	}
+	if api.SubnetUpdateSubnetHandler == nil {
+		api.SubnetUpdateSubnetHandler = subnet.UpdateSubnetHandlerFunc(func(params subnet.UpdateSubnetParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation subnet.UpdateSubnet has not yet been implemented")
+		})
+	}
 	if api.VnetUpdateVNetHandler == nil {
 		api.VnetUpdateVNetHandler = vnet.UpdateVNetHandlerFunc(func(params vnet.UpdateVNetParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation vnet.UpdateVNet has not yet been implemented")
+		})
+	}
+	if api.VnetUpdateVNetDefaultSubnetHandler == nil {
+		api.VnetUpdateVNetDefaultSubnetHandler = vnet.UpdateVNetDefaultSubnetHandlerFunc(func(params vnet.UpdateVNetDefaultSubnetParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation vnet.UpdateVNetDefaultSubnet has not yet been implemented")
 		})
 	}
 	if api.ZoneUpdateZoneHandler == nil {

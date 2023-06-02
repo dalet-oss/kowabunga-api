@@ -13,24 +13,24 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewDeleteVNetParams creates a new DeleteVNetParams object
+// NewGetVNetSubnetsParams creates a new GetVNetSubnetsParams object
 //
 // There are no default values defined in the spec.
-func NewDeleteVNetParams() DeleteVNetParams {
+func NewGetVNetSubnetsParams() GetVNetSubnetsParams {
 
-	return DeleteVNetParams{}
+	return GetVNetSubnetsParams{}
 }
 
-// DeleteVNetParams contains all the bound params for the delete v net operation
+// GetVNetSubnetsParams contains all the bound params for the get v net subnets operation
 // typically these are obtained from a http.Request
 //
-// swagger:parameters DeleteVNet
-type DeleteVNetParams struct {
+// swagger:parameters GetVNetSubnets
+type GetVNetSubnetsParams struct {
 
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
-	/*The ID of the virtual network to delete.
+	/*The ID of the virtual network to query.
 	  Required: true
 	  In: path
 	*/
@@ -40,8 +40,8 @@ type DeleteVNetParams struct {
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
 // for simple values it will use straight method calls.
 //
-// To ensure default values, the struct must have been initialized with NewDeleteVNetParams() beforehand.
-func (o *DeleteVNetParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
+// To ensure default values, the struct must have been initialized with NewGetVNetSubnetsParams() beforehand.
+func (o *GetVNetSubnetsParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
 	var res []error
 
 	o.HTTPRequest = r
@@ -57,7 +57,7 @@ func (o *DeleteVNetParams) BindRequest(r *http.Request, route *middleware.Matche
 }
 
 // bindVnetID binds and validates parameter VnetID from path.
-func (o *DeleteVNetParams) bindVnetID(rawData []string, hasKey bool, formats strfmt.Registry) error {
+func (o *GetVNetSubnetsParams) bindVnetID(rawData []string, hasKey bool, formats strfmt.Registry) error {
 	var raw string
 	if len(rawData) > 0 {
 		raw = rawData[len(rawData)-1]

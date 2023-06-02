@@ -30,15 +30,60 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	CreateSubnet(params *CreateSubnetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSubnetCreated, error)
+
 	DeleteVNet(params *DeleteVNetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteVNetOK, error)
 
 	GetAllVNets(params *GetAllVNetsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllVNetsOK, error)
 
 	GetVNet(params *GetVNetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVNetOK, error)
 
+	GetVNetSubnets(params *GetVNetSubnetsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVNetSubnetsOK, error)
+
 	UpdateVNet(params *UpdateVNetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVNetOK, error)
 
+	UpdateVNetDefaultSubnet(params *UpdateVNetDefaultSubnetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVNetDefaultSubnetOK, error)
+
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+CreateSubnet Creates a new subnet.
+*/
+func (a *Client) CreateSubnet(params *CreateSubnetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSubnetCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateSubnetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateSubnet",
+		Method:             "POST",
+		PathPattern:        "/vnet/{vnetId}/subnet",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateSubnetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateSubnetCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateSubnet: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -159,6 +204,45 @@ func (a *Client) GetVNet(params *GetVNetParams, authInfo runtime.ClientAuthInfoW
 }
 
 /*
+GetVNetSubnets Returns the IDs of the subnets existing in the virtual network.
+*/
+func (a *Client) GetVNetSubnets(params *GetVNetSubnetsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetVNetSubnetsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetVNetSubnetsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetVNetSubnets",
+		Method:             "GET",
+		PathPattern:        "/vnet/{vnetId}/subnets",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetVNetSubnetsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetVNetSubnetsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetVNetSubnets: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 UpdateVNet Updates a virtual network configuration.
 */
 func (a *Client) UpdateVNet(params *UpdateVNetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVNetOK, error) {
@@ -194,6 +278,45 @@ func (a *Client) UpdateVNet(params *UpdateVNetParams, authInfo runtime.ClientAut
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateVNet: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateVNetDefaultSubnet Set a virtual network default subnet.
+*/
+func (a *Client) UpdateVNetDefaultSubnet(params *UpdateVNetDefaultSubnetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVNetDefaultSubnetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateVNetDefaultSubnetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateVNetDefaultSubnet",
+		Method:             "PUT",
+		PathPattern:        "/vnet/{vnetId}/subnet/{subnetId}/default",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateVNetDefaultSubnetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateVNetDefaultSubnetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateVNetDefaultSubnet: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

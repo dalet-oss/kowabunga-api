@@ -7,7 +7,6 @@ package models
 
 import (
 	"context"
-	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -37,9 +36,6 @@ type VNet struct {
 	// Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?
 	Private *bool `json:"private,omitempty"`
 
-	// An array of associated subnets
-	Subnets []*Subnet `json:"subnets"`
-
 	// The VLAN identifier.
 	// Required: true
 	Vlan *int64 `json:"vlan"`
@@ -54,10 +50,6 @@ func (m *VNet) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateName(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateSubnets(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -89,32 +81,6 @@ func (m *VNet) validateName(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *VNet) validateSubnets(formats strfmt.Registry) error {
-	if swag.IsZero(m.Subnets) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.Subnets); i++ {
-		if swag.IsZero(m.Subnets[i]) { // not required
-			continue
-		}
-
-		if m.Subnets[i] != nil {
-			if err := m.Subnets[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("subnets" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("subnets" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
 func (m *VNet) validateVlan(formats strfmt.Registry) error {
 
 	if err := validate.Required("vlan", "body", m.Vlan); err != nil {
@@ -124,37 +90,8 @@ func (m *VNet) validateVlan(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validate this v net based on the context it is used
+// ContextValidate validates this v net based on context it is used
 func (m *VNet) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateSubnets(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *VNet) contextValidateSubnets(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Subnets); i++ {
-
-		if m.Subnets[i] != nil {
-			if err := m.Subnets[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("subnets" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("subnets" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
 	return nil
 }
 

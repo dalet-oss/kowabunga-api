@@ -17,6 +17,7 @@ import (
 	"github.com/dalet-oss/kowabunga-api/client/pool"
 	"github.com/dalet-oss/kowabunga-api/client/project"
 	"github.com/dalet-oss/kowabunga-api/client/region"
+	"github.com/dalet-oss/kowabunga-api/client/subnet"
 	"github.com/dalet-oss/kowabunga-api/client/vnet"
 	"github.com/dalet-oss/kowabunga-api/client/zone"
 )
@@ -70,6 +71,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Kowabunga 
 	cli.Pool = pool.New(transport, formats)
 	cli.Project = project.New(transport, formats)
 	cli.Region = region.New(transport, formats)
+	cli.Subnet = subnet.New(transport, formats)
 	cli.Vnet = vnet.New(transport, formats)
 	cli.Zone = zone.New(transport, formats)
 	return cli
@@ -130,6 +132,8 @@ type Kowabunga struct {
 
 	Region region.ClientService
 
+	Subnet subnet.ClientService
+
 	Vnet vnet.ClientService
 
 	Zone zone.ClientService
@@ -147,6 +151,7 @@ func (c *Kowabunga) SetTransport(transport runtime.ClientTransport) {
 	c.Pool.SetTransport(transport)
 	c.Project.SetTransport(transport)
 	c.Region.SetTransport(transport)
+	c.Subnet.SetTransport(transport)
 	c.Vnet.SetTransport(transport)
 	c.Zone.SetTransport(transport)
 }

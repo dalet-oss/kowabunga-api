@@ -1242,6 +1242,122 @@ func init() {
         }
       }
     },
+    "/subnet": {
+      "get": {
+        "description": "Returns the IDs of subnets.",
+        "tags": [
+          "subnet"
+        ],
+        "operationId": "GetAllSubnets",
+        "responses": {
+          "200": {
+            "description": "Returns the an array of subnet IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subnet/{subnetId}": {
+      "get": {
+        "description": "Returns a description of the subnet.",
+        "tags": [
+          "subnet"
+        ],
+        "operationId": "GetSubnet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the subnet to get.",
+            "name": "subnetId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the subnet object.",
+            "schema": {
+              "$ref": "#/definitions/Subnet"
+            }
+          },
+          "404": {
+            "description": "Invalid subnet ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a subnet configuration.",
+        "tags": [
+          "subnet"
+        ],
+        "operationId": "UpdateSubnet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the subnet to update.",
+            "name": "subnetId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Subnet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated subnet object.",
+            "schema": {
+              "$ref": "#/definitions/Subnet"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid subnet ID was provided."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing subnet.",
+        "tags": [
+          "subnet"
+        ],
+        "operationId": "DeleteSubnet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the subnet to delete.",
+            "name": "subnetId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The subnet has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid subnet ID was provided."
+          },
+          "409": {
+            "description": "The subnet is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete subnet."
+          }
+        }
+      }
+    },
     "/vnet": {
       "get": {
         "description": "Returns the IDs of virtual networks.",
@@ -1299,7 +1415,7 @@ func init() {
         "parameters": [
           {
             "type": "string",
-            "description": "The ID of the virtual network to get.",
+            "description": "The ID of the virtual network to update.",
             "name": "vnetId",
             "in": "path",
             "required": true
@@ -1336,7 +1452,7 @@ func init() {
         "parameters": [
           {
             "type": "string",
-            "description": "The ID of the virtual network to get.",
+            "description": "The ID of the virtual network to delete.",
             "name": "vnetId",
             "in": "path",
             "required": true
@@ -1354,6 +1470,123 @@ func init() {
           },
           "500": {
             "description": "Unable to delete virtual network."
+          }
+        }
+      }
+    },
+    "/vnet/{vnetId}/subnet": {
+      "post": {
+        "description": "Creates a new subnet.",
+        "tags": [
+          "vnet",
+          "subnet"
+        ],
+        "operationId": "CreateSubnet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated virtual network.",
+            "name": "vnetId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Subnet"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created subnet object.",
+            "schema": {
+              "$ref": "#/definitions/Subnet"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid virtual network ID was provided."
+          },
+          "409": {
+            "description": "Subnet already exists."
+          },
+          "500": {
+            "description": "Unable to create subnet."
+          }
+        }
+      }
+    },
+    "/vnet/{vnetId}/subnet/{subnetId}/default": {
+      "put": {
+        "description": "Set a virtual network default subnet.",
+        "tags": [
+          "vnet",
+          "subnet"
+        ],
+        "operationId": "UpdateVNetDefaultSubnet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual network to update.",
+            "name": "vnetId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the subnet to set as default.",
+            "name": "subnetId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated subnet object."
+          },
+          "404": {
+            "description": "Invalid virtual network ID or subnet ID was provided."
+          },
+          "500": {
+            "description": "Unable to assign the requested subnet as virtual network default."
+          }
+        }
+      }
+    },
+    "/vnet/{vnetId}/subnets": {
+      "get": {
+        "description": "Returns the IDs of the subnets existing in the virtual network.",
+        "tags": [
+          "vnet",
+          "subnet"
+        ],
+        "operationId": "GetVNetSubnets",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual network to query.",
+            "name": "vnetId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of subnet IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid virtual network ID was provided."
           }
         }
       }
@@ -2291,13 +2524,6 @@ func init() {
           "description": "Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?",
           "type": "boolean",
           "default": true
-        },
-        "subnets": {
-          "description": "An array of associated subnets",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Subnet"
-          }
         },
         "vlan": {
           "description": "The VLAN identifier.",
@@ -3564,6 +3790,122 @@ func init() {
         }
       }
     },
+    "/subnet": {
+      "get": {
+        "description": "Returns the IDs of subnets.",
+        "tags": [
+          "subnet"
+        ],
+        "operationId": "GetAllSubnets",
+        "responses": {
+          "200": {
+            "description": "Returns the an array of subnet IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subnet/{subnetId}": {
+      "get": {
+        "description": "Returns a description of the subnet.",
+        "tags": [
+          "subnet"
+        ],
+        "operationId": "GetSubnet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the subnet to get.",
+            "name": "subnetId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the subnet object.",
+            "schema": {
+              "$ref": "#/definitions/Subnet"
+            }
+          },
+          "404": {
+            "description": "Invalid subnet ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a subnet configuration.",
+        "tags": [
+          "subnet"
+        ],
+        "operationId": "UpdateSubnet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the subnet to update.",
+            "name": "subnetId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Subnet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated subnet object.",
+            "schema": {
+              "$ref": "#/definitions/Subnet"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid subnet ID was provided."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing subnet.",
+        "tags": [
+          "subnet"
+        ],
+        "operationId": "DeleteSubnet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the subnet to delete.",
+            "name": "subnetId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The subnet has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid subnet ID was provided."
+          },
+          "409": {
+            "description": "The subnet is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete subnet."
+          }
+        }
+      }
+    },
     "/vnet": {
       "get": {
         "description": "Returns the IDs of virtual networks.",
@@ -3621,7 +3963,7 @@ func init() {
         "parameters": [
           {
             "type": "string",
-            "description": "The ID of the virtual network to get.",
+            "description": "The ID of the virtual network to update.",
             "name": "vnetId",
             "in": "path",
             "required": true
@@ -3658,7 +4000,7 @@ func init() {
         "parameters": [
           {
             "type": "string",
-            "description": "The ID of the virtual network to get.",
+            "description": "The ID of the virtual network to delete.",
             "name": "vnetId",
             "in": "path",
             "required": true
@@ -3676,6 +4018,123 @@ func init() {
           },
           "500": {
             "description": "Unable to delete virtual network."
+          }
+        }
+      }
+    },
+    "/vnet/{vnetId}/subnet": {
+      "post": {
+        "description": "Creates a new subnet.",
+        "tags": [
+          "vnet",
+          "subnet"
+        ],
+        "operationId": "CreateSubnet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated virtual network.",
+            "name": "vnetId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Subnet"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created subnet object.",
+            "schema": {
+              "$ref": "#/definitions/Subnet"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid virtual network ID was provided."
+          },
+          "409": {
+            "description": "Subnet already exists."
+          },
+          "500": {
+            "description": "Unable to create subnet."
+          }
+        }
+      }
+    },
+    "/vnet/{vnetId}/subnet/{subnetId}/default": {
+      "put": {
+        "description": "Set a virtual network default subnet.",
+        "tags": [
+          "vnet",
+          "subnet"
+        ],
+        "operationId": "UpdateVNetDefaultSubnet",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual network to update.",
+            "name": "vnetId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the subnet to set as default.",
+            "name": "subnetId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated subnet object."
+          },
+          "404": {
+            "description": "Invalid virtual network ID or subnet ID was provided."
+          },
+          "500": {
+            "description": "Unable to assign the requested subnet as virtual network default."
+          }
+        }
+      }
+    },
+    "/vnet/{vnetId}/subnets": {
+      "get": {
+        "description": "Returns the IDs of the subnets existing in the virtual network.",
+        "tags": [
+          "vnet",
+          "subnet"
+        ],
+        "operationId": "GetVNetSubnets",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual network to query.",
+            "name": "vnetId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of subnet IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid virtual network ID was provided."
           }
         }
       }
@@ -4660,13 +5119,6 @@ func init() {
           "description": "Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?",
           "type": "boolean",
           "default": true
-        },
-        "subnets": {
-          "description": "An array of associated subnets",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Subnet"
-          }
         },
         "vlan": {
           "description": "The VLAN identifier.",

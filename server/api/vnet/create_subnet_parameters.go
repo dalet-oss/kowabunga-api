@@ -6,6 +6,7 @@ package vnet
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"io"
 	"net/http"
 
 	"github.com/go-openapi/errors"
@@ -17,28 +18,29 @@ import (
 	"github.com/dalet-oss/kowabunga-api/models"
 )
 
-// NewUpdateVNetParams creates a new UpdateVNetParams object
+// NewCreateSubnetParams creates a new CreateSubnetParams object
 //
 // There are no default values defined in the spec.
-func NewUpdateVNetParams() UpdateVNetParams {
+func NewCreateSubnetParams() CreateSubnetParams {
 
-	return UpdateVNetParams{}
+	return CreateSubnetParams{}
 }
 
-// UpdateVNetParams contains all the bound params for the update v net operation
+// CreateSubnetParams contains all the bound params for the create subnet operation
 // typically these are obtained from a http.Request
 //
-// swagger:parameters UpdateVNet
-type UpdateVNetParams struct {
+// swagger:parameters CreateSubnet
+type CreateSubnetParams struct {
 
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
 	/*
+	  Required: true
 	  In: body
 	*/
-	Body *models.VNet
-	/*The ID of the virtual network to update.
+	Body *models.Subnet
+	/*the ID of the associated virtual network.
 	  Required: true
 	  In: path
 	*/
@@ -48,17 +50,21 @@ type UpdateVNetParams struct {
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
 // for simple values it will use straight method calls.
 //
-// To ensure default values, the struct must have been initialized with NewUpdateVNetParams() beforehand.
-func (o *UpdateVNetParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
+// To ensure default values, the struct must have been initialized with NewCreateSubnetParams() beforehand.
+func (o *CreateSubnetParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
 	var res []error
 
 	o.HTTPRequest = r
 
 	if runtime.HasBody(r) {
 		defer r.Body.Close()
-		var body models.VNet
+		var body models.Subnet
 		if err := route.Consumer.Consume(r.Body, &body); err != nil {
-			res = append(res, errors.NewParseError("body", "body", "", err))
+			if err == io.EOF {
+				res = append(res, errors.Required("body", "body", ""))
+			} else {
+				res = append(res, errors.NewParseError("body", "body", "", err))
+			}
 		} else {
 			// validate body object
 			if err := body.Validate(route.Formats); err != nil {
@@ -74,6 +80,8 @@ func (o *UpdateVNetParams) BindRequest(r *http.Request, route *middleware.Matche
 				o.Body = &body
 			}
 		}
+	} else {
+		res = append(res, errors.Required("body", "body", ""))
 	}
 
 	rVnetID, rhkVnetID, _ := route.Params.GetOK("vnetId")
@@ -87,7 +95,7 @@ func (o *UpdateVNetParams) BindRequest(r *http.Request, route *middleware.Matche
 }
 
 // bindVnetID binds and validates parameter VnetID from path.
-func (o *UpdateVNetParams) bindVnetID(rawData []string, hasKey bool, formats strfmt.Registry) error {
+func (o *CreateSubnetParams) bindVnetID(rawData []string, hasKey bool, formats strfmt.Registry) error {
 	var raw string
 	if len(rawData) > 0 {
 		raw = rawData[len(rawData)-1]
