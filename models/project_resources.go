@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ProjectResources The global project quotas (0 for unlimited).
+// ProjectResources The global project resource quotas/usage (0 for unlimited).
 //
 // swagger:model ProjectResources
 type ProjectResources struct {

@@ -1,19 +1,21 @@
 definitions:
   Project:
     type: object
+    required: [name]
     properties:
       id:
         type: string
         description: The project ID (auto-generated).
       name:
         type: string
-        description: The project short name.
+        description: The project name.
       description:
         type: string
         description: The project description.
+
   ProjectResources:
     type: object
-    description: The global project quotas (0 for unlimited).
+    description: The global project resource quotas/usage (0 for unlimited).
     properties:
       vcpus:
         type: integer

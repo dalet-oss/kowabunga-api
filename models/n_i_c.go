@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // NIC n i c
@@ -18,7 +20,8 @@ import (
 type NIC struct {
 
 	// name of the host's network bridge interface the interface is currently mapped to
-	Bridge string `json:"bridge,omitempty"`
+	// Required: true
+	Bridge *string `json:"bridge"`
 
 	// MAC address of the interface
 	Mac string `json:"mac,omitempty"`
@@ -26,6 +29,24 @@ type NIC struct {
 
 // Validate validates this n i c
 func (m *NIC) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateBridge(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *NIC) validateBridge(formats strfmt.Registry) error {
+
+	if err := validate.Required("bridge", "body", m.Bridge); err != nil {
+		return err
+	}
+
 	return nil
 }
 

@@ -1,26 +1,30 @@
 definitions:
   Instance:
     type: object
+    required: [name, topology]
     properties:
       id:
         type: string
         description: The instance ID  (auto-generated).
       vm_id:
         type: string
-        description: the ID of the Virtual Machine
+        description: the libvirt ID of the Virtual Machine (auto-generated).
       vm_uuid:
         type: string
-        description: the UUID of the Virtual Machine
+        description: the libvirt UUID of the Virtual Machine (auto-generated).
       name:
         type: string
         description: the name of the Virtual Machine
       template:
         type: boolean
         description: is the VM a template ?
+        default: false
       topology:
         $ref: '#/definitions/InstanceTopology'
+
   InstanceTopology:
     type: object
+    required: [memory, vcpus, disks, nics]
     properties:
       memory:
         type: integer
@@ -36,14 +40,17 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/NIC'
+
   Disk:
     type: object
+    required: [device, rbd]
     properties:
       device:
         type: string
         description: name of the disk block device
       rbd:
         type: object
+        required: [image]
         properties:
           image:
             type: string
@@ -54,8 +61,10 @@ definitions:
           port:
             type: integer
             description: RBD pool server port
+
   NIC:
     type: object
+    required: [bridge]
     properties:
       bridge:
         type: string
@@ -63,8 +72,10 @@ definitions:
       mac:
         type: string
         description: MAC address of the interface
+
   InstanceState:
     type: object
+    required: [state, reason]
     properties:
       state:
         type: string

@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // InstanceTopology instance topology
@@ -20,16 +21,20 @@ import (
 type InstanceTopology struct {
 
 	// disks
+	// Required: true
 	Disks []*Disk `json:"disks"`
 
 	// the memory size of the VM in bytes
-	Memory int64 `json:"memory,omitempty"`
+	// Required: true
+	Memory *int64 `json:"memory"`
 
 	// nics
+	// Required: true
 	Nics []*NIC `json:"nics"`
 
 	// the memory size of the VM in bytes
-	Vcpus int64 `json:"vcpus,omitempty"`
+	// Required: true
+	Vcpus *int64 `json:"vcpus"`
 }
 
 // Validate validates this instance topology
@@ -40,7 +45,15 @@ func (m *InstanceTopology) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateMemory(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateNics(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVcpus(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -51,8 +64,9 @@ func (m *InstanceTopology) Validate(formats strfmt.Registry) error {
 }
 
 func (m *InstanceTopology) validateDisks(formats strfmt.Registry) error {
-	if swag.IsZero(m.Disks) { // not required
-		return nil
+
+	if err := validate.Required("disks", "body", m.Disks); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.Disks); i++ {
@@ -76,9 +90,19 @@ func (m *InstanceTopology) validateDisks(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *InstanceTopology) validateMemory(formats strfmt.Registry) error {
+
+	if err := validate.Required("memory", "body", m.Memory); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *InstanceTopology) validateNics(formats strfmt.Registry) error {
-	if swag.IsZero(m.Nics) { // not required
-		return nil
+
+	if err := validate.Required("nics", "body", m.Nics); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.Nics); i++ {
@@ -97,6 +121,15 @@ func (m *InstanceTopology) validateNics(formats strfmt.Registry) error {
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *InstanceTopology) validateVcpus(formats strfmt.Registry) error {
+
+	if err := validate.Required("vcpus", "body", m.Vcpus); err != nil {
+		return err
 	}
 
 	return nil

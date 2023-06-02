@@ -39,7 +39,7 @@ type CreateHostParams struct {
 	  Required: true
 	  In: body
 	*/
-	Body *models.HostConfiguration
+	Body *models.Host
 	/*the ID of the associated zone.
 	  Required: true
 	  In: path
@@ -58,7 +58,7 @@ func (o *CreateHostParams) BindRequest(r *http.Request, route *middleware.Matche
 
 	if runtime.HasBody(r) {
 		defer r.Body.Close()
-		var body models.HostConfiguration
+		var body models.Host
 		if err := route.Consumer.Consume(r.Body, &body); err != nil {
 			if err == io.EOF {
 				res = append(res, errors.Required("body", "body", ""))

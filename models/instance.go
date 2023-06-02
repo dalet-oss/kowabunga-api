@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // Instance instance
@@ -22,24 +23,30 @@ type Instance struct {
 	ID string `json:"id,omitempty"`
 
 	// the name of the Virtual Machine
-	Name string `json:"name,omitempty"`
+	// Required: true
+	Name *string `json:"name"`
 
 	// is the VM a template ?
-	Template bool `json:"template,omitempty"`
+	Template *bool `json:"template,omitempty"`
 
 	// topology
-	Topology *InstanceTopology `json:"topology,omitempty"`
+	// Required: true
+	Topology *InstanceTopology `json:"topology"`
 
-	// the ID of the Virtual Machine
+	// the libvirt ID of the Virtual Machine (auto-generated).
 	VMID string `json:"vm_id,omitempty"`
 
-	// the UUID of the Virtual Machine
+	// the libvirt UUID of the Virtual Machine (auto-generated).
 	VMUUID string `json:"vm_uuid,omitempty"`
 }
 
 // Validate validates this instance
 func (m *Instance) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateTopology(formats); err != nil {
 		res = append(res, err)
@@ -51,9 +58,19 @@ func (m *Instance) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Instance) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *Instance) validateTopology(formats strfmt.Registry) error {
-	if swag.IsZero(m.Topology) { // not required
-		return nil
+
+	if err := validate.Required("topology", "body", m.Topology); err != nil {
+		return err
 	}
 
 	if m.Topology != nil {

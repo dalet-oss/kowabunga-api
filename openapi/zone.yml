@@ -1,6 +1,7 @@
 definitions:
   Zone:
     type: object
+    required: [name]
     properties:
       id:
         type: string
@@ -163,7 +164,7 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/HostConfiguration'
+            $ref: '#/definitions/Host'
       responses:
         201:
           description: Returns the newly created host object.

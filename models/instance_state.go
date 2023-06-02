@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // InstanceState instance state
@@ -18,14 +20,47 @@ import (
 type InstanceState struct {
 
 	// the reason of the state of the VM
-	Reason string `json:"reason,omitempty"`
+	// Required: true
+	Reason *string `json:"reason"`
 
 	// the state of the VM
-	State string `json:"state,omitempty"`
+	// Required: true
+	State *string `json:"state"`
 }
 
 // Validate validates this instance state
 func (m *InstanceState) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateReason(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateState(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *InstanceState) validateReason(formats strfmt.Registry) error {
+
+	if err := validate.Required("reason", "body", m.Reason); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *InstanceState) validateState(formats strfmt.Registry) error {
+
+	if err := validate.Required("state", "body", m.State); err != nil {
+		return err
+	}
+
 	return nil
 }
 

@@ -64,7 +64,7 @@ CreateHostParams contains all the parameters to send to the API endpoint
 type CreateHostParams struct {
 
 	// Body.
-	Body *models.HostConfiguration
+	Body *models.Host
 
 	/* ZoneID.
 
@@ -126,13 +126,13 @@ func (o *CreateHostParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithBody adds the body to the create host params
-func (o *CreateHostParams) WithBody(body *models.HostConfiguration) *CreateHostParams {
+func (o *CreateHostParams) WithBody(body *models.Host) *CreateHostParams {
 	o.SetBody(body)
 	return o
 }
 
 // SetBody adds the body to the create host params
-func (o *CreateHostParams) SetBody(body *models.HostConfiguration) {
+func (o *CreateHostParams) SetBody(body *models.Host) {
 	o.Body = body
 }
 

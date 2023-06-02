@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // Disk disk
@@ -19,15 +20,21 @@ import (
 type Disk struct {
 
 	// name of the disk block device
-	Device string `json:"device,omitempty"`
+	// Required: true
+	Device *string `json:"device"`
 
 	// rbd
-	Rbd *DiskRbd `json:"rbd,omitempty"`
+	// Required: true
+	Rbd *DiskRbd `json:"rbd"`
 }
 
 // Validate validates this disk
 func (m *Disk) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateDevice(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateRbd(formats); err != nil {
 		res = append(res, err)
@@ -39,9 +46,19 @@ func (m *Disk) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Disk) validateDevice(formats strfmt.Registry) error {
+
+	if err := validate.Required("device", "body", m.Device); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *Disk) validateRbd(formats strfmt.Registry) error {
-	if swag.IsZero(m.Rbd) { // not required
-		return nil
+
+	if err := validate.Required("rbd", "body", m.Rbd); err != nil {
+		return err
 	}
 
 	if m.Rbd != nil {
@@ -115,7 +132,8 @@ type DiskRbd struct {
 	Host string `json:"host,omitempty"`
 
 	// disk image name on RBD pool
-	Image string `json:"image,omitempty"`
+	// Required: true
+	Image *string `json:"image"`
 
 	// RBD pool server port
 	Port int64 `json:"port,omitempty"`
@@ -123,6 +141,24 @@ type DiskRbd struct {
 
 // Validate validates this disk rbd
 func (m *DiskRbd) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateImage(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DiskRbd) validateImage(formats strfmt.Registry) error {
+
+	if err := validate.Required("rbd"+"."+"image", "body", m.Image); err != nil {
+		return err
+	}
+
 	return nil
 }
 

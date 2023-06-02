@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.2.4"
+    "version": "0.2.5"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -1728,7 +1728,7 @@ func init() {
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HostConfiguration"
+              "$ref": "#/definitions/Host"
             }
           }
         ],
@@ -2105,6 +2105,10 @@ func init() {
   "definitions": {
     "Disk": {
       "type": "object",
+      "required": [
+        "device",
+        "rbd"
+      ],
       "properties": {
         "device": {
           "description": "name of the disk block device",
@@ -2112,6 +2116,9 @@ func init() {
         },
         "rbd": {
           "type": "object",
+          "required": [
+            "image"
+          ],
           "properties": {
             "host": {
               "description": "RBD pool server address",
@@ -2131,7 +2138,16 @@ func init() {
     },
     "Host": {
       "type": "object",
+      "required": [
+        "name",
+        "protocol",
+        "address"
+      ],
       "properties": {
+        "address": {
+          "description": "The host libvirt's IPv4 address.",
+          "type": "string"
+        },
         "description": {
           "description": "The host description.",
           "type": "string"
@@ -2144,26 +2160,63 @@ func init() {
           "description": "The host name.",
           "type": "string"
         },
-        "region": {
-          "description": "The host region.",
-          "type": "string"
+        "port": {
+          "description": "The host libvirt's port.",
+          "type": "integer"
         },
-        "version": {
-          "description": "The host libvirt version.",
-          "type": "string"
+        "protocol": {
+          "description": "The protocol to use to issue libvirt connection.",
+          "type": "string",
+          "enum": [
+            "tcp",
+            "tls"
+          ]
         },
-        "zone": {
-          "description": "The host availability-zone.",
-          "type": "string"
+        "tls": {
+          "description": "The host libvirt's TLS configuration.",
+          "type": "object",
+          "required": [
+            "key",
+            "cert",
+            "ca"
+          ],
+          "properties": {
+            "ca": {
+              "description": "The TLS certificate of authority.",
+              "type": "string"
+            },
+            "cert": {
+              "description": "The TLS client public cert.",
+              "type": "string"
+            },
+            "key": {
+              "description": "The TLS client private key.",
+              "type": "string"
+            }
+          }
         }
       }
     },
     "HostCaps": {
       "type": "object",
+      "required": [
+        "version",
+        "uuid",
+        "cpu",
+        "memory"
+      ],
       "properties": {
         "cpu": {
           "description": "the host CPU characteristics",
           "type": "object",
+          "required": [
+            "arch",
+            "model",
+            "vendor",
+            "sockets",
+            "cores",
+            "threads"
+          ],
           "properties": {
             "arch": {
               "description": "the host CPU architecture",
@@ -2198,72 +2251,19 @@ func init() {
         "uuid": {
           "description": "the host UUID",
           "type": "string"
-        }
-      }
-    },
-    "HostConfiguration": {
-      "type": "object",
-      "required": [
-        "name",
-        "protocol",
-        "address"
-      ],
-      "properties": {
-        "address": {
-          "description": "The host libvirt's IPv4 address.",
-          "type": "string"
         },
-        "description": {
-          "description": "The host description.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The host name.",
-          "type": "string"
-        },
-        "port": {
-          "description": "The host libvirt's port.",
-          "type": "integer"
-        },
-        "protocol": {
-          "description": "The protocol to use to issue libvirt connection.",
-          "type": "string",
-          "enum": [
-            "tcp",
-            "tls"
-          ]
-        },
-        "tls": {
-          "description": "The host libvirt's TLS configuration.",
-          "type": "object",
-          "$ref": "#/definitions/HostConfigurationTLS"
-        }
-      }
-    },
-    "HostConfigurationTLS": {
-      "type": "object",
-      "required": [
-        "key",
-        "cert",
-        "ca"
-      ],
-      "properties": {
-        "ca": {
-          "description": "The TLS certificate of authority.",
-          "type": "string"
-        },
-        "cert": {
-          "description": "The TLS client public cert.",
-          "type": "string"
-        },
-        "key": {
-          "description": "The TLS client private key.",
+        "version": {
+          "description": "The host libvirt version.",
           "type": "string"
         }
       }
     },
     "Instance": {
       "type": "object",
+      "required": [
+        "name",
+        "topology"
+      ],
       "properties": {
         "id": {
           "description": "The instance ID  (auto-generated).",
@@ -2275,23 +2275,28 @@ func init() {
         },
         "template": {
           "description": "is the VM a template ?",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "topology": {
           "$ref": "#/definitions/InstanceTopology"
         },
         "vm_id": {
-          "description": "the ID of the Virtual Machine",
+          "description": "the libvirt ID of the Virtual Machine (auto-generated).",
           "type": "string"
         },
         "vm_uuid": {
-          "description": "the UUID of the Virtual Machine",
+          "description": "the libvirt UUID of the Virtual Machine (auto-generated).",
           "type": "string"
         }
       }
     },
     "InstanceState": {
       "type": "object",
+      "required": [
+        "state",
+        "reason"
+      ],
       "properties": {
         "reason": {
           "description": "the reason of the state of the VM",
@@ -2305,6 +2310,12 @@ func init() {
     },
     "InstanceTopology": {
       "type": "object",
+      "required": [
+        "memory",
+        "vcpus",
+        "disks",
+        "nics"
+      ],
       "properties": {
         "disks": {
           "type": "array",
@@ -2330,6 +2341,9 @@ func init() {
     },
     "NIC": {
       "type": "object",
+      "required": [
+        "bridge"
+      ],
       "properties": {
         "bridge": {
           "description": "name of the host's network bridge interface the interface is currently mapped to",
@@ -2378,6 +2392,9 @@ func init() {
     },
     "Project": {
       "type": "object",
+      "required": [
+        "name"
+      ],
       "properties": {
         "description": {
           "description": "The project description.",
@@ -2388,13 +2405,13 @@ func init() {
           "type": "string"
         },
         "name": {
-          "description": "The project short name.",
+          "description": "The project name.",
           "type": "string"
         }
       }
     },
     "ProjectResources": {
-      "description": "The global project quotas (0 for unlimited).",
+      "description": "The global project resource quotas/usage (0 for unlimited).",
       "type": "object",
       "properties": {
         "instances": {
@@ -2421,6 +2438,9 @@ func init() {
     },
     "Region": {
       "type": "object",
+      "required": [
+        "name"
+      ],
       "properties": {
         "description": {
           "description": "The region description.",
@@ -2546,6 +2566,9 @@ func init() {
     },
     "Zone": {
       "type": "object",
+      "required": [
+        "name"
+      ],
       "properties": {
         "description": {
           "description": "The zone description.",
@@ -2592,7 +2615,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.2.4"
+    "version": "0.2.5"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -4289,7 +4312,7 @@ func init() {
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HostConfiguration"
+              "$ref": "#/definitions/Host"
             }
           }
         ],
@@ -4666,6 +4689,10 @@ func init() {
   "definitions": {
     "Disk": {
       "type": "object",
+      "required": [
+        "device",
+        "rbd"
+      ],
       "properties": {
         "device": {
           "description": "name of the disk block device",
@@ -4673,6 +4700,9 @@ func init() {
         },
         "rbd": {
           "type": "object",
+          "required": [
+            "image"
+          ],
           "properties": {
             "host": {
               "description": "RBD pool server address",
@@ -4692,6 +4722,9 @@ func init() {
     },
     "DiskRbd": {
       "type": "object",
+      "required": [
+        "image"
+      ],
       "properties": {
         "host": {
           "description": "RBD pool server address",
@@ -4709,7 +4742,16 @@ func init() {
     },
     "Host": {
       "type": "object",
+      "required": [
+        "name",
+        "protocol",
+        "address"
+      ],
       "properties": {
+        "address": {
+          "description": "The host libvirt's IPv4 address.",
+          "type": "string"
+        },
         "description": {
           "description": "The host description.",
           "type": "string"
@@ -4722,26 +4764,63 @@ func init() {
           "description": "The host name.",
           "type": "string"
         },
-        "region": {
-          "description": "The host region.",
-          "type": "string"
+        "port": {
+          "description": "The host libvirt's port.",
+          "type": "integer"
         },
-        "version": {
-          "description": "The host libvirt version.",
-          "type": "string"
+        "protocol": {
+          "description": "The protocol to use to issue libvirt connection.",
+          "type": "string",
+          "enum": [
+            "tcp",
+            "tls"
+          ]
         },
-        "zone": {
-          "description": "The host availability-zone.",
-          "type": "string"
+        "tls": {
+          "description": "The host libvirt's TLS configuration.",
+          "type": "object",
+          "required": [
+            "key",
+            "cert",
+            "ca"
+          ],
+          "properties": {
+            "ca": {
+              "description": "The TLS certificate of authority.",
+              "type": "string"
+            },
+            "cert": {
+              "description": "The TLS client public cert.",
+              "type": "string"
+            },
+            "key": {
+              "description": "The TLS client private key.",
+              "type": "string"
+            }
+          }
         }
       }
     },
     "HostCaps": {
       "type": "object",
+      "required": [
+        "version",
+        "uuid",
+        "cpu",
+        "memory"
+      ],
       "properties": {
         "cpu": {
           "description": "the host CPU characteristics",
           "type": "object",
+          "required": [
+            "arch",
+            "model",
+            "vendor",
+            "sockets",
+            "cores",
+            "threads"
+          ],
           "properties": {
             "arch": {
               "description": "the host CPU architecture",
@@ -4776,12 +4855,24 @@ func init() {
         "uuid": {
           "description": "the host UUID",
           "type": "string"
+        },
+        "version": {
+          "description": "The host libvirt version.",
+          "type": "string"
         }
       }
     },
     "HostCapsCPU": {
       "description": "the host CPU characteristics",
       "type": "object",
+      "required": [
+        "arch",
+        "model",
+        "vendor",
+        "sockets",
+        "cores",
+        "threads"
+      ],
       "properties": {
         "arch": {
           "description": "the host CPU architecture",
@@ -4809,46 +4900,8 @@ func init() {
         }
       }
     },
-    "HostConfiguration": {
-      "type": "object",
-      "required": [
-        "name",
-        "protocol",
-        "address"
-      ],
-      "properties": {
-        "address": {
-          "description": "The host libvirt's IPv4 address.",
-          "type": "string"
-        },
-        "description": {
-          "description": "The host description.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The host name.",
-          "type": "string"
-        },
-        "port": {
-          "description": "The host libvirt's port.",
-          "type": "integer"
-        },
-        "protocol": {
-          "description": "The protocol to use to issue libvirt connection.",
-          "type": "string",
-          "enum": [
-            "tcp",
-            "tls"
-          ]
-        },
-        "tls": {
-          "description": "The host libvirt's TLS configuration.",
-          "type": "object",
-          "$ref": "#/definitions/HostConfigurationTLS"
-        }
-      }
-    },
-    "HostConfigurationTLS": {
+    "HostTLS": {
+      "description": "The host libvirt's TLS configuration.",
       "type": "object",
       "required": [
         "key",
@@ -4872,6 +4925,10 @@ func init() {
     },
     "Instance": {
       "type": "object",
+      "required": [
+        "name",
+        "topology"
+      ],
       "properties": {
         "id": {
           "description": "The instance ID  (auto-generated).",
@@ -4883,23 +4940,28 @@ func init() {
         },
         "template": {
           "description": "is the VM a template ?",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "topology": {
           "$ref": "#/definitions/InstanceTopology"
         },
         "vm_id": {
-          "description": "the ID of the Virtual Machine",
+          "description": "the libvirt ID of the Virtual Machine (auto-generated).",
           "type": "string"
         },
         "vm_uuid": {
-          "description": "the UUID of the Virtual Machine",
+          "description": "the libvirt UUID of the Virtual Machine (auto-generated).",
           "type": "string"
         }
       }
     },
     "InstanceState": {
       "type": "object",
+      "required": [
+        "state",
+        "reason"
+      ],
       "properties": {
         "reason": {
           "description": "the reason of the state of the VM",
@@ -4913,6 +4975,12 @@ func init() {
     },
     "InstanceTopology": {
       "type": "object",
+      "required": [
+        "memory",
+        "vcpus",
+        "disks",
+        "nics"
+      ],
       "properties": {
         "disks": {
           "type": "array",
@@ -4938,6 +5006,9 @@ func init() {
     },
     "NIC": {
       "type": "object",
+      "required": [
+        "bridge"
+      ],
       "properties": {
         "bridge": {
           "description": "name of the host's network bridge interface the interface is currently mapped to",
@@ -4986,6 +5057,9 @@ func init() {
     },
     "Project": {
       "type": "object",
+      "required": [
+        "name"
+      ],
       "properties": {
         "description": {
           "description": "The project description.",
@@ -4996,13 +5070,13 @@ func init() {
           "type": "string"
         },
         "name": {
-          "description": "The project short name.",
+          "description": "The project name.",
           "type": "string"
         }
       }
     },
     "ProjectResources": {
-      "description": "The global project quotas (0 for unlimited).",
+      "description": "The global project resource quotas/usage (0 for unlimited).",
       "type": "object",
       "properties": {
         "instances": {
@@ -5029,6 +5103,9 @@ func init() {
     },
     "Region": {
       "type": "object",
+      "required": [
+        "name"
+      ],
       "properties": {
         "description": {
           "description": "The region description.",
@@ -5154,6 +5231,9 @@ func init() {
     },
     "Zone": {
       "type": "object",
+      "required": [
+        "name"
+      ],
       "properties": {
         "description": {
           "description": "The zone description.",

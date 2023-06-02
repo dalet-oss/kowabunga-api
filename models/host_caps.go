@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // HostCaps host caps
@@ -19,13 +20,20 @@ import (
 type HostCaps struct {
 
 	// cpu
-	CPU *HostCapsCPU `json:"cpu,omitempty"`
+	// Required: true
+	CPU *HostCapsCPU `json:"cpu"`
 
 	// the host memory size in bytes
-	Memory int64 `json:"memory,omitempty"`
+	// Required: true
+	Memory *int64 `json:"memory"`
 
 	// the host UUID
-	UUID string `json:"uuid,omitempty"`
+	// Required: true
+	UUID *string `json:"uuid"`
+
+	// The host libvirt version.
+	// Required: true
+	Version *string `json:"version"`
 }
 
 // Validate validates this host caps
@@ -36,6 +44,18 @@ func (m *HostCaps) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateMemory(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUUID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVersion(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -43,8 +63,9 @@ func (m *HostCaps) Validate(formats strfmt.Registry) error {
 }
 
 func (m *HostCaps) validateCPU(formats strfmt.Registry) error {
-	if swag.IsZero(m.CPU) { // not required
-		return nil
+
+	if err := validate.Required("cpu", "body", m.CPU); err != nil {
+		return err
 	}
 
 	if m.CPU != nil {
@@ -56,6 +77,33 @@ func (m *HostCaps) validateCPU(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *HostCaps) validateMemory(formats strfmt.Registry) error {
+
+	if err := validate.Required("memory", "body", m.Memory); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *HostCaps) validateUUID(formats strfmt.Registry) error {
+
+	if err := validate.Required("uuid", "body", m.UUID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *HostCaps) validateVersion(formats strfmt.Registry) error {
+
+	if err := validate.Required("version", "body", m.Version); err != nil {
+		return err
 	}
 
 	return nil
@@ -115,26 +163,115 @@ func (m *HostCaps) UnmarshalBinary(b []byte) error {
 type HostCapsCPU struct {
 
 	// the host CPU architecture
-	Arch string `json:"arch,omitempty"`
+	// Required: true
+	Arch *string `json:"arch"`
 
 	// the host CPU number of cores
-	Cores int64 `json:"cores,omitempty"`
+	// Required: true
+	Cores *int64 `json:"cores"`
 
 	// the host CPU model
-	Model string `json:"model,omitempty"`
+	// Required: true
+	Model *string `json:"model"`
 
 	// the host CPU number of sockets
-	Sockets int64 `json:"sockets,omitempty"`
+	// Required: true
+	Sockets *int64 `json:"sockets"`
 
 	// the host CPU number of threads
-	Threads int64 `json:"threads,omitempty"`
+	// Required: true
+	Threads *int64 `json:"threads"`
 
 	// the host CPU vendor
-	Vendor string `json:"vendor,omitempty"`
+	// Required: true
+	Vendor *string `json:"vendor"`
 }
 
 // Validate validates this host caps CPU
 func (m *HostCapsCPU) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateArch(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCores(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateModel(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSockets(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateThreads(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVendor(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *HostCapsCPU) validateArch(formats strfmt.Registry) error {
+
+	if err := validate.Required("cpu"+"."+"arch", "body", m.Arch); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *HostCapsCPU) validateCores(formats strfmt.Registry) error {
+
+	if err := validate.Required("cpu"+"."+"cores", "body", m.Cores); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *HostCapsCPU) validateModel(formats strfmt.Registry) error {
+
+	if err := validate.Required("cpu"+"."+"model", "body", m.Model); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *HostCapsCPU) validateSockets(formats strfmt.Registry) error {
+
+	if err := validate.Required("cpu"+"."+"sockets", "body", m.Sockets); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *HostCapsCPU) validateThreads(formats strfmt.Registry) error {
+
+	if err := validate.Required("cpu"+"."+"threads", "body", m.Threads); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *HostCapsCPU) validateVendor(formats strfmt.Registry) error {
+
+	if err := validate.Required("cpu"+"."+"vendor", "body", m.Vendor); err != nil {
+		return err
+	}
+
 	return nil
 }
 
