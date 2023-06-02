@@ -223,6 +223,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		ZoneUpdateZoneHandler: zone.UpdateZoneHandlerFunc(func(params zone.UpdateZoneParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.UpdateZone has not yet been implemented")
 		}),
+		ZoneUpdateZoneDefaultPoolHandler: zone.UpdateZoneDefaultPoolHandlerFunc(func(params zone.UpdateZoneDefaultPoolParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation zone.UpdateZoneDefaultPool has not yet been implemented")
+		}),
 		ZoneUpdateZoneDefaultVNetHandler: zone.UpdateZoneDefaultVNetHandlerFunc(func(params zone.UpdateZoneDefaultVNetParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.UpdateZoneDefaultVNet has not yet been implemented")
 		}),
@@ -393,6 +396,8 @@ type KowabungaAPI struct {
 	VnetUpdateVNetHandler vnet.UpdateVNetHandler
 	// ZoneUpdateZoneHandler sets the operation handler for the update zone operation
 	ZoneUpdateZoneHandler zone.UpdateZoneHandler
+	// ZoneUpdateZoneDefaultPoolHandler sets the operation handler for the update zone default pool operation
+	ZoneUpdateZoneDefaultPoolHandler zone.UpdateZoneDefaultPoolHandler
 	// ZoneUpdateZoneDefaultVNetHandler sets the operation handler for the update zone default v net operation
 	ZoneUpdateZoneDefaultVNetHandler zone.UpdateZoneDefaultVNetHandler
 
@@ -649,6 +654,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.ZoneUpdateZoneHandler == nil {
 		unregistered = append(unregistered, "zone.UpdateZoneHandler")
+	}
+	if o.ZoneUpdateZoneDefaultPoolHandler == nil {
+		unregistered = append(unregistered, "zone.UpdateZoneDefaultPoolHandler")
 	}
 	if o.ZoneUpdateZoneDefaultVNetHandler == nil {
 		unregistered = append(unregistered, "zone.UpdateZoneDefaultVNetHandler")
@@ -980,6 +988,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
 	o.handlers["PUT"]["/zone/{zoneId}"] = zone.NewUpdateZone(o.context, o.ZoneUpdateZoneHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/zone/{zoneId}/pool/{poolId}/default"] = zone.NewUpdateZoneDefaultPool(o.context, o.ZoneUpdateZoneDefaultPoolHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}

@@ -54,6 +54,8 @@ type ClientService interface {
 
 	UpdateZone(params *UpdateZoneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateZoneOK, error)
 
+	UpdateZoneDefaultPool(params *UpdateZoneDefaultPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateZoneDefaultPoolOK, error)
+
 	UpdateZoneDefaultVNet(params *UpdateZoneDefaultVNetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateZoneDefaultVNetOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
@@ -524,6 +526,45 @@ func (a *Client) UpdateZone(params *UpdateZoneParams, authInfo runtime.ClientAut
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateZone: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateZoneDefaultPool Set a zone's default storage pool.
+*/
+func (a *Client) UpdateZoneDefaultPool(params *UpdateZoneDefaultPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateZoneDefaultPoolOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateZoneDefaultPoolParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateZoneDefaultPool",
+		Method:             "PUT",
+		PathPattern:        "/zone/{zoneId}/pool/{poolId}/default",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateZoneDefaultPoolReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateZoneDefaultPoolOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateZoneDefaultPool: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

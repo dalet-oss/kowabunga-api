@@ -1681,6 +1681,43 @@ func init() {
         }
       }
     },
+    "/zone/{zoneId}/pool/{poolId}/default": {
+      "put": {
+        "description": "Set a zone's default storage pool.",
+        "tags": [
+          "zone",
+          "pool"
+        ],
+        "operationId": "UpdateZoneDefaultPool",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the zone to update.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the storage pool to set as default.",
+            "name": "poolId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated project resources object."
+          },
+          "404": {
+            "description": "Invalid zone ID or storage pool ID was provided."
+          },
+          "500": {
+            "description": "Unable to assign the requested storage pool as zone's default."
+          }
+        }
+      }
+    },
     "/zone/{zoneId}/pools": {
       "get": {
         "description": "Returns the IDs of the pools existing in the zone.",
@@ -3962,6 +3999,43 @@ func init() {
           },
           "500": {
             "description": "Unable to create storage pool."
+          }
+        }
+      }
+    },
+    "/zone/{zoneId}/pool/{poolId}/default": {
+      "put": {
+        "description": "Set a zone's default storage pool.",
+        "tags": [
+          "zone",
+          "pool"
+        ],
+        "operationId": "UpdateZoneDefaultPool",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the zone to update.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the storage pool to set as default.",
+            "name": "poolId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated project resources object."
+          },
+          "404": {
+            "description": "Invalid zone ID or storage pool ID was provided."
+          },
+          "500": {
+            "description": "Unable to assign the requested storage pool as zone's default."
           }
         }
       }

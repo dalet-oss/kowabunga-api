@@ -344,6 +344,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation zone.UpdateZone has not yet been implemented")
 		})
 	}
+	if api.ZoneUpdateZoneDefaultPoolHandler == nil {
+		api.ZoneUpdateZoneDefaultPoolHandler = zone.UpdateZoneDefaultPoolHandlerFunc(func(params zone.UpdateZoneDefaultPoolParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation zone.UpdateZoneDefaultPool has not yet been implemented")
+		})
+	}
 	if api.ZoneUpdateZoneDefaultVNetHandler == nil {
 		api.ZoneUpdateZoneDefaultVNetHandler = zone.UpdateZoneDefaultVNetHandlerFunc(func(params zone.UpdateZoneDefaultVNetParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.UpdateZoneDefaultVNet has not yet been implemented")
