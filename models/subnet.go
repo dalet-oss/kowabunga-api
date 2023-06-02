@@ -19,16 +19,26 @@ import (
 // swagger:model Subnet
 type Subnet struct {
 
-	// The virtual network CIDR (e.g. 192.168.0.0/24).
+	// The subnet CIDR (e.g. 192.168.0.0/24).
 	// Required: true
 	Cidr *string `json:"cidr"`
 
-	// The virtual network DNS server IP address (gateway value if unspecified).
+	// The subnet description.
+	Description string `json:"description,omitempty"`
+
+	// The subnet DNS server IP address (gateway value if unspecified).
 	DNS string `json:"dns,omitempty"`
 
-	// The virtual network router/gateway IP address (e.g. 192.168.0.254).
+	// The subnet router/gateway IP address (e.g. 192.168.0.254).
 	// Required: true
 	Gateway *string `json:"gateway"`
+
+	// The subnet ID (auto-generated).
+	ID string `json:"id,omitempty"`
+
+	// The subnet name.
+	// Required: true
+	Name *string `json:"name"`
 }
 
 // Validate validates this subnet
@@ -40,6 +50,10 @@ func (m *Subnet) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateGateway(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -61,6 +75,15 @@ func (m *Subnet) validateCidr(formats strfmt.Registry) error {
 func (m *Subnet) validateGateway(formats strfmt.Registry) error {
 
 	if err := validate.Required("gateway", "body", m.Gateway); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Subnet) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
 		return err
 	}
 

@@ -1,17 +1,26 @@
 definitions:
   Subnet:
     type: object
-    required: [cidr, gateway]
+    required: [name, cidr, gateway]
     properties:
+      id:
+        type: string
+        description: The subnet ID (auto-generated).
+      name:
+        type: string
+        description: The subnet name.
+      description:
+        type: string
+        description: The subnet description.
       cidr:
         type: string
-        description: The virtual network CIDR (e.g. 192.168.0.0/24).
+        description: The subnet CIDR (e.g. 192.168.0.0/24).
       gateway:
         type: string
-        description: The virtual network router/gateway IP address (e.g. 192.168.0.254).
+        description: The subnet router/gateway IP address (e.g. 192.168.0.254).
       dns:
         type: string
-        description: The virtual network DNS server IP address (gateway value if unspecified).
+        description: The subnet DNS server IP address (gateway value if unspecified).
 
 paths:
   /subnet:

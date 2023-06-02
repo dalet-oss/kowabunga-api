@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.2.3"
+    "version": "0.2.4"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -2478,20 +2478,33 @@ func init() {
     "Subnet": {
       "type": "object",
       "required": [
+        "name",
         "cidr",
         "gateway"
       ],
       "properties": {
         "cidr": {
-          "description": "The virtual network CIDR (e.g. 192.168.0.0/24).",
+          "description": "The subnet CIDR (e.g. 192.168.0.0/24).",
+          "type": "string"
+        },
+        "description": {
+          "description": "The subnet description.",
           "type": "string"
         },
         "dns": {
-          "description": "The virtual network DNS server IP address (gateway value if unspecified).",
+          "description": "The subnet DNS server IP address (gateway value if unspecified).",
           "type": "string"
         },
         "gateway": {
-          "description": "The virtual network router/gateway IP address (e.g. 192.168.0.254).",
+          "description": "The subnet router/gateway IP address (e.g. 192.168.0.254).",
+          "type": "string"
+        },
+        "id": {
+          "description": "The subnet ID (auto-generated).",
+          "type": "string"
+        },
+        "name": {
+          "description": "The subnet name.",
           "type": "string"
         }
       }
@@ -2579,7 +2592,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.2.3"
+    "version": "0.2.4"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -5073,20 +5086,33 @@ func init() {
     "Subnet": {
       "type": "object",
       "required": [
+        "name",
         "cidr",
         "gateway"
       ],
       "properties": {
         "cidr": {
-          "description": "The virtual network CIDR (e.g. 192.168.0.0/24).",
+          "description": "The subnet CIDR (e.g. 192.168.0.0/24).",
+          "type": "string"
+        },
+        "description": {
+          "description": "The subnet description.",
           "type": "string"
         },
         "dns": {
-          "description": "The virtual network DNS server IP address (gateway value if unspecified).",
+          "description": "The subnet DNS server IP address (gateway value if unspecified).",
           "type": "string"
         },
         "gateway": {
-          "description": "The virtual network router/gateway IP address (e.g. 192.168.0.254).",
+          "description": "The subnet router/gateway IP address (e.g. 192.168.0.254).",
+          "type": "string"
+        },
+        "id": {
+          "description": "The subnet ID (auto-generated).",
+          "type": "string"
+        },
+        "name": {
+          "description": "The subnet name.",
           "type": "string"
         }
       }
