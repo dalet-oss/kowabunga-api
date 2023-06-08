@@ -1,0 +1,13 @@
+definitions:
+  Cost:
+    type: object
+    required: [price, currency]
+    description: A key/value metadata.
+    properties:
+      price:
+        type: number
+        format: float
+        description: The unit price information.
+      currency:
+        type: string
+        description: The associated currency.

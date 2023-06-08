@@ -1,0 +1,105 @@
+definitions:
+  Adapter:
+    type: object
+    required: [name, mac, addresses]
+    properties:
+      id:
+        type: string
+        description: The network adapter ID (auto-generated).
+      name:
+        type: string
+        description: The network adapter name.
+      description:
+        type: string
+        description: The network adapter description.
+      mac:
+        type: string
+        description: The network adapter hardware address (e.g. 00:11:22:33:44:55).
+      addresses:
+        type: array
+        description: The network adapter list of associated IPv4 addresses.
+        items:
+          type: string
+      reserved:
+        type: boolean
+        description: The network adapter is a reserved adapter (e.g. router), where the same hardware address can be reused over several subnets.
+        default: false
+
+paths:
+  /adapter:
+    get:
+      tags:
+        - adapter
+      operationId: GetAllAdapters
+      description: Returns the IDs of network adapters.
+      responses:
+        200:
+          description: Returns the an array of network adapter IDs.
+          schema:
+            type: array
+            items:
+              type: string
+
+  /adapter/{adapterId}:
+    get:
+      tags:
+        - adapter
+      operationId: GetAdapter
+      description: Returns a description of the network adapter.
+      parameters:
+        - name: adapterId
+          in: path
+          type: string
+          required: true
+          description: The ID of the network adapter to get.
+      responses:
+        200:
+          description: Returns the network adapter object.
+          schema:
+            $ref: '#/definitions/Adapter'
+        404:
+          description: Invalid network adapter ID was provided.
+    put:
+      tags:
+        - adapter
+      operationId: UpdateAdapter
+      description: Updates a network adapter configuration.
+      parameters:
+        - name: adapterId
+          in: path
+          type: string
+          required: true
+          description: The ID of the network adapter to update.
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/Adapter'
+      responses:
+        200:
+          description: Returns the updated network adapter object.
+          schema:
+            $ref: '#/definitions/Adapter'
+        400:
+          description: Bad parameters were provided.
+        404:
+          description: Invalid network adapter ID was provided.
+    delete:
+      tags:
+        - adapter
+      operationId: DeleteAdapter
+      description: Deletes an existing network adapter.
+      parameters:
+        - name: adapterId
+          in: path
+          type: string
+          required: true
+          description: The ID of the network adapter to delete.
+      responses:
+        200:
+          description: The network adapter has been successfully removed.
+        404:
+          description: Invalid network adapter ID was provided.
+        409:
+          description: The network adapter is not empty or still being referenced.
+        500:
+          description: Unable to delete network adapter.

@@ -31,10 +31,126 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.2.5"
+    "version": "0.3.0"
   },
   "basePath": "/api/v1",
   "paths": {
+    "/adapter": {
+      "get": {
+        "description": "Returns the IDs of network adapters.",
+        "tags": [
+          "adapter"
+        ],
+        "operationId": "GetAllAdapters",
+        "responses": {
+          "200": {
+            "description": "Returns the an array of network adapter IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/adapter/{adapterId}": {
+      "get": {
+        "description": "Returns a description of the network adapter.",
+        "tags": [
+          "adapter"
+        ],
+        "operationId": "GetAdapter",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the network adapter to get.",
+            "name": "adapterId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the network adapter object.",
+            "schema": {
+              "$ref": "#/definitions/Adapter"
+            }
+          },
+          "404": {
+            "description": "Invalid network adapter ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a network adapter configuration.",
+        "tags": [
+          "adapter"
+        ],
+        "operationId": "UpdateAdapter",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the network adapter to update.",
+            "name": "adapterId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Adapter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated network adapter object.",
+            "schema": {
+              "$ref": "#/definitions/Adapter"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid network adapter ID was provided."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing network adapter.",
+        "tags": [
+          "adapter"
+        ],
+        "operationId": "DeleteAdapter",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the network adapter to delete.",
+            "name": "adapterId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The network adapter has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid network adapter ID was provided."
+          },
+          "409": {
+            "description": "The network adapter is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete network adapter."
+          }
+        }
+      }
+    },
     "/healthz": {
       "get": {
         "produces": [
@@ -745,6 +861,39 @@ func init() {
         }
       }
     },
+    "/pool/{poolId}/volumes": {
+      "get": {
+        "description": "Returns the IDs of the storage volumes existing in the pool.",
+        "tags": [
+          "pool",
+          "volume"
+        ],
+        "operationId": "GetPoolVolumes",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the pool to query.",
+            "name": "poolId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of storage volume IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid pool ID was provided."
+          }
+        }
+      }
+    },
     "/project": {
       "get": {
         "description": "Returns the IDs of registered projects.",
@@ -1004,6 +1153,92 @@ func init() {
             "description": "Returns the project resources object.",
             "schema": {
               "$ref": "#/definitions/ProjectResources"
+            }
+          },
+          "404": {
+            "description": "Invalid project ID was provided."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/volume": {
+      "post": {
+        "description": "Creates a new storage volume.",
+        "tags": [
+          "project",
+          "volume"
+        ],
+        "operationId": "CreateVolume",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated project.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "the ID of the associated storage pool.",
+            "name": "poolId",
+            "in": "query"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created storage volume object.",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid project ID was provided."
+          },
+          "409": {
+            "description": "Storage volume already exists."
+          },
+          "500": {
+            "description": "Unable to create the storage volume."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/volumes": {
+      "get": {
+        "description": "Returns the IDs of the storage volumes existing in the project.",
+        "tags": [
+          "project",
+          "volume"
+        ],
+        "operationId": "GetProjectVolumes",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to query.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of storage volume IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           "404": {
@@ -1358,6 +1593,86 @@ func init() {
         }
       }
     },
+    "/subnet/{subnetId}/adapter": {
+      "post": {
+        "description": "Creates a new network adapter.",
+        "tags": [
+          "subnet",
+          "adapter"
+        ],
+        "operationId": "CreateAdapter",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated subnet.",
+            "name": "subnetId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Adapter"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created network adapter object.",
+            "schema": {
+              "$ref": "#/definitions/Adapter"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid subnet ID was provided."
+          },
+          "409": {
+            "description": "Network adapter already exists."
+          },
+          "500": {
+            "description": "Unable to create the network adapter."
+          }
+        }
+      }
+    },
+    "/subnet/{subnetId}/adapters": {
+      "get": {
+        "description": "Returns the IDs of the network adapters existing in the subnet.",
+        "tags": [
+          "subnet",
+          "adapter"
+        ],
+        "operationId": "GetSubnetAdapters",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the subnet to query.",
+            "name": "subnetId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of network adapter IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid subnet ID was provided."
+          }
+        }
+      }
+    },
     "/vnet": {
       "get": {
         "description": "Returns the IDs of virtual networks.",
@@ -1587,6 +1902,122 @@ func init() {
           },
           "404": {
             "description": "Invalid virtual network ID was provided."
+          }
+        }
+      }
+    },
+    "/volume": {
+      "get": {
+        "description": "Returns the IDs of storage volumes.",
+        "tags": [
+          "volume"
+        ],
+        "operationId": "GetAllVolumes",
+        "responses": {
+          "200": {
+            "description": "Returns the an array of storage volume IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/volume/{volumeId}": {
+      "get": {
+        "description": "Returns a description of the storage volume.",
+        "tags": [
+          "volume"
+        ],
+        "operationId": "GetVolume",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the storage volume to get.",
+            "name": "volumeId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the storage volume object.",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "404": {
+            "description": "Invalid storage volume ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a storage volume configuration.",
+        "tags": [
+          "volume"
+        ],
+        "operationId": "UpdateVolume",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the storage volume to update.",
+            "name": "volumeId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated storage volume object.",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid storage volume ID was provided."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing storage volume.",
+        "tags": [
+          "volume"
+        ],
+        "operationId": "DeleteVolume",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the storage volume to delete.",
+            "name": "volumeId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The storage volume has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid storage volume ID was provided."
+          },
+          "409": {
+            "description": "The storage volume is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete storage volume."
           }
         }
       }
@@ -2103,6 +2534,63 @@ func init() {
     }
   },
   "definitions": {
+    "Adapter": {
+      "type": "object",
+      "required": [
+        "name",
+        "mac",
+        "addresses"
+      ],
+      "properties": {
+        "addresses": {
+          "description": "The network adapter list of associated IPv4 addresses.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "description": "The network adapter description.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The network adapter ID (auto-generated).",
+          "type": "string"
+        },
+        "mac": {
+          "description": "The network adapter hardware address (e.g. 00:11:22:33:44:55).",
+          "type": "string"
+        },
+        "name": {
+          "description": "The network adapter name.",
+          "type": "string"
+        },
+        "reserved": {
+          "description": "The network adapter is a reserved adapter (e.g. router), where the same hardware address can be reused over several subnets.",
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "Cost": {
+      "description": "A key/value metadata.",
+      "type": "object",
+      "required": [
+        "price",
+        "currency"
+      ],
+      "properties": {
+        "currency": {
+          "description": "The associated currency.",
+          "type": "string"
+        },
+        "price": {
+          "description": "The unit price information.",
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
     "Disk": {
       "type": "object",
       "required": [
@@ -2147,6 +2635,13 @@ func init() {
         "address": {
           "description": "The host libvirt's IPv4 address.",
           "type": "string"
+        },
+        "cost": {
+          "description": "Cost associated to the host.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Cost"
+          }
         },
         "description": {
           "description": "The host description.",
@@ -2339,6 +2834,20 @@ func init() {
         }
       }
     },
+    "Metadata": {
+      "description": "A key/value metadata.",
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "The metadata key.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The metadata value.",
+          "type": "string"
+        }
+      }
+    },
     "NIC": {
       "type": "object",
       "required": [
@@ -2404,9 +2913,23 @@ func init() {
           "description": "The project ID (auto-generated).",
           "type": "string"
         },
+        "metadatas": {
+          "description": "A list of metadata to be associated to the project",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Metadata"
+          }
+        },
         "name": {
           "description": "The project name.",
           "type": "string"
+        },
+        "tags": {
+          "description": "A list of tags to be associated to the project.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2564,6 +3087,46 @@ func init() {
         }
       }
     },
+    "Volume": {
+      "type": "object",
+      "required": [
+        "name",
+        "kind",
+        "size"
+      ],
+      "properties": {
+        "description": {
+          "description": "The storage volume description.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The storage volume ID (auto-generated).",
+          "type": "string"
+        },
+        "kind": {
+          "description": "The type of storage volume.",
+          "type": "string",
+          "enum": [
+            "os",
+            "iso",
+            "raw"
+          ]
+        },
+        "name": {
+          "description": "The storage volume name.",
+          "type": "string"
+        },
+        "resizable": {
+          "description": "Is the storage volume allowed to grow (filesystem dependant) ?",
+          "type": "boolean",
+          "default": false
+        },
+        "size": {
+          "description": "The storage volume size in bytes.",
+          "type": "integer"
+        }
+      }
+    },
     "Zone": {
       "type": "object",
       "required": [
@@ -2615,10 +3178,126 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.2.5"
+    "version": "0.3.0"
   },
   "basePath": "/api/v1",
   "paths": {
+    "/adapter": {
+      "get": {
+        "description": "Returns the IDs of network adapters.",
+        "tags": [
+          "adapter"
+        ],
+        "operationId": "GetAllAdapters",
+        "responses": {
+          "200": {
+            "description": "Returns the an array of network adapter IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/adapter/{adapterId}": {
+      "get": {
+        "description": "Returns a description of the network adapter.",
+        "tags": [
+          "adapter"
+        ],
+        "operationId": "GetAdapter",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the network adapter to get.",
+            "name": "adapterId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the network adapter object.",
+            "schema": {
+              "$ref": "#/definitions/Adapter"
+            }
+          },
+          "404": {
+            "description": "Invalid network adapter ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a network adapter configuration.",
+        "tags": [
+          "adapter"
+        ],
+        "operationId": "UpdateAdapter",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the network adapter to update.",
+            "name": "adapterId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Adapter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated network adapter object.",
+            "schema": {
+              "$ref": "#/definitions/Adapter"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid network adapter ID was provided."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing network adapter.",
+        "tags": [
+          "adapter"
+        ],
+        "operationId": "DeleteAdapter",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the network adapter to delete.",
+            "name": "adapterId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The network adapter has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid network adapter ID was provided."
+          },
+          "409": {
+            "description": "The network adapter is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete network adapter."
+          }
+        }
+      }
+    },
     "/healthz": {
       "get": {
         "produces": [
@@ -3329,6 +4008,39 @@ func init() {
         }
       }
     },
+    "/pool/{poolId}/volumes": {
+      "get": {
+        "description": "Returns the IDs of the storage volumes existing in the pool.",
+        "tags": [
+          "pool",
+          "volume"
+        ],
+        "operationId": "GetPoolVolumes",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the pool to query.",
+            "name": "poolId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of storage volume IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid pool ID was provided."
+          }
+        }
+      }
+    },
     "/project": {
       "get": {
         "description": "Returns the IDs of registered projects.",
@@ -3588,6 +4300,92 @@ func init() {
             "description": "Returns the project resources object.",
             "schema": {
               "$ref": "#/definitions/ProjectResources"
+            }
+          },
+          "404": {
+            "description": "Invalid project ID was provided."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/volume": {
+      "post": {
+        "description": "Creates a new storage volume.",
+        "tags": [
+          "project",
+          "volume"
+        ],
+        "operationId": "CreateVolume",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated project.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "the ID of the associated storage pool.",
+            "name": "poolId",
+            "in": "query"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created storage volume object.",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid project ID was provided."
+          },
+          "409": {
+            "description": "Storage volume already exists."
+          },
+          "500": {
+            "description": "Unable to create the storage volume."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/volumes": {
+      "get": {
+        "description": "Returns the IDs of the storage volumes existing in the project.",
+        "tags": [
+          "project",
+          "volume"
+        ],
+        "operationId": "GetProjectVolumes",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to query.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of storage volume IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           "404": {
@@ -3942,6 +4740,86 @@ func init() {
         }
       }
     },
+    "/subnet/{subnetId}/adapter": {
+      "post": {
+        "description": "Creates a new network adapter.",
+        "tags": [
+          "subnet",
+          "adapter"
+        ],
+        "operationId": "CreateAdapter",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated subnet.",
+            "name": "subnetId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Adapter"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created network adapter object.",
+            "schema": {
+              "$ref": "#/definitions/Adapter"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid subnet ID was provided."
+          },
+          "409": {
+            "description": "Network adapter already exists."
+          },
+          "500": {
+            "description": "Unable to create the network adapter."
+          }
+        }
+      }
+    },
+    "/subnet/{subnetId}/adapters": {
+      "get": {
+        "description": "Returns the IDs of the network adapters existing in the subnet.",
+        "tags": [
+          "subnet",
+          "adapter"
+        ],
+        "operationId": "GetSubnetAdapters",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the subnet to query.",
+            "name": "subnetId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of network adapter IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid subnet ID was provided."
+          }
+        }
+      }
+    },
     "/vnet": {
       "get": {
         "description": "Returns the IDs of virtual networks.",
@@ -4171,6 +5049,122 @@ func init() {
           },
           "404": {
             "description": "Invalid virtual network ID was provided."
+          }
+        }
+      }
+    },
+    "/volume": {
+      "get": {
+        "description": "Returns the IDs of storage volumes.",
+        "tags": [
+          "volume"
+        ],
+        "operationId": "GetAllVolumes",
+        "responses": {
+          "200": {
+            "description": "Returns the an array of storage volume IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/volume/{volumeId}": {
+      "get": {
+        "description": "Returns a description of the storage volume.",
+        "tags": [
+          "volume"
+        ],
+        "operationId": "GetVolume",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the storage volume to get.",
+            "name": "volumeId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the storage volume object.",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "404": {
+            "description": "Invalid storage volume ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a storage volume configuration.",
+        "tags": [
+          "volume"
+        ],
+        "operationId": "UpdateVolume",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the storage volume to update.",
+            "name": "volumeId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated storage volume object.",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid storage volume ID was provided."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing storage volume.",
+        "tags": [
+          "volume"
+        ],
+        "operationId": "DeleteVolume",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the storage volume to delete.",
+            "name": "volumeId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The storage volume has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid storage volume ID was provided."
+          },
+          "409": {
+            "description": "The storage volume is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete storage volume."
           }
         }
       }
@@ -4687,6 +5681,63 @@ func init() {
     }
   },
   "definitions": {
+    "Adapter": {
+      "type": "object",
+      "required": [
+        "name",
+        "mac",
+        "addresses"
+      ],
+      "properties": {
+        "addresses": {
+          "description": "The network adapter list of associated IPv4 addresses.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "description": "The network adapter description.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The network adapter ID (auto-generated).",
+          "type": "string"
+        },
+        "mac": {
+          "description": "The network adapter hardware address (e.g. 00:11:22:33:44:55).",
+          "type": "string"
+        },
+        "name": {
+          "description": "The network adapter name.",
+          "type": "string"
+        },
+        "reserved": {
+          "description": "The network adapter is a reserved adapter (e.g. router), where the same hardware address can be reused over several subnets.",
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "Cost": {
+      "description": "A key/value metadata.",
+      "type": "object",
+      "required": [
+        "price",
+        "currency"
+      ],
+      "properties": {
+        "currency": {
+          "description": "The associated currency.",
+          "type": "string"
+        },
+        "price": {
+          "description": "The unit price information.",
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
     "Disk": {
       "type": "object",
       "required": [
@@ -4751,6 +5802,13 @@ func init() {
         "address": {
           "description": "The host libvirt's IPv4 address.",
           "type": "string"
+        },
+        "cost": {
+          "description": "Cost associated to the host.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Cost"
+          }
         },
         "description": {
           "description": "The host description.",
@@ -5004,6 +6062,20 @@ func init() {
         }
       }
     },
+    "Metadata": {
+      "description": "A key/value metadata.",
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "The metadata key.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The metadata value.",
+          "type": "string"
+        }
+      }
+    },
     "NIC": {
       "type": "object",
       "required": [
@@ -5069,9 +6141,23 @@ func init() {
           "description": "The project ID (auto-generated).",
           "type": "string"
         },
+        "metadatas": {
+          "description": "A list of metadata to be associated to the project",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Metadata"
+          }
+        },
         "name": {
           "description": "The project name.",
           "type": "string"
+        },
+        "tags": {
+          "description": "A list of tags to be associated to the project.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5225,6 +6311,46 @@ func init() {
         },
         "vlan": {
           "description": "The VLAN identifier.",
+          "type": "integer"
+        }
+      }
+    },
+    "Volume": {
+      "type": "object",
+      "required": [
+        "name",
+        "kind",
+        "size"
+      ],
+      "properties": {
+        "description": {
+          "description": "The storage volume description.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The storage volume ID (auto-generated).",
+          "type": "string"
+        },
+        "kind": {
+          "description": "The type of storage volume.",
+          "type": "string",
+          "enum": [
+            "os",
+            "iso",
+            "raw"
+          ]
+        },
+        "name": {
+          "description": "The storage volume name.",
+          "type": "string"
+        },
+        "resizable": {
+          "description": "Is the storage volume allowed to grow (filesystem dependant) ?",
+          "type": "boolean",
+          "default": false
+        },
+        "size": {
+          "description": "The storage volume size in bytes.",
           "type": "integer"
         }
       }

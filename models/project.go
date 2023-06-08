@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -25,14 +26,24 @@ type Project struct {
 	// The project ID (auto-generated).
 	ID string `json:"id,omitempty"`
 
+	// A list of metadata to be associated to the project
+	Metadatas []*Metadata `json:"metadatas"`
+
 	// The project name.
 	// Required: true
 	Name *string `json:"name"`
+
+	// A list of tags to be associated to the project.
+	Tags []string `json:"tags"`
 }
 
 // Validate validates this project
 func (m *Project) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateMetadatas(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
@@ -41,6 +52,32 @@ func (m *Project) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Project) validateMetadatas(formats strfmt.Registry) error {
+	if swag.IsZero(m.Metadatas) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Metadatas); i++ {
+		if swag.IsZero(m.Metadatas[i]) { // not required
+			continue
+		}
+
+		if m.Metadatas[i] != nil {
+			if err := m.Metadatas[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("metadatas" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("metadatas" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -53,8 +90,37 @@ func (m *Project) validateName(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this project based on context it is used
+// ContextValidate validate this project based on the context it is used
 func (m *Project) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateMetadatas(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *Project) contextValidateMetadatas(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Metadatas); i++ {
+
+		if m.Metadatas[i] != nil {
+			if err := m.Metadatas[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("metadatas" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("metadatas" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

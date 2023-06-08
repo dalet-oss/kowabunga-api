@@ -10,6 +10,7 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
+	"github.com/dalet-oss/kowabunga-api/client/adapter"
 	"github.com/dalet-oss/kowabunga-api/client/host"
 	"github.com/dalet-oss/kowabunga-api/client/instance"
 	"github.com/dalet-oss/kowabunga-api/client/netgw"
@@ -19,6 +20,7 @@ import (
 	"github.com/dalet-oss/kowabunga-api/client/region"
 	"github.com/dalet-oss/kowabunga-api/client/subnet"
 	"github.com/dalet-oss/kowabunga-api/client/vnet"
+	"github.com/dalet-oss/kowabunga-api/client/volume"
 	"github.com/dalet-oss/kowabunga-api/client/zone"
 )
 
@@ -64,6 +66,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Kowabunga 
 
 	cli := new(Kowabunga)
 	cli.Transport = transport
+	cli.Adapter = adapter.New(transport, formats)
 	cli.Host = host.New(transport, formats)
 	cli.Instance = instance.New(transport, formats)
 	cli.Netgw = netgw.New(transport, formats)
@@ -73,6 +76,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Kowabunga 
 	cli.Region = region.New(transport, formats)
 	cli.Subnet = subnet.New(transport, formats)
 	cli.Vnet = vnet.New(transport, formats)
+	cli.Volume = volume.New(transport, formats)
 	cli.Zone = zone.New(transport, formats)
 	return cli
 }
@@ -118,6 +122,8 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 
 // Kowabunga is a client for kowabunga
 type Kowabunga struct {
+	Adapter adapter.ClientService
+
 	Host host.ClientService
 
 	Instance instance.ClientService
@@ -136,6 +142,8 @@ type Kowabunga struct {
 
 	Vnet vnet.ClientService
 
+	Volume volume.ClientService
+
 	Zone zone.ClientService
 
 	Transport runtime.ClientTransport
@@ -144,6 +152,7 @@ type Kowabunga struct {
 // SetTransport changes the transport on the client and all its subresources
 func (c *Kowabunga) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
+	c.Adapter.SetTransport(transport)
 	c.Host.SetTransport(transport)
 	c.Instance.SetTransport(transport)
 	c.Netgw.SetTransport(transport)
@@ -153,5 +162,6 @@ func (c *Kowabunga) SetTransport(transport runtime.ClientTransport) {
 	c.Region.SetTransport(transport)
 	c.Subnet.SetTransport(transport)
 	c.Vnet.SetTransport(transport)
+	c.Volume.SetTransport(transport)
 	c.Zone.SetTransport(transport)
 }

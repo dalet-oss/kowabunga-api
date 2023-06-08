@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 	"encoding/json"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -23,6 +24,9 @@ type Host struct {
 	// The host libvirt's IPv4 address.
 	// Required: true
 	Address *string `json:"address"`
+
+	// Cost associated to the host.
+	Cost []*Cost `json:"cost"`
 
 	// The host description.
 	Description string `json:"description,omitempty"`
@@ -54,6 +58,10 @@ func (m *Host) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateCost(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
@@ -76,6 +84,32 @@ func (m *Host) validateAddress(formats strfmt.Registry) error {
 
 	if err := validate.Required("address", "body", m.Address); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *Host) validateCost(formats strfmt.Registry) error {
+	if swag.IsZero(m.Cost) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Cost); i++ {
+		if swag.IsZero(m.Cost[i]) { // not required
+			continue
+		}
+
+		if m.Cost[i] != nil {
+			if err := m.Cost[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("cost" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("cost" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -156,6 +190,10 @@ func (m *Host) validateTLS(formats strfmt.Registry) error {
 func (m *Host) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateCost(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateTLS(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -163,6 +201,26 @@ func (m *Host) ContextValidate(ctx context.Context, formats strfmt.Registry) err
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Host) contextValidateCost(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Cost); i++ {
+
+		if m.Cost[i] != nil {
+			if err := m.Cost[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("cost" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("cost" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

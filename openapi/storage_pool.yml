@@ -104,3 +104,26 @@ paths:
           description: The pool is not empty or still being referenced.
         500:
           description: Unable to delete pool.
+
+  /pool/{poolId}/volumes:
+    get:
+      tags:
+        - pool
+        - volume
+      operationId: GetPoolVolumes
+      description: Returns the IDs of the storage volumes existing in the pool.
+      parameters:
+        - name: poolId
+          in: path
+          type: string
+          required: true
+          description: The ID of the pool to query.
+      responses:
+        200:
+          description: Returns an array of storage volume IDs.
+          schema:
+            type: array
+            items:
+              type: string
+        404:
+          description: Invalid pool ID was provided.

@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 
 	swaggerapi "github.com/dalet-oss/kowabunga-api/server/api"
+	"github.com/dalet-oss/kowabunga-api/server/api/adapter"
 	"github.com/dalet-oss/kowabunga-api/server/api/host"
 	"github.com/dalet-oss/kowabunga-api/server/api/instance"
 	"github.com/dalet-oss/kowabunga-api/server/api/netgw"
@@ -19,6 +20,7 @@ import (
 	"github.com/dalet-oss/kowabunga-api/server/api/region"
 	"github.com/dalet-oss/kowabunga-api/server/api/subnet"
 	"github.com/dalet-oss/kowabunga-api/server/api/vnet"
+	"github.com/dalet-oss/kowabunga-api/server/api/volume"
 	"github.com/dalet-oss/kowabunga-api/server/api/zone"
 )
 
@@ -60,6 +62,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	// Example:
 	// api.APIAuthorizer = security.Authorized()
 
+	if api.SubnetCreateAdapterHandler == nil {
+		api.SubnetCreateAdapterHandler = subnet.CreateAdapterHandlerFunc(func(params subnet.CreateAdapterParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation subnet.CreateAdapter has not yet been implemented")
+		})
+	}
 	if api.ZoneCreateHostHandler == nil {
 		api.ZoneCreateHostHandler = zone.CreateHostHandlerFunc(func(params zone.CreateHostParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.CreateHost has not yet been implemented")
@@ -95,9 +102,19 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation zone.CreateVNet has not yet been implemented")
 		})
 	}
+	if api.ProjectCreateVolumeHandler == nil {
+		api.ProjectCreateVolumeHandler = project.CreateVolumeHandlerFunc(func(params project.CreateVolumeParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.CreateVolume has not yet been implemented")
+		})
+	}
 	if api.RegionCreateZoneHandler == nil {
 		api.RegionCreateZoneHandler = region.CreateZoneHandlerFunc(func(params region.CreateZoneParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation region.CreateZone has not yet been implemented")
+		})
+	}
+	if api.AdapterDeleteAdapterHandler == nil {
+		api.AdapterDeleteAdapterHandler = adapter.DeleteAdapterHandlerFunc(func(params adapter.DeleteAdapterParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation adapter.DeleteAdapter has not yet been implemented")
 		})
 	}
 	if api.HostDeleteHostHandler == nil {
@@ -135,9 +152,24 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation vnet.DeleteVNet has not yet been implemented")
 		})
 	}
+	if api.VolumeDeleteVolumeHandler == nil {
+		api.VolumeDeleteVolumeHandler = volume.DeleteVolumeHandlerFunc(func(params volume.DeleteVolumeParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation volume.DeleteVolume has not yet been implemented")
+		})
+	}
 	if api.ZoneDeleteZoneHandler == nil {
 		api.ZoneDeleteZoneHandler = zone.DeleteZoneHandlerFunc(func(params zone.DeleteZoneParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.DeleteZone has not yet been implemented")
+		})
+	}
+	if api.AdapterGetAdapterHandler == nil {
+		api.AdapterGetAdapterHandler = adapter.GetAdapterHandlerFunc(func(params adapter.GetAdapterParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation adapter.GetAdapter has not yet been implemented")
+		})
+	}
+	if api.AdapterGetAllAdaptersHandler == nil {
+		api.AdapterGetAllAdaptersHandler = adapter.GetAllAdaptersHandlerFunc(func(params adapter.GetAllAdaptersParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation adapter.GetAllAdapters has not yet been implemented")
 		})
 	}
 	if api.HostGetAllHostsHandler == nil {
@@ -180,6 +212,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation vnet.GetAllVNets has not yet been implemented")
 		})
 	}
+	if api.VolumeGetAllVolumesHandler == nil {
+		api.VolumeGetAllVolumesHandler = volume.GetAllVolumesHandlerFunc(func(params volume.GetAllVolumesParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation volume.GetAllVolumes has not yet been implemented")
+		})
+	}
 	if api.ZoneGetAllZonesHandler == nil {
 		api.ZoneGetAllZonesHandler = zone.GetAllZonesHandlerFunc(func(params zone.GetAllZonesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.GetAllZones has not yet been implemented")
@@ -220,6 +257,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation pool.GetPool has not yet been implemented")
 		})
 	}
+	if api.PoolGetPoolVolumesHandler == nil {
+		api.PoolGetPoolVolumesHandler = pool.GetPoolVolumesHandlerFunc(func(params pool.GetPoolVolumesParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation pool.GetPoolVolumes has not yet been implemented")
+		})
+	}
 	if api.ProjectGetProjectHandler == nil {
 		api.ProjectGetProjectHandler = project.GetProjectHandlerFunc(func(params project.GetProjectParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProject has not yet been implemented")
@@ -233,6 +275,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.ProjectGetProjectUsageHandler == nil {
 		api.ProjectGetProjectUsageHandler = project.GetProjectUsageHandlerFunc(func(params project.GetProjectUsageParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectUsage has not yet been implemented")
+		})
+	}
+	if api.ProjectGetProjectVolumesHandler == nil {
+		api.ProjectGetProjectVolumesHandler = project.GetProjectVolumesHandlerFunc(func(params project.GetProjectVolumesParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.GetProjectVolumes has not yet been implemented")
 		})
 	}
 	if api.RegionGetRegionHandler == nil {
@@ -250,6 +297,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation subnet.GetSubnet has not yet been implemented")
 		})
 	}
+	if api.SubnetGetSubnetAdaptersHandler == nil {
+		api.SubnetGetSubnetAdaptersHandler = subnet.GetSubnetAdaptersHandlerFunc(func(params subnet.GetSubnetAdaptersParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation subnet.GetSubnetAdapters has not yet been implemented")
+		})
+	}
 	if api.VnetGetVNetHandler == nil {
 		api.VnetGetVNetHandler = vnet.GetVNetHandlerFunc(func(params vnet.GetVNetParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation vnet.GetVNet has not yet been implemented")
@@ -258,6 +310,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.VnetGetVNetSubnetsHandler == nil {
 		api.VnetGetVNetSubnetsHandler = vnet.GetVNetSubnetsHandlerFunc(func(params vnet.GetVNetSubnetsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation vnet.GetVNetSubnets has not yet been implemented")
+		})
+	}
+	if api.VolumeGetVolumeHandler == nil {
+		api.VolumeGetVolumeHandler = volume.GetVolumeHandlerFunc(func(params volume.GetVolumeParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation volume.GetVolume has not yet been implemented")
 		})
 	}
 	if api.ZoneGetZoneHandler == nil {
@@ -330,6 +387,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation instance.SuspendInstance has not yet been implemented")
 		})
 	}
+	if api.AdapterUpdateAdapterHandler == nil {
+		api.AdapterUpdateAdapterHandler = adapter.UpdateAdapterHandlerFunc(func(params adapter.UpdateAdapterParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation adapter.UpdateAdapter has not yet been implemented")
+		})
+	}
 	if api.HostUpdateHostHandler == nil {
 		api.HostUpdateHostHandler = host.UpdateHostHandlerFunc(func(params host.UpdateHostParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation host.UpdateHost has not yet been implemented")
@@ -373,6 +435,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.VnetUpdateVNetDefaultSubnetHandler == nil {
 		api.VnetUpdateVNetDefaultSubnetHandler = vnet.UpdateVNetDefaultSubnetHandlerFunc(func(params vnet.UpdateVNetDefaultSubnetParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation vnet.UpdateVNetDefaultSubnet has not yet been implemented")
+		})
+	}
+	if api.VolumeUpdateVolumeHandler == nil {
+		api.VolumeUpdateVolumeHandler = volume.UpdateVolumeHandlerFunc(func(params volume.UpdateVolumeParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation volume.UpdateVolume has not yet been implemented")
 		})
 	}
 	if api.ZoneUpdateZoneHandler == nil {

@@ -100,3 +100,58 @@ paths:
           description: The subnet is not empty or still being referenced.
         500:
           description: Unable to delete subnet.
+
+  /subnet/{subnetId}/adapter:
+    post:
+      tags:
+        - subnet
+        - adapter
+      operationId: CreateAdapter
+      description: Creates a new network adapter.
+      parameters:
+        - name: subnetId
+          in: path
+          type: string
+          required: true
+          description: the ID of the associated subnet.
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Adapter'
+      responses:
+        201:
+          description: Returns the newly created network adapter object.
+          schema:
+            $ref: '#/definitions/Adapter'
+        400:
+          description: Bad parameters were provided.
+        404:
+          description: Invalid subnet ID was provided.
+        409:
+          description: Network adapter already exists.
+        500:
+          description: Unable to create the network adapter.
+
+  /subnet/{subnetId}/adapters:
+    get:
+      tags:
+        - subnet
+        - adapter
+      operationId: GetSubnetAdapters
+      description: Returns the IDs of the network adapters existing in the subnet.
+      parameters:
+        - name: subnetId
+          in: path
+          type: string
+          required: true
+          description: The ID of the subnet to query.
+      responses:
+        200:
+          description: Returns an array of network adapter IDs.
+          schema:
+            type: array
+            items:
+              type: string
+        404:
+          description: Invalid subnet ID was provided.
