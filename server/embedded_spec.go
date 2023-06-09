@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.3.0"
+    "version": "0.3.1"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -2638,10 +2638,8 @@ func init() {
         },
         "cost": {
           "description": "Cost associated to the host.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Cost"
-          }
+          "type": "object",
+          "$ref": "#/definitions/Cost"
         },
         "description": {
           "description": "The host description.",
@@ -2991,6 +2989,11 @@ func init() {
           "description": "The local Ceph Monitor(s) address or FQDN.",
           "type": "string"
         },
+        "cost": {
+          "description": "Cost associated to the storage pool.",
+          "type": "object",
+          "$ref": "#/definitions/Cost"
+        },
         "description": {
           "description": "The storage pool description.",
           "type": "string"
@@ -3178,7 +3181,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.3.0"
+    "version": "0.3.1"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -5805,10 +5808,8 @@ func init() {
         },
         "cost": {
           "description": "Cost associated to the host.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Cost"
-          }
+          "type": "object",
+          "$ref": "#/definitions/Cost"
         },
         "description": {
           "description": "The host description.",
@@ -6218,6 +6219,11 @@ func init() {
         "address": {
           "description": "The local Ceph Monitor(s) address or FQDN.",
           "type": "string"
+        },
+        "cost": {
+          "description": "Cost associated to the storage pool.",
+          "type": "object",
+          "$ref": "#/definitions/Cost"
         },
         "description": {
           "description": "The storage pool description.",

@@ -25,6 +25,10 @@ definitions:
       secret_uuid:
         type: string
         description: The libvirt secret UUID for CephX authentication.
+      cost:
+        type: object
+        description: Cost associated to the storage pool.
+        $ref: '#/definitions/Cost'
 
 paths:
   /pool:

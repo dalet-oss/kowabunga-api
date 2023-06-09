@@ -23,6 +23,9 @@ type StoragePool struct {
 	// Required: true
 	Address *string `json:"address"`
 
+	// Cost associated to the storage pool.
+	Cost *Cost `json:"cost,omitempty"`
+
 	// The storage pool description.
 	Description string `json:"description,omitempty"`
 
@@ -52,6 +55,10 @@ func (m *StoragePool) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateCost(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
@@ -75,6 +82,25 @@ func (m *StoragePool) validateAddress(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *StoragePool) validateCost(formats strfmt.Registry) error {
+	if swag.IsZero(m.Cost) { // not required
+		return nil
+	}
+
+	if m.Cost != nil {
+		if err := m.Cost.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("cost")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("cost")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *StoragePool) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
@@ -93,8 +119,33 @@ func (m *StoragePool) validatePool(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this storage pool based on context it is used
+// ContextValidate validate this storage pool based on the context it is used
 func (m *StoragePool) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateCost(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *StoragePool) contextValidateCost(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Cost != nil {
+		if err := m.Cost.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("cost")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("cost")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

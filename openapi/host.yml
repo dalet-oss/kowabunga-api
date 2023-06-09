@@ -37,10 +37,9 @@ definitions:
             type: string
             description: The TLS certificate of authority.
       cost:
-        type: array
+        type: object
         description: Cost associated to the host.
-        items:
-          $ref: '#/definitions/Cost'
+        $ref: '#/definitions/Cost'
 
   HostCaps:
     type: object

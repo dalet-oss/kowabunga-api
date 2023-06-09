@@ -8,7 +8,6 @@ package models
 import (
 	"context"
 	"encoding/json"
-	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -26,7 +25,7 @@ type Host struct {
 	Address *string `json:"address"`
 
 	// Cost associated to the host.
-	Cost []*Cost `json:"cost"`
+	Cost *Cost `json:"cost,omitempty"`
 
 	// The host description.
 	Description string `json:"description,omitempty"`
@@ -94,22 +93,15 @@ func (m *Host) validateCost(formats strfmt.Registry) error {
 		return nil
 	}
 
-	for i := 0; i < len(m.Cost); i++ {
-		if swag.IsZero(m.Cost[i]) { // not required
-			continue
-		}
-
-		if m.Cost[i] != nil {
-			if err := m.Cost[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("cost" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("cost" + "." + strconv.Itoa(i))
-				}
-				return err
+	if m.Cost != nil {
+		if err := m.Cost.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("cost")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("cost")
 			}
+			return err
 		}
-
 	}
 
 	return nil
@@ -206,19 +198,15 @@ func (m *Host) ContextValidate(ctx context.Context, formats strfmt.Registry) err
 
 func (m *Host) contextValidateCost(ctx context.Context, formats strfmt.Registry) error {
 
-	for i := 0; i < len(m.Cost); i++ {
-
-		if m.Cost[i] != nil {
-			if err := m.Cost[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("cost" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("cost" + "." + strconv.Itoa(i))
-				}
-				return err
+	if m.Cost != nil {
+		if err := m.Cost.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("cost")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("cost")
 			}
+			return err
 		}
-
 	}
 
 	return nil
