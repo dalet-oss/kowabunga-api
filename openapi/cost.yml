@@ -5,7 +5,7 @@ definitions:
     description: A key/value metadata.
     properties:
       price:
-        type: number
+        type: integer
         format: float
         description: The unit price information.
       currency:

@@ -25,7 +25,7 @@ type Cost struct {
 
 	// The unit price information.
 	// Required: true
-	Price *float32 `json:"price"`
+	Price *int64 `json:"price"`
 }
 
 // Validate validates this cost
