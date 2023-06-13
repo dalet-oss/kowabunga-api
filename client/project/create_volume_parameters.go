@@ -78,6 +78,12 @@ type CreateVolumeParams struct {
 	*/
 	ProjectID string
 
+	/* TemplateID.
+
+	   the ID of the template to clone the storage volume from.
+	*/
+	TemplateID string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -164,6 +170,17 @@ func (o *CreateVolumeParams) SetProjectID(projectID string) {
 	o.ProjectID = projectID
 }
 
+// WithTemplateID adds the templateID to the create volume params
+func (o *CreateVolumeParams) WithTemplateID(templateID string) *CreateVolumeParams {
+	o.SetTemplateID(templateID)
+	return o
+}
+
+// SetTemplateID adds the templateId to the create volume params
+func (o *CreateVolumeParams) SetTemplateID(templateID string) {
+	o.TemplateID = templateID
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *CreateVolumeParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -190,6 +207,16 @@ func (o *CreateVolumeParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 	// path param projectId
 	if err := r.SetPathParam("projectId", o.ProjectID); err != nil {
 		return err
+	}
+
+	// query param templateId
+	qrTemplateID := o.TemplateID
+	qTemplateID := qrTemplateID
+	if qTemplateID != "" {
+
+		if err := r.SetQueryParam("templateId", qTemplateID); err != nil {
+			return err
+		}
 	}
 
 	if len(res) > 0 {

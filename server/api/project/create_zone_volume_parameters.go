@@ -49,6 +49,10 @@ type CreateZoneVolumeParams struct {
 	  In: path
 	*/
 	ProjectID string
+	/*the ID of the template to clone the storage volume from (optional, zone's default if unspecified)
+	  In: query
+	*/
+	TemplateID *string
 	/*the ID of the associated zone.
 	  Required: true
 	  In: path
@@ -105,6 +109,11 @@ func (o *CreateZoneVolumeParams) BindRequest(r *http.Request, route *middleware.
 		res = append(res, err)
 	}
 
+	qTemplateID, qhkTemplateID, _ := qs.GetOK("templateId")
+	if err := o.bindTemplateID(qTemplateID, qhkTemplateID, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
 	rZoneID, rhkZoneID, _ := route.Params.GetOK("zoneId")
 	if err := o.bindZoneID(rZoneID, rhkZoneID, route.Formats); err != nil {
 		res = append(res, err)
@@ -143,6 +152,24 @@ func (o *CreateZoneVolumeParams) bindProjectID(rawData []string, hasKey bool, fo
 	// Required: true
 	// Parameter is provided by construction from the route
 	o.ProjectID = raw
+
+	return nil
+}
+
+// bindTemplateID binds and validates parameter TemplateID from query.
+func (o *CreateZoneVolumeParams) bindTemplateID(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+	o.TemplateID = &raw
 
 	return nil
 }

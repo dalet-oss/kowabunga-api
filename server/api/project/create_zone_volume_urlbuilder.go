@@ -17,7 +17,8 @@ type CreateZoneVolumeURL struct {
 	ProjectID string
 	ZoneID    string
 
-	PoolID *string
+	PoolID     *string
+	TemplateID *string
 
 	_basePath string
 	// avoid unkeyed usage
@@ -73,6 +74,14 @@ func (o *CreateZoneVolumeURL) Build() (*url.URL, error) {
 	}
 	if poolIDQ != "" {
 		qs.Set("poolId", poolIDQ)
+	}
+
+	var templateIDQ string
+	if o.TemplateID != nil {
+		templateIDQ = *o.TemplateID
+	}
+	if templateIDQ != "" {
+		qs.Set("templateId", templateIDQ)
 	}
 
 	_result.RawQuery = qs.Encode()

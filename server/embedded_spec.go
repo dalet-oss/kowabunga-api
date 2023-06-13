@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.4.2"
+    "version": "0.4.3"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -1302,6 +1302,13 @@ func init() {
             "required": true
           },
           {
+            "type": "string",
+            "description": "the ID of the template to clone the storage volume from.",
+            "name": "templateId",
+            "in": "query",
+            "required": true
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -1393,6 +1400,12 @@ func init() {
             "type": "string",
             "description": "the ID of the associated storage pool (optional, zone's default if unspecified).",
             "name": "poolId",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "the ID of the template to clone the storage volume from (optional, zone's default if unspecified)",
+            "name": "templateId",
             "in": "query"
           },
           {
@@ -3549,7 +3562,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.4.2"
+    "version": "0.4.3"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -4820,6 +4833,13 @@ func init() {
             "required": true
           },
           {
+            "type": "string",
+            "description": "the ID of the template to clone the storage volume from.",
+            "name": "templateId",
+            "in": "query",
+            "required": true
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -4911,6 +4931,12 @@ func init() {
             "type": "string",
             "description": "the ID of the associated storage pool (optional, zone's default if unspecified).",
             "name": "poolId",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "the ID of the template to clone the storage volume from (optional, zone's default if unspecified)",
+            "name": "templateId",
             "in": "query"
           },
           {

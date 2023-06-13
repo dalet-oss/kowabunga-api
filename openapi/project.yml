@@ -242,6 +242,11 @@ paths:
           type: string
           required: true
           description: the ID of the associated storage pool.
+        - name: templateId
+          in: query
+          type: string
+          required: true
+          description: the ID of the template to clone the storage volume from.
         - name: body
           in: body
           required: true
@@ -307,6 +312,10 @@ paths:
           in: query
           type: string
           description: the ID of the associated storage pool (optional, zone's default if unspecified).
+        - name: templateId
+          in: query
+          type: string
+          description: the ID of the template to clone the storage volume from (optional, zone's default if unspecified)
         - name: body
           in: body
           required: true

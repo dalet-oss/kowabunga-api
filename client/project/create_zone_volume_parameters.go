@@ -78,6 +78,12 @@ type CreateZoneVolumeParams struct {
 	*/
 	ProjectID string
 
+	/* TemplateID.
+
+	   the ID of the template to clone the storage volume from (optional, zone's default if unspecified)
+	*/
+	TemplateID *string
+
 	/* ZoneID.
 
 	   the ID of the associated zone.
@@ -170,6 +176,17 @@ func (o *CreateZoneVolumeParams) SetProjectID(projectID string) {
 	o.ProjectID = projectID
 }
 
+// WithTemplateID adds the templateID to the create zone volume params
+func (o *CreateZoneVolumeParams) WithTemplateID(templateID *string) *CreateZoneVolumeParams {
+	o.SetTemplateID(templateID)
+	return o
+}
+
+// SetTemplateID adds the templateId to the create zone volume params
+func (o *CreateZoneVolumeParams) SetTemplateID(templateID *string) {
+	o.TemplateID = templateID
+}
+
 // WithZoneID adds the zoneID to the create zone volume params
 func (o *CreateZoneVolumeParams) WithZoneID(zoneID string) *CreateZoneVolumeParams {
 	o.SetZoneID(zoneID)
@@ -214,6 +231,23 @@ func (o *CreateZoneVolumeParams) WriteToRequest(r runtime.ClientRequest, reg str
 	// path param projectId
 	if err := r.SetPathParam("projectId", o.ProjectID); err != nil {
 		return err
+	}
+
+	if o.TemplateID != nil {
+
+		// query param templateId
+		var qrTemplateID string
+
+		if o.TemplateID != nil {
+			qrTemplateID = *o.TemplateID
+		}
+		qTemplateID := qrTemplateID
+		if qTemplateID != "" {
+
+			if err := r.SetQueryParam("templateId", qTemplateID); err != nil {
+				return err
+			}
+		}
 	}
 
 	// path param zoneId

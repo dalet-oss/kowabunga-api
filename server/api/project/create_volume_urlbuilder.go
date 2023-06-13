@@ -16,7 +16,8 @@ import (
 type CreateVolumeURL struct {
 	ProjectID string
 
-	PoolID string
+	PoolID     string
+	TemplateID string
 
 	_basePath string
 	// avoid unkeyed usage
@@ -62,6 +63,11 @@ func (o *CreateVolumeURL) Build() (*url.URL, error) {
 	poolIDQ := o.PoolID
 	if poolIDQ != "" {
 		qs.Set("poolId", poolIDQ)
+	}
+
+	templateIDQ := o.TemplateID
+	if templateIDQ != "" {
+		qs.Set("templateId", templateIDQ)
 	}
 
 	_result.RawQuery = qs.Encode()
