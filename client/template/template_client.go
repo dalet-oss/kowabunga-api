@@ -34,7 +34,7 @@ type ClientService interface {
 
 	GetAllTemplates(params *GetAllTemplatesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllTemplatesOK, error)
 
-	GetTemplateVolume(params *GetTemplateVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTemplateVolumeOK, error)
+	GetTemplate(params *GetTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTemplateOK, error)
 
 	UpdateTemplate(params *UpdateTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateTemplateOK, error)
 
@@ -120,22 +120,22 @@ func (a *Client) GetAllTemplates(params *GetAllTemplatesParams, authInfo runtime
 }
 
 /*
-GetTemplateVolume Returns a description of the volume template.
+GetTemplate Returns a description of the volume template.
 */
-func (a *Client) GetTemplateVolume(params *GetTemplateVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTemplateVolumeOK, error) {
+func (a *Client) GetTemplate(params *GetTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTemplateOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetTemplateVolumeParams()
+		params = NewGetTemplateParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetTemplateVolume",
+		ID:                 "GetTemplate",
 		Method:             "GET",
 		PathPattern:        "/template/{templateId}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &GetTemplateVolumeReader{formats: a.formats},
+		Reader:             &GetTemplateReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -148,13 +148,13 @@ func (a *Client) GetTemplateVolume(params *GetTemplateVolumeParams, authInfo run
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*GetTemplateVolumeOK)
+	success, ok := result.(*GetTemplateOK)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetTemplateVolume: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for GetTemplate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

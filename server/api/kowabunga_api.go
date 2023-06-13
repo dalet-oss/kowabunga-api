@@ -218,8 +218,8 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		SubnetGetSubnetAdaptersHandler: subnet.GetSubnetAdaptersHandlerFunc(func(params subnet.GetSubnetAdaptersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation subnet.GetSubnetAdapters has not yet been implemented")
 		}),
-		TemplateGetTemplateVolumeHandler: template.GetTemplateVolumeHandlerFunc(func(params template.GetTemplateVolumeParams, principal interface{}) middleware.Responder {
-			return middleware.NotImplemented("operation template.GetTemplateVolume has not yet been implemented")
+		TemplateGetTemplateHandler: template.GetTemplateHandlerFunc(func(params template.GetTemplateParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation template.GetTemplate has not yet been implemented")
 		}),
 		VnetGetVNetHandler: vnet.GetVNetHandlerFunc(func(params vnet.GetVNetParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation vnet.GetVNet has not yet been implemented")
@@ -481,8 +481,8 @@ type KowabungaAPI struct {
 	SubnetGetSubnetHandler subnet.GetSubnetHandler
 	// SubnetGetSubnetAdaptersHandler sets the operation handler for the get subnet adapters operation
 	SubnetGetSubnetAdaptersHandler subnet.GetSubnetAdaptersHandler
-	// TemplateGetTemplateVolumeHandler sets the operation handler for the get template volume operation
-	TemplateGetTemplateVolumeHandler template.GetTemplateVolumeHandler
+	// TemplateGetTemplateHandler sets the operation handler for the get template operation
+	TemplateGetTemplateHandler template.GetTemplateHandler
 	// VnetGetVNetHandler sets the operation handler for the get v net operation
 	VnetGetVNetHandler vnet.GetVNetHandler
 	// VnetGetVNetSubnetsHandler sets the operation handler for the get v net subnets operation
@@ -795,8 +795,8 @@ func (o *KowabungaAPI) Validate() error {
 	if o.SubnetGetSubnetAdaptersHandler == nil {
 		unregistered = append(unregistered, "subnet.GetSubnetAdaptersHandler")
 	}
-	if o.TemplateGetTemplateVolumeHandler == nil {
-		unregistered = append(unregistered, "template.GetTemplateVolumeHandler")
+	if o.TemplateGetTemplateHandler == nil {
+		unregistered = append(unregistered, "template.GetTemplateHandler")
 	}
 	if o.VnetGetVNetHandler == nil {
 		unregistered = append(unregistered, "vnet.GetVNetHandler")
@@ -1215,7 +1215,7 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/template/{templateId}"] = template.NewGetTemplateVolume(o.context, o.TemplateGetTemplateVolumeHandler)
+	o.handlers["GET"]["/template/{templateId}"] = template.NewGetTemplate(o.context, o.TemplateGetTemplateHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}

@@ -11,40 +11,40 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 )
 
-// GetTemplateVolumeHandlerFunc turns a function with the right signature into a get template volume handler
-type GetTemplateVolumeHandlerFunc func(GetTemplateVolumeParams, interface{}) middleware.Responder
+// GetTemplateHandlerFunc turns a function with the right signature into a get template handler
+type GetTemplateHandlerFunc func(GetTemplateParams, interface{}) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn GetTemplateVolumeHandlerFunc) Handle(params GetTemplateVolumeParams, principal interface{}) middleware.Responder {
+func (fn GetTemplateHandlerFunc) Handle(params GetTemplateParams, principal interface{}) middleware.Responder {
 	return fn(params, principal)
 }
 
-// GetTemplateVolumeHandler interface for that can handle valid get template volume params
-type GetTemplateVolumeHandler interface {
-	Handle(GetTemplateVolumeParams, interface{}) middleware.Responder
+// GetTemplateHandler interface for that can handle valid get template params
+type GetTemplateHandler interface {
+	Handle(GetTemplateParams, interface{}) middleware.Responder
 }
 
-// NewGetTemplateVolume creates a new http.Handler for the get template volume operation
-func NewGetTemplateVolume(ctx *middleware.Context, handler GetTemplateVolumeHandler) *GetTemplateVolume {
-	return &GetTemplateVolume{Context: ctx, Handler: handler}
+// NewGetTemplate creates a new http.Handler for the get template operation
+func NewGetTemplate(ctx *middleware.Context, handler GetTemplateHandler) *GetTemplate {
+	return &GetTemplate{Context: ctx, Handler: handler}
 }
 
 /*
-	GetTemplateVolume swagger:route GET /template/{templateId} template getTemplateVolume
+	GetTemplate swagger:route GET /template/{templateId} template getTemplate
 
 Returns a description of the volume template.
 */
-type GetTemplateVolume struct {
+type GetTemplate struct {
 	Context *middleware.Context
-	Handler GetTemplateVolumeHandler
+	Handler GetTemplateHandler
 }
 
-func (o *GetTemplateVolume) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
+func (o *GetTemplate) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
 		*r = *rCtx
 	}
-	var Params = NewGetTemplateVolumeParams()
+	var Params = NewGetTemplateParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
 	if err != nil {
 		o.Context.Respond(rw, r, route.Produces, route, err)

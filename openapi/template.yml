@@ -37,7 +37,7 @@ paths:
     get:
       tags:
         - template
-      operationId: GetTemplateVolume
+      operationId: GetTemplate
       description: Returns a description of the volume template.
       parameters:
         - name: templateId

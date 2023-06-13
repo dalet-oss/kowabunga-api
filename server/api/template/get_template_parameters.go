@@ -13,19 +13,19 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewGetTemplateVolumeParams creates a new GetTemplateVolumeParams object
+// NewGetTemplateParams creates a new GetTemplateParams object
 //
 // There are no default values defined in the spec.
-func NewGetTemplateVolumeParams() GetTemplateVolumeParams {
+func NewGetTemplateParams() GetTemplateParams {
 
-	return GetTemplateVolumeParams{}
+	return GetTemplateParams{}
 }
 
-// GetTemplateVolumeParams contains all the bound params for the get template volume operation
+// GetTemplateParams contains all the bound params for the get template operation
 // typically these are obtained from a http.Request
 //
-// swagger:parameters GetTemplateVolume
-type GetTemplateVolumeParams struct {
+// swagger:parameters GetTemplate
+type GetTemplateParams struct {
 
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
@@ -40,8 +40,8 @@ type GetTemplateVolumeParams struct {
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
 // for simple values it will use straight method calls.
 //
-// To ensure default values, the struct must have been initialized with NewGetTemplateVolumeParams() beforehand.
-func (o *GetTemplateVolumeParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
+// To ensure default values, the struct must have been initialized with NewGetTemplateParams() beforehand.
+func (o *GetTemplateParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
 	var res []error
 
 	o.HTTPRequest = r
@@ -57,7 +57,7 @@ func (o *GetTemplateVolumeParams) BindRequest(r *http.Request, route *middleware
 }
 
 // bindTemplateID binds and validates parameter TemplateID from path.
-func (o *GetTemplateVolumeParams) bindTemplateID(rawData []string, hasKey bool, formats strfmt.Registry) error {
+func (o *GetTemplateParams) bindTemplateID(rawData []string, hasKey bool, formats strfmt.Registry) error {
 	var raw string
 	if len(rawData) > 0 {
 		raw = rawData[len(rawData)-1]

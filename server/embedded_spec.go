@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.4.0"
+    "version": "0.4.1"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -1919,7 +1919,7 @@ func init() {
         "tags": [
           "template"
         ],
-        "operationId": "GetTemplateVolume",
+        "operationId": "GetTemplate",
         "parameters": [
           {
             "type": "string",
@@ -3549,7 +3549,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.4.0"
+    "version": "0.4.1"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -5437,7 +5437,7 @@ func init() {
         "tags": [
           "template"
         ],
-        "operationId": "GetTemplateVolume",
+        "operationId": "GetTemplate",
         "parameters": [
           {
             "type": "string",

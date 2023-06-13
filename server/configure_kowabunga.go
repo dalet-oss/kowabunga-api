@@ -333,9 +333,9 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation subnet.GetSubnetAdapters has not yet been implemented")
 		})
 	}
-	if api.TemplateGetTemplateVolumeHandler == nil {
-		api.TemplateGetTemplateVolumeHandler = template.GetTemplateVolumeHandlerFunc(func(params template.GetTemplateVolumeParams, principal interface{}) middleware.Responder {
-			return middleware.NotImplemented("operation template.GetTemplateVolume has not yet been implemented")
+	if api.TemplateGetTemplateHandler == nil {
+		api.TemplateGetTemplateHandler = template.GetTemplateHandlerFunc(func(params template.GetTemplateParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation template.GetTemplate has not yet been implemented")
 		})
 	}
 	if api.VnetGetVNetHandler == nil {
