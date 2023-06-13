@@ -41,6 +41,12 @@ func (o *UpdateVolumeReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return nil, result
+	case 500:
+		result := NewUpdateVolumeInternalServerError()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -222,6 +228,62 @@ func (o *UpdateVolumeNotFound) String() string {
 }
 
 func (o *UpdateVolumeNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewUpdateVolumeInternalServerError creates a UpdateVolumeInternalServerError with default headers values
+func NewUpdateVolumeInternalServerError() *UpdateVolumeInternalServerError {
+	return &UpdateVolumeInternalServerError{}
+}
+
+/*
+UpdateVolumeInternalServerError describes a response with status code 500, with default header values.
+
+Unable to update the storage volume.
+*/
+type UpdateVolumeInternalServerError struct {
+}
+
+// IsSuccess returns true when this update volume internal server error response has a 2xx status code
+func (o *UpdateVolumeInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update volume internal server error response has a 3xx status code
+func (o *UpdateVolumeInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update volume internal server error response has a 4xx status code
+func (o *UpdateVolumeInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update volume internal server error response has a 5xx status code
+func (o *UpdateVolumeInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this update volume internal server error response a status code equal to that given
+func (o *UpdateVolumeInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the update volume internal server error response
+func (o *UpdateVolumeInternalServerError) Code() int {
+	return 500
+}
+
+func (o *UpdateVolumeInternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /volume/{volumeId}][%d] updateVolumeInternalServerError ", 500)
+}
+
+func (o *UpdateVolumeInternalServerError) String() string {
+	return fmt.Sprintf("[PUT /volume/{volumeId}][%d] updateVolumeInternalServerError ", 500)
+}
+
+func (o *UpdateVolumeInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

@@ -62,7 +62,7 @@ paths:
       tags:
         - volume
       operationId: UpdateVolume
-      description: Updates a storage volume configuration.
+      description: Updates/resizes a storage volume configuration.
       parameters:
         - name: volumeId
           in: path
@@ -82,6 +82,8 @@ paths:
           description: Bad parameters were provided.
         404:
           description: Invalid storage volume ID was provided.
+        500:
+          description: Unable to update the storage volume.
     delete:
       tags:
         - volume

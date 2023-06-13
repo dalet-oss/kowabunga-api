@@ -240,6 +240,7 @@ paths:
         - name: poolId
           in: query
           type: string
+          required: true
           description: the ID of the associated storage pool.
         - name: body
           in: body
@@ -282,5 +283,76 @@ paths:
               type: string
         404:
           description: Invalid project ID was provided.
+
+  /project/{projectId}/zone/{zoneId}/volume:
+    post:
+      tags:
+        - project
+        - zone
+        - volume
+      operationId: CreateZoneVolume
+      description: Creates a new storage volume in specified zone.
+      parameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: the ID of the associated project.
+        - name: zoneId
+          in: path
+          type: string
+          required: true
+          description: the ID of the associated zone.
+        - name: poolId
+          in: query
+          type: string
+          description: the ID of the associated storage pool (optional, zone's default if unspecified).
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Volume'
+      responses:
+        201:
+          description: Returns the newly created storage volume object.
+          schema:
+            $ref: '#/definitions/Volume'
+        400:
+          description: Bad parameters were provided.
+        404:
+          description: Invalid project ID was provided.
+        409:
+          description: Storage volume already exists.
+        500:
+          description: Unable to create the storage volume.
+
+  /project/{projectId}/zone/{zoneId}/volumes:
+    get:
+      tags:
+        - project
+        - zone
+        - volume
+      operationId: GetProjectZoneVolumes
+      description: Returns the IDs of the storage volumes existing in the project in the specified zone.
+      parameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: The ID of the project to query.
+        - name: zoneId
+          in: path
+          type: string
+          required: true
+          description: The ID of the zone to query.
+      responses:
+        200:
+          description: Returns an array of storage volume IDs.
+          schema:
+            type: array
+            items:
+              type: string
+        404:
+          description: Invalid project or zone ID was provided.
 
 # /project/id/instance Create

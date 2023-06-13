@@ -30,17 +30,62 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	CreateTemplate(params *CreateTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTemplateCreated, error)
+
 	DeletePool(params *DeletePoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeletePoolOK, error)
 
 	GetAllPools(params *GetAllPoolsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllPoolsOK, error)
 
 	GetPool(params *GetPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPoolOK, error)
 
+	GetPoolTemplates(params *GetPoolTemplatesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPoolTemplatesOK, error)
+
 	GetPoolVolumes(params *GetPoolVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPoolVolumesOK, error)
 
 	UpdatePool(params *UpdatePoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePoolOK, error)
 
+	UpdatePoolDefaultTemplate(params *UpdatePoolDefaultTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePoolDefaultTemplateOK, error)
+
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+CreateTemplate Creates a new volume template.
+*/
+func (a *Client) CreateTemplate(params *CreateTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateTemplateCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateTemplateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateTemplate",
+		Method:             "POST",
+		PathPattern:        "/pool/{poolId}/template",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateTemplateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateTemplateCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateTemplate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -161,6 +206,45 @@ func (a *Client) GetPool(params *GetPoolParams, authInfo runtime.ClientAuthInfoW
 }
 
 /*
+GetPoolTemplates Returns the IDs of the volume templates existing in the storage pool.
+*/
+func (a *Client) GetPoolTemplates(params *GetPoolTemplatesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPoolTemplatesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetPoolTemplatesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetPoolTemplates",
+		Method:             "GET",
+		PathPattern:        "/pool/{poolId}/templates",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetPoolTemplatesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetPoolTemplatesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetPoolTemplates: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetPoolVolumes Returns the IDs of the storage volumes existing in the pool.
 */
 func (a *Client) GetPoolVolumes(params *GetPoolVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPoolVolumesOK, error) {
@@ -235,6 +319,45 @@ func (a *Client) UpdatePool(params *UpdatePoolParams, authInfo runtime.ClientAut
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdatePool: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdatePoolDefaultTemplate Set a storage pool default volume template.
+*/
+func (a *Client) UpdatePoolDefaultTemplate(params *UpdatePoolDefaultTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdatePoolDefaultTemplateOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdatePoolDefaultTemplateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdatePoolDefaultTemplate",
+		Method:             "PUT",
+		PathPattern:        "/pool/{poolId}/template/{templateId}/default",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdatePoolDefaultTemplateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdatePoolDefaultTemplateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdatePoolDefaultTemplate: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

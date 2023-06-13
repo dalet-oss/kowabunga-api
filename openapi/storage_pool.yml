@@ -131,3 +131,84 @@ paths:
               type: string
         404:
           description: Invalid pool ID was provided.
+
+  /pool/{poolId}/template:
+    post:
+      tags:
+        - pool
+        - template
+      operationId: CreateTemplate
+      description: Creates a new volume template.
+      parameters:
+        - name: poolId
+          in: path
+          type: string
+          required: true
+          description: the ID of the associated storage pool.
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Template'
+      responses:
+        201:
+          description: Returns the newly created volume template.
+          schema:
+            $ref: '#/definitions/Template'
+        400:
+          description: Bad parameters were provided.
+        404:
+          description: Invalid storage pool ID was provided.
+        409:
+          description: Template already exists.
+        500:
+          description: Unable to create template.
+
+  /pool/{poolId}/template/{templateId}/default:
+    put:
+      tags:
+        - pool
+        - template
+      operationId: UpdatePoolDefaultTemplate
+      description: Set a storage pool default volume template.
+      parameters:
+        - name: poolId
+          in: path
+          type: string
+          required: true
+          description: The ID of the storage pool to update.
+        - name: templateId
+          in: path
+          type: string
+          required: true
+          description: The ID of the volume template to set as default.
+      responses:
+        200:
+          description: Returns success.
+        404:
+          description: Invalid storage pool ID or volume template ID was provided.
+        500:
+          description: Unable to assign the requested volume template as storage pool default.
+
+  /pool/{poolId}/templates:
+    get:
+      tags:
+        - pool
+        - templates
+      operationId: GetPoolTemplates
+      description: Returns the IDs of the volume templates existing in the storage pool.
+      parameters:
+        - name: poolId
+          in: path
+          type: string
+          required: true
+          description: The ID of the storage pool to query.
+      responses:
+        200:
+          description: Returns an array of volume template IDs.
+          schema:
+            type: array
+            items:
+              type: string
+        404:
+          description: Invalid storage pool ID was provided.

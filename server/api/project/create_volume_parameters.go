@@ -41,9 +41,10 @@ type CreateVolumeParams struct {
 	*/
 	Body *models.Volume
 	/*the ID of the associated storage pool.
+	  Required: true
 	  In: query
 	*/
-	PoolID *string
+	PoolID string
 	/*the ID of the associated project.
 	  Required: true
 	  In: path
@@ -107,18 +108,21 @@ func (o *CreateVolumeParams) BindRequest(r *http.Request, route *middleware.Matc
 
 // bindPoolID binds and validates parameter PoolID from query.
 func (o *CreateVolumeParams) bindPoolID(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	if !hasKey {
+		return errors.Required("poolId", "query", rawData)
+	}
 	var raw string
 	if len(rawData) > 0 {
 		raw = rawData[len(rawData)-1]
 	}
 
-	// Required: false
+	// Required: true
 	// AllowEmptyValue: false
 
-	if raw == "" { // empty values pass all other validations
-		return nil
+	if err := validate.RequiredString("poolId", "query", raw); err != nil {
+		return err
 	}
-	o.PoolID = &raw
+	o.PoolID = raw
 
 	return nil
 }

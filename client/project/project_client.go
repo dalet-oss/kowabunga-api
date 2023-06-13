@@ -34,6 +34,8 @@ type ClientService interface {
 
 	CreateVolume(params *CreateVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVolumeCreated, error)
 
+	CreateZoneVolume(params *CreateZoneVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateZoneVolumeCreated, error)
+
 	DeleteProject(params *DeleteProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectOK, error)
 
 	GetAllProjects(params *GetAllProjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllProjectsOK, error)
@@ -45,6 +47,8 @@ type ClientService interface {
 	GetProjectUsage(params *GetProjectUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectUsageOK, error)
 
 	GetProjectVolumes(params *GetProjectVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectVolumesOK, error)
+
+	GetProjectZoneVolumes(params *GetProjectZoneVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectZoneVolumesOK, error)
 
 	ResetProjectQuotas(params *ResetProjectQuotasParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResetProjectQuotasOK, error)
 
@@ -130,6 +134,45 @@ func (a *Client) CreateVolume(params *CreateVolumeParams, authInfo runtime.Clien
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateVolume: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateZoneVolume Creates a new storage volume in specified zone.
+*/
+func (a *Client) CreateZoneVolume(params *CreateZoneVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateZoneVolumeCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateZoneVolumeParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateZoneVolume",
+		Method:             "POST",
+		PathPattern:        "/project/{projectId}/zone/{zoneId}/volume",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateZoneVolumeReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateZoneVolumeCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateZoneVolume: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -364,6 +407,45 @@ func (a *Client) GetProjectVolumes(params *GetProjectVolumesParams, authInfo run
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetProjectVolumes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetProjectZoneVolumes Returns the IDs of the storage volumes existing in the project in the specified zone.
+*/
+func (a *Client) GetProjectZoneVolumes(params *GetProjectZoneVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectZoneVolumesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetProjectZoneVolumesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetProjectZoneVolumes",
+		Method:             "GET",
+		PathPattern:        "/project/{projectId}/zone/{zoneId}/volumes",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetProjectZoneVolumesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetProjectZoneVolumesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetProjectZoneVolumes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

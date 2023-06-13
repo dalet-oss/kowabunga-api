@@ -16,7 +16,7 @@ import (
 type CreateVolumeURL struct {
 	ProjectID string
 
-	PoolID *string
+	PoolID string
 
 	_basePath string
 	// avoid unkeyed usage
@@ -59,10 +59,7 @@ func (o *CreateVolumeURL) Build() (*url.URL, error) {
 
 	qs := make(url.Values)
 
-	var poolIDQ string
-	if o.PoolID != nil {
-		poolIDQ = *o.PoolID
-	}
+	poolIDQ := o.PoolID
 	if poolIDQ != "" {
 		qs.Set("poolId", poolIDQ)
 	}

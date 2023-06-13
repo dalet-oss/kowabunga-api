@@ -32,7 +32,7 @@ func NewUpdateVolume(ctx *middleware.Context, handler UpdateVolumeHandler) *Upda
 /*
 	UpdateVolume swagger:route PUT /volume/{volumeId} volume updateVolume
 
-Updates a storage volume configuration.
+Updates/resizes a storage volume configuration.
 */
 type UpdateVolume struct {
 	Context *middleware.Context

@@ -70,7 +70,7 @@ type CreateVolumeParams struct {
 
 	   the ID of the associated storage pool.
 	*/
-	PoolID *string
+	PoolID string
 
 	/* ProjectID.
 
@@ -143,13 +143,13 @@ func (o *CreateVolumeParams) SetBody(body *models.Volume) {
 }
 
 // WithPoolID adds the poolID to the create volume params
-func (o *CreateVolumeParams) WithPoolID(poolID *string) *CreateVolumeParams {
+func (o *CreateVolumeParams) WithPoolID(poolID string) *CreateVolumeParams {
 	o.SetPoolID(poolID)
 	return o
 }
 
 // SetPoolID adds the poolId to the create volume params
-func (o *CreateVolumeParams) SetPoolID(poolID *string) {
+func (o *CreateVolumeParams) SetPoolID(poolID string) {
 	o.PoolID = poolID
 }
 
@@ -177,20 +177,13 @@ func (o *CreateVolumeParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		}
 	}
 
-	if o.PoolID != nil {
+	// query param poolId
+	qrPoolID := o.PoolID
+	qPoolID := qrPoolID
+	if qPoolID != "" {
 
-		// query param poolId
-		var qrPoolID string
-
-		if o.PoolID != nil {
-			qrPoolID = *o.PoolID
-		}
-		qPoolID := qrPoolID
-		if qPoolID != "" {
-
-			if err := r.SetQueryParam("poolId", qPoolID); err != nil {
-				return err
-			}
+		if err := r.SetQueryParam("poolId", qPoolID); err != nil {
+			return err
 		}
 	}
 

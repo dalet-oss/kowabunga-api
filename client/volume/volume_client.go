@@ -159,7 +159,7 @@ func (a *Client) GetVolume(params *GetVolumeParams, authInfo runtime.ClientAuthI
 }
 
 /*
-UpdateVolume Updates a storage volume configuration.
+UpdateVolume Updates/resizes a storage volume configuration.
 */
 func (a *Client) UpdateVolume(params *UpdateVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateVolumeOK, error) {
 	// TODO: Validate the params before sending

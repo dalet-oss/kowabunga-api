@@ -107,3 +107,28 @@ func (o *UpdateVolumeNotFound) WriteResponse(rw http.ResponseWriter, producer ru
 
 	rw.WriteHeader(404)
 }
+
+// UpdateVolumeInternalServerErrorCode is the HTTP code returned for type UpdateVolumeInternalServerError
+const UpdateVolumeInternalServerErrorCode int = 500
+
+/*
+UpdateVolumeInternalServerError Unable to update the storage volume.
+
+swagger:response updateVolumeInternalServerError
+*/
+type UpdateVolumeInternalServerError struct {
+}
+
+// NewUpdateVolumeInternalServerError creates UpdateVolumeInternalServerError with default headers values
+func NewUpdateVolumeInternalServerError() *UpdateVolumeInternalServerError {
+
+	return &UpdateVolumeInternalServerError{}
+}
+
+// WriteResponse to the client
+func (o *UpdateVolumeInternalServerError) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.Header().Del(runtime.HeaderContentType) //Remove Content-Type on empty responses
+
+	rw.WriteHeader(500)
+}

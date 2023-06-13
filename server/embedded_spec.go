@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.3.2"
+    "version": "0.4.0"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -861,6 +861,123 @@ func init() {
         }
       }
     },
+    "/pool/{poolId}/template": {
+      "post": {
+        "description": "Creates a new volume template.",
+        "tags": [
+          "pool",
+          "template"
+        ],
+        "operationId": "CreateTemplate",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated storage pool.",
+            "name": "poolId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created volume template.",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid storage pool ID was provided."
+          },
+          "409": {
+            "description": "Template already exists."
+          },
+          "500": {
+            "description": "Unable to create template."
+          }
+        }
+      }
+    },
+    "/pool/{poolId}/template/{templateId}/default": {
+      "put": {
+        "description": "Set a storage pool default volume template.",
+        "tags": [
+          "pool",
+          "template"
+        ],
+        "operationId": "UpdatePoolDefaultTemplate",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the storage pool to update.",
+            "name": "poolId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the volume template to set as default.",
+            "name": "templateId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns success."
+          },
+          "404": {
+            "description": "Invalid storage pool ID or volume template ID was provided."
+          },
+          "500": {
+            "description": "Unable to assign the requested volume template as storage pool default."
+          }
+        }
+      }
+    },
+    "/pool/{poolId}/templates": {
+      "get": {
+        "description": "Returns the IDs of the volume templates existing in the storage pool.",
+        "tags": [
+          "pool",
+          "templates"
+        ],
+        "operationId": "GetPoolTemplates",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the storage pool to query.",
+            "name": "poolId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of volume template IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid storage pool ID was provided."
+          }
+        }
+      }
+    },
     "/pool/{poolId}/volumes": {
       "get": {
         "description": "Returns the IDs of the storage volumes existing in the pool.",
@@ -1181,7 +1298,8 @@ func init() {
             "type": "string",
             "description": "the ID of the associated storage pool.",
             "name": "poolId",
-            "in": "query"
+            "in": "query",
+            "required": true
           },
           {
             "name": "body",
@@ -1243,6 +1361,108 @@ func init() {
           },
           "404": {
             "description": "Invalid project ID was provided."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/zone/{zoneId}/volume": {
+      "post": {
+        "description": "Creates a new storage volume in specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "volume"
+        ],
+        "operationId": "CreateZoneVolume",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated project.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "the ID of the associated zone.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "the ID of the associated storage pool (optional, zone's default if unspecified).",
+            "name": "poolId",
+            "in": "query"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created storage volume object.",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid project ID was provided."
+          },
+          "409": {
+            "description": "Storage volume already exists."
+          },
+          "500": {
+            "description": "Unable to create the storage volume."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/zone/{zoneId}/volumes": {
+      "get": {
+        "description": "Returns the IDs of the storage volumes existing in the project in the specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "volume"
+        ],
+        "operationId": "GetProjectZoneVolumes",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to query.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the zone to query.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of storage volume IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid project or zone ID was provided."
           }
         }
       }
@@ -1673,6 +1893,122 @@ func init() {
         }
       }
     },
+    "/template": {
+      "get": {
+        "description": "Returns the IDs of volume templates.",
+        "tags": [
+          "template"
+        ],
+        "operationId": "GetAllTemplates",
+        "responses": {
+          "200": {
+            "description": "Returns the an array of volume template IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/template/{templateId}": {
+      "get": {
+        "description": "Returns a description of the volume template.",
+        "tags": [
+          "template"
+        ],
+        "operationId": "GetTemplateVolume",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the volume template to get.",
+            "name": "templateId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the volume template object.",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          },
+          "404": {
+            "description": "Invalid volume template ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a volume template configuration.",
+        "tags": [
+          "template"
+        ],
+        "operationId": "UpdateTemplate",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the volume template to update.",
+            "name": "templateId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated volume template object.",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid volume template ID was provided."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing volume template.",
+        "tags": [
+          "template"
+        ],
+        "operationId": "DeleteTemplate",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the volume template to delete.",
+            "name": "templateId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The volume template has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid volume template ID was provided."
+          },
+          "409": {
+            "description": "The volume template is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete volume template."
+          }
+        }
+      }
+    },
     "/vnet": {
       "get": {
         "description": "Returns the IDs of virtual networks.",
@@ -1955,7 +2291,7 @@ func init() {
         }
       },
       "put": {
-        "description": "Updates a storage volume configuration.",
+        "description": "Updates/resizes a storage volume configuration.",
         "tags": [
           "volume"
         ],
@@ -1988,6 +2324,9 @@ func init() {
           },
           "404": {
             "description": "Invalid storage volume ID was provided."
+          },
+          "500": {
+            "description": "Unable to update the storage volume."
           }
         }
       },
@@ -3055,6 +3394,35 @@ func init() {
         }
       }
     },
+    "Template": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "description": {
+          "description": "The volume template description.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The volume template ID (auto-generated).",
+          "type": "string"
+        },
+        "kind": {
+          "description": "The type of volume template.",
+          "type": "string",
+          "default": "os",
+          "enum": [
+            "os",
+            "raw"
+          ]
+        },
+        "name": {
+          "description": "The volume template name.",
+          "type": "string"
+        }
+      }
+    },
     "VNet": {
       "type": "object",
       "required": [
@@ -3181,7 +3549,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.3.2"
+    "version": "0.4.0"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -4011,6 +4379,123 @@ func init() {
         }
       }
     },
+    "/pool/{poolId}/template": {
+      "post": {
+        "description": "Creates a new volume template.",
+        "tags": [
+          "pool",
+          "template"
+        ],
+        "operationId": "CreateTemplate",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated storage pool.",
+            "name": "poolId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created volume template.",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid storage pool ID was provided."
+          },
+          "409": {
+            "description": "Template already exists."
+          },
+          "500": {
+            "description": "Unable to create template."
+          }
+        }
+      }
+    },
+    "/pool/{poolId}/template/{templateId}/default": {
+      "put": {
+        "description": "Set a storage pool default volume template.",
+        "tags": [
+          "pool",
+          "template"
+        ],
+        "operationId": "UpdatePoolDefaultTemplate",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the storage pool to update.",
+            "name": "poolId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the volume template to set as default.",
+            "name": "templateId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns success."
+          },
+          "404": {
+            "description": "Invalid storage pool ID or volume template ID was provided."
+          },
+          "500": {
+            "description": "Unable to assign the requested volume template as storage pool default."
+          }
+        }
+      }
+    },
+    "/pool/{poolId}/templates": {
+      "get": {
+        "description": "Returns the IDs of the volume templates existing in the storage pool.",
+        "tags": [
+          "pool",
+          "templates"
+        ],
+        "operationId": "GetPoolTemplates",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the storage pool to query.",
+            "name": "poolId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of volume template IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid storage pool ID was provided."
+          }
+        }
+      }
+    },
     "/pool/{poolId}/volumes": {
       "get": {
         "description": "Returns the IDs of the storage volumes existing in the pool.",
@@ -4331,7 +4816,8 @@ func init() {
             "type": "string",
             "description": "the ID of the associated storage pool.",
             "name": "poolId",
-            "in": "query"
+            "in": "query",
+            "required": true
           },
           {
             "name": "body",
@@ -4393,6 +4879,108 @@ func init() {
           },
           "404": {
             "description": "Invalid project ID was provided."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/zone/{zoneId}/volume": {
+      "post": {
+        "description": "Creates a new storage volume in specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "volume"
+        ],
+        "operationId": "CreateZoneVolume",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated project.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "the ID of the associated zone.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "the ID of the associated storage pool (optional, zone's default if unspecified).",
+            "name": "poolId",
+            "in": "query"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created storage volume object.",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid project ID was provided."
+          },
+          "409": {
+            "description": "Storage volume already exists."
+          },
+          "500": {
+            "description": "Unable to create the storage volume."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/zone/{zoneId}/volumes": {
+      "get": {
+        "description": "Returns the IDs of the storage volumes existing in the project in the specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "volume"
+        ],
+        "operationId": "GetProjectZoneVolumes",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to query.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the zone to query.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of storage volume IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid project or zone ID was provided."
           }
         }
       }
@@ -4823,6 +5411,122 @@ func init() {
         }
       }
     },
+    "/template": {
+      "get": {
+        "description": "Returns the IDs of volume templates.",
+        "tags": [
+          "template"
+        ],
+        "operationId": "GetAllTemplates",
+        "responses": {
+          "200": {
+            "description": "Returns the an array of volume template IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/template/{templateId}": {
+      "get": {
+        "description": "Returns a description of the volume template.",
+        "tags": [
+          "template"
+        ],
+        "operationId": "GetTemplateVolume",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the volume template to get.",
+            "name": "templateId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the volume template object.",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          },
+          "404": {
+            "description": "Invalid volume template ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a volume template configuration.",
+        "tags": [
+          "template"
+        ],
+        "operationId": "UpdateTemplate",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the volume template to update.",
+            "name": "templateId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated volume template object.",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid volume template ID was provided."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing volume template.",
+        "tags": [
+          "template"
+        ],
+        "operationId": "DeleteTemplate",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the volume template to delete.",
+            "name": "templateId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The volume template has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid volume template ID was provided."
+          },
+          "409": {
+            "description": "The volume template is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete volume template."
+          }
+        }
+      }
+    },
     "/vnet": {
       "get": {
         "description": "Returns the IDs of virtual networks.",
@@ -5105,7 +5809,7 @@ func init() {
         }
       },
       "put": {
-        "description": "Updates a storage volume configuration.",
+        "description": "Updates/resizes a storage volume configuration.",
         "tags": [
           "volume"
         ],
@@ -5138,6 +5842,9 @@ func init() {
           },
           "404": {
             "description": "Invalid storage volume ID was provided."
+          },
+          "500": {
+            "description": "Unable to update the storage volume."
           }
         }
       },
@@ -6282,6 +6989,35 @@ func init() {
         },
         "name": {
           "description": "The subnet name.",
+          "type": "string"
+        }
+      }
+    },
+    "Template": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "description": {
+          "description": "The volume template description.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The volume template ID (auto-generated).",
+          "type": "string"
+        },
+        "kind": {
+          "description": "The type of volume template.",
+          "type": "string",
+          "default": "os",
+          "enum": [
+            "os",
+            "raw"
+          ]
+        },
+        "name": {
+          "description": "The volume template name.",
           "type": "string"
         }
       }

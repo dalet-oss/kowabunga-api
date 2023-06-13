@@ -27,6 +27,7 @@ import (
 	"github.com/dalet-oss/kowabunga-api/server/api/project"
 	"github.com/dalet-oss/kowabunga-api/server/api/region"
 	"github.com/dalet-oss/kowabunga-api/server/api/subnet"
+	"github.com/dalet-oss/kowabunga-api/server/api/template"
 	"github.com/dalet-oss/kowabunga-api/server/api/vnet"
 	"github.com/dalet-oss/kowabunga-api/server/api/volume"
 	"github.com/dalet-oss/kowabunga-api/server/api/zone"
@@ -76,6 +77,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		VnetCreateSubnetHandler: vnet.CreateSubnetHandlerFunc(func(params vnet.CreateSubnetParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation vnet.CreateSubnet has not yet been implemented")
 		}),
+		PoolCreateTemplateHandler: pool.CreateTemplateHandlerFunc(func(params pool.CreateTemplateParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation pool.CreateTemplate has not yet been implemented")
+		}),
 		ZoneCreateVNetHandler: zone.CreateVNetHandlerFunc(func(params zone.CreateVNetParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.CreateVNet has not yet been implemented")
 		}),
@@ -84,6 +88,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		RegionCreateZoneHandler: region.CreateZoneHandlerFunc(func(params region.CreateZoneParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation region.CreateZone has not yet been implemented")
+		}),
+		ProjectCreateZoneVolumeHandler: project.CreateZoneVolumeHandlerFunc(func(params project.CreateZoneVolumeParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.CreateZoneVolume has not yet been implemented")
 		}),
 		AdapterDeleteAdapterHandler: adapter.DeleteAdapterHandlerFunc(func(params adapter.DeleteAdapterParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation adapter.DeleteAdapter has not yet been implemented")
@@ -105,6 +112,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		SubnetDeleteSubnetHandler: subnet.DeleteSubnetHandlerFunc(func(params subnet.DeleteSubnetParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation subnet.DeleteSubnet has not yet been implemented")
+		}),
+		TemplateDeleteTemplateHandler: template.DeleteTemplateHandlerFunc(func(params template.DeleteTemplateParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation template.DeleteTemplate has not yet been implemented")
 		}),
 		VnetDeleteVNetHandler: vnet.DeleteVNetHandlerFunc(func(params vnet.DeleteVNetParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation vnet.DeleteVNet has not yet been implemented")
@@ -142,6 +152,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		SubnetGetAllSubnetsHandler: subnet.GetAllSubnetsHandlerFunc(func(params subnet.GetAllSubnetsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation subnet.GetAllSubnets has not yet been implemented")
 		}),
+		TemplateGetAllTemplatesHandler: template.GetAllTemplatesHandlerFunc(func(params template.GetAllTemplatesParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation template.GetAllTemplates has not yet been implemented")
+		}),
 		VnetGetAllVNetsHandler: vnet.GetAllVNetsHandlerFunc(func(params vnet.GetAllVNetsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation vnet.GetAllVNets has not yet been implemented")
 		}),
@@ -172,6 +185,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		PoolGetPoolHandler: pool.GetPoolHandlerFunc(func(params pool.GetPoolParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation pool.GetPool has not yet been implemented")
 		}),
+		PoolGetPoolTemplatesHandler: pool.GetPoolTemplatesHandlerFunc(func(params pool.GetPoolTemplatesParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation pool.GetPoolTemplates has not yet been implemented")
+		}),
 		PoolGetPoolVolumesHandler: pool.GetPoolVolumesHandlerFunc(func(params pool.GetPoolVolumesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation pool.GetPoolVolumes has not yet been implemented")
 		}),
@@ -187,6 +203,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		ProjectGetProjectVolumesHandler: project.GetProjectVolumesHandlerFunc(func(params project.GetProjectVolumesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectVolumes has not yet been implemented")
 		}),
+		ProjectGetProjectZoneVolumesHandler: project.GetProjectZoneVolumesHandlerFunc(func(params project.GetProjectZoneVolumesParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.GetProjectZoneVolumes has not yet been implemented")
+		}),
 		RegionGetRegionHandler: region.GetRegionHandlerFunc(func(params region.GetRegionParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation region.GetRegion has not yet been implemented")
 		}),
@@ -198,6 +217,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		SubnetGetSubnetAdaptersHandler: subnet.GetSubnetAdaptersHandlerFunc(func(params subnet.GetSubnetAdaptersParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation subnet.GetSubnetAdapters has not yet been implemented")
+		}),
+		TemplateGetTemplateVolumeHandler: template.GetTemplateVolumeHandlerFunc(func(params template.GetTemplateVolumeParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation template.GetTemplateVolume has not yet been implemented")
 		}),
 		VnetGetVNetHandler: vnet.GetVNetHandlerFunc(func(params vnet.GetVNetParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation vnet.GetVNet has not yet been implemented")
@@ -262,6 +284,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		PoolUpdatePoolHandler: pool.UpdatePoolHandlerFunc(func(params pool.UpdatePoolParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation pool.UpdatePool has not yet been implemented")
 		}),
+		PoolUpdatePoolDefaultTemplateHandler: pool.UpdatePoolDefaultTemplateHandlerFunc(func(params pool.UpdatePoolDefaultTemplateParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation pool.UpdatePoolDefaultTemplate has not yet been implemented")
+		}),
 		ProjectUpdateProjectHandler: project.UpdateProjectHandlerFunc(func(params project.UpdateProjectParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.UpdateProject has not yet been implemented")
 		}),
@@ -273,6 +298,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		SubnetUpdateSubnetHandler: subnet.UpdateSubnetHandlerFunc(func(params subnet.UpdateSubnetParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation subnet.UpdateSubnet has not yet been implemented")
+		}),
+		TemplateUpdateTemplateHandler: template.UpdateTemplateHandlerFunc(func(params template.UpdateTemplateParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation template.UpdateTemplate has not yet been implemented")
 		}),
 		VnetUpdateVNetHandler: vnet.UpdateVNetHandlerFunc(func(params vnet.UpdateVNetParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation vnet.UpdateVNet has not yet been implemented")
@@ -359,12 +387,16 @@ type KowabungaAPI struct {
 	RegionCreateRegionHandler region.CreateRegionHandler
 	// VnetCreateSubnetHandler sets the operation handler for the create subnet operation
 	VnetCreateSubnetHandler vnet.CreateSubnetHandler
+	// PoolCreateTemplateHandler sets the operation handler for the create template operation
+	PoolCreateTemplateHandler pool.CreateTemplateHandler
 	// ZoneCreateVNetHandler sets the operation handler for the create v net operation
 	ZoneCreateVNetHandler zone.CreateVNetHandler
 	// ProjectCreateVolumeHandler sets the operation handler for the create volume operation
 	ProjectCreateVolumeHandler project.CreateVolumeHandler
 	// RegionCreateZoneHandler sets the operation handler for the create zone operation
 	RegionCreateZoneHandler region.CreateZoneHandler
+	// ProjectCreateZoneVolumeHandler sets the operation handler for the create zone volume operation
+	ProjectCreateZoneVolumeHandler project.CreateZoneVolumeHandler
 	// AdapterDeleteAdapterHandler sets the operation handler for the delete adapter operation
 	AdapterDeleteAdapterHandler adapter.DeleteAdapterHandler
 	// HostDeleteHostHandler sets the operation handler for the delete host operation
@@ -379,6 +411,8 @@ type KowabungaAPI struct {
 	RegionDeleteRegionHandler region.DeleteRegionHandler
 	// SubnetDeleteSubnetHandler sets the operation handler for the delete subnet operation
 	SubnetDeleteSubnetHandler subnet.DeleteSubnetHandler
+	// TemplateDeleteTemplateHandler sets the operation handler for the delete template operation
+	TemplateDeleteTemplateHandler template.DeleteTemplateHandler
 	// VnetDeleteVNetHandler sets the operation handler for the delete v net operation
 	VnetDeleteVNetHandler vnet.DeleteVNetHandler
 	// VolumeDeleteVolumeHandler sets the operation handler for the delete volume operation
@@ -403,6 +437,8 @@ type KowabungaAPI struct {
 	RegionGetAllRegionsHandler region.GetAllRegionsHandler
 	// SubnetGetAllSubnetsHandler sets the operation handler for the get all subnets operation
 	SubnetGetAllSubnetsHandler subnet.GetAllSubnetsHandler
+	// TemplateGetAllTemplatesHandler sets the operation handler for the get all templates operation
+	TemplateGetAllTemplatesHandler template.GetAllTemplatesHandler
 	// VnetGetAllVNetsHandler sets the operation handler for the get all v nets operation
 	VnetGetAllVNetsHandler vnet.GetAllVNetsHandler
 	// VolumeGetAllVolumesHandler sets the operation handler for the get all volumes operation
@@ -423,6 +459,8 @@ type KowabungaAPI struct {
 	NetgwGetNetGWHandler netgw.GetNetGWHandler
 	// PoolGetPoolHandler sets the operation handler for the get pool operation
 	PoolGetPoolHandler pool.GetPoolHandler
+	// PoolGetPoolTemplatesHandler sets the operation handler for the get pool templates operation
+	PoolGetPoolTemplatesHandler pool.GetPoolTemplatesHandler
 	// PoolGetPoolVolumesHandler sets the operation handler for the get pool volumes operation
 	PoolGetPoolVolumesHandler pool.GetPoolVolumesHandler
 	// ProjectGetProjectHandler sets the operation handler for the get project operation
@@ -433,6 +471,8 @@ type KowabungaAPI struct {
 	ProjectGetProjectUsageHandler project.GetProjectUsageHandler
 	// ProjectGetProjectVolumesHandler sets the operation handler for the get project volumes operation
 	ProjectGetProjectVolumesHandler project.GetProjectVolumesHandler
+	// ProjectGetProjectZoneVolumesHandler sets the operation handler for the get project zone volumes operation
+	ProjectGetProjectZoneVolumesHandler project.GetProjectZoneVolumesHandler
 	// RegionGetRegionHandler sets the operation handler for the get region operation
 	RegionGetRegionHandler region.GetRegionHandler
 	// RegionGetRegionZonesHandler sets the operation handler for the get region zones operation
@@ -441,6 +481,8 @@ type KowabungaAPI struct {
 	SubnetGetSubnetHandler subnet.GetSubnetHandler
 	// SubnetGetSubnetAdaptersHandler sets the operation handler for the get subnet adapters operation
 	SubnetGetSubnetAdaptersHandler subnet.GetSubnetAdaptersHandler
+	// TemplateGetTemplateVolumeHandler sets the operation handler for the get template volume operation
+	TemplateGetTemplateVolumeHandler template.GetTemplateVolumeHandler
 	// VnetGetVNetHandler sets the operation handler for the get v net operation
 	VnetGetVNetHandler vnet.GetVNetHandler
 	// VnetGetVNetSubnetsHandler sets the operation handler for the get v net subnets operation
@@ -483,6 +525,8 @@ type KowabungaAPI struct {
 	NetgwUpdateNetGWHandler netgw.UpdateNetGWHandler
 	// PoolUpdatePoolHandler sets the operation handler for the update pool operation
 	PoolUpdatePoolHandler pool.UpdatePoolHandler
+	// PoolUpdatePoolDefaultTemplateHandler sets the operation handler for the update pool default template operation
+	PoolUpdatePoolDefaultTemplateHandler pool.UpdatePoolDefaultTemplateHandler
 	// ProjectUpdateProjectHandler sets the operation handler for the update project operation
 	ProjectUpdateProjectHandler project.UpdateProjectHandler
 	// ProjectUpdateProjectQuotasHandler sets the operation handler for the update project quotas operation
@@ -491,6 +535,8 @@ type KowabungaAPI struct {
 	RegionUpdateRegionHandler region.UpdateRegionHandler
 	// SubnetUpdateSubnetHandler sets the operation handler for the update subnet operation
 	SubnetUpdateSubnetHandler subnet.UpdateSubnetHandler
+	// TemplateUpdateTemplateHandler sets the operation handler for the update template operation
+	TemplateUpdateTemplateHandler template.UpdateTemplateHandler
 	// VnetUpdateVNetHandler sets the operation handler for the update v net operation
 	VnetUpdateVNetHandler vnet.UpdateVNetHandler
 	// VnetUpdateVNetDefaultSubnetHandler sets the operation handler for the update v net default subnet operation
@@ -608,6 +654,9 @@ func (o *KowabungaAPI) Validate() error {
 	if o.VnetCreateSubnetHandler == nil {
 		unregistered = append(unregistered, "vnet.CreateSubnetHandler")
 	}
+	if o.PoolCreateTemplateHandler == nil {
+		unregistered = append(unregistered, "pool.CreateTemplateHandler")
+	}
 	if o.ZoneCreateVNetHandler == nil {
 		unregistered = append(unregistered, "zone.CreateVNetHandler")
 	}
@@ -616,6 +665,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.RegionCreateZoneHandler == nil {
 		unregistered = append(unregistered, "region.CreateZoneHandler")
+	}
+	if o.ProjectCreateZoneVolumeHandler == nil {
+		unregistered = append(unregistered, "project.CreateZoneVolumeHandler")
 	}
 	if o.AdapterDeleteAdapterHandler == nil {
 		unregistered = append(unregistered, "adapter.DeleteAdapterHandler")
@@ -637,6 +689,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.SubnetDeleteSubnetHandler == nil {
 		unregistered = append(unregistered, "subnet.DeleteSubnetHandler")
+	}
+	if o.TemplateDeleteTemplateHandler == nil {
+		unregistered = append(unregistered, "template.DeleteTemplateHandler")
 	}
 	if o.VnetDeleteVNetHandler == nil {
 		unregistered = append(unregistered, "vnet.DeleteVNetHandler")
@@ -674,6 +729,9 @@ func (o *KowabungaAPI) Validate() error {
 	if o.SubnetGetAllSubnetsHandler == nil {
 		unregistered = append(unregistered, "subnet.GetAllSubnetsHandler")
 	}
+	if o.TemplateGetAllTemplatesHandler == nil {
+		unregistered = append(unregistered, "template.GetAllTemplatesHandler")
+	}
 	if o.VnetGetAllVNetsHandler == nil {
 		unregistered = append(unregistered, "vnet.GetAllVNetsHandler")
 	}
@@ -704,6 +762,9 @@ func (o *KowabungaAPI) Validate() error {
 	if o.PoolGetPoolHandler == nil {
 		unregistered = append(unregistered, "pool.GetPoolHandler")
 	}
+	if o.PoolGetPoolTemplatesHandler == nil {
+		unregistered = append(unregistered, "pool.GetPoolTemplatesHandler")
+	}
 	if o.PoolGetPoolVolumesHandler == nil {
 		unregistered = append(unregistered, "pool.GetPoolVolumesHandler")
 	}
@@ -719,6 +780,9 @@ func (o *KowabungaAPI) Validate() error {
 	if o.ProjectGetProjectVolumesHandler == nil {
 		unregistered = append(unregistered, "project.GetProjectVolumesHandler")
 	}
+	if o.ProjectGetProjectZoneVolumesHandler == nil {
+		unregistered = append(unregistered, "project.GetProjectZoneVolumesHandler")
+	}
 	if o.RegionGetRegionHandler == nil {
 		unregistered = append(unregistered, "region.GetRegionHandler")
 	}
@@ -730,6 +794,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.SubnetGetSubnetAdaptersHandler == nil {
 		unregistered = append(unregistered, "subnet.GetSubnetAdaptersHandler")
+	}
+	if o.TemplateGetTemplateVolumeHandler == nil {
+		unregistered = append(unregistered, "template.GetTemplateVolumeHandler")
 	}
 	if o.VnetGetVNetHandler == nil {
 		unregistered = append(unregistered, "vnet.GetVNetHandler")
@@ -794,6 +861,9 @@ func (o *KowabungaAPI) Validate() error {
 	if o.PoolUpdatePoolHandler == nil {
 		unregistered = append(unregistered, "pool.UpdatePoolHandler")
 	}
+	if o.PoolUpdatePoolDefaultTemplateHandler == nil {
+		unregistered = append(unregistered, "pool.UpdatePoolDefaultTemplateHandler")
+	}
 	if o.ProjectUpdateProjectHandler == nil {
 		unregistered = append(unregistered, "project.UpdateProjectHandler")
 	}
@@ -805,6 +875,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.SubnetUpdateSubnetHandler == nil {
 		unregistered = append(unregistered, "subnet.UpdateSubnetHandler")
+	}
+	if o.TemplateUpdateTemplateHandler == nil {
+		unregistered = append(unregistered, "template.UpdateTemplateHandler")
 	}
 	if o.VnetUpdateVNetHandler == nil {
 		unregistered = append(unregistered, "vnet.UpdateVNetHandler")
@@ -954,6 +1027,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
+	o.handlers["POST"]["/pool/{poolId}/template"] = pool.NewCreateTemplate(o.context, o.PoolCreateTemplateHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
 	o.handlers["POST"]["/zone/{zoneId}/vnet"] = zone.NewCreateVNet(o.context, o.ZoneCreateVNetHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
@@ -963,6 +1040,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
 	o.handlers["POST"]["/region/{regionId}/zone"] = region.NewCreateZone(o.context, o.RegionCreateZoneHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/project/{projectId}/zone/{zoneId}/volume"] = project.NewCreateZoneVolume(o.context, o.ProjectCreateZoneVolumeHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
@@ -991,6 +1072,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
 	o.handlers["DELETE"]["/subnet/{subnetId}"] = subnet.NewDeleteSubnet(o.context, o.SubnetDeleteSubnetHandler)
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
+	o.handlers["DELETE"]["/template/{templateId}"] = template.NewDeleteTemplate(o.context, o.TemplateDeleteTemplateHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
@@ -1042,6 +1127,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
+	o.handlers["GET"]["/template"] = template.NewGetAllTemplates(o.context, o.TemplateGetAllTemplatesHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
 	o.handlers["GET"]["/vnet"] = vnet.NewGetAllVNets(o.context, o.VnetGetAllVNetsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
@@ -1082,6 +1171,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
+	o.handlers["GET"]["/pool/{poolId}/templates"] = pool.NewGetPoolTemplates(o.context, o.PoolGetPoolTemplatesHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
 	o.handlers["GET"]["/pool/{poolId}/volumes"] = pool.NewGetPoolVolumes(o.context, o.PoolGetPoolVolumesHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
@@ -1102,6 +1195,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
+	o.handlers["GET"]["/project/{projectId}/zone/{zoneId}/volumes"] = project.NewGetProjectZoneVolumes(o.context, o.ProjectGetProjectZoneVolumesHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
 	o.handlers["GET"]["/region/{regionId}"] = region.NewGetRegion(o.context, o.RegionGetRegionHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
@@ -1115,6 +1212,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/subnet/{subnetId}/adapters"] = subnet.NewGetSubnetAdapters(o.context, o.SubnetGetSubnetAdaptersHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/template/{templateId}"] = template.NewGetTemplateVolume(o.context, o.TemplateGetTemplateVolumeHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -1202,6 +1303,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
+	o.handlers["PUT"]["/pool/{poolId}/template/{templateId}/default"] = pool.NewUpdatePoolDefaultTemplate(o.context, o.PoolUpdatePoolDefaultTemplateHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
 	o.handlers["PUT"]["/project/{projectId}"] = project.NewUpdateProject(o.context, o.ProjectUpdateProjectHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
@@ -1215,6 +1320,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
 	o.handlers["PUT"]["/subnet/{subnetId}"] = subnet.NewUpdateSubnet(o.context, o.SubnetUpdateSubnetHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/template/{templateId}"] = template.NewUpdateTemplate(o.context, o.TemplateUpdateTemplateHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
