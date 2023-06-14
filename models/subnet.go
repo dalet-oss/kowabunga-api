@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -25,6 +26,9 @@ type Subnet struct {
 
 	// The subnet description.
 	Description string `json:"description,omitempty"`
+
+	// The subnet list of reserved DHCP range (i.e. dynamic range, not IP address should be assigned from there).
+	Dhcp []*DhcpRange `json:"dhcp"`
 
 	// The subnet DNS server IP address (gateway value if unspecified).
 	DNS string `json:"dns,omitempty"`
@@ -46,6 +50,10 @@ func (m *Subnet) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCidr(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDhcp(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -72,6 +80,32 @@ func (m *Subnet) validateCidr(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Subnet) validateDhcp(formats strfmt.Registry) error {
+	if swag.IsZero(m.Dhcp) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Dhcp); i++ {
+		if swag.IsZero(m.Dhcp[i]) { // not required
+			continue
+		}
+
+		if m.Dhcp[i] != nil {
+			if err := m.Dhcp[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("dhcp" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("dhcp" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *Subnet) validateGateway(formats strfmt.Registry) error {
 
 	if err := validate.Required("gateway", "body", m.Gateway); err != nil {
@@ -90,8 +124,37 @@ func (m *Subnet) validateName(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this subnet based on context it is used
+// ContextValidate validate this subnet based on the context it is used
 func (m *Subnet) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateDhcp(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *Subnet) contextValidateDhcp(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Dhcp); i++ {
+
+		if m.Dhcp[i] != nil {
+			if err := m.Dhcp[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("dhcp" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("dhcp" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

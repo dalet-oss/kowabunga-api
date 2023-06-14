@@ -21,6 +21,23 @@ definitions:
       dns:
         type: string
         description: The subnet DNS server IP address (gateway value if unspecified).
+      dhcp:
+        type: array
+        description: The subnet list of reserved DHCP range (i.e. dynamic range, not IP address should be assigned from there).
+        items:
+          $ref: '#/definitions/DhcpRange'
+
+  DhcpRange:
+    type: object
+    required: [first, last]
+    description: A DHCPv4 dynamic pool range.
+    properties:
+      first:
+        type: string
+        description: The range's first IP address for DHCP dynamic leases.
+      last:
+        type: string
+        description: The range's last IP address for DHCP dynamic leases.
 
 paths:
   /subnet:

@@ -48,7 +48,6 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	api.JSONConsumer = runtime.JSONConsumer()
 
 	api.JSONProducer = runtime.JSONProducer()
-	api.TxtProducer = runtime.TextProducer()
 
 	// Applies when the "x-token" header is set
 	if api.KeyAuth == nil {
@@ -376,11 +375,6 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.ZoneGetZoneVNetsHandler == nil {
 		api.ZoneGetZoneVNetsHandler = zone.GetZoneVNetsHandlerFunc(func(params zone.GetZoneVNetsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.GetZoneVNets has not yet been implemented")
-		})
-	}
-	if api.HealthzHandler == nil {
-		api.HealthzHandler = swaggerapi.HealthzHandlerFunc(func(params swaggerapi.HealthzParams, principal interface{}) middleware.Responder {
-			return middleware.NotImplemented("operation api.Healthz has not yet been implemented")
 		})
 	}
 	if api.InstanceRebootInstanceHandler == nil {

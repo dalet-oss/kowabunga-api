@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.4.3"
+    "version": "0.4.4"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -147,25 +147,6 @@ func init() {
           },
           "500": {
             "description": "Unable to delete network adapter."
-          }
-        }
-      }
-    },
-    "/healthz": {
-      "get": {
-        "produces": [
-          "text/plain"
-        ],
-        "operationId": "Healthz",
-        "responses": {
-          "200": {
-            "description": "OK message.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "OK"
-              ]
-            }
           }
         }
       }
@@ -2940,6 +2921,24 @@ func init() {
           "description": "The unit price information.",
           "type": "integer",
           "format": "float"
+        }
+      }
+    },
+    "DhcpRange": {
+      "description": "A DHCPv4 dynamic pool range.",
+      "type": "object",
+      "required": [
+        "first",
+        "last"
+      ],
+      "properties": {
+        "first": {
+          "description": "The range's first IP address for DHCP dynamic leases.",
+          "type": "string"
+        },
+        "last": {
+          "description": "The range's last IP address for DHCP dynamic leases.",
+          "type": "string"
         }
       }
     },
@@ -3389,6 +3388,13 @@ func init() {
           "description": "The subnet description.",
           "type": "string"
         },
+        "dhcp": {
+          "description": "The subnet list of reserved DHCP range (i.e. dynamic range, not IP address should be assigned from there).",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DhcpRange"
+          }
+        },
         "dns": {
           "description": "The subnet DNS server IP address (gateway value if unspecified).",
           "type": "string"
@@ -3562,7 +3568,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.4.3"
+    "version": "0.4.4"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -3678,25 +3684,6 @@ func init() {
           },
           "500": {
             "description": "Unable to delete network adapter."
-          }
-        }
-      }
-    },
-    "/healthz": {
-      "get": {
-        "produces": [
-          "text/plain"
-        ],
-        "operationId": "Healthz",
-        "responses": {
-          "200": {
-            "description": "OK message.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "OK"
-              ]
-            }
           }
         }
       }
@@ -6471,6 +6458,24 @@ func init() {
           "description": "The unit price information.",
           "type": "integer",
           "format": "float"
+        }
+      }
+    },
+    "DhcpRange": {
+      "description": "A DHCPv4 dynamic pool range.",
+      "type": "object",
+      "required": [
+        "first",
+        "last"
+      ],
+      "properties": {
+        "first": {
+          "description": "The range's first IP address for DHCP dynamic leases.",
+          "type": "string"
+        },
+        "last": {
+          "description": "The range's last IP address for DHCP dynamic leases.",
+          "type": "string"
         }
       }
     },
@@ -7000,6 +7005,13 @@ func init() {
         "description": {
           "description": "The subnet description.",
           "type": "string"
+        },
+        "dhcp": {
+          "description": "The subnet list of reserved DHCP range (i.e. dynamic range, not IP address should be assigned from there).",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DhcpRange"
+          }
         },
         "dns": {
           "description": "The subnet DNS server IP address (gateway value if unspecified).",

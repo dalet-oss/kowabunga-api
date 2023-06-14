@@ -54,7 +54,6 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		JSONConsumer: runtime.JSONConsumer(),
 
 		JSONProducer: runtime.JSONProducer(),
-		TxtProducer:  runtime.TextProducer(),
 
 		SubnetCreateAdapterHandler: subnet.CreateAdapterHandlerFunc(func(params subnet.CreateAdapterParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation subnet.CreateAdapter has not yet been implemented")
@@ -245,9 +244,6 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		ZoneGetZoneVNetsHandler: zone.GetZoneVNetsHandlerFunc(func(params zone.GetZoneVNetsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.GetZoneVNets has not yet been implemented")
 		}),
-		HealthzHandler: HealthzHandlerFunc(func(params HealthzParams, principal interface{}) middleware.Responder {
-			return middleware.NotImplemented("operation Healthz has not yet been implemented")
-		}),
 		InstanceRebootInstanceHandler: instance.RebootInstanceHandlerFunc(func(params instance.RebootInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.RebootInstance has not yet been implemented")
 		}),
@@ -362,9 +358,6 @@ type KowabungaAPI struct {
 	// JSONProducer registers a producer for the following mime types:
 	//   - application/json
 	JSONProducer runtime.Producer
-	// TxtProducer registers a producer for the following mime types:
-	//   - text/plain
-	TxtProducer runtime.Producer
 
 	// KeyAuth registers a function that takes a token and returns a principal
 	// it performs authentication based on an api key x-token provided in the header
@@ -499,8 +492,6 @@ type KowabungaAPI struct {
 	ZoneGetZonePoolsHandler zone.GetZonePoolsHandler
 	// ZoneGetZoneVNetsHandler sets the operation handler for the get zone v nets operation
 	ZoneGetZoneVNetsHandler zone.GetZoneVNetsHandler
-	// HealthzHandler sets the operation handler for the healthz operation
-	HealthzHandler HealthzHandler
 	// InstanceRebootInstanceHandler sets the operation handler for the reboot instance operation
 	InstanceRebootInstanceHandler instance.RebootInstanceHandler
 	// InstanceResetInstanceHandler sets the operation handler for the reset instance operation
@@ -624,9 +615,6 @@ func (o *KowabungaAPI) Validate() error {
 
 	if o.JSONProducer == nil {
 		unregistered = append(unregistered, "JSONProducer")
-	}
-	if o.TxtProducer == nil {
-		unregistered = append(unregistered, "TxtProducer")
 	}
 
 	if o.KeyAuth == nil {
@@ -822,9 +810,6 @@ func (o *KowabungaAPI) Validate() error {
 	if o.ZoneGetZoneVNetsHandler == nil {
 		unregistered = append(unregistered, "zone.GetZoneVNetsHandler")
 	}
-	if o.HealthzHandler == nil {
-		unregistered = append(unregistered, "HealthzHandler")
-	}
 	if o.InstanceRebootInstanceHandler == nil {
 		unregistered = append(unregistered, "instance.RebootInstanceHandler")
 	}
@@ -954,8 +939,6 @@ func (o *KowabungaAPI) ProducersFor(mediaTypes []string) map[string]runtime.Prod
 		switch mt {
 		case "application/json":
 			result["application/json"] = o.JSONProducer
-		case "text/plain":
-			result["text/plain"] = o.TxtProducer
 		}
 
 		if p, ok := o.customProducers[mt]; ok {
@@ -1248,10 +1231,6 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/zone/{zoneId}/vnets"] = zone.NewGetZoneVNets(o.context, o.ZoneGetZoneVNetsHandler)
-	if o.handlers["GET"] == nil {
-		o.handlers["GET"] = make(map[string]http.Handler)
-	}
-	o.handlers["GET"]["/healthz"] = NewHealthz(o.context, o.HealthzHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}

@@ -7,14 +7,13 @@
 //	  http
 //	Host: localhost
 //	BasePath: /api/v1
-//	Version: 0.4.3
+//	Version: 0.4.4
 //
 //	Consumes:
 //	  - application/json
 //
 //	Produces:
 //	  - application/json
-//	  - text/plain
 //
 // swagger:meta
 package server

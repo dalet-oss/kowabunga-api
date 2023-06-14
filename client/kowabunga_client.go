@@ -14,7 +14,6 @@ import (
 	"github.com/dalet-oss/kowabunga-api/client/host"
 	"github.com/dalet-oss/kowabunga-api/client/instance"
 	"github.com/dalet-oss/kowabunga-api/client/netgw"
-	"github.com/dalet-oss/kowabunga-api/client/operations"
 	"github.com/dalet-oss/kowabunga-api/client/pool"
 	"github.com/dalet-oss/kowabunga-api/client/project"
 	"github.com/dalet-oss/kowabunga-api/client/region"
@@ -71,7 +70,6 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Kowabunga 
 	cli.Host = host.New(transport, formats)
 	cli.Instance = instance.New(transport, formats)
 	cli.Netgw = netgw.New(transport, formats)
-	cli.Operations = operations.New(transport, formats)
 	cli.Pool = pool.New(transport, formats)
 	cli.Project = project.New(transport, formats)
 	cli.Region = region.New(transport, formats)
@@ -132,8 +130,6 @@ type Kowabunga struct {
 
 	Netgw netgw.ClientService
 
-	Operations operations.ClientService
-
 	Pool pool.ClientService
 
 	Project project.ClientService
@@ -160,7 +156,6 @@ func (c *Kowabunga) SetTransport(transport runtime.ClientTransport) {
 	c.Host.SetTransport(transport)
 	c.Instance.SetTransport(transport)
 	c.Netgw.SetTransport(transport)
-	c.Operations.SetTransport(transport)
 	c.Pool.SetTransport(transport)
 	c.Project.SetTransport(transport)
 	c.Region.SetTransport(transport)
