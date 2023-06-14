@@ -157,3 +157,28 @@ func (o *CreateVolumeInternalServerError) WriteResponse(rw http.ResponseWriter, 
 
 	rw.WriteHeader(500)
 }
+
+// CreateVolumeInsufficientStorageCode is the HTTP code returned for type CreateVolumeInsufficientStorage
+const CreateVolumeInsufficientStorageCode int = 507
+
+/*
+CreateVolumeInsufficientStorage Requested volume characteristics are beyond project's quota in place.
+
+swagger:response createVolumeInsufficientStorage
+*/
+type CreateVolumeInsufficientStorage struct {
+}
+
+// NewCreateVolumeInsufficientStorage creates CreateVolumeInsufficientStorage with default headers values
+func NewCreateVolumeInsufficientStorage() *CreateVolumeInsufficientStorage {
+
+	return &CreateVolumeInsufficientStorage{}
+}
+
+// WriteResponse to the client
+func (o *CreateVolumeInsufficientStorage) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.Header().Del(runtime.HeaderContentType) //Remove Content-Type on empty responses
+
+	rw.WriteHeader(507)
+}

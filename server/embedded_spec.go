@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.5.0"
+    "version": "0.5.1"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -1316,6 +1316,9 @@ func init() {
           },
           "500": {
             "description": "Unable to create the storage volume."
+          },
+          "507": {
+            "description": "Requested volume characteristics are beyond project's quota in place."
           }
         }
       }
@@ -1404,6 +1407,9 @@ func init() {
           },
           "500": {
             "description": "Unable to create the virtual machine instance."
+          },
+          "507": {
+            "description": "Requested volume characteristics are beyond project's quota in place."
           }
         }
       }
@@ -1512,6 +1518,9 @@ func init() {
           },
           "500": {
             "description": "Unable to create the storage volume."
+          },
+          "507": {
+            "description": "Requested volume characteristics are beyond project's quota in place."
           }
         }
       }
@@ -3604,7 +3613,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.5.0"
+    "version": "0.5.1"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -4889,6 +4898,9 @@ func init() {
           },
           "500": {
             "description": "Unable to create the storage volume."
+          },
+          "507": {
+            "description": "Requested volume characteristics are beyond project's quota in place."
           }
         }
       }
@@ -4977,6 +4989,9 @@ func init() {
           },
           "500": {
             "description": "Unable to create the virtual machine instance."
+          },
+          "507": {
+            "description": "Requested volume characteristics are beyond project's quota in place."
           }
         }
       }
@@ -5085,6 +5100,9 @@ func init() {
           },
           "500": {
             "description": "Unable to create the storage volume."
+          },
+          "507": {
+            "description": "Requested volume characteristics are beyond project's quota in place."
           }
         }
       }

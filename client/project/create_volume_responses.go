@@ -53,6 +53,12 @@ func (o *CreateVolumeReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return nil, result
+	case 507:
+		result := NewCreateVolumeInsufficientStorage()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -346,6 +352,62 @@ func (o *CreateVolumeInternalServerError) String() string {
 }
 
 func (o *CreateVolumeInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewCreateVolumeInsufficientStorage creates a CreateVolumeInsufficientStorage with default headers values
+func NewCreateVolumeInsufficientStorage() *CreateVolumeInsufficientStorage {
+	return &CreateVolumeInsufficientStorage{}
+}
+
+/*
+CreateVolumeInsufficientStorage describes a response with status code 507, with default header values.
+
+Requested volume characteristics are beyond project's quota in place.
+*/
+type CreateVolumeInsufficientStorage struct {
+}
+
+// IsSuccess returns true when this create volume insufficient storage response has a 2xx status code
+func (o *CreateVolumeInsufficientStorage) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create volume insufficient storage response has a 3xx status code
+func (o *CreateVolumeInsufficientStorage) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create volume insufficient storage response has a 4xx status code
+func (o *CreateVolumeInsufficientStorage) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create volume insufficient storage response has a 5xx status code
+func (o *CreateVolumeInsufficientStorage) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create volume insufficient storage response a status code equal to that given
+func (o *CreateVolumeInsufficientStorage) IsCode(code int) bool {
+	return code == 507
+}
+
+// Code gets the status code for the create volume insufficient storage response
+func (o *CreateVolumeInsufficientStorage) Code() int {
+	return 507
+}
+
+func (o *CreateVolumeInsufficientStorage) Error() string {
+	return fmt.Sprintf("[POST /project/{projectId}/volume][%d] createVolumeInsufficientStorage ", 507)
+}
+
+func (o *CreateVolumeInsufficientStorage) String() string {
+	return fmt.Sprintf("[POST /project/{projectId}/volume][%d] createVolumeInsufficientStorage ", 507)
+}
+
+func (o *CreateVolumeInsufficientStorage) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

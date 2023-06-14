@@ -265,6 +265,8 @@ paths:
           description: Storage volume already exists.
         500:
           description: Unable to create the storage volume.
+        507:
+          description: Requested volume characteristics are beyond project's quota in place.
 
   /project/{projectId}/volumes:
     get:
@@ -334,6 +336,8 @@ paths:
           description: Storage volume already exists.
         500:
           description: Unable to create the storage volume.
+        507:
+          description: Requested volume characteristics are beyond project's quota in place.
 
   /project/{projectId}/zone/{zoneId}/volumes:
     get:
@@ -401,6 +405,8 @@ paths:
           description: Virtual machine instance already exists.
         500:
           description: Unable to create the virtual machine instance.
+        507:
+          description: Requested volume characteristics are beyond project's quota in place.
 
   /project/{projectId}/zone/{zoneId}/instances:
     get:

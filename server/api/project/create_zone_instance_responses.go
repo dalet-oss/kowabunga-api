@@ -157,3 +157,28 @@ func (o *CreateZoneInstanceInternalServerError) WriteResponse(rw http.ResponseWr
 
 	rw.WriteHeader(500)
 }
+
+// CreateZoneInstanceInsufficientStorageCode is the HTTP code returned for type CreateZoneInstanceInsufficientStorage
+const CreateZoneInstanceInsufficientStorageCode int = 507
+
+/*
+CreateZoneInstanceInsufficientStorage Requested volume characteristics are beyond project's quota in place.
+
+swagger:response createZoneInstanceInsufficientStorage
+*/
+type CreateZoneInstanceInsufficientStorage struct {
+}
+
+// NewCreateZoneInstanceInsufficientStorage creates CreateZoneInstanceInsufficientStorage with default headers values
+func NewCreateZoneInstanceInsufficientStorage() *CreateZoneInstanceInsufficientStorage {
+
+	return &CreateZoneInstanceInsufficientStorage{}
+}
+
+// WriteResponse to the client
+func (o *CreateZoneInstanceInsufficientStorage) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.Header().Del(runtime.HeaderContentType) //Remove Content-Type on empty responses
+
+	rw.WriteHeader(507)
+}

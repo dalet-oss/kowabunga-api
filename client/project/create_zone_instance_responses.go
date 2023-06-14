@@ -53,6 +53,12 @@ func (o *CreateZoneInstanceReader) ReadResponse(response runtime.ClientResponse,
 			return nil, err
 		}
 		return nil, result
+	case 507:
+		result := NewCreateZoneInstanceInsufficientStorage()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -346,6 +352,62 @@ func (o *CreateZoneInstanceInternalServerError) String() string {
 }
 
 func (o *CreateZoneInstanceInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewCreateZoneInstanceInsufficientStorage creates a CreateZoneInstanceInsufficientStorage with default headers values
+func NewCreateZoneInstanceInsufficientStorage() *CreateZoneInstanceInsufficientStorage {
+	return &CreateZoneInstanceInsufficientStorage{}
+}
+
+/*
+CreateZoneInstanceInsufficientStorage describes a response with status code 507, with default header values.
+
+Requested volume characteristics are beyond project's quota in place.
+*/
+type CreateZoneInstanceInsufficientStorage struct {
+}
+
+// IsSuccess returns true when this create zone instance insufficient storage response has a 2xx status code
+func (o *CreateZoneInstanceInsufficientStorage) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create zone instance insufficient storage response has a 3xx status code
+func (o *CreateZoneInstanceInsufficientStorage) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create zone instance insufficient storage response has a 4xx status code
+func (o *CreateZoneInstanceInsufficientStorage) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create zone instance insufficient storage response has a 5xx status code
+func (o *CreateZoneInstanceInsufficientStorage) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create zone instance insufficient storage response a status code equal to that given
+func (o *CreateZoneInstanceInsufficientStorage) IsCode(code int) bool {
+	return code == 507
+}
+
+// Code gets the status code for the create zone instance insufficient storage response
+func (o *CreateZoneInstanceInsufficientStorage) Code() int {
+	return 507
+}
+
+func (o *CreateZoneInstanceInsufficientStorage) Error() string {
+	return fmt.Sprintf("[POST /project/{projectId}/zone/{zoneId}/instance][%d] createZoneInstanceInsufficientStorage ", 507)
+}
+
+func (o *CreateZoneInstanceInsufficientStorage) String() string {
+	return fmt.Sprintf("[POST /project/{projectId}/zone/{zoneId}/instance][%d] createZoneInstanceInsufficientStorage ", 507)
+}
+
+func (o *CreateZoneInstanceInsufficientStorage) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }
