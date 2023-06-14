@@ -190,7 +190,7 @@ func NewCreateZoneVolumeNotFound() *CreateZoneVolumeNotFound {
 /*
 CreateZoneVolumeNotFound describes a response with status code 404, with default header values.
 
-Invalid project ID was provided.
+Invalid project or zone ID was provided.
 */
 type CreateZoneVolumeNotFound struct {
 }

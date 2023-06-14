@@ -1,77 +1,38 @@
 definitions:
   Instance:
     type: object
-    required: [name, topology]
+    required: [name, memory, vcpus]
     properties:
       id:
         type: string
-        description: The instance ID  (auto-generated).
-      vm_id:
-        type: string
-        description: the libvirt ID of the Virtual Machine (auto-generated).
-      vm_uuid:
-        type: string
-        description: the libvirt UUID of the Virtual Machine (auto-generated).
+        description: The virtual machine instance ID  (auto-generated).
       name:
         type: string
-        description: the name of the Virtual Machine
-      template:
-        type: boolean
-        description: is the VM a template ?
-        default: false
-      topology:
-        $ref: '#/definitions/InstanceTopology'
-
-  InstanceTopology:
-    type: object
-    required: [memory, vcpus, disks, nics]
-    properties:
+        description: The virtual machine name
+      description:
+        type: string
+        description: The virtual machine description.
+      os:
+        type: string
+        description: Type of operating system (useful to determine cloud-init parameters for instance)
+        enum: ["linux", "windows"]
+        default: "linux"
       memory:
         type: integer
-        description: the memory size of the VM in bytes
+        description: the virtual machine's memory size (in bytes).
       vcpus:
         type: integer
-        description: the memory size of the VM in bytes
-      disks:
+        description: the virtual machine's number of vCPUs.
+      adapters:
         type: array
+        description: a list of existing network adapters to be connected to the instance.
         items:
-          $ref: '#/definitions/Disk'
-      nics:
+          type: string
+      volumes:
         type: array
+        description: a list of existing storage volumes (i.e. disks) to be connected to the instance.
         items:
-          $ref: '#/definitions/NIC'
-
-  Disk:
-    type: object
-    required: [device, rbd]
-    properties:
-      device:
-        type: string
-        description: name of the disk block device
-      rbd:
-        type: object
-        required: [image]
-        properties:
-          image:
-            type: string
-            description: disk image name on RBD pool
-          host:
-            type: string
-            description: RBD pool server address
-          port:
-            type: integer
-            description: RBD pool server port
-
-  NIC:
-    type: object
-    required: [bridge]
-    properties:
-      bridge:
-        type: string
-        description: name of the host's network bridge interface the interface is currently mapped to
-      mac:
-        type: string
-        description: MAC address of the interface
+          type: string
 
   InstanceState:
     type: object

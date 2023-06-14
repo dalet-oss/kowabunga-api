@@ -87,7 +87,7 @@ func (o *CreateZoneVolumeBadRequest) WriteResponse(rw http.ResponseWriter, produ
 const CreateZoneVolumeNotFoundCode int = 404
 
 /*
-CreateZoneVolumeNotFound Invalid project ID was provided.
+CreateZoneVolumeNotFound Invalid project or zone ID was provided.
 
 swagger:response createZoneVolumeNotFound
 */

@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.4.4"
+    "version": "0.5.0"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -1353,6 +1353,102 @@ func init() {
         }
       }
     },
+    "/project/{projectId}/zone/{zoneId}/instance": {
+      "post": {
+        "description": "Creates a new virtual machine instance in specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "instance"
+        ],
+        "operationId": "CreateZoneInstance",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated project.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "the ID of the associated zone.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created virtual machine instance object.",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid project or zone ID was provided."
+          },
+          "409": {
+            "description": "Virtual machine instance already exists."
+          },
+          "500": {
+            "description": "Unable to create the virtual machine instance."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/zone/{zoneId}/instances": {
+      "get": {
+        "description": "Returns the IDs of the virtual machine instances existing in the project in the specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "instance"
+        ],
+        "operationId": "GetProjectZoneInstances",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to query.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the zone to query.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of virtual machine instance IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid project or zone ID was provided."
+          }
+        }
+      }
+    },
     "/project/{projectId}/zone/{zoneId}/volume": {
       "post": {
         "description": "Creates a new storage volume in specified zone.",
@@ -1409,7 +1505,7 @@ func init() {
             "description": "Bad parameters were provided."
           },
           "404": {
-            "description": "Invalid project ID was provided."
+            "description": "Invalid project or zone ID was provided."
           },
           "409": {
             "description": "Storage volume already exists."
@@ -2942,39 +3038,6 @@ func init() {
         }
       }
     },
-    "Disk": {
-      "type": "object",
-      "required": [
-        "device",
-        "rbd"
-      ],
-      "properties": {
-        "device": {
-          "description": "name of the disk block device",
-          "type": "string"
-        },
-        "rbd": {
-          "type": "object",
-          "required": [
-            "image"
-          ],
-          "properties": {
-            "host": {
-              "description": "RBD pool server address",
-              "type": "string"
-            },
-            "image": {
-              "description": "disk image name on RBD pool",
-              "type": "string"
-            },
-            "port": {
-              "description": "RBD pool server port",
-              "type": "integer"
-            }
-          }
-        }
-      }
-    },
     "Host": {
       "type": "object",
       "required": [
@@ -3106,32 +3169,52 @@ func init() {
       "type": "object",
       "required": [
         "name",
-        "topology"
+        "memory",
+        "vcpus"
       ],
       "properties": {
-        "id": {
-          "description": "The instance ID  (auto-generated).",
+        "adapters": {
+          "description": "a list of existing network adapters to be connected to the instance.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "description": "The virtual machine description.",
           "type": "string"
+        },
+        "id": {
+          "description": "The virtual machine instance ID  (auto-generated).",
+          "type": "string"
+        },
+        "memory": {
+          "description": "the virtual machine's memory size (in bytes).",
+          "type": "integer"
         },
         "name": {
-          "description": "the name of the Virtual Machine",
+          "description": "The virtual machine name",
           "type": "string"
         },
-        "template": {
-          "description": "is the VM a template ?",
-          "type": "boolean",
-          "default": false
+        "os": {
+          "description": "Type of operating system (useful to determine cloud-init parameters for instance)",
+          "type": "string",
+          "default": "linux",
+          "enum": [
+            "linux",
+            "windows"
+          ]
         },
-        "topology": {
-          "$ref": "#/definitions/InstanceTopology"
+        "vcpus": {
+          "description": "the virtual machine's number of vCPUs.",
+          "type": "integer"
         },
-        "vm_id": {
-          "description": "the libvirt ID of the Virtual Machine (auto-generated).",
-          "type": "string"
-        },
-        "vm_uuid": {
-          "description": "the libvirt UUID of the Virtual Machine (auto-generated).",
-          "type": "string"
+        "volumes": {
+          "description": "a list of existing storage volumes (i.e. disks) to be connected to the instance.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -3152,37 +3235,6 @@ func init() {
         }
       }
     },
-    "InstanceTopology": {
-      "type": "object",
-      "required": [
-        "memory",
-        "vcpus",
-        "disks",
-        "nics"
-      ],
-      "properties": {
-        "disks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Disk"
-          }
-        },
-        "memory": {
-          "description": "the memory size of the VM in bytes",
-          "type": "integer"
-        },
-        "nics": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NIC"
-          }
-        },
-        "vcpus": {
-          "description": "the memory size of the VM in bytes",
-          "type": "integer"
-        }
-      }
-    },
     "Metadata": {
       "description": "A key/value metadata.",
       "type": "object",
@@ -3193,22 +3245,6 @@ func init() {
         },
         "value": {
           "description": "The metadata value.",
-          "type": "string"
-        }
-      }
-    },
-    "NIC": {
-      "type": "object",
-      "required": [
-        "bridge"
-      ],
-      "properties": {
-        "bridge": {
-          "description": "name of the host's network bridge interface the interface is currently mapped to",
-          "type": "string"
-        },
-        "mac": {
-          "description": "MAC address of the interface",
           "type": "string"
         }
       }
@@ -3568,7 +3604,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.4.4"
+    "version": "0.5.0"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -4890,6 +4926,102 @@ func init() {
         }
       }
     },
+    "/project/{projectId}/zone/{zoneId}/instance": {
+      "post": {
+        "description": "Creates a new virtual machine instance in specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "instance"
+        ],
+        "operationId": "CreateZoneInstance",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated project.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "the ID of the associated zone.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created virtual machine instance object.",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid project or zone ID was provided."
+          },
+          "409": {
+            "description": "Virtual machine instance already exists."
+          },
+          "500": {
+            "description": "Unable to create the virtual machine instance."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/zone/{zoneId}/instances": {
+      "get": {
+        "description": "Returns the IDs of the virtual machine instances existing in the project in the specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "instance"
+        ],
+        "operationId": "GetProjectZoneInstances",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to query.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the zone to query.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of virtual machine instance IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid project or zone ID was provided."
+          }
+        }
+      }
+    },
     "/project/{projectId}/zone/{zoneId}/volume": {
       "post": {
         "description": "Creates a new storage volume in specified zone.",
@@ -4946,7 +5078,7 @@ func init() {
             "description": "Bad parameters were provided."
           },
           "404": {
-            "description": "Invalid project ID was provided."
+            "description": "Invalid project or zone ID was provided."
           },
           "409": {
             "description": "Storage volume already exists."
@@ -6479,59 +6611,6 @@ func init() {
         }
       }
     },
-    "Disk": {
-      "type": "object",
-      "required": [
-        "device",
-        "rbd"
-      ],
-      "properties": {
-        "device": {
-          "description": "name of the disk block device",
-          "type": "string"
-        },
-        "rbd": {
-          "type": "object",
-          "required": [
-            "image"
-          ],
-          "properties": {
-            "host": {
-              "description": "RBD pool server address",
-              "type": "string"
-            },
-            "image": {
-              "description": "disk image name on RBD pool",
-              "type": "string"
-            },
-            "port": {
-              "description": "RBD pool server port",
-              "type": "integer"
-            }
-          }
-        }
-      }
-    },
-    "DiskRbd": {
-      "type": "object",
-      "required": [
-        "image"
-      ],
-      "properties": {
-        "host": {
-          "description": "RBD pool server address",
-          "type": "string"
-        },
-        "image": {
-          "description": "disk image name on RBD pool",
-          "type": "string"
-        },
-        "port": {
-          "description": "RBD pool server port",
-          "type": "integer"
-        }
-      }
-    },
     "Host": {
       "type": "object",
       "required": [
@@ -6724,32 +6803,52 @@ func init() {
       "type": "object",
       "required": [
         "name",
-        "topology"
+        "memory",
+        "vcpus"
       ],
       "properties": {
-        "id": {
-          "description": "The instance ID  (auto-generated).",
+        "adapters": {
+          "description": "a list of existing network adapters to be connected to the instance.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "description": "The virtual machine description.",
           "type": "string"
+        },
+        "id": {
+          "description": "The virtual machine instance ID  (auto-generated).",
+          "type": "string"
+        },
+        "memory": {
+          "description": "the virtual machine's memory size (in bytes).",
+          "type": "integer"
         },
         "name": {
-          "description": "the name of the Virtual Machine",
+          "description": "The virtual machine name",
           "type": "string"
         },
-        "template": {
-          "description": "is the VM a template ?",
-          "type": "boolean",
-          "default": false
+        "os": {
+          "description": "Type of operating system (useful to determine cloud-init parameters for instance)",
+          "type": "string",
+          "default": "linux",
+          "enum": [
+            "linux",
+            "windows"
+          ]
         },
-        "topology": {
-          "$ref": "#/definitions/InstanceTopology"
+        "vcpus": {
+          "description": "the virtual machine's number of vCPUs.",
+          "type": "integer"
         },
-        "vm_id": {
-          "description": "the libvirt ID of the Virtual Machine (auto-generated).",
-          "type": "string"
-        },
-        "vm_uuid": {
-          "description": "the libvirt UUID of the Virtual Machine (auto-generated).",
-          "type": "string"
+        "volumes": {
+          "description": "a list of existing storage volumes (i.e. disks) to be connected to the instance.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -6770,37 +6869,6 @@ func init() {
         }
       }
     },
-    "InstanceTopology": {
-      "type": "object",
-      "required": [
-        "memory",
-        "vcpus",
-        "disks",
-        "nics"
-      ],
-      "properties": {
-        "disks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Disk"
-          }
-        },
-        "memory": {
-          "description": "the memory size of the VM in bytes",
-          "type": "integer"
-        },
-        "nics": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NIC"
-          }
-        },
-        "vcpus": {
-          "description": "the memory size of the VM in bytes",
-          "type": "integer"
-        }
-      }
-    },
     "Metadata": {
       "description": "A key/value metadata.",
       "type": "object",
@@ -6811,22 +6879,6 @@ func init() {
         },
         "value": {
           "description": "The metadata value.",
-          "type": "string"
-        }
-      }
-    },
-    "NIC": {
-      "type": "object",
-      "required": [
-        "bridge"
-      ],
-      "properties": {
-        "bridge": {
-          "description": "name of the host's network bridge interface the interface is currently mapped to",
-          "type": "string"
-        },
-        "mac": {
-          "description": "MAC address of the interface",
           "type": "string"
         }
       }

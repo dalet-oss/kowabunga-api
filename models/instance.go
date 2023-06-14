@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -19,42 +20,67 @@ import (
 // swagger:model Instance
 type Instance struct {
 
-	// The instance ID  (auto-generated).
+	// a list of existing network adapters to be connected to the instance.
+	Adapters []string `json:"adapters"`
+
+	// The virtual machine description.
+	Description string `json:"description,omitempty"`
+
+	// The virtual machine instance ID  (auto-generated).
 	ID string `json:"id,omitempty"`
 
-	// the name of the Virtual Machine
+	// the virtual machine's memory size (in bytes).
+	// Required: true
+	Memory *int64 `json:"memory"`
+
+	// The virtual machine name
 	// Required: true
 	Name *string `json:"name"`
 
-	// is the VM a template ?
-	Template *bool `json:"template,omitempty"`
+	// Type of operating system (useful to determine cloud-init parameters for instance)
+	// Enum: [linux windows]
+	Os *string `json:"os,omitempty"`
 
-	// topology
+	// the virtual machine's number of vCPUs.
 	// Required: true
-	Topology *InstanceTopology `json:"topology"`
+	Vcpus *int64 `json:"vcpus"`
 
-	// the libvirt ID of the Virtual Machine (auto-generated).
-	VMID string `json:"vm_id,omitempty"`
-
-	// the libvirt UUID of the Virtual Machine (auto-generated).
-	VMUUID string `json:"vm_uuid,omitempty"`
+	// a list of existing storage volumes (i.e. disks) to be connected to the instance.
+	Volumes []string `json:"volumes"`
 }
 
 // Validate validates this instance
 func (m *Instance) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateMemory(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
 
-	if err := m.validateTopology(formats); err != nil {
+	if err := m.validateOs(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateVcpus(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Instance) validateMemory(formats strfmt.Registry) error {
+
+	if err := validate.Required("memory", "body", m.Memory); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -67,53 +93,59 @@ func (m *Instance) validateName(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Instance) validateTopology(formats strfmt.Registry) error {
+var instanceTypeOsPropEnum []interface{}
 
-	if err := validate.Required("topology", "body", m.Topology); err != nil {
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["linux","windows"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		instanceTypeOsPropEnum = append(instanceTypeOsPropEnum, v)
+	}
+}
+
+const (
+
+	// InstanceOsLinux captures enum value "linux"
+	InstanceOsLinux string = "linux"
+
+	// InstanceOsWindows captures enum value "windows"
+	InstanceOsWindows string = "windows"
+)
+
+// prop value enum
+func (m *Instance) validateOsEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, instanceTypeOsPropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *Instance) validateOs(formats strfmt.Registry) error {
+	if swag.IsZero(m.Os) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateOsEnum("os", "body", *m.Os); err != nil {
 		return err
 	}
 
-	if m.Topology != nil {
-		if err := m.Topology.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("topology")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("topology")
-			}
-			return err
-		}
+	return nil
+}
+
+func (m *Instance) validateVcpus(formats strfmt.Registry) error {
+
+	if err := validate.Required("vcpus", "body", m.Vcpus); err != nil {
+		return err
 	}
 
 	return nil
 }
 
-// ContextValidate validate this instance based on the context it is used
+// ContextValidate validates this instance based on context it is used
 func (m *Instance) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateTopology(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *Instance) contextValidateTopology(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Topology != nil {
-		if err := m.Topology.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("topology")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("topology")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
