@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.5.3"
+    "version": "0.5.4"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -374,6 +374,79 @@ func init() {
           },
           "404": {
             "description": "Invalid instance ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a virtual machine configuration.",
+        "tags": [
+          "instance"
+        ],
+        "operationId": "UpdateInstance",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual machine instance.",
+            "name": "instanceId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated virtual machine instance object.",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid virtual machine instance ID was provided."
+          },
+          "500": {
+            "description": "Unable to update the virtual machine instance."
+          },
+          "507": {
+            "description": "Requested instance characteristics are beyond associated project's quota in place."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing virtual machine instance.",
+        "tags": [
+          "instance"
+        ],
+        "operationId": "DeleteInstance",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual machine instance to delete.",
+            "name": "instanceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The storage volume has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid storage volume ID was provided."
+          },
+          "409": {
+            "description": "The storage volume is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete storage volume."
           }
         }
       }
@@ -2426,6 +2499,9 @@ func init() {
           },
           "500": {
             "description": "Unable to update the storage volume."
+          },
+          "507": {
+            "description": "Requested volume size is beyond associated project's quota in place."
           }
         }
       },
@@ -3613,7 +3689,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.5.3"
+    "version": "0.5.4"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -3956,6 +4032,79 @@ func init() {
           },
           "404": {
             "description": "Invalid instance ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a virtual machine configuration.",
+        "tags": [
+          "instance"
+        ],
+        "operationId": "UpdateInstance",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual machine instance.",
+            "name": "instanceId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated virtual machine instance object.",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid virtual machine instance ID was provided."
+          },
+          "500": {
+            "description": "Unable to update the virtual machine instance."
+          },
+          "507": {
+            "description": "Requested instance characteristics are beyond associated project's quota in place."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing virtual machine instance.",
+        "tags": [
+          "instance"
+        ],
+        "operationId": "DeleteInstance",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual machine instance to delete.",
+            "name": "instanceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The storage volume has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid storage volume ID was provided."
+          },
+          "409": {
+            "description": "The storage volume is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete storage volume."
           }
         }
       }
@@ -6008,6 +6157,9 @@ func init() {
           },
           "500": {
             "description": "Unable to update the storage volume."
+          },
+          "507": {
+            "description": "Requested volume size is beyond associated project's quota in place."
           }
         }
       },

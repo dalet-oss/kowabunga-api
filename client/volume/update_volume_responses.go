@@ -47,6 +47,12 @@ func (o *UpdateVolumeReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return nil, result
+	case 507:
+		result := NewUpdateVolumeInsufficientStorage()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -284,6 +290,62 @@ func (o *UpdateVolumeInternalServerError) String() string {
 }
 
 func (o *UpdateVolumeInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewUpdateVolumeInsufficientStorage creates a UpdateVolumeInsufficientStorage with default headers values
+func NewUpdateVolumeInsufficientStorage() *UpdateVolumeInsufficientStorage {
+	return &UpdateVolumeInsufficientStorage{}
+}
+
+/*
+UpdateVolumeInsufficientStorage describes a response with status code 507, with default header values.
+
+Requested volume size is beyond associated project's quota in place.
+*/
+type UpdateVolumeInsufficientStorage struct {
+}
+
+// IsSuccess returns true when this update volume insufficient storage response has a 2xx status code
+func (o *UpdateVolumeInsufficientStorage) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update volume insufficient storage response has a 3xx status code
+func (o *UpdateVolumeInsufficientStorage) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update volume insufficient storage response has a 4xx status code
+func (o *UpdateVolumeInsufficientStorage) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update volume insufficient storage response has a 5xx status code
+func (o *UpdateVolumeInsufficientStorage) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this update volume insufficient storage response a status code equal to that given
+func (o *UpdateVolumeInsufficientStorage) IsCode(code int) bool {
+	return code == 507
+}
+
+// Code gets the status code for the update volume insufficient storage response
+func (o *UpdateVolumeInsufficientStorage) Code() int {
+	return 507
+}
+
+func (o *UpdateVolumeInsufficientStorage) Error() string {
+	return fmt.Sprintf("[PUT /volume/{volumeId}][%d] updateVolumeInsufficientStorage ", 507)
+}
+
+func (o *UpdateVolumeInsufficientStorage) String() string {
+	return fmt.Sprintf("[PUT /volume/{volumeId}][%d] updateVolumeInsufficientStorage ", 507)
+}
+
+func (o *UpdateVolumeInsufficientStorage) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	return nil
 }

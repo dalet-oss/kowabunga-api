@@ -137,6 +137,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation host.DeleteHost has not yet been implemented")
 		})
 	}
+	if api.InstanceDeleteInstanceHandler == nil {
+		api.InstanceDeleteInstanceHandler = instance.DeleteInstanceHandlerFunc(func(params instance.DeleteInstanceParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation instance.DeleteInstance has not yet been implemented")
+		})
+	}
 	if api.NetgwDeleteNetGWHandler == nil {
 		api.NetgwDeleteNetGWHandler = netgw.DeleteNetGWHandlerFunc(func(params netgw.DeleteNetGWParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation netgw.DeleteNetGW has not yet been implemented")
@@ -435,6 +440,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.HostUpdateHostHandler == nil {
 		api.HostUpdateHostHandler = host.UpdateHostHandlerFunc(func(params host.UpdateHostParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation host.UpdateHost has not yet been implemented")
+		})
+	}
+	if api.InstanceUpdateInstanceHandler == nil {
+		api.InstanceUpdateInstanceHandler = instance.UpdateInstanceHandlerFunc(func(params instance.UpdateInstanceParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation instance.UpdateInstance has not yet been implemented")
 		})
 	}
 	if api.NetgwUpdateNetGWHandler == nil {

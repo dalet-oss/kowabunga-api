@@ -30,6 +30,8 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
+	DeleteInstance(params *DeleteInstanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteInstanceOK, error)
+
 	GetAllInstances(params *GetAllInstancesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllInstancesOK, error)
 
 	GetInstance(params *GetInstanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetInstanceOK, error)
@@ -50,7 +52,48 @@ type ClientService interface {
 
 	SuspendInstance(params *SuspendInstanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SuspendInstanceOK, error)
 
+	UpdateInstance(params *UpdateInstanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstanceOK, error)
+
 	SetTransport(transport runtime.ClientTransport)
+}
+
+/*
+DeleteInstance Deletes an existing virtual machine instance.
+*/
+func (a *Client) DeleteInstance(params *DeleteInstanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteInstanceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteInstanceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "DeleteInstance",
+		Method:             "DELETE",
+		PathPattern:        "/instance/{instanceId}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteInstanceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteInstanceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteInstance: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -440,6 +483,45 @@ func (a *Client) SuspendInstance(params *SuspendInstanceParams, authInfo runtime
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for SuspendInstance: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateInstance Updates a virtual machine configuration.
+*/
+func (a *Client) UpdateInstance(params *UpdateInstanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateInstanceOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateInstanceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateInstance",
+		Method:             "PUT",
+		PathPattern:        "/instance/{instanceId}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateInstanceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateInstanceOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateInstance: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

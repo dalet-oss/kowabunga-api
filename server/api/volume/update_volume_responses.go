@@ -132,3 +132,28 @@ func (o *UpdateVolumeInternalServerError) WriteResponse(rw http.ResponseWriter, 
 
 	rw.WriteHeader(500)
 }
+
+// UpdateVolumeInsufficientStorageCode is the HTTP code returned for type UpdateVolumeInsufficientStorage
+const UpdateVolumeInsufficientStorageCode int = 507
+
+/*
+UpdateVolumeInsufficientStorage Requested volume size is beyond associated project's quota in place.
+
+swagger:response updateVolumeInsufficientStorage
+*/
+type UpdateVolumeInsufficientStorage struct {
+}
+
+// NewUpdateVolumeInsufficientStorage creates UpdateVolumeInsufficientStorage with default headers values
+func NewUpdateVolumeInsufficientStorage() *UpdateVolumeInsufficientStorage {
+
+	return &UpdateVolumeInsufficientStorage{}
+}
+
+// WriteResponse to the client
+func (o *UpdateVolumeInsufficientStorage) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.Header().Del(runtime.HeaderContentType) //Remove Content-Type on empty responses
+
+	rw.WriteHeader(507)
+}

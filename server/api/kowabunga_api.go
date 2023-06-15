@@ -100,6 +100,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		HostDeleteHostHandler: host.DeleteHostHandlerFunc(func(params host.DeleteHostParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation host.DeleteHost has not yet been implemented")
 		}),
+		InstanceDeleteInstanceHandler: instance.DeleteInstanceHandlerFunc(func(params instance.DeleteInstanceParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation instance.DeleteInstance has not yet been implemented")
+		}),
 		NetgwDeleteNetGWHandler: netgw.DeleteNetGWHandlerFunc(func(params netgw.DeleteNetGWParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation netgw.DeleteNetGW has not yet been implemented")
 		}),
@@ -280,6 +283,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		HostUpdateHostHandler: host.UpdateHostHandlerFunc(func(params host.UpdateHostParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation host.UpdateHost has not yet been implemented")
 		}),
+		InstanceUpdateInstanceHandler: instance.UpdateInstanceHandlerFunc(func(params instance.UpdateInstanceParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation instance.UpdateInstance has not yet been implemented")
+		}),
 		NetgwUpdateNetGWHandler: netgw.UpdateNetGWHandlerFunc(func(params netgw.UpdateNetGWParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation netgw.UpdateNetGW has not yet been implemented")
 		}),
@@ -402,6 +408,8 @@ type KowabungaAPI struct {
 	AdapterDeleteAdapterHandler adapter.DeleteAdapterHandler
 	// HostDeleteHostHandler sets the operation handler for the delete host operation
 	HostDeleteHostHandler host.DeleteHostHandler
+	// InstanceDeleteInstanceHandler sets the operation handler for the delete instance operation
+	InstanceDeleteInstanceHandler instance.DeleteInstanceHandler
 	// NetgwDeleteNetGWHandler sets the operation handler for the delete net g w operation
 	NetgwDeleteNetGWHandler netgw.DeleteNetGWHandler
 	// PoolDeletePoolHandler sets the operation handler for the delete pool operation
@@ -522,6 +530,8 @@ type KowabungaAPI struct {
 	AdapterUpdateAdapterHandler adapter.UpdateAdapterHandler
 	// HostUpdateHostHandler sets the operation handler for the update host operation
 	HostUpdateHostHandler host.UpdateHostHandler
+	// InstanceUpdateInstanceHandler sets the operation handler for the update instance operation
+	InstanceUpdateInstanceHandler instance.UpdateInstanceHandler
 	// NetgwUpdateNetGWHandler sets the operation handler for the update net g w operation
 	NetgwUpdateNetGWHandler netgw.UpdateNetGWHandler
 	// PoolUpdatePoolHandler sets the operation handler for the update pool operation
@@ -675,6 +685,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.HostDeleteHostHandler == nil {
 		unregistered = append(unregistered, "host.DeleteHostHandler")
+	}
+	if o.InstanceDeleteInstanceHandler == nil {
+		unregistered = append(unregistered, "instance.DeleteInstanceHandler")
 	}
 	if o.NetgwDeleteNetGWHandler == nil {
 		unregistered = append(unregistered, "netgw.DeleteNetGWHandler")
@@ -855,6 +868,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.HostUpdateHostHandler == nil {
 		unregistered = append(unregistered, "host.UpdateHostHandler")
+	}
+	if o.InstanceUpdateInstanceHandler == nil {
+		unregistered = append(unregistered, "instance.UpdateInstanceHandler")
 	}
 	if o.NetgwUpdateNetGWHandler == nil {
 		unregistered = append(unregistered, "netgw.UpdateNetGWHandler")
@@ -1055,6 +1071,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
 	o.handlers["DELETE"]["/host/{hostId}"] = host.NewDeleteHost(o.context, o.HostDeleteHostHandler)
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
+	o.handlers["DELETE"]["/instance/{instanceId}"] = instance.NewDeleteInstance(o.context, o.InstanceDeleteInstanceHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
@@ -1295,6 +1315,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
 	o.handlers["PUT"]["/host/{hostId}"] = host.NewUpdateHost(o.context, o.HostUpdateHostHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/instance/{instanceId}"] = instance.NewUpdateInstance(o.context, o.InstanceUpdateInstanceHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
