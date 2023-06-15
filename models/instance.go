@@ -7,7 +7,6 @@ package models
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -37,10 +36,6 @@ type Instance struct {
 	// Required: true
 	Name *string `json:"name"`
 
-	// Type of operating system (useful to determine cloud-init parameters for instance)
-	// Enum: [linux windows]
-	Os *string `json:"os,omitempty"`
-
 	// the virtual machine's number of vCPUs.
 	// Required: true
 	Vcpus *int64 `json:"vcpus"`
@@ -58,10 +53,6 @@ func (m *Instance) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateName(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateOs(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -87,48 +78,6 @@ func (m *Instance) validateMemory(formats strfmt.Registry) error {
 func (m *Instance) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var instanceTypeOsPropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["linux","windows"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		instanceTypeOsPropEnum = append(instanceTypeOsPropEnum, v)
-	}
-}
-
-const (
-
-	// InstanceOsLinux captures enum value "linux"
-	InstanceOsLinux string = "linux"
-
-	// InstanceOsWindows captures enum value "windows"
-	InstanceOsWindows string = "windows"
-)
-
-// prop value enum
-func (m *Instance) validateOsEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, instanceTypeOsPropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *Instance) validateOs(formats strfmt.Registry) error {
-	if swag.IsZero(m.Os) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateOsEnum("os", "body", *m.Os); err != nil {
 		return err
 	}
 

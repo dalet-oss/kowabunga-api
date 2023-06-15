@@ -33,6 +33,10 @@ type Template struct {
 	// The volume template name.
 	// Required: true
 	Name *string `json:"name"`
+
+	// Type of operating system if OS kind (useful to determine cloud-init parameters for instance)
+	// Enum: [linux windows]
+	Os *string `json:"os,omitempty"`
 }
 
 // Validate validates this template
@@ -44,6 +48,10 @@ func (m *Template) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOs(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -98,6 +106,48 @@ func (m *Template) validateKind(formats strfmt.Registry) error {
 func (m *Template) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var templateTypeOsPropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["linux","windows"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		templateTypeOsPropEnum = append(templateTypeOsPropEnum, v)
+	}
+}
+
+const (
+
+	// TemplateOsLinux captures enum value "linux"
+	TemplateOsLinux string = "linux"
+
+	// TemplateOsWindows captures enum value "windows"
+	TemplateOsWindows string = "windows"
+)
+
+// prop value enum
+func (m *Template) validateOsEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, templateTypeOsPropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *Template) validateOs(formats strfmt.Registry) error {
+	if swag.IsZero(m.Os) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateOsEnum("os", "body", *m.Os); err != nil {
 		return err
 	}
 

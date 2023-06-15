@@ -17,6 +17,11 @@ definitions:
         description: The type of volume template.
         enum: ['os', 'raw']
         default: 'os'
+      os:
+        type: string
+        description: Type of operating system if OS kind (useful to determine cloud-init parameters for instance)
+        enum: ["linux", "windows"]
+        default: "linux"
 
 paths:
   /template:

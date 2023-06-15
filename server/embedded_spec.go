@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.5.2"
+    "version": "0.5.3"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -3205,15 +3205,6 @@ func init() {
           "description": "The virtual machine name",
           "type": "string"
         },
-        "os": {
-          "description": "Type of operating system (useful to determine cloud-init parameters for instance)",
-          "type": "string",
-          "default": "linux",
-          "enum": [
-            "linux",
-            "windows"
-          ]
-        },
         "vcpus": {
           "description": "the virtual machine's number of vCPUs.",
           "type": "integer"
@@ -3484,6 +3475,15 @@ func init() {
         "name": {
           "description": "The volume template name.",
           "type": "string"
+        },
+        "os": {
+          "description": "Type of operating system if OS kind (useful to determine cloud-init parameters for instance)",
+          "type": "string",
+          "default": "linux",
+          "enum": [
+            "linux",
+            "windows"
+          ]
         }
       }
     },
@@ -3613,7 +3613,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.5.2"
+    "version": "0.5.3"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -6848,15 +6848,6 @@ func init() {
           "description": "The virtual machine name",
           "type": "string"
         },
-        "os": {
-          "description": "Type of operating system (useful to determine cloud-init parameters for instance)",
-          "type": "string",
-          "default": "linux",
-          "enum": [
-            "linux",
-            "windows"
-          ]
-        },
         "vcpus": {
           "description": "the virtual machine's number of vCPUs.",
           "type": "integer"
@@ -7127,6 +7118,15 @@ func init() {
         "name": {
           "description": "The volume template name.",
           "type": "string"
+        },
+        "os": {
+          "description": "Type of operating system if OS kind (useful to determine cloud-init parameters for instance)",
+          "type": "string",
+          "default": "linux",
+          "enum": [
+            "linux",
+            "windows"
+          ]
         }
       }
     },

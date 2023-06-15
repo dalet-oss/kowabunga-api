@@ -12,11 +12,6 @@ definitions:
       description:
         type: string
         description: The virtual machine description.
-      os:
-        type: string
-        description: Type of operating system (useful to determine cloud-init parameters for instance)
-        enum: ["linux", "windows"]
-        default: "linux"
       memory:
         type: integer
         description: the virtual machine's memory size (in bytes).
