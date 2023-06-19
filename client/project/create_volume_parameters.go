@@ -66,6 +66,12 @@ type CreateVolumeParams struct {
 	// Body.
 	Body *models.Volume
 
+	/* HostID.
+
+	   the ID of the associated host (useless for RBD pools, mandatory for local ones).
+	*/
+	HostID *string
+
 	/* PoolID.
 
 	   the ID of the associated storage pool.
@@ -148,6 +154,17 @@ func (o *CreateVolumeParams) SetBody(body *models.Volume) {
 	o.Body = body
 }
 
+// WithHostID adds the hostID to the create volume params
+func (o *CreateVolumeParams) WithHostID(hostID *string) *CreateVolumeParams {
+	o.SetHostID(hostID)
+	return o
+}
+
+// SetHostID adds the hostId to the create volume params
+func (o *CreateVolumeParams) SetHostID(hostID *string) {
+	o.HostID = hostID
+}
+
 // WithPoolID adds the poolID to the create volume params
 func (o *CreateVolumeParams) WithPoolID(poolID string) *CreateVolumeParams {
 	o.SetPoolID(poolID)
@@ -191,6 +208,23 @@ func (o *CreateVolumeParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err
+		}
+	}
+
+	if o.HostID != nil {
+
+		// query param hostId
+		var qrHostID string
+
+		if o.HostID != nil {
+			qrHostID = *o.HostID
+		}
+		qHostID := qrHostID
+		if qHostID != "" {
+
+			if err := r.SetQueryParam("hostId", qHostID); err != nil {
+				return err
+			}
 		}
 	}
 

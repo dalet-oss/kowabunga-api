@@ -40,6 +40,10 @@ type CreateZoneVolumeParams struct {
 	  In: body
 	*/
 	Body *models.Volume
+	/*the ID of the associated host (useless for RBD pools, mandatory for local ones).
+	  In: query
+	*/
+	HostID *string
 	/*the ID of the associated storage pool (optional, zone's default if unspecified).
 	  In: query
 	*/
@@ -99,6 +103,11 @@ func (o *CreateZoneVolumeParams) BindRequest(r *http.Request, route *middleware.
 		res = append(res, errors.Required("body", "body", ""))
 	}
 
+	qHostID, qhkHostID, _ := qs.GetOK("hostId")
+	if err := o.bindHostID(qHostID, qhkHostID, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
 	qPoolID, qhkPoolID, _ := qs.GetOK("poolId")
 	if err := o.bindPoolID(qPoolID, qhkPoolID, route.Formats); err != nil {
 		res = append(res, err)
@@ -121,6 +130,24 @@ func (o *CreateZoneVolumeParams) BindRequest(r *http.Request, route *middleware.
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// bindHostID binds and validates parameter HostID from query.
+func (o *CreateZoneVolumeParams) bindHostID(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+	o.HostID = &raw
+
 	return nil
 }
 

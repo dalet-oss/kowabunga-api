@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.5.5"
+    "version": "0.5.6"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -1363,6 +1363,12 @@ func init() {
             "required": true
           },
           {
+            "type": "string",
+            "description": "the ID of the associated host (useless for RBD pools, mandatory for local ones).",
+            "name": "hostId",
+            "in": "query"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -1562,6 +1568,12 @@ func init() {
             "type": "string",
             "description": "the ID of the template to clone the storage volume from (optional, zone's default if unspecified)",
             "name": "templateId",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "the ID of the associated host (useless for RBD pools, mandatory for local ones).",
+            "name": "hostId",
             "in": "query"
           },
           {
@@ -3698,7 +3710,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.5.5"
+    "version": "0.5.6"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -5030,6 +5042,12 @@ func init() {
             "required": true
           },
           {
+            "type": "string",
+            "description": "the ID of the associated host (useless for RBD pools, mandatory for local ones).",
+            "name": "hostId",
+            "in": "query"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -5229,6 +5247,12 @@ func init() {
             "type": "string",
             "description": "the ID of the template to clone the storage volume from (optional, zone's default if unspecified)",
             "name": "templateId",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "the ID of the associated host (useless for RBD pools, mandatory for local ones).",
+            "name": "hostId",
             "in": "query"
           },
           {
