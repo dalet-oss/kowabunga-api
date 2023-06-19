@@ -7,7 +7,7 @@
 //	  http
 //	Host: localhost
 //	BasePath: /api/v1
-//	Version: 0.5.6
+//	Version: 0.5.7
 //
 //	Consumes:
 //	  - application/json

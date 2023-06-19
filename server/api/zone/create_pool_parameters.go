@@ -40,6 +40,10 @@ type CreatePoolParams struct {
 	  In: body
 	*/
 	Body *models.StoragePool
+	/*the ID of the associated host (useless for RBD pools, mandatory for local ones).
+	  In: query
+	*/
+	HostID *string
 	/*the ID of the associated zone.
 	  Required: true
 	  In: path
@@ -55,6 +59,8 @@ func (o *CreatePoolParams) BindRequest(r *http.Request, route *middleware.Matche
 	var res []error
 
 	o.HTTPRequest = r
+
+	qs := runtime.Values(r.URL.Query())
 
 	if runtime.HasBody(r) {
 		defer r.Body.Close()
@@ -84,6 +90,11 @@ func (o *CreatePoolParams) BindRequest(r *http.Request, route *middleware.Matche
 		res = append(res, errors.Required("body", "body", ""))
 	}
 
+	qHostID, qhkHostID, _ := qs.GetOK("hostId")
+	if err := o.bindHostID(qHostID, qhkHostID, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
 	rZoneID, rhkZoneID, _ := route.Params.GetOK("zoneId")
 	if err := o.bindZoneID(rZoneID, rhkZoneID, route.Formats); err != nil {
 		res = append(res, err)
@@ -91,6 +102,24 @@ func (o *CreatePoolParams) BindRequest(r *http.Request, route *middleware.Matche
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// bindHostID binds and validates parameter HostID from query.
+func (o *CreatePoolParams) bindHostID(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+	o.HostID = &raw
+
 	return nil
 }
 

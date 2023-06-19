@@ -16,6 +16,8 @@ import (
 type CreatePoolURL struct {
 	ZoneID string
 
+	HostID *string
+
 	_basePath string
 	// avoid unkeyed usage
 	_ struct{}
@@ -54,6 +56,18 @@ func (o *CreatePoolURL) Build() (*url.URL, error) {
 		_basePath = "/api/v1"
 	}
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
+
+	qs := make(url.Values)
+
+	var hostIDQ string
+	if o.HostID != nil {
+		hostIDQ = *o.HostID
+	}
+	if hostIDQ != "" {
+		qs.Set("hostId", hostIDQ)
+	}
+
+	_result.RawQuery = qs.Encode()
 
 	return &_result, nil
 }

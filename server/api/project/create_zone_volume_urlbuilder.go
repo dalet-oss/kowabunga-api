@@ -17,7 +17,6 @@ type CreateZoneVolumeURL struct {
 	ProjectID string
 	ZoneID    string
 
-	HostID     *string
 	PoolID     *string
 	TemplateID *string
 
@@ -68,14 +67,6 @@ func (o *CreateZoneVolumeURL) Build() (*url.URL, error) {
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
 
 	qs := make(url.Values)
-
-	var hostIDQ string
-	if o.HostID != nil {
-		hostIDQ = *o.HostID
-	}
-	if hostIDQ != "" {
-		qs.Set("hostId", hostIDQ)
-	}
 
 	var poolIDQ string
 	if o.PoolID != nil {

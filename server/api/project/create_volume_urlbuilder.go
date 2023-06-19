@@ -16,7 +16,6 @@ import (
 type CreateVolumeURL struct {
 	ProjectID string
 
-	HostID     *string
 	PoolID     string
 	TemplateID string
 
@@ -60,14 +59,6 @@ func (o *CreateVolumeURL) Build() (*url.URL, error) {
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
 
 	qs := make(url.Values)
-
-	var hostIDQ string
-	if o.HostID != nil {
-		hostIDQ = *o.HostID
-	}
-	if hostIDQ != "" {
-		qs.Set("hostId", hostIDQ)
-	}
 
 	poolIDQ := o.PoolID
 	if poolIDQ != "" {

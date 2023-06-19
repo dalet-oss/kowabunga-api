@@ -66,6 +66,12 @@ type CreatePoolParams struct {
 	// Body.
 	Body *models.StoragePool
 
+	/* HostID.
+
+	   the ID of the associated host (useless for RBD pools, mandatory for local ones).
+	*/
+	HostID *string
+
 	/* ZoneID.
 
 	   the ID of the associated zone.
@@ -136,6 +142,17 @@ func (o *CreatePoolParams) SetBody(body *models.StoragePool) {
 	o.Body = body
 }
 
+// WithHostID adds the hostID to the create pool params
+func (o *CreatePoolParams) WithHostID(hostID *string) *CreatePoolParams {
+	o.SetHostID(hostID)
+	return o
+}
+
+// SetHostID adds the hostId to the create pool params
+func (o *CreatePoolParams) SetHostID(hostID *string) {
+	o.HostID = hostID
+}
+
 // WithZoneID adds the zoneID to the create pool params
 func (o *CreatePoolParams) WithZoneID(zoneID string) *CreatePoolParams {
 	o.SetZoneID(zoneID)
@@ -157,6 +174,23 @@ func (o *CreatePoolParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Re
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err
+		}
+	}
+
+	if o.HostID != nil {
+
+		// query param hostId
+		var qrHostID string
+
+		if o.HostID != nil {
+			qrHostID = *o.HostID
+		}
+		qHostID := qrHostID
+		if qHostID != "" {
+
+			if err := r.SetQueryParam("hostId", qHostID); err != nil {
+				return err
+			}
 		}
 	}
 

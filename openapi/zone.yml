@@ -215,6 +215,10 @@ paths:
           type: string
           required: true
           description: the ID of the associated zone.
+        - name: hostId
+          in: query
+          type: string
+          description: the ID of the associated host (useless for RBD pools, mandatory for local ones).
         - name: body
           in: body
           required: true
