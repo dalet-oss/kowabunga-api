@@ -26,11 +26,6 @@ type Volume struct {
 	// The storage volume ID (auto-generated).
 	ID string `json:"id,omitempty"`
 
-	// The type of storage volume.
-	// Required: true
-	// Enum: [os iso raw]
-	Kind *string `json:"kind"`
-
 	// The storage volume name.
 	// Required: true
 	Name *string `json:"name"`
@@ -41,15 +36,16 @@ type Volume struct {
 	// The storage volume size in bytes.
 	// Required: true
 	Size *int64 `json:"size"`
+
+	// The type of storage volume.
+	// Required: true
+	// Enum: [os iso raw]
+	Type *string `json:"type"`
 }
 
 // Validate validates this volume
 func (m *Volume) Validate(formats strfmt.Registry) error {
 	var res []error
-
-	if err := m.validateKind(formats); err != nil {
-		res = append(res, err)
-	}
 
 	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
@@ -59,55 +55,13 @@ func (m *Volume) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateType(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-var volumeTypeKindPropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["os","iso","raw"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		volumeTypeKindPropEnum = append(volumeTypeKindPropEnum, v)
-	}
-}
-
-const (
-
-	// VolumeKindOs captures enum value "os"
-	VolumeKindOs string = "os"
-
-	// VolumeKindIso captures enum value "iso"
-	VolumeKindIso string = "iso"
-
-	// VolumeKindRaw captures enum value "raw"
-	VolumeKindRaw string = "raw"
-)
-
-// prop value enum
-func (m *Volume) validateKindEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, volumeTypeKindPropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *Volume) validateKind(formats strfmt.Registry) error {
-
-	if err := validate.Required("kind", "body", m.Kind); err != nil {
-		return err
-	}
-
-	// value enum
-	if err := m.validateKindEnum("kind", "body", *m.Kind); err != nil {
-		return err
-	}
-
 	return nil
 }
 
@@ -123,6 +77,52 @@ func (m *Volume) validateName(formats strfmt.Registry) error {
 func (m *Volume) validateSize(formats strfmt.Registry) error {
 
 	if err := validate.Required("size", "body", m.Size); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var volumeTypeTypePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["os","iso","raw"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		volumeTypeTypePropEnum = append(volumeTypeTypePropEnum, v)
+	}
+}
+
+const (
+
+	// VolumeTypeOs captures enum value "os"
+	VolumeTypeOs string = "os"
+
+	// VolumeTypeIso captures enum value "iso"
+	VolumeTypeIso string = "iso"
+
+	// VolumeTypeRaw captures enum value "raw"
+	VolumeTypeRaw string = "raw"
+)
+
+// prop value enum
+func (m *Volume) validateTypeEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, volumeTypeTypePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *Volume) validateType(formats strfmt.Registry) error {
+
+	if err := validate.Required("type", "body", m.Type); err != nil {
+		return err
+	}
+
+	// value enum
+	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
 		return err
 	}
 

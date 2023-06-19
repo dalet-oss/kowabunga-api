@@ -26,10 +26,6 @@ type Template struct {
 	// The volume template ID (auto-generated).
 	ID string `json:"id,omitempty"`
 
-	// The type of volume template.
-	// Enum: [os raw]
-	Kind *string `json:"kind,omitempty"`
-
 	// The volume template name.
 	// Required: true
 	Name *string `json:"name"`
@@ -37,15 +33,15 @@ type Template struct {
 	// Type of operating system if OS kind (useful to determine cloud-init parameters for instance)
 	// Enum: [linux windows]
 	Os *string `json:"os,omitempty"`
+
+	// The type of volume template.
+	// Enum: [os raw]
+	Type *string `json:"type,omitempty"`
 }
 
 // Validate validates this template
 func (m *Template) Validate(formats strfmt.Registry) error {
 	var res []error
-
-	if err := m.validateKind(formats); err != nil {
-		res = append(res, err)
-	}
 
 	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
@@ -55,51 +51,13 @@ func (m *Template) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateType(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-var templateTypeKindPropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["os","raw"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		templateTypeKindPropEnum = append(templateTypeKindPropEnum, v)
-	}
-}
-
-const (
-
-	// TemplateKindOs captures enum value "os"
-	TemplateKindOs string = "os"
-
-	// TemplateKindRaw captures enum value "raw"
-	TemplateKindRaw string = "raw"
-)
-
-// prop value enum
-func (m *Template) validateKindEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, templateTypeKindPropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *Template) validateKind(formats strfmt.Registry) error {
-	if swag.IsZero(m.Kind) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateKindEnum("kind", "body", *m.Kind); err != nil {
-		return err
-	}
-
 	return nil
 }
 
@@ -148,6 +106,48 @@ func (m *Template) validateOs(formats strfmt.Registry) error {
 
 	// value enum
 	if err := m.validateOsEnum("os", "body", *m.Os); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var templateTypeTypePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["os","raw"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		templateTypeTypePropEnum = append(templateTypeTypePropEnum, v)
+	}
+}
+
+const (
+
+	// TemplateTypeOs captures enum value "os"
+	TemplateTypeOs string = "os"
+
+	// TemplateTypeRaw captures enum value "raw"
+	TemplateTypeRaw string = "raw"
+)
+
+// prop value enum
+func (m *Template) validateTypeEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, templateTypeTypePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *Template) validateType(formats strfmt.Registry) error {
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
 		return err
 	}
 

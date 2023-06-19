@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.5.4"
+    "version": "0.5.5"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -3444,12 +3444,21 @@ func init() {
       "type": "object",
       "required": [
         "name",
-        "pool",
-        "address"
+        "pool"
       ],
       "properties": {
-        "address": {
-          "description": "The local Ceph Monitor(s) address or FQDN.",
+        "ceph_address": {
+          "description": "The local Ceph Monitor(s) address or FQDN, empty for local pool type.",
+          "type": "string",
+          "default": "localhost"
+        },
+        "ceph_port": {
+          "description": "The local Ceph Monitor(s) port (default 3300), empty for local pool type.",
+          "type": "integer",
+          "default": 3300
+        },
+        "ceph_secret_uuid": {
+          "description": "The libvirt secret UUID for CephX authentication, empty for local pool type.",
           "type": "string"
         },
         "cost": {
@@ -3470,17 +3479,17 @@ func init() {
           "type": "string"
         },
         "pool": {
-          "description": "The local Ceph RBD pool name.",
+          "description": "The libvirt pool name.",
           "type": "string"
         },
-        "port": {
-          "description": "The local Ceph Monitor(s) port (default 3300).",
-          "type": "integer",
-          "default": 3300
-        },
-        "secret_uuid": {
-          "description": "The libvirt secret UUID for CephX authentication.",
-          "type": "string"
+        "type": {
+          "description": "The storage pool type.",
+          "type": "string",
+          "default": "rbd",
+          "enum": [
+            "local",
+            "rbd"
+          ]
         }
       }
     },
@@ -3539,15 +3548,6 @@ func init() {
           "description": "The volume template ID (auto-generated).",
           "type": "string"
         },
-        "kind": {
-          "description": "The type of volume template.",
-          "type": "string",
-          "default": "os",
-          "enum": [
-            "os",
-            "raw"
-          ]
-        },
         "name": {
           "description": "The volume template name.",
           "type": "string"
@@ -3559,6 +3559,15 @@ func init() {
           "enum": [
             "linux",
             "windows"
+          ]
+        },
+        "type": {
+          "description": "The type of volume template.",
+          "type": "string",
+          "default": "os",
+          "enum": [
+            "os",
+            "raw"
           ]
         }
       }
@@ -3602,7 +3611,7 @@ func init() {
       "type": "object",
       "required": [
         "name",
-        "kind",
+        "type",
         "size"
       ],
       "properties": {
@@ -3613,15 +3622,6 @@ func init() {
         "id": {
           "description": "The storage volume ID (auto-generated).",
           "type": "string"
-        },
-        "kind": {
-          "description": "The type of storage volume.",
-          "type": "string",
-          "enum": [
-            "os",
-            "iso",
-            "raw"
-          ]
         },
         "name": {
           "description": "The storage volume name.",
@@ -3635,6 +3635,15 @@ func init() {
         "size": {
           "description": "The storage volume size in bytes.",
           "type": "integer"
+        },
+        "type": {
+          "description": "The type of storage volume.",
+          "type": "string",
+          "enum": [
+            "os",
+            "iso",
+            "raw"
+          ]
         }
       }
     },
@@ -3689,7 +3698,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.5.4"
+    "version": "0.5.5"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -7163,12 +7172,21 @@ func init() {
       "type": "object",
       "required": [
         "name",
-        "pool",
-        "address"
+        "pool"
       ],
       "properties": {
-        "address": {
-          "description": "The local Ceph Monitor(s) address or FQDN.",
+        "ceph_address": {
+          "description": "The local Ceph Monitor(s) address or FQDN, empty for local pool type.",
+          "type": "string",
+          "default": "localhost"
+        },
+        "ceph_port": {
+          "description": "The local Ceph Monitor(s) port (default 3300), empty for local pool type.",
+          "type": "integer",
+          "default": 3300
+        },
+        "ceph_secret_uuid": {
+          "description": "The libvirt secret UUID for CephX authentication, empty for local pool type.",
           "type": "string"
         },
         "cost": {
@@ -7189,17 +7207,17 @@ func init() {
           "type": "string"
         },
         "pool": {
-          "description": "The local Ceph RBD pool name.",
+          "description": "The libvirt pool name.",
           "type": "string"
         },
-        "port": {
-          "description": "The local Ceph Monitor(s) port (default 3300).",
-          "type": "integer",
-          "default": 3300
-        },
-        "secret_uuid": {
-          "description": "The libvirt secret UUID for CephX authentication.",
-          "type": "string"
+        "type": {
+          "description": "The storage pool type.",
+          "type": "string",
+          "default": "rbd",
+          "enum": [
+            "local",
+            "rbd"
+          ]
         }
       }
     },
@@ -7258,15 +7276,6 @@ func init() {
           "description": "The volume template ID (auto-generated).",
           "type": "string"
         },
-        "kind": {
-          "description": "The type of volume template.",
-          "type": "string",
-          "default": "os",
-          "enum": [
-            "os",
-            "raw"
-          ]
-        },
         "name": {
           "description": "The volume template name.",
           "type": "string"
@@ -7278,6 +7287,15 @@ func init() {
           "enum": [
             "linux",
             "windows"
+          ]
+        },
+        "type": {
+          "description": "The type of volume template.",
+          "type": "string",
+          "default": "os",
+          "enum": [
+            "os",
+            "raw"
           ]
         }
       }
@@ -7321,7 +7339,7 @@ func init() {
       "type": "object",
       "required": [
         "name",
-        "kind",
+        "type",
         "size"
       ],
       "properties": {
@@ -7332,15 +7350,6 @@ func init() {
         "id": {
           "description": "The storage volume ID (auto-generated).",
           "type": "string"
-        },
-        "kind": {
-          "description": "The type of storage volume.",
-          "type": "string",
-          "enum": [
-            "os",
-            "iso",
-            "raw"
-          ]
         },
         "name": {
           "description": "The storage volume name.",
@@ -7354,6 +7363,15 @@ func init() {
         "size": {
           "description": "The storage volume size in bytes.",
           "type": "integer"
+        },
+        "type": {
+          "description": "The type of storage volume.",
+          "type": "string",
+          "enum": [
+            "os",
+            "iso",
+            "raw"
+          ]
         }
       }
     },

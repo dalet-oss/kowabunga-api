@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	"encoding/json"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -19,9 +20,14 @@ import (
 // swagger:model StoragePool
 type StoragePool struct {
 
-	// The local Ceph Monitor(s) address or FQDN.
-	// Required: true
-	Address *string `json:"address"`
+	// The local Ceph Monitor(s) address or FQDN, empty for local pool type.
+	CephAddress *string `json:"ceph_address,omitempty"`
+
+	// The local Ceph Monitor(s) port (default 3300), empty for local pool type.
+	CephPort *int64 `json:"ceph_port,omitempty"`
+
+	// The libvirt secret UUID for CephX authentication, empty for local pool type.
+	CephSecretUUID string `json:"ceph_secret_uuid,omitempty"`
 
 	// Cost associated to the storage pool.
 	Cost *Cost `json:"cost,omitempty"`
@@ -36,24 +42,18 @@ type StoragePool struct {
 	// Required: true
 	Name *string `json:"name"`
 
-	// The local Ceph RBD pool name.
+	// The libvirt pool name.
 	// Required: true
 	Pool *string `json:"pool"`
 
-	// The local Ceph Monitor(s) port (default 3300).
-	Port *int64 `json:"port,omitempty"`
-
-	// The libvirt secret UUID for CephX authentication.
-	SecretUUID string `json:"secret_uuid,omitempty"`
+	// The storage pool type.
+	// Enum: [local rbd]
+	Type *string `json:"type,omitempty"`
 }
 
 // Validate validates this storage pool
 func (m *StoragePool) Validate(formats strfmt.Registry) error {
 	var res []error
-
-	if err := m.validateAddress(formats); err != nil {
-		res = append(res, err)
-	}
 
 	if err := m.validateCost(formats); err != nil {
 		res = append(res, err)
@@ -67,18 +67,13 @@ func (m *StoragePool) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateType(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *StoragePool) validateAddress(formats strfmt.Registry) error {
-
-	if err := validate.Required("address", "body", m.Address); err != nil {
-		return err
-	}
-
 	return nil
 }
 
@@ -113,6 +108,48 @@ func (m *StoragePool) validateName(formats strfmt.Registry) error {
 func (m *StoragePool) validatePool(formats strfmt.Registry) error {
 
 	if err := validate.Required("pool", "body", m.Pool); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var storagePoolTypeTypePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["local","rbd"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		storagePoolTypeTypePropEnum = append(storagePoolTypeTypePropEnum, v)
+	}
+}
+
+const (
+
+	// StoragePoolTypeLocal captures enum value "local"
+	StoragePoolTypeLocal string = "local"
+
+	// StoragePoolTypeRbd captures enum value "rbd"
+	StoragePoolTypeRbd string = "rbd"
+)
+
+// prop value enum
+func (m *StoragePool) validateTypeEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, storagePoolTypeTypePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *StoragePool) validateType(formats strfmt.Registry) error {
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateTypeEnum("type", "body", *m.Type); err != nil {
 		return err
 	}
 

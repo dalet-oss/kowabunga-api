@@ -1,7 +1,7 @@
 definitions:
   StoragePool:
     type: object
-    required: [name, pool, address]
+    required: [name, pool]
     properties:
       id:
         type: string
@@ -12,19 +12,25 @@ definitions:
       description:
         type: string
         description: The storage pool description.
+      type:
+        type: string
+        description: The storage pool type.
+        enum: ['local', 'rbd']
+        default: 'rbd'
       pool:
         type: string
-        description: The local Ceph RBD pool name.
-      address:
+        description: The libvirt pool name.
+      ceph_address:
         type: string
-        description: The local Ceph Monitor(s) address or FQDN.
-      port:
+        description: The local Ceph Monitor(s) address or FQDN, empty for local pool type.
+        default: "localhost"
+      ceph_port:
         type: integer
-        description: The local Ceph Monitor(s) port (default 3300).
+        description: The local Ceph Monitor(s) port (default 3300), empty for local pool type.
         default: 3300
-      secret_uuid:
+      ceph_secret_uuid:
         type: string
-        description: The libvirt secret UUID for CephX authentication.
+        description: The libvirt secret UUID for CephX authentication, empty for local pool type.
       cost:
         type: object
         description: Cost associated to the storage pool.
