@@ -13,17 +13,25 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
 	"github.com/dalet-oss/kowabunga-api/models"
 )
 
 // NewCreateAdapterParams creates a new CreateAdapterParams object
-//
-// There are no default values defined in the spec.
+// with the default values initialized.
 func NewCreateAdapterParams() CreateAdapterParams {
 
-	return CreateAdapterParams{}
+	var (
+		// initialize parameters with default values
+
+		assignIPDefault = bool(false)
+	)
+
+	return CreateAdapterParams{
+		AssignIP: &assignIPDefault,
+	}
 }
 
 // CreateAdapterParams contains all the bound params for the create adapter operation
@@ -35,6 +43,11 @@ type CreateAdapterParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
+	/*whether Kowabunga should pick and assign an IP address to this adapter.
+	  In: query
+	  Default: false
+	*/
+	AssignIP *bool
 	/*
 	  Required: true
 	  In: body
@@ -55,6 +68,13 @@ func (o *CreateAdapterParams) BindRequest(r *http.Request, route *middleware.Mat
 	var res []error
 
 	o.HTTPRequest = r
+
+	qs := runtime.Values(r.URL.Query())
+
+	qAssignIP, qhkAssignIP, _ := qs.GetOK("assignIP")
+	if err := o.bindAssignIP(qAssignIP, qhkAssignIP, route.Formats); err != nil {
+		res = append(res, err)
+	}
 
 	if runtime.HasBody(r) {
 		defer r.Body.Close()
@@ -91,6 +111,30 @@ func (o *CreateAdapterParams) BindRequest(r *http.Request, route *middleware.Mat
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// bindAssignIP binds and validates parameter AssignIP from query.
+func (o *CreateAdapterParams) bindAssignIP(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		// Default values have been previously initialized by NewCreateAdapterParams()
+		return nil
+	}
+
+	value, err := swag.ConvertBool(raw)
+	if err != nil {
+		return errors.InvalidType("assignIP", "query", "bool", raw)
+	}
+	o.AssignIP = &value
+
 	return nil
 }
 

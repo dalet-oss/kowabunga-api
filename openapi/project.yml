@@ -1,7 +1,7 @@
 definitions:
   Project:
     type: object
-    required: [name]
+    required: [name, email]
     properties:
       id:
         type: string
@@ -12,6 +12,9 @@ definitions:
       description:
         type: string
         description: The project description.
+      email:
+        type: string
+        description: The project associated email address, used to receive notifications.
       tags:
         type: array
         description: A list of tags to be associated to the project.

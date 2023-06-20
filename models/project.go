@@ -23,6 +23,10 @@ type Project struct {
 	// The project description.
 	Description string `json:"description,omitempty"`
 
+	// The project associated email address, used to receive notifications.
+	// Required: true
+	Email *string `json:"email"`
+
 	// The project ID (auto-generated).
 	ID string `json:"id,omitempty"`
 
@@ -41,6 +45,10 @@ type Project struct {
 func (m *Project) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateEmail(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateMetadatas(formats); err != nil {
 		res = append(res, err)
 	}
@@ -52,6 +60,15 @@ func (m *Project) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Project) validateEmail(formats strfmt.Registry) error {
+
+	if err := validate.Required("email", "body", m.Email); err != nil {
+		return err
+	}
+
 	return nil
 }
 

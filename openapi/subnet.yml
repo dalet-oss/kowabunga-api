@@ -131,6 +131,11 @@ paths:
           type: string
           required: true
           description: the ID of the associated subnet.
+        - name: assignIP
+          in: query
+          type: boolean
+          default: false
+          description: whether Kowabunga should pick and assign an IP address to this adapter.
         - name: body
           in: body
           required: true

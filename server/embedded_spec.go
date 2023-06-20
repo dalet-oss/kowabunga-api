@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.5.7"
+    "version": "0.5.8"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -2002,6 +2002,13 @@ func init() {
             "required": true
           },
           {
+            "type": "boolean",
+            "default": false,
+            "description": "whether Kowabunga should pick and assign an IP address to this adapter.",
+            "name": "assignIP",
+            "in": "query"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -3057,9 +3064,7 @@ func init() {
     "Adapter": {
       "type": "object",
       "required": [
-        "name",
-        "mac",
-        "addresses"
+        "name"
       ],
       "properties": {
         "addresses": {
@@ -3078,7 +3083,7 @@ func init() {
           "type": "string"
         },
         "mac": {
-          "description": "The network adapter hardware address (e.g. 00:11:22:33:44:55).",
+          "description": "The network adapter hardware address (e.g. 00:11:22:33:44:55). Auto-generated if unspecified.",
           "type": "string"
         },
         "name": {
@@ -3369,11 +3374,16 @@ func init() {
     "Project": {
       "type": "object",
       "required": [
-        "name"
+        "name",
+        "email"
       ],
       "properties": {
         "description": {
           "description": "The project description.",
+          "type": "string"
+        },
+        "email": {
+          "description": "The project associated email address, used to receive notifications.",
           "type": "string"
         },
         "id": {
@@ -3704,7 +3714,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.5.7"
+    "version": "0.5.8"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -5675,6 +5685,13 @@ func init() {
             "required": true
           },
           {
+            "type": "boolean",
+            "default": false,
+            "description": "whether Kowabunga should pick and assign an IP address to this adapter.",
+            "name": "assignIP",
+            "in": "query"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -6730,9 +6747,7 @@ func init() {
     "Adapter": {
       "type": "object",
       "required": [
-        "name",
-        "mac",
-        "addresses"
+        "name"
       ],
       "properties": {
         "addresses": {
@@ -6751,7 +6766,7 @@ func init() {
           "type": "string"
         },
         "mac": {
-          "description": "The network adapter hardware address (e.g. 00:11:22:33:44:55).",
+          "description": "The network adapter hardware address (e.g. 00:11:22:33:44:55). Auto-generated if unspecified.",
           "type": "string"
         },
         "name": {
@@ -7103,11 +7118,16 @@ func init() {
     "Project": {
       "type": "object",
       "required": [
-        "name"
+        "name",
+        "email"
       ],
       "properties": {
         "description": {
           "description": "The project description.",
+          "type": "string"
+        },
+        "email": {
+          "description": "The project associated email address, used to receive notifications.",
           "type": "string"
         },
         "id": {

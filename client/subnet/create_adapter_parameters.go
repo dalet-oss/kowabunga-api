@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/dalet-oss/kowabunga-api/models"
 )
@@ -63,6 +64,12 @@ CreateAdapterParams contains all the parameters to send to the API endpoint
 */
 type CreateAdapterParams struct {
 
+	/* AssignIP.
+
+	   whether Kowabunga should pick and assign an IP address to this adapter.
+	*/
+	AssignIP *bool
+
 	// Body.
 	Body *models.Adapter
 
@@ -89,7 +96,18 @@ func (o *CreateAdapterParams) WithDefaults() *CreateAdapterParams {
 //
 // All values with no default are reset to their zero value.
 func (o *CreateAdapterParams) SetDefaults() {
-	// no default values defined for this parameter
+	var (
+		assignIPDefault = bool(false)
+	)
+
+	val := CreateAdapterParams{
+		AssignIP: &assignIPDefault,
+	}
+
+	val.timeout = o.timeout
+	val.Context = o.Context
+	val.HTTPClient = o.HTTPClient
+	*o = val
 }
 
 // WithTimeout adds the timeout to the create adapter params
@@ -125,6 +143,17 @@ func (o *CreateAdapterParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithAssignIP adds the assignIP to the create adapter params
+func (o *CreateAdapterParams) WithAssignIP(assignIP *bool) *CreateAdapterParams {
+	o.SetAssignIP(assignIP)
+	return o
+}
+
+// SetAssignIP adds the assignIp to the create adapter params
+func (o *CreateAdapterParams) SetAssignIP(assignIP *bool) {
+	o.AssignIP = assignIP
+}
+
 // WithBody adds the body to the create adapter params
 func (o *CreateAdapterParams) WithBody(body *models.Adapter) *CreateAdapterParams {
 	o.SetBody(body)
@@ -154,6 +183,23 @@ func (o *CreateAdapterParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		return err
 	}
 	var res []error
+
+	if o.AssignIP != nil {
+
+		// query param assignIP
+		var qrAssignIP bool
+
+		if o.AssignIP != nil {
+			qrAssignIP = *o.AssignIP
+		}
+		qAssignIP := swag.FormatBool(qrAssignIP)
+		if qAssignIP != "" {
+
+			if err := r.SetQueryParam("assignIP", qAssignIP); err != nil {
+				return err
+			}
+		}
+	}
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err

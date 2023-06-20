@@ -1,7 +1,7 @@
 definitions:
   Adapter:
     type: object
-    required: [name, mac, addresses]
+    required: [name]
     properties:
       id:
         type: string
@@ -14,7 +14,7 @@ definitions:
         description: The network adapter description.
       mac:
         type: string
-        description: The network adapter hardware address (e.g. 00:11:22:33:44:55).
+        description: The network adapter hardware address (e.g. 00:11:22:33:44:55). Auto-generated if unspecified.
       addresses:
         type: array
         description: The network adapter list of associated IPv4 addresses.

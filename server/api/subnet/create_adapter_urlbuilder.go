@@ -10,11 +10,15 @@ import (
 	"net/url"
 	golangswaggerpaths "path"
 	"strings"
+
+	"github.com/go-openapi/swag"
 )
 
 // CreateAdapterURL generates an URL for the create adapter operation
 type CreateAdapterURL struct {
 	SubnetID string
+
+	AssignIP *bool
 
 	_basePath string
 	// avoid unkeyed usage
@@ -54,6 +58,18 @@ func (o *CreateAdapterURL) Build() (*url.URL, error) {
 		_basePath = "/api/v1"
 	}
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
+
+	qs := make(url.Values)
+
+	var assignIPQ string
+	if o.AssignIP != nil {
+		assignIPQ = swag.FormatBool(*o.AssignIP)
+	}
+	if assignIPQ != "" {
+		qs.Set("assignIP", assignIPQ)
+	}
+
+	_result.RawQuery = qs.Encode()
 
 	return &_result, nil
 }

@@ -20,7 +20,6 @@ import (
 type Adapter struct {
 
 	// The network adapter list of associated IPv4 addresses.
-	// Required: true
 	Addresses []string `json:"addresses"`
 
 	// The network adapter description.
@@ -29,9 +28,8 @@ type Adapter struct {
 	// The network adapter ID (auto-generated).
 	ID string `json:"id,omitempty"`
 
-	// The network adapter hardware address (e.g. 00:11:22:33:44:55).
-	// Required: true
-	Mac *string `json:"mac"`
+	// The network adapter hardware address (e.g. 00:11:22:33:44:55). Auto-generated if unspecified.
+	Mac string `json:"mac,omitempty"`
 
 	// The network adapter name.
 	// Required: true
@@ -45,14 +43,6 @@ type Adapter struct {
 func (m *Adapter) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateAddresses(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateMac(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
@@ -60,24 +50,6 @@ func (m *Adapter) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *Adapter) validateAddresses(formats strfmt.Registry) error {
-
-	if err := validate.Required("addresses", "body", m.Addresses); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *Adapter) validateMac(formats strfmt.Registry) error {
-
-	if err := validate.Required("mac", "body", m.Mac); err != nil {
-		return err
-	}
-
 	return nil
 }
 
