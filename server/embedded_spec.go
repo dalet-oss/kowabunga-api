@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.5.9"
+    "version": "0.5.10"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -3378,6 +3378,14 @@ func init() {
         "email"
       ],
       "properties": {
+        "bootstrap_pubkey": {
+          "description": "The project default public SSH key, to be associated to bootstrap user. Will use Kowabunga's default configuration one if unspecified.",
+          "type": "string"
+        },
+        "bootstrap_user": {
+          "description": "The project default service user name, created at cloud-init instance bootstrap phase. Will use Kowabunga's default configuration one if unspecified.",
+          "type": "string"
+        },
         "description": {
           "description": "The project description.",
           "type": "string"
@@ -3718,7 +3726,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.5.9"
+    "version": "0.5.10"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -7126,6 +7134,14 @@ func init() {
         "email"
       ],
       "properties": {
+        "bootstrap_pubkey": {
+          "description": "The project default public SSH key, to be associated to bootstrap user. Will use Kowabunga's default configuration one if unspecified.",
+          "type": "string"
+        },
+        "bootstrap_user": {
+          "description": "The project default service user name, created at cloud-init instance bootstrap phase. Will use Kowabunga's default configuration one if unspecified.",
+          "type": "string"
+        },
         "description": {
           "description": "The project description.",
           "type": "string"

@@ -18,6 +18,12 @@ definitions:
       domain:
         type: string
         description: The project associated internal domain name (e.g. myproject.acme.com).
+      bootstrap_user:
+        type: string
+        description: The project default service user name, created at cloud-init instance bootstrap phase. Will use Kowabunga's default configuration one if unspecified.
+      bootstrap_pubkey:
+        type: string
+        description: The project default public SSH key, to be associated to bootstrap user. Will use Kowabunga's default configuration one if unspecified.
       tags:
         type: array
         description: A list of tags to be associated to the project.

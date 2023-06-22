@@ -20,6 +20,12 @@ import (
 // swagger:model Project
 type Project struct {
 
+	// The project default public SSH key, to be associated to bootstrap user. Will use Kowabunga's default configuration one if unspecified.
+	BootstrapPubkey string `json:"bootstrap_pubkey,omitempty"`
+
+	// The project default service user name, created at cloud-init instance bootstrap phase. Will use Kowabunga's default configuration one if unspecified.
+	BootstrapUser string `json:"bootstrap_user,omitempty"`
+
 	// The project description.
 	Description string `json:"description,omitempty"`
 
