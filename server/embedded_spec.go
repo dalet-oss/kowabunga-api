@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.5.10"
+    "version": "0.5.11"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -3413,6 +3413,10 @@ func init() {
           "description": "The project name.",
           "type": "string"
         },
+        "root_password": {
+          "description": "The project default root password, set at cloud-init instance bootstrap phase. Will be randomly auto-generated at each instance creation if unspecified.",
+          "type": "string"
+        },
         "tags": {
           "description": "A list of tags to be associated to the project.",
           "type": "array",
@@ -3726,7 +3730,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.5.10"
+    "version": "0.5.11"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -7167,6 +7171,10 @@ func init() {
         },
         "name": {
           "description": "The project name.",
+          "type": "string"
+        },
+        "root_password": {
+          "description": "The project default root password, set at cloud-init instance bootstrap phase. Will be randomly auto-generated at each instance creation if unspecified.",
           "type": "string"
         },
         "tags": {

@@ -46,6 +46,9 @@ type Project struct {
 	// Required: true
 	Name *string `json:"name"`
 
+	// The project default root password, set at cloud-init instance bootstrap phase. Will be randomly auto-generated at each instance creation if unspecified.
+	RootPassword string `json:"root_password,omitempty"`
+
 	// A list of tags to be associated to the project.
 	Tags []string `json:"tags"`
 }

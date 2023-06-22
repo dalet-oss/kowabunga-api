@@ -18,6 +18,9 @@ definitions:
       domain:
         type: string
         description: The project associated internal domain name (e.g. myproject.acme.com).
+      root_password:
+        type: string
+        description: The project default root password, set at cloud-init instance bootstrap phase. Will be randomly auto-generated at each instance creation if unspecified.
       bootstrap_user:
         type: string
         description: The project default service user name, created at cloud-init instance bootstrap phase. Will use Kowabunga's default configuration one if unspecified.
