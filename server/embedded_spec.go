@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.5.8"
+    "version": "0.5.9"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -3382,6 +3382,10 @@ func init() {
           "description": "The project description.",
           "type": "string"
         },
+        "domain": {
+          "description": "The project associated internal domain name (e.g. myproject.acme.com).",
+          "type": "string"
+        },
         "email": {
           "description": "The project associated email address, used to receive notifications.",
           "type": "string"
@@ -3714,7 +3718,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.5.8"
+    "version": "0.5.9"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -7124,6 +7128,10 @@ func init() {
       "properties": {
         "description": {
           "description": "The project description.",
+          "type": "string"
+        },
+        "domain": {
+          "description": "The project associated internal domain name (e.g. myproject.acme.com).",
           "type": "string"
         },
         "email": {

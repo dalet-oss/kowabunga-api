@@ -23,6 +23,9 @@ type Project struct {
 	// The project description.
 	Description string `json:"description,omitempty"`
 
+	// The project associated internal domain name (e.g. myproject.acme.com).
+	Domain string `json:"domain,omitempty"`
+
 	// The project associated email address, used to receive notifications.
 	// Required: true
 	Email *string `json:"email"`
