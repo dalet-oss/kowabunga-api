@@ -10,6 +10,8 @@ import (
 	"net/url"
 	golangswaggerpaths "path"
 	"strings"
+
+	"github.com/go-openapi/swag"
 )
 
 // CreateZoneKceURL generates an URL for the create zone kce operation
@@ -18,6 +20,8 @@ type CreateZoneKceURL struct {
 	ZoneID    string
 
 	PoolID     *string
+	Public     *bool
+	SubnetID   *string
 	TemplateID *string
 
 	_basePath string
@@ -74,6 +78,22 @@ func (o *CreateZoneKceURL) Build() (*url.URL, error) {
 	}
 	if poolIDQ != "" {
 		qs.Set("poolId", poolIDQ)
+	}
+
+	var publicQ string
+	if o.Public != nil {
+		publicQ = swag.FormatBool(*o.Public)
+	}
+	if publicQ != "" {
+		qs.Set("public", publicQ)
+	}
+
+	var subnetIDQ string
+	if o.SubnetID != nil {
+		subnetIDQ = *o.SubnetID
+	}
+	if subnetIDQ != "" {
+		qs.Set("subnetId", subnetIDQ)
 	}
 
 	var templateIDQ string

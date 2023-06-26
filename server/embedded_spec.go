@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.6.0"
+    "version": "0.6.1"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -1916,6 +1916,19 @@ func init() {
             "type": "string",
             "description": "the ID of the template to clone the OS storage volume from (optional, zone's default if unspecified)",
             "name": "templateId",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "the ID of the private subnet to be used for networking (optional, zone's default if unspecified)",
+            "name": "subnetId",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "default": false,
+            "description": "Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).",
+            "name": "public",
             "in": "query"
           },
           {
@@ -3788,14 +3801,13 @@ func init() {
       }
     },
     "KCE": {
-      "description": "Kowabunga Compute Engine (KCE) is a wrapper object for bare virtual machines. It consists of an instance, one to several attached volumes and 2 network adapters (a private one, a public one). This is the prefered way for creating virtual machines.",
+      "description": "Kowabunga Compute Engine (KCE) is a wrapper object for bare virtual machines. It consists of an instance, one to several attached volumes and 2 network adapters (a private one, a public one). This is the prefered way for creating virtual machines. IP addresses will be automatically assigned.",
       "type": "object",
       "required": [
         "name",
         "memory",
         "vcpus",
-        "disk",
-        "subnet"
+        "disk"
       ],
       "properties": {
         "data_disk": {
@@ -3821,15 +3833,6 @@ func init() {
         },
         "name": {
           "description": "The KCE virtual machine name",
-          "type": "string"
-        },
-        "public": {
-          "description": "Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).",
-          "type": "boolean",
-          "default": false
-        },
-        "subnet": {
-          "description": "The name of ID of the private subnet to be used for networking (KCE IPv4 address will be auto-assigned).",
           "type": "string"
         },
         "vcpus": {
@@ -4246,7 +4249,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.6.0"
+    "version": "0.6.1"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -6131,6 +6134,19 @@ func init() {
             "type": "string",
             "description": "the ID of the template to clone the OS storage volume from (optional, zone's default if unspecified)",
             "name": "templateId",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "the ID of the private subnet to be used for networking (optional, zone's default if unspecified)",
+            "name": "subnetId",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "default": false,
+            "description": "Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).",
+            "name": "public",
             "in": "query"
           },
           {
@@ -8064,14 +8080,13 @@ func init() {
       }
     },
     "KCE": {
-      "description": "Kowabunga Compute Engine (KCE) is a wrapper object for bare virtual machines. It consists of an instance, one to several attached volumes and 2 network adapters (a private one, a public one). This is the prefered way for creating virtual machines.",
+      "description": "Kowabunga Compute Engine (KCE) is a wrapper object for bare virtual machines. It consists of an instance, one to several attached volumes and 2 network adapters (a private one, a public one). This is the prefered way for creating virtual machines. IP addresses will be automatically assigned.",
       "type": "object",
       "required": [
         "name",
         "memory",
         "vcpus",
-        "disk",
-        "subnet"
+        "disk"
       ],
       "properties": {
         "data_disk": {
@@ -8097,15 +8112,6 @@ func init() {
         },
         "name": {
           "description": "The KCE virtual machine name",
-          "type": "string"
-        },
-        "public": {
-          "description": "Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).",
-          "type": "boolean",
-          "default": false
-        },
-        "subnet": {
-          "description": "The name of ID of the private subnet to be used for networking (KCE IPv4 address will be auto-assigned).",
           "type": "string"
         },
         "vcpus": {

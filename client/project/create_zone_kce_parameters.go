@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/dalet-oss/kowabunga-api/models"
 )
@@ -78,6 +79,18 @@ type CreateZoneKceParams struct {
 	*/
 	ProjectID string
 
+	/* Public.
+
+	   Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).
+	*/
+	Public *bool
+
+	/* SubnetID.
+
+	   the ID of the private subnet to be used for networking (optional, zone's default if unspecified)
+	*/
+	SubnetID *string
+
 	/* TemplateID.
 
 	   the ID of the template to clone the OS storage volume from (optional, zone's default if unspecified)
@@ -107,7 +120,18 @@ func (o *CreateZoneKceParams) WithDefaults() *CreateZoneKceParams {
 //
 // All values with no default are reset to their zero value.
 func (o *CreateZoneKceParams) SetDefaults() {
-	// no default values defined for this parameter
+	var (
+		publicDefault = bool(false)
+	)
+
+	val := CreateZoneKceParams{
+		Public: &publicDefault,
+	}
+
+	val.timeout = o.timeout
+	val.Context = o.Context
+	val.HTTPClient = o.HTTPClient
+	*o = val
 }
 
 // WithTimeout adds the timeout to the create zone kce params
@@ -176,6 +200,28 @@ func (o *CreateZoneKceParams) SetProjectID(projectID string) {
 	o.ProjectID = projectID
 }
 
+// WithPublic adds the public to the create zone kce params
+func (o *CreateZoneKceParams) WithPublic(public *bool) *CreateZoneKceParams {
+	o.SetPublic(public)
+	return o
+}
+
+// SetPublic adds the public to the create zone kce params
+func (o *CreateZoneKceParams) SetPublic(public *bool) {
+	o.Public = public
+}
+
+// WithSubnetID adds the subnetID to the create zone kce params
+func (o *CreateZoneKceParams) WithSubnetID(subnetID *string) *CreateZoneKceParams {
+	o.SetSubnetID(subnetID)
+	return o
+}
+
+// SetSubnetID adds the subnetId to the create zone kce params
+func (o *CreateZoneKceParams) SetSubnetID(subnetID *string) {
+	o.SubnetID = subnetID
+}
+
 // WithTemplateID adds the templateID to the create zone kce params
 func (o *CreateZoneKceParams) WithTemplateID(templateID *string) *CreateZoneKceParams {
 	o.SetTemplateID(templateID)
@@ -231,6 +277,40 @@ func (o *CreateZoneKceParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 	// path param projectId
 	if err := r.SetPathParam("projectId", o.ProjectID); err != nil {
 		return err
+	}
+
+	if o.Public != nil {
+
+		// query param public
+		var qrPublic bool
+
+		if o.Public != nil {
+			qrPublic = *o.Public
+		}
+		qPublic := swag.FormatBool(qrPublic)
+		if qPublic != "" {
+
+			if err := r.SetQueryParam("public", qPublic); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.SubnetID != nil {
+
+		// query param subnetId
+		var qrSubnetID string
+
+		if o.SubnetID != nil {
+			qrSubnetID = *o.SubnetID
+		}
+		qSubnetID := qrSubnetID
+		if qSubnetID != "" {
+
+			if err := r.SetQueryParam("subnetId", qSubnetID); err != nil {
+				return err
+			}
+		}
 	}
 
 	if o.TemplateID != nil {

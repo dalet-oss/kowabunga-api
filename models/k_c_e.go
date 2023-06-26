@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// KCE Kowabunga Compute Engine (KCE) is a wrapper object for bare virtual machines. It consists of an instance, one to several attached volumes and 2 network adapters (a private one, a public one). This is the prefered way for creating virtual machines.
+// KCE Kowabunga Compute Engine (KCE) is a wrapper object for bare virtual machines. It consists of an instance, one to several attached volumes and 2 network adapters (a private one, a public one). This is the prefered way for creating virtual machines. IP addresses will be automatically assigned.
 //
 // swagger:model KCE
 type KCE struct {
@@ -40,13 +40,6 @@ type KCE struct {
 	// Required: true
 	Name *string `json:"name"`
 
-	// Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).
-	Public *bool `json:"public,omitempty"`
-
-	// The name of ID of the private subnet to be used for networking (KCE IPv4 address will be auto-assigned).
-	// Required: true
-	Subnet *string `json:"subnet"`
-
 	// The KCE virtual machine's number of vCPUs.
 	// Required: true
 	Vcpus *int64 `json:"vcpus"`
@@ -65,10 +58,6 @@ func (m *KCE) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateName(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateSubnet(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -103,15 +92,6 @@ func (m *KCE) validateMemory(formats strfmt.Registry) error {
 func (m *KCE) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *KCE) validateSubnet(formats strfmt.Registry) error {
-
-	if err := validate.Required("subnet", "body", m.Subnet); err != nil {
 		return err
 	}
 

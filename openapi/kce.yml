@@ -1,8 +1,8 @@
 definitions:
   KCE:
     type: object
-    required: [name, memory, vcpus, disk, subnet]
-    description: Kowabunga Compute Engine (KCE) is a wrapper object for bare virtual machines. It consists of an instance, one to several attached volumes and 2 network adapters (a private one, a public one). This is the prefered way for creating virtual machines.
+    required: [name, memory, vcpus, disk]
+    description: Kowabunga Compute Engine (KCE) is a wrapper object for bare virtual machines. It consists of an instance, one to several attached volumes and 2 network adapters (a private one, a public one). This is the prefered way for creating virtual machines. IP addresses will be automatically assigned.
     properties:
       id:
         type: string
@@ -26,13 +26,6 @@ definitions:
         type: integer
         description: The KCE virtual machine's extra data disk size (in bytes). If unspecified, no extra data disk will be assigned.
         default: 0
-      subnet:
-        type: string
-        description: The name of ID of the private subnet to be used for networking (KCE IPv4 address will be auto-assigned).
-      public:
-        type: boolean
-        description: Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).
-        default: false
 
 paths:
   /kce:

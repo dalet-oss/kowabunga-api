@@ -13,17 +13,25 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
 	"github.com/dalet-oss/kowabunga-api/models"
 )
 
 // NewCreateZoneKceParams creates a new CreateZoneKceParams object
-//
-// There are no default values defined in the spec.
+// with the default values initialized.
 func NewCreateZoneKceParams() CreateZoneKceParams {
 
-	return CreateZoneKceParams{}
+	var (
+		// initialize parameters with default values
+
+		publicDefault = bool(false)
+	)
+
+	return CreateZoneKceParams{
+		Public: &publicDefault,
+	}
 }
 
 // CreateZoneKceParams contains all the bound params for the create zone kce operation
@@ -49,6 +57,15 @@ type CreateZoneKceParams struct {
 	  In: path
 	*/
 	ProjectID string
+	/*Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).
+	  In: query
+	  Default: false
+	*/
+	Public *bool
+	/*the ID of the private subnet to be used for networking (optional, zone's default if unspecified)
+	  In: query
+	*/
+	SubnetID *string
 	/*the ID of the template to clone the OS storage volume from (optional, zone's default if unspecified)
 	  In: query
 	*/
@@ -109,6 +126,16 @@ func (o *CreateZoneKceParams) BindRequest(r *http.Request, route *middleware.Mat
 		res = append(res, err)
 	}
 
+	qPublic, qhkPublic, _ := qs.GetOK("public")
+	if err := o.bindPublic(qPublic, qhkPublic, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
+	qSubnetID, qhkSubnetID, _ := qs.GetOK("subnetId")
+	if err := o.bindSubnetID(qSubnetID, qhkSubnetID, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
 	qTemplateID, qhkTemplateID, _ := qs.GetOK("templateId")
 	if err := o.bindTemplateID(qTemplateID, qhkTemplateID, route.Formats); err != nil {
 		res = append(res, err)
@@ -152,6 +179,48 @@ func (o *CreateZoneKceParams) bindProjectID(rawData []string, hasKey bool, forma
 	// Required: true
 	// Parameter is provided by construction from the route
 	o.ProjectID = raw
+
+	return nil
+}
+
+// bindPublic binds and validates parameter Public from query.
+func (o *CreateZoneKceParams) bindPublic(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		// Default values have been previously initialized by NewCreateZoneKceParams()
+		return nil
+	}
+
+	value, err := swag.ConvertBool(raw)
+	if err != nil {
+		return errors.InvalidType("public", "query", "bool", raw)
+	}
+	o.Public = &value
+
+	return nil
+}
+
+// bindSubnetID binds and validates parameter SubnetID from query.
+func (o *CreateZoneKceParams) bindSubnetID(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+	o.SubnetID = &raw
 
 	return nil
 }
