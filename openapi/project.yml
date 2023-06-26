@@ -451,3 +451,80 @@ paths:
               type: string
         404:
           description: Invalid project or zone ID was provided.
+
+  /project/{projectId}/zone/{zoneId}/kce:
+    post:
+      tags:
+        - project
+        - zone
+        - kce
+      operationId: CreateZoneKce
+      description: Creates a new KCE virtual machine in specified zone.
+      parameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: the ID of the associated project.
+        - name: zoneId
+          in: path
+          type: string
+          required: true
+          description: the ID of the associated zone.
+        - name: poolId
+          in: query
+          type: string
+          description: the ID of the associated storage pool (optional, zone's default if unspecified).
+        - name: templateId
+          in: query
+          type: string
+          description: the ID of the template to clone the OS storage volume from (optional, zone's default if unspecified)
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/KCE'
+      responses:
+        201:
+          description: Returns the newly created KCE virtual machine object.
+          schema:
+            $ref: '#/definitions/KCE'
+        400:
+          description: Bad parameters were provided.
+        404:
+          description: Invalid project or zone ID was provided.
+        409:
+          description: KCE Virtual machine already exists.
+        500:
+          description: Unable to create the KCE virtual machine.
+        507:
+          description: Requested characteristics are beyond project's quota in place.
+
+  /project/{projectId}/zone/{zoneId}/kces:
+    get:
+      tags:
+        - project
+        - zone
+        - kce
+      operationId: GetProjectZoneKCEs
+      description: Returns the IDs of the KCE virtual machines existing in the project in the specified zone.
+      parameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: The ID of the project to query.
+        - name: zoneId
+          in: path
+          type: string
+          required: true
+          description: The ID of the zone to query.
+      responses:
+        200:
+          description: Returns an array of KCE virtual machine IDs.
+          schema:
+            type: array
+            items:
+              type: string
+        404:
+          description: Invalid project or zone ID was provided.

@@ -22,6 +22,7 @@ import (
 	"github.com/dalet-oss/kowabunga-api/server/api/adapter"
 	"github.com/dalet-oss/kowabunga-api/server/api/host"
 	"github.com/dalet-oss/kowabunga-api/server/api/instance"
+	"github.com/dalet-oss/kowabunga-api/server/api/kce"
 	"github.com/dalet-oss/kowabunga-api/server/api/netgw"
 	"github.com/dalet-oss/kowabunga-api/server/api/pool"
 	"github.com/dalet-oss/kowabunga-api/server/api/project"
@@ -91,6 +92,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		ProjectCreateZoneInstanceHandler: project.CreateZoneInstanceHandlerFunc(func(params project.CreateZoneInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.CreateZoneInstance has not yet been implemented")
 		}),
+		ProjectCreateZoneKceHandler: project.CreateZoneKceHandlerFunc(func(params project.CreateZoneKceParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.CreateZoneKce has not yet been implemented")
+		}),
 		ProjectCreateZoneVolumeHandler: project.CreateZoneVolumeHandlerFunc(func(params project.CreateZoneVolumeParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.CreateZoneVolume has not yet been implemented")
 		}),
@@ -102,6 +106,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		InstanceDeleteInstanceHandler: instance.DeleteInstanceHandlerFunc(func(params instance.DeleteInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.DeleteInstance has not yet been implemented")
+		}),
+		KceDeleteKCEHandler: kce.DeleteKCEHandlerFunc(func(params kce.DeleteKCEParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.DeleteKCE has not yet been implemented")
 		}),
 		NetgwDeleteNetGWHandler: netgw.DeleteNetGWHandlerFunc(func(params netgw.DeleteNetGWParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation netgw.DeleteNetGW has not yet been implemented")
@@ -141,6 +148,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		InstanceGetAllInstancesHandler: instance.GetAllInstancesHandlerFunc(func(params instance.GetAllInstancesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.GetAllInstances has not yet been implemented")
+		}),
+		KceGetAllKCEsHandler: kce.GetAllKCEsHandlerFunc(func(params kce.GetAllKCEsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.GetAllKCEs has not yet been implemented")
 		}),
 		NetgwGetAllNetGWsHandler: netgw.GetAllNetGWsHandlerFunc(func(params netgw.GetAllNetGWsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation netgw.GetAllNetGWs has not yet been implemented")
@@ -184,6 +194,12 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		InstanceGetInstanceStateHandler: instance.GetInstanceStateHandlerFunc(func(params instance.GetInstanceStateParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.GetInstanceState has not yet been implemented")
 		}),
+		KceGetKCEHandler: kce.GetKCEHandlerFunc(func(params kce.GetKCEParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.GetKCE has not yet been implemented")
+		}),
+		KceGetKCEStateHandler: kce.GetKCEStateHandlerFunc(func(params kce.GetKCEStateParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.GetKCEState has not yet been implemented")
+		}),
 		NetgwGetNetGWHandler: netgw.GetNetGWHandlerFunc(func(params netgw.GetNetGWParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation netgw.GetNetGW has not yet been implemented")
 		}),
@@ -210,6 +226,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		ProjectGetProjectZoneInstancesHandler: project.GetProjectZoneInstancesHandlerFunc(func(params project.GetProjectZoneInstancesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectZoneInstances has not yet been implemented")
+		}),
+		ProjectGetProjectZoneKCEsHandler: project.GetProjectZoneKCEsHandlerFunc(func(params project.GetProjectZoneKCEsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.GetProjectZoneKCEs has not yet been implemented")
 		}),
 		ProjectGetProjectZoneVolumesHandler: project.GetProjectZoneVolumesHandlerFunc(func(params project.GetProjectZoneVolumesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectZoneVolumes has not yet been implemented")
@@ -256,8 +275,14 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		InstanceRebootInstanceHandler: instance.RebootInstanceHandlerFunc(func(params instance.RebootInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.RebootInstance has not yet been implemented")
 		}),
+		KceRebootKCEHandler: kce.RebootKCEHandlerFunc(func(params kce.RebootKCEParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.RebootKCE has not yet been implemented")
+		}),
 		InstanceResetInstanceHandler: instance.ResetInstanceHandlerFunc(func(params instance.ResetInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.ResetInstance has not yet been implemented")
+		}),
+		KceResetKCEHandler: kce.ResetKCEHandlerFunc(func(params kce.ResetKCEParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.ResetKCE has not yet been implemented")
 		}),
 		ProjectResetProjectQuotasHandler: project.ResetProjectQuotasHandlerFunc(func(params project.ResetProjectQuotasParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.ResetProjectQuotas has not yet been implemented")
@@ -265,17 +290,32 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		InstanceResumeInstanceHandler: instance.ResumeInstanceHandlerFunc(func(params instance.ResumeInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.ResumeInstance has not yet been implemented")
 		}),
+		KceResumeKCEHandler: kce.ResumeKCEHandlerFunc(func(params kce.ResumeKCEParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.ResumeKCE has not yet been implemented")
+		}),
 		InstanceShutdownInstanceHandler: instance.ShutdownInstanceHandlerFunc(func(params instance.ShutdownInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.ShutdownInstance has not yet been implemented")
+		}),
+		KceShutdownKCEHandler: kce.ShutdownKCEHandlerFunc(func(params kce.ShutdownKCEParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.ShutdownKCE has not yet been implemented")
 		}),
 		InstanceStartInstanceHandler: instance.StartInstanceHandlerFunc(func(params instance.StartInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.StartInstance has not yet been implemented")
 		}),
+		KceStartKCEHandler: kce.StartKCEHandlerFunc(func(params kce.StartKCEParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.StartKCE has not yet been implemented")
+		}),
 		InstanceStopInstanceHandler: instance.StopInstanceHandlerFunc(func(params instance.StopInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.StopInstance has not yet been implemented")
 		}),
+		KceStopKCEHandler: kce.StopKCEHandlerFunc(func(params kce.StopKCEParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.StopKCE has not yet been implemented")
+		}),
 		InstanceSuspendInstanceHandler: instance.SuspendInstanceHandlerFunc(func(params instance.SuspendInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.SuspendInstance has not yet been implemented")
+		}),
+		KceSuspendKCEHandler: kce.SuspendKCEHandlerFunc(func(params kce.SuspendKCEParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.SuspendKCE has not yet been implemented")
 		}),
 		AdapterUpdateAdapterHandler: adapter.UpdateAdapterHandlerFunc(func(params adapter.UpdateAdapterParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation adapter.UpdateAdapter has not yet been implemented")
@@ -285,6 +325,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		InstanceUpdateInstanceHandler: instance.UpdateInstanceHandlerFunc(func(params instance.UpdateInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.UpdateInstance has not yet been implemented")
+		}),
+		KceUpdateKCEHandler: kce.UpdateKCEHandlerFunc(func(params kce.UpdateKCEParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.UpdateKCE has not yet been implemented")
 		}),
 		NetgwUpdateNetGWHandler: netgw.UpdateNetGWHandlerFunc(func(params netgw.UpdateNetGWParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation netgw.UpdateNetGW has not yet been implemented")
@@ -402,6 +445,8 @@ type KowabungaAPI struct {
 	RegionCreateZoneHandler region.CreateZoneHandler
 	// ProjectCreateZoneInstanceHandler sets the operation handler for the create zone instance operation
 	ProjectCreateZoneInstanceHandler project.CreateZoneInstanceHandler
+	// ProjectCreateZoneKceHandler sets the operation handler for the create zone kce operation
+	ProjectCreateZoneKceHandler project.CreateZoneKceHandler
 	// ProjectCreateZoneVolumeHandler sets the operation handler for the create zone volume operation
 	ProjectCreateZoneVolumeHandler project.CreateZoneVolumeHandler
 	// AdapterDeleteAdapterHandler sets the operation handler for the delete adapter operation
@@ -410,6 +455,8 @@ type KowabungaAPI struct {
 	HostDeleteHostHandler host.DeleteHostHandler
 	// InstanceDeleteInstanceHandler sets the operation handler for the delete instance operation
 	InstanceDeleteInstanceHandler instance.DeleteInstanceHandler
+	// KceDeleteKCEHandler sets the operation handler for the delete k c e operation
+	KceDeleteKCEHandler kce.DeleteKCEHandler
 	// NetgwDeleteNetGWHandler sets the operation handler for the delete net g w operation
 	NetgwDeleteNetGWHandler netgw.DeleteNetGWHandler
 	// PoolDeletePoolHandler sets the operation handler for the delete pool operation
@@ -436,6 +483,8 @@ type KowabungaAPI struct {
 	HostGetAllHostsHandler host.GetAllHostsHandler
 	// InstanceGetAllInstancesHandler sets the operation handler for the get all instances operation
 	InstanceGetAllInstancesHandler instance.GetAllInstancesHandler
+	// KceGetAllKCEsHandler sets the operation handler for the get all k c es operation
+	KceGetAllKCEsHandler kce.GetAllKCEsHandler
 	// NetgwGetAllNetGWsHandler sets the operation handler for the get all net g ws operation
 	NetgwGetAllNetGWsHandler netgw.GetAllNetGWsHandler
 	// PoolGetAllPoolsHandler sets the operation handler for the get all pools operation
@@ -464,6 +513,10 @@ type KowabungaAPI struct {
 	InstanceGetInstanceHandler instance.GetInstanceHandler
 	// InstanceGetInstanceStateHandler sets the operation handler for the get instance state operation
 	InstanceGetInstanceStateHandler instance.GetInstanceStateHandler
+	// KceGetKCEHandler sets the operation handler for the get k c e operation
+	KceGetKCEHandler kce.GetKCEHandler
+	// KceGetKCEStateHandler sets the operation handler for the get k c e state operation
+	KceGetKCEStateHandler kce.GetKCEStateHandler
 	// NetgwGetNetGWHandler sets the operation handler for the get net g w operation
 	NetgwGetNetGWHandler netgw.GetNetGWHandler
 	// PoolGetPoolHandler sets the operation handler for the get pool operation
@@ -482,6 +535,8 @@ type KowabungaAPI struct {
 	ProjectGetProjectVolumesHandler project.GetProjectVolumesHandler
 	// ProjectGetProjectZoneInstancesHandler sets the operation handler for the get project zone instances operation
 	ProjectGetProjectZoneInstancesHandler project.GetProjectZoneInstancesHandler
+	// ProjectGetProjectZoneKCEsHandler sets the operation handler for the get project zone k c es operation
+	ProjectGetProjectZoneKCEsHandler project.GetProjectZoneKCEsHandler
 	// ProjectGetProjectZoneVolumesHandler sets the operation handler for the get project zone volumes operation
 	ProjectGetProjectZoneVolumesHandler project.GetProjectZoneVolumesHandler
 	// RegionGetRegionHandler sets the operation handler for the get region operation
@@ -512,26 +567,42 @@ type KowabungaAPI struct {
 	ZoneGetZoneVNetsHandler zone.GetZoneVNetsHandler
 	// InstanceRebootInstanceHandler sets the operation handler for the reboot instance operation
 	InstanceRebootInstanceHandler instance.RebootInstanceHandler
+	// KceRebootKCEHandler sets the operation handler for the reboot k c e operation
+	KceRebootKCEHandler kce.RebootKCEHandler
 	// InstanceResetInstanceHandler sets the operation handler for the reset instance operation
 	InstanceResetInstanceHandler instance.ResetInstanceHandler
+	// KceResetKCEHandler sets the operation handler for the reset k c e operation
+	KceResetKCEHandler kce.ResetKCEHandler
 	// ProjectResetProjectQuotasHandler sets the operation handler for the reset project quotas operation
 	ProjectResetProjectQuotasHandler project.ResetProjectQuotasHandler
 	// InstanceResumeInstanceHandler sets the operation handler for the resume instance operation
 	InstanceResumeInstanceHandler instance.ResumeInstanceHandler
+	// KceResumeKCEHandler sets the operation handler for the resume k c e operation
+	KceResumeKCEHandler kce.ResumeKCEHandler
 	// InstanceShutdownInstanceHandler sets the operation handler for the shutdown instance operation
 	InstanceShutdownInstanceHandler instance.ShutdownInstanceHandler
+	// KceShutdownKCEHandler sets the operation handler for the shutdown k c e operation
+	KceShutdownKCEHandler kce.ShutdownKCEHandler
 	// InstanceStartInstanceHandler sets the operation handler for the start instance operation
 	InstanceStartInstanceHandler instance.StartInstanceHandler
+	// KceStartKCEHandler sets the operation handler for the start k c e operation
+	KceStartKCEHandler kce.StartKCEHandler
 	// InstanceStopInstanceHandler sets the operation handler for the stop instance operation
 	InstanceStopInstanceHandler instance.StopInstanceHandler
+	// KceStopKCEHandler sets the operation handler for the stop k c e operation
+	KceStopKCEHandler kce.StopKCEHandler
 	// InstanceSuspendInstanceHandler sets the operation handler for the suspend instance operation
 	InstanceSuspendInstanceHandler instance.SuspendInstanceHandler
+	// KceSuspendKCEHandler sets the operation handler for the suspend k c e operation
+	KceSuspendKCEHandler kce.SuspendKCEHandler
 	// AdapterUpdateAdapterHandler sets the operation handler for the update adapter operation
 	AdapterUpdateAdapterHandler adapter.UpdateAdapterHandler
 	// HostUpdateHostHandler sets the operation handler for the update host operation
 	HostUpdateHostHandler host.UpdateHostHandler
 	// InstanceUpdateInstanceHandler sets the operation handler for the update instance operation
 	InstanceUpdateInstanceHandler instance.UpdateInstanceHandler
+	// KceUpdateKCEHandler sets the operation handler for the update k c e operation
+	KceUpdateKCEHandler kce.UpdateKCEHandler
 	// NetgwUpdateNetGWHandler sets the operation handler for the update net g w operation
 	NetgwUpdateNetGWHandler netgw.UpdateNetGWHandler
 	// PoolUpdatePoolHandler sets the operation handler for the update pool operation
@@ -677,6 +748,9 @@ func (o *KowabungaAPI) Validate() error {
 	if o.ProjectCreateZoneInstanceHandler == nil {
 		unregistered = append(unregistered, "project.CreateZoneInstanceHandler")
 	}
+	if o.ProjectCreateZoneKceHandler == nil {
+		unregistered = append(unregistered, "project.CreateZoneKceHandler")
+	}
 	if o.ProjectCreateZoneVolumeHandler == nil {
 		unregistered = append(unregistered, "project.CreateZoneVolumeHandler")
 	}
@@ -688,6 +762,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.InstanceDeleteInstanceHandler == nil {
 		unregistered = append(unregistered, "instance.DeleteInstanceHandler")
+	}
+	if o.KceDeleteKCEHandler == nil {
+		unregistered = append(unregistered, "kce.DeleteKCEHandler")
 	}
 	if o.NetgwDeleteNetGWHandler == nil {
 		unregistered = append(unregistered, "netgw.DeleteNetGWHandler")
@@ -727,6 +804,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.InstanceGetAllInstancesHandler == nil {
 		unregistered = append(unregistered, "instance.GetAllInstancesHandler")
+	}
+	if o.KceGetAllKCEsHandler == nil {
+		unregistered = append(unregistered, "kce.GetAllKCEsHandler")
 	}
 	if o.NetgwGetAllNetGWsHandler == nil {
 		unregistered = append(unregistered, "netgw.GetAllNetGWsHandler")
@@ -770,6 +850,12 @@ func (o *KowabungaAPI) Validate() error {
 	if o.InstanceGetInstanceStateHandler == nil {
 		unregistered = append(unregistered, "instance.GetInstanceStateHandler")
 	}
+	if o.KceGetKCEHandler == nil {
+		unregistered = append(unregistered, "kce.GetKCEHandler")
+	}
+	if o.KceGetKCEStateHandler == nil {
+		unregistered = append(unregistered, "kce.GetKCEStateHandler")
+	}
 	if o.NetgwGetNetGWHandler == nil {
 		unregistered = append(unregistered, "netgw.GetNetGWHandler")
 	}
@@ -796,6 +882,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.ProjectGetProjectZoneInstancesHandler == nil {
 		unregistered = append(unregistered, "project.GetProjectZoneInstancesHandler")
+	}
+	if o.ProjectGetProjectZoneKCEsHandler == nil {
+		unregistered = append(unregistered, "project.GetProjectZoneKCEsHandler")
 	}
 	if o.ProjectGetProjectZoneVolumesHandler == nil {
 		unregistered = append(unregistered, "project.GetProjectZoneVolumesHandler")
@@ -842,8 +931,14 @@ func (o *KowabungaAPI) Validate() error {
 	if o.InstanceRebootInstanceHandler == nil {
 		unregistered = append(unregistered, "instance.RebootInstanceHandler")
 	}
+	if o.KceRebootKCEHandler == nil {
+		unregistered = append(unregistered, "kce.RebootKCEHandler")
+	}
 	if o.InstanceResetInstanceHandler == nil {
 		unregistered = append(unregistered, "instance.ResetInstanceHandler")
+	}
+	if o.KceResetKCEHandler == nil {
+		unregistered = append(unregistered, "kce.ResetKCEHandler")
 	}
 	if o.ProjectResetProjectQuotasHandler == nil {
 		unregistered = append(unregistered, "project.ResetProjectQuotasHandler")
@@ -851,17 +946,32 @@ func (o *KowabungaAPI) Validate() error {
 	if o.InstanceResumeInstanceHandler == nil {
 		unregistered = append(unregistered, "instance.ResumeInstanceHandler")
 	}
+	if o.KceResumeKCEHandler == nil {
+		unregistered = append(unregistered, "kce.ResumeKCEHandler")
+	}
 	if o.InstanceShutdownInstanceHandler == nil {
 		unregistered = append(unregistered, "instance.ShutdownInstanceHandler")
+	}
+	if o.KceShutdownKCEHandler == nil {
+		unregistered = append(unregistered, "kce.ShutdownKCEHandler")
 	}
 	if o.InstanceStartInstanceHandler == nil {
 		unregistered = append(unregistered, "instance.StartInstanceHandler")
 	}
+	if o.KceStartKCEHandler == nil {
+		unregistered = append(unregistered, "kce.StartKCEHandler")
+	}
 	if o.InstanceStopInstanceHandler == nil {
 		unregistered = append(unregistered, "instance.StopInstanceHandler")
 	}
+	if o.KceStopKCEHandler == nil {
+		unregistered = append(unregistered, "kce.StopKCEHandler")
+	}
 	if o.InstanceSuspendInstanceHandler == nil {
 		unregistered = append(unregistered, "instance.SuspendInstanceHandler")
+	}
+	if o.KceSuspendKCEHandler == nil {
+		unregistered = append(unregistered, "kce.SuspendKCEHandler")
 	}
 	if o.AdapterUpdateAdapterHandler == nil {
 		unregistered = append(unregistered, "adapter.UpdateAdapterHandler")
@@ -871,6 +981,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.InstanceUpdateInstanceHandler == nil {
 		unregistered = append(unregistered, "instance.UpdateInstanceHandler")
+	}
+	if o.KceUpdateKCEHandler == nil {
+		unregistered = append(unregistered, "kce.UpdateKCEHandler")
 	}
 	if o.NetgwUpdateNetGWHandler == nil {
 		unregistered = append(unregistered, "netgw.UpdateNetGWHandler")
@@ -1062,6 +1175,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
+	o.handlers["POST"]["/project/{projectId}/zone/{zoneId}/kce"] = project.NewCreateZoneKce(o.context, o.ProjectCreateZoneKceHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
 	o.handlers["POST"]["/project/{projectId}/zone/{zoneId}/volume"] = project.NewCreateZoneVolume(o.context, o.ProjectCreateZoneVolumeHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
@@ -1075,6 +1192,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
 	o.handlers["DELETE"]["/instance/{instanceId}"] = instance.NewDeleteInstance(o.context, o.InstanceDeleteInstanceHandler)
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
+	o.handlers["DELETE"]["/kce/{kceId}"] = kce.NewDeleteKCE(o.context, o.KceDeleteKCEHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
@@ -1127,6 +1248,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/instance"] = instance.NewGetAllInstances(o.context, o.InstanceGetAllInstancesHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/kce"] = kce.NewGetAllKCEs(o.context, o.KceGetAllKCEsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -1186,6 +1311,14 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
+	o.handlers["GET"]["/kce/{kceId}"] = kce.NewGetKCE(o.context, o.KceGetKCEHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/kce/{kceId}/state"] = kce.NewGetKCEState(o.context, o.KceGetKCEStateHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
 	o.handlers["GET"]["/netgw/{netgwId}"] = netgw.NewGetNetGW(o.context, o.NetgwGetNetGWHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
@@ -1219,6 +1352,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/project/{projectId}/zone/{zoneId}/instances"] = project.NewGetProjectZoneInstances(o.context, o.ProjectGetProjectZoneInstancesHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/project/{projectId}/zone/{zoneId}/kces"] = project.NewGetProjectZoneKCEs(o.context, o.ProjectGetProjectZoneKCEsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -1282,7 +1419,15 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
+	o.handlers["POST"]["/kce/{kceId}/reboot"] = kce.NewRebootKCE(o.context, o.KceRebootKCEHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
 	o.handlers["POST"]["/instance/{instanceId}/reset"] = instance.NewResetInstance(o.context, o.InstanceResetInstanceHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/kce/{kceId}/reset"] = kce.NewResetKCE(o.context, o.KceResetKCEHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
@@ -1294,7 +1439,15 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
+	o.handlers["POST"]["/kce/{kceId}/resume"] = kce.NewResumeKCE(o.context, o.KceResumeKCEHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
 	o.handlers["POST"]["/instance/{instanceId}/shutdown"] = instance.NewShutdownInstance(o.context, o.InstanceShutdownInstanceHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/kce/{kceId}/shutdown"] = kce.NewShutdownKCE(o.context, o.KceShutdownKCEHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
@@ -1302,11 +1455,23 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
+	o.handlers["POST"]["/kce/{kceId}/start"] = kce.NewStartKCE(o.context, o.KceStartKCEHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
 	o.handlers["POST"]["/instance/{instanceId}/stop"] = instance.NewStopInstance(o.context, o.InstanceStopInstanceHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
+	o.handlers["POST"]["/kce/{kceId}/stop"] = kce.NewStopKCE(o.context, o.KceStopKCEHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
 	o.handlers["POST"]["/instance/{instanceId}/suspend"] = instance.NewSuspendInstance(o.context, o.InstanceSuspendInstanceHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/kce/{kceId}/suspend"] = kce.NewSuspendKCE(o.context, o.KceSuspendKCEHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
@@ -1319,6 +1484,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
 	o.handlers["PUT"]["/instance/{instanceId}"] = instance.NewUpdateInstance(o.context, o.InstanceUpdateInstanceHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/kce/{kceId}"] = kce.NewUpdateKCE(o.context, o.KceUpdateKCEHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}

@@ -15,7 +15,7 @@ import (
 const GetAllInstancesOKCode int = 200
 
 /*
-GetAllInstancesOK Returns the an array of virtual machines UUIDs.
+GetAllInstancesOK Returns the an array of virtual machines IDs.
 
 swagger:response getAllInstancesOK
 */

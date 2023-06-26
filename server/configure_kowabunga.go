@@ -14,6 +14,7 @@ import (
 	"github.com/dalet-oss/kowabunga-api/server/api/adapter"
 	"github.com/dalet-oss/kowabunga-api/server/api/host"
 	"github.com/dalet-oss/kowabunga-api/server/api/instance"
+	"github.com/dalet-oss/kowabunga-api/server/api/kce"
 	"github.com/dalet-oss/kowabunga-api/server/api/netgw"
 	"github.com/dalet-oss/kowabunga-api/server/api/pool"
 	"github.com/dalet-oss/kowabunga-api/server/api/project"
@@ -122,6 +123,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation project.CreateZoneInstance has not yet been implemented")
 		})
 	}
+	if api.ProjectCreateZoneKceHandler == nil {
+		api.ProjectCreateZoneKceHandler = project.CreateZoneKceHandlerFunc(func(params project.CreateZoneKceParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.CreateZoneKce has not yet been implemented")
+		})
+	}
 	if api.ProjectCreateZoneVolumeHandler == nil {
 		api.ProjectCreateZoneVolumeHandler = project.CreateZoneVolumeHandlerFunc(func(params project.CreateZoneVolumeParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.CreateZoneVolume has not yet been implemented")
@@ -140,6 +146,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.InstanceDeleteInstanceHandler == nil {
 		api.InstanceDeleteInstanceHandler = instance.DeleteInstanceHandlerFunc(func(params instance.DeleteInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.DeleteInstance has not yet been implemented")
+		})
+	}
+	if api.KceDeleteKCEHandler == nil {
+		api.KceDeleteKCEHandler = kce.DeleteKCEHandlerFunc(func(params kce.DeleteKCEParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.DeleteKCE has not yet been implemented")
 		})
 	}
 	if api.NetgwDeleteNetGWHandler == nil {
@@ -205,6 +216,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.InstanceGetAllInstancesHandler == nil {
 		api.InstanceGetAllInstancesHandler = instance.GetAllInstancesHandlerFunc(func(params instance.GetAllInstancesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.GetAllInstances has not yet been implemented")
+		})
+	}
+	if api.KceGetAllKCEsHandler == nil {
+		api.KceGetAllKCEsHandler = kce.GetAllKCEsHandlerFunc(func(params kce.GetAllKCEsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.GetAllKCEs has not yet been implemented")
 		})
 	}
 	if api.NetgwGetAllNetGWsHandler == nil {
@@ -277,6 +293,16 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation instance.GetInstanceState has not yet been implemented")
 		})
 	}
+	if api.KceGetKCEHandler == nil {
+		api.KceGetKCEHandler = kce.GetKCEHandlerFunc(func(params kce.GetKCEParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.GetKCE has not yet been implemented")
+		})
+	}
+	if api.KceGetKCEStateHandler == nil {
+		api.KceGetKCEStateHandler = kce.GetKCEStateHandlerFunc(func(params kce.GetKCEStateParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.GetKCEState has not yet been implemented")
+		})
+	}
 	if api.NetgwGetNetGWHandler == nil {
 		api.NetgwGetNetGWHandler = netgw.GetNetGWHandlerFunc(func(params netgw.GetNetGWParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation netgw.GetNetGW has not yet been implemented")
@@ -320,6 +346,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.ProjectGetProjectZoneInstancesHandler == nil {
 		api.ProjectGetProjectZoneInstancesHandler = project.GetProjectZoneInstancesHandlerFunc(func(params project.GetProjectZoneInstancesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectZoneInstances has not yet been implemented")
+		})
+	}
+	if api.ProjectGetProjectZoneKCEsHandler == nil {
+		api.ProjectGetProjectZoneKCEsHandler = project.GetProjectZoneKCEsHandlerFunc(func(params project.GetProjectZoneKCEsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.GetProjectZoneKCEs has not yet been implemented")
 		})
 	}
 	if api.ProjectGetProjectZoneVolumesHandler == nil {
@@ -397,9 +428,19 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation instance.RebootInstance has not yet been implemented")
 		})
 	}
+	if api.KceRebootKCEHandler == nil {
+		api.KceRebootKCEHandler = kce.RebootKCEHandlerFunc(func(params kce.RebootKCEParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.RebootKCE has not yet been implemented")
+		})
+	}
 	if api.InstanceResetInstanceHandler == nil {
 		api.InstanceResetInstanceHandler = instance.ResetInstanceHandlerFunc(func(params instance.ResetInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.ResetInstance has not yet been implemented")
+		})
+	}
+	if api.KceResetKCEHandler == nil {
+		api.KceResetKCEHandler = kce.ResetKCEHandlerFunc(func(params kce.ResetKCEParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.ResetKCE has not yet been implemented")
 		})
 	}
 	if api.ProjectResetProjectQuotasHandler == nil {
@@ -412,9 +453,19 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation instance.ResumeInstance has not yet been implemented")
 		})
 	}
+	if api.KceResumeKCEHandler == nil {
+		api.KceResumeKCEHandler = kce.ResumeKCEHandlerFunc(func(params kce.ResumeKCEParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.ResumeKCE has not yet been implemented")
+		})
+	}
 	if api.InstanceShutdownInstanceHandler == nil {
 		api.InstanceShutdownInstanceHandler = instance.ShutdownInstanceHandlerFunc(func(params instance.ShutdownInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.ShutdownInstance has not yet been implemented")
+		})
+	}
+	if api.KceShutdownKCEHandler == nil {
+		api.KceShutdownKCEHandler = kce.ShutdownKCEHandlerFunc(func(params kce.ShutdownKCEParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.ShutdownKCE has not yet been implemented")
 		})
 	}
 	if api.InstanceStartInstanceHandler == nil {
@@ -422,14 +473,29 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation instance.StartInstance has not yet been implemented")
 		})
 	}
+	if api.KceStartKCEHandler == nil {
+		api.KceStartKCEHandler = kce.StartKCEHandlerFunc(func(params kce.StartKCEParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.StartKCE has not yet been implemented")
+		})
+	}
 	if api.InstanceStopInstanceHandler == nil {
 		api.InstanceStopInstanceHandler = instance.StopInstanceHandlerFunc(func(params instance.StopInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.StopInstance has not yet been implemented")
 		})
 	}
+	if api.KceStopKCEHandler == nil {
+		api.KceStopKCEHandler = kce.StopKCEHandlerFunc(func(params kce.StopKCEParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.StopKCE has not yet been implemented")
+		})
+	}
 	if api.InstanceSuspendInstanceHandler == nil {
 		api.InstanceSuspendInstanceHandler = instance.SuspendInstanceHandlerFunc(func(params instance.SuspendInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.SuspendInstance has not yet been implemented")
+		})
+	}
+	if api.KceSuspendKCEHandler == nil {
+		api.KceSuspendKCEHandler = kce.SuspendKCEHandlerFunc(func(params kce.SuspendKCEParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.SuspendKCE has not yet been implemented")
 		})
 	}
 	if api.AdapterUpdateAdapterHandler == nil {
@@ -445,6 +511,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.InstanceUpdateInstanceHandler == nil {
 		api.InstanceUpdateInstanceHandler = instance.UpdateInstanceHandlerFunc(func(params instance.UpdateInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.UpdateInstance has not yet been implemented")
+		})
+	}
+	if api.KceUpdateKCEHandler == nil {
+		api.KceUpdateKCEHandler = kce.UpdateKCEHandlerFunc(func(params kce.UpdateKCEParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kce.UpdateKCE has not yet been implemented")
 		})
 	}
 	if api.NetgwUpdateNetGWHandler == nil {

@@ -40,7 +40,7 @@ func NewGetAllInstancesOK() *GetAllInstancesOK {
 /*
 GetAllInstancesOK describes a response with status code 200, with default header values.
 
-Returns the an array of virtual machines UUIDs.
+Returns the an array of virtual machines IDs.
 */
 type GetAllInstancesOK struct {
 	Payload []string

@@ -57,7 +57,7 @@ func NewDeleteInstanceOK() *DeleteInstanceOK {
 /*
 DeleteInstanceOK describes a response with status code 200, with default header values.
 
-The storage volume has been successfully removed.
+The instance has been successfully removed.
 */
 type DeleteInstanceOK struct {
 }
@@ -113,7 +113,7 @@ func NewDeleteInstanceNotFound() *DeleteInstanceNotFound {
 /*
 DeleteInstanceNotFound describes a response with status code 404, with default header values.
 
-Invalid storage volume ID was provided.
+Invalid instance ID was provided.
 */
 type DeleteInstanceNotFound struct {
 }
@@ -169,7 +169,7 @@ func NewDeleteInstanceConflict() *DeleteInstanceConflict {
 /*
 DeleteInstanceConflict describes a response with status code 409, with default header values.
 
-The storage volume is not empty or still being referenced.
+The instance is not empty or still being referenced.
 */
 type DeleteInstanceConflict struct {
 }
@@ -225,7 +225,7 @@ func NewDeleteInstanceInternalServerError() *DeleteInstanceInternalServerError {
 /*
 DeleteInstanceInternalServerError describes a response with status code 500, with default header values.
 
-Unable to delete storage volume.
+Unable to delete instance.
 */
 type DeleteInstanceInternalServerError struct {
 }

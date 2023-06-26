@@ -36,6 +36,8 @@ type ClientService interface {
 
 	CreateZoneInstance(params *CreateZoneInstanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateZoneInstanceCreated, error)
 
+	CreateZoneKce(params *CreateZoneKceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateZoneKceCreated, error)
+
 	CreateZoneVolume(params *CreateZoneVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateZoneVolumeCreated, error)
 
 	DeleteProject(params *DeleteProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectOK, error)
@@ -51,6 +53,8 @@ type ClientService interface {
 	GetProjectVolumes(params *GetProjectVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectVolumesOK, error)
 
 	GetProjectZoneInstances(params *GetProjectZoneInstancesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectZoneInstancesOK, error)
+
+	GetProjectZoneKCEs(params *GetProjectZoneKCEsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectZoneKCEsOK, error)
 
 	GetProjectZoneVolumes(params *GetProjectZoneVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectZoneVolumesOK, error)
 
@@ -177,6 +181,45 @@ func (a *Client) CreateZoneInstance(params *CreateZoneInstanceParams, authInfo r
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateZoneInstance: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateZoneKce Creates a new KCE virtual machine in specified zone.
+*/
+func (a *Client) CreateZoneKce(params *CreateZoneKceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateZoneKceCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateZoneKceParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateZoneKce",
+		Method:             "POST",
+		PathPattern:        "/project/{projectId}/zone/{zoneId}/kce",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateZoneKceReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateZoneKceCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateZoneKce: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -489,6 +532,45 @@ func (a *Client) GetProjectZoneInstances(params *GetProjectZoneInstancesParams, 
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetProjectZoneInstances: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetProjectZoneKCEs Returns the IDs of the KCE virtual machines existing in the project in the specified zone.
+*/
+func (a *Client) GetProjectZoneKCEs(params *GetProjectZoneKCEsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectZoneKCEsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetProjectZoneKCEsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetProjectZoneKCEs",
+		Method:             "GET",
+		PathPattern:        "/project/{projectId}/zone/{zoneId}/kces",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetProjectZoneKCEsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetProjectZoneKCEsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetProjectZoneKCEs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

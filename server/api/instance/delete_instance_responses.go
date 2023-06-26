@@ -15,7 +15,7 @@ import (
 const DeleteInstanceOKCode int = 200
 
 /*
-DeleteInstanceOK The storage volume has been successfully removed.
+DeleteInstanceOK The instance has been successfully removed.
 
 swagger:response deleteInstanceOK
 */
@@ -40,7 +40,7 @@ func (o *DeleteInstanceOK) WriteResponse(rw http.ResponseWriter, producer runtim
 const DeleteInstanceNotFoundCode int = 404
 
 /*
-DeleteInstanceNotFound Invalid storage volume ID was provided.
+DeleteInstanceNotFound Invalid instance ID was provided.
 
 swagger:response deleteInstanceNotFound
 */
@@ -65,7 +65,7 @@ func (o *DeleteInstanceNotFound) WriteResponse(rw http.ResponseWriter, producer 
 const DeleteInstanceConflictCode int = 409
 
 /*
-DeleteInstanceConflict The storage volume is not empty or still being referenced.
+DeleteInstanceConflict The instance is not empty or still being referenced.
 
 swagger:response deleteInstanceConflict
 */
@@ -90,7 +90,7 @@ func (o *DeleteInstanceConflict) WriteResponse(rw http.ResponseWriter, producer 
 const DeleteInstanceInternalServerErrorCode int = 500
 
 /*
-DeleteInstanceInternalServerError Unable to delete storage volume.
+DeleteInstanceInternalServerError Unable to delete instance.
 
 swagger:response deleteInstanceInternalServerError
 */

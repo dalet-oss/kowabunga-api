@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.5.11"
+    "version": "0.6.0"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -338,7 +338,7 @@ func init() {
         "operationId": "GetAllInstances",
         "responses": {
           "200": {
-            "description": "Returns the an array of virtual machines UUIDs.",
+            "description": "Returns the an array of virtual machines IDs.",
             "schema": {
               "type": "array",
               "items": {
@@ -437,16 +437,16 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "The storage volume has been successfully removed."
+            "description": "The instance has been successfully removed."
           },
           "404": {
-            "description": "Invalid storage volume ID was provided."
+            "description": "Invalid instance ID was provided."
           },
           "409": {
-            "description": "The storage volume is not empty or still being referenced."
+            "description": "The instance is not empty or still being referenced."
           },
           "500": {
-            "description": "Unable to delete storage volume."
+            "description": "Unable to delete instance."
           }
         }
       }
@@ -679,6 +679,360 @@ func init() {
           },
           "500": {
             "description": "An error occurred when trying to suspend the virtual machine."
+          }
+        }
+      }
+    },
+    "/kce": {
+      "get": {
+        "description": "Returns the IDs of registered KCE virtual machines.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "GetAllKCEs",
+        "responses": {
+          "200": {
+            "description": "Returns the an array of KCE virtual machines IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/kce/{kceId}": {
+      "get": {
+        "description": "Returns the description of the KCE virtual machine.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "GetKCE",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KCE virtual machine to query.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the KCE virtual machine object.",
+            "schema": {
+              "$ref": "#/definitions/KCE"
+            }
+          },
+          "404": {
+            "description": "Invalid KCE ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a KCE virtual machine configuration.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "UpdateKCE",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KCE virtual machine object.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/KCE"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated KCE virtual machine object.",
+            "schema": {
+              "$ref": "#/definitions/KCE"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid KCE virtual machine ID was provided."
+          },
+          "500": {
+            "description": "Unable to update the KCE virtual machine."
+          },
+          "507": {
+            "description": "Requested KCE characteristics are beyond associated project's quota in place."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing KCE virtual machine.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "DeleteKCE",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KCE virtual machine to delete.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The KCE virtual machine has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid KCE ID was provided."
+          },
+          "409": {
+            "description": "The KCE virtual machine is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete KCE virtual machine."
+          }
+        }
+      }
+    },
+    "/kce/{kceId}/reboot": {
+      "post": {
+        "description": "Perform a KCE virtual machine software reboot.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "RebootKCE",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KCE virtual machine to query.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The KCE virtual machine has been rebooted successfully."
+          },
+          "404": {
+            "description": "Invalid KCE ID was provided."
+          },
+          "500": {
+            "description": "An error occurred when trying to reboot the KCE virtual machine."
+          }
+        }
+      }
+    },
+    "/kce/{kceId}/reset": {
+      "post": {
+        "description": "Perform a KCE virtual machine hardware reset.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "ResetKCE",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KCE virtual machine to query.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The KCE virtual machine has been reseted successfully."
+          },
+          "404": {
+            "description": "Invalid KCE ID was provided."
+          },
+          "500": {
+            "description": "An error occurred when trying to reset the KCE virtual machine."
+          }
+        }
+      }
+    },
+    "/kce/{kceId}/resume": {
+      "post": {
+        "description": "Perform a KCE virtual machine software PM resume.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "ResumeKCE",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KCE virtual machine to query.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The KCE virtual machine has been resumed successfully."
+          },
+          "404": {
+            "description": "Invalid KCE ID was provided."
+          },
+          "500": {
+            "description": "An error occurred when trying to resume the KCE virtual machine."
+          }
+        }
+      }
+    },
+    "/kce/{kceId}/shutdown": {
+      "post": {
+        "description": "Initiate a software shutdown of a KCE virtual machine.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "ShutdownKCE",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KCE virtual machine to query.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The KCE virtual machine has been shut down successfully."
+          },
+          "404": {
+            "description": "Invalid KCE ID was provided."
+          },
+          "500": {
+            "description": "An error occurred when trying to shut down the KCE virtual machine."
+          }
+        }
+      }
+    },
+    "/kce/{kceId}/start": {
+      "post": {
+        "description": "Boot up a KCE virtual machine.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "StartKCE",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KCE virtual machine to query.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The KCE virtual machine has been started successfully."
+          },
+          "404": {
+            "description": "Invalid KCE ID was provided."
+          },
+          "500": {
+            "description": "An error occurred when trying to start the KCE virtual machine."
+          }
+        }
+      }
+    },
+    "/kce/{kceId}/state": {
+      "get": {
+        "description": "Returns the state of the KCE virtual machine.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "GetKCEState",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual machine to query.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the KCE virtual machine state object.",
+            "schema": {
+              "$ref": "#/definitions/InstanceState"
+            }
+          },
+          "404": {
+            "description": "Invalid KCE ID was provided."
+          }
+        }
+      }
+    },
+    "/kce/{kceId}/stop": {
+      "post": {
+        "description": "Initiate a hardware stop of a KCE virtual machine.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "StopKCE",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KCE virtual machine to query.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The KCE virtual machine has been stopped successfully."
+          },
+          "404": {
+            "description": "Invalid KCE ID was provided."
+          },
+          "500": {
+            "description": "An error occurred when trying to stop the KCE virtual machine."
+          }
+        }
+      }
+    },
+    "/kce/{kceId}/suspend": {
+      "post": {
+        "description": "Perform a KCE virtual machine software PM suspend.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "SuspendKCE",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual machine to query.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The KCE virtual machine has been suspended successfully."
+          },
+          "404": {
+            "description": "Invalid KCE ID was provided."
+          },
+          "500": {
+            "description": "An error occurred when trying to suspend the KCE virtual machine."
           }
         }
       }
@@ -1515,6 +1869,117 @@ func init() {
         "responses": {
           "200": {
             "description": "Returns an array of virtual machine instance IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid project or zone ID was provided."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/zone/{zoneId}/kce": {
+      "post": {
+        "description": "Creates a new KCE virtual machine in specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "kce"
+        ],
+        "operationId": "CreateZoneKce",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated project.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "the ID of the associated zone.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "the ID of the associated storage pool (optional, zone's default if unspecified).",
+            "name": "poolId",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "the ID of the template to clone the OS storage volume from (optional, zone's default if unspecified)",
+            "name": "templateId",
+            "in": "query"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KCE"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created KCE virtual machine object.",
+            "schema": {
+              "$ref": "#/definitions/KCE"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid project or zone ID was provided."
+          },
+          "409": {
+            "description": "KCE Virtual machine already exists."
+          },
+          "500": {
+            "description": "Unable to create the KCE virtual machine."
+          },
+          "507": {
+            "description": "Requested characteristics are beyond project's quota in place."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/zone/{zoneId}/kces": {
+      "get": {
+        "description": "Returns the IDs of the KCE virtual machines existing in the project in the specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "kce"
+        ],
+        "operationId": "GetProjectZoneKCEs",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to query.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the zone to query.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of KCE virtual machine IDs.",
             "schema": {
               "type": "array",
               "items": {
@@ -3322,6 +3787,57 @@ func init() {
         }
       }
     },
+    "KCE": {
+      "description": "Kowabunga Compute Engine (KCE) is a wrapper object for bare virtual machines. It consists of an instance, one to several attached volumes and 2 network adapters (a private one, a public one). This is the prefered way for creating virtual machines.",
+      "type": "object",
+      "required": [
+        "name",
+        "memory",
+        "vcpus",
+        "disk",
+        "subnet"
+      ],
+      "properties": {
+        "data_disk": {
+          "description": "The KCE virtual machine's extra data disk size (in bytes). If unspecified, no extra data disk will be assigned.",
+          "type": "integer",
+          "default": 0
+        },
+        "description": {
+          "description": "The KCE virtual machine description.",
+          "type": "string"
+        },
+        "disk": {
+          "description": "The KCE virtual machine's OS disk size (in bytes).",
+          "type": "integer"
+        },
+        "id": {
+          "description": "The KCE ID  (auto-generated).",
+          "type": "string"
+        },
+        "memory": {
+          "description": "The KCE virtual machine's memory size (in bytes).",
+          "type": "integer"
+        },
+        "name": {
+          "description": "The KCE virtual machine name",
+          "type": "string"
+        },
+        "public": {
+          "description": "Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).",
+          "type": "boolean",
+          "default": false
+        },
+        "subnet": {
+          "description": "The name of ID of the private subnet to be used for networking (KCE IPv4 address will be auto-assigned).",
+          "type": "string"
+        },
+        "vcpus": {
+          "description": "The KCE virtual machine's number of vCPUs.",
+          "type": "integer"
+        }
+      }
+    },
     "Metadata": {
       "description": "A key/value metadata.",
       "type": "object",
@@ -3730,7 +4246,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.5.11"
+    "version": "0.6.0"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -4037,7 +4553,7 @@ func init() {
         "operationId": "GetAllInstances",
         "responses": {
           "200": {
-            "description": "Returns the an array of virtual machines UUIDs.",
+            "description": "Returns the an array of virtual machines IDs.",
             "schema": {
               "type": "array",
               "items": {
@@ -4136,16 +4652,16 @@ func init() {
         ],
         "responses": {
           "200": {
-            "description": "The storage volume has been successfully removed."
+            "description": "The instance has been successfully removed."
           },
           "404": {
-            "description": "Invalid storage volume ID was provided."
+            "description": "Invalid instance ID was provided."
           },
           "409": {
-            "description": "The storage volume is not empty or still being referenced."
+            "description": "The instance is not empty or still being referenced."
           },
           "500": {
-            "description": "Unable to delete storage volume."
+            "description": "Unable to delete instance."
           }
         }
       }
@@ -4378,6 +4894,360 @@ func init() {
           },
           "500": {
             "description": "An error occurred when trying to suspend the virtual machine."
+          }
+        }
+      }
+    },
+    "/kce": {
+      "get": {
+        "description": "Returns the IDs of registered KCE virtual machines.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "GetAllKCEs",
+        "responses": {
+          "200": {
+            "description": "Returns the an array of KCE virtual machines IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/kce/{kceId}": {
+      "get": {
+        "description": "Returns the description of the KCE virtual machine.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "GetKCE",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KCE virtual machine to query.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the KCE virtual machine object.",
+            "schema": {
+              "$ref": "#/definitions/KCE"
+            }
+          },
+          "404": {
+            "description": "Invalid KCE ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a KCE virtual machine configuration.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "UpdateKCE",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KCE virtual machine object.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/KCE"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated KCE virtual machine object.",
+            "schema": {
+              "$ref": "#/definitions/KCE"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid KCE virtual machine ID was provided."
+          },
+          "500": {
+            "description": "Unable to update the KCE virtual machine."
+          },
+          "507": {
+            "description": "Requested KCE characteristics are beyond associated project's quota in place."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing KCE virtual machine.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "DeleteKCE",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KCE virtual machine to delete.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The KCE virtual machine has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid KCE ID was provided."
+          },
+          "409": {
+            "description": "The KCE virtual machine is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete KCE virtual machine."
+          }
+        }
+      }
+    },
+    "/kce/{kceId}/reboot": {
+      "post": {
+        "description": "Perform a KCE virtual machine software reboot.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "RebootKCE",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KCE virtual machine to query.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The KCE virtual machine has been rebooted successfully."
+          },
+          "404": {
+            "description": "Invalid KCE ID was provided."
+          },
+          "500": {
+            "description": "An error occurred when trying to reboot the KCE virtual machine."
+          }
+        }
+      }
+    },
+    "/kce/{kceId}/reset": {
+      "post": {
+        "description": "Perform a KCE virtual machine hardware reset.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "ResetKCE",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KCE virtual machine to query.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The KCE virtual machine has been reseted successfully."
+          },
+          "404": {
+            "description": "Invalid KCE ID was provided."
+          },
+          "500": {
+            "description": "An error occurred when trying to reset the KCE virtual machine."
+          }
+        }
+      }
+    },
+    "/kce/{kceId}/resume": {
+      "post": {
+        "description": "Perform a KCE virtual machine software PM resume.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "ResumeKCE",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KCE virtual machine to query.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The KCE virtual machine has been resumed successfully."
+          },
+          "404": {
+            "description": "Invalid KCE ID was provided."
+          },
+          "500": {
+            "description": "An error occurred when trying to resume the KCE virtual machine."
+          }
+        }
+      }
+    },
+    "/kce/{kceId}/shutdown": {
+      "post": {
+        "description": "Initiate a software shutdown of a KCE virtual machine.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "ShutdownKCE",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KCE virtual machine to query.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The KCE virtual machine has been shut down successfully."
+          },
+          "404": {
+            "description": "Invalid KCE ID was provided."
+          },
+          "500": {
+            "description": "An error occurred when trying to shut down the KCE virtual machine."
+          }
+        }
+      }
+    },
+    "/kce/{kceId}/start": {
+      "post": {
+        "description": "Boot up a KCE virtual machine.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "StartKCE",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KCE virtual machine to query.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The KCE virtual machine has been started successfully."
+          },
+          "404": {
+            "description": "Invalid KCE ID was provided."
+          },
+          "500": {
+            "description": "An error occurred when trying to start the KCE virtual machine."
+          }
+        }
+      }
+    },
+    "/kce/{kceId}/state": {
+      "get": {
+        "description": "Returns the state of the KCE virtual machine.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "GetKCEState",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual machine to query.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the KCE virtual machine state object.",
+            "schema": {
+              "$ref": "#/definitions/InstanceState"
+            }
+          },
+          "404": {
+            "description": "Invalid KCE ID was provided."
+          }
+        }
+      }
+    },
+    "/kce/{kceId}/stop": {
+      "post": {
+        "description": "Initiate a hardware stop of a KCE virtual machine.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "StopKCE",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KCE virtual machine to query.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The KCE virtual machine has been stopped successfully."
+          },
+          "404": {
+            "description": "Invalid KCE ID was provided."
+          },
+          "500": {
+            "description": "An error occurred when trying to stop the KCE virtual machine."
+          }
+        }
+      }
+    },
+    "/kce/{kceId}/suspend": {
+      "post": {
+        "description": "Perform a KCE virtual machine software PM suspend.",
+        "tags": [
+          "kce"
+        ],
+        "operationId": "SuspendKCE",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual machine to query.",
+            "name": "kceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The KCE virtual machine has been suspended successfully."
+          },
+          "404": {
+            "description": "Invalid KCE ID was provided."
+          },
+          "500": {
+            "description": "An error occurred when trying to suspend the KCE virtual machine."
           }
         }
       }
@@ -5214,6 +6084,117 @@ func init() {
         "responses": {
           "200": {
             "description": "Returns an array of virtual machine instance IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid project or zone ID was provided."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/zone/{zoneId}/kce": {
+      "post": {
+        "description": "Creates a new KCE virtual machine in specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "kce"
+        ],
+        "operationId": "CreateZoneKce",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated project.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "the ID of the associated zone.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "the ID of the associated storage pool (optional, zone's default if unspecified).",
+            "name": "poolId",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "the ID of the template to clone the OS storage volume from (optional, zone's default if unspecified)",
+            "name": "templateId",
+            "in": "query"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KCE"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created KCE virtual machine object.",
+            "schema": {
+              "$ref": "#/definitions/KCE"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid project or zone ID was provided."
+          },
+          "409": {
+            "description": "KCE Virtual machine already exists."
+          },
+          "500": {
+            "description": "Unable to create the KCE virtual machine."
+          },
+          "507": {
+            "description": "Requested characteristics are beyond project's quota in place."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/zone/{zoneId}/kces": {
+      "get": {
+        "description": "Returns the IDs of the KCE virtual machines existing in the project in the specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "kce"
+        ],
+        "operationId": "GetProjectZoneKCEs",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to query.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the zone to query.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of KCE virtual machine IDs.",
             "schema": {
               "type": "array",
               "items": {
@@ -7079,6 +8060,57 @@ func init() {
         "state": {
           "description": "the state of the VM",
           "type": "string"
+        }
+      }
+    },
+    "KCE": {
+      "description": "Kowabunga Compute Engine (KCE) is a wrapper object for bare virtual machines. It consists of an instance, one to several attached volumes and 2 network adapters (a private one, a public one). This is the prefered way for creating virtual machines.",
+      "type": "object",
+      "required": [
+        "name",
+        "memory",
+        "vcpus",
+        "disk",
+        "subnet"
+      ],
+      "properties": {
+        "data_disk": {
+          "description": "The KCE virtual machine's extra data disk size (in bytes). If unspecified, no extra data disk will be assigned.",
+          "type": "integer",
+          "default": 0
+        },
+        "description": {
+          "description": "The KCE virtual machine description.",
+          "type": "string"
+        },
+        "disk": {
+          "description": "The KCE virtual machine's OS disk size (in bytes).",
+          "type": "integer"
+        },
+        "id": {
+          "description": "The KCE ID  (auto-generated).",
+          "type": "string"
+        },
+        "memory": {
+          "description": "The KCE virtual machine's memory size (in bytes).",
+          "type": "integer"
+        },
+        "name": {
+          "description": "The KCE virtual machine name",
+          "type": "string"
+        },
+        "public": {
+          "description": "Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).",
+          "type": "boolean",
+          "default": false
+        },
+        "subnet": {
+          "description": "The name of ID of the private subnet to be used for networking (KCE IPv4 address will be auto-assigned).",
+          "type": "string"
+        },
+        "vcpus": {
+          "description": "The KCE virtual machine's number of vCPUs.",
+          "type": "integer"
         }
       }
     },
