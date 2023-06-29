@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/dalet-oss/kowabunga-api/models"
 )
@@ -66,6 +67,14 @@ type CreateProjectParams struct {
 	// Body.
 	Body *models.Project
 
+	/* SubnetSize.
+
+	   The minimum VPC subnet size to be affected to the project. WARNING, this cannot be changed later.
+
+	   Default: 26
+	*/
+	SubnetSize *float64
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -83,7 +92,18 @@ func (o *CreateProjectParams) WithDefaults() *CreateProjectParams {
 //
 // All values with no default are reset to their zero value.
 func (o *CreateProjectParams) SetDefaults() {
-	// no default values defined for this parameter
+	var (
+		subnetSizeDefault = float64(26)
+	)
+
+	val := CreateProjectParams{
+		SubnetSize: &subnetSizeDefault,
+	}
+
+	val.timeout = o.timeout
+	val.Context = o.Context
+	val.HTTPClient = o.HTTPClient
+	*o = val
 }
 
 // WithTimeout adds the timeout to the create project params
@@ -130,6 +150,17 @@ func (o *CreateProjectParams) SetBody(body *models.Project) {
 	o.Body = body
 }
 
+// WithSubnetSize adds the subnetSize to the create project params
+func (o *CreateProjectParams) WithSubnetSize(subnetSize *float64) *CreateProjectParams {
+	o.SetSubnetSize(subnetSize)
+	return o
+}
+
+// SetSubnetSize adds the subnetSize to the create project params
+func (o *CreateProjectParams) SetSubnetSize(subnetSize *float64) {
+	o.SubnetSize = subnetSize
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *CreateProjectParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -140,6 +171,23 @@ func (o *CreateProjectParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err
+		}
+	}
+
+	if o.SubnetSize != nil {
+
+		// query param subnetSize
+		var qrSubnetSize float64
+
+		if o.SubnetSize != nil {
+			qrSubnetSize = *o.SubnetSize
+		}
+		qSubnetSize := swag.FormatFloat64(qrSubnetSize)
+		if qSubnetSize != "" {
+
+			if err := r.SetQueryParam("subnetSize", qSubnetSize); err != nil {
+				return err
+			}
 		}
 	}
 

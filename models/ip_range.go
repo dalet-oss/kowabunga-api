@@ -14,22 +14,22 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// DhcpRange A DHCPv4 dynamic pool range.
+// IPRange A reserved IPv4 pool range, non-addressable by Kowabunga.
 //
-// swagger:model DhcpRange
-type DhcpRange struct {
+// swagger:model IpRange
+type IPRange struct {
 
-	// The range's first IP address for DHCP dynamic leases.
+	// The range's first IP address.
 	// Required: true
 	First *string `json:"first"`
 
-	// The range's last IP address for DHCP dynamic leases.
+	// The range's last IP address.
 	// Required: true
 	Last *string `json:"last"`
 }
 
-// Validate validates this dhcp range
-func (m *DhcpRange) Validate(formats strfmt.Registry) error {
+// Validate validates this Ip range
+func (m *IPRange) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateFirst(formats); err != nil {
@@ -46,7 +46,7 @@ func (m *DhcpRange) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *DhcpRange) validateFirst(formats strfmt.Registry) error {
+func (m *IPRange) validateFirst(formats strfmt.Registry) error {
 
 	if err := validate.Required("first", "body", m.First); err != nil {
 		return err
@@ -55,7 +55,7 @@ func (m *DhcpRange) validateFirst(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *DhcpRange) validateLast(formats strfmt.Registry) error {
+func (m *IPRange) validateLast(formats strfmt.Registry) error {
 
 	if err := validate.Required("last", "body", m.Last); err != nil {
 		return err
@@ -64,13 +64,13 @@ func (m *DhcpRange) validateLast(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this dhcp range based on context it is used
-func (m *DhcpRange) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this Ip range based on context it is used
+func (m *IPRange) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *DhcpRange) MarshalBinary() ([]byte, error) {
+func (m *IPRange) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -78,8 +78,8 @@ func (m *DhcpRange) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *DhcpRange) UnmarshalBinary(b []byte) error {
-	var res DhcpRange
+func (m *IPRange) UnmarshalBinary(b []byte) error {
+	var res IPRange
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

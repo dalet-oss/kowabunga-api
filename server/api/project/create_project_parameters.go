@@ -12,17 +12,26 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
+	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
 	"github.com/dalet-oss/kowabunga-api/models"
 )
 
 // NewCreateProjectParams creates a new CreateProjectParams object
-//
-// There are no default values defined in the spec.
+// with the default values initialized.
 func NewCreateProjectParams() CreateProjectParams {
 
-	return CreateProjectParams{}
+	var (
+		// initialize parameters with default values
+
+		subnetSizeDefault = float64(26)
+	)
+
+	return CreateProjectParams{
+		SubnetSize: &subnetSizeDefault,
+	}
 }
 
 // CreateProjectParams contains all the bound params for the create project operation
@@ -39,6 +48,11 @@ type CreateProjectParams struct {
 	  In: body
 	*/
 	Body *models.Project
+	/*The minimum VPC subnet size to be affected to the project. WARNING, this cannot be changed later.
+	  In: query
+	  Default: 26
+	*/
+	SubnetSize *float64
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
@@ -49,6 +63,8 @@ func (o *CreateProjectParams) BindRequest(r *http.Request, route *middleware.Mat
 	var res []error
 
 	o.HTTPRequest = r
+
+	qs := runtime.Values(r.URL.Query())
 
 	if runtime.HasBody(r) {
 		defer r.Body.Close()
@@ -77,8 +93,37 @@ func (o *CreateProjectParams) BindRequest(r *http.Request, route *middleware.Mat
 	} else {
 		res = append(res, errors.Required("body", "body", ""))
 	}
+
+	qSubnetSize, qhkSubnetSize, _ := qs.GetOK("subnetSize")
+	if err := o.bindSubnetSize(qSubnetSize, qhkSubnetSize, route.Formats); err != nil {
+		res = append(res, err)
+	}
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// bindSubnetSize binds and validates parameter SubnetSize from query.
+func (o *CreateProjectParams) bindSubnetSize(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		// Default values have been previously initialized by NewCreateProjectParams()
+		return nil
+	}
+
+	value, err := swag.ConvertFloat64(raw)
+	if err != nil {
+		return errors.InvalidType("subnetSize", "query", "float64", raw)
+	}
+	o.SubnetSize = &value
+
 	return nil
 }

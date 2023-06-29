@@ -27,9 +27,6 @@ type Subnet struct {
 	// The subnet description.
 	Description string `json:"description,omitempty"`
 
-	// The subnet list of reserved DHCP range (i.e. dynamic range, not IP address should be assigned from there).
-	Dhcp []*DhcpRange `json:"dhcp"`
-
 	// The subnet DNS server IP address (gateway value if unspecified).
 	DNS string `json:"dns,omitempty"`
 
@@ -43,6 +40,9 @@ type Subnet struct {
 	// The subnet name.
 	// Required: true
 	Name *string `json:"name"`
+
+	// The subnet list of reserved IPv4 ranges (i.e. no IP address can be assigned from there).
+	Reserved []*IPRange `json:"reserved"`
 }
 
 // Validate validates this subnet
@@ -53,15 +53,15 @@ func (m *Subnet) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateDhcp(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateGateway(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateReserved(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -75,32 +75,6 @@ func (m *Subnet) validateCidr(formats strfmt.Registry) error {
 
 	if err := validate.Required("cidr", "body", m.Cidr); err != nil {
 		return err
-	}
-
-	return nil
-}
-
-func (m *Subnet) validateDhcp(formats strfmt.Registry) error {
-	if swag.IsZero(m.Dhcp) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.Dhcp); i++ {
-		if swag.IsZero(m.Dhcp[i]) { // not required
-			continue
-		}
-
-		if m.Dhcp[i] != nil {
-			if err := m.Dhcp[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("dhcp" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("dhcp" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
 	}
 
 	return nil
@@ -124,11 +98,37 @@ func (m *Subnet) validateName(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Subnet) validateReserved(formats strfmt.Registry) error {
+	if swag.IsZero(m.Reserved) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Reserved); i++ {
+		if swag.IsZero(m.Reserved[i]) { // not required
+			continue
+		}
+
+		if m.Reserved[i] != nil {
+			if err := m.Reserved[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("reserved" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("reserved" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 // ContextValidate validate this subnet based on the context it is used
 func (m *Subnet) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateDhcp(ctx, formats); err != nil {
+	if err := m.contextValidateReserved(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -138,16 +138,16 @@ func (m *Subnet) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 	return nil
 }
 
-func (m *Subnet) contextValidateDhcp(ctx context.Context, formats strfmt.Registry) error {
+func (m *Subnet) contextValidateReserved(ctx context.Context, formats strfmt.Registry) error {
 
-	for i := 0; i < len(m.Dhcp); i++ {
+	for i := 0; i < len(m.Reserved); i++ {
 
-		if m.Dhcp[i] != nil {
-			if err := m.Dhcp[i].ContextValidate(ctx, formats); err != nil {
+		if m.Reserved[i] != nil {
+			if err := m.Reserved[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("dhcp" + "." + strconv.Itoa(i))
+					return ve.ValidateName("reserved" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("dhcp" + "." + strconv.Itoa(i))
+					return ce.ValidateName("reserved" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

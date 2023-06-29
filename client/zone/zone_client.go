@@ -56,8 +56,6 @@ type ClientService interface {
 
 	UpdateZoneDefaultPool(params *UpdateZoneDefaultPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateZoneDefaultPoolOK, error)
 
-	UpdateZoneDefaultVNet(params *UpdateZoneDefaultVNetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateZoneDefaultVNetOK, error)
-
 	SetTransport(transport runtime.ClientTransport)
 }
 
@@ -565,45 +563,6 @@ func (a *Client) UpdateZoneDefaultPool(params *UpdateZoneDefaultPoolParams, auth
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateZoneDefaultPool: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-UpdateZoneDefaultVNet Set a zone's default virtual network.
-*/
-func (a *Client) UpdateZoneDefaultVNet(params *UpdateZoneDefaultVNetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateZoneDefaultVNetOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewUpdateZoneDefaultVNetParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "UpdateZoneDefaultVNet",
-		Method:             "PUT",
-		PathPattern:        "/zone/{zoneId}/vnet/{vnetId}/default",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &UpdateZoneDefaultVNetReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*UpdateZoneDefaultVNetOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for UpdateZoneDefaultVNet: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

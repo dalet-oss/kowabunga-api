@@ -79,6 +79,11 @@ paths:
       operationId: CreateProject
       description: Creates a new project.
       parameters:
+        - name: subnetSize
+          in: query
+          type: number
+          default: 26
+          description: The minimum VPC subnet size to be affected to the project. WARNING, this cannot be changed later.
         - name: body
           in: body
           required: true
@@ -95,6 +100,8 @@ paths:
           description: Project already exists.
         500:
           description: Unable to create the requested project.
+        507:
+          description: The expected VPC subnet size cannot be assigned.
 
   /project/{projectId}:
     get:

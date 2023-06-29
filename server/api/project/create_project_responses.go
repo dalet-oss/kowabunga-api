@@ -132,3 +132,28 @@ func (o *CreateProjectInternalServerError) WriteResponse(rw http.ResponseWriter,
 
 	rw.WriteHeader(500)
 }
+
+// CreateProjectInsufficientStorageCode is the HTTP code returned for type CreateProjectInsufficientStorage
+const CreateProjectInsufficientStorageCode int = 507
+
+/*
+CreateProjectInsufficientStorage The expected VPC subnet size cannot be assigned.
+
+swagger:response createProjectInsufficientStorage
+*/
+type CreateProjectInsufficientStorage struct {
+}
+
+// NewCreateProjectInsufficientStorage creates CreateProjectInsufficientStorage with default headers values
+func NewCreateProjectInsufficientStorage() *CreateProjectInsufficientStorage {
+
+	return &CreateProjectInsufficientStorage{}
+}
+
+// WriteResponse to the client
+func (o *CreateProjectInsufficientStorage) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.Header().Del(runtime.HeaderContentType) //Remove Content-Type on empty responses
+
+	rw.WriteHeader(507)
+}

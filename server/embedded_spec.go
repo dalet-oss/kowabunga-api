@@ -1446,6 +1446,13 @@ func init() {
         "operationId": "CreateProject",
         "parameters": [
           {
+            "type": "number",
+            "default": 26,
+            "description": "The minimum VPC subnet size to be affected to the project. WARNING, this cannot be changed later.",
+            "name": "subnetSize",
+            "in": "query"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -1469,6 +1476,9 @@ func init() {
           },
           "500": {
             "description": "Unable to create the requested project."
+          },
+          "507": {
+            "description": "The expected VPC subnet size cannot be assigned."
           }
         }
       }
@@ -3467,43 +3477,6 @@ func init() {
         }
       }
     },
-    "/zone/{zoneId}/vnet/{vnetId}/default": {
-      "put": {
-        "description": "Set a zone's default virtual network.",
-        "tags": [
-          "zone",
-          "vnet"
-        ],
-        "operationId": "UpdateZoneDefaultVNet",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "The ID of the zone to update.",
-            "name": "zoneId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "The ID of the virtual network to set as default.",
-            "name": "vnetId",
-            "in": "path",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the updated project resources object."
-          },
-          "404": {
-            "description": "Invalid zone ID or virtual network ID was provided."
-          },
-          "500": {
-            "description": "Unable to assign the requested virtual network as zone's default."
-          }
-        }
-      }
-    },
     "/zone/{zoneId}/vnets": {
       "get": {
         "description": "Returns the IDs of the virtual networks existing in the zone.",
@@ -3591,24 +3564,6 @@ func init() {
           "description": "The unit price information.",
           "type": "integer",
           "format": "float"
-        }
-      }
-    },
-    "DhcpRange": {
-      "description": "A DHCPv4 dynamic pool range.",
-      "type": "object",
-      "required": [
-        "first",
-        "last"
-      ],
-      "properties": {
-        "first": {
-          "description": "The range's first IP address for DHCP dynamic leases.",
-          "type": "string"
-        },
-        "last": {
-          "description": "The range's last IP address for DHCP dynamic leases.",
-          "type": "string"
         }
       }
     },
@@ -3796,6 +3751,24 @@ func init() {
         },
         "state": {
           "description": "the state of the VM",
+          "type": "string"
+        }
+      }
+    },
+    "IpRange": {
+      "description": "A reserved IPv4 pool range, non-addressable by Kowabunga.",
+      "type": "object",
+      "required": [
+        "first",
+        "last"
+      ],
+      "properties": {
+        "first": {
+          "description": "The range's first IP address.",
+          "type": "string"
+        },
+        "last": {
+          "description": "The range's last IP address.",
           "type": "string"
         }
       }
@@ -4060,13 +4033,6 @@ func init() {
           "description": "The subnet description.",
           "type": "string"
         },
-        "dhcp": {
-          "description": "The subnet list of reserved DHCP range (i.e. dynamic range, not IP address should be assigned from there).",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DhcpRange"
-          }
-        },
         "dns": {
           "description": "The subnet DNS server IP address (gateway value if unspecified).",
           "type": "string"
@@ -4082,6 +4048,13 @@ func init() {
         "name": {
           "description": "The subnet name.",
           "type": "string"
+        },
+        "reserved": {
+          "description": "The subnet list of reserved IPv4 ranges (i.e. no IP address can be assigned from there).",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpRange"
+          }
         }
       }
     },
@@ -5664,6 +5637,13 @@ func init() {
         "operationId": "CreateProject",
         "parameters": [
           {
+            "type": "number",
+            "default": 26,
+            "description": "The minimum VPC subnet size to be affected to the project. WARNING, this cannot be changed later.",
+            "name": "subnetSize",
+            "in": "query"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -5687,6 +5667,9 @@ func init() {
           },
           "500": {
             "description": "Unable to create the requested project."
+          },
+          "507": {
+            "description": "The expected VPC subnet size cannot be assigned."
           }
         }
       }
@@ -7685,43 +7668,6 @@ func init() {
         }
       }
     },
-    "/zone/{zoneId}/vnet/{vnetId}/default": {
-      "put": {
-        "description": "Set a zone's default virtual network.",
-        "tags": [
-          "zone",
-          "vnet"
-        ],
-        "operationId": "UpdateZoneDefaultVNet",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "The ID of the zone to update.",
-            "name": "zoneId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "description": "The ID of the virtual network to set as default.",
-            "name": "vnetId",
-            "in": "path",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the updated project resources object."
-          },
-          "404": {
-            "description": "Invalid zone ID or virtual network ID was provided."
-          },
-          "500": {
-            "description": "Unable to assign the requested virtual network as zone's default."
-          }
-        }
-      }
-    },
     "/zone/{zoneId}/vnets": {
       "get": {
         "description": "Returns the IDs of the virtual networks existing in the zone.",
@@ -7809,24 +7755,6 @@ func init() {
           "description": "The unit price information.",
           "type": "integer",
           "format": "float"
-        }
-      }
-    },
-    "DhcpRange": {
-      "description": "A DHCPv4 dynamic pool range.",
-      "type": "object",
-      "required": [
-        "first",
-        "last"
-      ],
-      "properties": {
-        "first": {
-          "description": "The range's first IP address for DHCP dynamic leases.",
-          "type": "string"
-        },
-        "last": {
-          "description": "The range's last IP address for DHCP dynamic leases.",
-          "type": "string"
         }
       }
     },
@@ -8075,6 +8003,24 @@ func init() {
         },
         "state": {
           "description": "the state of the VM",
+          "type": "string"
+        }
+      }
+    },
+    "IpRange": {
+      "description": "A reserved IPv4 pool range, non-addressable by Kowabunga.",
+      "type": "object",
+      "required": [
+        "first",
+        "last"
+      ],
+      "properties": {
+        "first": {
+          "description": "The range's first IP address.",
+          "type": "string"
+        },
+        "last": {
+          "description": "The range's last IP address.",
           "type": "string"
         }
       }
@@ -8339,13 +8285,6 @@ func init() {
           "description": "The subnet description.",
           "type": "string"
         },
-        "dhcp": {
-          "description": "The subnet list of reserved DHCP range (i.e. dynamic range, not IP address should be assigned from there).",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DhcpRange"
-          }
-        },
         "dns": {
           "description": "The subnet DNS server IP address (gateway value if unspecified).",
           "type": "string"
@@ -8361,6 +8300,13 @@ func init() {
         "name": {
           "description": "The subnet name.",
           "type": "string"
+        },
+        "reserved": {
+          "description": "The subnet list of reserved IPv4 ranges (i.e. no IP address can be assigned from there).",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpRange"
+          }
         }
       }
     },

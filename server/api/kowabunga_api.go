@@ -368,9 +368,6 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		ZoneUpdateZoneDefaultPoolHandler: zone.UpdateZoneDefaultPoolHandlerFunc(func(params zone.UpdateZoneDefaultPoolParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.UpdateZoneDefaultPool has not yet been implemented")
 		}),
-		ZoneUpdateZoneDefaultVNetHandler: zone.UpdateZoneDefaultVNetHandlerFunc(func(params zone.UpdateZoneDefaultVNetParams, principal interface{}) middleware.Responder {
-			return middleware.NotImplemented("operation zone.UpdateZoneDefaultVNet has not yet been implemented")
-		}),
 
 		// Applies when the "x-token" header is set
 		KeyAuth: func(token string) (interface{}, error) {
@@ -629,8 +626,6 @@ type KowabungaAPI struct {
 	ZoneUpdateZoneHandler zone.UpdateZoneHandler
 	// ZoneUpdateZoneDefaultPoolHandler sets the operation handler for the update zone default pool operation
 	ZoneUpdateZoneDefaultPoolHandler zone.UpdateZoneDefaultPoolHandler
-	// ZoneUpdateZoneDefaultVNetHandler sets the operation handler for the update zone default v net operation
-	ZoneUpdateZoneDefaultVNetHandler zone.UpdateZoneDefaultVNetHandler
 
 	// ServeError is called when an error is received, there is a default handler
 	// but you can set your own with this
@@ -1023,9 +1018,6 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.ZoneUpdateZoneDefaultPoolHandler == nil {
 		unregistered = append(unregistered, "zone.UpdateZoneDefaultPoolHandler")
-	}
-	if o.ZoneUpdateZoneDefaultVNetHandler == nil {
-		unregistered = append(unregistered, "zone.UpdateZoneDefaultVNetHandler")
 	}
 
 	if len(unregistered) > 0 {
@@ -1540,10 +1532,6 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
 	o.handlers["PUT"]["/zone/{zoneId}/pool/{poolId}/default"] = zone.NewUpdateZoneDefaultPool(o.context, o.ZoneUpdateZoneDefaultPoolHandler)
-	if o.handlers["PUT"] == nil {
-		o.handlers["PUT"] = make(map[string]http.Handler)
-	}
-	o.handlers["PUT"]["/zone/{zoneId}/vnet/{vnetId}/default"] = zone.NewUpdateZoneDefaultVNet(o.context, o.ZoneUpdateZoneDefaultVNetHandler)
 }
 
 // Serve creates a http handler to serve the API over HTTP
