@@ -83,9 +83,6 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		ZoneCreateVNetHandler: zone.CreateVNetHandlerFunc(func(params zone.CreateVNetParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.CreateVNet has not yet been implemented")
 		}),
-		ProjectCreateVolumeHandler: project.CreateVolumeHandlerFunc(func(params project.CreateVolumeParams, principal interface{}) middleware.Responder {
-			return middleware.NotImplemented("operation project.CreateVolume has not yet been implemented")
-		}),
 		RegionCreateZoneHandler: region.CreateZoneHandlerFunc(func(params region.CreateZoneParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation region.CreateZone has not yet been implemented")
 		}),
@@ -220,9 +217,6 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		ProjectGetProjectUsageHandler: project.GetProjectUsageHandlerFunc(func(params project.GetProjectUsageParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectUsage has not yet been implemented")
-		}),
-		ProjectGetProjectVolumesHandler: project.GetProjectVolumesHandlerFunc(func(params project.GetProjectVolumesParams, principal interface{}) middleware.Responder {
-			return middleware.NotImplemented("operation project.GetProjectVolumes has not yet been implemented")
 		}),
 		ProjectGetProjectZoneInstancesHandler: project.GetProjectZoneInstancesHandlerFunc(func(params project.GetProjectZoneInstancesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectZoneInstances has not yet been implemented")
@@ -436,8 +430,6 @@ type KowabungaAPI struct {
 	PoolCreateTemplateHandler pool.CreateTemplateHandler
 	// ZoneCreateVNetHandler sets the operation handler for the create v net operation
 	ZoneCreateVNetHandler zone.CreateVNetHandler
-	// ProjectCreateVolumeHandler sets the operation handler for the create volume operation
-	ProjectCreateVolumeHandler project.CreateVolumeHandler
 	// RegionCreateZoneHandler sets the operation handler for the create zone operation
 	RegionCreateZoneHandler region.CreateZoneHandler
 	// ProjectCreateZoneInstanceHandler sets the operation handler for the create zone instance operation
@@ -528,8 +520,6 @@ type KowabungaAPI struct {
 	ProjectGetProjectQuotasHandler project.GetProjectQuotasHandler
 	// ProjectGetProjectUsageHandler sets the operation handler for the get project usage operation
 	ProjectGetProjectUsageHandler project.GetProjectUsageHandler
-	// ProjectGetProjectVolumesHandler sets the operation handler for the get project volumes operation
-	ProjectGetProjectVolumesHandler project.GetProjectVolumesHandler
 	// ProjectGetProjectZoneInstancesHandler sets the operation handler for the get project zone instances operation
 	ProjectGetProjectZoneInstancesHandler project.GetProjectZoneInstancesHandler
 	// ProjectGetProjectZoneKCEsHandler sets the operation handler for the get project zone k c es operation
@@ -734,9 +724,6 @@ func (o *KowabungaAPI) Validate() error {
 	if o.ZoneCreateVNetHandler == nil {
 		unregistered = append(unregistered, "zone.CreateVNetHandler")
 	}
-	if o.ProjectCreateVolumeHandler == nil {
-		unregistered = append(unregistered, "project.CreateVolumeHandler")
-	}
 	if o.RegionCreateZoneHandler == nil {
 		unregistered = append(unregistered, "region.CreateZoneHandler")
 	}
@@ -871,9 +858,6 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.ProjectGetProjectUsageHandler == nil {
 		unregistered = append(unregistered, "project.GetProjectUsageHandler")
-	}
-	if o.ProjectGetProjectVolumesHandler == nil {
-		unregistered = append(unregistered, "project.GetProjectVolumesHandler")
 	}
 	if o.ProjectGetProjectZoneInstancesHandler == nil {
 		unregistered = append(unregistered, "project.GetProjectZoneInstancesHandler")
@@ -1155,10 +1139,6 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
-	o.handlers["POST"]["/project/{projectId}/volume"] = project.NewCreateVolume(o.context, o.ProjectCreateVolumeHandler)
-	if o.handlers["POST"] == nil {
-		o.handlers["POST"] = make(map[string]http.Handler)
-	}
 	o.handlers["POST"]["/region/{regionId}/zone"] = region.NewCreateZone(o.context, o.RegionCreateZoneHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
@@ -1336,10 +1316,6 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/project/{projectId}/usage"] = project.NewGetProjectUsage(o.context, o.ProjectGetProjectUsageHandler)
-	if o.handlers["GET"] == nil {
-		o.handlers["GET"] = make(map[string]http.Handler)
-	}
-	o.handlers["GET"]["/project/{projectId}/volumes"] = project.NewGetProjectVolumes(o.context, o.ProjectGetProjectVolumesHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}

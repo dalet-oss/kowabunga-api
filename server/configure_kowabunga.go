@@ -108,11 +108,6 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation zone.CreateVNet has not yet been implemented")
 		})
 	}
-	if api.ProjectCreateVolumeHandler == nil {
-		api.ProjectCreateVolumeHandler = project.CreateVolumeHandlerFunc(func(params project.CreateVolumeParams, principal interface{}) middleware.Responder {
-			return middleware.NotImplemented("operation project.CreateVolume has not yet been implemented")
-		})
-	}
 	if api.RegionCreateZoneHandler == nil {
 		api.RegionCreateZoneHandler = region.CreateZoneHandlerFunc(func(params region.CreateZoneParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation region.CreateZone has not yet been implemented")
@@ -336,11 +331,6 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.ProjectGetProjectUsageHandler == nil {
 		api.ProjectGetProjectUsageHandler = project.GetProjectUsageHandlerFunc(func(params project.GetProjectUsageParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectUsage has not yet been implemented")
-		})
-	}
-	if api.ProjectGetProjectVolumesHandler == nil {
-		api.ProjectGetProjectVolumesHandler = project.GetProjectVolumesHandlerFunc(func(params project.GetProjectVolumesParams, principal interface{}) middleware.Responder {
-			return middleware.NotImplemented("operation project.GetProjectVolumes has not yet been implemented")
 		})
 	}
 	if api.ProjectGetProjectZoneInstancesHandler == nil {
