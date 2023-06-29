@@ -19,9 +19,9 @@ import (
 	"github.com/dalet-oss/kowabunga-api/models"
 )
 
-// NewCreateZoneKceParams creates a new CreateZoneKceParams object
+// NewCreateProjectZoneKceParams creates a new CreateProjectZoneKceParams object
 // with the default values initialized.
-func NewCreateZoneKceParams() CreateZoneKceParams {
+func NewCreateProjectZoneKceParams() CreateProjectZoneKceParams {
 
 	var (
 		// initialize parameters with default values
@@ -29,16 +29,16 @@ func NewCreateZoneKceParams() CreateZoneKceParams {
 		publicDefault = bool(false)
 	)
 
-	return CreateZoneKceParams{
+	return CreateProjectZoneKceParams{
 		Public: &publicDefault,
 	}
 }
 
-// CreateZoneKceParams contains all the bound params for the create zone kce operation
+// CreateProjectZoneKceParams contains all the bound params for the create project zone kce operation
 // typically these are obtained from a http.Request
 //
-// swagger:parameters CreateZoneKce
-type CreateZoneKceParams struct {
+// swagger:parameters CreateProjectZoneKce
+type CreateProjectZoneKceParams struct {
 
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
@@ -80,8 +80,8 @@ type CreateZoneKceParams struct {
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
 // for simple values it will use straight method calls.
 //
-// To ensure default values, the struct must have been initialized with NewCreateZoneKceParams() beforehand.
-func (o *CreateZoneKceParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
+// To ensure default values, the struct must have been initialized with NewCreateProjectZoneKceParams() beforehand.
+func (o *CreateProjectZoneKceParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
 	var res []error
 
 	o.HTTPRequest = r
@@ -152,7 +152,7 @@ func (o *CreateZoneKceParams) BindRequest(r *http.Request, route *middleware.Mat
 }
 
 // bindPoolID binds and validates parameter PoolID from query.
-func (o *CreateZoneKceParams) bindPoolID(rawData []string, hasKey bool, formats strfmt.Registry) error {
+func (o *CreateProjectZoneKceParams) bindPoolID(rawData []string, hasKey bool, formats strfmt.Registry) error {
 	var raw string
 	if len(rawData) > 0 {
 		raw = rawData[len(rawData)-1]
@@ -170,7 +170,7 @@ func (o *CreateZoneKceParams) bindPoolID(rawData []string, hasKey bool, formats 
 }
 
 // bindProjectID binds and validates parameter ProjectID from path.
-func (o *CreateZoneKceParams) bindProjectID(rawData []string, hasKey bool, formats strfmt.Registry) error {
+func (o *CreateProjectZoneKceParams) bindProjectID(rawData []string, hasKey bool, formats strfmt.Registry) error {
 	var raw string
 	if len(rawData) > 0 {
 		raw = rawData[len(rawData)-1]
@@ -184,7 +184,7 @@ func (o *CreateZoneKceParams) bindProjectID(rawData []string, hasKey bool, forma
 }
 
 // bindPublic binds and validates parameter Public from query.
-func (o *CreateZoneKceParams) bindPublic(rawData []string, hasKey bool, formats strfmt.Registry) error {
+func (o *CreateProjectZoneKceParams) bindPublic(rawData []string, hasKey bool, formats strfmt.Registry) error {
 	var raw string
 	if len(rawData) > 0 {
 		raw = rawData[len(rawData)-1]
@@ -194,7 +194,7 @@ func (o *CreateZoneKceParams) bindPublic(rawData []string, hasKey bool, formats 
 	// AllowEmptyValue: false
 
 	if raw == "" { // empty values pass all other validations
-		// Default values have been previously initialized by NewCreateZoneKceParams()
+		// Default values have been previously initialized by NewCreateProjectZoneKceParams()
 		return nil
 	}
 
@@ -208,7 +208,7 @@ func (o *CreateZoneKceParams) bindPublic(rawData []string, hasKey bool, formats 
 }
 
 // bindSubnetID binds and validates parameter SubnetID from query.
-func (o *CreateZoneKceParams) bindSubnetID(rawData []string, hasKey bool, formats strfmt.Registry) error {
+func (o *CreateProjectZoneKceParams) bindSubnetID(rawData []string, hasKey bool, formats strfmt.Registry) error {
 	var raw string
 	if len(rawData) > 0 {
 		raw = rawData[len(rawData)-1]
@@ -226,7 +226,7 @@ func (o *CreateZoneKceParams) bindSubnetID(rawData []string, hasKey bool, format
 }
 
 // bindTemplateID binds and validates parameter TemplateID from query.
-func (o *CreateZoneKceParams) bindTemplateID(rawData []string, hasKey bool, formats strfmt.Registry) error {
+func (o *CreateProjectZoneKceParams) bindTemplateID(rawData []string, hasKey bool, formats strfmt.Registry) error {
 	var raw string
 	if len(rawData) > 0 {
 		raw = rawData[len(rawData)-1]
@@ -244,7 +244,7 @@ func (o *CreateZoneKceParams) bindTemplateID(rawData []string, hasKey bool, form
 }
 
 // bindZoneID binds and validates parameter ZoneID from path.
-func (o *CreateZoneKceParams) bindZoneID(rawData []string, hasKey bool, formats strfmt.Registry) error {
+func (o *CreateProjectZoneKceParams) bindZoneID(rawData []string, hasKey bool, formats strfmt.Registry) error {
 	var raw string
 	if len(rawData) > 0 {
 		raw = rawData[len(rawData)-1]

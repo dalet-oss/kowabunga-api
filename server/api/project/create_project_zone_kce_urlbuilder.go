@@ -10,12 +10,19 @@ import (
 	"net/url"
 	golangswaggerpaths "path"
 	"strings"
+
+	"github.com/go-openapi/swag"
 )
 
-// CreateZoneInstanceURL generates an URL for the create zone instance operation
-type CreateZoneInstanceURL struct {
+// CreateProjectZoneKceURL generates an URL for the create project zone kce operation
+type CreateProjectZoneKceURL struct {
 	ProjectID string
 	ZoneID    string
+
+	PoolID     *string
+	Public     *bool
+	SubnetID   *string
+	TemplateID *string
 
 	_basePath string
 	// avoid unkeyed usage
@@ -25,7 +32,7 @@ type CreateZoneInstanceURL struct {
 // WithBasePath sets the base path for this url builder, only required when it's different from the
 // base path specified in the swagger spec.
 // When the value of the base path is an empty string
-func (o *CreateZoneInstanceURL) WithBasePath(bp string) *CreateZoneInstanceURL {
+func (o *CreateProjectZoneKceURL) WithBasePath(bp string) *CreateProjectZoneKceURL {
 	o.SetBasePath(bp)
 	return o
 }
@@ -33,28 +40,28 @@ func (o *CreateZoneInstanceURL) WithBasePath(bp string) *CreateZoneInstanceURL {
 // SetBasePath sets the base path for this url builder, only required when it's different from the
 // base path specified in the swagger spec.
 // When the value of the base path is an empty string
-func (o *CreateZoneInstanceURL) SetBasePath(bp string) {
+func (o *CreateProjectZoneKceURL) SetBasePath(bp string) {
 	o._basePath = bp
 }
 
 // Build a url path and query string
-func (o *CreateZoneInstanceURL) Build() (*url.URL, error) {
+func (o *CreateProjectZoneKceURL) Build() (*url.URL, error) {
 	var _result url.URL
 
-	var _path = "/project/{projectId}/zone/{zoneId}/instance"
+	var _path = "/project/{projectId}/zone/{zoneId}/kce"
 
 	projectID := o.ProjectID
 	if projectID != "" {
 		_path = strings.Replace(_path, "{projectId}", projectID, -1)
 	} else {
-		return nil, errors.New("projectId is required on CreateZoneInstanceURL")
+		return nil, errors.New("projectId is required on CreateProjectZoneKceURL")
 	}
 
 	zoneID := o.ZoneID
 	if zoneID != "" {
 		_path = strings.Replace(_path, "{zoneId}", zoneID, -1)
 	} else {
-		return nil, errors.New("zoneId is required on CreateZoneInstanceURL")
+		return nil, errors.New("zoneId is required on CreateProjectZoneKceURL")
 	}
 
 	_basePath := o._basePath
@@ -63,11 +70,47 @@ func (o *CreateZoneInstanceURL) Build() (*url.URL, error) {
 	}
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
 
+	qs := make(url.Values)
+
+	var poolIDQ string
+	if o.PoolID != nil {
+		poolIDQ = *o.PoolID
+	}
+	if poolIDQ != "" {
+		qs.Set("poolId", poolIDQ)
+	}
+
+	var publicQ string
+	if o.Public != nil {
+		publicQ = swag.FormatBool(*o.Public)
+	}
+	if publicQ != "" {
+		qs.Set("public", publicQ)
+	}
+
+	var subnetIDQ string
+	if o.SubnetID != nil {
+		subnetIDQ = *o.SubnetID
+	}
+	if subnetIDQ != "" {
+		qs.Set("subnetId", subnetIDQ)
+	}
+
+	var templateIDQ string
+	if o.TemplateID != nil {
+		templateIDQ = *o.TemplateID
+	}
+	if templateIDQ != "" {
+		qs.Set("templateId", templateIDQ)
+	}
+
+	_result.RawQuery = qs.Encode()
+
 	return &_result, nil
 }
 
 // Must is a helper function to panic when the url builder returns an error
-func (o *CreateZoneInstanceURL) Must(u *url.URL, err error) *url.URL {
+func (o *CreateProjectZoneKceURL) Must(u *url.URL, err error) *url.URL {
 	if err != nil {
 		panic(err)
 	}
@@ -78,17 +121,17 @@ func (o *CreateZoneInstanceURL) Must(u *url.URL, err error) *url.URL {
 }
 
 // String returns the string representation of the path with query string
-func (o *CreateZoneInstanceURL) String() string {
+func (o *CreateProjectZoneKceURL) String() string {
 	return o.Must(o.Build()).String()
 }
 
 // BuildFull builds a full url with scheme, host, path and query string
-func (o *CreateZoneInstanceURL) BuildFull(scheme, host string) (*url.URL, error) {
+func (o *CreateProjectZoneKceURL) BuildFull(scheme, host string) (*url.URL, error) {
 	if scheme == "" {
-		return nil, errors.New("scheme is required for a full url on CreateZoneInstanceURL")
+		return nil, errors.New("scheme is required for a full url on CreateProjectZoneKceURL")
 	}
 	if host == "" {
-		return nil, errors.New("host is required for a full url on CreateZoneInstanceURL")
+		return nil, errors.New("host is required for a full url on CreateProjectZoneKceURL")
 	}
 
 	base, err := o.Build()
@@ -102,6 +145,6 @@ func (o *CreateZoneInstanceURL) BuildFull(scheme, host string) (*url.URL, error)
 }
 
 // StringFull returns the string representation of a complete url
-func (o *CreateZoneInstanceURL) StringFull(scheme, host string) string {
+func (o *CreateProjectZoneKceURL) StringFull(scheme, host string) string {
 	return o.Must(o.BuildFull(scheme, host)).String()
 }

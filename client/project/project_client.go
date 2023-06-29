@@ -32,11 +32,11 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	CreateProject(params *CreateProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectCreated, error)
 
-	CreateZoneInstance(params *CreateZoneInstanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateZoneInstanceCreated, error)
+	CreateProjectZoneInstance(params *CreateProjectZoneInstanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectZoneInstanceCreated, error)
 
-	CreateZoneKce(params *CreateZoneKceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateZoneKceCreated, error)
+	CreateProjectZoneKce(params *CreateProjectZoneKceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectZoneKceCreated, error)
 
-	CreateZoneVolume(params *CreateZoneVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateZoneVolumeCreated, error)
+	CreateProjectZoneVolume(params *CreateProjectZoneVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectZoneVolumeCreated, error)
 
 	DeleteProject(params *DeleteProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectOK, error)
 
@@ -103,22 +103,22 @@ func (a *Client) CreateProject(params *CreateProjectParams, authInfo runtime.Cli
 }
 
 /*
-CreateZoneInstance Creates a new virtual machine instance in specified zone.
+CreateProjectZoneInstance Creates a new virtual machine instance in specified zone.
 */
-func (a *Client) CreateZoneInstance(params *CreateZoneInstanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateZoneInstanceCreated, error) {
+func (a *Client) CreateProjectZoneInstance(params *CreateProjectZoneInstanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectZoneInstanceCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateZoneInstanceParams()
+		params = NewCreateProjectZoneInstanceParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "CreateZoneInstance",
+		ID:                 "CreateProjectZoneInstance",
 		Method:             "POST",
 		PathPattern:        "/project/{projectId}/zone/{zoneId}/instance",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateZoneInstanceReader{formats: a.formats},
+		Reader:             &CreateProjectZoneInstanceReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -131,33 +131,33 @@ func (a *Client) CreateZoneInstance(params *CreateZoneInstanceParams, authInfo r
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateZoneInstanceCreated)
+	success, ok := result.(*CreateProjectZoneInstanceCreated)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CreateZoneInstance: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for CreateProjectZoneInstance: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateZoneKce Creates a new KCE virtual machine in specified zone.
+CreateProjectZoneKce Creates a new KCE virtual machine in specified zone.
 */
-func (a *Client) CreateZoneKce(params *CreateZoneKceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateZoneKceCreated, error) {
+func (a *Client) CreateProjectZoneKce(params *CreateProjectZoneKceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectZoneKceCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateZoneKceParams()
+		params = NewCreateProjectZoneKceParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "CreateZoneKce",
+		ID:                 "CreateProjectZoneKce",
 		Method:             "POST",
 		PathPattern:        "/project/{projectId}/zone/{zoneId}/kce",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateZoneKceReader{formats: a.formats},
+		Reader:             &CreateProjectZoneKceReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -170,33 +170,33 @@ func (a *Client) CreateZoneKce(params *CreateZoneKceParams, authInfo runtime.Cli
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateZoneKceCreated)
+	success, ok := result.(*CreateProjectZoneKceCreated)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CreateZoneKce: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for CreateProjectZoneKce: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-CreateZoneVolume Creates a new storage volume in specified zone.
+CreateProjectZoneVolume Creates a new storage volume in specified zone.
 */
-func (a *Client) CreateZoneVolume(params *CreateZoneVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateZoneVolumeCreated, error) {
+func (a *Client) CreateProjectZoneVolume(params *CreateProjectZoneVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectZoneVolumeCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewCreateZoneVolumeParams()
+		params = NewCreateProjectZoneVolumeParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "CreateZoneVolume",
+		ID:                 "CreateProjectZoneVolume",
 		Method:             "POST",
 		PathPattern:        "/project/{projectId}/zone/{zoneId}/volume",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
 		Params:             params,
-		Reader:             &CreateZoneVolumeReader{formats: a.formats},
+		Reader:             &CreateProjectZoneVolumeReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -209,13 +209,13 @@ func (a *Client) CreateZoneVolume(params *CreateZoneVolumeParams, authInfo runti
 	if err != nil {
 		return nil, err
 	}
-	success, ok := result.(*CreateZoneVolumeCreated)
+	success, ok := result.(*CreateProjectZoneVolumeCreated)
 	if ok {
 		return success, nil
 	}
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for CreateZoneVolume: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for CreateProjectZoneVolume: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

@@ -10,18 +10,14 @@ import (
 	"net/url"
 	golangswaggerpaths "path"
 	"strings"
-
-	"github.com/go-openapi/swag"
 )
 
-// CreateZoneKceURL generates an URL for the create zone kce operation
-type CreateZoneKceURL struct {
+// CreateProjectZoneVolumeURL generates an URL for the create project zone volume operation
+type CreateProjectZoneVolumeURL struct {
 	ProjectID string
 	ZoneID    string
 
 	PoolID     *string
-	Public     *bool
-	SubnetID   *string
 	TemplateID *string
 
 	_basePath string
@@ -32,7 +28,7 @@ type CreateZoneKceURL struct {
 // WithBasePath sets the base path for this url builder, only required when it's different from the
 // base path specified in the swagger spec.
 // When the value of the base path is an empty string
-func (o *CreateZoneKceURL) WithBasePath(bp string) *CreateZoneKceURL {
+func (o *CreateProjectZoneVolumeURL) WithBasePath(bp string) *CreateProjectZoneVolumeURL {
 	o.SetBasePath(bp)
 	return o
 }
@@ -40,28 +36,28 @@ func (o *CreateZoneKceURL) WithBasePath(bp string) *CreateZoneKceURL {
 // SetBasePath sets the base path for this url builder, only required when it's different from the
 // base path specified in the swagger spec.
 // When the value of the base path is an empty string
-func (o *CreateZoneKceURL) SetBasePath(bp string) {
+func (o *CreateProjectZoneVolumeURL) SetBasePath(bp string) {
 	o._basePath = bp
 }
 
 // Build a url path and query string
-func (o *CreateZoneKceURL) Build() (*url.URL, error) {
+func (o *CreateProjectZoneVolumeURL) Build() (*url.URL, error) {
 	var _result url.URL
 
-	var _path = "/project/{projectId}/zone/{zoneId}/kce"
+	var _path = "/project/{projectId}/zone/{zoneId}/volume"
 
 	projectID := o.ProjectID
 	if projectID != "" {
 		_path = strings.Replace(_path, "{projectId}", projectID, -1)
 	} else {
-		return nil, errors.New("projectId is required on CreateZoneKceURL")
+		return nil, errors.New("projectId is required on CreateProjectZoneVolumeURL")
 	}
 
 	zoneID := o.ZoneID
 	if zoneID != "" {
 		_path = strings.Replace(_path, "{zoneId}", zoneID, -1)
 	} else {
-		return nil, errors.New("zoneId is required on CreateZoneKceURL")
+		return nil, errors.New("zoneId is required on CreateProjectZoneVolumeURL")
 	}
 
 	_basePath := o._basePath
@@ -80,22 +76,6 @@ func (o *CreateZoneKceURL) Build() (*url.URL, error) {
 		qs.Set("poolId", poolIDQ)
 	}
 
-	var publicQ string
-	if o.Public != nil {
-		publicQ = swag.FormatBool(*o.Public)
-	}
-	if publicQ != "" {
-		qs.Set("public", publicQ)
-	}
-
-	var subnetIDQ string
-	if o.SubnetID != nil {
-		subnetIDQ = *o.SubnetID
-	}
-	if subnetIDQ != "" {
-		qs.Set("subnetId", subnetIDQ)
-	}
-
 	var templateIDQ string
 	if o.TemplateID != nil {
 		templateIDQ = *o.TemplateID
@@ -110,7 +90,7 @@ func (o *CreateZoneKceURL) Build() (*url.URL, error) {
 }
 
 // Must is a helper function to panic when the url builder returns an error
-func (o *CreateZoneKceURL) Must(u *url.URL, err error) *url.URL {
+func (o *CreateProjectZoneVolumeURL) Must(u *url.URL, err error) *url.URL {
 	if err != nil {
 		panic(err)
 	}
@@ -121,17 +101,17 @@ func (o *CreateZoneKceURL) Must(u *url.URL, err error) *url.URL {
 }
 
 // String returns the string representation of the path with query string
-func (o *CreateZoneKceURL) String() string {
+func (o *CreateProjectZoneVolumeURL) String() string {
 	return o.Must(o.Build()).String()
 }
 
 // BuildFull builds a full url with scheme, host, path and query string
-func (o *CreateZoneKceURL) BuildFull(scheme, host string) (*url.URL, error) {
+func (o *CreateProjectZoneVolumeURL) BuildFull(scheme, host string) (*url.URL, error) {
 	if scheme == "" {
-		return nil, errors.New("scheme is required for a full url on CreateZoneKceURL")
+		return nil, errors.New("scheme is required for a full url on CreateProjectZoneVolumeURL")
 	}
 	if host == "" {
-		return nil, errors.New("host is required for a full url on CreateZoneKceURL")
+		return nil, errors.New("host is required for a full url on CreateProjectZoneVolumeURL")
 	}
 
 	base, err := o.Build()
@@ -145,6 +125,6 @@ func (o *CreateZoneKceURL) BuildFull(scheme, host string) (*url.URL, error) {
 }
 
 // StringFull returns the string representation of a complete url
-func (o *CreateZoneKceURL) StringFull(scheme, host string) string {
+func (o *CreateProjectZoneVolumeURL) StringFull(scheme, host string) string {
 	return o.Must(o.BuildFull(scheme, host)).String()
 }

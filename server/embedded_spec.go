@@ -1704,7 +1704,7 @@ func init() {
           "zone",
           "instance"
         ],
-        "operationId": "CreateZoneInstance",
+        "operationId": "CreateProjectZoneInstance",
         "parameters": [
           {
             "type": "string",
@@ -1803,7 +1803,7 @@ func init() {
           "zone",
           "kce"
         ],
-        "operationId": "CreateZoneKce",
+        "operationId": "CreateProjectZoneKce",
         "parameters": [
           {
             "type": "string",
@@ -1927,7 +1927,7 @@ func init() {
           "zone",
           "volume"
         ],
-        "operationId": "CreateZoneVolume",
+        "operationId": "CreateProjectZoneVolume",
         "parameters": [
           {
             "type": "string",
@@ -5798,7 +5798,7 @@ func init() {
           "zone",
           "instance"
         ],
-        "operationId": "CreateZoneInstance",
+        "operationId": "CreateProjectZoneInstance",
         "parameters": [
           {
             "type": "string",
@@ -5897,7 +5897,7 @@ func init() {
           "zone",
           "kce"
         ],
-        "operationId": "CreateZoneKce",
+        "operationId": "CreateProjectZoneKce",
         "parameters": [
           {
             "type": "string",
@@ -6021,7 +6021,7 @@ func init() {
           "zone",
           "volume"
         ],
-        "operationId": "CreateZoneVolume",
+        "operationId": "CreateProjectZoneVolume",
         "parameters": [
           {
             "type": "string",

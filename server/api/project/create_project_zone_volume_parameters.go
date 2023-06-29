@@ -18,19 +18,19 @@ import (
 	"github.com/dalet-oss/kowabunga-api/models"
 )
 
-// NewCreateZoneInstanceParams creates a new CreateZoneInstanceParams object
+// NewCreateProjectZoneVolumeParams creates a new CreateProjectZoneVolumeParams object
 //
 // There are no default values defined in the spec.
-func NewCreateZoneInstanceParams() CreateZoneInstanceParams {
+func NewCreateProjectZoneVolumeParams() CreateProjectZoneVolumeParams {
 
-	return CreateZoneInstanceParams{}
+	return CreateProjectZoneVolumeParams{}
 }
 
-// CreateZoneInstanceParams contains all the bound params for the create zone instance operation
+// CreateProjectZoneVolumeParams contains all the bound params for the create project zone volume operation
 // typically these are obtained from a http.Request
 //
-// swagger:parameters CreateZoneInstance
-type CreateZoneInstanceParams struct {
+// swagger:parameters CreateProjectZoneVolume
+type CreateProjectZoneVolumeParams struct {
 
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
@@ -39,12 +39,20 @@ type CreateZoneInstanceParams struct {
 	  Required: true
 	  In: body
 	*/
-	Body *models.Instance
+	Body *models.Volume
+	/*the ID of the associated storage pool (optional, zone's default if unspecified).
+	  In: query
+	*/
+	PoolID *string
 	/*the ID of the associated project.
 	  Required: true
 	  In: path
 	*/
 	ProjectID string
+	/*the ID of the template to clone the storage volume from (optional, zone's default if unspecified)
+	  In: query
+	*/
+	TemplateID *string
 	/*the ID of the associated zone.
 	  Required: true
 	  In: path
@@ -55,15 +63,17 @@ type CreateZoneInstanceParams struct {
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
 // for simple values it will use straight method calls.
 //
-// To ensure default values, the struct must have been initialized with NewCreateZoneInstanceParams() beforehand.
-func (o *CreateZoneInstanceParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
+// To ensure default values, the struct must have been initialized with NewCreateProjectZoneVolumeParams() beforehand.
+func (o *CreateProjectZoneVolumeParams) BindRequest(r *http.Request, route *middleware.MatchedRoute) error {
 	var res []error
 
 	o.HTTPRequest = r
 
+	qs := runtime.Values(r.URL.Query())
+
 	if runtime.HasBody(r) {
 		defer r.Body.Close()
-		var body models.Instance
+		var body models.Volume
 		if err := route.Consumer.Consume(r.Body, &body); err != nil {
 			if err == io.EOF {
 				res = append(res, errors.Required("body", "body", ""))
@@ -89,8 +99,18 @@ func (o *CreateZoneInstanceParams) BindRequest(r *http.Request, route *middlewar
 		res = append(res, errors.Required("body", "body", ""))
 	}
 
+	qPoolID, qhkPoolID, _ := qs.GetOK("poolId")
+	if err := o.bindPoolID(qPoolID, qhkPoolID, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
 	rProjectID, rhkProjectID, _ := route.Params.GetOK("projectId")
 	if err := o.bindProjectID(rProjectID, rhkProjectID, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
+	qTemplateID, qhkTemplateID, _ := qs.GetOK("templateId")
+	if err := o.bindTemplateID(qTemplateID, qhkTemplateID, route.Formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -104,8 +124,26 @@ func (o *CreateZoneInstanceParams) BindRequest(r *http.Request, route *middlewar
 	return nil
 }
 
+// bindPoolID binds and validates parameter PoolID from query.
+func (o *CreateProjectZoneVolumeParams) bindPoolID(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+	o.PoolID = &raw
+
+	return nil
+}
+
 // bindProjectID binds and validates parameter ProjectID from path.
-func (o *CreateZoneInstanceParams) bindProjectID(rawData []string, hasKey bool, formats strfmt.Registry) error {
+func (o *CreateProjectZoneVolumeParams) bindProjectID(rawData []string, hasKey bool, formats strfmt.Registry) error {
 	var raw string
 	if len(rawData) > 0 {
 		raw = rawData[len(rawData)-1]
@@ -118,8 +156,26 @@ func (o *CreateZoneInstanceParams) bindProjectID(rawData []string, hasKey bool, 
 	return nil
 }
 
+// bindTemplateID binds and validates parameter TemplateID from query.
+func (o *CreateProjectZoneVolumeParams) bindTemplateID(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		return nil
+	}
+	o.TemplateID = &raw
+
+	return nil
+}
+
 // bindZoneID binds and validates parameter ZoneID from path.
-func (o *CreateZoneInstanceParams) bindZoneID(rawData []string, hasKey bool, formats strfmt.Registry) error {
+func (o *CreateProjectZoneVolumeParams) bindZoneID(rawData []string, hasKey bool, formats strfmt.Registry) error {
 	var raw string
 	if len(rawData) > 0 {
 		raw = rawData[len(rawData)-1]

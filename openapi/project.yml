@@ -252,7 +252,7 @@ paths:
         - project
         - zone
         - volume
-      operationId: CreateZoneVolume
+      operationId: CreateProjectZoneVolume
       description: Creates a new storage volume in specified zone.
       parameters:
         - name: projectId
@@ -329,7 +329,7 @@ paths:
         - project
         - zone
         - instance
-      operationId: CreateZoneInstance
+      operationId: CreateProjectZoneInstance
       description: Creates a new virtual machine instance in specified zone.
       parameters:
         - name: projectId
@@ -398,7 +398,7 @@ paths:
         - project
         - zone
         - kce
-      operationId: CreateZoneKce
+      operationId: CreateProjectZoneKce
       description: Creates a new KCE virtual machine in specified zone.
       parameters:
         - name: projectId
