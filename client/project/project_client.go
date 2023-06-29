@@ -44,8 +44,6 @@ type ClientService interface {
 
 	GetProject(params *GetProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectOK, error)
 
-	GetProjectQuotas(params *GetProjectQuotasParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectQuotasOK, error)
-
 	GetProjectUsage(params *GetProjectUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectUsageOK, error)
 
 	GetProjectZoneInstances(params *GetProjectZoneInstancesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectZoneInstancesOK, error)
@@ -54,11 +52,7 @@ type ClientService interface {
 
 	GetProjectZoneVolumes(params *GetProjectZoneVolumesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectZoneVolumesOK, error)
 
-	ResetProjectQuotas(params *ResetProjectQuotasParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResetProjectQuotasOK, error)
-
 	UpdateProject(params *UpdateProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProjectOK, error)
-
-	UpdateProjectQuotas(params *UpdateProjectQuotasParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProjectQuotasOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -337,45 +331,6 @@ func (a *Client) GetProject(params *GetProjectParams, authInfo runtime.ClientAut
 }
 
 /*
-GetProjectQuotas Returns the quotas set for the project.
-*/
-func (a *Client) GetProjectQuotas(params *GetProjectQuotasParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectQuotasOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetProjectQuotasParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetProjectQuotas",
-		Method:             "GET",
-		PathPattern:        "/project/{projectId}/quotas",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &GetProjectQuotasReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetProjectQuotasOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetProjectQuotas: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 GetProjectUsage Returns the current resources usage for the project.
 */
 func (a *Client) GetProjectUsage(params *GetProjectUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectUsageOK, error) {
@@ -532,45 +487,6 @@ func (a *Client) GetProjectZoneVolumes(params *GetProjectZoneVolumesParams, auth
 }
 
 /*
-ResetProjectQuotas Reset project's quotas to default value.
-*/
-func (a *Client) ResetProjectQuotas(params *ResetProjectQuotasParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ResetProjectQuotasOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewResetProjectQuotasParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "ResetProjectQuotas",
-		Method:             "DELETE",
-		PathPattern:        "/project/{projectId}/quotas",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &ResetProjectQuotasReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*ResetProjectQuotasOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for ResetProjectQuotas: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 UpdateProject Updates a project configuration.
 */
 func (a *Client) UpdateProject(params *UpdateProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProjectOK, error) {
@@ -606,45 +522,6 @@ func (a *Client) UpdateProject(params *UpdateProjectParams, authInfo runtime.Cli
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-UpdateProjectQuotas Updates a project's quotas.
-*/
-func (a *Client) UpdateProjectQuotas(params *UpdateProjectQuotasParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProjectQuotasOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewUpdateProjectQuotasParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "UpdateProjectQuotas",
-		Method:             "PUT",
-		PathPattern:        "/project/{projectId}/quotas",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &UpdateProjectQuotasReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*UpdateProjectQuotasOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for UpdateProjectQuotas: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

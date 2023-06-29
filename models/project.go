@@ -46,6 +46,13 @@ type Project struct {
 	// Required: true
 	Name *string `json:"name"`
 
+	// The project's owner name.
+	// Required: true
+	Owner *string `json:"owner"`
+
+	// The global project resource quotas (0 for unlimited)
+	Quotas *ProjectResources `json:"quotas,omitempty"`
+
 	// The project default root password, set at cloud-init instance bootstrap phase. Will be randomly auto-generated at each instance creation if unspecified.
 	RootPassword string `json:"root_password,omitempty"`
 
@@ -66,6 +73,14 @@ func (m *Project) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOwner(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateQuotas(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -119,11 +134,43 @@ func (m *Project) validateName(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Project) validateOwner(formats strfmt.Registry) error {
+
+	if err := validate.Required("owner", "body", m.Owner); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Project) validateQuotas(formats strfmt.Registry) error {
+	if swag.IsZero(m.Quotas) { // not required
+		return nil
+	}
+
+	if m.Quotas != nil {
+		if err := m.Quotas.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("quotas")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("quotas")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this project based on the context it is used
 func (m *Project) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateMetadatas(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateQuotas(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -148,6 +195,22 @@ func (m *Project) contextValidateMetadatas(ctx context.Context, formats strfmt.R
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *Project) contextValidateQuotas(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Quotas != nil {
+		if err := m.Quotas.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("quotas")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("quotas")
+			}
+			return err
+		}
 	}
 
 	return nil

@@ -19,6 +19,7 @@ type CreateProjectZoneKceURL struct {
 	ProjectID string
 	ZoneID    string
 
+	Notify     *bool
 	PoolID     *string
 	Public     *bool
 	TemplateID *string
@@ -70,6 +71,14 @@ func (o *CreateProjectZoneKceURL) Build() (*url.URL, error) {
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
 
 	qs := make(url.Values)
+
+	var notifyQ string
+	if o.Notify != nil {
+		notifyQ = swag.FormatBool(*o.Notify)
+	}
+	if notifyQ != "" {
+		qs.Set("notify", notifyQ)
+	}
 
 	var poolIDQ string
 	if o.PoolID != nil {

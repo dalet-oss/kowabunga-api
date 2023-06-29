@@ -10,12 +10,16 @@ import (
 	"net/url"
 	golangswaggerpaths "path"
 	"strings"
+
+	"github.com/go-openapi/swag"
 )
 
 // CreateProjectZoneInstanceURL generates an URL for the create project zone instance operation
 type CreateProjectZoneInstanceURL struct {
 	ProjectID string
 	ZoneID    string
+
+	Notify *bool
 
 	_basePath string
 	// avoid unkeyed usage
@@ -62,6 +66,18 @@ func (o *CreateProjectZoneInstanceURL) Build() (*url.URL, error) {
 		_basePath = "/api/v1"
 	}
 	_result.Path = golangswaggerpaths.Join(_basePath, _path)
+
+	qs := make(url.Values)
+
+	var notifyQ string
+	if o.Notify != nil {
+		notifyQ = swag.FormatBool(*o.Notify)
+	}
+	if notifyQ != "" {
+		qs.Set("notify", notifyQ)
+	}
+
+	_result.RawQuery = qs.Encode()
 
 	return &_result, nil
 }

@@ -1,7 +1,7 @@
 definitions:
   Project:
     type: object
-    required: [name, email]
+    required: [name, owner, email]
     properties:
       id:
         type: string
@@ -12,6 +12,9 @@ definitions:
       description:
         type: string
         description: The project description.
+      owner:
+        type: string
+        description: The project's owner name.
       email:
         type: string
         description: The project associated email address, used to receive notifications.
@@ -37,6 +40,10 @@ definitions:
         description: A list of metadata to be associated to the project
         items:
           $ref: '#/definitions/Metadata'
+      quotas:
+        type: object
+        description: The global project resource quotas (0 for unlimited)
+        $ref: '#/definitions/ProjectResources'
 
   ProjectResources:
     type: object
@@ -81,9 +88,14 @@ paths:
       parameters:
         - name: subnetSize
           in: query
-          type: number
+          type: integer
           default: 26
           description: The minimum VPC subnet size to be affected to the project. WARNING, this cannot be changed later.
+        - name: notify
+          in: query
+          type: boolean
+          default: true
+          description: Whether or not to send a notification email at resource creation.
         - name: body
           in: body
           required: true
@@ -184,65 +196,6 @@ paths:
           description: Returns the project resources object.
           schema:
             $ref: '#/definitions/ProjectResources'
-        404:
-          description: Invalid project ID was provided.
-
-  /project/{projectId}/quotas:
-    get:
-      tags:
-        - project
-      operationId: GetProjectQuotas
-      description: Returns the quotas set for the project.
-      parameters:
-        - name: projectId
-          in: path
-          type: string
-          required: true
-          description: The ID of the project to query.
-      responses:
-        200:
-          description: Returns the project resources object.
-          schema:
-            $ref: '#/definitions/ProjectResources'
-        404:
-          description: Invalid project ID was provided.
-    put:
-      tags:
-        - project
-      operationId: UpdateProjectQuotas
-      description: Updates a project's quotas.
-      parameters:
-        - name: projectId
-          in: path
-          type: string
-          required: true
-          description: The ID of the project to update.
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/ProjectResources'
-      responses:
-        200:
-          description: Returns the updated project resources object.
-          schema:
-            $ref: '#/definitions/ProjectResources'
-        404:
-          description: Invalid project ID was provided.
-    delete:
-      tags:
-        - project
-      operationId: ResetProjectQuotas
-      description: Reset project's quotas to default value.
-      parameters:
-        - name: projectId
-          in: path
-          type: string
-          required: true
-          description: The ID of the project to query.
-      responses:
-        200:
-          description: The project quotas have been successfully reset.
         404:
           description: Invalid project ID was provided.
 
@@ -347,6 +300,11 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Instance'
+        - name: notify
+          in: query
+          type: boolean
+          default: true
+          description: Whether or not to send a notification email at resource creation.
       responses:
         201:
           description: Returns the newly created virtual machine instance object.
@@ -424,6 +382,11 @@ paths:
           type: boolean
           description: Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).
           default: false
+        - name: notify
+          in: query
+          type: boolean
+          default: true
+          description: Whether or not to send a notification email at resource creation.
         - name: body
           in: body
           required: true

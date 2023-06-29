@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.7.2"
+    "version": "0.7.3"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -1446,10 +1446,17 @@ func init() {
         "operationId": "CreateProject",
         "parameters": [
           {
-            "type": "number",
+            "type": "integer",
             "default": 26,
             "description": "The minimum VPC subnet size to be affected to the project. WARNING, this cannot be changed later.",
             "name": "subnetSize",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether or not to send a notification email at resource creation.",
+            "name": "notify",
             "in": "query"
           },
           {
@@ -1579,94 +1586,6 @@ func init() {
         }
       }
     },
-    "/project/{projectId}/quotas": {
-      "get": {
-        "description": "Returns the quotas set for the project.",
-        "tags": [
-          "project"
-        ],
-        "operationId": "GetProjectQuotas",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "The ID of the project to query.",
-            "name": "projectId",
-            "in": "path",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the project resources object.",
-            "schema": {
-              "$ref": "#/definitions/ProjectResources"
-            }
-          },
-          "404": {
-            "description": "Invalid project ID was provided."
-          }
-        }
-      },
-      "put": {
-        "description": "Updates a project's quotas.",
-        "tags": [
-          "project"
-        ],
-        "operationId": "UpdateProjectQuotas",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "The ID of the project to update.",
-            "name": "projectId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProjectResources"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the updated project resources object.",
-            "schema": {
-              "$ref": "#/definitions/ProjectResources"
-            }
-          },
-          "404": {
-            "description": "Invalid project ID was provided."
-          }
-        }
-      },
-      "delete": {
-        "description": "Reset project's quotas to default value.",
-        "tags": [
-          "project"
-        ],
-        "operationId": "ResetProjectQuotas",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "The ID of the project to query.",
-            "name": "projectId",
-            "in": "path",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The project quotas have been successfully reset."
-          },
-          "404": {
-            "description": "Invalid project ID was provided."
-          }
-        }
-      }
-    },
     "/project/{projectId}/usage": {
       "get": {
         "description": "Returns the current resources usage for the project.",
@@ -1727,6 +1646,13 @@ func init() {
             "schema": {
               "$ref": "#/definitions/Instance"
             }
+          },
+          {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether or not to send a notification email at resource creation.",
+            "name": "notify",
+            "in": "query"
           }
         ],
         "responses": {
@@ -1836,6 +1762,13 @@ func init() {
             "default": false,
             "description": "Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).",
             "name": "public",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether or not to send a notification email at resource creation.",
+            "name": "notify",
             "in": "query"
           },
           {
@@ -3764,6 +3697,7 @@ func init() {
       "type": "object",
       "required": [
         "name",
+        "owner",
         "email"
       ],
       "properties": {
@@ -3801,6 +3735,15 @@ func init() {
         "name": {
           "description": "The project name.",
           "type": "string"
+        },
+        "owner": {
+          "description": "The project's owner name.",
+          "type": "string"
+        },
+        "quotas": {
+          "description": "The global project resource quotas (0 for unlimited)",
+          "type": "object",
+          "$ref": "#/definitions/ProjectResources"
         },
         "root_password": {
           "description": "The project default root password, set at cloud-init instance bootstrap phase. Will be randomly auto-generated at each instance creation if unspecified.",
@@ -4126,7 +4069,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.7.2"
+    "version": "0.7.3"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -5541,10 +5484,17 @@ func init() {
         "operationId": "CreateProject",
         "parameters": [
           {
-            "type": "number",
+            "type": "integer",
             "default": 26,
             "description": "The minimum VPC subnet size to be affected to the project. WARNING, this cannot be changed later.",
             "name": "subnetSize",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether or not to send a notification email at resource creation.",
+            "name": "notify",
             "in": "query"
           },
           {
@@ -5674,94 +5624,6 @@ func init() {
         }
       }
     },
-    "/project/{projectId}/quotas": {
-      "get": {
-        "description": "Returns the quotas set for the project.",
-        "tags": [
-          "project"
-        ],
-        "operationId": "GetProjectQuotas",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "The ID of the project to query.",
-            "name": "projectId",
-            "in": "path",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the project resources object.",
-            "schema": {
-              "$ref": "#/definitions/ProjectResources"
-            }
-          },
-          "404": {
-            "description": "Invalid project ID was provided."
-          }
-        }
-      },
-      "put": {
-        "description": "Updates a project's quotas.",
-        "tags": [
-          "project"
-        ],
-        "operationId": "UpdateProjectQuotas",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "The ID of the project to update.",
-            "name": "projectId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProjectResources"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the updated project resources object.",
-            "schema": {
-              "$ref": "#/definitions/ProjectResources"
-            }
-          },
-          "404": {
-            "description": "Invalid project ID was provided."
-          }
-        }
-      },
-      "delete": {
-        "description": "Reset project's quotas to default value.",
-        "tags": [
-          "project"
-        ],
-        "operationId": "ResetProjectQuotas",
-        "parameters": [
-          {
-            "type": "string",
-            "description": "The ID of the project to query.",
-            "name": "projectId",
-            "in": "path",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The project quotas have been successfully reset."
-          },
-          "404": {
-            "description": "Invalid project ID was provided."
-          }
-        }
-      }
-    },
     "/project/{projectId}/usage": {
       "get": {
         "description": "Returns the current resources usage for the project.",
@@ -5822,6 +5684,13 @@ func init() {
             "schema": {
               "$ref": "#/definitions/Instance"
             }
+          },
+          {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether or not to send a notification email at resource creation.",
+            "name": "notify",
+            "in": "query"
           }
         ],
         "responses": {
@@ -5931,6 +5800,13 @@ func init() {
             "default": false,
             "description": "Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).",
             "name": "public",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether or not to send a notification email at resource creation.",
+            "name": "notify",
             "in": "query"
           },
           {
@@ -7920,6 +7796,7 @@ func init() {
       "type": "object",
       "required": [
         "name",
+        "owner",
         "email"
       ],
       "properties": {
@@ -7957,6 +7834,15 @@ func init() {
         "name": {
           "description": "The project name.",
           "type": "string"
+        },
+        "owner": {
+          "description": "The project's owner name.",
+          "type": "string"
+        },
+        "quotas": {
+          "description": "The global project resource quotas (0 for unlimited)",
+          "type": "object",
+          "$ref": "#/definitions/ProjectResources"
         },
         "root_password": {
           "description": "The project default root password, set at cloud-init instance bootstrap phase. Will be randomly auto-generated at each instance creation if unspecified.",

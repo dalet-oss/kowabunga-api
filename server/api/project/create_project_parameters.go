@@ -26,10 +26,13 @@ func NewCreateProjectParams() CreateProjectParams {
 	var (
 		// initialize parameters with default values
 
-		subnetSizeDefault = float64(26)
+		notifyDefault     = bool(true)
+		subnetSizeDefault = int64(26)
 	)
 
 	return CreateProjectParams{
+		Notify: &notifyDefault,
+
 		SubnetSize: &subnetSizeDefault,
 	}
 }
@@ -48,11 +51,16 @@ type CreateProjectParams struct {
 	  In: body
 	*/
 	Body *models.Project
+	/*Whether or not to send a notification email at resource creation.
+	  In: query
+	  Default: true
+	*/
+	Notify *bool
 	/*The minimum VPC subnet size to be affected to the project. WARNING, this cannot be changed later.
 	  In: query
 	  Default: 26
 	*/
-	SubnetSize *float64
+	SubnetSize *int64
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
@@ -94,6 +102,11 @@ func (o *CreateProjectParams) BindRequest(r *http.Request, route *middleware.Mat
 		res = append(res, errors.Required("body", "body", ""))
 	}
 
+	qNotify, qhkNotify, _ := qs.GetOK("notify")
+	if err := o.bindNotify(qNotify, qhkNotify, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
 	qSubnetSize, qhkSubnetSize, _ := qs.GetOK("subnetSize")
 	if err := o.bindSubnetSize(qSubnetSize, qhkSubnetSize, route.Formats); err != nil {
 		res = append(res, err)
@@ -101,6 +114,30 @@ func (o *CreateProjectParams) BindRequest(r *http.Request, route *middleware.Mat
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// bindNotify binds and validates parameter Notify from query.
+func (o *CreateProjectParams) bindNotify(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		// Default values have been previously initialized by NewCreateProjectParams()
+		return nil
+	}
+
+	value, err := swag.ConvertBool(raw)
+	if err != nil {
+		return errors.InvalidType("notify", "query", "bool", raw)
+	}
+	o.Notify = &value
+
 	return nil
 }
 
@@ -119,9 +156,9 @@ func (o *CreateProjectParams) bindSubnetSize(rawData []string, hasKey bool, form
 		return nil
 	}
 
-	value, err := swag.ConvertFloat64(raw)
+	value, err := swag.ConvertInt64(raw)
 	if err != nil {
-		return errors.InvalidType("subnetSize", "query", "float64", raw)
+		return errors.InvalidType("subnetSize", "query", "int64", raw)
 	}
 	o.SubnetSize = &value
 

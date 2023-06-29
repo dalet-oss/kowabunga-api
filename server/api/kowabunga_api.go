@@ -212,9 +212,6 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		ProjectGetProjectHandler: project.GetProjectHandlerFunc(func(params project.GetProjectParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProject has not yet been implemented")
 		}),
-		ProjectGetProjectQuotasHandler: project.GetProjectQuotasHandlerFunc(func(params project.GetProjectQuotasParams, principal interface{}) middleware.Responder {
-			return middleware.NotImplemented("operation project.GetProjectQuotas has not yet been implemented")
-		}),
 		ProjectGetProjectUsageHandler: project.GetProjectUsageHandlerFunc(func(params project.GetProjectUsageParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectUsage has not yet been implemented")
 		}),
@@ -278,9 +275,6 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		KceResetKCEHandler: kce.ResetKCEHandlerFunc(func(params kce.ResetKCEParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation kce.ResetKCE has not yet been implemented")
 		}),
-		ProjectResetProjectQuotasHandler: project.ResetProjectQuotasHandlerFunc(func(params project.ResetProjectQuotasParams, principal interface{}) middleware.Responder {
-			return middleware.NotImplemented("operation project.ResetProjectQuotas has not yet been implemented")
-		}),
 		InstanceResumeInstanceHandler: instance.ResumeInstanceHandlerFunc(func(params instance.ResumeInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.ResumeInstance has not yet been implemented")
 		}),
@@ -334,9 +328,6 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		ProjectUpdateProjectHandler: project.UpdateProjectHandlerFunc(func(params project.UpdateProjectParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.UpdateProject has not yet been implemented")
-		}),
-		ProjectUpdateProjectQuotasHandler: project.UpdateProjectQuotasHandlerFunc(func(params project.UpdateProjectQuotasParams, principal interface{}) middleware.Responder {
-			return middleware.NotImplemented("operation project.UpdateProjectQuotas has not yet been implemented")
 		}),
 		RegionUpdateRegionHandler: region.UpdateRegionHandlerFunc(func(params region.UpdateRegionParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation region.UpdateRegion has not yet been implemented")
@@ -516,8 +507,6 @@ type KowabungaAPI struct {
 	PoolGetPoolVolumesHandler pool.GetPoolVolumesHandler
 	// ProjectGetProjectHandler sets the operation handler for the get project operation
 	ProjectGetProjectHandler project.GetProjectHandler
-	// ProjectGetProjectQuotasHandler sets the operation handler for the get project quotas operation
-	ProjectGetProjectQuotasHandler project.GetProjectQuotasHandler
 	// ProjectGetProjectUsageHandler sets the operation handler for the get project usage operation
 	ProjectGetProjectUsageHandler project.GetProjectUsageHandler
 	// ProjectGetProjectZoneInstancesHandler sets the operation handler for the get project zone instances operation
@@ -560,8 +549,6 @@ type KowabungaAPI struct {
 	InstanceResetInstanceHandler instance.ResetInstanceHandler
 	// KceResetKCEHandler sets the operation handler for the reset k c e operation
 	KceResetKCEHandler kce.ResetKCEHandler
-	// ProjectResetProjectQuotasHandler sets the operation handler for the reset project quotas operation
-	ProjectResetProjectQuotasHandler project.ResetProjectQuotasHandler
 	// InstanceResumeInstanceHandler sets the operation handler for the resume instance operation
 	InstanceResumeInstanceHandler instance.ResumeInstanceHandler
 	// KceResumeKCEHandler sets the operation handler for the resume k c e operation
@@ -598,8 +585,6 @@ type KowabungaAPI struct {
 	PoolUpdatePoolDefaultTemplateHandler pool.UpdatePoolDefaultTemplateHandler
 	// ProjectUpdateProjectHandler sets the operation handler for the update project operation
 	ProjectUpdateProjectHandler project.UpdateProjectHandler
-	// ProjectUpdateProjectQuotasHandler sets the operation handler for the update project quotas operation
-	ProjectUpdateProjectQuotasHandler project.UpdateProjectQuotasHandler
 	// RegionUpdateRegionHandler sets the operation handler for the update region operation
 	RegionUpdateRegionHandler region.UpdateRegionHandler
 	// SubnetUpdateSubnetHandler sets the operation handler for the update subnet operation
@@ -853,9 +838,6 @@ func (o *KowabungaAPI) Validate() error {
 	if o.ProjectGetProjectHandler == nil {
 		unregistered = append(unregistered, "project.GetProjectHandler")
 	}
-	if o.ProjectGetProjectQuotasHandler == nil {
-		unregistered = append(unregistered, "project.GetProjectQuotasHandler")
-	}
 	if o.ProjectGetProjectUsageHandler == nil {
 		unregistered = append(unregistered, "project.GetProjectUsageHandler")
 	}
@@ -919,9 +901,6 @@ func (o *KowabungaAPI) Validate() error {
 	if o.KceResetKCEHandler == nil {
 		unregistered = append(unregistered, "kce.ResetKCEHandler")
 	}
-	if o.ProjectResetProjectQuotasHandler == nil {
-		unregistered = append(unregistered, "project.ResetProjectQuotasHandler")
-	}
 	if o.InstanceResumeInstanceHandler == nil {
 		unregistered = append(unregistered, "instance.ResumeInstanceHandler")
 	}
@@ -975,9 +954,6 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.ProjectUpdateProjectHandler == nil {
 		unregistered = append(unregistered, "project.UpdateProjectHandler")
-	}
-	if o.ProjectUpdateProjectQuotasHandler == nil {
-		unregistered = append(unregistered, "project.UpdateProjectQuotasHandler")
 	}
 	if o.RegionUpdateRegionHandler == nil {
 		unregistered = append(unregistered, "region.UpdateRegionHandler")
@@ -1311,10 +1287,6 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/project/{projectId}/quotas"] = project.NewGetProjectQuotas(o.context, o.ProjectGetProjectQuotasHandler)
-	if o.handlers["GET"] == nil {
-		o.handlers["GET"] = make(map[string]http.Handler)
-	}
 	o.handlers["GET"]["/project/{projectId}/usage"] = project.NewGetProjectUsage(o.context, o.ProjectGetProjectUsageHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
@@ -1396,10 +1368,6 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
 	o.handlers["POST"]["/kce/{kceId}/reset"] = kce.NewResetKCE(o.context, o.KceResetKCEHandler)
-	if o.handlers["DELETE"] == nil {
-		o.handlers["DELETE"] = make(map[string]http.Handler)
-	}
-	o.handlers["DELETE"]["/project/{projectId}/quotas"] = project.NewResetProjectQuotas(o.context, o.ProjectResetProjectQuotasHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
@@ -1472,10 +1440,6 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
 	o.handlers["PUT"]["/project/{projectId}"] = project.NewUpdateProject(o.context, o.ProjectUpdateProjectHandler)
-	if o.handlers["PUT"] == nil {
-		o.handlers["PUT"] = make(map[string]http.Handler)
-	}
-	o.handlers["PUT"]["/project/{projectId}/quotas"] = project.NewUpdateProjectQuotas(o.context, o.ProjectUpdateProjectQuotasHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}

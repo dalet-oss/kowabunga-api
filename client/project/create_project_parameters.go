@@ -67,13 +67,21 @@ type CreateProjectParams struct {
 	// Body.
 	Body *models.Project
 
+	/* Notify.
+
+	   Whether or not to send a notification email at resource creation.
+
+	   Default: true
+	*/
+	Notify *bool
+
 	/* SubnetSize.
 
 	   The minimum VPC subnet size to be affected to the project. WARNING, this cannot be changed later.
 
 	   Default: 26
 	*/
-	SubnetSize *float64
+	SubnetSize *int64
 
 	timeout    time.Duration
 	Context    context.Context
@@ -93,10 +101,13 @@ func (o *CreateProjectParams) WithDefaults() *CreateProjectParams {
 // All values with no default are reset to their zero value.
 func (o *CreateProjectParams) SetDefaults() {
 	var (
-		subnetSizeDefault = float64(26)
+		notifyDefault = bool(true)
+
+		subnetSizeDefault = int64(26)
 	)
 
 	val := CreateProjectParams{
+		Notify:     &notifyDefault,
 		SubnetSize: &subnetSizeDefault,
 	}
 
@@ -150,14 +161,25 @@ func (o *CreateProjectParams) SetBody(body *models.Project) {
 	o.Body = body
 }
 
+// WithNotify adds the notify to the create project params
+func (o *CreateProjectParams) WithNotify(notify *bool) *CreateProjectParams {
+	o.SetNotify(notify)
+	return o
+}
+
+// SetNotify adds the notify to the create project params
+func (o *CreateProjectParams) SetNotify(notify *bool) {
+	o.Notify = notify
+}
+
 // WithSubnetSize adds the subnetSize to the create project params
-func (o *CreateProjectParams) WithSubnetSize(subnetSize *float64) *CreateProjectParams {
+func (o *CreateProjectParams) WithSubnetSize(subnetSize *int64) *CreateProjectParams {
 	o.SetSubnetSize(subnetSize)
 	return o
 }
 
 // SetSubnetSize adds the subnetSize to the create project params
-func (o *CreateProjectParams) SetSubnetSize(subnetSize *float64) {
+func (o *CreateProjectParams) SetSubnetSize(subnetSize *int64) {
 	o.SubnetSize = subnetSize
 }
 
@@ -174,15 +196,32 @@ func (o *CreateProjectParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		}
 	}
 
+	if o.Notify != nil {
+
+		// query param notify
+		var qrNotify bool
+
+		if o.Notify != nil {
+			qrNotify = *o.Notify
+		}
+		qNotify := swag.FormatBool(qrNotify)
+		if qNotify != "" {
+
+			if err := r.SetQueryParam("notify", qNotify); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.SubnetSize != nil {
 
 		// query param subnetSize
-		var qrSubnetSize float64
+		var qrSubnetSize int64
 
 		if o.SubnetSize != nil {
 			qrSubnetSize = *o.SubnetSize
 		}
-		qSubnetSize := swag.FormatFloat64(qrSubnetSize)
+		qSubnetSize := swag.FormatInt64(qrSubnetSize)
 		if qSubnetSize != "" {
 
 			if err := r.SetQueryParam("subnetSize", qSubnetSize); err != nil {

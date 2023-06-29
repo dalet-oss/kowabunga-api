@@ -67,6 +67,14 @@ type CreateProjectZoneKceParams struct {
 	// Body.
 	Body *models.KCE
 
+	/* Notify.
+
+	   Whether or not to send a notification email at resource creation.
+
+	   Default: true
+	*/
+	Notify *bool
+
 	/* PoolID.
 
 	   the ID of the associated storage pool (optional, zone's default if unspecified).
@@ -115,10 +123,13 @@ func (o *CreateProjectZoneKceParams) WithDefaults() *CreateProjectZoneKceParams 
 // All values with no default are reset to their zero value.
 func (o *CreateProjectZoneKceParams) SetDefaults() {
 	var (
+		notifyDefault = bool(true)
+
 		publicDefault = bool(false)
 	)
 
 	val := CreateProjectZoneKceParams{
+		Notify: &notifyDefault,
 		Public: &publicDefault,
 	}
 
@@ -170,6 +181,17 @@ func (o *CreateProjectZoneKceParams) WithBody(body *models.KCE) *CreateProjectZo
 // SetBody adds the body to the create project zone kce params
 func (o *CreateProjectZoneKceParams) SetBody(body *models.KCE) {
 	o.Body = body
+}
+
+// WithNotify adds the notify to the create project zone kce params
+func (o *CreateProjectZoneKceParams) WithNotify(notify *bool) *CreateProjectZoneKceParams {
+	o.SetNotify(notify)
+	return o
+}
+
+// SetNotify adds the notify to the create project zone kce params
+func (o *CreateProjectZoneKceParams) SetNotify(notify *bool) {
+	o.Notify = notify
 }
 
 // WithPoolID adds the poolID to the create project zone kce params
@@ -237,6 +259,23 @@ func (o *CreateProjectZoneKceParams) WriteToRequest(r runtime.ClientRequest, reg
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err
+		}
+	}
+
+	if o.Notify != nil {
+
+		// query param notify
+		var qrNotify bool
+
+		if o.Notify != nil {
+			qrNotify = *o.Notify
+		}
+		qNotify := swag.FormatBool(qrNotify)
+		if qNotify != "" {
+
+			if err := r.SetQueryParam("notify", qNotify); err != nil {
+				return err
+			}
 		}
 	}
 

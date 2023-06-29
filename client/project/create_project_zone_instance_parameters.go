@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 
 	"github.com/dalet-oss/kowabunga-api/models"
 )
@@ -66,6 +67,14 @@ type CreateProjectZoneInstanceParams struct {
 	// Body.
 	Body *models.Instance
 
+	/* Notify.
+
+	   Whether or not to send a notification email at resource creation.
+
+	   Default: true
+	*/
+	Notify *bool
+
 	/* ProjectID.
 
 	   the ID of the associated project.
@@ -95,7 +104,18 @@ func (o *CreateProjectZoneInstanceParams) WithDefaults() *CreateProjectZoneInsta
 //
 // All values with no default are reset to their zero value.
 func (o *CreateProjectZoneInstanceParams) SetDefaults() {
-	// no default values defined for this parameter
+	var (
+		notifyDefault = bool(true)
+	)
+
+	val := CreateProjectZoneInstanceParams{
+		Notify: &notifyDefault,
+	}
+
+	val.timeout = o.timeout
+	val.Context = o.Context
+	val.HTTPClient = o.HTTPClient
+	*o = val
 }
 
 // WithTimeout adds the timeout to the create project zone instance params
@@ -142,6 +162,17 @@ func (o *CreateProjectZoneInstanceParams) SetBody(body *models.Instance) {
 	o.Body = body
 }
 
+// WithNotify adds the notify to the create project zone instance params
+func (o *CreateProjectZoneInstanceParams) WithNotify(notify *bool) *CreateProjectZoneInstanceParams {
+	o.SetNotify(notify)
+	return o
+}
+
+// SetNotify adds the notify to the create project zone instance params
+func (o *CreateProjectZoneInstanceParams) SetNotify(notify *bool) {
+	o.Notify = notify
+}
+
 // WithProjectID adds the projectID to the create project zone instance params
 func (o *CreateProjectZoneInstanceParams) WithProjectID(projectID string) *CreateProjectZoneInstanceParams {
 	o.SetProjectID(projectID)
@@ -174,6 +205,23 @@ func (o *CreateProjectZoneInstanceParams) WriteToRequest(r runtime.ClientRequest
 	if o.Body != nil {
 		if err := r.SetBodyParam(o.Body); err != nil {
 			return err
+		}
+	}
+
+	if o.Notify != nil {
+
+		// query param notify
+		var qrNotify bool
+
+		if o.Notify != nil {
+			qrNotify = *o.Notify
+		}
+		qNotify := swag.FormatBool(qrNotify)
+		if qNotify != "" {
+
+			if err := r.SetQueryParam("notify", qNotify); err != nil {
+				return err
+			}
 		}
 	}
 

@@ -15,7 +15,8 @@ import (
 
 // CreateProjectURL generates an URL for the create project operation
 type CreateProjectURL struct {
-	SubnetSize *float64
+	Notify     *bool
+	SubnetSize *int64
 
 	_basePath string
 	// avoid unkeyed usage
@@ -51,9 +52,17 @@ func (o *CreateProjectURL) Build() (*url.URL, error) {
 
 	qs := make(url.Values)
 
+	var notifyQ string
+	if o.Notify != nil {
+		notifyQ = swag.FormatBool(*o.Notify)
+	}
+	if notifyQ != "" {
+		qs.Set("notify", notifyQ)
+	}
+
 	var subnetSizeQ string
 	if o.SubnetSize != nil {
-		subnetSizeQ = swag.FormatFloat64(*o.SubnetSize)
+		subnetSizeQ = swag.FormatInt64(*o.SubnetSize)
 	}
 	if subnetSizeQ != "" {
 		qs.Set("subnetSize", subnetSizeQ)

@@ -323,11 +323,6 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation project.GetProject has not yet been implemented")
 		})
 	}
-	if api.ProjectGetProjectQuotasHandler == nil {
-		api.ProjectGetProjectQuotasHandler = project.GetProjectQuotasHandlerFunc(func(params project.GetProjectQuotasParams, principal interface{}) middleware.Responder {
-			return middleware.NotImplemented("operation project.GetProjectQuotas has not yet been implemented")
-		})
-	}
 	if api.ProjectGetProjectUsageHandler == nil {
 		api.ProjectGetProjectUsageHandler = project.GetProjectUsageHandlerFunc(func(params project.GetProjectUsageParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectUsage has not yet been implemented")
@@ -433,11 +428,6 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation kce.ResetKCE has not yet been implemented")
 		})
 	}
-	if api.ProjectResetProjectQuotasHandler == nil {
-		api.ProjectResetProjectQuotasHandler = project.ResetProjectQuotasHandlerFunc(func(params project.ResetProjectQuotasParams, principal interface{}) middleware.Responder {
-			return middleware.NotImplemented("operation project.ResetProjectQuotas has not yet been implemented")
-		})
-	}
 	if api.InstanceResumeInstanceHandler == nil {
 		api.InstanceResumeInstanceHandler = instance.ResumeInstanceHandlerFunc(func(params instance.ResumeInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.ResumeInstance has not yet been implemented")
@@ -526,11 +516,6 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.ProjectUpdateProjectHandler == nil {
 		api.ProjectUpdateProjectHandler = project.UpdateProjectHandlerFunc(func(params project.UpdateProjectParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.UpdateProject has not yet been implemented")
-		})
-	}
-	if api.ProjectUpdateProjectQuotasHandler == nil {
-		api.ProjectUpdateProjectQuotasHandler = project.UpdateProjectQuotasHandlerFunc(func(params project.UpdateProjectQuotasParams, principal interface{}) middleware.Responder {
-			return middleware.NotImplemented("operation project.UpdateProjectQuotas has not yet been implemented")
 		})
 	}
 	if api.RegionUpdateRegionHandler == nil {

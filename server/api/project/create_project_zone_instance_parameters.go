@@ -13,17 +13,25 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
 	"github.com/dalet-oss/kowabunga-api/models"
 )
 
 // NewCreateProjectZoneInstanceParams creates a new CreateProjectZoneInstanceParams object
-//
-// There are no default values defined in the spec.
+// with the default values initialized.
 func NewCreateProjectZoneInstanceParams() CreateProjectZoneInstanceParams {
 
-	return CreateProjectZoneInstanceParams{}
+	var (
+		// initialize parameters with default values
+
+		notifyDefault = bool(true)
+	)
+
+	return CreateProjectZoneInstanceParams{
+		Notify: &notifyDefault,
+	}
 }
 
 // CreateProjectZoneInstanceParams contains all the bound params for the create project zone instance operation
@@ -40,6 +48,11 @@ type CreateProjectZoneInstanceParams struct {
 	  In: body
 	*/
 	Body *models.Instance
+	/*Whether or not to send a notification email at resource creation.
+	  In: query
+	  Default: true
+	*/
+	Notify *bool
 	/*the ID of the associated project.
 	  Required: true
 	  In: path
@@ -60,6 +73,8 @@ func (o *CreateProjectZoneInstanceParams) BindRequest(r *http.Request, route *mi
 	var res []error
 
 	o.HTTPRequest = r
+
+	qs := runtime.Values(r.URL.Query())
 
 	if runtime.HasBody(r) {
 		defer r.Body.Close()
@@ -89,6 +104,11 @@ func (o *CreateProjectZoneInstanceParams) BindRequest(r *http.Request, route *mi
 		res = append(res, errors.Required("body", "body", ""))
 	}
 
+	qNotify, qhkNotify, _ := qs.GetOK("notify")
+	if err := o.bindNotify(qNotify, qhkNotify, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
 	rProjectID, rhkProjectID, _ := route.Params.GetOK("projectId")
 	if err := o.bindProjectID(rProjectID, rhkProjectID, route.Formats); err != nil {
 		res = append(res, err)
@@ -101,6 +121,30 @@ func (o *CreateProjectZoneInstanceParams) BindRequest(r *http.Request, route *mi
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// bindNotify binds and validates parameter Notify from query.
+func (o *CreateProjectZoneInstanceParams) bindNotify(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		// Default values have been previously initialized by NewCreateProjectZoneInstanceParams()
+		return nil
+	}
+
+	value, err := swag.ConvertBool(raw)
+	if err != nil {
+		return errors.InvalidType("notify", "query", "bool", raw)
+	}
+	o.Notify = &value
+
 	return nil
 }
 

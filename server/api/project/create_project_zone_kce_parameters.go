@@ -26,10 +26,14 @@ func NewCreateProjectZoneKceParams() CreateProjectZoneKceParams {
 	var (
 		// initialize parameters with default values
 
+		notifyDefault = bool(true)
+
 		publicDefault = bool(false)
 	)
 
 	return CreateProjectZoneKceParams{
+		Notify: &notifyDefault,
+
 		Public: &publicDefault,
 	}
 }
@@ -48,6 +52,11 @@ type CreateProjectZoneKceParams struct {
 	  In: body
 	*/
 	Body *models.KCE
+	/*Whether or not to send a notification email at resource creation.
+	  In: query
+	  Default: true
+	*/
+	Notify *bool
 	/*the ID of the associated storage pool (optional, zone's default if unspecified).
 	  In: query
 	*/
@@ -112,6 +121,11 @@ func (o *CreateProjectZoneKceParams) BindRequest(r *http.Request, route *middlew
 		res = append(res, errors.Required("body", "body", ""))
 	}
 
+	qNotify, qhkNotify, _ := qs.GetOK("notify")
+	if err := o.bindNotify(qNotify, qhkNotify, route.Formats); err != nil {
+		res = append(res, err)
+	}
+
 	qPoolID, qhkPoolID, _ := qs.GetOK("poolId")
 	if err := o.bindPoolID(qPoolID, qhkPoolID, route.Formats); err != nil {
 		res = append(res, err)
@@ -139,6 +153,30 @@ func (o *CreateProjectZoneKceParams) BindRequest(r *http.Request, route *middlew
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+// bindNotify binds and validates parameter Notify from query.
+func (o *CreateProjectZoneKceParams) bindNotify(rawData []string, hasKey bool, formats strfmt.Registry) error {
+	var raw string
+	if len(rawData) > 0 {
+		raw = rawData[len(rawData)-1]
+	}
+
+	// Required: false
+	// AllowEmptyValue: false
+
+	if raw == "" { // empty values pass all other validations
+		// Default values have been previously initialized by NewCreateProjectZoneKceParams()
+		return nil
+	}
+
+	value, err := swag.ConvertBool(raw)
+	if err != nil {
+		return errors.InvalidType("notify", "query", "bool", raw)
+	}
+	o.Notify = &value
+
 	return nil
 }
 
