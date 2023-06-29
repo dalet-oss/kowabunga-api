@@ -419,10 +419,6 @@ paths:
           in: query
           type: string
           description: the ID of the template to clone the OS storage volume from (optional, zone's default if unspecified)
-        - name: subnetId
-          in: query
-          type: string
-          description: the ID of the private subnet to be used for networking (optional, zone's default if unspecified)
         - name: public
           in: query
           type: boolean

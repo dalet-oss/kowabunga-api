@@ -21,7 +21,6 @@ type CreateProjectZoneKceURL struct {
 
 	PoolID     *string
 	Public     *bool
-	SubnetID   *string
 	TemplateID *string
 
 	_basePath string
@@ -86,14 +85,6 @@ func (o *CreateProjectZoneKceURL) Build() (*url.URL, error) {
 	}
 	if publicQ != "" {
 		qs.Set("public", publicQ)
-	}
-
-	var subnetIDQ string
-	if o.SubnetID != nil {
-		subnetIDQ = *o.SubnetID
-	}
-	if subnetIDQ != "" {
-		qs.Set("subnetId", subnetIDQ)
 	}
 
 	var templateIDQ string

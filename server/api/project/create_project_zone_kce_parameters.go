@@ -62,10 +62,6 @@ type CreateProjectZoneKceParams struct {
 	  Default: false
 	*/
 	Public *bool
-	/*the ID of the private subnet to be used for networking (optional, zone's default if unspecified)
-	  In: query
-	*/
-	SubnetID *string
 	/*the ID of the template to clone the OS storage volume from (optional, zone's default if unspecified)
 	  In: query
 	*/
@@ -128,11 +124,6 @@ func (o *CreateProjectZoneKceParams) BindRequest(r *http.Request, route *middlew
 
 	qPublic, qhkPublic, _ := qs.GetOK("public")
 	if err := o.bindPublic(qPublic, qhkPublic, route.Formats); err != nil {
-		res = append(res, err)
-	}
-
-	qSubnetID, qhkSubnetID, _ := qs.GetOK("subnetId")
-	if err := o.bindSubnetID(qSubnetID, qhkSubnetID, route.Formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -203,24 +194,6 @@ func (o *CreateProjectZoneKceParams) bindPublic(rawData []string, hasKey bool, f
 		return errors.InvalidType("public", "query", "bool", raw)
 	}
 	o.Public = &value
-
-	return nil
-}
-
-// bindSubnetID binds and validates parameter SubnetID from query.
-func (o *CreateProjectZoneKceParams) bindSubnetID(rawData []string, hasKey bool, formats strfmt.Registry) error {
-	var raw string
-	if len(rawData) > 0 {
-		raw = rawData[len(rawData)-1]
-	}
-
-	// Required: false
-	// AllowEmptyValue: false
-
-	if raw == "" { // empty values pass all other validations
-		return nil
-	}
-	o.SubnetID = &raw
 
 	return nil
 }

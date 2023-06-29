@@ -85,12 +85,6 @@ type CreateProjectZoneKceParams struct {
 	*/
 	Public *bool
 
-	/* SubnetID.
-
-	   the ID of the private subnet to be used for networking (optional, zone's default if unspecified)
-	*/
-	SubnetID *string
-
 	/* TemplateID.
 
 	   the ID of the template to clone the OS storage volume from (optional, zone's default if unspecified)
@@ -211,17 +205,6 @@ func (o *CreateProjectZoneKceParams) SetPublic(public *bool) {
 	o.Public = public
 }
 
-// WithSubnetID adds the subnetID to the create project zone kce params
-func (o *CreateProjectZoneKceParams) WithSubnetID(subnetID *string) *CreateProjectZoneKceParams {
-	o.SetSubnetID(subnetID)
-	return o
-}
-
-// SetSubnetID adds the subnetId to the create project zone kce params
-func (o *CreateProjectZoneKceParams) SetSubnetID(subnetID *string) {
-	o.SubnetID = subnetID
-}
-
 // WithTemplateID adds the templateID to the create project zone kce params
 func (o *CreateProjectZoneKceParams) WithTemplateID(templateID *string) *CreateProjectZoneKceParams {
 	o.SetTemplateID(templateID)
@@ -291,23 +274,6 @@ func (o *CreateProjectZoneKceParams) WriteToRequest(r runtime.ClientRequest, reg
 		if qPublic != "" {
 
 			if err := r.SetQueryParam("public", qPublic); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.SubnetID != nil {
-
-		// query param subnetId
-		var qrSubnetID string
-
-		if o.SubnetID != nil {
-			qrSubnetID = *o.SubnetID
-		}
-		qSubnetID := qrSubnetID
-		if qSubnetID != "" {
-
-			if err := r.SetQueryParam("subnetId", qSubnetID); err != nil {
 				return err
 			}
 		}
