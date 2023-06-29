@@ -21,6 +21,11 @@ definitions:
       dns:
         type: string
         description: The subnet DNS server IP address (gateway value if unspecified).
+      extra_routes:
+        type: array
+        description: The list of extra routes to be access through designated gateway (format is 10.0.0.0/8).
+        items:
+          type: string
       reserved:
         type: array
         description: The subnet list of reserved IPv4 ranges (i.e. no IP address can be assigned from there).

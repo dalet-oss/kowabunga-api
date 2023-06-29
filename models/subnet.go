@@ -30,6 +30,9 @@ type Subnet struct {
 	// The subnet DNS server IP address (gateway value if unspecified).
 	DNS string `json:"dns,omitempty"`
 
+	// The list of extra routes to be access through designated gateway (format is 10.0.0.0/8).
+	ExtraRoutes []string `json:"extra_routes"`
+
 	// The subnet router/gateway IP address (e.g. 192.168.0.254).
 	// Required: true
 	Gateway *string `json:"gateway"`

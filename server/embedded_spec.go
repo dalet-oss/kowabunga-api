@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.7.1"
+    "version": "0.7.2"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -3934,6 +3934,13 @@ func init() {
           "description": "The subnet DNS server IP address (gateway value if unspecified).",
           "type": "string"
         },
+        "extra_routes": {
+          "description": "The list of extra routes to be access through designated gateway (format is 10.0.0.0/8).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "gateway": {
           "description": "The subnet router/gateway IP address (e.g. 192.168.0.254).",
           "type": "string"
@@ -4119,7 +4126,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.7.1"
+    "version": "0.7.2"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -8082,6 +8089,13 @@ func init() {
         "dns": {
           "description": "The subnet DNS server IP address (gateway value if unspecified).",
           "type": "string"
+        },
+        "extra_routes": {
+          "description": "The list of extra routes to be access through designated gateway (format is 10.0.0.0/8).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "gateway": {
           "description": "The subnet router/gateway IP address (e.g. 192.168.0.254).",
