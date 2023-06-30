@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.7.5"
+    "version": "0.7.6"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -3744,13 +3744,12 @@ func init() {
           "description": "The project's owner name.",
           "type": "string"
         },
-        "private_subnet": {
-          "description": "The assigned project VPC private subnet ID (read-only).",
-          "type": "string"
-        },
-        "public_subnet": {
-          "description": "The assigned project VPC public subnet ID (read-only).",
-          "type": "string"
+        "private_subnets": {
+          "description": "The assigned project VPC private subnets IDs (read-only).",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZoneSubnet"
+          }
         },
         "quotas": {
           "description": "The global project resource quotas (0 for unlimited)",
@@ -4050,6 +4049,20 @@ func init() {
         }
       }
     },
+    "ZoneSubnet": {
+      "description": "A zone/subnet map.",
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "The zone key.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The subnet ID.",
+          "type": "string"
+        }
+      }
+    },
     "principal": {
       "type": "string"
     }
@@ -4081,7 +4094,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.7.5"
+    "version": "0.7.6"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -7855,13 +7868,12 @@ func init() {
           "description": "The project's owner name.",
           "type": "string"
         },
-        "private_subnet": {
-          "description": "The assigned project VPC private subnet ID (read-only).",
-          "type": "string"
-        },
-        "public_subnet": {
-          "description": "The assigned project VPC public subnet ID (read-only).",
-          "type": "string"
+        "private_subnets": {
+          "description": "The assigned project VPC private subnets IDs (read-only).",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZoneSubnet"
+          }
         },
         "quotas": {
           "description": "The global project resource quotas (0 for unlimited)",
@@ -8157,6 +8169,20 @@ func init() {
         },
         "name": {
           "description": "The zone name.",
+          "type": "string"
+        }
+      }
+    },
+    "ZoneSubnet": {
+      "description": "A zone/subnet map.",
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "The zone key.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The subnet ID.",
           "type": "string"
         }
       }

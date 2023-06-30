@@ -44,6 +44,17 @@ definitions:
         type: string
         description: The range's last IP address.
 
+  ZoneSubnet:
+    type: object
+    description: A zone/subnet map.
+    properties:
+      key:
+        type: string
+        description: The zone key.
+      value:
+        type: string
+        description: The subnet ID.
+
 paths:
   /subnet:
     get:

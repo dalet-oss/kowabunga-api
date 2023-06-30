@@ -50,11 +50,8 @@ type Project struct {
 	// Required: true
 	Owner *string `json:"owner"`
 
-	// The assigned project VPC private subnet ID (read-only).
-	PrivateSubnet string `json:"private_subnet,omitempty"`
-
-	// The assigned project VPC public subnet ID (read-only).
-	PublicSubnet string `json:"public_subnet,omitempty"`
+	// The assigned project VPC private subnets IDs (read-only).
+	PrivateSubnets []*ZoneSubnet `json:"private_subnets"`
 
 	// The global project resource quotas (0 for unlimited)
 	Quotas *ProjectResources `json:"quotas,omitempty"`
@@ -83,6 +80,10 @@ func (m *Project) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateOwner(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePrivateSubnets(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -149,6 +150,32 @@ func (m *Project) validateOwner(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Project) validatePrivateSubnets(formats strfmt.Registry) error {
+	if swag.IsZero(m.PrivateSubnets) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.PrivateSubnets); i++ {
+		if swag.IsZero(m.PrivateSubnets[i]) { // not required
+			continue
+		}
+
+		if m.PrivateSubnets[i] != nil {
+			if err := m.PrivateSubnets[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("private_subnets" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("private_subnets" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *Project) validateQuotas(formats strfmt.Registry) error {
 	if swag.IsZero(m.Quotas) { // not required
 		return nil
@@ -176,6 +203,10 @@ func (m *Project) ContextValidate(ctx context.Context, formats strfmt.Registry) 
 		res = append(res, err)
 	}
 
+	if err := m.contextValidatePrivateSubnets(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateQuotas(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -196,6 +227,26 @@ func (m *Project) contextValidateMetadatas(ctx context.Context, formats strfmt.R
 					return ve.ValidateName("metadatas" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("metadatas" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *Project) contextValidatePrivateSubnets(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.PrivateSubnets); i++ {
+
+		if m.PrivateSubnets[i] != nil {
+			if err := m.PrivateSubnets[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("private_subnets" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("private_subnets" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
