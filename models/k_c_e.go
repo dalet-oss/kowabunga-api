@@ -32,6 +32,9 @@ type KCE struct {
 	// The KCE ID  (auto-generated).
 	ID string `json:"id,omitempty"`
 
+	// The KCE virtual machine's assigned private IPv4 address (read-only).
+	IP string `json:"ip,omitempty"`
+
 	// The KCE virtual machine's memory size (in bytes).
 	// Required: true
 	Memory *int64 `json:"memory"`

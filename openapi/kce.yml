@@ -26,6 +26,9 @@ definitions:
         type: integer
         description: The KCE virtual machine's extra data disk size (in bytes). If unspecified, no extra data disk will be assigned.
         default: 0
+      ip:
+        type: string
+        description: The KCE virtual machine's assigned private IPv4 address (read-only).
 
 paths:
   /kce:

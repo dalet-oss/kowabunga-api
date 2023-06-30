@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.7.3"
+    "version": "0.7.4"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -3630,6 +3630,10 @@ func init() {
           "description": "The KCE ID  (auto-generated).",
           "type": "string"
         },
+        "ip": {
+          "description": "The KCE virtual machine's assigned private IPv4 address (read-only).",
+          "type": "string"
+        },
         "memory": {
           "description": "The KCE virtual machine's memory size (in bytes).",
           "type": "integer"
@@ -4069,7 +4073,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.7.3"
+    "version": "0.7.4"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -7727,6 +7731,10 @@ func init() {
         },
         "id": {
           "description": "The KCE ID  (auto-generated).",
+          "type": "string"
+        },
+        "ip": {
+          "description": "The KCE virtual machine's assigned private IPv4 address (read-only).",
           "type": "string"
         },
         "memory": {
