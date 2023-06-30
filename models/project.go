@@ -50,6 +50,12 @@ type Project struct {
 	// Required: true
 	Owner *string `json:"owner"`
 
+	// The assigned project VPC private subnet ID (read-only).
+	PrivateSubnet string `json:"private_subnet,omitempty"`
+
+	// The assigned project VPC public subnet ID (read-only).
+	PublicSubnet string `json:"public_subnet,omitempty"`
+
 	// The global project resource quotas (0 for unlimited)
 	Quotas *ProjectResources `json:"quotas,omitempty"`
 

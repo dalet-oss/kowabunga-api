@@ -44,6 +44,12 @@ definitions:
         type: object
         description: The global project resource quotas (0 for unlimited)
         $ref: '#/definitions/ProjectResources'
+      private_subnet:
+        type: string
+        description: The assigned project VPC private subnet ID (read-only).
+      public_subnet:
+        type: string
+        description: The assigned project VPC public subnet ID (read-only).
 
   ProjectResources:
     type: object

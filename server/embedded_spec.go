@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.7.4"
+    "version": "0.7.5"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -3744,6 +3744,14 @@ func init() {
           "description": "The project's owner name.",
           "type": "string"
         },
+        "private_subnet": {
+          "description": "The assigned project VPC private subnet ID (read-only).",
+          "type": "string"
+        },
+        "public_subnet": {
+          "description": "The assigned project VPC public subnet ID (read-only).",
+          "type": "string"
+        },
         "quotas": {
           "description": "The global project resource quotas (0 for unlimited)",
           "type": "object",
@@ -4073,7 +4081,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.7.4"
+    "version": "0.7.5"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -7845,6 +7853,14 @@ func init() {
         },
         "owner": {
           "description": "The project's owner name.",
+          "type": "string"
+        },
+        "private_subnet": {
+          "description": "The assigned project VPC private subnet ID (read-only).",
+          "type": "string"
+        },
+        "public_subnet": {
+          "description": "The assigned project VPC public subnet ID (read-only).",
           "type": "string"
         },
         "quotas": {
