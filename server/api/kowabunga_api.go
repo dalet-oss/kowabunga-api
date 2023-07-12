@@ -26,6 +26,7 @@ import (
 	"github.com/dalet-oss/kowabunga-api/server/api/netgw"
 	"github.com/dalet-oss/kowabunga-api/server/api/pool"
 	"github.com/dalet-oss/kowabunga-api/server/api/project"
+	"github.com/dalet-oss/kowabunga-api/server/api/record"
 	"github.com/dalet-oss/kowabunga-api/server/api/region"
 	"github.com/dalet-oss/kowabunga-api/server/api/subnet"
 	"github.com/dalet-oss/kowabunga-api/server/api/template"
@@ -71,6 +72,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		ProjectCreateProjectHandler: project.CreateProjectHandlerFunc(func(params project.CreateProjectParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.CreateProject has not yet been implemented")
 		}),
+		ProjectCreateProjectDNSRecordHandler: project.CreateProjectDNSRecordHandlerFunc(func(params project.CreateProjectDNSRecordParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.CreateProjectDNSRecord has not yet been implemented")
+		}),
 		ProjectCreateProjectZoneInstanceHandler: project.CreateProjectZoneInstanceHandlerFunc(func(params project.CreateProjectZoneInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.CreateProjectZoneInstance has not yet been implemented")
 		}),
@@ -97,6 +101,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		AdapterDeleteAdapterHandler: adapter.DeleteAdapterHandlerFunc(func(params adapter.DeleteAdapterParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation adapter.DeleteAdapter has not yet been implemented")
+		}),
+		RecordDeleteDNSRecordHandler: record.DeleteDNSRecordHandlerFunc(func(params record.DeleteDNSRecordParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation record.DeleteDNSRecord has not yet been implemented")
 		}),
 		HostDeleteHostHandler: host.DeleteHostHandlerFunc(func(params host.DeleteHostParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation host.DeleteHost has not yet been implemented")
@@ -176,6 +183,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		ZoneGetAllZonesHandler: zone.GetAllZonesHandlerFunc(func(params zone.GetAllZonesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.GetAllZones has not yet been implemented")
 		}),
+		RecordGetDNSRecordHandler: record.GetDNSRecordHandlerFunc(func(params record.GetDNSRecordParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation record.GetDNSRecord has not yet been implemented")
+		}),
 		HostGetHostHandler: host.GetHostHandlerFunc(func(params host.GetHostParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation host.GetHost has not yet been implemented")
 		}),
@@ -211,6 +221,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		ProjectGetProjectHandler: project.GetProjectHandlerFunc(func(params project.GetProjectParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProject has not yet been implemented")
+		}),
+		ProjectGetProjectDNSRecordsHandler: project.GetProjectDNSRecordsHandlerFunc(func(params project.GetProjectDNSRecordsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.GetProjectDNSRecords has not yet been implemented")
 		}),
 		ProjectGetProjectUsageHandler: project.GetProjectUsageHandlerFunc(func(params project.GetProjectUsageParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectUsage has not yet been implemented")
@@ -307,6 +320,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		AdapterUpdateAdapterHandler: adapter.UpdateAdapterHandlerFunc(func(params adapter.UpdateAdapterParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation adapter.UpdateAdapter has not yet been implemented")
+		}),
+		RecordUpdateDNSRecordHandler: record.UpdateDNSRecordHandlerFunc(func(params record.UpdateDNSRecordParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation record.UpdateDNSRecord has not yet been implemented")
 		}),
 		HostUpdateHostHandler: host.UpdateHostHandlerFunc(func(params host.UpdateHostParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation host.UpdateHost has not yet been implemented")
@@ -413,6 +429,8 @@ type KowabungaAPI struct {
 	ZoneCreatePoolHandler zone.CreatePoolHandler
 	// ProjectCreateProjectHandler sets the operation handler for the create project operation
 	ProjectCreateProjectHandler project.CreateProjectHandler
+	// ProjectCreateProjectDNSRecordHandler sets the operation handler for the create project Dns record operation
+	ProjectCreateProjectDNSRecordHandler project.CreateProjectDNSRecordHandler
 	// ProjectCreateProjectZoneInstanceHandler sets the operation handler for the create project zone instance operation
 	ProjectCreateProjectZoneInstanceHandler project.CreateProjectZoneInstanceHandler
 	// ProjectCreateProjectZoneKceHandler sets the operation handler for the create project zone kce operation
@@ -431,6 +449,8 @@ type KowabungaAPI struct {
 	RegionCreateZoneHandler region.CreateZoneHandler
 	// AdapterDeleteAdapterHandler sets the operation handler for the delete adapter operation
 	AdapterDeleteAdapterHandler adapter.DeleteAdapterHandler
+	// RecordDeleteDNSRecordHandler sets the operation handler for the delete Dns record operation
+	RecordDeleteDNSRecordHandler record.DeleteDNSRecordHandler
 	// HostDeleteHostHandler sets the operation handler for the delete host operation
 	HostDeleteHostHandler host.DeleteHostHandler
 	// InstanceDeleteInstanceHandler sets the operation handler for the delete instance operation
@@ -483,6 +503,8 @@ type KowabungaAPI struct {
 	VolumeGetAllVolumesHandler volume.GetAllVolumesHandler
 	// ZoneGetAllZonesHandler sets the operation handler for the get all zones operation
 	ZoneGetAllZonesHandler zone.GetAllZonesHandler
+	// RecordGetDNSRecordHandler sets the operation handler for the get Dns record operation
+	RecordGetDNSRecordHandler record.GetDNSRecordHandler
 	// HostGetHostHandler sets the operation handler for the get host operation
 	HostGetHostHandler host.GetHostHandler
 	// HostGetHostCapsHandler sets the operation handler for the get host caps operation
@@ -507,6 +529,8 @@ type KowabungaAPI struct {
 	PoolGetPoolVolumesHandler pool.GetPoolVolumesHandler
 	// ProjectGetProjectHandler sets the operation handler for the get project operation
 	ProjectGetProjectHandler project.GetProjectHandler
+	// ProjectGetProjectDNSRecordsHandler sets the operation handler for the get project Dns records operation
+	ProjectGetProjectDNSRecordsHandler project.GetProjectDNSRecordsHandler
 	// ProjectGetProjectUsageHandler sets the operation handler for the get project usage operation
 	ProjectGetProjectUsageHandler project.GetProjectUsageHandler
 	// ProjectGetProjectZoneInstancesHandler sets the operation handler for the get project zone instances operation
@@ -571,6 +595,8 @@ type KowabungaAPI struct {
 	KceSuspendKCEHandler kce.SuspendKCEHandler
 	// AdapterUpdateAdapterHandler sets the operation handler for the update adapter operation
 	AdapterUpdateAdapterHandler adapter.UpdateAdapterHandler
+	// RecordUpdateDNSRecordHandler sets the operation handler for the update Dns record operation
+	RecordUpdateDNSRecordHandler record.UpdateDNSRecordHandler
 	// HostUpdateHostHandler sets the operation handler for the update host operation
 	HostUpdateHostHandler host.UpdateHostHandler
 	// InstanceUpdateInstanceHandler sets the operation handler for the update instance operation
@@ -697,6 +723,9 @@ func (o *KowabungaAPI) Validate() error {
 	if o.ProjectCreateProjectHandler == nil {
 		unregistered = append(unregistered, "project.CreateProjectHandler")
 	}
+	if o.ProjectCreateProjectDNSRecordHandler == nil {
+		unregistered = append(unregistered, "project.CreateProjectDNSRecordHandler")
+	}
 	if o.ProjectCreateProjectZoneInstanceHandler == nil {
 		unregistered = append(unregistered, "project.CreateProjectZoneInstanceHandler")
 	}
@@ -723,6 +752,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.AdapterDeleteAdapterHandler == nil {
 		unregistered = append(unregistered, "adapter.DeleteAdapterHandler")
+	}
+	if o.RecordDeleteDNSRecordHandler == nil {
+		unregistered = append(unregistered, "record.DeleteDNSRecordHandler")
 	}
 	if o.HostDeleteHostHandler == nil {
 		unregistered = append(unregistered, "host.DeleteHostHandler")
@@ -802,6 +834,9 @@ func (o *KowabungaAPI) Validate() error {
 	if o.ZoneGetAllZonesHandler == nil {
 		unregistered = append(unregistered, "zone.GetAllZonesHandler")
 	}
+	if o.RecordGetDNSRecordHandler == nil {
+		unregistered = append(unregistered, "record.GetDNSRecordHandler")
+	}
 	if o.HostGetHostHandler == nil {
 		unregistered = append(unregistered, "host.GetHostHandler")
 	}
@@ -837,6 +872,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.ProjectGetProjectHandler == nil {
 		unregistered = append(unregistered, "project.GetProjectHandler")
+	}
+	if o.ProjectGetProjectDNSRecordsHandler == nil {
+		unregistered = append(unregistered, "project.GetProjectDNSRecordsHandler")
 	}
 	if o.ProjectGetProjectUsageHandler == nil {
 		unregistered = append(unregistered, "project.GetProjectUsageHandler")
@@ -933,6 +971,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.AdapterUpdateAdapterHandler == nil {
 		unregistered = append(unregistered, "adapter.UpdateAdapterHandler")
+	}
+	if o.RecordUpdateDNSRecordHandler == nil {
+		unregistered = append(unregistered, "record.UpdateDNSRecordHandler")
 	}
 	if o.HostUpdateHostHandler == nil {
 		unregistered = append(unregistered, "host.UpdateHostHandler")
@@ -1099,6 +1140,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
+	o.handlers["POST"]["/project/{projectId}/record"] = project.NewCreateProjectDNSRecord(o.context, o.ProjectCreateProjectDNSRecordHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
 	o.handlers["POST"]["/project/{projectId}/zone/{zoneId}/instance"] = project.NewCreateProjectZoneInstance(o.context, o.ProjectCreateProjectZoneInstanceHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
@@ -1132,6 +1177,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
 	o.handlers["DELETE"]["/adapter/{adapterId}"] = adapter.NewDeleteAdapter(o.context, o.AdapterDeleteAdapterHandler)
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
+	o.handlers["DELETE"]["/record/{recordId}"] = record.NewDeleteDNSRecord(o.context, o.RecordDeleteDNSRecordHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
@@ -1239,6 +1288,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
+	o.handlers["GET"]["/record/{recordId}"] = record.NewGetDNSRecord(o.context, o.RecordGetDNSRecordHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
 	o.handlers["GET"]["/host/{hostId}"] = host.NewGetHost(o.context, o.HostGetHostHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
@@ -1284,6 +1337,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/project/{projectId}"] = project.NewGetProject(o.context, o.ProjectGetProjectHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/project/{projectId}/records"] = project.NewGetProjectDNSRecords(o.context, o.ProjectGetProjectDNSRecordsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -1412,6 +1469,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
 	o.handlers["PUT"]["/adapter/{adapterId}"] = adapter.NewUpdateAdapter(o.context, o.AdapterUpdateAdapterHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/record/{recordId}"] = record.NewUpdateDNSRecord(o.context, o.RecordUpdateDNSRecordHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}

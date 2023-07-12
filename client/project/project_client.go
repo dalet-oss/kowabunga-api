@@ -32,6 +32,8 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	CreateProject(params *CreateProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectCreated, error)
 
+	CreateProjectDNSRecord(params *CreateProjectDNSRecordParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectDNSRecordCreated, error)
+
 	CreateProjectZoneInstance(params *CreateProjectZoneInstanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectZoneInstanceCreated, error)
 
 	CreateProjectZoneKce(params *CreateProjectZoneKceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectZoneKceCreated, error)
@@ -43,6 +45,8 @@ type ClientService interface {
 	GetAllProjects(params *GetAllProjectsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAllProjectsOK, error)
 
 	GetProject(params *GetProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectOK, error)
+
+	GetProjectDNSRecords(params *GetProjectDNSRecordsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectDNSRecordsOK, error)
 
 	GetProjectUsage(params *GetProjectUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectUsageOK, error)
 
@@ -93,6 +97,45 @@ func (a *Client) CreateProject(params *CreateProjectParams, authInfo runtime.Cli
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateProjectDNSRecord Creates a new DNS record in specified project.
+*/
+func (a *Client) CreateProjectDNSRecord(params *CreateProjectDNSRecordParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectDNSRecordCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateProjectDNSRecordParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateProjectDnsRecord",
+		Method:             "POST",
+		PathPattern:        "/project/{projectId}/record",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateProjectDNSRecordReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateProjectDNSRecordCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateProjectDnsRecord: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -327,6 +370,45 @@ func (a *Client) GetProject(params *GetProjectParams, authInfo runtime.ClientAut
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetProjectDNSRecords Returns the IDs of the DNS records existing in the project.
+*/
+func (a *Client) GetProjectDNSRecords(params *GetProjectDNSRecordsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectDNSRecordsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetProjectDNSRecordsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetProjectDnsRecords",
+		Method:             "GET",
+		PathPattern:        "/project/{projectId}/records",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetProjectDNSRecordsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetProjectDNSRecordsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetProjectDnsRecords: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

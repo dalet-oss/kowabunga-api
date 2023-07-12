@@ -18,6 +18,7 @@ import (
 	"github.com/dalet-oss/kowabunga-api/server/api/netgw"
 	"github.com/dalet-oss/kowabunga-api/server/api/pool"
 	"github.com/dalet-oss/kowabunga-api/server/api/project"
+	"github.com/dalet-oss/kowabunga-api/server/api/record"
 	"github.com/dalet-oss/kowabunga-api/server/api/region"
 	"github.com/dalet-oss/kowabunga-api/server/api/subnet"
 	"github.com/dalet-oss/kowabunga-api/server/api/template"
@@ -88,6 +89,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation project.CreateProject has not yet been implemented")
 		})
 	}
+	if api.ProjectCreateProjectDNSRecordHandler == nil {
+		api.ProjectCreateProjectDNSRecordHandler = project.CreateProjectDNSRecordHandlerFunc(func(params project.CreateProjectDNSRecordParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.CreateProjectDNSRecord has not yet been implemented")
+		})
+	}
 	if api.ProjectCreateProjectZoneInstanceHandler == nil {
 		api.ProjectCreateProjectZoneInstanceHandler = project.CreateProjectZoneInstanceHandlerFunc(func(params project.CreateProjectZoneInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.CreateProjectZoneInstance has not yet been implemented")
@@ -131,6 +137,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.AdapterDeleteAdapterHandler == nil {
 		api.AdapterDeleteAdapterHandler = adapter.DeleteAdapterHandlerFunc(func(params adapter.DeleteAdapterParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation adapter.DeleteAdapter has not yet been implemented")
+		})
+	}
+	if api.RecordDeleteDNSRecordHandler == nil {
+		api.RecordDeleteDNSRecordHandler = record.DeleteDNSRecordHandlerFunc(func(params record.DeleteDNSRecordParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation record.DeleteDNSRecord has not yet been implemented")
 		})
 	}
 	if api.HostDeleteHostHandler == nil {
@@ -263,6 +274,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation zone.GetAllZones has not yet been implemented")
 		})
 	}
+	if api.RecordGetDNSRecordHandler == nil {
+		api.RecordGetDNSRecordHandler = record.GetDNSRecordHandlerFunc(func(params record.GetDNSRecordParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation record.GetDNSRecord has not yet been implemented")
+		})
+	}
 	if api.HostGetHostHandler == nil {
 		api.HostGetHostHandler = host.GetHostHandlerFunc(func(params host.GetHostParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation host.GetHost has not yet been implemented")
@@ -321,6 +337,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.ProjectGetProjectHandler == nil {
 		api.ProjectGetProjectHandler = project.GetProjectHandlerFunc(func(params project.GetProjectParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProject has not yet been implemented")
+		})
+	}
+	if api.ProjectGetProjectDNSRecordsHandler == nil {
+		api.ProjectGetProjectDNSRecordsHandler = project.GetProjectDNSRecordsHandlerFunc(func(params project.GetProjectDNSRecordsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.GetProjectDNSRecords has not yet been implemented")
 		})
 	}
 	if api.ProjectGetProjectUsageHandler == nil {
@@ -481,6 +502,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.AdapterUpdateAdapterHandler == nil {
 		api.AdapterUpdateAdapterHandler = adapter.UpdateAdapterHandlerFunc(func(params adapter.UpdateAdapterParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation adapter.UpdateAdapter has not yet been implemented")
+		})
+	}
+	if api.RecordUpdateDNSRecordHandler == nil {
+		api.RecordUpdateDNSRecordHandler = record.UpdateDNSRecordHandlerFunc(func(params record.UpdateDNSRecordParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation record.UpdateDNSRecord has not yet been implemented")
 		})
 	}
 	if api.HostUpdateHostHandler == nil {

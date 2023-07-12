@@ -1586,6 +1586,86 @@ func init() {
         }
       }
     },
+    "/project/{projectId}/record": {
+      "post": {
+        "description": "Creates a new DNS record in specified project.",
+        "tags": [
+          "project",
+          "record"
+        ],
+        "operationId": "CreateProjectDnsRecord",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated project.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DnsRecord"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created DNS record object.",
+            "schema": {
+              "$ref": "#/definitions/DnsRecord"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid project ID was provided."
+          },
+          "409": {
+            "description": "DNS record already exists."
+          },
+          "500": {
+            "description": "Unable to create the DNS record."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/records": {
+      "get": {
+        "description": "Returns the IDs of the DNS records existing in the project.",
+        "tags": [
+          "project",
+          "record"
+        ],
+        "operationId": "GetProjectDnsRecords",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to query.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of DNS record IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid project ID was provided."
+          }
+        }
+      }
+    },
     "/project/{projectId}/usage": {
       "get": {
         "description": "Returns the current resources usage for the project.",
@@ -1953,6 +2033,99 @@ func init() {
           },
           "404": {
             "description": "Invalid project or zone ID was provided."
+          }
+        }
+      }
+    },
+    "/record/{recordId}": {
+      "get": {
+        "description": "Returns a DNS record object",
+        "tags": [
+          "record"
+        ],
+        "operationId": "GetDnsRecord",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the DNS record to get.",
+            "name": "recordId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the DNS record object.",
+            "schema": {
+              "$ref": "#/definitions/DnsRecord"
+            }
+          },
+          "404": {
+            "description": "Invalid DNS record ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a DNS record configuration.",
+        "tags": [
+          "record"
+        ],
+        "operationId": "UpdateDnsRecord",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the DNS record to update.",
+            "name": "recordId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DnsRecord"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated DNS record object.",
+            "schema": {
+              "$ref": "#/definitions/DnsRecord"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid DNS record ID was provided."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing DNS record.",
+        "tags": [
+          "record"
+        ],
+        "operationId": "DeleteDnsRecord",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the DNS record to delete.",
+            "name": "recordId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The DNS record has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid DNS record ID was provided."
+          },
+          "500": {
+            "description": "Unable to delete DNS record."
           }
         }
       }
@@ -3394,6 +3567,38 @@ func init() {
           "description": "The unit price information.",
           "type": "integer",
           "format": "float"
+        }
+      }
+    },
+    "DnsRecord": {
+      "type": "object",
+      "required": [
+        "name",
+        "addresses"
+      ],
+      "properties": {
+        "addresses": {
+          "description": "A list of IPv4 addresses to be associated to the record.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "description": "The DNS record description.",
+          "type": "string"
+        },
+        "domain": {
+          "description": "The DNS record associated domain (inherited from associated project).",
+          "type": "string"
+        },
+        "id": {
+          "description": "The DNS record ID (auto-generated).",
+          "type": "string"
+        },
+        "name": {
+          "description": "The DNS record name (zone's entry).",
+          "type": "string"
         }
       }
     },
@@ -5649,6 +5854,86 @@ func init() {
         }
       }
     },
+    "/project/{projectId}/record": {
+      "post": {
+        "description": "Creates a new DNS record in specified project.",
+        "tags": [
+          "project",
+          "record"
+        ],
+        "operationId": "CreateProjectDnsRecord",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated project.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DnsRecord"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created DNS record object.",
+            "schema": {
+              "$ref": "#/definitions/DnsRecord"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid project ID was provided."
+          },
+          "409": {
+            "description": "DNS record already exists."
+          },
+          "500": {
+            "description": "Unable to create the DNS record."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/records": {
+      "get": {
+        "description": "Returns the IDs of the DNS records existing in the project.",
+        "tags": [
+          "project",
+          "record"
+        ],
+        "operationId": "GetProjectDnsRecords",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to query.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of DNS record IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid project ID was provided."
+          }
+        }
+      }
+    },
     "/project/{projectId}/usage": {
       "get": {
         "description": "Returns the current resources usage for the project.",
@@ -6016,6 +6301,99 @@ func init() {
           },
           "404": {
             "description": "Invalid project or zone ID was provided."
+          }
+        }
+      }
+    },
+    "/record/{recordId}": {
+      "get": {
+        "description": "Returns a DNS record object",
+        "tags": [
+          "record"
+        ],
+        "operationId": "GetDnsRecord",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the DNS record to get.",
+            "name": "recordId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the DNS record object.",
+            "schema": {
+              "$ref": "#/definitions/DnsRecord"
+            }
+          },
+          "404": {
+            "description": "Invalid DNS record ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a DNS record configuration.",
+        "tags": [
+          "record"
+        ],
+        "operationId": "UpdateDnsRecord",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the DNS record to update.",
+            "name": "recordId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DnsRecord"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated DNS record object.",
+            "schema": {
+              "$ref": "#/definitions/DnsRecord"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid DNS record ID was provided."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing DNS record.",
+        "tags": [
+          "record"
+        ],
+        "operationId": "DeleteDnsRecord",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the DNS record to delete.",
+            "name": "recordId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The DNS record has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid DNS record ID was provided."
+          },
+          "500": {
+            "description": "Unable to delete DNS record."
           }
         }
       }
@@ -7457,6 +7835,38 @@ func init() {
           "description": "The unit price information.",
           "type": "integer",
           "format": "float"
+        }
+      }
+    },
+    "DnsRecord": {
+      "type": "object",
+      "required": [
+        "name",
+        "addresses"
+      ],
+      "properties": {
+        "addresses": {
+          "description": "A list of IPv4 addresses to be associated to the record.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "description": "The DNS record description.",
+          "type": "string"
+        },
+        "domain": {
+          "description": "The DNS record associated domain (inherited from associated project).",
+          "type": "string"
+        },
+        "id": {
+          "description": "The DNS record ID (auto-generated).",
+          "type": "string"
+        },
+        "name": {
+          "description": "The DNS record name (zone's entry).",
+          "type": "string"
         }
       }
     },

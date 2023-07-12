@@ -1,0 +1,85 @@
+definitions:
+  DnsRecord:
+    type: object
+    required: [name, addresses]
+    properties:
+      id:
+        type: string
+        description: The DNS record ID (auto-generated).
+      name:
+        type: string
+        description: The DNS record name (zone's entry).
+      description:
+        type: string
+        description: The DNS record description.
+      domain:
+        type: string
+        description: The DNS record associated domain (inherited from associated project).
+      addresses:
+        type: array
+        description: A list of IPv4 addresses to be associated to the record.
+        items:
+          type: string
+
+paths:
+  /record/{recordId}:
+    get:
+      tags:
+        - record
+      operationId: GetDnsRecord
+      description: Returns a DNS record object
+      parameters:
+        - name: recordId
+          in: path
+          type: string
+          required: true
+          description: The ID of the DNS record to get.
+      responses:
+        200:
+          description: Returns the DNS record object.
+          schema:
+            $ref: '#/definitions/DnsRecord'
+        404:
+          description: Invalid DNS record ID was provided.
+    put:
+      tags:
+        - record
+      operationId: UpdateDnsRecord
+      description: Updates a DNS record configuration.
+      parameters:
+        - name: recordId
+          in: path
+          type: string
+          required: true
+          description: The ID of the DNS record to update.
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/DnsRecord'
+      responses:
+        200:
+          description: Returns the updated DNS record object.
+          schema:
+            $ref: '#/definitions/DnsRecord'
+        400:
+          description: Bad parameters were provided.
+        404:
+          description: Invalid DNS record ID was provided.
+    delete:
+      tags:
+        - record
+      operationId: DeleteDnsRecord
+      description: Deletes an existing DNS record.
+      parameters:
+        - name: recordId
+          in: path
+          type: string
+          required: true
+          description: The ID of the DNS record to delete.
+      responses:
+        200:
+          description: The DNS record has been successfully removed.
+        404:
+          description: Invalid DNS record ID was provided.
+        500:
+          description: Unable to delete DNS record.
