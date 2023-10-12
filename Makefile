@@ -14,7 +14,7 @@ YQ = $(BIN_DIR)/yq
 YQ_VERSION = v4.34.1
 
 GOSWAGGER = $(BIN_DIR)/goswagger
-GOSWAGGER_VERSION = v0.30.4
+GOSWAGGER_VERSION = v0.30.5
 SWAGGER_YAML_TO_HTML = $(BIN_DIR)/swagger-yaml-to-html
 
 OPENAPI_DIR = openapi

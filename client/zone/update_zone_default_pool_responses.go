@@ -39,7 +39,7 @@ func (o *UpdateZoneDefaultPoolReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /zone/{zoneId}/pool/{poolId}/default] UpdateZoneDefaultPool", response, response.Code())
 	}
 }
 

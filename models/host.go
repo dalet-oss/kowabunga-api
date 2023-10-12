@@ -199,6 +199,11 @@ func (m *Host) ContextValidate(ctx context.Context, formats strfmt.Registry) err
 func (m *Host) contextValidateCost(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Cost != nil {
+
+		if swag.IsZero(m.Cost) { // not required
+			return nil
+		}
+
 		if err := m.Cost.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cost")
@@ -215,6 +220,11 @@ func (m *Host) contextValidateCost(ctx context.Context, formats strfmt.Registry)
 func (m *Host) contextValidateTLS(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TLS != nil {
+
+		if swag.IsZero(m.TLS) { // not required
+			return nil
+		}
+
 		if err := m.TLS.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("tls")

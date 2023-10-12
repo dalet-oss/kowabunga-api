@@ -126,6 +126,7 @@ func (m *HostCaps) ContextValidate(ctx context.Context, formats strfmt.Registry)
 func (m *HostCaps) contextValidateCPU(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.CPU != nil {
+
 		if err := m.CPU.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cpu")

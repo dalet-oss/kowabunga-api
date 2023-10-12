@@ -54,7 +54,7 @@ func (o *CreateProjectDNSRecordReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /project/{projectId}/record] CreateProjectDnsRecord", response, response.Code())
 	}
 }
 

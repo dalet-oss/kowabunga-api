@@ -28,7 +28,7 @@ func (o *GetAllVNetsReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return result, nil
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /vnet] GetAllVNets", response, response.Code())
 	}
 }
 

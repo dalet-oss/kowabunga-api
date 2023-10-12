@@ -60,7 +60,7 @@ func (o *CreateProjectZoneVolumeReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /project/{projectId}/zone/{zoneId}/volume] CreateProjectZoneVolume", response, response.Code())
 	}
 }
 

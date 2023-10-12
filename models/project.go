@@ -222,6 +222,11 @@ func (m *Project) contextValidateMetadatas(ctx context.Context, formats strfmt.R
 	for i := 0; i < len(m.Metadatas); i++ {
 
 		if m.Metadatas[i] != nil {
+
+			if swag.IsZero(m.Metadatas[i]) { // not required
+				return nil
+			}
+
 			if err := m.Metadatas[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("metadatas" + "." + strconv.Itoa(i))
@@ -242,6 +247,11 @@ func (m *Project) contextValidatePrivateSubnets(ctx context.Context, formats str
 	for i := 0; i < len(m.PrivateSubnets); i++ {
 
 		if m.PrivateSubnets[i] != nil {
+
+			if swag.IsZero(m.PrivateSubnets[i]) { // not required
+				return nil
+			}
+
 			if err := m.PrivateSubnets[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("private_subnets" + "." + strconv.Itoa(i))
@@ -260,6 +270,11 @@ func (m *Project) contextValidatePrivateSubnets(ctx context.Context, formats str
 func (m *Project) contextValidateQuotas(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Quotas != nil {
+
+		if swag.IsZero(m.Quotas) { // not required
+			return nil
+		}
+
 		if err := m.Quotas.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("quotas")

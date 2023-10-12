@@ -146,6 +146,11 @@ func (m *Subnet) contextValidateReserved(ctx context.Context, formats strfmt.Reg
 	for i := 0; i < len(m.Reserved); i++ {
 
 		if m.Reserved[i] != nil {
+
+			if swag.IsZero(m.Reserved[i]) { // not required
+				return nil
+			}
+
 			if err := m.Reserved[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("reserved" + "." + strconv.Itoa(i))
