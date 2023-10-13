@@ -496,3 +496,77 @@ paths:
               type: string
         404:
           description: Invalid project or zone ID was provided.
+
+  /project/{projectId}/zone/{zoneId}/kfs:
+    get:
+      tags:
+        - project
+        - zone
+        - kfs
+      operationId: GetProjectZoneKfs
+      description: Returns the IDs of the KFS storage volumes existing in the project in the specified zone.
+      parameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: The ID of the project to query.
+        - name: zoneId
+          in: path
+          type: string
+          required: true
+          description: The ID of the zone to query.
+      responses:
+        200:
+          description: Returns an array of KFS storage volume IDs.
+          schema:
+            type: array
+            items:
+              type: string
+        404:
+          description: Invalid project or zone ID was provided.
+    post:
+      tags:
+        - project
+        - zone
+        - kfs
+      operationId: CreateProjectZoneKfs
+      description: Creates a new KFS storage volume in specified zone.
+      parameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: the ID of the associated project.
+        - name: zoneId
+          in: path
+          type: string
+          required: true
+          description: the ID of the associated zone.
+        - name: nfsId
+          in: query
+          type: string
+          description: the ID of the associated NFS storage (optional, zone's default if unspecified).
+        - name: notify
+          in: query
+          type: boolean
+          default: true
+          description: Whether or not to send a notification email at resource creation.
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/KFS'
+      responses:
+        201:
+          description: Returns the newly created KFS storage volume object.
+          schema:
+            $ref: '#/definitions/KFS'
+        400:
+          description: Bad parameters were provided.
+        404:
+          description: Invalid project or zone ID was provided.
+        409:
+          description: KFS storage volume already exists.
+        500:
+          description: Unable to create the KFS storage volume.

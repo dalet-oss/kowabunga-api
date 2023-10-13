@@ -15,7 +15,9 @@ import (
 	"github.com/dalet-oss/kowabunga-api/server/api/host"
 	"github.com/dalet-oss/kowabunga-api/server/api/instance"
 	"github.com/dalet-oss/kowabunga-api/server/api/kce"
+	"github.com/dalet-oss/kowabunga-api/server/api/kfs"
 	"github.com/dalet-oss/kowabunga-api/server/api/netgw"
+	"github.com/dalet-oss/kowabunga-api/server/api/nfs"
 	"github.com/dalet-oss/kowabunga-api/server/api/pool"
 	"github.com/dalet-oss/kowabunga-api/server/api/project"
 	"github.com/dalet-oss/kowabunga-api/server/api/record"
@@ -79,6 +81,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation zone.CreateNetGW has not yet been implemented")
 		})
 	}
+	if api.ZoneCreateNfsStorageHandler == nil {
+		api.ZoneCreateNfsStorageHandler = zone.CreateNfsStorageHandlerFunc(func(params zone.CreateNfsStorageParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation zone.CreateNfsStorage has not yet been implemented")
+		})
+	}
 	if api.ZoneCreatePoolHandler == nil {
 		api.ZoneCreatePoolHandler = zone.CreatePoolHandlerFunc(func(params zone.CreatePoolParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.CreatePool has not yet been implemented")
@@ -102,6 +109,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.ProjectCreateProjectZoneKceHandler == nil {
 		api.ProjectCreateProjectZoneKceHandler = project.CreateProjectZoneKceHandlerFunc(func(params project.CreateProjectZoneKceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.CreateProjectZoneKce has not yet been implemented")
+		})
+	}
+	if api.ProjectCreateProjectZoneKfsHandler == nil {
+		api.ProjectCreateProjectZoneKfsHandler = project.CreateProjectZoneKfsHandlerFunc(func(params project.CreateProjectZoneKfsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.CreateProjectZoneKfs has not yet been implemented")
 		})
 	}
 	if api.ProjectCreateProjectZoneVolumeHandler == nil {
@@ -159,9 +171,19 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation kce.DeleteKCE has not yet been implemented")
 		})
 	}
+	if api.KfsDeleteKFSHandler == nil {
+		api.KfsDeleteKFSHandler = kfs.DeleteKFSHandlerFunc(func(params kfs.DeleteKFSParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kfs.DeleteKFS has not yet been implemented")
+		})
+	}
 	if api.NetgwDeleteNetGWHandler == nil {
 		api.NetgwDeleteNetGWHandler = netgw.DeleteNetGWHandlerFunc(func(params netgw.DeleteNetGWParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation netgw.DeleteNetGW has not yet been implemented")
+		})
+	}
+	if api.NfsDeleteNfsStorageHandler == nil {
+		api.NfsDeleteNfsStorageHandler = nfs.DeleteNfsStorageHandlerFunc(func(params nfs.DeleteNfsStorageParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation nfs.DeleteNfsStorage has not yet been implemented")
 		})
 	}
 	if api.PoolDeletePoolHandler == nil {
@@ -229,9 +251,19 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation kce.GetAllKCEs has not yet been implemented")
 		})
 	}
+	if api.KfsGetAllKFSsHandler == nil {
+		api.KfsGetAllKFSsHandler = kfs.GetAllKFSsHandlerFunc(func(params kfs.GetAllKFSsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kfs.GetAllKFSs has not yet been implemented")
+		})
+	}
 	if api.NetgwGetAllNetGWsHandler == nil {
 		api.NetgwGetAllNetGWsHandler = netgw.GetAllNetGWsHandlerFunc(func(params netgw.GetAllNetGWsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation netgw.GetAllNetGWs has not yet been implemented")
+		})
+	}
+	if api.NfsGetAllNfsStoragesHandler == nil {
+		api.NfsGetAllNfsStoragesHandler = nfs.GetAllNfsStoragesHandlerFunc(func(params nfs.GetAllNfsStoragesParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation nfs.GetAllNfsStorages has not yet been implemented")
 		})
 	}
 	if api.PoolGetAllPoolsHandler == nil {
@@ -314,9 +346,24 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation kce.GetKCEState has not yet been implemented")
 		})
 	}
+	if api.KfsGetKFSHandler == nil {
+		api.KfsGetKFSHandler = kfs.GetKFSHandlerFunc(func(params kfs.GetKFSParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kfs.GetKFS has not yet been implemented")
+		})
+	}
 	if api.NetgwGetNetGWHandler == nil {
 		api.NetgwGetNetGWHandler = netgw.GetNetGWHandlerFunc(func(params netgw.GetNetGWParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation netgw.GetNetGW has not yet been implemented")
+		})
+	}
+	if api.NfsGetNfsKfsHandler == nil {
+		api.NfsGetNfsKfsHandler = nfs.GetNfsKfsHandlerFunc(func(params nfs.GetNfsKfsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation nfs.GetNfsKfs has not yet been implemented")
+		})
+	}
+	if api.NfsGetNfsStorageHandler == nil {
+		api.NfsGetNfsStorageHandler = nfs.GetNfsStorageHandlerFunc(func(params nfs.GetNfsStorageParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation nfs.GetNfsStorage has not yet been implemented")
 		})
 	}
 	if api.PoolGetPoolHandler == nil {
@@ -357,6 +404,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.ProjectGetProjectZoneKCEsHandler == nil {
 		api.ProjectGetProjectZoneKCEsHandler = project.GetProjectZoneKCEsHandlerFunc(func(params project.GetProjectZoneKCEsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectZoneKCEs has not yet been implemented")
+		})
+	}
+	if api.ProjectGetProjectZoneKfsHandler == nil {
+		api.ProjectGetProjectZoneKfsHandler = project.GetProjectZoneKfsHandlerFunc(func(params project.GetProjectZoneKfsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.GetProjectZoneKfs has not yet been implemented")
 		})
 	}
 	if api.ProjectGetProjectZoneVolumesHandler == nil {
@@ -417,6 +469,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.ZoneGetZoneNetGWsHandler == nil {
 		api.ZoneGetZoneNetGWsHandler = zone.GetZoneNetGWsHandlerFunc(func(params zone.GetZoneNetGWsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.GetZoneNetGWs has not yet been implemented")
+		})
+	}
+	if api.ZoneGetZoneNfsStoragesHandler == nil {
+		api.ZoneGetZoneNfsStoragesHandler = zone.GetZoneNfsStoragesHandlerFunc(func(params zone.GetZoneNfsStoragesParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation zone.GetZoneNfsStorages has not yet been implemented")
 		})
 	}
 	if api.ZoneGetZonePoolsHandler == nil {
@@ -524,9 +581,19 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation kce.UpdateKCE has not yet been implemented")
 		})
 	}
+	if api.KfsUpdateKFSHandler == nil {
+		api.KfsUpdateKFSHandler = kfs.UpdateKFSHandlerFunc(func(params kfs.UpdateKFSParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kfs.UpdateKFS has not yet been implemented")
+		})
+	}
 	if api.NetgwUpdateNetGWHandler == nil {
 		api.NetgwUpdateNetGWHandler = netgw.UpdateNetGWHandlerFunc(func(params netgw.UpdateNetGWParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation netgw.UpdateNetGW has not yet been implemented")
+		})
+	}
+	if api.NfsUpdateNfsStorageHandler == nil {
+		api.NfsUpdateNfsStorageHandler = nfs.UpdateNfsStorageHandlerFunc(func(params nfs.UpdateNfsStorageParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation nfs.UpdateNfsStorage has not yet been implemented")
 		})
 	}
 	if api.PoolUpdatePoolHandler == nil {
@@ -577,6 +644,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.ZoneUpdateZoneHandler == nil {
 		api.ZoneUpdateZoneHandler = zone.UpdateZoneHandlerFunc(func(params zone.UpdateZoneParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.UpdateZone has not yet been implemented")
+		})
+	}
+	if api.ZoneUpdateZoneDefaultNfsStorageHandler == nil {
+		api.ZoneUpdateZoneDefaultNfsStorageHandler = zone.UpdateZoneDefaultNfsStorageHandlerFunc(func(params zone.UpdateZoneDefaultNfsStorageParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation zone.UpdateZoneDefaultNfsStorage has not yet been implemented")
 		})
 	}
 	if api.ZoneUpdateZoneDefaultPoolHandler == nil {

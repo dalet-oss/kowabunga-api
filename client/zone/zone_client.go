@@ -34,6 +34,8 @@ type ClientService interface {
 
 	CreateNetGW(params *CreateNetGWParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateNetGWCreated, error)
 
+	CreateNfsStorage(params *CreateNfsStorageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateNfsStorageCreated, error)
+
 	CreatePool(params *CreatePoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreatePoolCreated, error)
 
 	CreateVNet(params *CreateVNetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateVNetCreated, error)
@@ -48,11 +50,15 @@ type ClientService interface {
 
 	GetZoneNetGWs(params *GetZoneNetGWsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetZoneNetGWsOK, error)
 
+	GetZoneNfsStorages(params *GetZoneNfsStoragesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetZoneNfsStoragesOK, error)
+
 	GetZonePools(params *GetZonePoolsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetZonePoolsOK, error)
 
 	GetZoneVNets(params *GetZoneVNetsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetZoneVNetsOK, error)
 
 	UpdateZone(params *UpdateZoneParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateZoneOK, error)
+
+	UpdateZoneDefaultNfsStorage(params *UpdateZoneDefaultNfsStorageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateZoneDefaultNfsStorageOK, error)
 
 	UpdateZoneDefaultPool(params *UpdateZoneDefaultPoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateZoneDefaultPoolOK, error)
 
@@ -134,6 +140,45 @@ func (a *Client) CreateNetGW(params *CreateNetGWParams, authInfo runtime.ClientA
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateNetGW: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateNfsStorage Creates a new NFS storage.
+*/
+func (a *Client) CreateNfsStorage(params *CreateNfsStorageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateNfsStorageCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateNfsStorageParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateNfsStorage",
+		Method:             "POST",
+		PathPattern:        "/zone/{zoneId}/nfs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateNfsStorageReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateNfsStorageCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateNfsStorage: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -411,6 +456,45 @@ func (a *Client) GetZoneNetGWs(params *GetZoneNetGWsParams, authInfo runtime.Cli
 }
 
 /*
+GetZoneNfsStorages Returns the IDs of the NFS storages existing in the zone.
+*/
+func (a *Client) GetZoneNfsStorages(params *GetZoneNfsStoragesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetZoneNfsStoragesOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetZoneNfsStoragesParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetZoneNfsStorages",
+		Method:             "GET",
+		PathPattern:        "/zone/{zoneId}/nfs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetZoneNfsStoragesReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetZoneNfsStoragesOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetZoneNfsStorages: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetZonePools Returns the IDs of the pools existing in the zone.
 */
 func (a *Client) GetZonePools(params *GetZonePoolsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetZonePoolsOK, error) {
@@ -524,6 +608,45 @@ func (a *Client) UpdateZone(params *UpdateZoneParams, authInfo runtime.ClientAut
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for UpdateZone: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+UpdateZoneDefaultNfsStorage Set a zone's default NFS storage.
+*/
+func (a *Client) UpdateZoneDefaultNfsStorage(params *UpdateZoneDefaultNfsStorageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateZoneDefaultNfsStorageOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUpdateZoneDefaultNfsStorageParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "UpdateZoneDefaultNfsStorage",
+		Method:             "PUT",
+		PathPattern:        "/zone/{zoneId}/nfs/{nfsId}/default",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &UpdateZoneDefaultNfsStorageReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UpdateZoneDefaultNfsStorageOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateZoneDefaultNfsStorage: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

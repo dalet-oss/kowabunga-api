@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.7.7"
+    "version": "0.8.0"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -1037,6 +1037,125 @@ func init() {
         }
       }
     },
+    "/kfs": {
+      "get": {
+        "description": "Returns the IDs of registered KFS storage volumes.",
+        "tags": [
+          "kfs"
+        ],
+        "operationId": "GetAllKFSs",
+        "responses": {
+          "200": {
+            "description": "Returns the an array of KFS storage volume IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/kfs/{kfsId}": {
+      "get": {
+        "description": "Returns the description of the KFS storage volume.",
+        "tags": [
+          "kfs"
+        ],
+        "operationId": "GetKFS",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KFS storage volume to query.",
+            "name": "kfsId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the KFS storage volume object.",
+            "schema": {
+              "$ref": "#/definitions/KFS"
+            }
+          },
+          "404": {
+            "description": "Invalid KFS ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a KFS storage volume configuration.",
+        "tags": [
+          "kfs"
+        ],
+        "operationId": "UpdateKFS",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KFS storage volume.",
+            "name": "kfsId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/KFS"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated KFS storage volume object.",
+            "schema": {
+              "$ref": "#/definitions/KFS"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid KFs storage volume ID was provided."
+          },
+          "500": {
+            "description": "Unable to update the KFS storage volume."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing KFS storage volume.",
+        "tags": [
+          "kfs"
+        ],
+        "operationId": "DeleteKFS",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KFS storage volume to delete.",
+            "name": "kfsId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The KFS storage volume has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid KFS ID was provided."
+          },
+          "409": {
+            "description": "The KFS storage volume is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete KFS storage volume."
+          }
+        }
+      }
+    },
     "/netgw": {
       "get": {
         "description": "Returns the IDs of network gateways.",
@@ -1149,6 +1268,155 @@ func init() {
           },
           "500": {
             "description": "Unable to delete network gateway."
+          }
+        }
+      }
+    },
+    "/nfs": {
+      "get": {
+        "description": "Returns the IDs of registered NFS storages.",
+        "tags": [
+          "nfs"
+        ],
+        "operationId": "GetAllNfsStorages",
+        "responses": {
+          "200": {
+            "description": "Returns the an array of NFS storage IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/nfs/{nfsId}": {
+      "get": {
+        "description": "Returns a description of the NFS storage.",
+        "tags": [
+          "nfs"
+        ],
+        "operationId": "GetNfsStorage",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the NFS storage to get.",
+            "name": "nfsId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the NFS storage object.",
+            "schema": {
+              "$ref": "#/definitions/StorageNFS"
+            }
+          },
+          "404": {
+            "description": "Invalid NFS storage ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates an NFS storage configuration.",
+        "tags": [
+          "nfs"
+        ],
+        "operationId": "UpdateNfsStorage",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the NFS storage to get.",
+            "name": "nfsId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/StorageNFS"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated NFS storage object.",
+            "schema": {
+              "$ref": "#/definitions/StorageNFS"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid NFS storage ID was provided."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing NFS storage.",
+        "tags": [
+          "nfs"
+        ],
+        "operationId": "DeleteNfsStorage",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the NFS storage to get.",
+            "name": "nfsId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The NFS storage has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid NFS storage ID was provided."
+          },
+          "409": {
+            "description": "The NFS storage is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete NFS storage."
+          }
+        }
+      }
+    },
+    "/nfs/{nfsId}/kfs": {
+      "get": {
+        "description": "Returns the IDs of the KFS volumes existing in the NFS storage.",
+        "tags": [
+          "nfs",
+          "kfs"
+        ],
+        "operationId": "GetNfsKfs",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the NFS storage to query.",
+            "name": "nfsId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of KFS storage volume IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid NFS storage ID was provided."
           }
         }
       }
@@ -1922,6 +2190,113 @@ func init() {
           },
           "404": {
             "description": "Invalid project or zone ID was provided."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/zone/{zoneId}/kfs": {
+      "get": {
+        "description": "Returns the IDs of the KFS storage volumes existing in the project in the specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "kfs"
+        ],
+        "operationId": "GetProjectZoneKfs",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to query.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the zone to query.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of KFS storage volume IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid project or zone ID was provided."
+          }
+        }
+      },
+      "post": {
+        "description": "Creates a new KFS storage volume in specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "kfs"
+        ],
+        "operationId": "CreateProjectZoneKfs",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated project.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "the ID of the associated zone.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "the ID of the associated NFS storage (optional, zone's default if unspecified).",
+            "name": "nfsId",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether or not to send a notification email at resource creation.",
+            "name": "notify",
+            "in": "query"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KFS"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created KFS storage volume object.",
+            "schema": {
+              "$ref": "#/definitions/KFS"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid project or zone ID was provided."
+          },
+          "409": {
+            "description": "KFS storage volume already exists."
+          },
+          "500": {
+            "description": "Unable to create the KFS storage volume."
           }
         }
       }
@@ -3306,6 +3681,121 @@ func init() {
           },
           "404": {
             "description": "Invalid zone ID was provided."
+          }
+        }
+      }
+    },
+    "/zone/{zoneId}/nfs": {
+      "get": {
+        "description": "Returns the IDs of the NFS storages existing in the zone.",
+        "tags": [
+          "zone",
+          "nfs"
+        ],
+        "operationId": "GetZoneNfsStorages",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the zone to query.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of NFS storage IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid zone ID was provided."
+          }
+        }
+      },
+      "post": {
+        "description": "Creates a new NFS storage.",
+        "tags": [
+          "zone",
+          "nfs"
+        ],
+        "operationId": "CreateNfsStorage",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated zone.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageNFS"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created NFS storage object.",
+            "schema": {
+              "$ref": "#/definitions/StorageNFS"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid zone ID was provided."
+          },
+          "409": {
+            "description": "NFS storage already exists."
+          },
+          "500": {
+            "description": "Unable to create NFS storage."
+          }
+        }
+      }
+    },
+    "/zone/{zoneId}/nfs/{nfsId}/default": {
+      "put": {
+        "description": "Set a zone's default NFS storage.",
+        "tags": [
+          "zone",
+          "nfs"
+        ],
+        "operationId": "UpdateZoneDefaultNfsStorage",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the zone to update.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the NFS storage to set as default.",
+            "name": "nfsId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated zone resources object."
+          },
+          "404": {
+            "description": "Invalid zone ID or NFS storage ID was provided."
+          },
+          "500": {
+            "description": "Unable to assign the requested NFS storage as zone's default."
           }
         }
       }
@@ -3853,6 +4343,59 @@ func init() {
         }
       }
     },
+    "KFS": {
+      "description": "Kowabunga File System (KFS) provides an elastic NFS-like remote storage volume.",
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "access": {
+          "description": "The KFS storage volume access type.",
+          "type": "string",
+          "default": "RW",
+          "enum": [
+            "RO",
+            "RW"
+          ]
+        },
+        "description": {
+          "description": "The KFS storage volume description.",
+          "type": "string"
+        },
+        "endpoint": {
+          "description": "The KFS endpoint FQDN (read-only).",
+          "type": "string"
+        },
+        "id": {
+          "description": "The KFS ID (auto-generated).",
+          "type": "string"
+        },
+        "name": {
+          "description": "The KFS storage volume name.",
+          "type": "string"
+        },
+        "protocols": {
+          "description": "The KFS storage volume's NFS protocol versions to be supported.",
+          "type": "array",
+          "default": [
+            3,
+            4
+          ],
+          "items": {
+            "type": "integer",
+            "enum": [
+              3,
+              4
+            ]
+          }
+        },
+        "size": {
+          "description": "The KFS storage volume bytes used (read-only).",
+          "type": "integer"
+        }
+      }
+    },
     "Metadata": {
       "description": "A key/value metadata.",
       "type": "object",
@@ -4017,6 +4560,48 @@ func init() {
         "name": {
           "description": "The region name.",
           "type": "string"
+        }
+      }
+    },
+    "StorageNFS": {
+      "type": "object",
+      "required": [
+        "name",
+        "endpoint"
+      ],
+      "properties": {
+        "backends": {
+          "description": "List of NFS Ganesha API server IP addresses.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "description": "The NFS storage description.",
+          "type": "string"
+        },
+        "endpoint": {
+          "description": "The associated NFS endpoint FQDN.",
+          "type": "string"
+        },
+        "fs": {
+          "description": "The underlying associated CephFS volume name.",
+          "type": "string",
+          "default": "nfs"
+        },
+        "id": {
+          "description": "The NFS storage ID (auto-generated).",
+          "type": "string"
+        },
+        "name": {
+          "description": "The NFS storage name.",
+          "type": "string"
+        },
+        "port": {
+          "description": "NFS Ganesha API server port (default 54934).",
+          "type": "integer",
+          "default": 54934
         }
       }
     },
@@ -4299,7 +4884,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.7.7"
+    "version": "0.8.0"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -5305,6 +5890,125 @@ func init() {
         }
       }
     },
+    "/kfs": {
+      "get": {
+        "description": "Returns the IDs of registered KFS storage volumes.",
+        "tags": [
+          "kfs"
+        ],
+        "operationId": "GetAllKFSs",
+        "responses": {
+          "200": {
+            "description": "Returns the an array of KFS storage volume IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/kfs/{kfsId}": {
+      "get": {
+        "description": "Returns the description of the KFS storage volume.",
+        "tags": [
+          "kfs"
+        ],
+        "operationId": "GetKFS",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KFS storage volume to query.",
+            "name": "kfsId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the KFS storage volume object.",
+            "schema": {
+              "$ref": "#/definitions/KFS"
+            }
+          },
+          "404": {
+            "description": "Invalid KFS ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a KFS storage volume configuration.",
+        "tags": [
+          "kfs"
+        ],
+        "operationId": "UpdateKFS",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KFS storage volume.",
+            "name": "kfsId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/KFS"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated KFS storage volume object.",
+            "schema": {
+              "$ref": "#/definitions/KFS"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid KFs storage volume ID was provided."
+          },
+          "500": {
+            "description": "Unable to update the KFS storage volume."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing KFS storage volume.",
+        "tags": [
+          "kfs"
+        ],
+        "operationId": "DeleteKFS",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KFS storage volume to delete.",
+            "name": "kfsId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The KFS storage volume has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid KFS ID was provided."
+          },
+          "409": {
+            "description": "The KFS storage volume is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete KFS storage volume."
+          }
+        }
+      }
+    },
     "/netgw": {
       "get": {
         "description": "Returns the IDs of network gateways.",
@@ -5417,6 +6121,155 @@ func init() {
           },
           "500": {
             "description": "Unable to delete network gateway."
+          }
+        }
+      }
+    },
+    "/nfs": {
+      "get": {
+        "description": "Returns the IDs of registered NFS storages.",
+        "tags": [
+          "nfs"
+        ],
+        "operationId": "GetAllNfsStorages",
+        "responses": {
+          "200": {
+            "description": "Returns the an array of NFS storage IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/nfs/{nfsId}": {
+      "get": {
+        "description": "Returns a description of the NFS storage.",
+        "tags": [
+          "nfs"
+        ],
+        "operationId": "GetNfsStorage",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the NFS storage to get.",
+            "name": "nfsId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the NFS storage object.",
+            "schema": {
+              "$ref": "#/definitions/StorageNFS"
+            }
+          },
+          "404": {
+            "description": "Invalid NFS storage ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates an NFS storage configuration.",
+        "tags": [
+          "nfs"
+        ],
+        "operationId": "UpdateNfsStorage",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the NFS storage to get.",
+            "name": "nfsId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/StorageNFS"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated NFS storage object.",
+            "schema": {
+              "$ref": "#/definitions/StorageNFS"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid NFS storage ID was provided."
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing NFS storage.",
+        "tags": [
+          "nfs"
+        ],
+        "operationId": "DeleteNfsStorage",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the NFS storage to get.",
+            "name": "nfsId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The NFS storage has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid NFS storage ID was provided."
+          },
+          "409": {
+            "description": "The NFS storage is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete NFS storage."
+          }
+        }
+      }
+    },
+    "/nfs/{nfsId}/kfs": {
+      "get": {
+        "description": "Returns the IDs of the KFS volumes existing in the NFS storage.",
+        "tags": [
+          "nfs",
+          "kfs"
+        ],
+        "operationId": "GetNfsKfs",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the NFS storage to query.",
+            "name": "nfsId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of KFS storage volume IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid NFS storage ID was provided."
           }
         }
       }
@@ -6190,6 +7043,113 @@ func init() {
           },
           "404": {
             "description": "Invalid project or zone ID was provided."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/zone/{zoneId}/kfs": {
+      "get": {
+        "description": "Returns the IDs of the KFS storage volumes existing in the project in the specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "kfs"
+        ],
+        "operationId": "GetProjectZoneKfs",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to query.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the zone to query.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of KFS storage volume IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid project or zone ID was provided."
+          }
+        }
+      },
+      "post": {
+        "description": "Creates a new KFS storage volume in specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "kfs"
+        ],
+        "operationId": "CreateProjectZoneKfs",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated project.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "the ID of the associated zone.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "the ID of the associated NFS storage (optional, zone's default if unspecified).",
+            "name": "nfsId",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether or not to send a notification email at resource creation.",
+            "name": "notify",
+            "in": "query"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KFS"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created KFS storage volume object.",
+            "schema": {
+              "$ref": "#/definitions/KFS"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid project or zone ID was provided."
+          },
+          "409": {
+            "description": "KFS storage volume already exists."
+          },
+          "500": {
+            "description": "Unable to create the KFS storage volume."
           }
         }
       }
@@ -7574,6 +8534,121 @@ func init() {
           },
           "404": {
             "description": "Invalid zone ID was provided."
+          }
+        }
+      }
+    },
+    "/zone/{zoneId}/nfs": {
+      "get": {
+        "description": "Returns the IDs of the NFS storages existing in the zone.",
+        "tags": [
+          "zone",
+          "nfs"
+        ],
+        "operationId": "GetZoneNfsStorages",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the zone to query.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of NFS storage IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid zone ID was provided."
+          }
+        }
+      },
+      "post": {
+        "description": "Creates a new NFS storage.",
+        "tags": [
+          "zone",
+          "nfs"
+        ],
+        "operationId": "CreateNfsStorage",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated zone.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageNFS"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created NFS storage object.",
+            "schema": {
+              "$ref": "#/definitions/StorageNFS"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid zone ID was provided."
+          },
+          "409": {
+            "description": "NFS storage already exists."
+          },
+          "500": {
+            "description": "Unable to create NFS storage."
+          }
+        }
+      }
+    },
+    "/zone/{zoneId}/nfs/{nfsId}/default": {
+      "put": {
+        "description": "Set a zone's default NFS storage.",
+        "tags": [
+          "zone",
+          "nfs"
+        ],
+        "operationId": "UpdateZoneDefaultNfsStorage",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the zone to update.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the NFS storage to set as default.",
+            "name": "nfsId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated zone resources object."
+          },
+          "404": {
+            "description": "Invalid zone ID or NFS storage ID was provided."
+          },
+          "500": {
+            "description": "Unable to assign the requested NFS storage as zone's default."
           }
         }
       }
@@ -8182,6 +9257,59 @@ func init() {
         }
       }
     },
+    "KFS": {
+      "description": "Kowabunga File System (KFS) provides an elastic NFS-like remote storage volume.",
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "access": {
+          "description": "The KFS storage volume access type.",
+          "type": "string",
+          "default": "RW",
+          "enum": [
+            "RO",
+            "RW"
+          ]
+        },
+        "description": {
+          "description": "The KFS storage volume description.",
+          "type": "string"
+        },
+        "endpoint": {
+          "description": "The KFS endpoint FQDN (read-only).",
+          "type": "string"
+        },
+        "id": {
+          "description": "The KFS ID (auto-generated).",
+          "type": "string"
+        },
+        "name": {
+          "description": "The KFS storage volume name.",
+          "type": "string"
+        },
+        "protocols": {
+          "description": "The KFS storage volume's NFS protocol versions to be supported.",
+          "type": "array",
+          "default": [
+            3,
+            4
+          ],
+          "items": {
+            "type": "integer",
+            "enum": [
+              3,
+              4
+            ]
+          }
+        },
+        "size": {
+          "description": "The KFS storage volume bytes used (read-only).",
+          "type": "integer"
+        }
+      }
+    },
     "Metadata": {
       "description": "A key/value metadata.",
       "type": "object",
@@ -8346,6 +9474,48 @@ func init() {
         "name": {
           "description": "The region name.",
           "type": "string"
+        }
+      }
+    },
+    "StorageNFS": {
+      "type": "object",
+      "required": [
+        "name",
+        "endpoint"
+      ],
+      "properties": {
+        "backends": {
+          "description": "List of NFS Ganesha API server IP addresses.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "description": "The NFS storage description.",
+          "type": "string"
+        },
+        "endpoint": {
+          "description": "The associated NFS endpoint FQDN.",
+          "type": "string"
+        },
+        "fs": {
+          "description": "The underlying associated CephFS volume name.",
+          "type": "string",
+          "default": "nfs"
+        },
+        "id": {
+          "description": "The NFS storage ID (auto-generated).",
+          "type": "string"
+        },
+        "name": {
+          "description": "The NFS storage name.",
+          "type": "string"
+        },
+        "port": {
+          "description": "NFS Ganesha API server port (default 54934).",
+          "type": "integer",
+          "default": 54934
         }
       }
     },

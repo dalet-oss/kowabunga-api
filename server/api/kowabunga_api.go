@@ -23,7 +23,9 @@ import (
 	"github.com/dalet-oss/kowabunga-api/server/api/host"
 	"github.com/dalet-oss/kowabunga-api/server/api/instance"
 	"github.com/dalet-oss/kowabunga-api/server/api/kce"
+	"github.com/dalet-oss/kowabunga-api/server/api/kfs"
 	"github.com/dalet-oss/kowabunga-api/server/api/netgw"
+	"github.com/dalet-oss/kowabunga-api/server/api/nfs"
 	"github.com/dalet-oss/kowabunga-api/server/api/pool"
 	"github.com/dalet-oss/kowabunga-api/server/api/project"
 	"github.com/dalet-oss/kowabunga-api/server/api/record"
@@ -66,6 +68,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		ZoneCreateNetGWHandler: zone.CreateNetGWHandlerFunc(func(params zone.CreateNetGWParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.CreateNetGW has not yet been implemented")
 		}),
+		ZoneCreateNfsStorageHandler: zone.CreateNfsStorageHandlerFunc(func(params zone.CreateNfsStorageParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation zone.CreateNfsStorage has not yet been implemented")
+		}),
 		ZoneCreatePoolHandler: zone.CreatePoolHandlerFunc(func(params zone.CreatePoolParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.CreatePool has not yet been implemented")
 		}),
@@ -80,6 +85,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		ProjectCreateProjectZoneKceHandler: project.CreateProjectZoneKceHandlerFunc(func(params project.CreateProjectZoneKceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.CreateProjectZoneKce has not yet been implemented")
+		}),
+		ProjectCreateProjectZoneKfsHandler: project.CreateProjectZoneKfsHandlerFunc(func(params project.CreateProjectZoneKfsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.CreateProjectZoneKfs has not yet been implemented")
 		}),
 		ProjectCreateProjectZoneVolumeHandler: project.CreateProjectZoneVolumeHandlerFunc(func(params project.CreateProjectZoneVolumeParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.CreateProjectZoneVolume has not yet been implemented")
@@ -114,8 +122,14 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		KceDeleteKCEHandler: kce.DeleteKCEHandlerFunc(func(params kce.DeleteKCEParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation kce.DeleteKCE has not yet been implemented")
 		}),
+		KfsDeleteKFSHandler: kfs.DeleteKFSHandlerFunc(func(params kfs.DeleteKFSParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kfs.DeleteKFS has not yet been implemented")
+		}),
 		NetgwDeleteNetGWHandler: netgw.DeleteNetGWHandlerFunc(func(params netgw.DeleteNetGWParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation netgw.DeleteNetGW has not yet been implemented")
+		}),
+		NfsDeleteNfsStorageHandler: nfs.DeleteNfsStorageHandlerFunc(func(params nfs.DeleteNfsStorageParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation nfs.DeleteNfsStorage has not yet been implemented")
 		}),
 		PoolDeletePoolHandler: pool.DeletePoolHandlerFunc(func(params pool.DeletePoolParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation pool.DeletePool has not yet been implemented")
@@ -156,8 +170,14 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		KceGetAllKCEsHandler: kce.GetAllKCEsHandlerFunc(func(params kce.GetAllKCEsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation kce.GetAllKCEs has not yet been implemented")
 		}),
+		KfsGetAllKFSsHandler: kfs.GetAllKFSsHandlerFunc(func(params kfs.GetAllKFSsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kfs.GetAllKFSs has not yet been implemented")
+		}),
 		NetgwGetAllNetGWsHandler: netgw.GetAllNetGWsHandlerFunc(func(params netgw.GetAllNetGWsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation netgw.GetAllNetGWs has not yet been implemented")
+		}),
+		NfsGetAllNfsStoragesHandler: nfs.GetAllNfsStoragesHandlerFunc(func(params nfs.GetAllNfsStoragesParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation nfs.GetAllNfsStorages has not yet been implemented")
 		}),
 		PoolGetAllPoolsHandler: pool.GetAllPoolsHandlerFunc(func(params pool.GetAllPoolsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation pool.GetAllPools has not yet been implemented")
@@ -207,8 +227,17 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		KceGetKCEStateHandler: kce.GetKCEStateHandlerFunc(func(params kce.GetKCEStateParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation kce.GetKCEState has not yet been implemented")
 		}),
+		KfsGetKFSHandler: kfs.GetKFSHandlerFunc(func(params kfs.GetKFSParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kfs.GetKFS has not yet been implemented")
+		}),
 		NetgwGetNetGWHandler: netgw.GetNetGWHandlerFunc(func(params netgw.GetNetGWParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation netgw.GetNetGW has not yet been implemented")
+		}),
+		NfsGetNfsKfsHandler: nfs.GetNfsKfsHandlerFunc(func(params nfs.GetNfsKfsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation nfs.GetNfsKfs has not yet been implemented")
+		}),
+		NfsGetNfsStorageHandler: nfs.GetNfsStorageHandlerFunc(func(params nfs.GetNfsStorageParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation nfs.GetNfsStorage has not yet been implemented")
 		}),
 		PoolGetPoolHandler: pool.GetPoolHandlerFunc(func(params pool.GetPoolParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation pool.GetPool has not yet been implemented")
@@ -233,6 +262,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		ProjectGetProjectZoneKCEsHandler: project.GetProjectZoneKCEsHandlerFunc(func(params project.GetProjectZoneKCEsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectZoneKCEs has not yet been implemented")
+		}),
+		ProjectGetProjectZoneKfsHandler: project.GetProjectZoneKfsHandlerFunc(func(params project.GetProjectZoneKfsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.GetProjectZoneKfs has not yet been implemented")
 		}),
 		ProjectGetProjectZoneVolumesHandler: project.GetProjectZoneVolumesHandlerFunc(func(params project.GetProjectZoneVolumesParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectZoneVolumes has not yet been implemented")
@@ -269,6 +301,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		ZoneGetZoneNetGWsHandler: zone.GetZoneNetGWsHandlerFunc(func(params zone.GetZoneNetGWsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.GetZoneNetGWs has not yet been implemented")
+		}),
+		ZoneGetZoneNfsStoragesHandler: zone.GetZoneNfsStoragesHandlerFunc(func(params zone.GetZoneNfsStoragesParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation zone.GetZoneNfsStorages has not yet been implemented")
 		}),
 		ZoneGetZonePoolsHandler: zone.GetZonePoolsHandlerFunc(func(params zone.GetZonePoolsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.GetZonePools has not yet been implemented")
@@ -333,8 +368,14 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		KceUpdateKCEHandler: kce.UpdateKCEHandlerFunc(func(params kce.UpdateKCEParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation kce.UpdateKCE has not yet been implemented")
 		}),
+		KfsUpdateKFSHandler: kfs.UpdateKFSHandlerFunc(func(params kfs.UpdateKFSParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kfs.UpdateKFS has not yet been implemented")
+		}),
 		NetgwUpdateNetGWHandler: netgw.UpdateNetGWHandlerFunc(func(params netgw.UpdateNetGWParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation netgw.UpdateNetGW has not yet been implemented")
+		}),
+		NfsUpdateNfsStorageHandler: nfs.UpdateNfsStorageHandlerFunc(func(params nfs.UpdateNfsStorageParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation nfs.UpdateNfsStorage has not yet been implemented")
 		}),
 		PoolUpdatePoolHandler: pool.UpdatePoolHandlerFunc(func(params pool.UpdatePoolParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation pool.UpdatePool has not yet been implemented")
@@ -365,6 +406,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		ZoneUpdateZoneHandler: zone.UpdateZoneHandlerFunc(func(params zone.UpdateZoneParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.UpdateZone has not yet been implemented")
+		}),
+		ZoneUpdateZoneDefaultNfsStorageHandler: zone.UpdateZoneDefaultNfsStorageHandlerFunc(func(params zone.UpdateZoneDefaultNfsStorageParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation zone.UpdateZoneDefaultNfsStorage has not yet been implemented")
 		}),
 		ZoneUpdateZoneDefaultPoolHandler: zone.UpdateZoneDefaultPoolHandlerFunc(func(params zone.UpdateZoneDefaultPoolParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation zone.UpdateZoneDefaultPool has not yet been implemented")
@@ -425,6 +469,8 @@ type KowabungaAPI struct {
 	ZoneCreateHostHandler zone.CreateHostHandler
 	// ZoneCreateNetGWHandler sets the operation handler for the create net g w operation
 	ZoneCreateNetGWHandler zone.CreateNetGWHandler
+	// ZoneCreateNfsStorageHandler sets the operation handler for the create nfs storage operation
+	ZoneCreateNfsStorageHandler zone.CreateNfsStorageHandler
 	// ZoneCreatePoolHandler sets the operation handler for the create pool operation
 	ZoneCreatePoolHandler zone.CreatePoolHandler
 	// ProjectCreateProjectHandler sets the operation handler for the create project operation
@@ -435,6 +481,8 @@ type KowabungaAPI struct {
 	ProjectCreateProjectZoneInstanceHandler project.CreateProjectZoneInstanceHandler
 	// ProjectCreateProjectZoneKceHandler sets the operation handler for the create project zone kce operation
 	ProjectCreateProjectZoneKceHandler project.CreateProjectZoneKceHandler
+	// ProjectCreateProjectZoneKfsHandler sets the operation handler for the create project zone kfs operation
+	ProjectCreateProjectZoneKfsHandler project.CreateProjectZoneKfsHandler
 	// ProjectCreateProjectZoneVolumeHandler sets the operation handler for the create project zone volume operation
 	ProjectCreateProjectZoneVolumeHandler project.CreateProjectZoneVolumeHandler
 	// RegionCreateRegionHandler sets the operation handler for the create region operation
@@ -457,8 +505,12 @@ type KowabungaAPI struct {
 	InstanceDeleteInstanceHandler instance.DeleteInstanceHandler
 	// KceDeleteKCEHandler sets the operation handler for the delete k c e operation
 	KceDeleteKCEHandler kce.DeleteKCEHandler
+	// KfsDeleteKFSHandler sets the operation handler for the delete k f s operation
+	KfsDeleteKFSHandler kfs.DeleteKFSHandler
 	// NetgwDeleteNetGWHandler sets the operation handler for the delete net g w operation
 	NetgwDeleteNetGWHandler netgw.DeleteNetGWHandler
+	// NfsDeleteNfsStorageHandler sets the operation handler for the delete nfs storage operation
+	NfsDeleteNfsStorageHandler nfs.DeleteNfsStorageHandler
 	// PoolDeletePoolHandler sets the operation handler for the delete pool operation
 	PoolDeletePoolHandler pool.DeletePoolHandler
 	// ProjectDeleteProjectHandler sets the operation handler for the delete project operation
@@ -485,8 +537,12 @@ type KowabungaAPI struct {
 	InstanceGetAllInstancesHandler instance.GetAllInstancesHandler
 	// KceGetAllKCEsHandler sets the operation handler for the get all k c es operation
 	KceGetAllKCEsHandler kce.GetAllKCEsHandler
+	// KfsGetAllKFSsHandler sets the operation handler for the get all k f ss operation
+	KfsGetAllKFSsHandler kfs.GetAllKFSsHandler
 	// NetgwGetAllNetGWsHandler sets the operation handler for the get all net g ws operation
 	NetgwGetAllNetGWsHandler netgw.GetAllNetGWsHandler
+	// NfsGetAllNfsStoragesHandler sets the operation handler for the get all nfs storages operation
+	NfsGetAllNfsStoragesHandler nfs.GetAllNfsStoragesHandler
 	// PoolGetAllPoolsHandler sets the operation handler for the get all pools operation
 	PoolGetAllPoolsHandler pool.GetAllPoolsHandler
 	// ProjectGetAllProjectsHandler sets the operation handler for the get all projects operation
@@ -519,8 +575,14 @@ type KowabungaAPI struct {
 	KceGetKCEHandler kce.GetKCEHandler
 	// KceGetKCEStateHandler sets the operation handler for the get k c e state operation
 	KceGetKCEStateHandler kce.GetKCEStateHandler
+	// KfsGetKFSHandler sets the operation handler for the get k f s operation
+	KfsGetKFSHandler kfs.GetKFSHandler
 	// NetgwGetNetGWHandler sets the operation handler for the get net g w operation
 	NetgwGetNetGWHandler netgw.GetNetGWHandler
+	// NfsGetNfsKfsHandler sets the operation handler for the get nfs kfs operation
+	NfsGetNfsKfsHandler nfs.GetNfsKfsHandler
+	// NfsGetNfsStorageHandler sets the operation handler for the get nfs storage operation
+	NfsGetNfsStorageHandler nfs.GetNfsStorageHandler
 	// PoolGetPoolHandler sets the operation handler for the get pool operation
 	PoolGetPoolHandler pool.GetPoolHandler
 	// PoolGetPoolTemplatesHandler sets the operation handler for the get pool templates operation
@@ -537,6 +599,8 @@ type KowabungaAPI struct {
 	ProjectGetProjectZoneInstancesHandler project.GetProjectZoneInstancesHandler
 	// ProjectGetProjectZoneKCEsHandler sets the operation handler for the get project zone k c es operation
 	ProjectGetProjectZoneKCEsHandler project.GetProjectZoneKCEsHandler
+	// ProjectGetProjectZoneKfsHandler sets the operation handler for the get project zone kfs operation
+	ProjectGetProjectZoneKfsHandler project.GetProjectZoneKfsHandler
 	// ProjectGetProjectZoneVolumesHandler sets the operation handler for the get project zone volumes operation
 	ProjectGetProjectZoneVolumesHandler project.GetProjectZoneVolumesHandler
 	// RegionGetRegionHandler sets the operation handler for the get region operation
@@ -561,6 +625,8 @@ type KowabungaAPI struct {
 	ZoneGetZoneHostsHandler zone.GetZoneHostsHandler
 	// ZoneGetZoneNetGWsHandler sets the operation handler for the get zone net g ws operation
 	ZoneGetZoneNetGWsHandler zone.GetZoneNetGWsHandler
+	// ZoneGetZoneNfsStoragesHandler sets the operation handler for the get zone nfs storages operation
+	ZoneGetZoneNfsStoragesHandler zone.GetZoneNfsStoragesHandler
 	// ZoneGetZonePoolsHandler sets the operation handler for the get zone pools operation
 	ZoneGetZonePoolsHandler zone.GetZonePoolsHandler
 	// ZoneGetZoneVNetsHandler sets the operation handler for the get zone v nets operation
@@ -603,8 +669,12 @@ type KowabungaAPI struct {
 	InstanceUpdateInstanceHandler instance.UpdateInstanceHandler
 	// KceUpdateKCEHandler sets the operation handler for the update k c e operation
 	KceUpdateKCEHandler kce.UpdateKCEHandler
+	// KfsUpdateKFSHandler sets the operation handler for the update k f s operation
+	KfsUpdateKFSHandler kfs.UpdateKFSHandler
 	// NetgwUpdateNetGWHandler sets the operation handler for the update net g w operation
 	NetgwUpdateNetGWHandler netgw.UpdateNetGWHandler
+	// NfsUpdateNfsStorageHandler sets the operation handler for the update nfs storage operation
+	NfsUpdateNfsStorageHandler nfs.UpdateNfsStorageHandler
 	// PoolUpdatePoolHandler sets the operation handler for the update pool operation
 	PoolUpdatePoolHandler pool.UpdatePoolHandler
 	// PoolUpdatePoolDefaultTemplateHandler sets the operation handler for the update pool default template operation
@@ -625,6 +695,8 @@ type KowabungaAPI struct {
 	VolumeUpdateVolumeHandler volume.UpdateVolumeHandler
 	// ZoneUpdateZoneHandler sets the operation handler for the update zone operation
 	ZoneUpdateZoneHandler zone.UpdateZoneHandler
+	// ZoneUpdateZoneDefaultNfsStorageHandler sets the operation handler for the update zone default nfs storage operation
+	ZoneUpdateZoneDefaultNfsStorageHandler zone.UpdateZoneDefaultNfsStorageHandler
 	// ZoneUpdateZoneDefaultPoolHandler sets the operation handler for the update zone default pool operation
 	ZoneUpdateZoneDefaultPoolHandler zone.UpdateZoneDefaultPoolHandler
 
@@ -717,6 +789,9 @@ func (o *KowabungaAPI) Validate() error {
 	if o.ZoneCreateNetGWHandler == nil {
 		unregistered = append(unregistered, "zone.CreateNetGWHandler")
 	}
+	if o.ZoneCreateNfsStorageHandler == nil {
+		unregistered = append(unregistered, "zone.CreateNfsStorageHandler")
+	}
 	if o.ZoneCreatePoolHandler == nil {
 		unregistered = append(unregistered, "zone.CreatePoolHandler")
 	}
@@ -731,6 +806,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.ProjectCreateProjectZoneKceHandler == nil {
 		unregistered = append(unregistered, "project.CreateProjectZoneKceHandler")
+	}
+	if o.ProjectCreateProjectZoneKfsHandler == nil {
+		unregistered = append(unregistered, "project.CreateProjectZoneKfsHandler")
 	}
 	if o.ProjectCreateProjectZoneVolumeHandler == nil {
 		unregistered = append(unregistered, "project.CreateProjectZoneVolumeHandler")
@@ -765,8 +843,14 @@ func (o *KowabungaAPI) Validate() error {
 	if o.KceDeleteKCEHandler == nil {
 		unregistered = append(unregistered, "kce.DeleteKCEHandler")
 	}
+	if o.KfsDeleteKFSHandler == nil {
+		unregistered = append(unregistered, "kfs.DeleteKFSHandler")
+	}
 	if o.NetgwDeleteNetGWHandler == nil {
 		unregistered = append(unregistered, "netgw.DeleteNetGWHandler")
+	}
+	if o.NfsDeleteNfsStorageHandler == nil {
+		unregistered = append(unregistered, "nfs.DeleteNfsStorageHandler")
 	}
 	if o.PoolDeletePoolHandler == nil {
 		unregistered = append(unregistered, "pool.DeletePoolHandler")
@@ -807,8 +891,14 @@ func (o *KowabungaAPI) Validate() error {
 	if o.KceGetAllKCEsHandler == nil {
 		unregistered = append(unregistered, "kce.GetAllKCEsHandler")
 	}
+	if o.KfsGetAllKFSsHandler == nil {
+		unregistered = append(unregistered, "kfs.GetAllKFSsHandler")
+	}
 	if o.NetgwGetAllNetGWsHandler == nil {
 		unregistered = append(unregistered, "netgw.GetAllNetGWsHandler")
+	}
+	if o.NfsGetAllNfsStoragesHandler == nil {
+		unregistered = append(unregistered, "nfs.GetAllNfsStoragesHandler")
 	}
 	if o.PoolGetAllPoolsHandler == nil {
 		unregistered = append(unregistered, "pool.GetAllPoolsHandler")
@@ -858,8 +948,17 @@ func (o *KowabungaAPI) Validate() error {
 	if o.KceGetKCEStateHandler == nil {
 		unregistered = append(unregistered, "kce.GetKCEStateHandler")
 	}
+	if o.KfsGetKFSHandler == nil {
+		unregistered = append(unregistered, "kfs.GetKFSHandler")
+	}
 	if o.NetgwGetNetGWHandler == nil {
 		unregistered = append(unregistered, "netgw.GetNetGWHandler")
+	}
+	if o.NfsGetNfsKfsHandler == nil {
+		unregistered = append(unregistered, "nfs.GetNfsKfsHandler")
+	}
+	if o.NfsGetNfsStorageHandler == nil {
+		unregistered = append(unregistered, "nfs.GetNfsStorageHandler")
 	}
 	if o.PoolGetPoolHandler == nil {
 		unregistered = append(unregistered, "pool.GetPoolHandler")
@@ -884,6 +983,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.ProjectGetProjectZoneKCEsHandler == nil {
 		unregistered = append(unregistered, "project.GetProjectZoneKCEsHandler")
+	}
+	if o.ProjectGetProjectZoneKfsHandler == nil {
+		unregistered = append(unregistered, "project.GetProjectZoneKfsHandler")
 	}
 	if o.ProjectGetProjectZoneVolumesHandler == nil {
 		unregistered = append(unregistered, "project.GetProjectZoneVolumesHandler")
@@ -920,6 +1022,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.ZoneGetZoneNetGWsHandler == nil {
 		unregistered = append(unregistered, "zone.GetZoneNetGWsHandler")
+	}
+	if o.ZoneGetZoneNfsStoragesHandler == nil {
+		unregistered = append(unregistered, "zone.GetZoneNfsStoragesHandler")
 	}
 	if o.ZoneGetZonePoolsHandler == nil {
 		unregistered = append(unregistered, "zone.GetZonePoolsHandler")
@@ -984,8 +1089,14 @@ func (o *KowabungaAPI) Validate() error {
 	if o.KceUpdateKCEHandler == nil {
 		unregistered = append(unregistered, "kce.UpdateKCEHandler")
 	}
+	if o.KfsUpdateKFSHandler == nil {
+		unregistered = append(unregistered, "kfs.UpdateKFSHandler")
+	}
 	if o.NetgwUpdateNetGWHandler == nil {
 		unregistered = append(unregistered, "netgw.UpdateNetGWHandler")
+	}
+	if o.NfsUpdateNfsStorageHandler == nil {
+		unregistered = append(unregistered, "nfs.UpdateNfsStorageHandler")
 	}
 	if o.PoolUpdatePoolHandler == nil {
 		unregistered = append(unregistered, "pool.UpdatePoolHandler")
@@ -1016,6 +1127,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.ZoneUpdateZoneHandler == nil {
 		unregistered = append(unregistered, "zone.UpdateZoneHandler")
+	}
+	if o.ZoneUpdateZoneDefaultNfsStorageHandler == nil {
+		unregistered = append(unregistered, "zone.UpdateZoneDefaultNfsStorageHandler")
 	}
 	if o.ZoneUpdateZoneDefaultPoolHandler == nil {
 		unregistered = append(unregistered, "zone.UpdateZoneDefaultPoolHandler")
@@ -1132,6 +1246,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
+	o.handlers["POST"]["/zone/{zoneId}/nfs"] = zone.NewCreateNfsStorage(o.context, o.ZoneCreateNfsStorageHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
 	o.handlers["POST"]["/zone/{zoneId}/pool"] = zone.NewCreatePool(o.context, o.ZoneCreatePoolHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
@@ -1149,6 +1267,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
 	o.handlers["POST"]["/project/{projectId}/zone/{zoneId}/kce"] = project.NewCreateProjectZoneKce(o.context, o.ProjectCreateProjectZoneKceHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/project/{projectId}/zone/{zoneId}/kfs"] = project.NewCreateProjectZoneKfs(o.context, o.ProjectCreateProjectZoneKfsHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
@@ -1196,7 +1318,15 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
+	o.handlers["DELETE"]["/kfs/{kfsId}"] = kfs.NewDeleteKFS(o.context, o.KfsDeleteKFSHandler)
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
 	o.handlers["DELETE"]["/netgw/{netgwId}"] = netgw.NewDeleteNetGW(o.context, o.NetgwDeleteNetGWHandler)
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
+	o.handlers["DELETE"]["/nfs/{nfsId}"] = nfs.NewDeleteNfsStorage(o.context, o.NfsDeleteNfsStorageHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
@@ -1252,7 +1382,15 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
+	o.handlers["GET"]["/kfs"] = kfs.NewGetAllKFSs(o.context, o.KfsGetAllKFSsHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
 	o.handlers["GET"]["/netgw"] = netgw.NewGetAllNetGWs(o.context, o.NetgwGetAllNetGWsHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/nfs"] = nfs.NewGetAllNfsStorages(o.context, o.NfsGetAllNfsStoragesHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -1320,7 +1458,19 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
+	o.handlers["GET"]["/kfs/{kfsId}"] = kfs.NewGetKFS(o.context, o.KfsGetKFSHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
 	o.handlers["GET"]["/netgw/{netgwId}"] = netgw.NewGetNetGW(o.context, o.NetgwGetNetGWHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/nfs/{nfsId}/kfs"] = nfs.NewGetNfsKfs(o.context, o.NfsGetNfsKfsHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/nfs/{nfsId}"] = nfs.NewGetNfsStorage(o.context, o.NfsGetNfsStorageHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -1353,6 +1503,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/project/{projectId}/zone/{zoneId}/kces"] = project.NewGetProjectZoneKCEs(o.context, o.ProjectGetProjectZoneKCEsHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/project/{projectId}/zone/{zoneId}/kfs"] = project.NewGetProjectZoneKfs(o.context, o.ProjectGetProjectZoneKfsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -1401,6 +1555,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/zone/{zoneId}/netgws"] = zone.NewGetZoneNetGWs(o.context, o.ZoneGetZoneNetGWsHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/zone/{zoneId}/nfs"] = zone.NewGetZoneNfsStorages(o.context, o.ZoneGetZoneNfsStoragesHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -1488,7 +1646,15 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
+	o.handlers["PUT"]["/kfs/{kfsId}"] = kfs.NewUpdateKFS(o.context, o.KfsUpdateKFSHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
 	o.handlers["PUT"]["/netgw/{netgwId}"] = netgw.NewUpdateNetGW(o.context, o.NetgwUpdateNetGWHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/nfs/{nfsId}"] = nfs.NewUpdateNfsStorage(o.context, o.NfsUpdateNfsStorageHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
@@ -1529,6 +1695,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
 	o.handlers["PUT"]["/zone/{zoneId}"] = zone.NewUpdateZone(o.context, o.ZoneUpdateZoneHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/zone/{zoneId}/nfs/{nfsId}/default"] = zone.NewUpdateZoneDefaultNfsStorage(o.context, o.ZoneUpdateZoneDefaultNfsStorageHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
