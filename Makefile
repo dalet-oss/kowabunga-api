@@ -1,10 +1,12 @@
 BIN_DIR = bin
+NODE_DIR = node_modules
 CMD_DIR = cmd
 DOCS_DIR = docs
 MODELS_DIR = models
 
 API_CLIENT_DIR = client
 API_CLIENT_NAME = kowabunga
+API_CLIENT_ANGULAR = typescript-angular
 
 API_SERVER_DIR = server
 API_SERVER_OPERATIONS = api
@@ -20,6 +22,7 @@ SWAGGER_YAML_TO_HTML = $(BIN_DIR)/swagger-yaml-to-html
 OPENAPI_DIR = openapi
 OPENAPI_DEFINITION = swagger.generated.yml
 OPENAPI_DOC = $(DOCS_DIR)/index.html
+OPENAPI_GENERATOR = $(NODE_DIR)/.bin/openapi-generator-cli
 
 V = 0
 Q = $(if $(filter 1,$V),,@)
@@ -55,6 +58,11 @@ get-goswagger: bin; $(info $(M) downloading go-swagger…) @
 	$Q test -x $(GOSWAGGER) || curl -sL https://github.com/go-swagger/go-swagger/releases/download/$(GOSWAGGER_VERSION)/swagger_$(shell uname -s | tr '[:upper:]' '[:lower:]')_$(shell uname -m | sed 's%x86_64%amd64%') --output $(GOSWAGGER)
 	$Q chmod a+x $(GOSWAGGER)
 
+.PHONY: get-openapi-generator
+get-openapi-generator: ;$(info $(M) installing openapi-generator-cli…) @
+	$Q test -x $(OPENAPI_GENERATOR) || yarn add @openapitools/openapi-generator-cli
+	$Q chmod a+x $(OPENAPI_GENERATOR)
+
 .PHONY: swagger-validate
 swagger-validate: get-goswagger ; $(info $(M) validate Swagger API syntax…) @
 	$Q $(GOSWAGGER) validate -q $(OPENAPI_DEFINITION)
@@ -63,9 +71,13 @@ swagger-validate: get-goswagger ; $(info $(M) validate Swagger API syntax…) @
 swagger-generate-server: get-goswagger ; $(info $(M) generate Swagger REST API Server Go code…) @
 	$Q $(GOSWAGGER) generate server -q -f $(OPENAPI_DEFINITION) -s $(API_SERVER_DIR) -a $(API_SERVER_OPERATIONS) --exclude-main --name=$(API_SERVER_NAME)
 
-.PHONY: swagger-generate-client
-swagger-generate-client: get-goswagger ; $(info $(M) generate Swagger Client Go code…) @
+.PHONY: swagger-generate-client-go
+swagger-generate-client-go: get-goswagger ; $(info $(M) generate Swagger Client Go code…) @
 	$Q $(GOSWAGGER) generate client -q -f $(OPENAPI_DEFINITION) -c $(API_CLIENT_DIR) --name=$(API_CLIENT_NAME)
+
+.PHONY: swagger-generate-client-angular
+swagger-generate-client-angular: get-openapi-generator ; $(info $(M) generate Swagger Client TypeScript Angular code…) @
+	$Q $(OPENAPI_GENERATOR) generate -g typescript-angular --package-name $(API_CLIENT_NAME) -i $(OPENAPI_DEFINITION) -o $(API_CLIENT_ANGULAR)
 
 .PHONY: get-swagger-yaml-to-html
 get-swagger-yaml-to-html: bin; $(info $(M) downloading swagger-yaml-to-html…) @
@@ -78,15 +90,20 @@ swagger-doc: get-swagger-yaml-to-html ; $(info $(M) generate Swagger API HTML do
 	$Q python3 $(SWAGGER_YAML_TO_HTML) < $(OPENAPI_DEFINITION) > $(OPENAPI_DOC)
 
 .PHONY: api
-api: swagger-specs swagger-validate swagger-doc swagger-generate-server swagger-generate-client ; @
+api: swagger-specs swagger-validate swagger-doc swagger-generate-server swagger-generate-client-go swagger-generate-client-angular ; @
 
 .PHONY: clean
 clean: ; $(info $(M) cleaning…)	@
 	$Q rm -rf $(BIN_DIR)
+	$Q rm -rf $(NODE_DIR)
 	$Q rm -rf $(CMD_DIR)
 	$Q rm -rf $(OPENAPI_DOC)
 	$Q rm -rf $(OPENAPI_DEFINITION)
 	$Q rm -rf $(DOCS_DIR)
 	$Q rm -rf $(MODELS_DIR)
 	$Q rm -rf $(API_CLIENT_DIR)
+	$Q rm -rf $(API_CLIENT_ANGULAR)
 	$Q rm -rf $(API_SERVER_DIR)
+	$Q rm -rf package.json
+	$Q rm -rf yarn.lock
+

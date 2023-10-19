@@ -18,3 +18,9 @@
 bin/
 cmd/
 swagger.generated.yml
+node_modules/
+package.json
+yarn.lock
+typescript-angular/.gitignore
+typescript-angular/.openapi-generator
+typescript-angular/.openapi-generator-ignore
