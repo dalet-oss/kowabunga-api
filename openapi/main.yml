@@ -3,7 +3,7 @@ consumes:
 info:
   description: Kvm Orchestrator With A BUNch of Goods Added
   title: Kowabunga
-  version: 0.8.0
+  version: 0.8.1
 produces:
 - application/json
 schemes:
