@@ -48,6 +48,8 @@ type ClientService interface {
 
 	GetProject(params *GetProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectOK, error)
 
+	GetProjectCost(params *GetProjectCostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectCostOK, error)
+
 	GetProjectDNSRecords(params *GetProjectDNSRecordsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectDNSRecordsOK, error)
 
 	GetProjectUsage(params *GetProjectUsageParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectUsageOK, error)
@@ -413,6 +415,45 @@ func (a *Client) GetProject(params *GetProjectParams, authInfo runtime.ClientAut
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetProjectCost Returns the current cost for the project.
+*/
+func (a *Client) GetProjectCost(params *GetProjectCostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectCostOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetProjectCostParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetProjectCost",
+		Method:             "GET",
+		PathPattern:        "/project/{projectId}/cost",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetProjectCostReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetProjectCostOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetProjectCost: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

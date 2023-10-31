@@ -1854,6 +1854,35 @@ func init() {
         }
       }
     },
+    "/project/{projectId}/cost": {
+      "get": {
+        "description": "Returns the current cost for the project.",
+        "tags": [
+          "project"
+        ],
+        "operationId": "GetProjectCost",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to query.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the project cost object.",
+            "schema": {
+              "$ref": "#/definitions/Cost"
+            }
+          },
+          "404": {
+            "description": "Invalid project ID was provided."
+          }
+        }
+      }
+    },
     "/project/{projectId}/record": {
       "post": {
         "description": "Creates a new DNS record in specified project.",
@@ -6703,6 +6732,35 @@ func init() {
           },
           "500": {
             "description": "Unable to delete project."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/cost": {
+      "get": {
+        "description": "Returns the current cost for the project.",
+        "tags": [
+          "project"
+        ],
+        "operationId": "GetProjectCost",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to query.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the project cost object.",
+            "schema": {
+              "$ref": "#/definitions/Cost"
+            }
+          },
+          "404": {
+            "description": "Invalid project ID was provided."
           }
         }
       }

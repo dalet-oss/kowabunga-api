@@ -77,7 +77,7 @@ swagger-generate-client-go: get-goswagger ; $(info $(M) generate Swagger Client 
 
 .PHONY: swagger-generate-client-angular
 swagger-generate-client-angular: get-openapi-generator ; $(info $(M) generate Swagger Client TypeScript Angular code…) @
-	$Q $(OPENAPI_GENERATOR) generate -g typescript-angular --package-name $(API_CLIENT_NAME) -i $(OPENAPI_DEFINITION) -o $(API_CLIENT_ANGULAR)
+	$Q $(OPENAPI_GENERATOR) generate -g typescript-angular --package-name $(API_CLIENT_NAME) -i $(OPENAPI_DEFINITION) -o $(API_CLIENT_ANGULAR) --additional-properties=ngVersion=14.2.12
 
 .PHONY: get-swagger-yaml-to-html
 get-swagger-yaml-to-html: bin; $(info $(M) downloading swagger-yaml-to-html…) @

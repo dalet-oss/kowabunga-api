@@ -386,6 +386,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation project.GetProject has not yet been implemented")
 		})
 	}
+	if api.ProjectGetProjectCostHandler == nil {
+		api.ProjectGetProjectCostHandler = project.GetProjectCostHandlerFunc(func(params project.GetProjectCostParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.GetProjectCost has not yet been implemented")
+		})
+	}
 	if api.ProjectGetProjectDNSRecordsHandler == nil {
 		api.ProjectGetProjectDNSRecordsHandler = project.GetProjectDNSRecordsHandlerFunc(func(params project.GetProjectDNSRecordsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectDNSRecords has not yet been implemented")

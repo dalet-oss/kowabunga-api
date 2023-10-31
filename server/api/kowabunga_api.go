@@ -251,6 +251,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		ProjectGetProjectHandler: project.GetProjectHandlerFunc(func(params project.GetProjectParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProject has not yet been implemented")
 		}),
+		ProjectGetProjectCostHandler: project.GetProjectCostHandlerFunc(func(params project.GetProjectCostParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.GetProjectCost has not yet been implemented")
+		}),
 		ProjectGetProjectDNSRecordsHandler: project.GetProjectDNSRecordsHandlerFunc(func(params project.GetProjectDNSRecordsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectDNSRecords has not yet been implemented")
 		}),
@@ -591,6 +594,8 @@ type KowabungaAPI struct {
 	PoolGetPoolVolumesHandler pool.GetPoolVolumesHandler
 	// ProjectGetProjectHandler sets the operation handler for the get project operation
 	ProjectGetProjectHandler project.GetProjectHandler
+	// ProjectGetProjectCostHandler sets the operation handler for the get project cost operation
+	ProjectGetProjectCostHandler project.GetProjectCostHandler
 	// ProjectGetProjectDNSRecordsHandler sets the operation handler for the get project Dns records operation
 	ProjectGetProjectDNSRecordsHandler project.GetProjectDNSRecordsHandler
 	// ProjectGetProjectUsageHandler sets the operation handler for the get project usage operation
@@ -971,6 +976,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.ProjectGetProjectHandler == nil {
 		unregistered = append(unregistered, "project.GetProjectHandler")
+	}
+	if o.ProjectGetProjectCostHandler == nil {
+		unregistered = append(unregistered, "project.GetProjectCostHandler")
 	}
 	if o.ProjectGetProjectDNSRecordsHandler == nil {
 		unregistered = append(unregistered, "project.GetProjectDNSRecordsHandler")
@@ -1487,6 +1495,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/project/{projectId}"] = project.NewGetProject(o.context, o.ProjectGetProjectHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/project/{projectId}/cost"] = project.NewGetProjectCost(o.context, o.ProjectGetProjectCostHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
