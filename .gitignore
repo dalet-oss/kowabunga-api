@@ -20,6 +20,7 @@ cmd/
 swagger.generated.yml
 node_modules/
 package.json
+package-lock.json
 yarn.lock
 typescript-angular/.gitignore
 typescript-angular/.openapi-generator
