@@ -11,18 +11,10 @@
  */
 
 
-export interface Zone { 
+export interface InstanceRemoteAccess { 
     /**
-     * The zone ID (auto-generated).
+     * the remote access URL
      */
-    id?: string;
-    /**
-     * The zone name.
-     */
-    name: string;
-    /**
-     * The zone description.
-     */
-    description?: string;
+    url: string;
 }
 

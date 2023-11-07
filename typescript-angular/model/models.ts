@@ -6,6 +6,7 @@ export * from './hostCaps';
 export * from './hostCapsCpu';
 export * from './hostTls';
 export * from './instance';
+export * from './instanceRemoteAccess';
 export * from './instanceState';
 export * from './ipRange';
 export * from './kCE';

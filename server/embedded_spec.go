@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.8.1"
+    "version": "0.8.2"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -447,6 +447,35 @@ func init() {
           },
           "500": {
             "description": "Unable to delete instance."
+          }
+        }
+      }
+    },
+    "/instance/{instanceId}/connect": {
+      "get": {
+        "description": "Returns virtual machine remote access URL.",
+        "tags": [
+          "instance"
+        ],
+        "operationId": "GetInstanceRemoteConnection",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual machine to query.",
+            "name": "instanceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the virtual machine remote connection URL.",
+            "schema": {
+              "$ref": "#/definitions/InstanceRemoteAccess"
+            }
+          },
+          "404": {
+            "description": "Invalid instance ID was provided."
           }
         }
       }
@@ -4292,6 +4321,18 @@ func init() {
         }
       }
     },
+    "InstanceRemoteAccess": {
+      "type": "object",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "description": "the remote access URL",
+          "type": "string"
+        }
+      }
+    },
     "InstanceState": {
       "type": "object",
       "required": [
@@ -4913,7 +4954,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.8.1"
+    "version": "0.8.2"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -5329,6 +5370,35 @@ func init() {
           },
           "500": {
             "description": "Unable to delete instance."
+          }
+        }
+      }
+    },
+    "/instance/{instanceId}/connect": {
+      "get": {
+        "description": "Returns virtual machine remote access URL.",
+        "tags": [
+          "instance"
+        ],
+        "operationId": "GetInstanceRemoteConnection",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual machine to query.",
+            "name": "instanceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the virtual machine remote connection URL.",
+            "schema": {
+              "$ref": "#/definitions/InstanceRemoteAccess"
+            }
+          },
+          "404": {
+            "description": "Invalid instance ID was provided."
           }
         }
       }
@@ -9232,6 +9302,18 @@ func init() {
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "InstanceRemoteAccess": {
+      "type": "object",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "description": "the remote access URL",
+          "type": "string"
         }
       }
     },

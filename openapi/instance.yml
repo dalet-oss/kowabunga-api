@@ -40,6 +40,14 @@ definitions:
         type: string
         description: the reason of the state of the VM
 
+  InstanceRemoteAccess:
+    type: object
+    required: [url]
+    properties:
+      url:
+        type: string
+        description: the remote access URL
+
 paths:
   /instance:
     get:
@@ -282,3 +290,23 @@ paths:
           description: Invalid instance ID was provided.
         500:
           description: An error occurred when trying to shut down the virtual machine.
+
+  /instance/{instanceId}/connect:
+    get:
+      tags:
+        - instance
+      operationId: GetInstanceRemoteConnection
+      description: Returns virtual machine remote access URL.
+      parameters:
+        - name: instanceId
+          in: path
+          type: string
+          required: true
+          description: The ID of the virtual machine to query.
+      responses:
+        200:
+          description: Returns the virtual machine remote connection URL.
+          schema:
+            $ref: '#/definitions/InstanceRemoteAccess'
+        404:
+          description: Invalid instance ID was provided.
