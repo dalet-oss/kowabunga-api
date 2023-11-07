@@ -1,0 +1,117 @@
+definitions:
+  KGW:
+    type: object
+    description: Kowabunga Network Gateway is a network gateway used for your internet inbound and outbound traffic
+    properties:
+      id:
+        type: string
+        description: The Kowabunga network gateway ID (auto-generated).
+      description:
+        type: string
+        description: The KGW description.
+      public_ip:
+        type: string
+        description: The Kowabunga network gateway public IP
+      nats:
+        type: array
+        items:
+          description: A list of provided or generated public/private IPs mapping
+          type: object
+          properties:
+            private_ip:
+              type: string
+              description: Target Private IP. Leave blank for a new generated one
+            public_ip:
+              type: string
+              description: Leave blank to use the default generated public IP
+            ports:
+              type: array
+              items:
+                type: integer
+                format: uint16
+                description: Port being forwarded from the public to the private IP
+
+
+
+paths:
+  /kgw:
+    get:
+      tags:
+        - kgw
+      operationId: GetAllKgw
+      description: Returns the IDs of registered KGW
+      responses:
+        200:
+          description: Returns an array for KGW IDs
+          schema:
+            type: array
+            items:
+              type: string 
+
+  /kgw/{kgwId}:
+    get:
+      tags:
+        - kgw
+      operationId: GetKgw
+      description: Returns the descirption of the registered KGW
+      parameters:
+        - name: kgwId
+          in: path
+          type: string
+          required: true
+          description: The ID of the KGW
+      responses:
+        200:
+          description: Returns an array for KGW IDs
+          schema:
+            $ref: '#/definitions/KGW'
+        404:
+          description: Invalid KGW ID was provided.
+    put:
+      tags:
+        - kgw
+      operationId: UpdateKGW
+      description: Updates a KGW virtual machine configuration.
+      parameters:
+        - name: kgwId
+          in: path
+          type: string
+          required: true
+          description: The ID of the KGW.
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/KGW'
+      responses:
+        200:
+          description: Returns the updated KGW.
+          schema:
+            $ref: '#/definitions/KGW'
+        400:
+          description: Bad parameters were provided.
+        404:
+          description: Invalid KGW ID was provided.
+        500:
+          description: Unable to update the KCE virtual machine.
+        507:
+          description: Available public IPs not available
+    delete:
+      tags:
+        - kgw
+      operationId: DeleteKGW
+      description: Deletes an existing KGW gateway.
+      parameters:
+        - name: kgwId
+          in: path
+          type: string
+          required: true
+          description: The ID of the KGW to delete.
+      responses:
+        200:
+          description: The KGW has been successfully removed.
+        404:
+          description: Invalid KGW ID was provided.
+        409:
+          description: The KGW is not empty or still being referenced.
+        500:
+          description: Unable to delete KGW.

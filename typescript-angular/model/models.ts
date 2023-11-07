@@ -10,6 +10,8 @@ export * from './instanceState';
 export * from './ipRange';
 export * from './kCE';
 export * from './kFS';
+export * from './kGW';
+export * from './kGWNatsInner';
 export * from './metadata';
 export * from './netGW';
 export * from './project';
