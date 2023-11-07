@@ -4179,6 +4179,16 @@ func init() {
           "description": "The host name.",
           "type": "string"
         },
+        "overcommit_cpu_ratio": {
+          "description": "The host CPU resource over-commit ratio. Overcommitting CPU resources for VMs means allocating more virtual CPUs (vCPUs) to the virtual machines (VMs) than the physical cores available on the host. This can help optimize the utilization of the host CPU and increase the density of VMs per host.",
+          "type": "integer",
+          "default": 3
+        },
+        "overcommit_memory_ratio": {
+          "description": "The host memory resource over-commit ratio. Memory overcommitment is a concept in computing that covers the assignment of more memory to virtual computing devices (or processes) than the physical machine they are hosted, or running on, actually has.",
+          "type": "integer",
+          "default": 2
+        },
         "port": {
           "description": "The host libvirt's port.",
           "type": "integer"
@@ -9101,6 +9111,16 @@ func init() {
         "name": {
           "description": "The host name.",
           "type": "string"
+        },
+        "overcommit_cpu_ratio": {
+          "description": "The host CPU resource over-commit ratio. Overcommitting CPU resources for VMs means allocating more virtual CPUs (vCPUs) to the virtual machines (VMs) than the physical cores available on the host. This can help optimize the utilization of the host CPU and increase the density of VMs per host.",
+          "type": "integer",
+          "default": 3
+        },
+        "overcommit_memory_ratio": {
+          "description": "The host memory resource over-commit ratio. Memory overcommitment is a concept in computing that covers the assignment of more memory to virtual computing devices (or processes) than the physical machine they are hosted, or running on, actually has.",
+          "type": "integer",
+          "default": 2
         },
         "port": {
           "description": "The host libvirt's port.",
