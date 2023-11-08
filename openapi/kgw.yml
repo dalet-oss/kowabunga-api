@@ -10,8 +10,13 @@ definitions:
         type: string
         description: The KGW description.
       public_ip:
+        type: array
+        items:
+          type: string
+          description: The Kowabunga network gateway public IPs
+      private_ip:
         type: string
-        description: The Kowabunga network gateway public IP
+        description: The Kowabunga network gateway private IP
       nats:
         type: array
         items:
@@ -21,17 +26,15 @@ definitions:
             private_ip:
               type: string
               description: Target Private IP. Leave blank for a new generated one
-            public_ip:
-              type: string
-              description: Leave blank to use the default generated public IP
             ports:
               type: array
               items:
                 type: integer
                 format: uint16
                 description: Port being forwarded from the public to the private IP
-
-
+            public_ip:
+              type: string
+              description: Public IP from created Adapter. Leave empty to use the default Public IP
 
 paths:
   /kgw:

@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.8.1"
+    "version": "0.8.5"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -447,6 +447,35 @@ func init() {
           },
           "500": {
             "description": "Unable to delete instance."
+          }
+        }
+      }
+    },
+    "/instance/{instanceId}/connect": {
+      "get": {
+        "description": "Returns virtual machine remote access URL.",
+        "tags": [
+          "instance"
+        ],
+        "operationId": "GetInstanceRemoteConnection",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual machine to query.",
+            "name": "instanceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the virtual machine remote connection URL.",
+            "schema": {
+              "$ref": "#/definitions/InstanceRemoteAccess"
+            }
+          },
+          "404": {
+            "description": "Invalid instance ID was provided."
           }
         }
       }
@@ -4327,6 +4356,16 @@ func init() {
           "description": "The host name.",
           "type": "string"
         },
+        "overcommit_cpu_ratio": {
+          "description": "The host CPU resource over-commit ratio. Overcommitting CPU resources for VMs means allocating more virtual CPUs (vCPUs) to the virtual machines (VMs) than the physical cores available on the host. This can help optimize the utilization of the host CPU and increase the density of VMs per host.",
+          "type": "integer",
+          "default": 3
+        },
+        "overcommit_memory_ratio": {
+          "description": "The host memory resource over-commit ratio. Memory overcommitment is a concept in computing that covers the assignment of more memory to virtual computing devices (or processes) than the physical machine they are hosted, or running on, actually has.",
+          "type": "integer",
+          "default": 2
+        },
         "port": {
           "description": "The host libvirt's port.",
           "type": "integer"
@@ -4466,6 +4505,18 @@ func init() {
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "InstanceRemoteAccess": {
+      "type": "object",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "description": "the remote access URL",
+          "type": "string"
         }
       }
     },
@@ -4633,15 +4684,22 @@ func init() {
                 "type": "string"
               },
               "public_ip": {
-                "description": "Leave blank to use the default generated public IP",
+                "description": "Public IP from created Adapter. Leave empty to use the default Public IP",
                 "type": "string"
               }
             }
           }
         },
-        "public_ip": {
-          "description": "The Kowabunga network gateway public IP",
+        "private_ip": {
+          "description": "The Kowabunga network gateway private IP",
           "type": "string"
+        },
+        "public_ip": {
+          "type": "array",
+          "items": {
+            "description": "The Kowabunga network gateway public IPs",
+            "type": "string"
+          }
         }
       }
     },
@@ -5133,7 +5191,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.8.1"
+    "version": "0.8.5"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -5549,6 +5607,35 @@ func init() {
           },
           "500": {
             "description": "Unable to delete instance."
+          }
+        }
+      }
+    },
+    "/instance/{instanceId}/connect": {
+      "get": {
+        "description": "Returns virtual machine remote access URL.",
+        "tags": [
+          "instance"
+        ],
+        "operationId": "GetInstanceRemoteConnection",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the virtual machine to query.",
+            "name": "instanceId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the virtual machine remote connection URL.",
+            "schema": {
+              "$ref": "#/definitions/InstanceRemoteAccess"
+            }
+          },
+          "404": {
+            "description": "Invalid instance ID was provided."
           }
         }
       }
@@ -9429,6 +9516,16 @@ func init() {
           "description": "The host name.",
           "type": "string"
         },
+        "overcommit_cpu_ratio": {
+          "description": "The host CPU resource over-commit ratio. Overcommitting CPU resources for VMs means allocating more virtual CPUs (vCPUs) to the virtual machines (VMs) than the physical cores available on the host. This can help optimize the utilization of the host CPU and increase the density of VMs per host.",
+          "type": "integer",
+          "default": 3
+        },
+        "overcommit_memory_ratio": {
+          "description": "The host memory resource over-commit ratio. Memory overcommitment is a concept in computing that covers the assignment of more memory to virtual computing devices (or processes) than the physical machine they are hosted, or running on, actually has.",
+          "type": "integer",
+          "default": 2
+        },
         "port": {
           "description": "The host libvirt's port.",
           "type": "integer"
@@ -9632,6 +9729,18 @@ func init() {
         }
       }
     },
+    "InstanceRemoteAccess": {
+      "type": "object",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "description": "the remote access URL",
+          "type": "string"
+        }
+      }
+    },
     "InstanceState": {
       "type": "object",
       "required": [
@@ -9783,9 +9892,16 @@ func init() {
             "$ref": "#/definitions/KGWNatsItems0"
           }
         },
-        "public_ip": {
-          "description": "The Kowabunga network gateway public IP",
+        "private_ip": {
+          "description": "The Kowabunga network gateway private IP",
           "type": "string"
+        },
+        "public_ip": {
+          "type": "array",
+          "items": {
+            "description": "The Kowabunga network gateway public IPs",
+            "type": "string"
+          }
         }
       }
     },
@@ -9806,7 +9922,7 @@ func init() {
           "type": "string"
         },
         "public_ip": {
-          "description": "Leave blank to use the default generated public IP",
+          "description": "Public IP from created Adapter. Leave empty to use the default Public IP",
           "type": "string"
         }
       }

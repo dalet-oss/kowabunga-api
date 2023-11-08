@@ -105,5 +105,6 @@ clean: ; $(info $(M) cleaning…)	@
 	$Q rm -rf $(API_CLIENT_ANGULAR)
 	$Q rm -rf $(API_SERVER_DIR)
 	$Q rm -rf package.json
+	$Q rm -rf package-lock.json
 	$Q rm -rf yarn.lock
 

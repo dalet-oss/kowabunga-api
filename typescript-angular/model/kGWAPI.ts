@@ -15,7 +15,7 @@ import { KGWNatsInner } from './kGWNatsInner';
 /**
  * Kowabunga Network Gateway is a network gateway used for your internet inbound and outbound traffic
  */
-export interface KGW { 
+export interface KGWAPI { 
     /**
      * The Kowabunga network gateway ID (auto-generated).
      */
@@ -24,7 +24,10 @@ export interface KGW {
      * The KGW description.
      */
     description?: string;
-    public_ip?: Array<string>;
+    /**
+     * Number of public IP to create
+     */
+    public_ip_count?: number;
     /**
      * The Kowabunga network gateway private IP
      */

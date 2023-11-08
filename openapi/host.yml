@@ -40,6 +40,14 @@ definitions:
         type: object
         description: Cost associated to the host.
         $ref: '#/definitions/Cost'
+      overcommit_cpu_ratio:
+        type: integer
+        description: The host CPU resource over-commit ratio. Overcommitting CPU resources for VMs means allocating more virtual CPUs (vCPUs) to the virtual machines (VMs) than the physical cores available on the host. This can help optimize the utilization of the host CPU and increase the density of VMs per host.
+        default: 3
+      overcommit_memory_ratio:
+        type: integer
+        description: The host memory resource over-commit ratio. Memory overcommitment is a concept in computing that covers the assignment of more memory to virtual computing devices (or processes) than the physical machine they are hosted, or running on, actually has.
+        default: 2
 
   HostCaps:
     type: object

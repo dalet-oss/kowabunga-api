@@ -28,8 +28,11 @@ type KGW struct {
 	// nats
 	Nats []*KGWNatsItems0 `json:"nats"`
 
-	// The Kowabunga network gateway public IP
-	PublicIP string `json:"public_ip,omitempty"`
+	// The Kowabunga network gateway private IP
+	PrivateIP string `json:"private_ip,omitempty"`
+
+	// public ip
+	PublicIP []string `json:"public_ip"`
 }
 
 // Validate validates this k g w
@@ -140,7 +143,7 @@ type KGWNatsItems0 struct {
 	// Target Private IP. Leave blank for a new generated one
 	PrivateIP string `json:"private_ip,omitempty"`
 
-	// Leave blank to use the default generated public IP
+	// Public IP from created Adapter. Leave empty to use the default Public IP
 	PublicIP string `json:"public_ip,omitempty"`
 }
 

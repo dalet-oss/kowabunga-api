@@ -228,6 +228,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		InstanceGetInstanceHandler: instance.GetInstanceHandlerFunc(func(params instance.GetInstanceParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.GetInstance has not yet been implemented")
 		}),
+		InstanceGetInstanceRemoteConnectionHandler: instance.GetInstanceRemoteConnectionHandlerFunc(func(params instance.GetInstanceRemoteConnectionParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation instance.GetInstanceRemoteConnection has not yet been implemented")
+		}),
 		InstanceGetInstanceStateHandler: instance.GetInstanceStateHandlerFunc(func(params instance.GetInstanceStateParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.GetInstanceState has not yet been implemented")
 		}),
@@ -594,6 +597,8 @@ type KowabungaAPI struct {
 	HostGetHostInstancesHandler host.GetHostInstancesHandler
 	// InstanceGetInstanceHandler sets the operation handler for the get instance operation
 	InstanceGetInstanceHandler instance.GetInstanceHandler
+	// InstanceGetInstanceRemoteConnectionHandler sets the operation handler for the get instance remote connection operation
+	InstanceGetInstanceRemoteConnectionHandler instance.GetInstanceRemoteConnectionHandler
 	// InstanceGetInstanceStateHandler sets the operation handler for the get instance state operation
 	InstanceGetInstanceStateHandler instance.GetInstanceStateHandler
 	// KceGetKCEHandler sets the operation handler for the get k c e operation
@@ -978,6 +983,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.InstanceGetInstanceHandler == nil {
 		unregistered = append(unregistered, "instance.GetInstanceHandler")
+	}
+	if o.InstanceGetInstanceRemoteConnectionHandler == nil {
+		unregistered = append(unregistered, "instance.GetInstanceRemoteConnectionHandler")
 	}
 	if o.InstanceGetInstanceStateHandler == nil {
 		unregistered = append(unregistered, "instance.GetInstanceStateHandler")
@@ -1504,6 +1512,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/instance/{instanceId}"] = instance.NewGetInstance(o.context, o.InstanceGetInstanceHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/instance/{instanceId}/connect"] = instance.NewGetInstanceRemoteConnection(o.context, o.InstanceGetInstanceRemoteConnectionHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}

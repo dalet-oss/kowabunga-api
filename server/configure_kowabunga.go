@@ -347,6 +347,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation instance.GetInstance has not yet been implemented")
 		})
 	}
+	if api.InstanceGetInstanceRemoteConnectionHandler == nil {
+		api.InstanceGetInstanceRemoteConnectionHandler = instance.GetInstanceRemoteConnectionHandlerFunc(func(params instance.GetInstanceRemoteConnectionParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation instance.GetInstanceRemoteConnection has not yet been implemented")
+		})
+	}
 	if api.InstanceGetInstanceStateHandler == nil {
 		api.InstanceGetInstanceStateHandler = instance.GetInstanceStateHandlerFunc(func(params instance.GetInstanceStateParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation instance.GetInstanceState has not yet been implemented")

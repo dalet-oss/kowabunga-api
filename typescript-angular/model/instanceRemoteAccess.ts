@@ -11,17 +11,10 @@
  */
 
 
-/**
- * A key/value metadata.
- */
-export interface Cost { 
+export interface InstanceRemoteAccess { 
     /**
-     * The unit price information.
+     * the remote access URL
      */
-    price: number;
-    /**
-     * The associated currency.
-     */
-    currency: string;
+    url: string;
 }
 
