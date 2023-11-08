@@ -1,110 +1,43 @@
+.DEFAULT_GOAL := all
+
 BIN_DIR = bin
-NODE_DIR = node_modules
-CMD_DIR = cmd
 DOCS_DIR = docs
-MODELS_DIR = models
+SDK_DIR = sdk
 
-API_CLIENT_DIR = client
-API_CLIENT_NAME = kowabunga
-API_CLIENT_ANGULAR = typescript-angular
-
-API_SERVER_DIR = server
-API_SERVER_OPERATIONS = api
-API_SERVER_NAME = kowabunga
-
-YQ = $(BIN_DIR)/yq
-YQ_VERSION = v4.34.1
-
-GOSWAGGER = $(BIN_DIR)/goswagger
-GOSWAGGER_VERSION = v0.30.5
-SWAGGER_YAML_TO_HTML = $(BIN_DIR)/swagger-yaml-to-html
-
-OPENAPI_DIR = openapi
-OPENAPI_DEFINITION = swagger.generated.yml
-OPENAPI_DOC = $(DOCS_DIR)/index.html
-OPENAPI_GENERATOR = $(NODE_DIR)/.bin/openapi-generator-cli
+include Make.api.mk
+include Make.go.mk
+include Make.typescript.mk
 
 V = 0
 Q = $(if $(filter 1,$V),,@)
 M = $(shell printf "\033[34;1m▶\033[0m")
 
+ifeq ($(V), 1)
+  OUT = ""
+else
+  OUT = ">/dev/null"
+endif
+
 .PHONY: all
-all: pre api post ; @
+all: pre sdk post ; @
 	$Q echo "done"
 
 .PHONY: pre
-pre: ; $(info $(M) cleaning up auto-generated code from Git…) @
-	$Q git rm -rf --quiet $(DOCS_DIR) $(MODELS_DIR) $(API_CLIENT_DIR) $(API_SERVER_DIR) || true
+pre: ; $(info $(M) [Git] cleaning up auto-generated code…) @
+	$Q git rm -rf --quiet $(DOCS_DIR) $(SDK_DIR) || true
 
 .PHONY: post
-post: ; $(info $(M) adding auto-generated code to Git…) @
-	$Q git add $(DOCS_DIR) $(MODELS_DIR) $(API_CLIENT_DIR) $(API_SERVER_DIR)
+post: ; $(info $(M) [Git] adding auto-generated code…) @
+	$Q git add $(DOCS_DIR) $(SDK_DIR)
 
 .PHONY: bin
-bin: ; $(info $(M) create local bin directory) @
+bin: ; $(info $(M) [Misc] create local bin directory) @
 	$Q mkdir -p $(BIN_DIR)
 
-.PHONY: get-yq
-get-yq: bin; $(info $(M) downloading yq…) @
-	$Q test -x $(YQ) || curl -sL https://github.com/mikefarah/yq/releases/download/$(YQ_VERSION)/yq_$(shell uname -s | tr '[:upper:]' '[:lower:]')_$(shell uname -m | sed 's%x86_64%amd64%') --output $(YQ)
-	$Q chmod a+x $(YQ)
-
-.PHONY: swagger-specs
-swagger-specs: get-yq ; $(info $(M) merge Swagger API fragments…) @
-	$Q $(YQ) ea '. as $$item ireduce ({}; . * $$item )' $(OPENAPI_DIR)/*.yml > $(OPENAPI_DEFINITION)
-
-.PHONY: get-goswagger
-get-goswagger: bin; $(info $(M) downloading go-swagger…) @
-	$Q test -x $(GOSWAGGER) || curl -sL https://github.com/go-swagger/go-swagger/releases/download/$(GOSWAGGER_VERSION)/swagger_$(shell uname -s | tr '[:upper:]' '[:lower:]')_$(shell uname -m | sed 's%x86_64%amd64%') --output $(GOSWAGGER)
-	$Q chmod a+x $(GOSWAGGER)
-
-.PHONY: get-openapi-generator
-get-openapi-generator: ;$(info $(M) installing openapi-generator-cli…) @
-	$Q test -x $(OPENAPI_GENERATOR) || yarn add @openapitools/openapi-generator-cli
-	$Q chmod a+x $(OPENAPI_GENERATOR)
-
-.PHONY: swagger-validate
-swagger-validate: get-goswagger ; $(info $(M) validate Swagger API syntax…) @
-	$Q $(GOSWAGGER) validate -q $(OPENAPI_DEFINITION)
-
-.PHONY: swagger-generate-server
-swagger-generate-server: get-goswagger ; $(info $(M) generate Swagger REST API Server Go code…) @
-	$Q $(GOSWAGGER) generate server -q -f $(OPENAPI_DEFINITION) -s $(API_SERVER_DIR) -a $(API_SERVER_OPERATIONS) --exclude-main --name=$(API_SERVER_NAME)
-
-.PHONY: swagger-generate-client-go
-swagger-generate-client-go: get-goswagger ; $(info $(M) generate Swagger Client Go code…) @
-	$Q $(GOSWAGGER) generate client -q -f $(OPENAPI_DEFINITION) -c $(API_CLIENT_DIR) --name=$(API_CLIENT_NAME)
-
-.PHONY: swagger-generate-client-angular
-swagger-generate-client-angular: get-openapi-generator ; $(info $(M) generate Swagger Client TypeScript Angular code…) @
-	$Q $(OPENAPI_GENERATOR) generate -g typescript-angular --package-name $(API_CLIENT_NAME) -i $(OPENAPI_DEFINITION) -o $(API_CLIENT_ANGULAR) --additional-properties=ngVersion=14.2.12
-
-.PHONY: get-swagger-yaml-to-html
-get-swagger-yaml-to-html: bin; $(info $(M) downloading swagger-yaml-to-html…) @
-	$Q test -x $(SWAGGER_YAML_TO_HTML) || curl -sL https://raw.githubusercontent.com/yousan/swagger-yaml-to-html/master/swagger-yaml-to-html.py --output $(SWAGGER_YAML_TO_HTML)
-	$Q chmod a+x $(SWAGGER_YAML_TO_HTML)
-
-.PHONY: swagger-doc
-swagger-doc: get-swagger-yaml-to-html ; $(info $(M) generate Swagger API HTML documentation…) @
-	$Q mkdir -p $(shell dirname $(OPENAPI_DOC))
-	$Q python3 $(SWAGGER_YAML_TO_HTML) < $(OPENAPI_DEFINITION) > $(OPENAPI_DOC)
-
-.PHONY: api
-api: swagger-specs swagger-validate swagger-doc swagger-generate-server swagger-generate-client-go swagger-generate-client-angular ; @
+.PHONY: sdk
+sdk: api go-sdk typescript-sdk; @
 
 .PHONY: clean
-clean: ; $(info $(M) cleaning…)	@
+clean: clean-api clean-go clean-typescript ; $(info $(M) cleaning…) @
 	$Q rm -rf $(BIN_DIR)
-	$Q rm -rf $(NODE_DIR)
-	$Q rm -rf $(CMD_DIR)
-	$Q rm -rf $(OPENAPI_DOC)
-	$Q rm -rf $(OPENAPI_DEFINITION)
-	$Q rm -rf $(DOCS_DIR)
-	$Q rm -rf $(MODELS_DIR)
-	$Q rm -rf $(API_CLIENT_DIR)
-	$Q rm -rf $(API_CLIENT_ANGULAR)
-	$Q rm -rf $(API_SERVER_DIR)
-	$Q rm -rf package.json
-	$Q rm -rf package-lock.json
-	$Q rm -rf yarn.lock
-
+	$Q rm -rf $(SDK_DIR)
