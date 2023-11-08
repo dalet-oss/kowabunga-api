@@ -24,14 +24,20 @@ type Host struct {
 	// Required: true
 	Address *string `json:"address"`
 
-	// Cost associated to the host.
+	// Global cost associated to the host (deprecated, will be removed).
 	Cost *Cost `json:"cost,omitempty"`
+
+	// Cost associated to the host's CPU resources.
+	CPUCost *Cost `json:"cpu_cost,omitempty"`
 
 	// The host description.
 	Description string `json:"description,omitempty"`
 
 	// The host ID (auto-generated).
 	ID string `json:"id,omitempty"`
+
+	// Cost associated to the host's memory resources.
+	MemoryCost *Cost `json:"memory_cost,omitempty"`
 
 	// The host name.
 	// Required: true
@@ -64,6 +70,14 @@ func (m *Host) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCost(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCPUCost(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMemoryCost(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -105,6 +119,44 @@ func (m *Host) validateCost(formats strfmt.Registry) error {
 				return ve.ValidateName("cost")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("cost")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Host) validateCPUCost(formats strfmt.Registry) error {
+	if swag.IsZero(m.CPUCost) { // not required
+		return nil
+	}
+
+	if m.CPUCost != nil {
+		if err := m.CPUCost.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("cpu_cost")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("cpu_cost")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Host) validateMemoryCost(formats strfmt.Registry) error {
+	if swag.IsZero(m.MemoryCost) { // not required
+		return nil
+	}
+
+	if m.MemoryCost != nil {
+		if err := m.MemoryCost.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("memory_cost")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("memory_cost")
 			}
 			return err
 		}
@@ -192,6 +244,14 @@ func (m *Host) ContextValidate(ctx context.Context, formats strfmt.Registry) err
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateCPUCost(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateMemoryCost(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateTLS(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -215,6 +275,48 @@ func (m *Host) contextValidateCost(ctx context.Context, formats strfmt.Registry)
 				return ve.ValidateName("cost")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("cost")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Host) contextValidateCPUCost(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.CPUCost != nil {
+
+		if swag.IsZero(m.CPUCost) { // not required
+			return nil
+		}
+
+		if err := m.CPUCost.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("cpu_cost")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("cpu_cost")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Host) contextValidateMemoryCost(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.MemoryCost != nil {
+
+		if swag.IsZero(m.MemoryCost) { // not required
+			return nil
+		}
+
+		if err := m.MemoryCost.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("memory_cost")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("memory_cost")
 			}
 			return err
 		}

@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.9.0"
+    "version": "0.9.1"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -4163,7 +4163,12 @@ func init() {
           "type": "string"
         },
         "cost": {
-          "description": "Cost associated to the host.",
+          "description": "Global cost associated to the host (deprecated, will be removed).",
+          "type": "object",
+          "$ref": "#/definitions/Cost"
+        },
+        "cpu_cost": {
+          "description": "Cost associated to the host's CPU resources.",
           "type": "object",
           "$ref": "#/definitions/Cost"
         },
@@ -4174,6 +4179,11 @@ func init() {
         "id": {
           "description": "The host ID (auto-generated).",
           "type": "string"
+        },
+        "memory_cost": {
+          "description": "Cost associated to the host's memory resources.",
+          "type": "object",
+          "$ref": "#/definitions/Cost"
         },
         "name": {
           "description": "The host name.",
@@ -4964,7 +4974,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.9.0"
+    "version": "0.9.1"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -9096,7 +9106,12 @@ func init() {
           "type": "string"
         },
         "cost": {
-          "description": "Cost associated to the host.",
+          "description": "Global cost associated to the host (deprecated, will be removed).",
+          "type": "object",
+          "$ref": "#/definitions/Cost"
+        },
+        "cpu_cost": {
+          "description": "Cost associated to the host's CPU resources.",
           "type": "object",
           "$ref": "#/definitions/Cost"
         },
@@ -9107,6 +9122,11 @@ func init() {
         "id": {
           "description": "The host ID (auto-generated).",
           "type": "string"
+        },
+        "memory_cost": {
+          "description": "Cost associated to the host's memory resources.",
+          "type": "object",
+          "$ref": "#/definitions/Cost"
         },
         "name": {
           "description": "The host name.",
