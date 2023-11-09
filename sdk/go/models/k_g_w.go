@@ -26,7 +26,7 @@ type KGW struct {
 	ID string `json:"id,omitempty"`
 
 	// nats
-	Nats []*KGWNatsItems0 `json:"nats"`
+	Nats []*KGWNat `json:"nats"`
 
 	// The Kowabunga network gateway private IP (read only)
 	PrivateIP string `json:"private_ip,omitempty"`
@@ -125,49 +125,6 @@ func (m *KGW) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *KGW) UnmarshalBinary(b []byte) error {
 	var res KGW
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-
-// KGWNatsItems0 A list of provided or generated public/private IPs mapping
-//
-// swagger:model KGWNatsItems0
-type KGWNatsItems0 struct {
-
-	// ports
-	Ports []uint16 `json:"ports"`
-
-	// Target Private IP. Leave blank for a new generated one
-	PrivateIP string `json:"private_ip,omitempty"`
-
-	// Public IP from created Adapter. Leave empty to use the default Public IP
-	PublicIP string `json:"public_ip,omitempty"`
-}
-
-// Validate validates this k g w nats items0
-func (m *KGWNatsItems0) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this k g w nats items0 based on context it is used
-func (m *KGWNatsItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *KGWNatsItems0) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *KGWNatsItems0) UnmarshalBinary(b []byte) error {
-	var res KGWNatsItems0
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

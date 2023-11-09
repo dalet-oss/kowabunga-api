@@ -9,7 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { KGWNatsInner } from './kGWNatsInner';
+import { KGWNat } from './kGWNat';
 
 
 /**
@@ -32,6 +32,6 @@ export interface KGW {
      * The Kowabunga network gateway private IP (read only)
      */
     private_ip?: string;
-    nats?: Array<KGWNatsInner>;
+    nats?: Array<KGWNat>;
 }
 

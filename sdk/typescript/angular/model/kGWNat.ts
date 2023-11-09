@@ -12,17 +12,17 @@
 
 
 /**
- * A list of provided or generated public/private IPs mapping
+ * KGW Nat definition
  */
-export interface KGWNatsInner { 
+export interface KGWNat { 
     /**
      * Target Private IP. Leave blank for a new generated one
      */
     private_ip?: string;
-    ports?: Array<number>;
     /**
      * Public IP from created Adapter. Leave empty to use the default Public IP
      */
     public_ip?: string;
+    ports?: Array<number>;
 }
 

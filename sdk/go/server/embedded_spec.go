@@ -4682,26 +4682,7 @@ func init() {
             "ports"
           ],
           "items": {
-            "description": "A list of provided or generated public/private IPs mapping",
-            "type": "object",
-            "properties": {
-              "ports": {
-                "type": "array",
-                "items": {
-                  "description": "Port being forwarded from the public to the private IP",
-                  "type": "integer",
-                  "format": "uint16"
-                }
-              },
-              "private_ip": {
-                "description": "Target Private IP. Leave blank for a new generated one",
-                "type": "string"
-              },
-              "public_ip": {
-                "description": "Public IP from created Adapter. Leave empty to use the default Public IP",
-                "type": "string"
-              }
-            }
+            "$ref": "#/definitions/KGWNat"
           }
         },
         "private_ip": {
@@ -4710,6 +4691,28 @@ func init() {
         },
         "public_ip": {
           "description": "The Kowabunga network gateway public IPs (read only)",
+          "type": "string"
+        }
+      }
+    },
+    "KGWNat": {
+      "description": "KGW Nat definition",
+      "type": "object",
+      "properties": {
+        "ports": {
+          "type": "array",
+          "items": {
+            "description": "Port being forwarded from the public to the private IP",
+            "type": "integer",
+            "format": "uint16"
+          }
+        },
+        "private_ip": {
+          "description": "Target Private IP. Leave blank for a new generated one",
+          "type": "string"
+        },
+        "public_ip": {
+          "description": "Public IP from created Adapter. Leave empty to use the default Public IP",
           "type": "string"
         }
       }
@@ -9914,7 +9917,7 @@ func init() {
             "ports"
           ],
           "items": {
-            "$ref": "#/definitions/KGWNatsItems0"
+            "$ref": "#/definitions/KGWNat"
           }
         },
         "private_ip": {
@@ -9927,8 +9930,8 @@ func init() {
         }
       }
     },
-    "KGWNatsItems0": {
-      "description": "A list of provided or generated public/private IPs mapping",
+    "KGWNat": {
+      "description": "KGW Nat definition",
       "type": "object",
       "properties": {
         "ports": {

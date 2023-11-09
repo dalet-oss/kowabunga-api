@@ -19,21 +19,23 @@ definitions:
         type: array
         required: [private_ip, ports]
         items:
-          description: A list of provided or generated public/private IPs mapping
-          type: object
-          properties:
-            private_ip:
-              type: string
-              description: Target Private IP. Leave blank for a new generated one
-            ports:
-              type: array
-              items:
-                type: integer
-                format: uint16
-                description: Port being forwarded from the public to the private IP
-            public_ip:
-              type: string
-              description: Public IP from created Adapter. Leave empty to use the default Public IP
+          $ref:  '#/definitions/KGWNat'
+  KGWNat:
+    type: object
+    description: KGW Nat definition
+    properties:
+      private_ip:
+        type: string
+        description: Target Private IP. Leave blank for a new generated one
+      public_ip:
+        type: string
+        description: Public IP from created Adapter. Leave empty to use the default Public IP
+      ports:
+        type: array
+        items:
+          type: integer
+          format: uint16
+          description: Port being forwarded from the public to the private IP
 
 paths:
   /kgw:
