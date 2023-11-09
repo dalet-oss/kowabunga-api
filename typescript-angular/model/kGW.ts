@@ -24,9 +24,12 @@ export interface KGW {
      * The KGW description.
      */
     description?: string;
-    public_ip?: Array<string>;
     /**
-     * The Kowabunga network gateway private IP
+     * The Kowabunga network gateway public IPs (read only)
+     */
+    public_ip?: string;
+    /**
+     * The Kowabunga network gateway private IP (read only)
      */
     private_ip?: string;
     nats?: Array<KGWNatsInner>;

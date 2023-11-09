@@ -4667,6 +4667,10 @@ func init() {
         },
         "nats": {
           "type": "array",
+          "required": [
+            "private_ip",
+            "ports"
+          ],
           "items": {
             "description": "A list of provided or generated public/private IPs mapping",
             "type": "object",
@@ -4691,15 +4695,12 @@ func init() {
           }
         },
         "private_ip": {
-          "description": "The Kowabunga network gateway private IP",
+          "description": "The Kowabunga network gateway private IP (read only)",
           "type": "string"
         },
         "public_ip": {
-          "type": "array",
-          "items": {
-            "description": "The Kowabunga network gateway public IPs",
-            "type": "string"
-          }
+          "description": "The Kowabunga network gateway public IPs (read only)",
+          "type": "string"
         }
       }
     },
@@ -9888,20 +9889,21 @@ func init() {
         },
         "nats": {
           "type": "array",
+          "required": [
+            "private_ip",
+            "ports"
+          ],
           "items": {
             "$ref": "#/definitions/KGWNatsItems0"
           }
         },
         "private_ip": {
-          "description": "The Kowabunga network gateway private IP",
+          "description": "The Kowabunga network gateway private IP (read only)",
           "type": "string"
         },
         "public_ip": {
-          "type": "array",
-          "items": {
-            "description": "The Kowabunga network gateway public IPs",
-            "type": "string"
-          }
+          "description": "The Kowabunga network gateway public IPs (read only)",
+          "type": "string"
         }
       }
     },

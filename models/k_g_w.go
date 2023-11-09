@@ -28,11 +28,11 @@ type KGW struct {
 	// nats
 	Nats []*KGWNatsItems0 `json:"nats"`
 
-	// The Kowabunga network gateway private IP
+	// The Kowabunga network gateway private IP (read only)
 	PrivateIP string `json:"private_ip,omitempty"`
 
-	// public ip
-	PublicIP []string `json:"public_ip"`
+	// The Kowabunga network gateway public IPs (read only)
+	PublicIP string `json:"public_ip,omitempty"`
 }
 
 // Validate validates this k g w
