@@ -38,7 +38,15 @@ definitions:
             description: The TLS certificate of authority.
       cost:
         type: object
-        description: Cost associated to the host.
+        description: Global cost associated to the host (deprecated, will be removed).
+        $ref: '#/definitions/Cost'
+      cpu_cost:
+        type: object
+        description: Cost associated to the host's CPU resources.
+        $ref: '#/definitions/Cost'
+      memory_cost:
+        type: object
+        description: Cost associated to the host's memory resources.
         $ref: '#/definitions/Cost'
       overcommit_cpu_ratio:
         type: integer

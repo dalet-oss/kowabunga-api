@@ -22,6 +22,9 @@ node_modules/
 package.json
 package-lock.json
 yarn.lock
-typescript-angular/.gitignore
-typescript-angular/.openapi-generator
-typescript-angular/.openapi-generator-ignore
+yarn-error.log
+sdk/typescript/angular/.gitignore
+sdk/typescript/angular/.openapi-generator
+sdk/typescript/angular/.openapi-generator-ignore
+sdk/typescript/angular/git_push.sh
+
