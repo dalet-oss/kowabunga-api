@@ -282,6 +282,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		ProjectGetProjectZoneKCEsHandler: project.GetProjectZoneKCEsHandlerFunc(func(params project.GetProjectZoneKCEsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectZoneKCEs has not yet been implemented")
 		}),
+		ProjectGetProjectZoneKGWsHandler: project.GetProjectZoneKGWsHandlerFunc(func(params project.GetProjectZoneKGWsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.GetProjectZoneKGWs has not yet been implemented")
+		}),
 		ProjectGetProjectZoneKfsHandler: project.GetProjectZoneKfsHandlerFunc(func(params project.GetProjectZoneKfsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectZoneKfs has not yet been implemented")
 		}),
@@ -633,6 +636,8 @@ type KowabungaAPI struct {
 	ProjectGetProjectZoneInstancesHandler project.GetProjectZoneInstancesHandler
 	// ProjectGetProjectZoneKCEsHandler sets the operation handler for the get project zone k c es operation
 	ProjectGetProjectZoneKCEsHandler project.GetProjectZoneKCEsHandler
+	// ProjectGetProjectZoneKGWsHandler sets the operation handler for the get project zone k g ws operation
+	ProjectGetProjectZoneKGWsHandler project.GetProjectZoneKGWsHandler
 	// ProjectGetProjectZoneKfsHandler sets the operation handler for the get project zone kfs operation
 	ProjectGetProjectZoneKfsHandler project.GetProjectZoneKfsHandler
 	// ProjectGetProjectZoneVolumesHandler sets the operation handler for the get project zone volumes operation
@@ -1037,6 +1042,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.ProjectGetProjectZoneKCEsHandler == nil {
 		unregistered = append(unregistered, "project.GetProjectZoneKCEsHandler")
+	}
+	if o.ProjectGetProjectZoneKGWsHandler == nil {
+		unregistered = append(unregistered, "project.GetProjectZoneKGWsHandler")
 	}
 	if o.ProjectGetProjectZoneKfsHandler == nil {
 		unregistered = append(unregistered, "project.GetProjectZoneKfsHandler")
@@ -1584,6 +1592,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/project/{projectId}/zone/{zoneId}/kces"] = project.NewGetProjectZoneKCEs(o.context, o.ProjectGetProjectZoneKCEsHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/project/{projectId}/zone/{zoneId}/kgws"] = project.NewGetProjectZoneKGWs(o.context, o.ProjectGetProjectZoneKGWsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}

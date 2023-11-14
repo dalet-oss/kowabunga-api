@@ -2536,6 +2536,47 @@ func init() {
         }
       }
     },
+    "/project/{projectId}/zone/{zoneId}/kgws": {
+      "get": {
+        "description": "Returns the IDs of the KGW existing in the project in the specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "kgw"
+        ],
+        "operationId": "GetProjectZoneKGWs",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to query.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the zone to query.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of KGW virtual machine IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid project or zone ID was provided."
+          }
+        }
+      }
+    },
     "/project/{projectId}/zone/{zoneId}/volume": {
       "post": {
         "description": "Creates a new storage volume in specified zone.",
@@ -7706,6 +7747,47 @@ func init() {
           },
           "500": {
             "description": "Unable to create the KGW."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/zone/{zoneId}/kgws": {
+      "get": {
+        "description": "Returns the IDs of the KGW existing in the project in the specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "kgw"
+        ],
+        "operationId": "GetProjectZoneKGWs",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to query.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the zone to query.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of KGW virtual machine IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid project or zone ID was provided."
           }
         }
       }

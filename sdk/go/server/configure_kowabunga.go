@@ -437,6 +437,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation project.GetProjectZoneKCEs has not yet been implemented")
 		})
 	}
+	if api.ProjectGetProjectZoneKGWsHandler == nil {
+		api.ProjectGetProjectZoneKGWsHandler = project.GetProjectZoneKGWsHandlerFunc(func(params project.GetProjectZoneKGWsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.GetProjectZoneKGWs has not yet been implemented")
+		})
+	}
 	if api.ProjectGetProjectZoneKfsHandler == nil {
 		api.ProjectGetProjectZoneKfsHandler = project.GetProjectZoneKfsHandlerFunc(func(params project.GetProjectZoneKfsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectZoneKfs has not yet been implemented")
