@@ -31,11 +31,8 @@ definitions:
         type: string
         description: Public IP from created Adapter. Leave empty to use the default Public IP
       ports:
-        type: array
-        items:
-          type: integer
-          format: uint16
-          description: Port being forwarded from the public to the private IP
+        type: string
+        description: Ports being forwarded from the public to the private IP. Accept Ranges
 
 paths:
   /kgw:

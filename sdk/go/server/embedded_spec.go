@@ -4741,12 +4741,8 @@ func init() {
       "type": "object",
       "properties": {
         "ports": {
-          "type": "array",
-          "items": {
-            "description": "Port being forwarded from the public to the private IP",
-            "type": "integer",
-            "format": "uint16"
-          }
+          "description": "Ports being forwarded from the public to the private IP. Accept Ranges",
+          "type": "string"
         },
         "private_ip": {
           "description": "Target Private IP. Leave blank for a new generated one",
@@ -10017,12 +10013,8 @@ func init() {
       "type": "object",
       "properties": {
         "ports": {
-          "type": "array",
-          "items": {
-            "description": "Port being forwarded from the public to the private IP",
-            "type": "integer",
-            "format": "uint16"
-          }
+          "description": "Ports being forwarded from the public to the private IP. Accept Ranges",
+          "type": "string"
         },
         "private_ip": {
           "description": "Target Private IP. Leave blank for a new generated one",

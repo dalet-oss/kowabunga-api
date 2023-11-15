@@ -17,8 +17,8 @@ import (
 // swagger:model KGWNat
 type KGWNat struct {
 
-	// ports
-	Ports []uint16 `json:"ports"`
+	// Ports being forwarded from the public to the private IP. Accept Ranges
+	Ports string `json:"ports,omitempty"`
 
 	// Target Private IP. Leave blank for a new generated one
 	PrivateIP string `json:"private_ip,omitempty"`
