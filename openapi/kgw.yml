@@ -17,12 +17,12 @@ definitions:
         description: The Kowabunga network gateway private IP (read only)
       nats:
         type: array
-        required: [private_ip, ports]
         items:
           $ref:  '#/definitions/KGWNat'
   KGWNat:
     type: object
     description: KGW Nat definition
+    required: [private_ip, ports]
     properties:
       private_ip:
         type: string

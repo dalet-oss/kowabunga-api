@@ -4718,10 +4718,6 @@ func init() {
         },
         "nats": {
           "type": "array",
-          "required": [
-            "private_ip",
-            "ports"
-          ],
           "items": {
             "$ref": "#/definitions/KGWNat"
           }
@@ -4739,6 +4735,10 @@ func init() {
     "KGWNat": {
       "description": "KGW Nat definition",
       "type": "object",
+      "required": [
+        "private_ip",
+        "ports"
+      ],
       "properties": {
         "ports": {
           "description": "Ports being forwarded from the public to the private IP. Accept Ranges",
@@ -9990,10 +9990,6 @@ func init() {
         },
         "nats": {
           "type": "array",
-          "required": [
-            "private_ip",
-            "ports"
-          ],
           "items": {
             "$ref": "#/definitions/KGWNat"
           }
@@ -10011,6 +10007,10 @@ func init() {
     "KGWNat": {
       "description": "KGW Nat definition",
       "type": "object",
+      "required": [
+        "private_ip",
+        "ports"
+      ],
       "properties": {
         "ports": {
           "description": "Ports being forwarded from the public to the private IP. Accept Ranges",

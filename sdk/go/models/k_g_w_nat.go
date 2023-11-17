@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // KGWNat KGW Nat definition
@@ -18,10 +20,12 @@ import (
 type KGWNat struct {
 
 	// Ports being forwarded from the public to the private IP. Accept Ranges
-	Ports string `json:"ports,omitempty"`
+	// Required: true
+	Ports *string `json:"ports"`
 
 	// Target Private IP. Leave blank for a new generated one
-	PrivateIP string `json:"private_ip,omitempty"`
+	// Required: true
+	PrivateIP *string `json:"private_ip"`
 
 	// Public IP from created Adapter. Leave empty to use the default Public IP
 	PublicIP string `json:"public_ip,omitempty"`
@@ -29,6 +33,37 @@ type KGWNat struct {
 
 // Validate validates this k g w nat
 func (m *KGWNat) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validatePorts(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePrivateIP(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *KGWNat) validatePorts(formats strfmt.Registry) error {
+
+	if err := validate.Required("ports", "body", m.Ports); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *KGWNat) validatePrivateIP(formats strfmt.Registry) error {
+
+	if err := validate.Required("private_ip", "body", m.PrivateIP); err != nil {
+		return err
+	}
+
 	return nil
 }
 

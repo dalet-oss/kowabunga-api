@@ -18,7 +18,7 @@ export interface KGWNat {
     /**
      * Target Private IP. Leave blank for a new generated one
      */
-    private_ip?: string;
+    private_ip: string;
     /**
      * Public IP from created Adapter. Leave empty to use the default Public IP
      */
@@ -26,6 +26,6 @@ export interface KGWNat {
     /**
      * Ports being forwarded from the public to the private IP. Accept Ranges
      */
-    ports?: string;
+    ports: string;
 }
 
