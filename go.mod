@@ -1,6 +1,6 @@
 module github.com/dalet-oss/kowabunga-api
 
-go 1.18
+go 1.21
 
 require (
 	github.com/go-openapi/errors v0.20.3

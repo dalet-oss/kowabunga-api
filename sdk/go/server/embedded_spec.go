@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.9.2"
+    "version": "0.10.0"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -5242,7 +5242,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.9.2"
+    "version": "0.10.0"
   },
   "basePath": "/api/v1",
   "paths": {
