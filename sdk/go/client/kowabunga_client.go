@@ -15,6 +15,7 @@ import (
 	"github.com/dalet-oss/kowabunga-api/sdk/go/client/instance"
 	"github.com/dalet-oss/kowabunga-api/sdk/go/client/kce"
 	"github.com/dalet-oss/kowabunga-api/sdk/go/client/kfs"
+	"github.com/dalet-oss/kowabunga-api/sdk/go/client/kgw"
 	"github.com/dalet-oss/kowabunga-api/sdk/go/client/netgw"
 	"github.com/dalet-oss/kowabunga-api/sdk/go/client/nfs"
 	"github.com/dalet-oss/kowabunga-api/sdk/go/client/pool"
@@ -75,6 +76,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *Kowabunga 
 	cli.Instance = instance.New(transport, formats)
 	cli.Kce = kce.New(transport, formats)
 	cli.Kfs = kfs.New(transport, formats)
+	cli.Kgw = kgw.New(transport, formats)
 	cli.Netgw = netgw.New(transport, formats)
 	cli.Nfs = nfs.New(transport, formats)
 	cli.Pool = pool.New(transport, formats)
@@ -140,6 +142,8 @@ type Kowabunga struct {
 
 	Kfs kfs.ClientService
 
+	Kgw kgw.ClientService
+
 	Netgw netgw.ClientService
 
 	Nfs nfs.ClientService
@@ -173,6 +177,7 @@ func (c *Kowabunga) SetTransport(transport runtime.ClientTransport) {
 	c.Instance.SetTransport(transport)
 	c.Kce.SetTransport(transport)
 	c.Kfs.SetTransport(transport)
+	c.Kgw.SetTransport(transport)
 	c.Netgw.SetTransport(transport)
 	c.Nfs.SetTransport(transport)
 	c.Pool.SetTransport(transport)

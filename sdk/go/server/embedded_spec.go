@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.9.1"
+    "version": "0.9.2"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -1181,6 +1181,128 @@ func init() {
           },
           "500": {
             "description": "Unable to delete KFS storage volume."
+          }
+        }
+      }
+    },
+    "/kgw": {
+      "get": {
+        "description": "Returns the IDs of registered KGW",
+        "tags": [
+          "kgw"
+        ],
+        "operationId": "GetAllKgw",
+        "responses": {
+          "200": {
+            "description": "Returns an array for KGW IDs",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/kgw/{kgwId}": {
+      "get": {
+        "description": "Returns the descirption of the registered KGW",
+        "tags": [
+          "kgw"
+        ],
+        "operationId": "GetKgw",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KGW",
+            "name": "kgwId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array for KGW IDs",
+            "schema": {
+              "$ref": "#/definitions/KGW"
+            }
+          },
+          "404": {
+            "description": "Invalid KGW ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a KGW virtual machine configuration.",
+        "tags": [
+          "kgw"
+        ],
+        "operationId": "UpdateKGW",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KGW.",
+            "name": "kgwId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/KGW"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated KGW.",
+            "schema": {
+              "$ref": "#/definitions/KGW"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid KGW ID was provided."
+          },
+          "500": {
+            "description": "Unable to update the KCE virtual machine."
+          },
+          "507": {
+            "description": "Available public IPs not available"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing KGW gateway.",
+        "tags": [
+          "kgw"
+        ],
+        "operationId": "DeleteKGW",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KGW to delete.",
+            "name": "kgwId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The KGW has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid KGW ID was provided."
+          },
+          "409": {
+            "description": "The KGW is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete KGW."
           }
         }
       }
@@ -2355,6 +2477,102 @@ func init() {
           },
           "500": {
             "description": "Unable to create the KFS storage volume."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/zone/{zoneId}/kgw": {
+      "post": {
+        "description": "Creates a new KGW in the specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "kgw"
+        ],
+        "operationId": "CreateProjectZoneKgw",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated project.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "the ID of the associated zone.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KGW"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created KGW object.",
+            "schema": {
+              "$ref": "#/definitions/KGW"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid project or zone ID was provided."
+          },
+          "409": {
+            "description": "KGW already exists."
+          },
+          "500": {
+            "description": "Unable to create the KGW."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/zone/{zoneId}/kgws": {
+      "get": {
+        "description": "Returns the IDs of the KGW existing in the project in the specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "kgw"
+        ],
+        "operationId": "GetProjectZoneKGWs",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to query.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the zone to query.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of KGW virtual machine IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid project or zone ID was provided."
           }
         }
       }
@@ -4486,6 +4704,56 @@ func init() {
         }
       }
     },
+    "KGW": {
+      "description": "Kowabunga Network Gateway is a network gateway used for your internet inbound and outbound traffic",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The KGW description.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The Kowabunga network gateway ID (auto-generated).",
+          "type": "string"
+        },
+        "nats": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KGWNat"
+          }
+        },
+        "private_ip": {
+          "description": "The Kowabunga network gateway private IP (read only)",
+          "type": "string"
+        },
+        "public_ip": {
+          "description": "The Kowabunga network gateway public IPs (read only)",
+          "type": "string"
+        }
+      }
+    },
+    "KGWNat": {
+      "description": "KGW Nat definition",
+      "type": "object",
+      "required": [
+        "private_ip",
+        "ports"
+      ],
+      "properties": {
+        "ports": {
+          "description": "Ports being forwarded from the public to the private IP. Accept Ranges",
+          "type": "string"
+        },
+        "private_ip": {
+          "description": "Target Private IP. Leave blank for a new generated one",
+          "type": "string"
+        },
+        "public_ip": {
+          "description": "Public IP from created Adapter. Leave empty to use the default Public IP",
+          "type": "string"
+        }
+      }
+    },
     "Metadata": {
       "description": "A key/value metadata.",
       "type": "object",
@@ -4974,7 +5242,7 @@ func init() {
   "info": {
     "description": "Kvm Orchestrator With A BUNch of Goods Added",
     "title": "Kowabunga",
-    "version": "0.9.1"
+    "version": "0.9.2"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -6124,6 +6392,128 @@ func init() {
           },
           "500": {
             "description": "Unable to delete KFS storage volume."
+          }
+        }
+      }
+    },
+    "/kgw": {
+      "get": {
+        "description": "Returns the IDs of registered KGW",
+        "tags": [
+          "kgw"
+        ],
+        "operationId": "GetAllKgw",
+        "responses": {
+          "200": {
+            "description": "Returns an array for KGW IDs",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/kgw/{kgwId}": {
+      "get": {
+        "description": "Returns the descirption of the registered KGW",
+        "tags": [
+          "kgw"
+        ],
+        "operationId": "GetKgw",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KGW",
+            "name": "kgwId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array for KGW IDs",
+            "schema": {
+              "$ref": "#/definitions/KGW"
+            }
+          },
+          "404": {
+            "description": "Invalid KGW ID was provided."
+          }
+        }
+      },
+      "put": {
+        "description": "Updates a KGW virtual machine configuration.",
+        "tags": [
+          "kgw"
+        ],
+        "operationId": "UpdateKGW",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KGW.",
+            "name": "kgwId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/KGW"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated KGW.",
+            "schema": {
+              "$ref": "#/definitions/KGW"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid KGW ID was provided."
+          },
+          "500": {
+            "description": "Unable to update the KCE virtual machine."
+          },
+          "507": {
+            "description": "Available public IPs not available"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes an existing KGW gateway.",
+        "tags": [
+          "kgw"
+        ],
+        "operationId": "DeleteKGW",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the KGW to delete.",
+            "name": "kgwId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The KGW has been successfully removed."
+          },
+          "404": {
+            "description": "Invalid KGW ID was provided."
+          },
+          "409": {
+            "description": "The KGW is not empty or still being referenced."
+          },
+          "500": {
+            "description": "Unable to delete KGW."
           }
         }
       }
@@ -7298,6 +7688,102 @@ func init() {
           },
           "500": {
             "description": "Unable to create the KFS storage volume."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/zone/{zoneId}/kgw": {
+      "post": {
+        "description": "Creates a new KGW in the specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "kgw"
+        ],
+        "operationId": "CreateProjectZoneKgw",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "the ID of the associated project.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "the ID of the associated zone.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KGW"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the newly created KGW object.",
+            "schema": {
+              "$ref": "#/definitions/KGW"
+            }
+          },
+          "400": {
+            "description": "Bad parameters were provided."
+          },
+          "404": {
+            "description": "Invalid project or zone ID was provided."
+          },
+          "409": {
+            "description": "KGW already exists."
+          },
+          "500": {
+            "description": "Unable to create the KGW."
+          }
+        }
+      }
+    },
+    "/project/{projectId}/zone/{zoneId}/kgws": {
+      "get": {
+        "description": "Returns the IDs of the KGW existing in the project in the specified zone.",
+        "tags": [
+          "project",
+          "zone",
+          "kgw"
+        ],
+        "operationId": "GetProjectZoneKGWs",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The ID of the project to query.",
+            "name": "projectId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The ID of the zone to query.",
+            "name": "zoneId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of KGW virtual machine IDs.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid project or zone ID was provided."
           }
         }
       }
@@ -9487,6 +9973,56 @@ func init() {
         "size": {
           "description": "The KFS storage volume bytes used (read-only).",
           "type": "integer"
+        }
+      }
+    },
+    "KGW": {
+      "description": "Kowabunga Network Gateway is a network gateway used for your internet inbound and outbound traffic",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The KGW description.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The Kowabunga network gateway ID (auto-generated).",
+          "type": "string"
+        },
+        "nats": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KGWNat"
+          }
+        },
+        "private_ip": {
+          "description": "The Kowabunga network gateway private IP (read only)",
+          "type": "string"
+        },
+        "public_ip": {
+          "description": "The Kowabunga network gateway public IPs (read only)",
+          "type": "string"
+        }
+      }
+    },
+    "KGWNat": {
+      "description": "KGW Nat definition",
+      "type": "object",
+      "required": [
+        "private_ip",
+        "ports"
+      ],
+      "properties": {
+        "ports": {
+          "description": "Ports being forwarded from the public to the private IP. Accept Ranges",
+          "type": "string"
+        },
+        "private_ip": {
+          "description": "Target Private IP. Leave blank for a new generated one",
+          "type": "string"
+        },
+        "public_ip": {
+          "description": "Public IP from created Adapter. Leave empty to use the default Public IP",
+          "type": "string"
         }
       }
     },

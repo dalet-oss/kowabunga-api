@@ -590,3 +590,69 @@ paths:
           description: KFS storage volume already exists.
         500:
           description: Unable to create the KFS storage volume.
+
+  /project/{projectId}/zone/{zoneId}/kgw:
+    post:
+      tags:
+        - project
+        - zone
+        - kgw
+      operationId: CreateProjectZoneKgw
+      description: Creates a new KGW in the specified zone.
+      parameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: the ID of the associated project.
+        - name: zoneId
+          in: path
+          type: string
+          required: true
+          description: the ID of the associated zone.
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/KGW'
+      responses:
+        201:
+          description: Returns the newly created KGW object.
+          schema:
+            $ref: '#/definitions/KGW'
+        400:
+          description: Bad parameters were provided.
+        404:
+          description: Invalid project or zone ID was provided.
+        409:
+          description: KGW already exists.
+        500:
+          description: Unable to create the KGW.
+  /project/{projectId}/zone/{zoneId}/kgws:
+    get:
+      tags:
+        - project
+        - zone
+        - kgw
+      operationId: GetProjectZoneKGWs
+      description: Returns the IDs of the KGW existing in the project in the specified zone.
+      parameters:
+        - name: projectId
+          in: path
+          type: string
+          required: true
+          description: The ID of the project to query.
+        - name: zoneId
+          in: path
+          type: string
+          required: true
+          description: The ID of the zone to query.
+      responses:
+        200:
+          description: Returns an array of KGW virtual machine IDs.
+          schema:
+            type: array
+            items:
+              type: string
+        404:
+          description: Invalid project or zone ID was provided.

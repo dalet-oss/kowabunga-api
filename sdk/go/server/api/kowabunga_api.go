@@ -24,6 +24,7 @@ import (
 	"github.com/dalet-oss/kowabunga-api/sdk/go/server/api/instance"
 	"github.com/dalet-oss/kowabunga-api/sdk/go/server/api/kce"
 	"github.com/dalet-oss/kowabunga-api/sdk/go/server/api/kfs"
+	"github.com/dalet-oss/kowabunga-api/sdk/go/server/api/kgw"
 	"github.com/dalet-oss/kowabunga-api/sdk/go/server/api/netgw"
 	"github.com/dalet-oss/kowabunga-api/sdk/go/server/api/nfs"
 	"github.com/dalet-oss/kowabunga-api/sdk/go/server/api/pool"
@@ -89,6 +90,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		ProjectCreateProjectZoneKfsHandler: project.CreateProjectZoneKfsHandlerFunc(func(params project.CreateProjectZoneKfsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.CreateProjectZoneKfs has not yet been implemented")
 		}),
+		ProjectCreateProjectZoneKgwHandler: project.CreateProjectZoneKgwHandlerFunc(func(params project.CreateProjectZoneKgwParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.CreateProjectZoneKgw has not yet been implemented")
+		}),
 		ProjectCreateProjectZoneVolumeHandler: project.CreateProjectZoneVolumeHandlerFunc(func(params project.CreateProjectZoneVolumeParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.CreateProjectZoneVolume has not yet been implemented")
 		}),
@@ -124,6 +128,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		KfsDeleteKFSHandler: kfs.DeleteKFSHandlerFunc(func(params kfs.DeleteKFSParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation kfs.DeleteKFS has not yet been implemented")
+		}),
+		KgwDeleteKGWHandler: kgw.DeleteKGWHandlerFunc(func(params kgw.DeleteKGWParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kgw.DeleteKGW has not yet been implemented")
 		}),
 		NetgwDeleteNetGWHandler: netgw.DeleteNetGWHandlerFunc(func(params netgw.DeleteNetGWParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation netgw.DeleteNetGW has not yet been implemented")
@@ -172,6 +179,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		KfsGetAllKFSsHandler: kfs.GetAllKFSsHandlerFunc(func(params kfs.GetAllKFSsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation kfs.GetAllKFSs has not yet been implemented")
+		}),
+		KgwGetAllKgwHandler: kgw.GetAllKgwHandlerFunc(func(params kgw.GetAllKgwParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kgw.GetAllKgw has not yet been implemented")
 		}),
 		NetgwGetAllNetGWsHandler: netgw.GetAllNetGWsHandlerFunc(func(params netgw.GetAllNetGWsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation netgw.GetAllNetGWs has not yet been implemented")
@@ -233,6 +243,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		KfsGetKFSHandler: kfs.GetKFSHandlerFunc(func(params kfs.GetKFSParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation kfs.GetKFS has not yet been implemented")
 		}),
+		KgwGetKgwHandler: kgw.GetKgwHandlerFunc(func(params kgw.GetKgwParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kgw.GetKgw has not yet been implemented")
+		}),
 		NetgwGetNetGWHandler: netgw.GetNetGWHandlerFunc(func(params netgw.GetNetGWParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation netgw.GetNetGW has not yet been implemented")
 		}),
@@ -268,6 +281,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		ProjectGetProjectZoneKCEsHandler: project.GetProjectZoneKCEsHandlerFunc(func(params project.GetProjectZoneKCEsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectZoneKCEs has not yet been implemented")
+		}),
+		ProjectGetProjectZoneKGWsHandler: project.GetProjectZoneKGWsHandlerFunc(func(params project.GetProjectZoneKGWsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.GetProjectZoneKGWs has not yet been implemented")
 		}),
 		ProjectGetProjectZoneKfsHandler: project.GetProjectZoneKfsHandlerFunc(func(params project.GetProjectZoneKfsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectZoneKfs has not yet been implemented")
@@ -376,6 +392,9 @@ func NewKowabungaAPI(spec *loads.Document) *KowabungaAPI {
 		}),
 		KfsUpdateKFSHandler: kfs.UpdateKFSHandlerFunc(func(params kfs.UpdateKFSParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation kfs.UpdateKFS has not yet been implemented")
+		}),
+		KgwUpdateKGWHandler: kgw.UpdateKGWHandlerFunc(func(params kgw.UpdateKGWParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kgw.UpdateKGW has not yet been implemented")
 		}),
 		NetgwUpdateNetGWHandler: netgw.UpdateNetGWHandlerFunc(func(params netgw.UpdateNetGWParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation netgw.UpdateNetGW has not yet been implemented")
@@ -489,6 +508,8 @@ type KowabungaAPI struct {
 	ProjectCreateProjectZoneKceHandler project.CreateProjectZoneKceHandler
 	// ProjectCreateProjectZoneKfsHandler sets the operation handler for the create project zone kfs operation
 	ProjectCreateProjectZoneKfsHandler project.CreateProjectZoneKfsHandler
+	// ProjectCreateProjectZoneKgwHandler sets the operation handler for the create project zone kgw operation
+	ProjectCreateProjectZoneKgwHandler project.CreateProjectZoneKgwHandler
 	// ProjectCreateProjectZoneVolumeHandler sets the operation handler for the create project zone volume operation
 	ProjectCreateProjectZoneVolumeHandler project.CreateProjectZoneVolumeHandler
 	// RegionCreateRegionHandler sets the operation handler for the create region operation
@@ -513,6 +534,8 @@ type KowabungaAPI struct {
 	KceDeleteKCEHandler kce.DeleteKCEHandler
 	// KfsDeleteKFSHandler sets the operation handler for the delete k f s operation
 	KfsDeleteKFSHandler kfs.DeleteKFSHandler
+	// KgwDeleteKGWHandler sets the operation handler for the delete k g w operation
+	KgwDeleteKGWHandler kgw.DeleteKGWHandler
 	// NetgwDeleteNetGWHandler sets the operation handler for the delete net g w operation
 	NetgwDeleteNetGWHandler netgw.DeleteNetGWHandler
 	// NfsDeleteNfsStorageHandler sets the operation handler for the delete nfs storage operation
@@ -545,6 +568,8 @@ type KowabungaAPI struct {
 	KceGetAllKCEsHandler kce.GetAllKCEsHandler
 	// KfsGetAllKFSsHandler sets the operation handler for the get all k f ss operation
 	KfsGetAllKFSsHandler kfs.GetAllKFSsHandler
+	// KgwGetAllKgwHandler sets the operation handler for the get all kgw operation
+	KgwGetAllKgwHandler kgw.GetAllKgwHandler
 	// NetgwGetAllNetGWsHandler sets the operation handler for the get all net g ws operation
 	NetgwGetAllNetGWsHandler netgw.GetAllNetGWsHandler
 	// NfsGetAllNfsStoragesHandler sets the operation handler for the get all nfs storages operation
@@ -585,6 +610,8 @@ type KowabungaAPI struct {
 	KceGetKCEStateHandler kce.GetKCEStateHandler
 	// KfsGetKFSHandler sets the operation handler for the get k f s operation
 	KfsGetKFSHandler kfs.GetKFSHandler
+	// KgwGetKgwHandler sets the operation handler for the get kgw operation
+	KgwGetKgwHandler kgw.GetKgwHandler
 	// NetgwGetNetGWHandler sets the operation handler for the get net g w operation
 	NetgwGetNetGWHandler netgw.GetNetGWHandler
 	// NfsGetNfsKfsHandler sets the operation handler for the get nfs kfs operation
@@ -609,6 +636,8 @@ type KowabungaAPI struct {
 	ProjectGetProjectZoneInstancesHandler project.GetProjectZoneInstancesHandler
 	// ProjectGetProjectZoneKCEsHandler sets the operation handler for the get project zone k c es operation
 	ProjectGetProjectZoneKCEsHandler project.GetProjectZoneKCEsHandler
+	// ProjectGetProjectZoneKGWsHandler sets the operation handler for the get project zone k g ws operation
+	ProjectGetProjectZoneKGWsHandler project.GetProjectZoneKGWsHandler
 	// ProjectGetProjectZoneKfsHandler sets the operation handler for the get project zone kfs operation
 	ProjectGetProjectZoneKfsHandler project.GetProjectZoneKfsHandler
 	// ProjectGetProjectZoneVolumesHandler sets the operation handler for the get project zone volumes operation
@@ -681,6 +710,8 @@ type KowabungaAPI struct {
 	KceUpdateKCEHandler kce.UpdateKCEHandler
 	// KfsUpdateKFSHandler sets the operation handler for the update k f s operation
 	KfsUpdateKFSHandler kfs.UpdateKFSHandler
+	// KgwUpdateKGWHandler sets the operation handler for the update k g w operation
+	KgwUpdateKGWHandler kgw.UpdateKGWHandler
 	// NetgwUpdateNetGWHandler sets the operation handler for the update net g w operation
 	NetgwUpdateNetGWHandler netgw.UpdateNetGWHandler
 	// NfsUpdateNfsStorageHandler sets the operation handler for the update nfs storage operation
@@ -820,6 +851,9 @@ func (o *KowabungaAPI) Validate() error {
 	if o.ProjectCreateProjectZoneKfsHandler == nil {
 		unregistered = append(unregistered, "project.CreateProjectZoneKfsHandler")
 	}
+	if o.ProjectCreateProjectZoneKgwHandler == nil {
+		unregistered = append(unregistered, "project.CreateProjectZoneKgwHandler")
+	}
 	if o.ProjectCreateProjectZoneVolumeHandler == nil {
 		unregistered = append(unregistered, "project.CreateProjectZoneVolumeHandler")
 	}
@@ -855,6 +889,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.KfsDeleteKFSHandler == nil {
 		unregistered = append(unregistered, "kfs.DeleteKFSHandler")
+	}
+	if o.KgwDeleteKGWHandler == nil {
+		unregistered = append(unregistered, "kgw.DeleteKGWHandler")
 	}
 	if o.NetgwDeleteNetGWHandler == nil {
 		unregistered = append(unregistered, "netgw.DeleteNetGWHandler")
@@ -903,6 +940,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.KfsGetAllKFSsHandler == nil {
 		unregistered = append(unregistered, "kfs.GetAllKFSsHandler")
+	}
+	if o.KgwGetAllKgwHandler == nil {
+		unregistered = append(unregistered, "kgw.GetAllKgwHandler")
 	}
 	if o.NetgwGetAllNetGWsHandler == nil {
 		unregistered = append(unregistered, "netgw.GetAllNetGWsHandler")
@@ -964,6 +1004,9 @@ func (o *KowabungaAPI) Validate() error {
 	if o.KfsGetKFSHandler == nil {
 		unregistered = append(unregistered, "kfs.GetKFSHandler")
 	}
+	if o.KgwGetKgwHandler == nil {
+		unregistered = append(unregistered, "kgw.GetKgwHandler")
+	}
 	if o.NetgwGetNetGWHandler == nil {
 		unregistered = append(unregistered, "netgw.GetNetGWHandler")
 	}
@@ -999,6 +1042,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.ProjectGetProjectZoneKCEsHandler == nil {
 		unregistered = append(unregistered, "project.GetProjectZoneKCEsHandler")
+	}
+	if o.ProjectGetProjectZoneKGWsHandler == nil {
+		unregistered = append(unregistered, "project.GetProjectZoneKGWsHandler")
 	}
 	if o.ProjectGetProjectZoneKfsHandler == nil {
 		unregistered = append(unregistered, "project.GetProjectZoneKfsHandler")
@@ -1107,6 +1153,9 @@ func (o *KowabungaAPI) Validate() error {
 	}
 	if o.KfsUpdateKFSHandler == nil {
 		unregistered = append(unregistered, "kfs.UpdateKFSHandler")
+	}
+	if o.KgwUpdateKGWHandler == nil {
+		unregistered = append(unregistered, "kgw.UpdateKGWHandler")
 	}
 	if o.NetgwUpdateNetGWHandler == nil {
 		unregistered = append(unregistered, "netgw.UpdateNetGWHandler")
@@ -1290,6 +1339,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
+	o.handlers["POST"]["/project/{projectId}/zone/{zoneId}/kgw"] = project.NewCreateProjectZoneKgw(o.context, o.ProjectCreateProjectZoneKgwHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
 	o.handlers["POST"]["/project/{projectId}/zone/{zoneId}/volume"] = project.NewCreateProjectZoneVolume(o.context, o.ProjectCreateProjectZoneVolumeHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
@@ -1335,6 +1388,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
 	o.handlers["DELETE"]["/kfs/{kfsId}"] = kfs.NewDeleteKFS(o.context, o.KfsDeleteKFSHandler)
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
+	o.handlers["DELETE"]["/kgw/{kgwId}"] = kgw.NewDeleteKGW(o.context, o.KgwDeleteKGWHandler)
 	if o.handlers["DELETE"] == nil {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
@@ -1399,6 +1456,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/kfs"] = kfs.NewGetAllKFSs(o.context, o.KfsGetAllKFSsHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/kgw"] = kgw.NewGetAllKgw(o.context, o.KgwGetAllKgwHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -1482,6 +1543,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
+	o.handlers["GET"]["/kgw/{kgwId}"] = kgw.NewGetKgw(o.context, o.KgwGetKgwHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
 	o.handlers["GET"]["/netgw/{netgwId}"] = netgw.NewGetNetGW(o.context, o.NetgwGetNetGWHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
@@ -1527,6 +1592,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/project/{projectId}/zone/{zoneId}/kces"] = project.NewGetProjectZoneKCEs(o.context, o.ProjectGetProjectZoneKCEsHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/project/{projectId}/zone/{zoneId}/kgws"] = project.NewGetProjectZoneKGWs(o.context, o.ProjectGetProjectZoneKGWsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
@@ -1671,6 +1740,10 @@ func (o *KowabungaAPI) initHandlerCache() {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}
 	o.handlers["PUT"]["/kfs/{kfsId}"] = kfs.NewUpdateKFS(o.context, o.KfsUpdateKFSHandler)
+	if o.handlers["PUT"] == nil {
+		o.handlers["PUT"] = make(map[string]http.Handler)
+	}
+	o.handlers["PUT"]["/kgw/{kgwId}"] = kgw.NewUpdateKGW(o.context, o.KgwUpdateKGWHandler)
 	if o.handlers["PUT"] == nil {
 		o.handlers["PUT"] = make(map[string]http.Handler)
 	}

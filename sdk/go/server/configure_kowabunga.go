@@ -16,6 +16,7 @@ import (
 	"github.com/dalet-oss/kowabunga-api/sdk/go/server/api/instance"
 	"github.com/dalet-oss/kowabunga-api/sdk/go/server/api/kce"
 	"github.com/dalet-oss/kowabunga-api/sdk/go/server/api/kfs"
+	"github.com/dalet-oss/kowabunga-api/sdk/go/server/api/kgw"
 	"github.com/dalet-oss/kowabunga-api/sdk/go/server/api/netgw"
 	"github.com/dalet-oss/kowabunga-api/sdk/go/server/api/nfs"
 	"github.com/dalet-oss/kowabunga-api/sdk/go/server/api/pool"
@@ -116,6 +117,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation project.CreateProjectZoneKfs has not yet been implemented")
 		})
 	}
+	if api.ProjectCreateProjectZoneKgwHandler == nil {
+		api.ProjectCreateProjectZoneKgwHandler = project.CreateProjectZoneKgwHandlerFunc(func(params project.CreateProjectZoneKgwParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.CreateProjectZoneKgw has not yet been implemented")
+		})
+	}
 	if api.ProjectCreateProjectZoneVolumeHandler == nil {
 		api.ProjectCreateProjectZoneVolumeHandler = project.CreateProjectZoneVolumeHandlerFunc(func(params project.CreateProjectZoneVolumeParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.CreateProjectZoneVolume has not yet been implemented")
@@ -174,6 +180,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.KfsDeleteKFSHandler == nil {
 		api.KfsDeleteKFSHandler = kfs.DeleteKFSHandlerFunc(func(params kfs.DeleteKFSParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation kfs.DeleteKFS has not yet been implemented")
+		})
+	}
+	if api.KgwDeleteKGWHandler == nil {
+		api.KgwDeleteKGWHandler = kgw.DeleteKGWHandlerFunc(func(params kgw.DeleteKGWParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kgw.DeleteKGW has not yet been implemented")
 		})
 	}
 	if api.NetgwDeleteNetGWHandler == nil {
@@ -254,6 +265,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.KfsGetAllKFSsHandler == nil {
 		api.KfsGetAllKFSsHandler = kfs.GetAllKFSsHandlerFunc(func(params kfs.GetAllKFSsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation kfs.GetAllKFSs has not yet been implemented")
+		})
+	}
+	if api.KgwGetAllKgwHandler == nil {
+		api.KgwGetAllKgwHandler = kgw.GetAllKgwHandlerFunc(func(params kgw.GetAllKgwParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kgw.GetAllKgw has not yet been implemented")
 		})
 	}
 	if api.NetgwGetAllNetGWsHandler == nil {
@@ -356,6 +372,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 			return middleware.NotImplemented("operation kfs.GetKFS has not yet been implemented")
 		})
 	}
+	if api.KgwGetKgwHandler == nil {
+		api.KgwGetKgwHandler = kgw.GetKgwHandlerFunc(func(params kgw.GetKgwParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kgw.GetKgw has not yet been implemented")
+		})
+	}
 	if api.NetgwGetNetGWHandler == nil {
 		api.NetgwGetNetGWHandler = netgw.GetNetGWHandlerFunc(func(params netgw.GetNetGWParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation netgw.GetNetGW has not yet been implemented")
@@ -414,6 +435,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.ProjectGetProjectZoneKCEsHandler == nil {
 		api.ProjectGetProjectZoneKCEsHandler = project.GetProjectZoneKCEsHandlerFunc(func(params project.GetProjectZoneKCEsParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation project.GetProjectZoneKCEs has not yet been implemented")
+		})
+	}
+	if api.ProjectGetProjectZoneKGWsHandler == nil {
+		api.ProjectGetProjectZoneKGWsHandler = project.GetProjectZoneKGWsHandlerFunc(func(params project.GetProjectZoneKGWsParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation project.GetProjectZoneKGWs has not yet been implemented")
 		})
 	}
 	if api.ProjectGetProjectZoneKfsHandler == nil {
@@ -594,6 +620,11 @@ func configureAPI(api *swaggerapi.KowabungaAPI) http.Handler {
 	if api.KfsUpdateKFSHandler == nil {
 		api.KfsUpdateKFSHandler = kfs.UpdateKFSHandlerFunc(func(params kfs.UpdateKFSParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation kfs.UpdateKFS has not yet been implemented")
+		})
+	}
+	if api.KgwUpdateKGWHandler == nil {
+		api.KgwUpdateKGWHandler = kgw.UpdateKGWHandlerFunc(func(params kgw.UpdateKGWParams, principal interface{}) middleware.Responder {
+			return middleware.NotImplemented("operation kgw.UpdateKGW has not yet been implemented")
 		})
 	}
 	if api.NetgwUpdateNetGWHandler == nil {

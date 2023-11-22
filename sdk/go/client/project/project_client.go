@@ -40,6 +40,8 @@ type ClientService interface {
 
 	CreateProjectZoneKfs(params *CreateProjectZoneKfsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectZoneKfsCreated, error)
 
+	CreateProjectZoneKgw(params *CreateProjectZoneKgwParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectZoneKgwCreated, error)
+
 	CreateProjectZoneVolume(params *CreateProjectZoneVolumeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectZoneVolumeCreated, error)
 
 	DeleteProject(params *DeleteProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectOK, error)
@@ -57,6 +59,8 @@ type ClientService interface {
 	GetProjectZoneInstances(params *GetProjectZoneInstancesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectZoneInstancesOK, error)
 
 	GetProjectZoneKCEs(params *GetProjectZoneKCEsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectZoneKCEsOK, error)
+
+	GetProjectZoneKGWs(params *GetProjectZoneKGWsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectZoneKGWsOK, error)
 
 	GetProjectZoneKfs(params *GetProjectZoneKfsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectZoneKfsOK, error)
 
@@ -259,6 +263,45 @@ func (a *Client) CreateProjectZoneKfs(params *CreateProjectZoneKfsParams, authIn
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for CreateProjectZoneKfs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+CreateProjectZoneKgw Creates a new KGW in the specified zone.
+*/
+func (a *Client) CreateProjectZoneKgw(params *CreateProjectZoneKgwParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectZoneKgwCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateProjectZoneKgwParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "CreateProjectZoneKgw",
+		Method:             "POST",
+		PathPattern:        "/project/{projectId}/zone/{zoneId}/kgw",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &CreateProjectZoneKgwReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateProjectZoneKgwCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateProjectZoneKgw: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -610,6 +653,45 @@ func (a *Client) GetProjectZoneKCEs(params *GetProjectZoneKCEsParams, authInfo r
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for GetProjectZoneKCEs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetProjectZoneKGWs Returns the IDs of the KGW existing in the project in the specified zone.
+*/
+func (a *Client) GetProjectZoneKGWs(params *GetProjectZoneKGWsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectZoneKGWsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetProjectZoneKGWsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "GetProjectZoneKGWs",
+		Method:             "GET",
+		PathPattern:        "/project/{projectId}/zone/{zoneId}/kgws",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetProjectZoneKGWsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetProjectZoneKGWsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetProjectZoneKGWs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
