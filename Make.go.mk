@@ -1,31 +1,49 @@
 SDK_GO_DIR = $(SDK_DIR)/go
-SDK_GO_MODELS = $(SDK_GO_DIR)/models
+
 SDK_GO_SERVER_DIR = $(SDK_GO_DIR)/server
-SDK_GO_SERVER_OPERATIONS = api
-SDK_GO_SERVER_NAME = kowabunga
+SDK_GO_SERVER_GENERATOR = go-server
+SDK_GO_SERVER_NAME = server
+
 SDK_GO_CLIENT_DIR = $(SDK_GO_DIR)/client
-SDK_GO_CLIENT_NAME = kowabunga
+SDK_GO_CLIENT_GENERATOR = go
+SDK_GO_CLIENT_NAME = client
 
 .PHONY: go-sdk
 go-sdk: go-sdk-server go-sdk-client ; @
 
 .PHONY: go-sdk-server
-go-sdk-server: get-goswagger ; $(info $(M) [OpenAPIv2] generate Golang SDK Server code…) @
-	$Q $(SWAGGER) generate server -q \
-	  -f $(OPENAPI_DEFINITION) \
-	  -s $(SDK_GO_SERVER_DIR) \
-	  -a $(SDK_GO_SERVER_OPERATIONS) \
-	  -m $(SDK_GO_MODELS) \
-	  --exclude-main \
-	  --name=$(SDK_GO_SERVER_NAME)
+go-sdk-server: get-openapi-generator ; $(info $(M) [OpenAPIv3] generate Golang SDK Server code…) @
+	$Q $(OPENAPI_GENERATOR) generate \
+	  -g $(SDK_GO_SERVER_GENERATOR) \
+	  --package-name $(SDK_GO_SERVER_NAME) \
+	  -p outputAsLibrary=true \
+	  -p sourceFolder=$(SDK_GO_SERVER_NAME) \
+	  -i $(OPENAPI_DEFINITION) \
+	  -o $(SDK_GO_DIR) \
+	  $(OUT)
+	$Q rm -f $(SDK_GO_DIR)/README.md
+	$Q rm -f $(SDK_GO_DIR)/.openapi-generator-ignore
+	$Q rm -rf $(SDK_GO_DIR)/.openapi-generator
+	$Q rm -rf $(SDK_GO_DIR)/api
 
 .PHONY: go-sdk-client
-go-sdk-client: get-goswagger ; $(info $(M) [OpenAPIv2] generate Golang SDK client code…) @
-	$Q $(SWAGGER) generate client -q \
-	  -f $(OPENAPI_DEFINITION) \
-	  -c $(SDK_GO_CLIENT_DIR) \
-	  -m $(SDK_GO_MODELS) \
-	  --name=$(SDK_GO_CLIENT_NAME)
+go-sdk-client: get-openapi-generator ; $(info $(M) [OpenAPIv3] generate Golang SDK client code…) @
+	$Q $(OPENAPI_GENERATOR) generate \
+	  -g $(SDK_GO_CLIENT_GENERATOR) \
+	  --package-name $(SDK_GO_CLIENT_NAME) \
+	  -p withGoMod=false \
+	  -i $(OPENAPI_DEFINITION) \
+	  -o $(SDK_GO_CLIENT_DIR) \
+	  $(OUT)
+	  $Q rm -f $(SDK_GO_CLIENT_DIR)/.gitignore
+	  $Q rm -rf $(SDK_GO_CLIENT_DIR)/.openapi-generator
+	  $Q rm -f $(SDK_GO_CLIENT_DIR)/.openapi-generator-ignore
+	  $Q rm -f $(SDK_GO_CLIENT_DIR)/.travis.yml
+	  $Q rm -rf $(SDK_GO_CLIENT_DIR)/api
+	  $Q rm -f $(SDK_GO_CLIENT_DIR)/git_push.sh
+	  $Q rm -rf $(SDK_GO_CLIENT_DIR)/docs
+	  $Q rm -rf $(SDK_GO_CLIENT_DIR)/README.md
+	  $Q rm -rf $(SDK_GO_CLIENT_DIR)/test
 
 .PHONY: clean-go
 clean-go: ; @
