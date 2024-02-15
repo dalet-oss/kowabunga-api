@@ -32,8 +32,10 @@ specs: get-yq ; $(info $(M) [OpenAPIv2] merge fragments…) @
 	$Q $(YQ) ea '. as $$item ireduce ({}; . * $$item )' $(OPENAPI_DIR)/*.yml > $(OPENAPI_DEFINITION)
 
 .PHONY: validate
-validate: get-goswagger ; $(info $(M) [OpenAPIv2] validate API syntax…) @
-	$Q $(SWAGGER) validate -q $(OPENAPI_DEFINITION)
+validate: get-openapi-generator ; $(info $(M) [OpenAPIv2] valid API syntax…) @
+	$Q $(OPENAPI_GENERATOR) validate \
+	  --recommend \
+	  -i $(OPENAPI_DEFINITION)
 
 .PHONY: doc
 doc: get-swagger-yaml-to-html ; $(info $(M) [OpenAPIv2] generate HTML documentation…) @
