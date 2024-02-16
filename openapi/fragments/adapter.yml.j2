@@ -1,55 +1,27 @@
-{% import "openapi/oas.macros.yml.j2" as oas with context %}
-
-{% set adapter_schema = 'Adapter' %}
-{% set adapter_desc = 'network adapter' %}
-{% set adapter_tag = 'adapter' %}
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+{%- set adapter_schema = 'Adapter' %}
+{%- set adapter_desc = 'network adapter' %}
+{%- set adapter_tag = 'adapter' %}
 
 components:
   schemas:
-    Adapter:
-      type: object
-      description: A network adapter
-      required:
-        - name
-      properties:
-        id:
-          type: string
-          description: The network adapter ID (auto-generated).
-        name:
-          type: string
-          description: The network adapter name.
-        description:
-          type: string
-          description: The network adapter description.
-        mac:
-          type: string
-          description: The network adapter hardware address (e.g. 00:11:22:33:44:55). Auto-generated if unspecified.
-        addresses:
-          type: array
-          description: The network adapter list of associated IPv4 addresses.
-          items:
-            type: string
-        reserved:
-          type: boolean
-          description: The network adapter is a reserved adapter (e.g. router), where the same hardware address can be reused over several subnets.
-          default: false
+{{ oas.Schema(adapter_schema, adapter_desc, ['name']) }}
+{{ oas.StringProperty('id', 'The network adapter ID (auto-generated)') }}
+{{ oas.StringProperty('name', 'The network adapter name') }}
+{{ oas.StringProperty('description', 'The network adapter description') }}
+{{ oas.StringProperty('mac', 'The network adapter hardware address (e.g. 00:11:22:33:44:55). Auto-generated if unspecified') }}
+{{ oas.StringArrayProperty('addresses', 'The network adapter list of associated IPv4 addresses') }}
+{{ oas.BoolProperty('reserved', 'The network adapter is a reserved adapter (e.g. router), where the same hardware address can be reused over several subnets', 'false') }}
 
   parameters:
 {{ oas.PathParam('AdapterID', 'adapterId', 'The ID of the network adapter', 'string') }}
 
 paths:
   /adapter:
-    get:
 {{ oas.GetAll('GetAllAdapters', adapter_desc, [adapter_tag]) }}
 
   /adapter/{adapterId}:
 {{ oas.Parameters(['AdapterID']) }}
-
-    get:
 {{ oas.GetOne('GetAdapter', adapter_schema, adapter_desc, [adapter_tag]) }}
-
-    put:
 {{ oas.Update('UpdateAdapter', adapter_schema, adapter_desc, [adapter_tag]) }}
-
-    delete:
 {{ oas.Delete('DeleteAdapter', adapter_desc, [adapter_tag]) }}

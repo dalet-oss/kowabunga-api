@@ -1,3 +1,48 @@
+{% macro Schema(schema, desc, required=[]) %}
+    {{ schema }}:
+      type: object
+      description: A {{ desc }}
+{%if required != [] %}
+      required:
+{% for r in required %}
+        - {{ r }}
+{% endfor %}
+{% endif %}
+      properties:
+{% endmacro %}
+
+{% macro Property(name, type, desc, default=None) %}
+        {{ name }}:
+          type: {{ type }}
+          description: {{ desc }}
+{% if default != None %}
+          default: {{ default }}
+{% endif %}
+{% endmacro %}
+
+{% macro StringProperty(name, desc, default=None) %}
+{{ Property(name, 'string', desc, default) }}
+{% endmacro %}
+
+{% macro BoolProperty(name, desc, default=None) %}
+{{ Property(name, 'boolean', desc, default) }}
+{% endmacro %}
+
+{% macro ArrayProperty(name, type, desc, default=None) %}
+        {{ name }}:
+          type: array
+          description: {{ desc }}
+          items:
+            type: {{ type }}
+{% if default != None %}
+          default: {{ default }}
+{% endif %}
+{% endmacro %}
+
+{% macro StringArrayProperty(name, desc, default=None) %}
+{{ ArrayProperty(name, 'string', desc, default) }}
+{% endmacro %}
+
 {% macro PathParam(key, name, desc, t) %}
     {{ key }}:
       name: {{ name }}
@@ -103,6 +148,7 @@
 {% endmacro %}
 
 {% macro GetAll(opId, desc, tags) %}
+    get:
 {{ Tags(tags) }}
       description: Returns the IDs of {{ desc }}
       operationId: {{ opId }}
@@ -112,6 +158,7 @@
 {% endmacro %}
 
 {% macro GetOne(opId, schema, desc, tags) %}
+    get:
 {{ Tags(tags) }}
       description: Returns a {{ desc }}
       operationId: {{ opId }}
@@ -121,6 +168,7 @@
 {% endmacro %}
 
 {% macro Update(opId, schema, desc, tags) %}
+    put:
 {{ Tags(tags) }}
       description: Updates a {{ desc }} configuration
       operationId: {{ opId }}
@@ -131,6 +179,7 @@
 {% endmacro %}
 
 {% macro Delete(opId, desc, tags) %}
+    delete:
 {{ Tags(tags) }}
       description: Deletes an existing {{ desc }}
       operationId: {{ opId }}
