@@ -23,6 +23,6 @@ paths:
 
   /adapter/{adapterId}:
 {{ oas.Parameters([adapter_param]) }}
-{{ oas.GetOne('GetAdapter', adapter_schema, adapter_desc, [adapter_tag]) }}
+{{ oas.Read('GetAdapter', adapter_schema, adapter_desc, [adapter_tag]) }}
 {{ oas.Update('UpdateAdapter', adapter_schema, adapter_desc, [adapter_tag]) }}
 {{ oas.Delete('DeleteAdapter', adapter_desc, [adapter_tag]) }}

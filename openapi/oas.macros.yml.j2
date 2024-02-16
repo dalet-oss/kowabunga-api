@@ -161,7 +161,7 @@
 {{ ErrorsGetAll() }}
 {% endmacro %}
 
-{% macro GetOne(opId, schema, desc, tags) %}
+{% macro Read(opId, schema, desc, tags) %}
     get:
 {{ Tags(tags) }}
       description: Returns a {{ desc }}
