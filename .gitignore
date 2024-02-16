@@ -17,7 +17,8 @@
 # generated code & bins we don't care about
 bin/
 cmd/
-swagger.generated.yml
+openapi/templates
+openapi/openapi.generated.yml
 node_modules/
 package.json
 package-lock.json

@@ -1,10 +1,14 @@
 YQ = $(BIN_DIR)/yq
 YQ_VERSION = v4.34.1
 
+JINJA = jinjanate
+
 SWAGGER_YAML_TO_HTML = $(BIN_DIR)/swagger-yaml-to-html
 
 OPENAPI_DIR = openapi
-OPENAPI_DEFINITION = swagger.generated.yml
+OPENAPI_TEMPLATIZE = "./templatize.sh"
+OPENAPI_TEMPLATES_DIR = $(OPENAPI_DIR)/templates
+OPENAPI_DEFINITION = $(OPENAPI_DIR)/openapi.generated.yml
 OPENAPI_DOC = $(DOCS_DIR)/index.html
 
 .PHONY: get-yq
@@ -17,12 +21,17 @@ get-swagger-yaml-to-html: bin; $(info $(M) [Misc] downloading swagger-yaml-to-ht
 	$Q test -x $(SWAGGER_YAML_TO_HTML) || curl -sL https://raw.githubusercontent.com/yousan/swagger-yaml-to-html/master/swagger-yaml-to-html.py --output $(SWAGGER_YAML_TO_HTML)
 	$Q chmod a+x $(SWAGGER_YAML_TO_HTML)
 
+.PHONY: get-jinjanator
+get-jinjanator: ; $(info $(M) [Misc] installing jinjanator…) @
+	$Q which -s $(JINJA) || pip3 install jinjanator
+
 .PHONY: api
 api: specs validate doc ; @
 
 .PHONY: specs
-specs: get-yq ; $(info $(M) [OpenAPIv3] merge fragments…) @
-	$Q $(YQ) ea '. as $$item ireduce ({}; . * $$item )' $(OPENAPI_DIR)/*.yml > $(OPENAPI_DEFINITION)
+specs: get-jinjanator get-yq ; $(info $(M) [OpenAPIv3] merge fragments…) @
+	$Q $(OPENAPI_TEMPLATIZE)
+	$Q $(YQ) ea '. as $$item ireduce ({}; . * $$item )' $(OPENAPI_TEMPLATES_DIR)/*.yml > $(OPENAPI_DEFINITION)
 
 .PHONY: validate
 validate: get-openapi-generator ; $(info $(M) [OpenAPIv3] valid API syntax…) @
@@ -39,4 +48,5 @@ doc: get-swagger-yaml-to-html ; $(info $(M) [OpenAPIv3] generate HTML documentat
 clean-api: ; @
 	$Q rm -rf $(OPENAPI_DOC)
 	$Q rm -rf $(OPENAPI_DEFINITION)
+	$Q rm -rf $(OPENAPI_TEMPLATES_DIR)
 	$Q rm -rf $(DOCS_DIR)
