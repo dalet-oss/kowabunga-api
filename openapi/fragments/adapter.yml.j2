@@ -1,3 +1,9 @@
+{% import "openapi/oas.macros.yml.j2" as oas with context %}
+
+{% set adapter_schema = 'Adapter' %}
+{% set adapter_desc = 'network adapter' %}
+{% set adapter_tag = 'adapter' %}
+
 components:
   schemas:
     Adapter:
@@ -29,101 +35,21 @@ components:
           default: false
 
   parameters:
-    AdapterID:
-      name: adapterId
-      in: path
-      description: The ID of the network adapter.
-      required: true
-      schema:
-        type: string
+{{ oas.PathParam('AdapterID', 'adapterId', 'The ID of the network adapter', 'string') }}
 
 paths:
   /adapter:
     get:
-      tags:
-        - adapter
-      description: Returns the IDs of network adapters.
-      operationId: GetAllAdapters
-      responses:
-        '200':
-          description: Returns the an array of network adapter IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
+{{ oas.GetAll('GetAllAdapters', adapter_desc, [adapter_tag]) }}
 
   /adapter/{adapterId}:
-    parameters:
-      - $ref: '#/components/parameters/AdapterID'
+{{ oas.Parameters(['AdapterID']) }}
 
     get:
-      tags:
-        - adapter
-      description: Returns a description of the network adapter.
-      operationId: GetAdapter
-      responses:
-        '200':
-          description: Returns the network adapter object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Adapter'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+{{ oas.GetOne('GetAdapter', adapter_schema, adapter_desc, [adapter_tag]) }}
 
     put:
-      tags:
-        - adapter
-      description: Updates a network adapter configuration.
-      operationId: UpdateAdapter
-      requestBody:
-        description: Adapter payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Adapter'
-        required: true
-      responses:
-        '200':
-          description: Updated network adapter.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Adapter'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+{{ oas.Update('UpdateAdapter', adapter_schema, adapter_desc, [adapter_tag]) }}
 
     delete:
-      tags:
-        - adapter
-      description: Deletes an existing network adapter.
-      operationId: DeleteAdapter
-      responses:
-        '200':
-          description: The network adapter has been successfully removed.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+{{ oas.Delete('DeleteAdapter', adapter_desc, [adapter_tag]) }}
