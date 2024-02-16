@@ -87,13 +87,33 @@ export class Configuration {
             this.credentials = {};
         }
 
-        // init default key credential
-        if (!this.credentials['key']) {
-            this.credentials['key'] = () => {
+        // init default ApiKeyAuth credential
+        if (!this.credentials['ApiKeyAuth']) {
+            this.credentials['ApiKeyAuth'] = () => {
                 if (this.apiKeys === null || this.apiKeys === undefined) {
                     return undefined;
                 } else {
-                    return this.apiKeys['key'] || this.apiKeys['x-token'];
+                    return this.apiKeys['ApiKeyAuth'] || this.apiKeys['X-API-Key'];
+                }
+            };
+        }
+
+        // init default BearerAuth credential
+        if (!this.credentials['BearerAuth']) {
+            this.credentials['BearerAuth'] = () => {
+                return typeof this.accessToken === 'function'
+                    ? this.accessToken()
+                    : this.accessToken;
+            };
+        }
+
+        // init default TokenAuth credential
+        if (!this.credentials['TokenAuth']) {
+            this.credentials['TokenAuth'] = () => {
+                if (this.apiKeys === null || this.apiKeys === undefined) {
+                    return undefined;
+                } else {
+                    return this.apiKeys['TokenAuth'] || this.apiKeys['x-token'];
                 }
             };
         }
