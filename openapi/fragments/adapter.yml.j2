@@ -2,6 +2,7 @@
 {%- set adapter_schema = 'Adapter' %}
 {%- set adapter_desc = 'network adapter' %}
 {%- set adapter_tag = 'adapter' %}
+{%- set adapter_param = 'AdapterID' %}
 
 components:
   schemas:
@@ -14,14 +15,14 @@ components:
 {{ oas.BoolProperty('reserved', 'The network adapter is a reserved adapter (e.g. router), where the same hardware address can be reused over several subnets', 'false') }}
 
   parameters:
-{{ oas.PathParam('AdapterID', 'adapterId', 'The ID of the network adapter', 'string') }}
+{{ oas.StringPathParam(adapter_param, 'adapterId', 'The ID of the network adapter') }}
 
 paths:
   /adapter:
 {{ oas.GetAll('GetAllAdapters', adapter_desc, [adapter_tag]) }}
 
   /adapter/{adapterId}:
-{{ oas.Parameters(['AdapterID']) }}
+{{ oas.Parameters([adapter_param]) }}
 {{ oas.GetOne('GetAdapter', adapter_schema, adapter_desc, [adapter_tag]) }}
 {{ oas.Update('UpdateAdapter', adapter_schema, adapter_desc, [adapter_tag]) }}
 {{ oas.Delete('DeleteAdapter', adapter_desc, [adapter_tag]) }}
