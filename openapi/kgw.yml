@@ -1,38 +1,53 @@
-definitions:
-  KGW:
-    type: object
-    description: Kowabunga Network Gateway is a network gateway used for your internet inbound and outbound traffic
-    properties:
-      id:
+tags:
+  - name: kgw
+    description: Everything about Kowabunga network gateway
+
+components:
+  schemas:
+    KGW:
+      type: object
+      description: Kowabunga Network Gateway is a network gateway used for your internet inbound and outbound traffic
+      properties:
+        id:
+          type: string
+          description: The Kowabunga network gateway ID (auto-generated).
+        description:
+          type: string
+          description: The KGW description.
+        public_ip:
+          type: string
+          description: The Kowabunga network gateway public IPs (read only)
+        private_ip:
+          type: string
+          description: The Kowabunga network gateway private IP (read only)
+        nats:
+          type: array
+          items:
+            $ref:  '#/components/schemas/KGWNat'
+    KGWNat:
+      type: object
+      description: KGW Nat definition
+      required:
+        - private_ip
+        - ports
+      properties:
+        private_ip:
+          type: string
+          description: Target Private IP. Leave blank for a new generated one
+        public_ip:
+          type: string
+          description: Public IP from created Adapter. Leave empty to use the default Public IP
+        ports:
+          type: string
+          description: Ports being forwarded from the public to the private IP. Accept Ranges
+  parameters:
+    KgwID:
+      name: kgwId
+      in: path
+      description: The ID of the KGW network gateway.
+      required: true
+      schema:
         type: string
-        description: The Kowabunga network gateway ID (auto-generated).
-      description:
-        type: string
-        description: The KGW description.
-      public_ip:
-        type: string
-        description: The Kowabunga network gateway public IPs (read only)
-      private_ip:
-        type: string
-        description: The Kowabunga network gateway private IP (read only)
-      nats:
-        type: array
-        items:
-          $ref:  '#/definitions/KGWNat'
-  KGWNat:
-    type: object
-    description: KGW Nat definition
-    required: [private_ip, ports]
-    properties:
-      private_ip:
-        type: string
-        description: Target Private IP. Leave blank for a new generated one
-      public_ip:
-        type: string
-        description: Public IP from created Adapter. Leave empty to use the default Public IP
-      ports:
-        type: string
-        description: Ports being forwarded from the public to the private IP. Accept Ranges
 
 paths:
   /kgw:
@@ -42,77 +57,87 @@ paths:
       operationId: GetAllKgw
       description: Returns the IDs of registered KGW
       responses:
-        200:
+        '200':
           description: Returns an array for KGW IDs
-          schema:
-            type: array
-            items:
-              type: string 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
 
   /kgw/{kgwId}:
+    parameters:
+      - $ref: '#/components/parameters/KgwID'
+
     get:
       tags:
         - kgw
       operationId: GetKgw
       description: Returns the descirption of the registered KGW
-      parameters:
-        - name: kgwId
-          in: path
-          type: string
-          required: true
-          description: The ID of the KGW
       responses:
-        200:
-          description: Returns an array for KGW IDs
-          schema:
-            $ref: '#/definitions/KGW'
-        404:
-          description: Invalid KGW ID was provided.
+        '200':
+          description: Returns the KGW network gateway object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KGW'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
     put:
       tags:
         - kgw
       operationId: UpdateKGW
       description: Updates a KGW virtual machine configuration.
-      parameters:
-        - name: kgwId
-          in: path
-          type: string
-          required: true
-          description: The ID of the KGW.
-        - name: body
-          in: body
-          schema:
-            $ref: '#/definitions/KGW'
+      requestBody:
+        description: KGW payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KGW'
+        required: true
       responses:
-        200:
-          description: Returns the updated KGW.
-          schema:
-            $ref: '#/definitions/KGW'
-        400:
-          description: Bad parameters were provided.
-        404:
-          description: Invalid KGW ID was provided.
-        500:
-          description: Unable to update the KCE virtual machine.
-        507:
-          description: Available public IPs not available
+        '200':
+          description: Updated KGW network gateway.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KGW'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '507':
+          $ref: '#/components/responses/InsufficientStorage'
+
     delete:
       tags:
         - kgw
       operationId: DeleteKGW
       description: Deletes an existing KGW gateway.
-      parameters:
-        - name: kgwId
-          in: path
-          type: string
-          required: true
-          description: The ID of the KGW to delete.
       responses:
-        200:
+        '200':
           description: The KGW has been successfully removed.
-        404:
-          description: Invalid KGW ID was provided.
-        409:
-          description: The KGW is not empty or still being referenced.
-        500:
-          description: Unable to delete KGW.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'

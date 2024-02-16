@@ -1,25 +1,17 @@
-consumes:
-- application/json
+openapi: 3.1.0
+
 info:
+  title: Kowabunga API documentation
+  summary: Kowabunga API allows your client application to interact with Kowabunga's orchestrator.
   description: Kvm Orchestrator With A BUNch of Goods Added
-  title: Kowabunga
   version: 0.10.0
-produces:
-- application/json
-schemes:
-- http
-basePath: "/api/v1"
-swagger: "2.0"
+  contact:
+    name: Dalet CS Ops
+    url: "https://www.dalet.com/support/"
+    email: "csops@dalet.com"
+  license:
+    name: AGPLv3
+    url: "https://www.gnu.org/licenses/agpl-3.0.en.html"
 
-securityDefinitions:
-  key:
-    type: apiKey
-    in: header
-    name: x-token
-
-security:
-  - key: []
-
-definitions:
-  principal:
-    type: string
+servers:
+  - url: "/api/v1"

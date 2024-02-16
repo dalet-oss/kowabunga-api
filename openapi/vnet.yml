@@ -1,27 +1,43 @@
-definitions:
-  VNet:
-    type: object
-    required: [name, vlan, interface]
-    properties:
-      id:
+tags:
+  - name: vnet
+    description: Everything about virtual networks
+
+components:
+  schemas:
+    VNet:
+      type: object
+      required:
+        - name
+        - vlan
+        - interface
+      properties:
+        id:
+          type: string
+          description: The virtual network ID (auto-generated).
+        name:
+          type: string
+          description: The virtual network name.
+        description:
+          type: string
+          description: The virtual network description.
+        vlan:
+          type: integer
+          description: The VLAN identifier.
+        interface:
+          type: string
+          description: The libvirt's bridge network interface (brX).
+        private:
+          type: boolean
+          description: Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?
+          default: true
+  parameters:
+    VnetID:
+      name: vnetId
+      in: path
+      description: The ID of the virtual network.
+      required: true
+      schema:
         type: string
-        description: The virtual network ID (auto-generated).
-      name:
-        type: string
-        description: The virtual network name.
-      description:
-        type: string
-        description: The virtual network description.
-      vlan:
-        type: integer
-        description: The VLAN identifier.
-      interface:
-        type: string
-        description: The libvirt's bridge network interface (brX).
-      private:
-        type: boolean
-        description: Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?
-        default: true
 
 paths:
   /vnet:
@@ -31,154 +47,169 @@ paths:
       operationId: GetAllVNets
       description: Returns the IDs of virtual networks.
       responses:
-        200:
+        '200':
           description: Returns the an array of virtual network IDs.
-          schema:
-            type: array
-            items:
-              type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
 
   /vnet/{vnetId}:
+    parameters:
+      - $ref: '#/components/parameters/VnetID'
+
     get:
       tags:
         - vnet
       operationId: GetVNet
       description: Returns a description of the virtual network
-      parameters:
-        - name: vnetId
-          in: path
-          type: string
-          required: true
-          description: The ID of the virtual network to get.
       responses:
-        200:
+        '200':
           description: Returns the virtual network object.
-          schema:
-            $ref: '#/definitions/VNet'
-        404:
-          description: Invalid virtual network ID was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VNet'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
     put:
       tags:
         - vnet
       operationId: UpdateVNet
       description: Updates a virtual network configuration.
-      parameters:
-        - name: vnetId
-          in: path
-          type: string
-          required: true
-          description: The ID of the virtual network to update.
-        - name: body
-          in: body
-          schema:
-            $ref: '#/definitions/VNet'
+      requestBody:
+        description: VNet payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VNet'
+        required: true
       responses:
-        200:
-          description: Returns the updated virtual network object.
-          schema:
-            $ref: '#/definitions/VNet'
-        400:
-          description: Bad parameters were provided.
-        404:
-          description: Invalid virtual network ID was provided.
+        '200':
+          description: Updated virtual network.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VNet'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
     delete:
       tags:
         - vnet
       operationId: DeleteVNet
       description: Deletes an existing virtual network.
-      parameters:
-        - name: vnetId
-          in: path
-          type: string
-          required: true
-          description: The ID of the virtual network to delete.
       responses:
-        200:
+        '200':
           description: The virtual network has been successfully removed.
-        404:
-          description: Invalid virtual network ID was provided.
-        409:
-          description: The virtual network is not empty or still being referenced.
-        500:
-          description: Unable to delete virtual network.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   /vnet/{vnetId}/subnet:
+    parameters:
+      - $ref: '#/components/parameters/VnetID'
+
     post:
       tags:
         - vnet
         - subnet
       operationId: CreateSubnet
       description: Creates a new subnet.
-      parameters:
-        - name: vnetId
-          in: path
-          type: string
-          required: true
-          description: the ID of the associated virtual network.
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/Subnet'
+      requestBody:
+        description: Subnet payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subnet'
+        required: true
       responses:
-        201:
+        '201':
           description: Returns the newly created subnet object.
-          schema:
-            $ref: '#/definitions/Subnet'
-        400:
-          description: Bad parameters were provided.
-        404:
-          description: Invalid virtual network ID was provided.
-        409:
-          description: Subnet already exists.
-        500:
-          description: Unable to create subnet.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subnet'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   /vnet/{vnetId}/subnet/{subnetId}/default:
+    parameters:
+      - $ref: '#/components/parameters/VnetID'
+      - $ref: '#/components/parameters/SubnetID'
+
     put:
       tags:
         - vnet
         - subnet
       operationId: UpdateVNetDefaultSubnet
       description: Set a virtual network default subnet.
-      parameters:
-        - name: vnetId
-          in: path
-          type: string
-          required: true
-          description: The ID of the virtual network to update.
-        - name: subnetId
-          in: path
-          type: string
-          required: true
-          description: The ID of the subnet to set as default.
       responses:
-        200:
-          description: Returns the updated subnet object.
-        404:
-          description: Invalid virtual network ID or subnet ID was provided.
-        500:
-          description: Unable to assign the requested subnet as virtual network default.
+        '200':
+          description: The subnet has been set as default one.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   /vnet/{vnetId}/subnets:
+    parameters:
+      - $ref: '#/components/parameters/VnetID'
+
     get:
       tags:
         - vnet
         - subnet
       operationId: GetVNetSubnets
       description: Returns the IDs of the subnets existing in the virtual network.
-      parameters:
-        - name: vnetId
-          in: path
-          type: string
-          required: true
-          description: The ID of the virtual network to query.
       responses:
-        200:
+        '200':
           description: Returns an array of subnet IDs.
-          schema:
-            type: array
-            items:
-              type: string
-        404:
-          description: Invalid virtual network ID was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'

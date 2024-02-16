@@ -1,11 +1,12 @@
-definitions:
-  Metadata:
-    type: object
-    description: A key/value metadata.
-    properties:
-      key:
-        type: string
-        description: The metadata key.
-      value:
-        type: string
-        description: The metadata value.
+components:
+  schemas:
+    Metadata:
+      type: object
+      description: A key/value metadata.
+      properties:
+        key:
+          type: string
+          description: The metadata key.
+        value:
+          type: string
+          description: The metadata value.

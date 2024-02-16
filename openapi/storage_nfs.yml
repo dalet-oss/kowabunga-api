@@ -1,33 +1,54 @@
-definitions:
-  StorageNFS:
-    type: object
-    required: [name, endpoint]
-    properties:
-      id:
-        type: string
-        description: The NFS storage ID (auto-generated).
-      name:
-        type: string
-        description: The NFS storage name.
-      description:
-        type: string
-        description: The NFS storage description.
-      endpoint:
-        type: string
-        description: The associated NFS endpoint FQDN.
-      fs:
-        type: string
-        description: The underlying associated CephFS volume name.
-        default: 'nfs'
-      backends:
-        type: array
-        items:
+tags:
+  - name: nfs
+    description: Everything about NFS storages
+
+components:
+  schemas:
+    StorageNFS:
+      type: object
+      required:
+        - name
+        - endpoint
+      properties:
+        id:
           type: string
-        description: List of NFS Ganesha API server IP addresses.
-      port:
-        type: integer
-        description: NFS Ganesha API server port (default 54934).
-        default: 54934
+          description: The NFS storage ID (auto-generated).
+        name:
+          type: string
+          description: The NFS storage name.
+        description:
+          type: string
+          description: The NFS storage description.
+        endpoint:
+          type: string
+          description: The associated NFS endpoint FQDN.
+        fs:
+          type: string
+          description: The underlying associated CephFS volume name.
+          default: 'nfs'
+        backends:
+          type: array
+          items:
+            type: string
+          description: List of NFS Ganesha API server IP addresses.
+        port:
+          type: integer
+          description: NFS Ganesha API server port (default 54934).
+          default: 54934
+  parameters:
+    NfsID:
+      name: nfsId
+      in: path
+      description: The ID of the NFS storage.
+      required: true
+      schema:
+        type: string
+    OptionalQueryNfsID:
+      name: nfsId
+      in: query
+      description: NFS storage ID (optional, zone's default if unspecified).
+      schema:
+        type: string
 
 paths:
   /nfs:
@@ -37,96 +58,109 @@ paths:
       operationId: GetAllNfsStorages
       description: Returns the IDs of registered NFS storages.
       responses:
-        200:
+        '200':
           description: Returns the an array of NFS storage IDs.
-          schema:
-            type: array
-            items:
-              type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
 
   /nfs/{nfsId}:
+    parameters:
+      - $ref: '#/components/parameters/NfsID'
+
     get:
       tags:
         - nfs
       operationId: GetNfsStorage
       description: Returns a description of the NFS storage.
-      parameters:
-        - name: nfsId
-          in: path
-          type: string
-          required: true
-          description: The ID of the NFS storage to get.
       responses:
-        200:
+        '200':
           description: Returns the NFS storage object.
-          schema:
-            $ref: '#/definitions/StorageNFS'
-        404:
-          description: Invalid NFS storage ID was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StorageNFS'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
     put:
       tags:
         - nfs
       operationId: UpdateNfsStorage
       description: Updates an NFS storage configuration.
-      parameters:
-        - name: nfsId
-          in: path
-          type: string
-          required: true
-          description: The ID of the NFS storage to get.
-        - name: body
-          in: body
-          schema:
-            $ref: '#/definitions/StorageNFS'
+      requestBody:
+        description: NFS storage payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StorageNFS'
+        required: true
       responses:
-        200:
-          description: Returns the updated NFS storage object.
-          schema:
-            $ref: '#/definitions/StorageNFS'
-        400:
-          description: Bad parameters were provided.
-        404:
-          description: Invalid NFS storage ID was provided.
+        '200':
+          description: Updated NFS storage.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StorageNFS'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
     delete:
       tags:
         - nfs
       operationId: DeleteNfsStorage
       description: Deletes an existing NFS storage.
-      parameters:
-        - name: nfsId
-          in: path
-          type: string
-          required: true
-          description: The ID of the NFS storage to get.
       responses:
-        200:
+        '200':
           description: The NFS storage has been successfully removed.
-        404:
-          description: Invalid NFS storage ID was provided.
-        409:
-          description: The NFS storage is not empty or still being referenced.
-        500:
-          description: Unable to delete NFS storage.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   /nfs/{nfsId}/kfs:
+    parameters:
+      - $ref: '#/components/parameters/NfsID'
+
     get:
       tags:
         - nfs
         - kfs
       operationId: GetNfsKfs
       description: Returns the IDs of the KFS volumes existing in the NFS storage.
-      parameters:
-        - name: nfsId
-          in: path
-          type: string
-          required: true
-          description: The ID of the NFS storage to query.
       responses:
-        200:
+        '200':
           description: Returns an array of KFS storage volume IDs.
-          schema:
-            type: array
-            items:
-              type: string
-        404:
-          description: Invalid NFS storage ID was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'

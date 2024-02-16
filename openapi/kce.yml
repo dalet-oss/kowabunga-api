@@ -1,34 +1,58 @@
-definitions:
-  KCE:
-    type: object
-    required: [name, memory, vcpus, disk]
-    description: Kowabunga Compute Engine (KCE) is a wrapper object for bare virtual machines. It consists of an instance, one to several attached volumes and 2 network adapters (a private one, a public one). This is the prefered way for creating virtual machines. IP addresses will be automatically assigned.
-    properties:
-      id:
+tags:
+  - name: kce
+    description: Everything about KCE (Kowabunga Compute Engine)
+
+components:
+  schemas:
+    KCE:
+      type: object
+      required:
+        - name
+        - memory
+        - vcpus
+        - disk
+      description: Kowabunga Compute Engine (KCE) is a wrapper object for bare virtual machines. It consists of an instance, one to several attached volumes and 2 network adapters (a private one, a public one). This is the prefered way for creating virtual machines. IP addresses will be automatically assigned.
+      properties:
+        id:
+          type: string
+          description: The KCE ID  (auto-generated).
+        name:
+          type: string
+          description: The KCE virtual machine name
+        description:
+          type: string
+          description: The KCE virtual machine description.
+        memory:
+          type: integer
+          description: The KCE virtual machine's memory size (in bytes).
+        vcpus:
+          type: integer
+          description: The KCE virtual machine's number of vCPUs.
+        disk:
+          type: integer
+          description: The KCE virtual machine's OS disk size (in bytes).
+        data_disk:
+          type: integer
+          description: The KCE virtual machine's extra data disk size (in bytes). If unspecified, no extra data disk will be assigned.
+          default: 0
+        ip:
+          type: string
+          description: The KCE virtual machine's assigned private IPv4 address (read-only).
+
+  parameters:
+    KceID:
+      name: kceId
+      in: path
+      description: The ID of the KCE virtual machine.
+      required: true
+      schema:
         type: string
-        description: The KCE ID  (auto-generated).
-      name:
-        type: string
-        description: The KCE virtual machine name
-      description:
-        type: string
-        description: The KCE virtual machine description.
-      memory:
-        type: integer
-        description: The KCE virtual machine's memory size (in bytes).
-      vcpus:
-        type: integer
-        description: The KCE virtual machine's number of vCPUs.
-      disk:
-        type: integer
-        description: The KCE virtual machine's OS disk size (in bytes).
-      data_disk:
-        type: integer
-        description: The KCE virtual machine's extra data disk size (in bytes). If unspecified, no extra data disk will be assigned.
-        default: 0
-      ip:
-        type: string
-        description: The KCE virtual machine's assigned private IPv4 address (read-only).
+    OptionalQueryKcePublic:
+      name: public
+      in: query
+      description: Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).
+      schema:
+        type: boolean
 
 paths:
   /kce:
@@ -38,237 +62,257 @@ paths:
       operationId: GetAllKCEs
       description: Returns the IDs of registered KCE virtual machines.
       responses:
-        200:
+        '200':
           description: Returns the an array of KCE virtual machines IDs.
-          schema:
-            type: array
-            items:
-              type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
 
   /kce/{kceId}:
+    parameters:
+      - $ref: '#/components/parameters/KceID'
+
     get:
       tags:
         - kce
       operationId: GetKCE
       description: Returns the description of the KCE virtual machine.
-      parameters:
-        - name: kceId
-          in: path
-          type: string
-          required: true
-          description: The ID of the KCE virtual machine to query.
       responses:
-        200:
+        '200':
           description: Returns the KCE virtual machine object.
-          schema:
-            $ref: '#/definitions/KCE'
-        404:
-          description: Invalid KCE ID was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KCE'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
     put:
       tags:
         - kce
       operationId: UpdateKCE
       description: Updates a KCE virtual machine configuration.
-      parameters:
-        - name: kceId
-          in: path
-          type: string
-          required: true
-          description: The ID of the KCE virtual machine object.
-        - name: body
-          in: body
-          schema:
-            $ref: '#/definitions/KCE'
+      requestBody:
+        description: KCE payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KCE'
+        required: true
       responses:
-        200:
-          description: Returns the updated KCE virtual machine object.
-          schema:
-            $ref: '#/definitions/KCE'
-        400:
-          description: Bad parameters were provided.
-        404:
-          description: Invalid KCE virtual machine ID was provided.
-        500:
-          description: Unable to update the KCE virtual machine.
-        507:
-          description: Requested KCE characteristics are beyond associated project's quota in place.
+        '200':
+          description: Updated KCE virtual machine.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KCE'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '507':
+          $ref: '#/components/responses/InsufficientStorage'
+
     delete:
       tags:
         - kce
       operationId: DeleteKCE
       description: Deletes an existing KCE virtual machine.
-      parameters:
-        - name: kceId
-          in: path
-          type: string
-          required: true
-          description: The ID of the KCE virtual machine to delete.
       responses:
-        200:
+        '200':
           description: The KCE virtual machine has been successfully removed.
-        404:
-          description: Invalid KCE ID was provided.
-        409:
-          description: The KCE virtual machine is not empty or still being referenced.
-        500:
-          description: Unable to delete KCE virtual machine.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   /kce/{kceId}/state:
+    parameters:
+      - $ref: '#/components/parameters/KceID'
+
     get:
       tags:
         - kce
       operationId: GetKCEState
       description: Returns the state of the KCE virtual machine.
-      parameters:
-        - name: kceId
-          in: path
-          type: string
-          required: true
-          description: The ID of the virtual machine to query.
       responses:
-        200:
+        '200':
           description: Returns the KCE virtual machine state object.
-          schema:
-            $ref: '#/definitions/InstanceState'
-        404:
-          description: Invalid KCE ID was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceState'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
 
   /kce/{kceId}/reboot:
+    parameters:
+      - $ref: '#/components/parameters/KceID'
+
     post:
       tags:
         - kce
       operationId: RebootKCE
       description: Perform a KCE virtual machine software reboot.
-      parameters:
-        - name: kceId
-          in: path
-          type: string
-          required: true
-          description: The ID of the KCE virtual machine to query.
       responses:
-        200:
+        '200':
           description: The KCE virtual machine has been rebooted successfully.
-        404:
-          description: Invalid KCE ID was provided.
-        500:
-          description: An error occurred when trying to reboot the KCE virtual machine.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   /kce/{kceId}/reset:
+    parameters:
+      - $ref: '#/components/parameters/KceID'
+
     post:
       tags:
         - kce
       operationId: ResetKCE
       description: Perform a KCE virtual machine hardware reset.
-      parameters:
-        - name: kceId
-          in: path
-          type: string
-          required: true
-          description: The ID of the KCE virtual machine to query.
       responses:
-        200:
+        '200':
           description: The KCE virtual machine has been reseted successfully.
-        404:
-          description: Invalid KCE ID was provided.
-        500:
-          description: An error occurred when trying to reset the KCE virtual machine.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   /kce/{kceId}/suspend:
+    parameters:
+      - $ref: '#/components/parameters/KceID'
+
     post:
       tags:
         - kce
       operationId: SuspendKCE
       description: Perform a KCE virtual machine software PM suspend.
-      parameters:
-        - name: kceId
-          in: path
-          type: string
-          required: true
-          description: The ID of the virtual machine to query.
       responses:
-        200:
+        '200':
           description: The KCE virtual machine has been suspended successfully.
-        404:
-          description: Invalid KCE ID was provided.
-        500:
-          description: An error occurred when trying to suspend the KCE virtual machine.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   /kce/{kceId}/resume:
+    parameters:
+      - $ref: '#/components/parameters/KceID'
+
     post:
       tags:
         - kce
       operationId: ResumeKCE
       description: Perform a KCE virtual machine software PM resume.
-      parameters:
-        - name: kceId
-          in: path
-          type: string
-          required: true
-          description: The ID of the KCE virtual machine to query.
       responses:
-        200:
+        '200':
           description: The KCE virtual machine has been resumed successfully.
-        404:
-          description: Invalid KCE ID was provided.
-        500:
-          description: An error occurred when trying to resume the KCE virtual machine.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   /kce/{kceId}/start:
+    parameters:
+      - $ref: '#/components/parameters/KceID'
+
     post:
       tags:
         - kce
       operationId: StartKCE
       description: Boot up a KCE virtual machine.
-      parameters:
-        - name: kceId
-          in: path
-          type: string
-          required: true
-          description: The ID of the KCE virtual machine to query.
       responses:
-        200:
+        '200':
           description: The KCE virtual machine has been started successfully.
-        404:
-          description: Invalid KCE ID was provided.
-        500:
-          description: An error occurred when trying to start the KCE virtual machine.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   /kce/{kceId}/stop:
+    parameters:
+      - $ref: '#/components/parameters/KceID'
+
     post:
       tags:
         - kce
       operationId: StopKCE
       description: Initiate a hardware stop of a KCE virtual machine.
-      parameters:
-        - name: kceId
-          in: path
-          type: string
-          required: true
-          description: The ID of the KCE virtual machine to query.
       responses:
-        200:
+        '200':
           description: The KCE virtual machine has been stopped successfully.
-        404:
-          description: Invalid KCE ID was provided.
-        500:
-          description: An error occurred when trying to stop the KCE virtual machine.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   /kce/{kceId}/shutdown:
+    parameters:
+      - $ref: '#/components/parameters/KceID'
+
     post:
       tags:
         - kce
       operationId: ShutdownKCE
       description: Initiate a software shutdown of a KCE virtual machine.
-      parameters:
-        - name: kceId
-          in: path
-          type: string
-          required: true
-          description: The ID of the KCE virtual machine to query.
       responses:
-        200:
+        '200':
           description: The KCE virtual machine has been shut down successfully.
-        404:
-          description: Invalid KCE ID was provided.
-        500:
-          description: An error occurred when trying to shut down the KCE virtual machine.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'

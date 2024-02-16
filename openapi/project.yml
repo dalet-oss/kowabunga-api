@@ -1,75 +1,91 @@
-definitions:
-  Project:
-    type: object
-    required: [name, owner, email]
-    properties:
-      id:
-        type: string
-        description: The project ID (auto-generated).
-      name:
-        type: string
-        description: The project name.
-      description:
-        type: string
-        description: The project description.
-      owner:
-        type: string
-        description: The project's owner name.
-      email:
-        type: string
-        description: The project associated email address, used to receive notifications.
-      domain:
-        type: string
-        description: The project associated internal domain name (e.g. myproject.acme.com).
-      root_password:
-        type: string
-        description: The project default root password, set at cloud-init instance bootstrap phase. Will be randomly auto-generated at each instance creation if unspecified.
-      bootstrap_user:
-        type: string
-        description: The project default service user name, created at cloud-init instance bootstrap phase. Will use Kowabunga's default configuration one if unspecified.
-      bootstrap_pubkey:
-        type: string
-        description: The project default public SSH key, to be associated to bootstrap user. Will use Kowabunga's default configuration one if unspecified.
-      tags:
-        type: array
-        description: A list of tags to be associated to the project.
-        items:
-          type: string
-      metadatas:
-        type: array
-        description: A list of metadata to be associated to the project
-        items:
-          $ref: '#/definitions/Metadata'
-      quotas:
-        type: object
-        description: The global project resource quotas (0 for unlimited)
-        $ref: '#/definitions/ProjectResources'
-      private_subnets:
-        type: array
-        description: The assigned project VPC private subnets IDs (read-only).
-        items:
-          $ref: '#/definitions/ZoneSubnet'
+tags:
+  - name: project
+    description: Everything about projects
 
-  ProjectResources:
-    type: object
-    description: The global project resource quotas/usage (0 for unlimited).
-    properties:
-      vcpus:
-        type: integer
-        format: uint16
-        description: the maximum total number of vCPUs allowed to be consumed by sum of all instances.
-      memory:
-        type: integer
-        format: uint64
-        description: the maximum total memory (in bytes) allowed to be consumed by sum of all instances.
-      storage:
-        type: integer
-        format: uint64
-        description: the maximum total disk capacity allowed to be consumed by sum of all instances.
-      instances:
-        type: integer
-        format: uint16
-        description: the maximum number of instances allowed to be spawned.
+components:
+  schemas:
+    Project:
+      type: object
+      required:
+        - name
+        - owner
+        - email
+      properties:
+        id:
+          type: string
+          description: The project ID (auto-generated).
+        name:
+          type: string
+          description: The project name.
+        description:
+          type: string
+          description: The project description.
+        owner:
+          type: string
+          description: The project's owner name.
+        email:
+          type: string
+          description: The project associated email address, used to receive notifications.
+        domain:
+          type: string
+          description: The project associated internal domain name (e.g. myproject.acme.com).
+        root_password:
+          type: string
+          description: The project default root password, set at cloud-init instance bootstrap phase. Will be randomly auto-generated at each instance creation if unspecified.
+        bootstrap_user:
+          type: string
+          description: The project default service user name, created at cloud-init instance bootstrap phase. Will use Kowabunga's default configuration one if unspecified.
+        bootstrap_pubkey:
+          type: string
+          description: The project default public SSH key, to be associated to bootstrap user. Will use Kowabunga's default configuration one if unspecified.
+        tags:
+          type: array
+          description: A list of tags to be associated to the project.
+          items:
+            type: string
+        metadatas:
+          type: array
+          description: A list of metadata to be associated to the project
+          items:
+            $ref: '#/components/schemas/Metadata'
+        quotas:
+          type: object
+          description: The global project resource quotas (0 for unlimited)
+          $ref: '#/components/schemas/ProjectResources'
+        private_subnets:
+          type: array
+          description: The assigned project VPC private subnets IDs (read-only).
+          items:
+            $ref: '#/components/schemas/ZoneSubnet'
+
+    ProjectResources:
+      type: object
+      description: The global project resource quotas/usage (0 for unlimited).
+      properties:
+        vcpus:
+          type: integer
+          format: uint16
+          description: the maximum total number of vCPUs allowed to be consumed by sum of all instances.
+        memory:
+          type: integer
+          format: uint64
+          description: the maximum total memory (in bytes) allowed to be consumed by sum of all instances.
+        storage:
+          type: integer
+          format: uint64
+          description: the maximum total disk capacity allowed to be consumed by sum of all instances.
+        instances:
+          type: integer
+          format: uint16
+          description: the maximum number of instances allowed to be spawned.
+  parameters:
+    ProjectID:
+      name: projectId
+      in: path
+      description: The ID of the network adapter.
+      required: true
+      schema:
+        type: string
 
 paths:
   /project:
@@ -79,207 +95,240 @@ paths:
       operationId: GetAllProjects
       description: Returns the IDs of registered projects.
       responses:
-        200:
+        '200':
           description: Returns the an array of project IDs.
-          schema:
-            type: array
-            items:
-              type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
     post:
       tags:
         - project
       operationId: CreateProject
       description: Creates a new project.
       parameters:
-        - name: subnetSize
-          in: query
-          type: integer
-          default: 26
-          description: The minimum VPC subnet size to be affected to the project. WARNING, this cannot be changed later.
-        - name: notify
-          in: query
-          type: boolean
-          default: true
-          description: Whether or not to send a notification email at resource creation.
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/Project'
+        - $ref: '#/components/parameters/OptionalQuerySubnetSize'
+        - $ref: '#/components/parameters/OptionalQueryNotify'
+      requestBody:
+        description: Project payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+        required: true
       responses:
-        201:
+        '201':
           description: Returns the newly created project object.
-          schema:
-            $ref: '#/definitions/Project'
-        400:
-          description: Bad parameters were provided.
-        409:
-          description: Project already exists.
-        500:
-          description: Unable to create the requested project.
-        507:
-          description: The expected VPC subnet size cannot be assigned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '507':
+          $ref: '#/components/responses/InsufficientStorage'
 
   /project/{projectId}:
+    parameters:
+      - $ref: '#/components/parameters/ProjectID'
+
     get:
       tags:
         - project
       operationId: GetProject
       description: Returns a description of the project
-      parameters:
-        - name: projectId
-          in: path
-          type: string
-          required: true
-          description: The ID of the project to get.
       responses:
-        200:
+        '200':
           description: Returns the project object.
-          schema:
-            $ref: '#/definitions/Project'
-        404:
-          description: Invalid project ID was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
     put:
       tags:
         - project
       operationId: UpdateProject
       description: Updates a project configuration.
-      parameters:
-        - name: projectId
-          in: path
-          type: string
-          required: true
-          description: The ID of the project to update.
-        - name: body
-          in: body
-          schema:
-            $ref: '#/definitions/Project'
+      requestBody:
+        description: Project payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+        required: true
       responses:
-        200:
-          description: Returns the updated project object.
-          schema:
-            $ref: '#/definitions/Project'
-        400:
-          description: Bad parameters were provided.
-        404:
-          description: Invalid project ID was provided.
+        '200':
+          description: Updated project.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
     delete:
       tags:
         - project
       operationId: DeleteProject
       description: Deletes an existing project.
-      parameters:
-        - name: projectId
-          in: path
-          type: string
-          required: true
-          description: The ID of the project to delete.
       responses:
-        200:
+        '200':
           description: The project has been successfully removed.
-        404:
-          description: Invalid project ID was provided.
-        409:
-          description: The project is not empty or still being referenced.
-        500:
-          description: Unable to delete project.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   /project/{projectId}/cost:
+    parameters:
+      - $ref: '#/components/parameters/ProjectID'
+
     get:
       tags:
         - project
       operationId: GetProjectCost
       description: Returns the current cost for the project.
-      parameters:
-        - name: projectId
-          in: path
-          type: string
-          required: true
-          description: The ID of the project to query.
       responses:
-        200:
+        '200':
           description: Returns the project cost object.
-          schema:
-            $ref: '#/definitions/Cost'
-        404:
-          description: Invalid project ID was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cost'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
 
   /project/{projectId}/usage:
+    parameters:
+      - $ref: '#/components/parameters/ProjectID'
+
     get:
       tags:
         - project
       operationId: GetProjectUsage
       description: Returns the current resources usage for the project.
-      parameters:
-        - name: projectId
-          in: path
-          type: string
-          required: true
-          description: The ID of the project to query.
       responses:
-        200:
+        '200':
           description: Returns the project resources object.
-          schema:
-            $ref: '#/definitions/ProjectResources'
-        404:
-          description: Invalid project ID was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResources'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
 
   /project/{projectId}/record:
+    parameters:
+      - $ref: '#/components/parameters/ProjectID'
+
     post:
       tags:
         - project
         - record
       operationId: CreateProjectDnsRecord
       description: Creates a new DNS record in specified project.
-      parameters:
-        - name: projectId
-          in: path
-          type: string
-          required: true
-          description: the ID of the associated project.
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DnsRecord'
+      requestBody:
+        description: DNS record payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DnsRecord'
+        required: true
       responses:
-        201:
+        '201':
           description: Returns the newly created DNS record object.
-          schema:
-            $ref: '#/definitions/DnsRecord'
-        400:
-          description: Bad parameters were provided.
-        404:
-          description: Invalid project ID was provided.
-        409:
-          description: DNS record already exists.
-        500:
-          description: Unable to create the DNS record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DnsRecord'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   /project/{projectId}/records:
+    parameters:
+      - $ref: '#/components/parameters/ProjectID'
+
     get:
       tags:
         - project
         - record
       operationId: GetProjectDnsRecords
       description: Returns the IDs of the DNS records existing in the project.
-      parameters:
-        - name: projectId
-          in: path
-          type: string
-          required: true
-          description: The ID of the project to query.
       responses:
-        200:
+        '200':
           description: Returns an array of DNS record IDs.
-          schema:
-            type: array
-            items:
-              type: string
-        404:
-          description: Invalid project ID was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
 
   /project/{projectId}/zone/{zoneId}/volume:
+    parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/ZoneID'
+      - $ref: '#/components/parameters/OptionalQueryPoolID'
+      - $ref: '#/components/parameters/OptionalQueryTemplateID'
+
     post:
       tags:
         - project
@@ -287,47 +336,40 @@ paths:
         - volume
       operationId: CreateProjectZoneVolume
       description: Creates a new storage volume in specified zone.
-      parameters:
-        - name: projectId
-          in: path
-          type: string
-          required: true
-          description: the ID of the associated project.
-        - name: zoneId
-          in: path
-          type: string
-          required: true
-          description: the ID of the associated zone.
-        - name: poolId
-          in: query
-          type: string
-          description: the ID of the associated storage pool (optional, zone's default if unspecified).
-        - name: templateId
-          in: query
-          type: string
-          description: the ID of the template to clone the storage volume from (optional, zone's default if unspecified)
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/Volume'
+      requestBody:
+        description: Volume payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Volume'
+        required: true
       responses:
-        201:
+        '201':
           description: Returns the newly created storage volume object.
-          schema:
-            $ref: '#/definitions/Volume'
-        400:
-          description: Bad parameters were provided.
-        404:
-          description: Invalid project or zone ID was provided.
-        409:
-          description: Storage volume already exists.
-        500:
-          description: Unable to create the storage volume.
-        507:
-          description: Requested volume characteristics are beyond project's quota in place.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Volume'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '507':
+          $ref: '#/components/responses/InsufficientStorage'
 
   /project/{projectId}/zone/{zoneId}/volumes:
+    parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/ZoneID'
+
     get:
       tags:
         - project
@@ -335,28 +377,26 @@ paths:
         - volume
       operationId: GetProjectZoneVolumes
       description: Returns the IDs of the storage volumes existing in the project in the specified zone.
-      parameters:
-        - name: projectId
-          in: path
-          type: string
-          required: true
-          description: The ID of the project to query.
-        - name: zoneId
-          in: path
-          type: string
-          required: true
-          description: The ID of the zone to query.
       responses:
-        200:
+        '200':
           description: Returns an array of storage volume IDs.
-          schema:
-            type: array
-            items:
-              type: string
-        404:
-          description: Invalid project or zone ID was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
 
   /project/{projectId}/zone/{zoneId}/instance:
+    parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/ZoneID'
+      - $ref: '#/components/parameters/OptionalQueryNotify'
+
     post:
       tags:
         - project
@@ -364,44 +404,40 @@ paths:
         - instance
       operationId: CreateProjectZoneInstance
       description: Creates a new virtual machine instance in specified zone.
-      parameters:
-        - name: projectId
-          in: path
-          type: string
-          required: true
-          description: the ID of the associated project.
-        - name: zoneId
-          in: path
-          type: string
-          required: true
-          description: the ID of the associated zone.
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/Instance'
-        - name: notify
-          in: query
-          type: boolean
-          default: true
-          description: Whether or not to send a notification email at resource creation.
+      requestBody:
+        description: Instance payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Instance'
+        required: true
       responses:
-        201:
+        '201':
           description: Returns the newly created virtual machine instance object.
-          schema:
-            $ref: '#/definitions/Instance'
-        400:
-          description: Bad parameters were provided.
-        404:
-          description: Invalid project or zone ID was provided.
-        409:
-          description: Virtual machine instance already exists.
-        500:
-          description: Unable to create the virtual machine instance.
-        507:
-          description: Requested volume characteristics are beyond project's quota in place.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Instance'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '507':
+          $ref: '#/components/responses/InsufficientStorage'
 
   /project/{projectId}/zone/{zoneId}/instances:
+    parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/ZoneID'
+
     get:
       tags:
         - project
@@ -409,28 +445,29 @@ paths:
         - instance
       operationId: GetProjectZoneInstances
       description: Returns the IDs of the virtual machine instances existing in the project in the specified zone.
-      parameters:
-        - name: projectId
-          in: path
-          type: string
-          required: true
-          description: The ID of the project to query.
-        - name: zoneId
-          in: path
-          type: string
-          required: true
-          description: The ID of the zone to query.
       responses:
-        200:
+        '200':
           description: Returns an array of virtual machine instance IDs.
-          schema:
-            type: array
-            items:
-              type: string
-        404:
-          description: Invalid project or zone ID was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
 
   /project/{projectId}/zone/{zoneId}/kce:
+    parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/ZoneID'
+      - $ref: '#/components/parameters/OptionalQueryPoolID'
+      - $ref: '#/components/parameters/OptionalQueryTemplateID'
+      - $ref: '#/components/parameters/OptionalQueryKcePublic'
+      - $ref: '#/components/parameters/OptionalQueryNotify'
+
     post:
       tags:
         - project
@@ -438,57 +475,40 @@ paths:
         - kce
       operationId: CreateProjectZoneKce
       description: Creates a new KCE virtual machine in specified zone.
-      parameters:
-        - name: projectId
-          in: path
-          type: string
-          required: true
-          description: the ID of the associated project.
-        - name: zoneId
-          in: path
-          type: string
-          required: true
-          description: the ID of the associated zone.
-        - name: poolId
-          in: query
-          type: string
-          description: the ID of the associated storage pool (optional, zone's default if unspecified).
-        - name: templateId
-          in: query
-          type: string
-          description: the ID of the template to clone the OS storage volume from (optional, zone's default if unspecified)
-        - name: public
-          in: query
-          type: boolean
-          description: Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).
-          default: false
-        - name: notify
-          in: query
-          type: boolean
-          default: true
-          description: Whether or not to send a notification email at resource creation.
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/KCE'
+      requestBody:
+        description: KCE payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KCE'
+        required: true
       responses:
-        201:
+        '201':
           description: Returns the newly created KCE virtual machine object.
-          schema:
-            $ref: '#/definitions/KCE'
-        400:
-          description: Bad parameters were provided.
-        404:
-          description: Invalid project or zone ID was provided.
-        409:
-          description: KCE Virtual machine already exists.
-        500:
-          description: Unable to create the KCE virtual machine.
-        507:
-          description: Requested characteristics are beyond project's quota in place.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KCE'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '507':
+          $ref: '#/components/responses/InsufficientStorage'
 
   /project/{projectId}/zone/{zoneId}/kces:
+    parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/ZoneID'
+
     get:
       tags:
         - project
@@ -496,28 +516,27 @@ paths:
         - kce
       operationId: GetProjectZoneKCEs
       description: Returns the IDs of the KCE virtual machines existing in the project in the specified zone.
-      parameters:
-        - name: projectId
-          in: path
-          type: string
-          required: true
-          description: The ID of the project to query.
-        - name: zoneId
-          in: path
-          type: string
-          required: true
-          description: The ID of the zone to query.
       responses:
-        200:
+        '200':
           description: Returns an array of KCE virtual machine IDs.
-          schema:
-            type: array
-            items:
-              type: string
-        404:
-          description: Invalid project or zone ID was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
 
   /project/{projectId}/zone/{zoneId}/kfs:
+    parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/ZoneID'
+      - $ref: '#/components/parameters/OptionalQueryNfsID'
+      - $ref: '#/components/parameters/OptionalQueryNotify'
+
     get:
       tags:
         - project
@@ -525,26 +544,20 @@ paths:
         - kfs
       operationId: GetProjectZoneKfs
       description: Returns the IDs of the KFS storage volumes existing in the project in the specified zone.
-      parameters:
-        - name: projectId
-          in: path
-          type: string
-          required: true
-          description: The ID of the project to query.
-        - name: zoneId
-          in: path
-          type: string
-          required: true
-          description: The ID of the zone to query.
       responses:
-        200:
+        '200':
           description: Returns an array of KFS storage volume IDs.
-          schema:
-            type: array
-            items:
-              type: string
-        404:
-          description: Invalid project or zone ID was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
     post:
       tags:
         - project
@@ -552,46 +565,38 @@ paths:
         - kfs
       operationId: CreateProjectZoneKfs
       description: Creates a new KFS storage volume in specified zone.
-      parameters:
-        - name: projectId
-          in: path
-          type: string
-          required: true
-          description: the ID of the associated project.
-        - name: zoneId
-          in: path
-          type: string
-          required: true
-          description: the ID of the associated zone.
-        - name: nfsId
-          in: query
-          type: string
-          description: the ID of the associated NFS storage (optional, zone's default if unspecified).
-        - name: notify
-          in: query
-          type: boolean
-          default: true
-          description: Whether or not to send a notification email at resource creation.
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/KFS'
+      requestBody:
+        description: KFS payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KFS'
+        required: true
       responses:
-        201:
+        '201':
           description: Returns the newly created KFS storage volume object.
-          schema:
-            $ref: '#/definitions/KFS'
-        400:
-          description: Bad parameters were provided.
-        404:
-          description: Invalid project or zone ID was provided.
-        409:
-          description: KFS storage volume already exists.
-        500:
-          description: Unable to create the KFS storage volume.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KFS'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   /project/{projectId}/zone/{zoneId}/kgw:
+    parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/ZoneID'
+
     post:
       tags:
         - project
@@ -599,36 +604,38 @@ paths:
         - kgw
       operationId: CreateProjectZoneKgw
       description: Creates a new KGW in the specified zone.
-      parameters:
-        - name: projectId
-          in: path
-          type: string
-          required: true
-          description: the ID of the associated project.
-        - name: zoneId
-          in: path
-          type: string
-          required: true
-          description: the ID of the associated zone.
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/KGW'
+      requestBody:
+        description: KGW payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KGW'
+        required: true
       responses:
-        201:
+        '201':
           description: Returns the newly created KGW object.
-          schema:
-            $ref: '#/definitions/KGW'
-        400:
-          description: Bad parameters were provided.
-        404:
-          description: Invalid project or zone ID was provided.
-        409:
-          description: KGW already exists.
-        500:
-          description: Unable to create the KGW.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KGW'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
   /project/{projectId}/zone/{zoneId}/kgws:
+    parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/ZoneID'
+
     get:
       tags:
         - project
@@ -636,23 +643,16 @@ paths:
         - kgw
       operationId: GetProjectZoneKGWs
       description: Returns the IDs of the KGW existing in the project in the specified zone.
-      parameters:
-        - name: projectId
-          in: path
-          type: string
-          required: true
-          description: The ID of the project to query.
-        - name: zoneId
-          in: path
-          type: string
-          required: true
-          description: The ID of the zone to query.
       responses:
-        200:
+        '200':
           description: Returns an array of KGW virtual machine IDs.
-          schema:
-            type: array
-            items:
-              type: string
-        404:
-          description: Invalid project or zone ID was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'

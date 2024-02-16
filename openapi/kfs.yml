@@ -1,36 +1,57 @@
-definitions:
-  KFS:
-    type: object
-    required: [name]
-    description: Kowabunga File System (KFS) provides an elastic NFS-like remote storage volume.
-    properties:
-      id:
-        type: string
-        description: The KFS ID (auto-generated).
-      name:
-        type: string
-        description: The KFS storage volume name.
-      description:
-        type: string
-        description: The KFS storage volume description.
-      access:
-        type: string
-        description: The KFS storage volume access type.
-        enum: ['RO', 'RW']
-        default: 'RW'
-      protocols:
-        type: array
-        description: The KFS storage volume's NFS protocol versions to be supported.
-        items:
+tags:
+  - name: kfs
+    description: Everything about KFS (Kowabunga File system)
+
+components:
+  schemas:
+    KFS:
+      type: object
+      required:
+        - name
+      description: Kowabunga File System (KFS) provides an elastic NFS-like remote storage volume.
+      properties:
+        id:
+          type: string
+          description: The KFS ID (auto-generated).
+        name:
+          type: string
+          description: The KFS storage volume name.
+        description:
+          type: string
+          description: The KFS storage volume description.
+        access:
+          type: string
+          description: The KFS storage volume access type.
+          enum:
+            - RO
+            - RW
+          default: RW
+        protocols:
+          type: array
+          description: The KFS storage volume's NFS protocol versions to be supported.
+          items:
+            type: integer
+            enum:
+              - 3
+              - 4
+          default:
+            - 3
+            - 4
+        endpoint:
+          type: string
+          description: The KFS endpoint FQDN (read-only).
+        size:
           type: integer
-          enum: [3, 4]
-        default: [3, 4]
-      endpoint:
+          description: The KFS storage volume bytes used (read-only).
+
+  parameters:
+    KfsID:
+      name: kfsId
+      in: path
+      description: The ID of the KFS storage volume.
+      required: true
+      schema:
         type: string
-        description: The KFS endpoint FQDN (read-only).
-      size:
-        type: integer
-        description: The KFS storage volume bytes used (read-only).
 
 paths:
   /kfs:
@@ -40,75 +61,85 @@ paths:
       operationId: GetAllKFSs
       description: Returns the IDs of registered KFS storage volumes.
       responses:
-        200:
+        '200':
           description: Returns the an array of KFS storage volume IDs.
-          schema:
-            type: array
-            items:
-              type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
 
   /kfs/{kfsId}:
+    parameters:
+      - $ref: '#/components/parameters/KfsID'
+
     get:
       tags:
         - kfs
       operationId: GetKFS
       description: Returns the description of the KFS storage volume.
-      parameters:
-        - name: kfsId
-          in: path
-          type: string
-          required: true
-          description: The ID of the KFS storage volume to query.
       responses:
-        200:
+        '200':
           description: Returns the KFS storage volume object.
-          schema:
-            $ref: '#/definitions/KFS'
-        404:
-          description: Invalid KFS ID was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KFS'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
     put:
       tags:
         - kfs
       operationId: UpdateKFS
       description: Updates a KFS storage volume configuration.
-      parameters:
-        - name: kfsId
-          in: path
-          type: string
-          required: true
-          description: The ID of the KFS storage volume.
-        - name: body
-          in: body
-          schema:
-            $ref: '#/definitions/KFS'
+      requestBody:
+        description: KFS payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KFS'
+        required: true
       responses:
-        200:
-          description: Returns the updated KFS storage volume object.
-          schema:
-            $ref: '#/definitions/KFS'
-        400:
-          description: Bad parameters were provided.
-        404:
-          description: Invalid KFs storage volume ID was provided.
-        500:
-          description: Unable to update the KFS storage volume.
+        '200':
+          description: Updated KFS storage volume.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KFS'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
     delete:
       tags:
         - kfs
       operationId: DeleteKFS
       description: Deletes an existing KFS storage volume.
-      parameters:
-        - name: kfsId
-          in: path
-          type: string
-          required: true
-          description: The ID of the KFS storage volume to delete.
       responses:
-        200:
+        '200':
           description: The KFS storage volume has been successfully removed.
-        404:
-          description: Invalid KFS ID was provided.
-        409:
-          description: The KFS storage volume is not empty or still being referenced.
-        500:
-          description: Unable to delete KFS storage volume.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'

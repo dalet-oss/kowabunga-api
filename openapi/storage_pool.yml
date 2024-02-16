@@ -1,40 +1,63 @@
-definitions:
-  StoragePool:
-    type: object
-    required: [name, pool]
-    properties:
-      id:
+tags:
+  - name: pool
+    description: Everything about storage pools
+
+components:
+  schemas:
+    StoragePool:
+      type: object
+      required:
+        - name
+        - pool
+      properties:
+        id:
+          type: string
+          description: The storage pool ID (auto-generated).
+        name:
+          type: string
+          description: The storage pool name.
+        description:
+          type: string
+          description: The storage pool description.
+        type:
+          type: string
+          description: The storage pool type.
+          enum:
+            - local
+            - rbd
+          default: rbd
+        pool:
+          type: string
+          description: The libvirt pool name.
+        ceph_address:
+          type: string
+          description: The local Ceph Monitor(s) address or FQDN, empty for local pool type.
+          default: "localhost"
+        ceph_port:
+          type: integer
+          description: The local Ceph Monitor(s) port (default 3300), empty for local pool type.
+          default: 3300
+        ceph_secret_uuid:
+          type: string
+          description: The libvirt secret UUID for CephX authentication, empty for local pool type.
+        cost:
+          type: object
+          description: Cost associated to the storage pool.
+          $ref: '#/components/schemas/Cost'
+  parameters:
+    PoolID:
+      name: poolId
+      in: path
+      description: The ID of the storage pool.
+      required: true
+      schema:
         type: string
-        description: The storage pool ID (auto-generated).
-      name:
+    OptionalQueryPoolID:
+      name: poolId
+      in: query
+      description: Storage pool ID (optional, zone's default if unspecified).
+      schema:
         type: string
-        description: The storage pool name.
-      description:
-        type: string
-        description: The storage pool description.
-      type:
-        type: string
-        description: The storage pool type.
-        enum: ['local', 'rbd']
-        default: 'rbd'
-      pool:
-        type: string
-        description: The libvirt pool name.
-      ceph_address:
-        type: string
-        description: The local Ceph Monitor(s) address or FQDN, empty for local pool type.
-        default: "localhost"
-      ceph_port:
-        type: integer
-        description: The local Ceph Monitor(s) port (default 3300), empty for local pool type.
-        default: 3300
-      ceph_secret_uuid:
-        type: string
-        description: The libvirt secret UUID for CephX authentication, empty for local pool type.
-      cost:
-        type: object
-        description: Cost associated to the storage pool.
-        $ref: '#/definitions/Cost'
 
 paths:
   /pool:
@@ -44,177 +67,193 @@ paths:
       operationId: GetAllPools
       description: Returns the IDs of registered pools.
       responses:
-        200:
+        '200':
           description: Returns the an array of pool IDs.
-          schema:
-            type: array
-            items:
-              type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
 
   /pool/{poolId}:
+    parameters:
+      - $ref: '#/components/parameters/PoolID'
+
     get:
       tags:
         - pool
       operationId: GetPool
       description: Returns a description of the pool
-      parameters:
-        - name: poolId
-          in: path
-          type: string
-          required: true
-          description: The ID of the pool to get.
       responses:
-        200:
-          description: Returns the pool object.
-          schema:
-            $ref: '#/definitions/StoragePool'
-        404:
-          description: Invalid pool ID was provided.
+        '200':
+          description: Returns the storage pool object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoragePool'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
     put:
       tags:
         - pool
       operationId: UpdatePool
       description: Updates a pool configuration.
-      parameters:
-        - name: poolId
-          in: path
-          type: string
-          required: true
-          description: The ID of the pool to get.
-        - name: body
-          in: body
-          schema:
-            $ref: '#/definitions/StoragePool'
+      requestBody:
+        description: Storage pool payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoragePool'
+        required: true
       responses:
-        200:
-          description: Returns the updated pool object.
-          schema:
-            $ref: '#/definitions/StoragePool'
-        400:
-          description: Bad parameters were provided.
-        404:
-          description: Invalid pool ID was provided.
+        '200':
+          description: Updated storage pool.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoragePool'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
     delete:
       tags:
         - pool
       operationId: DeletePool
       description: Deletes an existing pool.
-      parameters:
-        - name: poolId
-          in: path
-          type: string
-          required: true
-          description: The ID of the pool to get.
       responses:
-        200:
+        '200':
           description: The pool has been successfully removed.
-        404:
-          description: Invalid pool ID was provided.
-        409:
-          description: The pool is not empty or still being referenced.
-        500:
-          description: Unable to delete pool.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   /pool/{poolId}/volumes:
+    parameters:
+      - $ref: '#/components/parameters/PoolID'
+
     get:
       tags:
         - pool
         - volume
       operationId: GetPoolVolumes
       description: Returns the IDs of the storage volumes existing in the pool.
-      parameters:
-        - name: poolId
-          in: path
-          type: string
-          required: true
-          description: The ID of the pool to query.
       responses:
-        200:
+        '200':
           description: Returns an array of storage volume IDs.
-          schema:
-            type: array
-            items:
-              type: string
-        404:
-          description: Invalid pool ID was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
 
   /pool/{poolId}/template:
+    parameters:
+      - $ref: '#/components/parameters/PoolID'
+
     post:
       tags:
         - pool
         - template
       operationId: CreateTemplate
       description: Creates a new volume template.
-      parameters:
-        - name: poolId
-          in: path
-          type: string
-          required: true
-          description: the ID of the associated storage pool.
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/Template'
+      requestBody:
+        description: Template payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Template'
+        required: true
       responses:
-        201:
+        '201':
           description: Returns the newly created volume template.
-          schema:
-            $ref: '#/definitions/Template'
-        400:
-          description: Bad parameters were provided.
-        404:
-          description: Invalid storage pool ID was provided.
-        409:
-          description: Template already exists.
-        500:
-          description: Unable to create template.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Template'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   /pool/{poolId}/template/{templateId}/default:
+    parameters:
+      - $ref: '#/components/parameters/PoolID'
+      - $ref: '#/components/parameters/TemplateID'
+
     put:
       tags:
         - pool
         - template
       operationId: UpdatePoolDefaultTemplate
       description: Set a storage pool default volume template.
-      parameters:
-        - name: poolId
-          in: path
-          type: string
-          required: true
-          description: The ID of the storage pool to update.
-        - name: templateId
-          in: path
-          type: string
-          required: true
-          description: The ID of the volume template to set as default.
       responses:
-        200:
-          description: Returns success.
-        404:
-          description: Invalid storage pool ID or volume template ID was provided.
-        500:
-          description: Unable to assign the requested volume template as storage pool default.
+        '200':
+          description: Template has been set as default one.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   /pool/{poolId}/templates:
+    parameters:
+      - $ref: '#/components/parameters/PoolID'
+
     get:
       tags:
         - pool
         - templates
       operationId: GetPoolTemplates
       description: Returns the IDs of the volume templates existing in the storage pool.
-      parameters:
-        - name: poolId
-          in: path
-          type: string
-          required: true
-          description: The ID of the storage pool to query.
       responses:
-        200:
+        '200':
           description: Returns an array of volume template IDs.
-          schema:
-            type: array
-            items:
-              type: string
-        404:
-          description: Invalid storage pool ID was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'

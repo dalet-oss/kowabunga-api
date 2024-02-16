@@ -1,17 +1,31 @@
-definitions:
-  Region:
-    type: object
-    required: [name]
-    properties:
-      id:
+tags:
+  - name: region
+    description: Everything about regions
+
+components:
+  schemas:
+    Region:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: string
+          description: The region ID (auto-generated).
+        name:
+          type: string
+          description: The region name.
+        description:
+          type: string
+          description: The region description.
+  parameters:
+    RegionID:
+      name: regionId
+      in: path
+      description: The ID of the region.
+      required: true
+      schema:
         type: string
-        description: The region ID (auto-generated).
-      name:
-        type: string
-        description: The region name.
-      description:
-        type: string
-        description: The region description.
 
 paths:
   /region:
@@ -21,150 +35,176 @@ paths:
       operationId: GetAllRegions
       description: Returns the IDs of registered regions.
       responses:
-        200:
+        '200':
           description: Returns the an array of region IDs.
-          schema:
-            type: array
-            items:
-              type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
     post:
       tags:
         - region
       operationId: CreateRegion
       description: Creates a new region.
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/Region'
+      requestBody:
+        description: Region payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Region'
+        required: true
       responses:
-        201:
+        '201':
           description: Returns the newly created region object.
-          schema:
-            $ref: '#/definitions/Region'
-        400:
-          description: Bad parameters were provided.
-        409:
-          description: Region already exists.
-        500:
-          description: Unable to create the region.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Region'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   /region/{regionId}:
+    parameters:
+      - $ref: '#/components/parameters/RegionID'
+
     get:
       tags:
         - region
       operationId: GetRegion
       description: Returns a description of the region
-      parameters:
-        - name: regionId
-          in: path
-          type: string
-          required: true
-          description: The ID of the region to get.
       responses:
-        200:
+        '200':
           description: Returns the region object.
-          schema:
-            $ref: '#/definitions/Region'
-        404:
-          description: Invalid region ID was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Region'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
     put:
       tags:
         - region
       operationId: UpdateRegion
       description: Updates a region configuration.
-      parameters:
-        - name: regionId
-          in: path
-          type: string
-          required: true
-          description: The ID of the region to get.
-        - name: body
-          in: body
-          schema:
-            $ref: '#/definitions/Region'
+      requestBody:
+        description: Region payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Region'
+        required: true
       responses:
-        200:
-          description: Returns the updated region object.
-          schema:
-            $ref: '#/definitions/Region'
-        400:
-          description: Bad parameters were provided.
-        404:
-          description: Invalid region ID was provided.
+        '200':
+          description: Updated region.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Region'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
     delete:
       tags:
         - region
       operationId: DeleteRegion
       description: Deletes an existing region.
-      parameters:
-        - name: regionId
-          in: path
-          type: string
-          required: true
-          description: The ID of the region to get.
       responses:
-        200:
+        '200':
           description: The region has been successfully removed.
-        404:
-          description: Invalid region ID was provided.
-        409:
-          description: The region is not empty or still being referenced.
-        500:
-          description: Unable to delete region.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   /region/{regionId}/zone:
+    parameters:
+      - $ref: '#/components/parameters/RegionID'
+
     post:
       tags:
         - region
         - zone
       operationId: CreateZone
       description: Creates a new zone.
-      parameters:
-        - name: regionId
-          in: path
-          type: string
-          required: true
-          description: the ID of the associated region.
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/Zone'
+      requestBody:
+        description: Zone payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zone'
+        required: true
       responses:
-        201:
+        '201':
           description: Returns the newly created zone object.
-          schema:
-            $ref: '#/definitions/Zone'
-        400:
-          description: Bad parameters were provided.
-        404:
-          description: Invalid region ID was provided.
-        409:
-          description: Zone already exists.
-        500:
-          description: Unable to create zone.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zone'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   /region/{regionId}/zones:
+    parameters:
+      - $ref: '#/components/parameters/RegionID'
+
     get:
       tags:
         - region
         - zone
       operationId: GetRegionZones
       description: Returns the IDs of the availability zones existing in the region.
-      parameters:
-        - name: regionId
-          in: path
-          type: string
-          required: true
-          description: The ID of the region to query.
       responses:
-        200:
+        '200':
           description: Returns an array of availability zone IDs.
-          schema:
-            type: array
-            items:
-              type: string
-        404:
-          description: Invalid region ID was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
