@@ -255,10 +255,10 @@ func (r ApiDeleteAdapterRequest) Execute() (*http.Response, error) {
 /*
 DeleteAdapter Method for DeleteAdapter
 
-Deletes an existing network adapter.
+Deletes an existing network adapter
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param adapterId The ID of the network adapter.
+ @param adapterId The ID of the network adapter
  @return ApiDeleteAdapterRequest
 */
 func (a *AdapterAPIService) DeleteAdapter(ctx context.Context, adapterId string) ApiDeleteAdapterRequest {
@@ -429,10 +429,10 @@ func (r ApiGetAdapterRequest) Execute() (*Adapter, *http.Response, error) {
 /*
 GetAdapter Method for GetAdapter
 
-Returns a description of the network adapter.
+Returns a network adapter
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param adapterId The ID of the network adapter.
+ @param adapterId The ID of the network adapter
  @return ApiGetAdapterRequest
 */
 func (a *AdapterAPIService) GetAdapter(ctx context.Context, adapterId string) ApiGetAdapterRequest {
@@ -591,7 +591,7 @@ func (r ApiGetAllAdaptersRequest) Execute() ([]string, *http.Response, error) {
 /*
 GetAllAdapters Method for GetAllAdapters
 
-Returns the IDs of network adapters.
+Returns the IDs of network adapter
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAllAdaptersRequest
@@ -910,10 +910,10 @@ func (r ApiUpdateAdapterRequest) Execute() (*Adapter, *http.Response, error) {
 /*
 UpdateAdapter Method for UpdateAdapter
 
-Updates a network adapter configuration.
+Updates a network adapter configuration
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param adapterId The ID of the network adapter.
+ @param adapterId The ID of the network adapter
  @return ApiUpdateAdapterRequest
 */
 func (a *AdapterAPIService) UpdateAdapter(ctx context.Context, adapterId string) ApiUpdateAdapterRequest {

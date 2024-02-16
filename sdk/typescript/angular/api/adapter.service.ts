@@ -203,8 +203,8 @@ export class AdapterService {
     }
 
     /**
-     * Deletes an existing network adapter.
-     * @param adapterId The ID of the network adapter.
+     * Deletes an existing network adapter
+     * @param adapterId The ID of the network adapter
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -280,8 +280,8 @@ export class AdapterService {
     }
 
     /**
-     * Returns a description of the network adapter.
-     * @param adapterId The ID of the network adapter.
+     * Returns a network adapter
+     * @param adapterId The ID of the network adapter
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -357,7 +357,7 @@ export class AdapterService {
     }
 
     /**
-     * Returns the IDs of network adapters.
+     * Returns the IDs of network adapter
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -507,8 +507,8 @@ export class AdapterService {
     }
 
     /**
-     * Updates a network adapter configuration.
-     * @param adapterId The ID of the network adapter.
+     * Updates a network adapter configuration
+     * @param adapterId The ID of the network adapter
      * @param adapter Adapter payload
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

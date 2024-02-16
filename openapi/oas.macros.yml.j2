@@ -1,0 +1,141 @@
+{% macro PathParam(key, name, desc, t) %}
+    {{ key }}:
+      name: {{ name }}
+      in: path
+      description: {{ desc }}
+      required: true
+      schema:
+        type: {{ t }}
+{% endmacro %}
+
+{% macro Tags(tgs) %}
+      tags:
+{% for t in tgs %}
+        - {{ t }}
+{% endfor %}
+{% endmacro %}
+
+{% macro ErrorsWrongParams() %}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+{% endmacro %}
+
+{% macro ErrorsAuth() %}
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+{% endmacro %}
+
+{% macro ErrorsUnknownResource() %}
+        '404':
+          $ref: '#/components/responses/NotFound'
+{% endmacro %}
+
+{% macro ErrorsConflict() %}
+        '409':
+          $ref: '#/components/responses/Conflict'
+{% endmacro %}
+
+{% macro ErrorsQuotas() %}
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+{% endmacro %}
+
+{% macro ErrorsGetAll() %}
+{{ ErrorsAuth() }}
+{% endmacro %}
+
+{% macro ErrorsGetOne() %}
+{{ ErrorsAuth() }}
+{{ ErrorsUnknownResource() }}
+{% endmacro %}
+
+{% macro ErrorsUpdate() %}
+{{ ErrorsWrongParams() }}
+{{ ErrorsGetOne() }}
+{{ ErrorsQuotas() }}
+{% endmacro %}
+
+{% macro ErrorsDelete() %}
+{{ ErrorsGetOne() }}
+{{ ErrorsConflict() }}
+{{ ErrorsQuotas() }}
+{% endmacro %}
+
+{% macro Parameters(params) %}
+    parameters:
+{% for p in params %}
+      - $ref: '#/components/parameters/{{ p }}'
+{% endfor %}
+{% endmacro %}
+
+{% macro ResponseOk(desc) %}
+        '200':
+          description: {{ desc }}
+{% endmacro %}
+
+{% macro GetResource(schema, desc) %}
+        '200':
+          description: {{ desc }}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/{{ schema }}'
+{% endmacro %}
+
+{% macro Payload(schema) %}
+      requestBody:
+        description: {{ schema }} payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/{{ schema }}'
+        required: true
+{% endmacro %}
+
+{% macro GetOneResource(schema, desc) %}
+{{ GetResource(schema, 'Returns the ' + desc + ' object') }}
+{% endmacro %}
+
+{% macro GetAllResource(desc) %}
+{{ GetResource('ObjectIds', 'Returns an array of ' + desc + ' IDs') }}
+{% endmacro %}
+
+{% macro GetAll(opId, desc, tags) %}
+{{ Tags(tags) }}
+      description: Returns the IDs of {{ desc }}
+      operationId: {{ opId }}
+      responses:
+{{ GetAllResource(desc) }}
+{{ ErrorsGetAll() }}
+{% endmacro %}
+
+{% macro GetOne(opId, schema, desc, tags) %}
+{{ Tags(tags) }}
+      description: Returns a {{ desc }}
+      operationId: {{ opId }}
+      responses:
+{{ GetOneResource(schema, desc) }}
+{{ ErrorsGetOne() }}
+{% endmacro %}
+
+{% macro Update(opId, schema, desc, tags) %}
+{{ Tags(tags) }}
+      description: Updates a {{ desc }} configuration
+      operationId: {{ opId }}
+{{ Payload(schema) }}
+      responses:
+{{ GetOneResource(schema, desc) }}
+{{ ErrorsUpdate() }}
+{% endmacro %}
+
+{% macro Delete(opId, desc, tags) %}
+{{ Tags(tags) }}
+      description: Deletes an existing {{ desc }}
+      operationId: {{ opId }}
+      responses:
+{{ ResponseOk('The ' + desc + ' has been successfully removed') }}
+{{ ErrorsDelete() }}
+{% endmacro %}
+
