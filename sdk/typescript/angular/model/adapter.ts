@@ -12,7 +12,7 @@
 
 
 /**
- * A network adapters
+ * A network adapter
  */
 export interface Adapter { 
     /**

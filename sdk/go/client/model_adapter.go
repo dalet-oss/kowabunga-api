@@ -20,7 +20,7 @@ import (
 // checks if the Adapter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Adapter{}
 
-// Adapter A network adapters
+// Adapter A network adapter
 type Adapter struct {
 	// The network adapter ID (auto-generated)
 	Id *string `json:"id,omitempty"`

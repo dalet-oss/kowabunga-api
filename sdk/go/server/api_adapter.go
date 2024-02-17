@@ -61,20 +61,20 @@ func (c *AdapterAPIController) Routes() Routes {
 			"/api/v1/adapter/{ adapterId }",
 			c.DeleteAdapter,
 		},
-		"GetAdapter": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/adapter/{ adapterId }",
-			c.GetAdapter,
-		},
-		"GetAllAdapters": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/adapter",
-			c.GetAllAdapters,
-		},
 		"GetSubnetAdapters": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/subnet/{subnetId}/adapters",
 			c.GetSubnetAdapters,
+		},
+		"ListAdapters": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/adapter",
+			c.ListAdapters,
+		},
+		"ReadAdapter": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/adapter/{ adapterId }",
+			c.ReadAdapter,
 		},
 		"UpdateAdapter": Route{
 			strings.ToUpper("Put"),
@@ -154,36 +154,6 @@ func (c *AdapterAPIController) DeleteAdapter(w http.ResponseWriter, r *http.Requ
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetAdapter - 
-func (c *AdapterAPIController) GetAdapter(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	adapterIdParam := params["adapterId"]
-	if adapterIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"adapterId"}, nil)
-		return
-	}
-	result, err := c.service.GetAdapter(r.Context(), adapterIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetAllAdapters - 
-func (c *AdapterAPIController) GetAllAdapters(w http.ResponseWriter, r *http.Request) {
-	result, err := c.service.GetAllAdapters(r.Context())
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
 // GetSubnetAdapters - 
 func (c *AdapterAPIController) GetSubnetAdapters(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -193,6 +163,36 @@ func (c *AdapterAPIController) GetSubnetAdapters(w http.ResponseWriter, r *http.
 		return
 	}
 	result, err := c.service.GetSubnetAdapters(r.Context(), subnetIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListAdapters - 
+func (c *AdapterAPIController) ListAdapters(w http.ResponseWriter, r *http.Request) {
+	result, err := c.service.ListAdapters(r.Context())
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ReadAdapter - 
+func (c *AdapterAPIController) ReadAdapter(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	adapterIdParam := params["adapterId"]
+	if adapterIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"adapterId"}, nil)
+		return
+	}
+	result, err := c.service.ReadAdapter(r.Context(), adapterIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

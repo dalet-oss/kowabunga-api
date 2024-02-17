@@ -1,7 +1,7 @@
 resources:
   adapter:
     tag: adapter
-    desc: network adapters
+    desc: network adapter
     schema: Adapter
     paramId: adapterId
     paramSchema: AdapterID

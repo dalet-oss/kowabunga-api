@@ -23,9 +23,9 @@ import (
 type AdapterAPIRouter interface { 
 	CreateAdapter(http.ResponseWriter, *http.Request)
 	DeleteAdapter(http.ResponseWriter, *http.Request)
-	GetAdapter(http.ResponseWriter, *http.Request)
-	GetAllAdapters(http.ResponseWriter, *http.Request)
 	GetSubnetAdapters(http.ResponseWriter, *http.Request)
+	ListAdapters(http.ResponseWriter, *http.Request)
+	ReadAdapter(http.ResponseWriter, *http.Request)
 	UpdateAdapter(http.ResponseWriter, *http.Request)
 }
 // HostAPIRouter defines the required methods for binding the api requests to a responses for the HostAPI
@@ -289,9 +289,9 @@ type ZoneAPIRouter interface {
 type AdapterAPIServicer interface { 
 	CreateAdapter(context.Context, string, Adapter, bool) (ImplResponse, error)
 	DeleteAdapter(context.Context, string) (ImplResponse, error)
-	GetAdapter(context.Context, string) (ImplResponse, error)
-	GetAllAdapters(context.Context) (ImplResponse, error)
 	GetSubnetAdapters(context.Context, string) (ImplResponse, error)
+	ListAdapters(context.Context) (ImplResponse, error)
+	ReadAdapter(context.Context, string) (ImplResponse, error)
 	UpdateAdapter(context.Context, string, Adapter) (ImplResponse, error)
 }
 

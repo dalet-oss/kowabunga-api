@@ -13,7 +13,7 @@ package server
 
 
 
-// Adapter - A network adapters
+// Adapter - A network adapter
 type Adapter struct {
 
 	// The network adapter ID (auto-generated)
