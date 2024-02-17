@@ -15,10 +15,7 @@ components:
 
 paths:
   /adapter:
-{{ oas.List('GetAllAdapters', resources.adapter.desc, [resources.adapter.tag]) }}
+{{ oas.List(resources.adapter, [resources.adapter.tag]) }}
 
   /adapter/{ {{ resources.adapter.paramId }} }:
-{{ oas.Parameters([resources.adapter.paramSchema]) }}
-{{ oas.Read('GetAdapter', resources.adapter.schema, resources.adapter.desc, [resources.adapter.tag]) }}
-{{ oas.Update('UpdateAdapter', resources.adapter.schema, resources.adapter.desc, [resources.adapter.tag]) }}
-{{ oas.Delete('DeleteAdapter', resources.adapter.desc, [resources.adapter.tag]) }}
+{{ oas.RUD(resources.adapter, [resources.adapter.tag], [resources.adapter.paramSchema]) }}

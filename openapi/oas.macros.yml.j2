@@ -112,11 +112,13 @@
 {{ ErrorsQuotas() }}
 {% endmacro %}
 
-{% macro Parameters(params) %}
+{% macro Parameters(params=[]) %}
+{% if params != [] %}
     parameters:
 {% for p in params %}
       - $ref: '#/components/parameters/{{ p }}'
 {% endfor %}
+{% endif %}
 {% endmacro %}
 
 {% macro ResponseOk(desc) %}
@@ -151,7 +153,7 @@
 {{ GetResource('ObjectIds', 'Returns an array of ' + desc + ' IDs') }}
 {% endmacro %}
 
-{% macro List(opId, desc, tags) %}
+{% macro GetAll(opId, desc, tags) %}
     get:
 {{ Tags(tags) }}
       description: Returns the IDs of {{ desc }}
@@ -192,3 +194,14 @@
 {{ ErrorsDelete() }}
 {% endmacro %}
 
+{% macro List(obj, tags, params=[]) %}
+{{ Parameters(params) }}
+{{ GetAll('GetAll' + obj.schema + 's', resources.adapter.desc, [resources.adapter.tag]) }}
+{% endmacro %}
+
+{% macro RUD(obj, tags, params=[]) %}
+{{ Parameters(params) }}
+{{ Read('Get' + obj.schema, obj.schema, obj.desc, tags) }}
+{{ Update('Update' + obj.schema, obj.schema, obj.desc, tags) }}
+{{ Delete('Delete' + obj.schema, obj.desc, tags) }}
+{% endmacro %}
