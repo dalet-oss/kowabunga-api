@@ -19,7 +19,7 @@ components:
 
 paths:
   /adapter:
-{{ oas.GetAll('GetAllAdapters', adapter_desc, [adapter_tag]) }}
+{{ oas.List('GetAllAdapters', adapter_desc, [adapter_tag]) }}
 
   /adapter/{adapterId}:
 {{ oas.Parameters([adapter_param]) }}

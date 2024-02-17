@@ -151,7 +151,7 @@
 {{ GetResource('ObjectIds', 'Returns an array of ' + desc + ' IDs') }}
 {% endmacro %}
 
-{% macro GetAll(opId, desc, tags) %}
+{% macro List(opId, desc, tags) %}
     get:
 {{ Tags(tags) }}
       description: Returns the IDs of {{ desc }}
