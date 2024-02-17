@@ -282,7 +282,7 @@ func (a *AdapterAPIService) DeleteAdapterExecute(r ApiDeleteAdapterRequest) (*ht
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/adapter/{adapterId}"
+	localVarPath := localBasePath + "/adapter/{ adapterId }"
 	localVarPath = strings.Replace(localVarPath, "{"+"adapterId"+"}", url.PathEscape(parameterValueToString(r.adapterId, "adapterId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -458,7 +458,7 @@ func (a *AdapterAPIService) GetAdapterExecute(r ApiGetAdapterRequest) (*Adapter,
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/adapter/{adapterId}"
+	localVarPath := localBasePath + "/adapter/{ adapterId }"
 	localVarPath = strings.Replace(localVarPath, "{"+"adapterId"+"}", url.PathEscape(parameterValueToString(r.adapterId, "adapterId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -939,7 +939,7 @@ func (a *AdapterAPIService) UpdateAdapterExecute(r ApiUpdateAdapterRequest) (*Ad
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/adapter/{adapterId}"
+	localVarPath := localBasePath + "/adapter/{ adapterId }"
 	localVarPath = strings.Replace(localVarPath, "{"+"adapterId"+"}", url.PathEscape(parameterValueToString(r.adapterId, "adapterId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

@@ -266,7 +266,7 @@ export class AdapterService {
             }
         }
 
-        let localVarPath = `/adapter/${this.configuration.encodeParam({name: "adapterId", value: adapterId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
+        let localVarPath = `/adapter/`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -343,7 +343,7 @@ export class AdapterService {
             }
         }
 
-        let localVarPath = `/adapter/${this.configuration.encodeParam({name: "adapterId", value: adapterId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
+        let localVarPath = `/adapter/`;
         return this.httpClient.request<Adapter>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -583,7 +583,7 @@ export class AdapterService {
             }
         }
 
-        let localVarPath = `/adapter/${this.configuration.encodeParam({name: "adapterId", value: adapterId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
+        let localVarPath = `/adapter/`;
         return this.httpClient.request<Adapter>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

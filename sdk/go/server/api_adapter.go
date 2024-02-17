@@ -58,12 +58,12 @@ func (c *AdapterAPIController) Routes() Routes {
 		},
 		"DeleteAdapter": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/adapter/{adapterId}",
+			"/api/v1/adapter/{ adapterId }",
 			c.DeleteAdapter,
 		},
 		"GetAdapter": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/adapter/{adapterId}",
+			"/api/v1/adapter/{ adapterId }",
 			c.GetAdapter,
 		},
 		"GetAllAdapters": Route{
@@ -78,7 +78,7 @@ func (c *AdapterAPIController) Routes() Routes {
 		},
 		"UpdateAdapter": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/adapter/{adapterId}",
+			"/api/v1/adapter/{ adapterId }",
 			c.UpdateAdapter,
 		},
 	}

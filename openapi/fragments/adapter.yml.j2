@@ -17,7 +17,7 @@ paths:
   /adapter:
 {{ oas.List('GetAllAdapters', resources.adapter.desc, [resources.adapter.tag]) }}
 
-  /adapter/{adapterId}:
+  /adapter/{ {{ resources.adapter.paramId }} }:
 {{ oas.Parameters([resources.adapter.paramSchema]) }}
 {{ oas.Read('GetAdapter', resources.adapter.schema, resources.adapter.desc, [resources.adapter.tag]) }}
 {{ oas.Update('UpdateAdapter', resources.adapter.schema, resources.adapter.desc, [resources.adapter.tag]) }}
