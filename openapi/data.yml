@@ -1,35 +1,35 @@
 resources:
-  - name: adapter
+  adapter:
     desc: network adapters
-  - name: record
+  record:
     desc: DNS records
-  - name: host
+  host:
     desc: computing hosts
-  - name: instance
+  instance:
     desc: virtual machine instances
-  - name: kce
+  kce:
     desc: KCE (Kowabunga Compute Engine)
-  - name: kfs
+  kfs:
     desc: KFS (Kowabunga File System)
-  - name: kgw
+  kgw:
     desc: KGW (Kowabunga Network Gateway)
-  - name: netgw
+  netgw:
     desc: network gateways
-  - name: project
+  project:
     desc: projects
-  - name: region
+  region:
     desc: regions
-  - name: nfs
+  nfs:
     desc: NFS storages
-  - name: pool
+  pool:
     desc: storage pools
-  - name: subnet
+  subnet:
     desc: network subnets
-  - name: template
+  template:
     desc: image templates
-  - name: vnet
+  vnet:
     desc: virtual networks
-  - name: volume
+  volume:
     desc: storage volumes
-  - name: zone
+  zone:
     desc: zones
