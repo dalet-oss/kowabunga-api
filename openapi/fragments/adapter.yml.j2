@@ -1,12 +1,8 @@
 {%- import "openapi/oas.macros.yml.j2" as oas with context %}
-{%- set adapter_schema = 'Adapter' %}
-{%- set adapter_desc = 'network adapter' %}
-{%- set adapter_tag = 'adapter' %}
-{%- set adapter_param = 'AdapterID' %}
 
 components:
   schemas:
-{{ oas.Schema(adapter_schema, adapter_desc, ['name']) }}
+{{ oas.Schema(resources.adapter.schema, resources.adapter.desc, ['name']) }}
 {{ oas.StringProperty('id', 'The network adapter ID (auto-generated)') }}
 {{ oas.StringProperty('name', 'The network adapter name') }}
 {{ oas.StringProperty('description', 'The network adapter description') }}
@@ -15,14 +11,14 @@ components:
 {{ oas.BoolProperty('reserved', 'The network adapter is a reserved adapter (e.g. router), where the same hardware address can be reused over several subnets', 'false') }}
 
   parameters:
-{{ oas.StringPathParam(adapter_param, 'adapterId', 'The ID of the network adapter') }}
+{{ oas.StringPathParam(resources.adapter.paramSchema, resources.adapter.paramId, 'The ID of the network adapter') }}
 
 paths:
   /adapter:
-{{ oas.List('GetAllAdapters', adapter_desc, [adapter_tag]) }}
+{{ oas.List('GetAllAdapters', resources.adapter.desc, [resources.adapter.tag]) }}
 
   /adapter/{adapterId}:
-{{ oas.Parameters([adapter_param]) }}
-{{ oas.Read('GetAdapter', adapter_schema, adapter_desc, [adapter_tag]) }}
-{{ oas.Update('UpdateAdapter', adapter_schema, adapter_desc, [adapter_tag]) }}
-{{ oas.Delete('DeleteAdapter', adapter_desc, [adapter_tag]) }}
+{{ oas.Parameters([resources.adapter.paramSchema]) }}
+{{ oas.Read('GetAdapter', resources.adapter.schema, resources.adapter.desc, [resources.adapter.tag]) }}
+{{ oas.Update('UpdateAdapter', resources.adapter.schema, resources.adapter.desc, [resources.adapter.tag]) }}
+{{ oas.Delete('DeleteAdapter', resources.adapter.desc, [resources.adapter.tag]) }}

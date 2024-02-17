@@ -1,6 +1,10 @@
 resources:
   adapter:
+    tag: adapter
     desc: network adapters
+    schema: Adapter
+    paramId: adapterId
+    paramSchema: AdapterID
   record:
     desc: DNS records
   host:

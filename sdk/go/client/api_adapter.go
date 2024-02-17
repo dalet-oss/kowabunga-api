@@ -255,7 +255,7 @@ func (r ApiDeleteAdapterRequest) Execute() (*http.Response, error) {
 /*
 DeleteAdapter Method for DeleteAdapter
 
-Deletes an existing network adapter
+Deletes an existing network adapters
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param adapterId The ID of the network adapter
@@ -429,7 +429,7 @@ func (r ApiGetAdapterRequest) Execute() (*Adapter, *http.Response, error) {
 /*
 GetAdapter Method for GetAdapter
 
-Returns a network adapter
+Returns a network adapters
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param adapterId The ID of the network adapter
@@ -591,7 +591,7 @@ func (r ApiGetAllAdaptersRequest) Execute() ([]string, *http.Response, error) {
 /*
 GetAllAdapters Method for GetAllAdapters
 
-Returns the IDs of network adapter
+Returns the IDs of network adapters
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAllAdaptersRequest
@@ -910,7 +910,7 @@ func (r ApiUpdateAdapterRequest) Execute() (*Adapter, *http.Response, error) {
 /*
 UpdateAdapter Method for UpdateAdapter
 
-Updates a network adapter configuration
+Updates a network adapters configuration
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param adapterId The ID of the network adapter
