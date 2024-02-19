@@ -3258,7 +3258,7 @@ components:
         type: string
       style: simple
     OptionalQueryNotify:
-      description: Whether or not to send a notification email at resource creation.
+      description: Whether or not to send a notification email at resource creation
       explode: true
       in: query
       name: notify
@@ -3716,6 +3716,7 @@ components:
       - reason
       - status
     ObjectIds:
+      description: A list of resource IDs
       items:
         type: string
       type: array

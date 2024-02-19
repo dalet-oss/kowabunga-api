@@ -162,7 +162,7 @@ All URIs are relative to */api/v1*
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
 | **zoneId** | **String**| The ID of the zone. | [default to null] |
 | **Instance** | [**Instance**](../Models/Instance.md)| Instance payload | |
-| **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
+| **notify** | **Boolean**| Whether or not to send a notification email at resource creation | [optional] [default to null] |
 
 ### Return type
 
@@ -195,7 +195,7 @@ All URIs are relative to */api/v1*
 | **poolId** | **String**| Storage pool ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **templateId** | **String**| Template to clone the storage volume from (optional, zone&#39;s default if unspecified) | [optional] [default to null] |
 | **public** | **Boolean**| Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false). | [optional] [default to null] |
-| **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
+| **notify** | **Boolean**| Whether or not to send a notification email at resource creation | [optional] [default to null] |
 
 ### Return type
 
@@ -226,7 +226,7 @@ All URIs are relative to */api/v1*
 | **zoneId** | **String**| The ID of the zone. | [default to null] |
 | **KFS** | [**KFS**](../Models/KFS.md)| KFS payload | |
 | **nfsId** | **String**| NFS storage ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
-| **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
+| **notify** | **Boolean**| Whether or not to send a notification email at resource creation | [optional] [default to null] |
 
 ### Return type
 
@@ -507,7 +507,7 @@ This endpoint does not need any parameter.
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
 | **zoneId** | **String**| The ID of the zone. | [default to null] |
 | **nfsId** | **String**| NFS storage ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
-| **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
+| **notify** | **Boolean**| Whether or not to send a notification email at resource creation | [optional] [default to null] |
 
 ### Return type
 
