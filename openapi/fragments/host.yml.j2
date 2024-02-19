@@ -75,20 +75,10 @@ components:
             memory:
               type: integer
               description: the host memory size in bytes
+
   parameters:
-    HostID:
-      name: hostId
-      in: path
-      description: The ID of the computing host.
-      schema:
-        type: string
-      required: true
-    OptionalQueryHostID:
-      name: hostId
-      in: query
-      description: The ID of the computing host (useless for RBD pools, mandatory for local ones).
-      schema:
-        type: string
+{{ oas.PathParamID(resources.host) }}
+{{ oas.StringQueryParam(resources.host.paramSchema, resources.host.paramId, 'The ID of the computing host (useless for RBD pools, mandatory for local ones)') }}
 
 paths:
   /host:

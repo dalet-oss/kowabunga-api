@@ -150,6 +150,10 @@
 {{ QueryParam(key, name, desc, 'boolean') }}
 {% endmacro %}
 
+{% macro StringQueryParam(key, name, desc) %}
+{{ QueryParam(key, name, desc, 'string') }}
+{% endmacro %}
+
 {% macro Tags(tgs) %}
       tags:
 {% for t in tgs %}
