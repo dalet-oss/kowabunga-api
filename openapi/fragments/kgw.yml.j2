@@ -1,139 +1,23 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
 components:
   schemas:
-    KGW:
-      type: object
-      description: Kowabunga Network Gateway is a network gateway used for your internet inbound and outbound traffic
-      properties:
-        id:
-          type: string
-          description: The Kowabunga network gateway ID (auto-generated).
-        description:
-          type: string
-          description: The KGW description.
-        public_ip:
-          type: string
-          description: The Kowabunga network gateway public IPs (read only)
-        private_ip:
-          type: string
-          description: The Kowabunga network gateway private IP (read only)
-        nats:
-          type: array
-          items:
-            $ref:  '#/components/schemas/KGWNat'
-    KGWNat:
-      type: object
-      description: KGW Nat definition
-      required:
-        - private_ip
-        - ports
-      properties:
-        private_ip:
-          type: string
-          description: Target Private IP. Leave blank for a new generated one
-        public_ip:
-          type: string
-          description: Public IP from created Adapter. Leave empty to use the default Public IP
-        ports:
-          type: string
-          description: Ports being forwarded from the public to the private IP. Accept Ranges
+{{ oas.SchemaBaseResource(resources.kgw) }}
+{{ oas.StringProperty('public_ip', 'The ' + resources.kgw.desc + ' public IP (read-only)') }}
+{{ oas.StringProperty('private_ip', 'The ' + resources.kgw.desc + ' private IP (read-only)') }}
+{{ oas.ObjectArrayProperty('nats', 'The ' + resources.kgw.desc + ' list of NAT entries', resources.kgw_nat.schema) }}
+
+{{ oas.Schema(resources.kgw_nat, ['private_ip', 'port']) }}
+{{ oas.StringProperty('private_ip', 'Target Private IP. Leave blank for a new generated one') }}
+{{ oas.StringProperty('public_ip', 'Public IP from created adapter. Leave empty to use the default public IP') }}
+{{ oas.StringProperty('ports', 'Ports being forwarded from the public to the private IP. Accept Ranges') }}
+
   parameters:
-    KgwID:
-      name: kgwId
-      in: path
-      description: The ID of the KGW network gateway.
-      required: true
-      schema:
-        type: string
+{{ oas.PathParamID(resources.kgw) }}
 
 paths:
   /kgw:
-    get:
-      tags:
-        - kgw
-      operationId: GetAllKgw
-      description: Returns the IDs of registered KGW
-      responses:
-        '200':
-          description: Returns an array for KGW IDs
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
+{{ oas.List(resources.kgw, [resources.kgw.tag]) }}
 
-  /kgw/{kgwId}:
-    parameters:
-      - $ref: '#/components/parameters/KgwID'
-
-    get:
-      tags:
-        - kgw
-      operationId: GetKgw
-      description: Returns the descirption of the registered KGW
-      responses:
-        '200':
-          description: Returns the KGW network gateway object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/KGW'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-
-    put:
-      tags:
-        - kgw
-      operationId: UpdateKGW
-      description: Updates a KGW virtual machine configuration.
-      requestBody:
-        description: KGW payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/KGW'
-        required: true
-      responses:
-        '200':
-          description: Updated KGW network gateway.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/KGW'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-        '507':
-          $ref: '#/components/responses/InsufficientStorage'
-
-    delete:
-      tags:
-        - kgw
-      operationId: DeleteKGW
-      description: Deletes an existing KGW gateway.
-      responses:
-        '200':
-          description: The KGW has been successfully removed.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /kgw/{{ resources.kgw.paramId }} }:
+{{ oas.RUD(resources.kgw, [resources.kgw.tag], [resources.kgw.paramSchema]) }}

@@ -52,18 +52,18 @@ All URIs are relative to */api/v1*
 *KceApi* | [**suspendKCE**](Apis/KceApi.md#suspendkce) | **POST** /kce/{ kceId }/suspend | Performs a KCE (Kowabunga Compute Engine) software PM suspend. |
 *KceApi* | [**updateKCE**](Apis/KceApi.md#updatekce) | **PUT** /kce/{ kceId } | Updates a KCE (Kowabunga Compute Engine) configuration. |
 | *KfsApi* | [**createProjectZoneKfs**](Apis/KfsApi.md#createprojectzonekfs) | **POST** /project/{projectId}/zone/{zoneId}/kfs | Creates a new KFS storage volume in specified zone. |
-*KfsApi* | [**deleteKFS**](Apis/KfsApi.md#deletekfs) | **DELETE** /kfs/{kfsId} | Deletes an existing KFS (Kowabunga File System). |
+*KfsApi* | [**deleteKFS**](Apis/KfsApi.md#deletekfs) | **DELETE** /kfs/{ kfsId } | Deletes an existing KFS (Kowabunga File System). |
 *KfsApi* | [**getNfsKfs**](Apis/KfsApi.md#getnfskfs) | **GET** /nfs/{nfsId}/kfs | Returns the IDs of the KFS volumes existing in the NFS storage. |
 *KfsApi* | [**getProjectZoneKfs**](Apis/KfsApi.md#getprojectzonekfs) | **GET** /project/{projectId}/zone/{zoneId}/kfs | Returns the IDs of the KFS storage volumes existing in the project in the specified zone. |
 *KfsApi* | [**listKFSs**](Apis/KfsApi.md#listkfss) | **GET** /kfs | Returns the IDs of KFS (Kowabunga File System) objects. |
-*KfsApi* | [**readKFS**](Apis/KfsApi.md#readkfs) | **GET** /kfs/{kfsId} | Returns a KFS (Kowabunga File System). |
-*KfsApi* | [**updateKFS**](Apis/KfsApi.md#updatekfs) | **PUT** /kfs/{kfsId} | Updates a KFS (Kowabunga File System) configuration. |
+*KfsApi* | [**readKFS**](Apis/KfsApi.md#readkfs) | **GET** /kfs/{ kfsId } | Returns a KFS (Kowabunga File System). |
+*KfsApi* | [**updateKFS**](Apis/KfsApi.md#updatekfs) | **PUT** /kfs/{ kfsId } | Updates a KFS (Kowabunga File System) configuration. |
 | *KgwApi* | [**createProjectZoneKgw**](Apis/KgwApi.md#createprojectzonekgw) | **POST** /project/{projectId}/zone/{zoneId}/kgw | Creates a new KGW in the specified zone. |
-*KgwApi* | [**deleteKGW**](Apis/KgwApi.md#deletekgw) | **DELETE** /kgw/{kgwId} | Deletes an existing KGW gateway. |
-*KgwApi* | [**getAllKgw**](Apis/KgwApi.md#getallkgw) | **GET** /kgw | Returns the IDs of registered KGW |
-*KgwApi* | [**getKgw**](Apis/KgwApi.md#getkgw) | **GET** /kgw/{kgwId} | Returns the descirption of the registered KGW |
+*KgwApi* | [**deleteKGW**](Apis/KgwApi.md#deletekgw) | **DELETE** /kgw/kgwId } | Deletes an existing KGW (Kowabunga Network Gateway). |
 *KgwApi* | [**getProjectZoneKGWs**](Apis/KgwApi.md#getprojectzonekgws) | **GET** /project/{projectId}/zone/{zoneId}/kgws | Returns the IDs of the KGW existing in the project in the specified zone. |
-*KgwApi* | [**updateKGW**](Apis/KgwApi.md#updatekgw) | **PUT** /kgw/{kgwId} | Updates a KGW virtual machine configuration. |
+*KgwApi* | [**listKGWs**](Apis/KgwApi.md#listkgws) | **GET** /kgw | Returns the IDs of KGW (Kowabunga Network Gateway) objects. |
+*KgwApi* | [**readKGW**](Apis/KgwApi.md#readkgw) | **GET** /kgw/kgwId } | Returns a KGW (Kowabunga Network Gateway). |
+*KgwApi* | [**updateKGW**](Apis/KgwApi.md#updatekgw) | **PUT** /kgw/kgwId } | Updates a KGW (Kowabunga Network Gateway) configuration. |
 | *NetgwApi* | [**createNetGW**](Apis/NetgwApi.md#createnetgw) | **POST** /zone/{zoneId}/netgw | Creates a new network gateway. |
 *NetgwApi* | [**deleteNetGW**](Apis/NetgwApi.md#deletenetgw) | **DELETE** /netgw/{netgwId} | Deletes an existing network gateway. |
 *NetgwApi* | [**getAllNetGWs**](Apis/NetgwApi.md#getallnetgws) | **GET** /netgw | Returns the IDs of network gateways. |

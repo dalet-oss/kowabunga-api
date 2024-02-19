@@ -5,11 +5,11 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createProjectZoneKgw**](KgwApi.md#createProjectZoneKgw) | **POST** /project/{projectId}/zone/{zoneId}/kgw |  |
-| [**deleteKGW**](KgwApi.md#deleteKGW) | **DELETE** /kgw/{kgwId} |  |
-| [**getAllKgw**](KgwApi.md#getAllKgw) | **GET** /kgw |  |
-| [**getKgw**](KgwApi.md#getKgw) | **GET** /kgw/{kgwId} |  |
+| [**deleteKGW**](KgwApi.md#deleteKGW) | **DELETE** /kgw/kgwId } |  |
 | [**getProjectZoneKGWs**](KgwApi.md#getProjectZoneKGWs) | **GET** /project/{projectId}/zone/{zoneId}/kgws |  |
-| [**updateKGW**](KgwApi.md#updateKGW) | **PUT** /kgw/{kgwId} |  |
+| [**listKGWs**](KgwApi.md#listKGWs) | **GET** /kgw |  |
+| [**readKGW**](KgwApi.md#readKGW) | **GET** /kgw/kgwId } |  |
+| [**updateKGW**](KgwApi.md#updateKGW) | **PUT** /kgw/kgwId } |  |
 
 
 <a name="createProjectZoneKgw"></a>
@@ -47,68 +47,17 @@ All URIs are relative to */api/v1*
 
 
 
-    Deletes an existing KGW gateway.
+    Deletes an existing KGW (Kowabunga Network Gateway).
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **kgwId** | **String**| The ID of the KGW network gateway. | [default to null] |
+| **kgwId** | **String**| The ID of the KGW (Kowabunga Network Gateway). | [default to null] |
 
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getAllKgw"></a>
-# **getAllKgw**
-> List getAllKgw()
-
-
-
-    Returns the IDs of registered KGW
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getKgw"></a>
-# **getKgw**
-> KGW getKgw(kgwId)
-
-
-
-    Returns the descirption of the registered KGW
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **kgwId** | **String**| The ID of the KGW network gateway. | [default to null] |
-
-### Return type
-
-[**KGW**](../Models/KGW.md)
 
 ### Authorization
 
@@ -147,20 +96,71 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+<a name="listKGWs"></a>
+# **listKGWs**
+> List listKGWs()
+
+
+
+    Returns the IDs of KGW (Kowabunga Network Gateway) objects.
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="readKGW"></a>
+# **readKGW**
+> KGW readKGW(kgwId)
+
+
+
+    Returns a KGW (Kowabunga Network Gateway).
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **kgwId** | **String**| The ID of the KGW (Kowabunga Network Gateway). | [default to null] |
+
+### Return type
+
+[**KGW**](../Models/KGW.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 <a name="updateKGW"></a>
 # **updateKGW**
 > KGW updateKGW(kgwId, KGW)
 
 
 
-    Updates a KGW virtual machine configuration.
+    Updates a KGW (Kowabunga Network Gateway) configuration.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **kgwId** | **String**| The ID of the KGW network gateway. | [default to null] |
-| **KGW** | [**KGW**](../Models/KGW.md)| KGW payload | |
+| **kgwId** | **String**| The ID of the KGW (Kowabunga Network Gateway). | [default to null] |
+| **KGW** | [**KGW**](../Models/KGW.md)| KGW payload. | |
 
 ### Return type
 

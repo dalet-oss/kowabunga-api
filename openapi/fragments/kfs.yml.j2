@@ -15,5 +15,5 @@ paths:
   /kfs:
 {{ oas.List(resources.kfs, [resources.kfs.tag]) }}
 
-  /kfs/{kfsId}:
+  /kfs/{ {{ resources.kfs.paramId }} }:
 {{ oas.RUD(resources.kfs, [resources.kfs.tag], [resources.kfs.paramSchema]) }}

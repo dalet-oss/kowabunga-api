@@ -5,12 +5,12 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createProjectZoneKfs**](KfsApi.md#createProjectZoneKfs) | **POST** /project/{projectId}/zone/{zoneId}/kfs |  |
-| [**deleteKFS**](KfsApi.md#deleteKFS) | **DELETE** /kfs/{kfsId} |  |
+| [**deleteKFS**](KfsApi.md#deleteKFS) | **DELETE** /kfs/{ kfsId } |  |
 | [**getNfsKfs**](KfsApi.md#getNfsKfs) | **GET** /nfs/{nfsId}/kfs |  |
 | [**getProjectZoneKfs**](KfsApi.md#getProjectZoneKfs) | **GET** /project/{projectId}/zone/{zoneId}/kfs |  |
 | [**listKFSs**](KfsApi.md#listKFSs) | **GET** /kfs |  |
-| [**readKFS**](KfsApi.md#readKFS) | **GET** /kfs/{kfsId} |  |
-| [**updateKFS**](KfsApi.md#updateKFS) | **PUT** /kfs/{kfsId} |  |
+| [**readKFS**](KfsApi.md#readKFS) | **GET** /kfs/{ kfsId } |  |
+| [**updateKFS**](KfsApi.md#updateKFS) | **PUT** /kfs/{ kfsId } |  |
 
 
 <a name="createProjectZoneKfs"></a>

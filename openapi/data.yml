@@ -58,7 +58,15 @@ resources:
     paramId: kfsId
     paramSchema: KfsID
   kgw:
+    tag: kgw
     desc: KGW (Kowabunga Network Gateway)
+    extended_desc: Kowabunga Network Gateway is a network gateway used for your internet inbound and outbound traffic
+    schema: KGW
+    paramId: kgwId
+    paramSchema: KgwID
+  kgw_nat:
+    desc: KGW NAT mapping
+    schema: KGWNat
   netgw:
     desc: network gateways
   project:

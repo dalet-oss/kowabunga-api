@@ -29,6 +29,8 @@ tags:
   name: kce
 - description: Everything about KFS (Kowabunga File System)
   name: kfs
+- description: Everything about KGW (Kowabunga Network Gateway)
+  name: kgw
 paths:
   /adapter:
     get:
@@ -906,7 +908,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
       tags:
       - kfs
-  /kfs/{kfsId}:
+  /kfs/{ kfsId }:
     delete:
       description: Deletes an existing KFS (Kowabunga File System).
       operationId: DeleteKFS
@@ -984,30 +986,30 @@ paths:
       - kfs
   /kgw:
     get:
-      description: Returns the IDs of registered KGW
-      operationId: GetAllKgw
+      description: Returns the IDs of KGW (Kowabunga Network Gateway) objects.
+      operationId: ListKGWs
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array for KGW IDs
+          description: Returns an array of KGW (Kowabunga Network Gateway) IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
           $ref: '#/components/responses/Forbidden'
       tags:
       - kgw
-  /kgw/{kgwId}:
+  /kgw/kgwId }:
     delete:
-      description: Deletes an existing KGW gateway.
+      description: Deletes an existing KGW (Kowabunga Network Gateway).
       operationId: DeleteKGW
       parameters:
       - $ref: '#/components/parameters/KgwID'
       responses:
         "200":
-          description: The KGW has been successfully removed.
+          description: The KGW (Kowabunga Network Gateway) has been successfully removed.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -1021,8 +1023,8 @@ paths:
       tags:
       - kgw
     get:
-      description: Returns the descirption of the registered KGW
-      operationId: GetKgw
+      description: Returns a KGW (Kowabunga Network Gateway).
+      operationId: ReadKGW
       parameters:
       - $ref: '#/components/parameters/KgwID'
       responses:
@@ -1031,7 +1033,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KGW'
-          description: Returns the KGW network gateway object.
+          description: Returns the KGW (Kowabunga Network Gateway) object.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -1043,7 +1045,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/KgwID'
     put:
-      description: Updates a KGW virtual machine configuration.
+      description: Updates a KGW (Kowabunga Network Gateway) configuration.
       operationId: UpdateKGW
       parameters:
       - $ref: '#/components/parameters/KgwID'
@@ -1052,7 +1054,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/KGW'
-        description: KGW payload
+        description: KGW payload.
         required: true
       responses:
         "200":
@@ -1060,7 +1062,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KGW'
-          description: Updated KGW network gateway.
+          description: Returns the KGW (Kowabunga Network Gateway) object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -3306,7 +3308,7 @@ components:
         type: string
       style: simple
     KgwID:
-      description: The ID of the KGW network gateway.
+      description: The ID of the KGW (Kowabunga Network Gateway).
       explode: false
       in: path
       name: kgwId
@@ -4030,8 +4032,8 @@ components:
       required:
       - name
     KGW:
-      description: Kowabunga Network Gateway is a network gateway used for your internet
-        inbound and outbound traffic
+      description: A Kowabunga Network Gateway is a network gateway used for your
+        internet inbound and outbound traffic.
       example:
         nats:
         - public_ip: public_ip
@@ -4041,46 +4043,50 @@ components:
           ports: ports
           private_ip: private_ip
         public_ip: public_ip
+        name: name
         description: description
         id: id
         private_ip: private_ip
       properties:
         id:
-          description: The Kowabunga network gateway ID (auto-generated).
+          description: The KGW (Kowabunga Network Gateway) ID (auto-generated).
+          type: string
+        name:
+          description: The KGW (Kowabunga Network Gateway) name.
           type: string
         description:
-          description: The KGW description.
+          description: The KGW (Kowabunga Network Gateway) description.
           type: string
         public_ip:
-          description: The Kowabunga network gateway public IPs (read only)
+          description: The KGW (Kowabunga Network Gateway) public IP (read-only).
           type: string
         private_ip:
-          description: The Kowabunga network gateway private IP (read only)
+          description: The KGW (Kowabunga Network Gateway) private IP (read-only).
           type: string
         nats:
+          description: The KGW (Kowabunga Network Gateway) list of NAT entries.
           items:
             $ref: '#/components/schemas/KGWNat'
           type: array
     KGWNat:
-      description: KGW Nat definition
+      description: A KGW NAT mapping.
       example:
         public_ip: public_ip
         ports: ports
         private_ip: private_ip
       properties:
         private_ip:
-          description: Target Private IP. Leave blank for a new generated one
+          description: Target Private IP. Leave blank for a new generated one.
           type: string
         public_ip:
-          description: Public IP from created Adapter. Leave empty to use the default
-            Public IP
+          description: Public IP from created adapter. Leave empty to use the default
+            public IP.
           type: string
         ports:
           description: Ports being forwarded from the public to the private IP. Accept
-            Ranges
+            Ranges.
           type: string
       required:
-      - ports
       - private_ip
     Metadata:
       description: A key/value metadata.

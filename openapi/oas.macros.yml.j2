@@ -122,6 +122,14 @@
 {{ ArrayProperty(name, 'integer', desc, values, default) }}
 {% endmacro %}
 
+{% macro ObjectArrayProperty(name, desc, schema) %}
+        {{ name }}:
+          type: array
+          description: {{ desc }}.
+          items:
+            $ref:  '#/components/schemas/{{ schema }}'
+{% endmacro %}
+
 {% macro SchemaBaseResource(obj, required=[]) %}
 {{ Schema(obj, required) }}
 {{ StringProperty('id', 'The ' + obj.desc + ' ID (auto-generated)') }}
