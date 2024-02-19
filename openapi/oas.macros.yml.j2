@@ -188,8 +188,11 @@
           $ref: '#/components/responses/UnprocessableEntity'
 {% endmacro %}
 
-{% macro ErrorsGetAll() %}
+{% macro ErrorsGetAll(childOf=False) %}
 {{ ErrorsAuth() }}
+{% if childOf %}
+{{ ErrorsUnknownResource() }}
+{% endif %}
 {% endmacro %}
 
 {% macro ErrorsGetOne() %}
@@ -250,14 +253,14 @@
 {{ GetResource('ObjectIds', 'Returns an array of ' + desc + ' IDs') }}
 {% endmacro %}
 
-{% macro GetAll(opId, desc, tags) %}
+{% macro GetAll(opId, desc, tags, childOf=False) %}
     get:
 {{ Tags(tags) }}
       description: Returns the IDs of {{ desc }} objects.
       operationId: {{ opId }}
       responses:
 {{ GetAllResource(desc) }}
-{{ ErrorsGetAll() }}
+{{ ErrorsGetAll(childOf) }}
 {% endmacro %}
 
 {% macro Read(opId, schema, desc, tags) %}
