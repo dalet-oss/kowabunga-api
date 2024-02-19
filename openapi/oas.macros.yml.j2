@@ -69,6 +69,10 @@
 {{ PathParam(key, name, desc, 'string') }}
 {% endmacro %}
 
+{% macro PathParamID(obj) %}
+{{ StringPathParam(obj.paramSchema, obj.paramId, 'The ID of the ' + obj.desc) }}
+{% endmacro %}
+
 {% macro Tags(tgs) %}
       tags:
 {% for t in tgs %}

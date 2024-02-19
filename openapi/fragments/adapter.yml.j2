@@ -10,7 +10,7 @@ components:
 {{ oas.BoolProperty('reserved', 'The network adapter is a reserved adapter (e.g. router), where the same hardware address can be reused over several subnets', 'false') }}
 
   parameters:
-{{ oas.StringPathParam(resources.adapter.paramSchema, resources.adapter.paramId, 'The ID of the network adapter') }}
+{{ oas.PathParamID(resources.adapter) }}
 
 paths:
   /adapter:

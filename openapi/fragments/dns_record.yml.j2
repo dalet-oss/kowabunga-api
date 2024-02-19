@@ -9,7 +9,7 @@ components:
 {{ oas.StringArrayProperty('addresses', 'A list of IPv4 addresses to be associated to the record') }}
 
   parameters:
-{{ oas.StringPathParam(resources.record.paramSchema, resources.record.paramId, 'The ID of the DNS record') }}
+{{ oas.PathParamID(resources.record) }}
 
 paths:
   /record/{ {{ resources.record.paramId }} }:
