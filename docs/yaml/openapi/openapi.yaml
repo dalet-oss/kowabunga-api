@@ -3475,43 +3475,46 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiErrorBadRequest'
-      description: Bad Request error
-    Forbidden:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiErrorForbidden'
-      description: Forbidden
+      description: "BadRequest error: Bad request (wrong input parameters)"
     Unauthorized:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiErrorUnauthorized'
-      description: Unauthorized error
+      description: "Unauthorized error: Unauthorized resource access (wrong auth/credentials)"
+    Forbidden:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorForbidden'
+      description: "Forbidden error: Forbidden resource access (restricted access\
+        \ control)"
     NotFound:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiErrorNotFound'
-      description: Not Found error
-    UnprocessableEntity:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiErrorUnprocessableEntity'
-      description: Unprocessable entity error
+      description: "NotFound error: Specified resource does not exist"
     Conflict:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiErrorConflict'
-      description: Conflict error
+      description: "Conflict error: A similar resource already exists or resource\
+        \ is still being referenced somewhere"
+    UnprocessableEntity:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorUnprocessableEntity'
+      description: "UnprocessableEntity error: Server can't process request"
     InsufficientStorage:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiErrorInsufficientStorage'
-      description: Insufficient resources error (out of quotas)
+      description: "InsufficientStorage error: Server can't process allocate resources\
+        \ (logical quotas or physical limits hit)"
   schemas:
     Adapter:
       description: A network adapter
@@ -3605,26 +3608,14 @@ components:
           format: int32
           type: integer
         error:
-          example: Bad request
+          example: Bad request (wrong input parameters)
+          type: string
+        reason:
+          example: server_side_details
           type: string
       required:
       - error
-      - status
-    ApiErrorForbidden:
-      properties:
-        status:
-          example: 403
-          format: int32
-          type: integer
-        error:
-          example: Forbidden
-          type: string
-        code:
-          example: feature_unavailable
-          type: string
-      required:
-      - code
-      - error
+      - reason
       - status
     ApiErrorUnauthorized:
       properties:
@@ -3633,29 +3624,30 @@ components:
           format: int32
           type: integer
         error:
-          example: Unauthorized
+          example: Unauthorized resource access (wrong auth/credentials)
+          type: string
+        reason:
+          example: server_side_details
           type: string
       required:
       - error
+      - reason
       - status
-    ApiErrorUnprocessableEntity:
+    ApiErrorForbidden:
       properties:
         status:
-          example: 422
+          example: 403
           format: int32
           type: integer
         error:
-          example: Unprocessable entity
+          example: Forbidden resource access (restricted access control)
           type: string
-        code:
-          example: validation_errors
+        reason:
+          example: server_side_details
           type: string
-        error_details:
-          type: object
       required:
-      - code
       - error
-      - error_details
+      - reason
       - status
     ApiErrorNotFound:
       properties:
@@ -3664,14 +3656,14 @@ components:
           format: int32
           type: integer
         error:
-          example: Not Found
+          example: Specified resource does not exist
           type: string
-        code:
-          example: object_not_found
+        reason:
+          example: server_side_details
           type: string
       required:
-      - code
       - error
+      - reason
       - status
     ApiErrorConflict:
       properties:
@@ -3680,14 +3672,31 @@ components:
           format: int32
           type: integer
         error:
-          example: Conflict
+          example: A similar resource already exists or resource is still being referenced
+            somewhere
           type: string
-        code:
-          example: request_conflict
+        reason:
+          example: server_side_details
           type: string
       required:
-      - code
       - error
+      - reason
+      - status
+    ApiErrorUnprocessableEntity:
+      properties:
+        status:
+          example: 422
+          format: int32
+          type: integer
+        error:
+          example: Server can't process request
+          type: string
+        reason:
+          example: server_side_details
+          type: string
+      required:
+      - error
+      - reason
       - status
     ApiErrorInsufficientStorage:
       properties:
@@ -3696,14 +3705,15 @@ components:
           format: int32
           type: integer
         error:
-          example: Conflict
+          example: Server can't process allocate resources (logical quotas or physical
+            limits hit)
           type: string
-        code:
-          example: request_conflict
+        reason:
+          example: server_side_details
           type: string
       required:
-      - code
       - error
+      - reason
       - status
     ObjectIds:
       items:
