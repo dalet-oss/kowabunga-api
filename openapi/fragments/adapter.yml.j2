@@ -2,9 +2,7 @@
 
 components:
   schemas:
-{{ oas.SchemaWithID(resources.adapter, ['name']) }}
-{{ oas.StringProperty('name', 'The network adapter name') }}
-{{ oas.StringProperty('description', 'The network adapter description') }}
+{{ oas.SchemaBaseResource(resources.adapter, ['name']) }}
 {{ oas.StringProperty('mac', 'The network adapter hardware address (e.g. 00:11:22:33:44:55). Auto-generated if unspecified') }}
 {{ oas.StringArrayProperty('addresses', 'The network adapter list of associated IPv4 addresses') }}
 {{ oas.BoolProperty('reserved', 'The network adapter is a reserved adapter (e.g. router), where the same hardware address can be reused over several subnets', 'false') }}

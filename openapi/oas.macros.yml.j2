@@ -96,9 +96,11 @@
 {{ ArrayProperty(name, 'string', desc, default) }}
 {% endmacro %}
 
-{% macro SchemaWithID(obj, required=[]) %}
+{% macro SchemaBaseResource(obj, required=[]) %}
 {{ Schema(obj, required) }}
 {{ StringProperty('id', 'The ' + obj.desc + ' ID (auto-generated)') }}
+{{ StringProperty('name', 'The ' + obj.desc + ' name') }}
+{{ StringProperty('description', 'The ' + obj.desc + ' description') }}
 {% endmacro %}
 
 {% macro PathParam(key, name, desc, t) %}
