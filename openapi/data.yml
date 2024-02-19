@@ -69,24 +69,24 @@ resources:
     desc: zones
 
 errors:
-  - code: 400
-    schema: BadRequest
+  BadRequest:
+    code: 400
     desc: Bad request (wrong input parameters)
-  - code: 401
-    schema: Unauthorized
+  Unauthorized:
+    code: 401
     desc: Unauthorized resource access (wrong auth/credentials)
-  - code: 403
-    schema: Forbidden
+  Forbidden:
+    code: 403
     desc: Forbidden resource access (restricted access control)
-  - code: 404
-    schema: NotFound
+  NotFound:
+    code: 404
     desc: Specified resource does not exist
-  - code: 409
-    schema: Conflict
+  Conflict:
+    code: 409
     desc: A similar resource already exists or resource is still being referenced somewhere
-  - code: 422
-    schema: UnprocessableEntity
+  UnprocessableEntity:
+    code: 422
     desc: Server can't process request
-  - code: 507
-    schema: InsufficientStorage
+  InsufficientStorage:
+    code: 507
     desc: Server can't process allocate resources (logical quotas or physical limits hit)
