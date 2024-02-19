@@ -23,7 +23,7 @@ tags:
   name: cost
 - description: Everything about DNS record
   name: record
-- description: Everything about computing hosts
+- description: Everything about computing host
   name: host
 - description: Everything about virtual machine instances
   name: instance
@@ -3721,7 +3721,7 @@ components:
         type: string
       type: array
     Host:
-      description: A computing hosts
+      description: A computing host
       example:
         protocol: tcp
         memory_cost:
@@ -3746,25 +3746,25 @@ components:
         overcommit_cpu_ratio: 1
       properties:
         id:
-          description: The computing hosts ID (auto-generated)
+          description: The computing host ID (auto-generated)
           type: string
         name:
-          description: The host name
+          description: The computing host name
           type: string
         description:
-          description: The host description
+          description: The computing host description
           type: string
         protocol:
-          description: The protocol to use to issue libvirt connection.
+          description: The protocol to use to issue libvirt connection
           enum:
           - tcp
           - tls
           type: string
         address:
-          description: The host libvirt's IPv4 address.
+          description: The host libvirt's IPv4 address
           type: string
         port:
-          description: The host libvirt's port.
+          description: The host libvirt's port
           type: integer
         tls:
           $ref: '#/components/schemas/Host_tls'
@@ -3780,14 +3780,14 @@ components:
             resources for VMs means allocating more virtual CPUs (vCPUs) to the virtual
             machines (VMs) than the physical cores available on the host. This can
             help optimize the utilization of the host CPU and increase the density
-            of VMs per host.
+            of VMs per host
           type: integer
         overcommit_memory_ratio:
           default: 2
           description: "The host memory resource over-commit ratio. Memory overcommitment\
             \ is a concept in computing that covers the assignment of more memory\
             \ to virtual computing devices (or processes) than the physical machine\
-            \ they are hosted, or running on, actually has."
+            \ they are hosted, or running on, actually has"
           type: integer
       required:
       - address
