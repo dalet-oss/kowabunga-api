@@ -3,9 +3,9 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **id** | **String** | The host ID (auto-generated). | [optional] [default to null] |
-| **name** | **String** | The host name. | [default to null] |
-| **description** | **String** | The host description. | [optional] [default to null] |
+| **id** | **String** | The computing hosts ID (auto-generated) | [optional] [default to null] |
+| **name** | **String** | The host name | [default to null] |
+| **description** | **String** | The host description | [optional] [default to null] |
 | **protocol** | **String** | The protocol to use to issue libvirt connection. | [default to null] |
 | **address** | **String** | The host libvirt&#39;s IPv4 address. | [default to null] |
 | **port** | **Integer** | The host libvirt&#39;s port. | [optional] [default to null] |
