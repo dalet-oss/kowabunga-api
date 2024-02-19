@@ -5,6 +5,9 @@ resources:
     schema: Adapter
     paramId: adapterId
     paramSchema: AdapterID
+  cost:
+    desc: key/value metadata
+    schema: Cost
   record:
     desc: DNS records
   host:

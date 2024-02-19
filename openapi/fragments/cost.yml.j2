@@ -1,16 +1,7 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
 components:
   schemas:
-    Cost:
-      type: object
-      required:
-        - price
-        - currency
-      description: A key/value metadata.
-      properties:
-        price:
-          type: integer
-          format: float
-          description: The unit price information.
-        currency:
-          type: string
-          description: The associated currency.
+{{ oas.Schema(resources.cost.schema, resources.cost.desc, ['price', 'currency']) }}
+{{ oas.FloatProperty('price', 'The unit price information') }}
+{{ oas.StringProperty('currency', 'The associated currency') }}
