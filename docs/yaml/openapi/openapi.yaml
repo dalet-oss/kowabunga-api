@@ -290,7 +290,7 @@ paths:
       - host
   /host/{ hostId }/caps:
     get:
-      description: Returns a computing host capabilities.
+      description: Returns a computing host capability.
       operationId: ReadHostCaps
       parameters:
       - $ref: '#/components/parameters/HostID'
@@ -300,7 +300,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HostCaps'
-          description: Returns the computing host capabilities object.
+          description: Returns the computing host capability object.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":

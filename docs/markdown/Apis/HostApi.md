@@ -180,7 +180,7 @@ This endpoint does not need any parameter.
 
 
 
-    Returns a computing host capabilities.
+    Returns a computing host capability.
 
 ### Parameters
 

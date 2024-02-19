@@ -45,7 +45,7 @@ paths:
 
   /host/{ {{ resources.host.paramId }} }/caps:
 {{ oas.Parameters([resources.host.paramSchema]) }}
-{{ oas.Read('ReadHostCaps', 'HostCaps', resources.host.desc + ' capabilities', [resources.host.tag]) }}
+{{ oas.Read('ReadHostCaps', resources.host_caps.schema, resources.host_caps.desc, [resources.host.tag]) }}
 
   /host/{ {{ resources.host.paramId }} }/instances:
 {{ oas.Parameters([resources.host.paramSchema]) }}

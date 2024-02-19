@@ -19,7 +19,7 @@ All URIs are relative to */api/v1*
 *HostApi* | [**listHostInstances**](Apis/HostApi.md#listhostinstances) | **GET** /host/{ hostId }/instances | Returns the IDs of virtual machine instance objects. |
 *HostApi* | [**listHosts**](Apis/HostApi.md#listhosts) | **GET** /host | Returns the IDs of computing host objects. |
 *HostApi* | [**readHost**](Apis/HostApi.md#readhost) | **GET** /host/{ hostId } | Returns a computing host. |
-*HostApi* | [**readHostCaps**](Apis/HostApi.md#readhostcaps) | **GET** /host/{ hostId }/caps | Returns a computing host capabilities. |
+*HostApi* | [**readHostCaps**](Apis/HostApi.md#readhostcaps) | **GET** /host/{ hostId }/caps | Returns a computing host capability. |
 *HostApi* | [**updateHost**](Apis/HostApi.md#updatehost) | **PUT** /host/{ hostId } | Updates a computing host configuration. |
 | *InstanceApi* | [**createProjectZoneInstance**](Apis/InstanceApi.md#createprojectzoneinstance) | **POST** /project/{projectId}/zone/{zoneId}/instance | Creates a new virtual machine instance in specified zone. |
 *InstanceApi* | [**deleteInstance**](Apis/InstanceApi.md#deleteinstance) | **DELETE** /instance/{ instanceId } | Deletes an existing virtual machine instance. |
