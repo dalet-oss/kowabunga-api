@@ -19,6 +19,8 @@ security:
 tags:
 - description: Everything about network adapter
   name: adapter
+- description: Everything about key/value metadata
+  name: cost
 - description: Everything about DNS records
   name: record
 - description: Everything about computing hosts
@@ -3549,17 +3551,17 @@ components:
       required:
       - name
     Cost:
-      description: A key/value metadata.
+      description: A key/value metadata
       example:
         price: 6
         currency: currency
       properties:
         price:
-          description: The unit price information.
+          description: The unit price information
           format: float
           type: integer
         currency:
-          description: The associated currency.
+          description: The associated currency
           type: string
       required:
       - currency
