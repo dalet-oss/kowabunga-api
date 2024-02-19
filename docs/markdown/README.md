@@ -109,10 +109,10 @@ All URIs are relative to */api/v1*
 *ProjectApi* | [**getProjectZoneVolumes**](Apis/ProjectApi.md#getprojectzonevolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes | Returns the IDs of the storage volumes existing in the project in the specified zone. |
 *ProjectApi* | [**updateProject**](Apis/ProjectApi.md#updateproject) | **PUT** /project/{projectId} | Updates a project configuration. |
 | *RecordApi* | [**createProjectDnsRecord**](Apis/RecordApi.md#createprojectdnsrecord) | **POST** /project/{projectId}/record | Creates a new DNS record in specified project. |
-*RecordApi* | [**deleteDnsRecord**](Apis/RecordApi.md#deletednsrecord) | **DELETE** /record/{recordId} | Deletes an existing DNS record. |
-*RecordApi* | [**getDnsRecord**](Apis/RecordApi.md#getdnsrecord) | **GET** /record/{recordId} | Returns a DNS record object |
+*RecordApi* | [**deleteDnsRecord**](Apis/RecordApi.md#deletednsrecord) | **DELETE** /record/{ recordId } | Deletes an existing DNS record |
 *RecordApi* | [**getProjectDnsRecords**](Apis/RecordApi.md#getprojectdnsrecords) | **GET** /project/{projectId}/records | Returns the IDs of the DNS records existing in the project. |
-*RecordApi* | [**updateDnsRecord**](Apis/RecordApi.md#updatednsrecord) | **PUT** /record/{recordId} | Updates a DNS record configuration. |
+*RecordApi* | [**readDnsRecord**](Apis/RecordApi.md#readdnsrecord) | **GET** /record/{ recordId } | Returns a DNS record |
+*RecordApi* | [**updateDnsRecord**](Apis/RecordApi.md#updatednsrecord) | **PUT** /record/{ recordId } | Updates a DNS record configuration |
 | *RegionApi* | [**createRegion**](Apis/RegionApi.md#createregion) | **POST** /region | Creates a new region. |
 *RegionApi* | [**createZone**](Apis/RegionApi.md#createzone) | **POST** /region/{regionId}/zone | Creates a new zone. |
 *RegionApi* | [**deleteRegion**](Apis/RegionApi.md#deleteregion) | **DELETE** /region/{regionId} | Deletes an existing region. |

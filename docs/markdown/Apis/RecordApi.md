@@ -5,10 +5,10 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createProjectDnsRecord**](RecordApi.md#createProjectDnsRecord) | **POST** /project/{projectId}/record |  |
-| [**deleteDnsRecord**](RecordApi.md#deleteDnsRecord) | **DELETE** /record/{recordId} |  |
-| [**getDnsRecord**](RecordApi.md#getDnsRecord) | **GET** /record/{recordId} |  |
+| [**deleteDnsRecord**](RecordApi.md#deleteDnsRecord) | **DELETE** /record/{ recordId } |  |
 | [**getProjectDnsRecords**](RecordApi.md#getProjectDnsRecords) | **GET** /project/{projectId}/records |  |
-| [**updateDnsRecord**](RecordApi.md#updateDnsRecord) | **PUT** /record/{recordId} |  |
+| [**readDnsRecord**](RecordApi.md#readDnsRecord) | **GET** /record/{ recordId } |  |
+| [**updateDnsRecord**](RecordApi.md#updateDnsRecord) | **PUT** /record/{ recordId } |  |
 
 
 <a name="createProjectDnsRecord"></a>
@@ -45,44 +45,17 @@ All URIs are relative to */api/v1*
 
 
 
-    Deletes an existing DNS record.
+    Deletes an existing DNS record
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **recordId** | **String**| The ID of the DNS record to get. | [default to null] |
+| **recordId** | **String**| The ID of the DNS record | [default to null] |
 
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getDnsRecord"></a>
-# **getDnsRecord**
-> DnsRecord getDnsRecord(recordId)
-
-
-
-    Returns a DNS record object
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **recordId** | **String**| The ID of the DNS record to get. | [default to null] |
-
-### Return type
-
-[**DnsRecord**](../Models/DnsRecord.md)
 
 ### Authorization
 
@@ -120,20 +93,47 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+<a name="readDnsRecord"></a>
+# **readDnsRecord**
+> DnsRecord readDnsRecord(recordId)
+
+
+
+    Returns a DNS record
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **recordId** | **String**| The ID of the DNS record | [default to null] |
+
+### Return type
+
+[**DnsRecord**](../Models/DnsRecord.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 <a name="updateDnsRecord"></a>
 # **updateDnsRecord**
 > DnsRecord updateDnsRecord(recordId, DnsRecord)
 
 
 
-    Updates a DNS record configuration.
+    Updates a DNS record configuration
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **recordId** | **String**| The ID of the DNS record to get. | [default to null] |
-| **DnsRecord** | [**DnsRecord**](../Models/DnsRecord.md)| DNS record payload | |
+| **recordId** | **String**| The ID of the DNS record | [default to null] |
+| **DnsRecord** | [**DnsRecord**](../Models/DnsRecord.md)| DnsRecord payload | |
 
 ### Return type
 

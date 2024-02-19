@@ -21,7 +21,7 @@ tags:
   name: adapter
 - description: Everything about key/value metadata
   name: cost
-- description: Everything about DNS records
+- description: Everything about DNS record
   name: record
 - description: Everything about computing hosts
   name: host
@@ -145,15 +145,15 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - adapter
-  /record/{recordId}:
+  /record/{ recordId }:
     delete:
-      description: Deletes an existing DNS record.
+      description: Deletes an existing DNS record
       operationId: DeleteDnsRecord
       parameters:
       - $ref: '#/components/parameters/RecordID'
       responses:
         "200":
-          description: The DNS record has been successfully removed.
+          description: The DNS record has been successfully removed
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -167,8 +167,8 @@ paths:
       tags:
       - record
     get:
-      description: Returns a DNS record object
-      operationId: GetDnsRecord
+      description: Returns a DNS record
+      operationId: ReadDnsRecord
       parameters:
       - $ref: '#/components/parameters/RecordID'
       responses:
@@ -177,7 +177,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DnsRecord'
-          description: Returns the DNS record object.
+          description: Returns the DNS record object
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -189,7 +189,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/RecordID'
     put:
-      description: Updates a DNS record configuration.
+      description: Updates a DNS record configuration
       operationId: UpdateDnsRecord
       parameters:
       - $ref: '#/components/parameters/RecordID'
@@ -198,7 +198,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/DnsRecord'
-        description: DNS record payload
+        description: DnsRecord payload
         required: true
       responses:
         "200":
@@ -206,7 +206,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DnsRecord'
-          description: Updated DNS record.
+          description: Returns the DNS record object
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -3249,7 +3249,7 @@ components:
         type: string
       style: simple
     RecordID:
-      description: The ID of the DNS record to get.
+      description: The ID of the DNS record
       explode: false
       in: path
       name: recordId
@@ -3578,20 +3578,20 @@ components:
         id: id
       properties:
         id:
-          description: The DNS record ID (auto-generated).
+          description: The DNS record ID (auto-generated)
           type: string
         name:
-          description: The DNS record name (zone's entry).
+          description: The DNS record name (zone's entry)
           type: string
         description:
-          description: The DNS record description.
+          description: The DNS record description
           type: string
         domain:
           description: The DNS record associated domain (inherited from associated
-            project).
+            project)
           type: string
         addresses:
-          description: A list of IPv4 addresses to be associated to the record.
+          description: A list of IPv4 addresses to be associated to the record
           items:
             type: string
           type: array
