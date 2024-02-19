@@ -11,7 +11,7 @@ All URIs are relative to */api/v1*
 | [**getInstanceRemoteConnection**](InstanceApi.md#getInstanceRemoteConnection) | **GET** /instance/{instanceId}/connect |  |
 | [**getInstanceState**](InstanceApi.md#getInstanceState) | **GET** /instance/{instanceId}/state |  |
 | [**getProjectZoneInstances**](InstanceApi.md#getProjectZoneInstances) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
-| [**listHostInstances**](InstanceApi.md#listHostInstances) | **GET** /host/{hostId}/instances |  |
+| [**listHostInstances**](InstanceApi.md#listHostInstances) | **GET** /host/{ hostId }/instances |  |
 | [**rebootInstance**](InstanceApi.md#rebootInstance) | **POST** /instance/{instanceId}/reboot |  |
 | [**resetInstance**](InstanceApi.md#resetInstance) | **POST** /instance/{instanceId}/reset |  |
 | [**resumeInstance**](InstanceApi.md#resumeInstance) | **POST** /instance/{instanceId}/resume |  |

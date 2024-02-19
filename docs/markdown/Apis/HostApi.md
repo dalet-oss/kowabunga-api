@@ -7,10 +7,10 @@ All URIs are relative to */api/v1*
 | [**createHost**](HostApi.md#createHost) | **POST** /zone/{zoneId}/host |  |
 | [**deleteHost**](HostApi.md#deleteHost) | **DELETE** /host/{ hostId } |  |
 | [**getZoneHosts**](HostApi.md#getZoneHosts) | **GET** /zone/{zoneId}/hosts |  |
-| [**listHostInstances**](HostApi.md#listHostInstances) | **GET** /host/{hostId}/instances |  |
+| [**listHostInstances**](HostApi.md#listHostInstances) | **GET** /host/{ hostId }/instances |  |
 | [**listHosts**](HostApi.md#listHosts) | **GET** /host |  |
 | [**readHost**](HostApi.md#readHost) | **GET** /host/{ hostId } |  |
-| [**readHostCaps**](HostApi.md#readHostCaps) | **GET** /host/{hostId}/caps |  |
+| [**readHostCaps**](HostApi.md#readHostCaps) | **GET** /host/{ hostId }/caps |  |
 | [**updateHost**](HostApi.md#updateHost) | **PUT** /host/{ hostId } |  |
 
 

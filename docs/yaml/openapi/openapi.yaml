@@ -19,40 +19,12 @@ security:
 tags:
 - description: Everything about network adapter
   name: adapter
-- description: Everything about key/value metadata
-  name: cost
 - description: Everything about DNS record
   name: record
 - description: Everything about computing host
   name: host
 - description: Everything about virtual machine instance
   name: instance
-- description: Everything about KCE (Kowabunga Compute Engine)
-  name: kce
-- description: Everything about KFS (Kowabunga File System)
-  name: kfs
-- description: Everything about KGW (Kowabunga Network Gateway)
-  name: kgw
-- description: Everything about network gateways
-  name: netgw
-- description: Everything about projects
-  name: project
-- description: Everything about regions
-  name: region
-- description: Everything about NFS storages
-  name: nfs
-- description: Everything about storage pools
-  name: pool
-- description: Everything about network subnets
-  name: subnet
-- description: Everything about image templates
-  name: template
-- description: Everything about virtual networks
-  name: vnet
-- description: Everything about storage volumes
-  name: volume
-- description: Everything about zones
-  name: zone
 paths:
   /adapter:
     get:
@@ -310,7 +282,7 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - host
-  /host/{hostId}/caps:
+  /host/{ hostId }/caps:
     get:
       description: Returns a computing host capabilities.
       operationId: ReadHostCaps
@@ -333,7 +305,7 @@ paths:
       - host
     parameters:
     - $ref: '#/components/parameters/HostID'
-  /host/{hostId}/instances:
+  /host/{ hostId }/instances:
     get:
       description: Returns the IDs of virtual machine instance objects.
       operationId: ListHostInstances
@@ -3794,6 +3766,7 @@ components:
       - name
       - protocol
     HostCaps:
+      description: A computing host capability.
       example:
         cpu:
           cores: 6
@@ -3807,10 +3780,10 @@ components:
         uuid: uuid
       properties:
         version:
-          description: The host libvirt version.
+          description: The computing host libvirt version.
           type: string
         uuid:
-          description: the host UUID
+          description: The computing host domain UUID.
           type: string
         cpu:
           $ref: '#/components/schemas/HostCaps_cpu'

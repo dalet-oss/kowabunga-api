@@ -1,6 +1,8 @@
 tags:
 {% for k, v in resources.items() %}
+{% if v.tag | default(None) %}
   - name: {{ k }}
     description: Everything about {{ v.desc }}
+{% endif %}
 {% endfor %}
 

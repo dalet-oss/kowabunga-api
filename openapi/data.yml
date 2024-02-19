@@ -20,6 +20,9 @@ resources:
     schema: Host
     paramId: hostId
     paramSchema: HostID
+  host_caps:
+    desc: computing host capability
+    schema: HostCaps
   instance:
     tag: instance
     desc: virtual machine instance

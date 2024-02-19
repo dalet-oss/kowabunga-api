@@ -16,10 +16,10 @@ All URIs are relative to */api/v1*
 | *HostApi* | [**createHost**](Apis/HostApi.md#createhost) | **POST** /zone/{zoneId}/host | Creates a new host. |
 *HostApi* | [**deleteHost**](Apis/HostApi.md#deletehost) | **DELETE** /host/{ hostId } | Deletes an existing computing host. |
 *HostApi* | [**getZoneHosts**](Apis/HostApi.md#getzonehosts) | **GET** /zone/{zoneId}/hosts | Returns the IDs of the hosts existing in the zone. |
-*HostApi* | [**listHostInstances**](Apis/HostApi.md#listhostinstances) | **GET** /host/{hostId}/instances | Returns the IDs of virtual machine instance objects. |
+*HostApi* | [**listHostInstances**](Apis/HostApi.md#listhostinstances) | **GET** /host/{ hostId }/instances | Returns the IDs of virtual machine instance objects. |
 *HostApi* | [**listHosts**](Apis/HostApi.md#listhosts) | **GET** /host | Returns the IDs of computing host objects. |
 *HostApi* | [**readHost**](Apis/HostApi.md#readhost) | **GET** /host/{ hostId } | Returns a computing host. |
-*HostApi* | [**readHostCaps**](Apis/HostApi.md#readhostcaps) | **GET** /host/{hostId}/caps | Returns a computing host capabilities. |
+*HostApi* | [**readHostCaps**](Apis/HostApi.md#readhostcaps) | **GET** /host/{ hostId }/caps | Returns a computing host capabilities. |
 *HostApi* | [**updateHost**](Apis/HostApi.md#updatehost) | **PUT** /host/{ hostId } | Updates a computing host configuration. |
 | *InstanceApi* | [**createProjectZoneInstance**](Apis/InstanceApi.md#createprojectzoneinstance) | **POST** /project/{projectId}/zone/{zoneId}/instance | Creates a new virtual machine instance in specified zone. |
 *InstanceApi* | [**deleteInstance**](Apis/InstanceApi.md#deleteinstance) | **DELETE** /instance/{instanceId} | Deletes an existing virtual machine instance. |
@@ -28,7 +28,7 @@ All URIs are relative to */api/v1*
 *InstanceApi* | [**getInstanceRemoteConnection**](Apis/InstanceApi.md#getinstanceremoteconnection) | **GET** /instance/{instanceId}/connect | Returns virtual machine remote access URL. |
 *InstanceApi* | [**getInstanceState**](Apis/InstanceApi.md#getinstancestate) | **GET** /instance/{instanceId}/state | Returns the state of the virtual machine. |
 *InstanceApi* | [**getProjectZoneInstances**](Apis/InstanceApi.md#getprojectzoneinstances) | **GET** /project/{projectId}/zone/{zoneId}/instances | Returns the IDs of the virtual machine instances existing in the project in the specified zone. |
-*InstanceApi* | [**listHostInstances**](Apis/InstanceApi.md#listhostinstances) | **GET** /host/{hostId}/instances | Returns the IDs of virtual machine instance objects. |
+*InstanceApi* | [**listHostInstances**](Apis/InstanceApi.md#listhostinstances) | **GET** /host/{ hostId }/instances | Returns the IDs of virtual machine instance objects. |
 *InstanceApi* | [**rebootInstance**](Apis/InstanceApi.md#rebootinstance) | **POST** /instance/{instanceId}/reboot | Perform a virtual machine software reboot. |
 *InstanceApi* | [**resetInstance**](Apis/InstanceApi.md#resetinstance) | **POST** /instance/{instanceId}/reset | Perform a virtual machine hardware reset. |
 *InstanceApi* | [**resumeInstance**](Apis/InstanceApi.md#resumeinstance) | **POST** /instance/{instanceId}/resume | Perform a virtual machine software PM resume. |

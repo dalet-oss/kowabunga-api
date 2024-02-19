@@ -29,20 +29,9 @@ components:
 {{ oas.IntProperty('overcommit_cpu_ratio', 'The host CPU resource over-commit ratio. Overcommitting CPU resources for VMs means allocating more virtual CPUs (vCPUs) to the virtual machines (VMs) than the physical cores available on the host. This can help optimize the utilization of the host CPU and increase the density of VMs per host', default=3) }}
 {{ oas.IntProperty('overcommit_memory_ratio', 'The host memory resource over-commit ratio. Memory overcommitment is a concept in computing that covers the assignment of more memory to virtual computing devices (or processes) than the physical machine they are hosted, or running on, actually has', default=2) }}
 
-    HostCaps:
-      type: object
-      required:
-        - version
-        - uuid
-        - cpu
-        - memory
-      properties:
-        version:
-          type: string
-          description: The host libvirt version.
-        uuid:
-          type: string
-          description: the host UUID
+{{ oas.Schema(resources.host_caps, ['version', 'uuid', 'cpu', 'memory']) }}
+{{ oas.StringProperty('version', 'The ' + resources.host.desc + ' libvirt version') }}
+{{ oas.StringProperty('uuid', 'The ' + resources.host.desc + ' domain UUID') }}
         cpu:
           type: object
           required:
@@ -87,10 +76,10 @@ paths:
   /host/{ {{ resources.host.paramId }} }:
 {{ oas.RUD(resources.host, [resources.host.tag], [resources.host.paramSchema]) }}
 
-  /host/{hostId}/caps:
+  /host/{ {{ resources.host.paramId }} }/caps:
 {{ oas.Parameters([resources.host.paramSchema]) }}
 {{ oas.Read('ReadHostCaps', 'HostCaps', resources.host.desc + ' capabilities', [resources.host.tag]) }}
 
-  /host/{hostId}/instances:
+  /host/{ {{ resources.host.paramId }} }/instances:
 {{ oas.Parameters([resources.host.paramSchema]) }}
 {{ oas.GetAll('ListHostInstances', resources.instance.desc, [resources.host.tag, resources.instance.tag], True) }}
