@@ -174,8 +174,8 @@ type ProjectAPIRouter interface {
 type RecordAPIRouter interface { 
 	CreateProjectDnsRecord(http.ResponseWriter, *http.Request)
 	DeleteDnsRecord(http.ResponseWriter, *http.Request)
-	GetDnsRecord(http.ResponseWriter, *http.Request)
 	GetProjectDnsRecords(http.ResponseWriter, *http.Request)
+	ReadDnsRecord(http.ResponseWriter, *http.Request)
 	UpdateDnsRecord(http.ResponseWriter, *http.Request)
 }
 // RegionAPIRouter defines the required methods for binding the api requests to a responses for the RegionAPI
@@ -470,8 +470,8 @@ type ProjectAPIServicer interface {
 type RecordAPIServicer interface { 
 	CreateProjectDnsRecord(context.Context, string, DnsRecord) (ImplResponse, error)
 	DeleteDnsRecord(context.Context, string) (ImplResponse, error)
-	GetDnsRecord(context.Context, string) (ImplResponse, error)
 	GetProjectDnsRecords(context.Context, string) (ImplResponse, error)
+	ReadDnsRecord(context.Context, string) (ImplResponse, error)
 	UpdateDnsRecord(context.Context, string, DnsRecord) (ImplResponse, error)
 }
 

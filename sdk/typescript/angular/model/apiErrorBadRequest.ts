@@ -14,5 +14,6 @@
 export interface ApiErrorBadRequest { 
     status: number;
     error: string;
+    reason: string;
 }
 

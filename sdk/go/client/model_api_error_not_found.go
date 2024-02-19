@@ -24,7 +24,7 @@ var _ MappedNullable = &ApiErrorNotFound{}
 type ApiErrorNotFound struct {
 	Status int32 `json:"status"`
 	Error string `json:"error"`
-	Code string `json:"code"`
+	Reason string `json:"reason"`
 }
 
 type _ApiErrorNotFound ApiErrorNotFound
@@ -33,11 +33,11 @@ type _ApiErrorNotFound ApiErrorNotFound
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewApiErrorNotFound(status int32, error_ string, code string) *ApiErrorNotFound {
+func NewApiErrorNotFound(status int32, error_ string, reason string) *ApiErrorNotFound {
 	this := ApiErrorNotFound{}
 	this.Status = status
 	this.Error = error_
-	this.Code = code
+	this.Reason = reason
 	return &this
 }
 
@@ -97,28 +97,28 @@ func (o *ApiErrorNotFound) SetError(v string) {
 	o.Error = v
 }
 
-// GetCode returns the Code field value
-func (o *ApiErrorNotFound) GetCode() string {
+// GetReason returns the Reason field value
+func (o *ApiErrorNotFound) GetReason() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Code
+	return o.Reason
 }
 
-// GetCodeOk returns a tuple with the Code field value
+// GetReasonOk returns a tuple with the Reason field value
 // and a boolean to check if the value has been set.
-func (o *ApiErrorNotFound) GetCodeOk() (*string, bool) {
+func (o *ApiErrorNotFound) GetReasonOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Code, true
+	return &o.Reason, true
 }
 
-// SetCode sets field value
-func (o *ApiErrorNotFound) SetCode(v string) {
-	o.Code = v
+// SetReason sets field value
+func (o *ApiErrorNotFound) SetReason(v string) {
+	o.Reason = v
 }
 
 func (o ApiErrorNotFound) MarshalJSON() ([]byte, error) {
@@ -133,7 +133,7 @@ func (o ApiErrorNotFound) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["status"] = o.Status
 	toSerialize["error"] = o.Error
-	toSerialize["code"] = o.Code
+	toSerialize["reason"] = o.Reason
 	return toSerialize, nil
 }
 
@@ -144,7 +144,7 @@ func (o *ApiErrorNotFound) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"status",
 		"error",
-		"code",
+		"reason",
 	}
 
 	allProperties := make(map[string]interface{})

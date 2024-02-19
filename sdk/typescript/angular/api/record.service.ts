@@ -195,8 +195,8 @@ export class RecordService {
     }
 
     /**
-     * Deletes an existing DNS record.
-     * @param recordId The ID of the DNS record to get.
+     * Deletes an existing DNS record
+     * @param recordId The ID of the DNS record
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -258,85 +258,8 @@ export class RecordService {
             }
         }
 
-        let localVarPath = `/record/${this.configuration.encodeParam({name: "recordId", value: recordId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
+        let localVarPath = `/record/`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Returns a DNS record object
-     * @param recordId The ID of the DNS record to get.
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getDnsRecord(recordId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<DnsRecord>;
-    public getDnsRecord(recordId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<DnsRecord>>;
-    public getDnsRecord(recordId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<DnsRecord>>;
-    public getDnsRecord(recordId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        if (recordId === null || recordId === undefined) {
-            throw new Error('Required parameter recordId was null or undefined when calling getDnsRecord.');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarCredential: string | undefined;
-        // authentication (TokenAuth) required
-        localVarCredential = this.configuration.lookupCredential('TokenAuth');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('x-token', localVarCredential);
-        }
-
-        // authentication (ApiKeyAuth) required
-        localVarCredential = this.configuration.lookupCredential('ApiKeyAuth');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('X-API-Key', localVarCredential);
-        }
-
-        // authentication (BearerAuth) required
-        localVarCredential = this.configuration.lookupCredential('BearerAuth');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
-        }
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/record/${this.configuration.encodeParam({name: "recordId", value: recordId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
-        return this.httpClient.request<DnsRecord>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -426,9 +349,86 @@ export class RecordService {
     }
 
     /**
-     * Updates a DNS record configuration.
-     * @param recordId The ID of the DNS record to get.
-     * @param dnsRecord DNS record payload
+     * Returns a DNS record
+     * @param recordId The ID of the DNS record
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public readDnsRecord(recordId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<DnsRecord>;
+    public readDnsRecord(recordId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<DnsRecord>>;
+    public readDnsRecord(recordId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<DnsRecord>>;
+    public readDnsRecord(recordId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (recordId === null || recordId === undefined) {
+            throw new Error('Required parameter recordId was null or undefined when calling readDnsRecord.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (TokenAuth) required
+        localVarCredential = this.configuration.lookupCredential('TokenAuth');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('x-token', localVarCredential);
+        }
+
+        // authentication (ApiKeyAuth) required
+        localVarCredential = this.configuration.lookupCredential('ApiKeyAuth');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('X-API-Key', localVarCredential);
+        }
+
+        // authentication (BearerAuth) required
+        localVarCredential = this.configuration.lookupCredential('BearerAuth');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/record/`;
+        return this.httpClient.request<DnsRecord>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Updates a DNS record configuration
+     * @param recordId The ID of the DNS record
+     * @param dnsRecord DnsRecord payload
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -502,7 +502,7 @@ export class RecordService {
             }
         }
 
-        let localVarPath = `/record/${this.configuration.encodeParam({name: "recordId", value: recordId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
+        let localVarPath = `/record/`;
         return this.httpClient.request<DnsRecord>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

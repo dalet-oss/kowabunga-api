@@ -14,5 +14,6 @@
 export interface ApiErrorUnauthorized { 
     status: number;
     error: string;
+    reason: string;
 }
 

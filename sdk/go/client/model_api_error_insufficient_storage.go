@@ -24,7 +24,7 @@ var _ MappedNullable = &ApiErrorInsufficientStorage{}
 type ApiErrorInsufficientStorage struct {
 	Status int32 `json:"status"`
 	Error string `json:"error"`
-	Code string `json:"code"`
+	Reason string `json:"reason"`
 }
 
 type _ApiErrorInsufficientStorage ApiErrorInsufficientStorage
@@ -33,11 +33,11 @@ type _ApiErrorInsufficientStorage ApiErrorInsufficientStorage
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewApiErrorInsufficientStorage(status int32, error_ string, code string) *ApiErrorInsufficientStorage {
+func NewApiErrorInsufficientStorage(status int32, error_ string, reason string) *ApiErrorInsufficientStorage {
 	this := ApiErrorInsufficientStorage{}
 	this.Status = status
 	this.Error = error_
-	this.Code = code
+	this.Reason = reason
 	return &this
 }
 
@@ -97,28 +97,28 @@ func (o *ApiErrorInsufficientStorage) SetError(v string) {
 	o.Error = v
 }
 
-// GetCode returns the Code field value
-func (o *ApiErrorInsufficientStorage) GetCode() string {
+// GetReason returns the Reason field value
+func (o *ApiErrorInsufficientStorage) GetReason() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Code
+	return o.Reason
 }
 
-// GetCodeOk returns a tuple with the Code field value
+// GetReasonOk returns a tuple with the Reason field value
 // and a boolean to check if the value has been set.
-func (o *ApiErrorInsufficientStorage) GetCodeOk() (*string, bool) {
+func (o *ApiErrorInsufficientStorage) GetReasonOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Code, true
+	return &o.Reason, true
 }
 
-// SetCode sets field value
-func (o *ApiErrorInsufficientStorage) SetCode(v string) {
-	o.Code = v
+// SetReason sets field value
+func (o *ApiErrorInsufficientStorage) SetReason(v string) {
+	o.Reason = v
 }
 
 func (o ApiErrorInsufficientStorage) MarshalJSON() ([]byte, error) {
@@ -133,7 +133,7 @@ func (o ApiErrorInsufficientStorage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["status"] = o.Status
 	toSerialize["error"] = o.Error
-	toSerialize["code"] = o.Code
+	toSerialize["reason"] = o.Reason
 	return toSerialize, nil
 }
 
@@ -144,7 +144,7 @@ func (o *ApiErrorInsufficientStorage) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"status",
 		"error",
-		"code",
+		"reason",
 	}
 
 	allProperties := make(map[string]interface{})

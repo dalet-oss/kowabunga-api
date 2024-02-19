@@ -14,6 +14,6 @@
 export interface ApiErrorForbidden { 
     status: number;
     error: string;
-    code: string;
+    reason: string;
 }
 

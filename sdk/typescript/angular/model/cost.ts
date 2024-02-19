@@ -12,15 +12,15 @@
 
 
 /**
- * A key/value metadata.
+ * A key/value metadata
  */
 export interface Cost { 
     /**
-     * The unit price information.
+     * The unit price information
      */
     price: number;
     /**
-     * The associated currency.
+     * The associated currency
      */
     currency: string;
 }

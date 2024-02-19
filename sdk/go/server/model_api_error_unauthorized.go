@@ -18,6 +18,8 @@ type ApiErrorUnauthorized struct {
 	Status int32 `json:"status"`
 
 	Error string `json:"error"`
+
+	Reason string `json:"reason"`
 }
 
 // AssertApiErrorUnauthorizedRequired checks if the required fields are not zero-ed
@@ -25,6 +27,7 @@ func AssertApiErrorUnauthorizedRequired(obj ApiErrorUnauthorized) error {
 	elements := map[string]interface{}{
 		"status": obj.Status,
 		"error": obj.Error,
+		"reason": obj.Reason,
 	}
 	for name, el := range elements {
 		if isZero := IsZeroValue(el); isZero {

@@ -58,22 +58,22 @@ func (c *RecordAPIController) Routes() Routes {
 		},
 		"DeleteDnsRecord": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/record/{recordId}",
+			"/api/v1/record/{ recordId }",
 			c.DeleteDnsRecord,
-		},
-		"GetDnsRecord": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/record/{recordId}",
-			c.GetDnsRecord,
 		},
 		"GetProjectDnsRecords": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/project/{projectId}/records",
 			c.GetProjectDnsRecords,
 		},
+		"ReadDnsRecord": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/record/{ recordId }",
+			c.ReadDnsRecord,
+		},
 		"UpdateDnsRecord": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/record/{recordId}",
+			"/api/v1/record/{ recordId }",
 			c.UpdateDnsRecord,
 		},
 	}
@@ -130,24 +130,6 @@ func (c *RecordAPIController) DeleteDnsRecord(w http.ResponseWriter, r *http.Req
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetDnsRecord - 
-func (c *RecordAPIController) GetDnsRecord(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	recordIdParam := params["recordId"]
-	if recordIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"recordId"}, nil)
-		return
-	}
-	result, err := c.service.GetDnsRecord(r.Context(), recordIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
 // GetProjectDnsRecords - 
 func (c *RecordAPIController) GetProjectDnsRecords(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -157,6 +139,24 @@ func (c *RecordAPIController) GetProjectDnsRecords(w http.ResponseWriter, r *htt
 		return
 	}
 	result, err := c.service.GetProjectDnsRecords(r.Context(), projectIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ReadDnsRecord - 
+func (c *RecordAPIController) ReadDnsRecord(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	recordIdParam := params["recordId"]
+	if recordIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"recordId"}, nil)
+		return
+	}
+	result, err := c.service.ReadDnsRecord(r.Context(), recordIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

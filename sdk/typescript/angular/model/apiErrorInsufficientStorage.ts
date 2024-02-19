@@ -14,6 +14,6 @@
 export interface ApiErrorInsufficientStorage { 
     status: number;
     error: string;
-    code: string;
+    reason: string;
 }
 

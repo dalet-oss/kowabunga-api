@@ -24,8 +24,7 @@ var _ MappedNullable = &ApiErrorUnprocessableEntity{}
 type ApiErrorUnprocessableEntity struct {
 	Status int32 `json:"status"`
 	Error string `json:"error"`
-	Code string `json:"code"`
-	ErrorDetails map[string]interface{} `json:"error_details"`
+	Reason string `json:"reason"`
 }
 
 type _ApiErrorUnprocessableEntity ApiErrorUnprocessableEntity
@@ -34,12 +33,11 @@ type _ApiErrorUnprocessableEntity ApiErrorUnprocessableEntity
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewApiErrorUnprocessableEntity(status int32, error_ string, code string, errorDetails map[string]interface{}) *ApiErrorUnprocessableEntity {
+func NewApiErrorUnprocessableEntity(status int32, error_ string, reason string) *ApiErrorUnprocessableEntity {
 	this := ApiErrorUnprocessableEntity{}
 	this.Status = status
 	this.Error = error_
-	this.Code = code
-	this.ErrorDetails = errorDetails
+	this.Reason = reason
 	return &this
 }
 
@@ -99,52 +97,28 @@ func (o *ApiErrorUnprocessableEntity) SetError(v string) {
 	o.Error = v
 }
 
-// GetCode returns the Code field value
-func (o *ApiErrorUnprocessableEntity) GetCode() string {
+// GetReason returns the Reason field value
+func (o *ApiErrorUnprocessableEntity) GetReason() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Code
+	return o.Reason
 }
 
-// GetCodeOk returns a tuple with the Code field value
+// GetReasonOk returns a tuple with the Reason field value
 // and a boolean to check if the value has been set.
-func (o *ApiErrorUnprocessableEntity) GetCodeOk() (*string, bool) {
+func (o *ApiErrorUnprocessableEntity) GetReasonOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Code, true
+	return &o.Reason, true
 }
 
-// SetCode sets field value
-func (o *ApiErrorUnprocessableEntity) SetCode(v string) {
-	o.Code = v
-}
-
-// GetErrorDetails returns the ErrorDetails field value
-func (o *ApiErrorUnprocessableEntity) GetErrorDetails() map[string]interface{} {
-	if o == nil {
-		var ret map[string]interface{}
-		return ret
-	}
-
-	return o.ErrorDetails
-}
-
-// GetErrorDetailsOk returns a tuple with the ErrorDetails field value
-// and a boolean to check if the value has been set.
-func (o *ApiErrorUnprocessableEntity) GetErrorDetailsOk() (map[string]interface{}, bool) {
-	if o == nil {
-		return map[string]interface{}{}, false
-	}
-	return o.ErrorDetails, true
-}
-
-// SetErrorDetails sets field value
-func (o *ApiErrorUnprocessableEntity) SetErrorDetails(v map[string]interface{}) {
-	o.ErrorDetails = v
+// SetReason sets field value
+func (o *ApiErrorUnprocessableEntity) SetReason(v string) {
+	o.Reason = v
 }
 
 func (o ApiErrorUnprocessableEntity) MarshalJSON() ([]byte, error) {
@@ -159,8 +133,7 @@ func (o ApiErrorUnprocessableEntity) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["status"] = o.Status
 	toSerialize["error"] = o.Error
-	toSerialize["code"] = o.Code
-	toSerialize["error_details"] = o.ErrorDetails
+	toSerialize["reason"] = o.Reason
 	return toSerialize, nil
 }
 
@@ -171,8 +144,7 @@ func (o *ApiErrorUnprocessableEntity) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"status",
 		"error",
-		"code",
-		"error_details",
+		"reason",
 	}
 
 	allProperties := make(map[string]interface{})

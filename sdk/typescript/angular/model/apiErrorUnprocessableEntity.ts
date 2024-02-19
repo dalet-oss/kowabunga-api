@@ -14,7 +14,6 @@
 export interface ApiErrorUnprocessableEntity { 
     status: number;
     error: string;
-    code: string;
-    error_details: object;
+    reason: string;
 }
 

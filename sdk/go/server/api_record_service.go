@@ -82,26 +82,6 @@ func (s *RecordAPIService) DeleteDnsRecord(ctx context.Context, recordId string)
 	return Response(http.StatusNotImplemented, nil), errors.New("DeleteDnsRecord method not implemented")
 }
 
-// GetDnsRecord - 
-func (s *RecordAPIService) GetDnsRecord(ctx context.Context, recordId string) (ImplResponse, error) {
-	// TODO - update GetDnsRecord with the required logic for this service method.
-	// Add api_record_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, DnsRecord{}) or use other options such as http.Ok ...
-	// return Response(200, DnsRecord{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetDnsRecord method not implemented")
-}
-
 // GetProjectDnsRecords - 
 func (s *RecordAPIService) GetProjectDnsRecords(ctx context.Context, projectId string) (ImplResponse, error) {
 	// TODO - update GetProjectDnsRecords with the required logic for this service method.
@@ -120,6 +100,26 @@ func (s *RecordAPIService) GetProjectDnsRecords(ctx context.Context, projectId s
 	// return Response(404, ApiErrorNotFound{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("GetProjectDnsRecords method not implemented")
+}
+
+// ReadDnsRecord - 
+func (s *RecordAPIService) ReadDnsRecord(ctx context.Context, recordId string) (ImplResponse, error) {
+	// TODO - update ReadDnsRecord with the required logic for this service method.
+	// Add api_record_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, DnsRecord{}) or use other options such as http.Ok ...
+	// return Response(200, DnsRecord{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ReadDnsRecord method not implemented")
 }
 
 // UpdateDnsRecord - 

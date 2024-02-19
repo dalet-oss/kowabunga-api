@@ -19,9 +19,7 @@ type ApiErrorUnprocessableEntity struct {
 
 	Error string `json:"error"`
 
-	Code string `json:"code"`
-
-	ErrorDetails map[string]interface{} `json:"error_details"`
+	Reason string `json:"reason"`
 }
 
 // AssertApiErrorUnprocessableEntityRequired checks if the required fields are not zero-ed
@@ -29,8 +27,7 @@ func AssertApiErrorUnprocessableEntityRequired(obj ApiErrorUnprocessableEntity) 
 	elements := map[string]interface{}{
 		"status": obj.Status,
 		"error": obj.Error,
-		"code": obj.Code,
-		"error_details": obj.ErrorDetails,
+		"reason": obj.Reason,
 	}
 	for name, el := range elements {
 		if isZero := IsZeroValue(el); isZero {

@@ -19,7 +19,7 @@ type ApiErrorForbidden struct {
 
 	Error string `json:"error"`
 
-	Code string `json:"code"`
+	Reason string `json:"reason"`
 }
 
 // AssertApiErrorForbiddenRequired checks if the required fields are not zero-ed
@@ -27,7 +27,7 @@ func AssertApiErrorForbiddenRequired(obj ApiErrorForbidden) error {
 	elements := map[string]interface{}{
 		"status": obj.Status,
 		"error": obj.Error,
-		"code": obj.Code,
+		"reason": obj.Reason,
 	}
 	for name, el := range elements {
 		if isZero := IsZeroValue(el); isZero {

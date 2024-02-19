@@ -14,6 +14,6 @@
 export interface ApiErrorConflict { 
     status: number;
     error: string;
-    code: string;
+    reason: string;
 }
 

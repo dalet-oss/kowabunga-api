@@ -24,6 +24,7 @@ var _ MappedNullable = &ApiErrorBadRequest{}
 type ApiErrorBadRequest struct {
 	Status int32 `json:"status"`
 	Error string `json:"error"`
+	Reason string `json:"reason"`
 }
 
 type _ApiErrorBadRequest ApiErrorBadRequest
@@ -32,10 +33,11 @@ type _ApiErrorBadRequest ApiErrorBadRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewApiErrorBadRequest(status int32, error_ string) *ApiErrorBadRequest {
+func NewApiErrorBadRequest(status int32, error_ string, reason string) *ApiErrorBadRequest {
 	this := ApiErrorBadRequest{}
 	this.Status = status
 	this.Error = error_
+	this.Reason = reason
 	return &this
 }
 
@@ -95,6 +97,30 @@ func (o *ApiErrorBadRequest) SetError(v string) {
 	o.Error = v
 }
 
+// GetReason returns the Reason field value
+func (o *ApiErrorBadRequest) GetReason() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Reason
+}
+
+// GetReasonOk returns a tuple with the Reason field value
+// and a boolean to check if the value has been set.
+func (o *ApiErrorBadRequest) GetReasonOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Reason, true
+}
+
+// SetReason sets field value
+func (o *ApiErrorBadRequest) SetReason(v string) {
+	o.Reason = v
+}
+
 func (o ApiErrorBadRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -107,6 +133,7 @@ func (o ApiErrorBadRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["status"] = o.Status
 	toSerialize["error"] = o.Error
+	toSerialize["reason"] = o.Reason
 	return toSerialize, nil
 }
 
@@ -117,6 +144,7 @@ func (o *ApiErrorBadRequest) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"status",
 		"error",
+		"reason",
 	}
 
 	allProperties := make(map[string]interface{})

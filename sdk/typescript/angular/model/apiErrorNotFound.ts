@@ -14,6 +14,6 @@
 export interface ApiErrorNotFound { 
     status: number;
     error: string;
-    code: string;
+    reason: string;
 }
 
