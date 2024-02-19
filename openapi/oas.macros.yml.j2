@@ -11,9 +11,12 @@
       properties:
 {% endmacro %}
 
-{% macro Property(name, type, desc, default=None) %}
+{% macro Property(name, type, desc, default=None, format=None) %}
         {{ name }}:
           type: {{ type }}
+{% if format != None %}
+          format: {{ format }}
+{% endif %}
           description: {{ desc }}
 {% if default != None %}
           default: {{ default }}
@@ -26,6 +29,10 @@
 
 {% macro BoolProperty(name, desc, default=None) %}
 {{ Property(name, 'boolean', desc, default) }}
+{% endmacro %}
+
+{% macro FloatProperty(name, desc, default=None) %}
+{{ Property(name, 'integer', desc, default, format='float') }}
 {% endmacro %}
 
 {% macro ArrayProperty(name, type, desc, default=None) %}
