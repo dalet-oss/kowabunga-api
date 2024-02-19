@@ -1,3 +1,32 @@
+{% macro ErrorSchema(err) %}
+    ApiError{{ err.schema }}:
+      type: object
+      required:
+        - status
+        - error
+        - reason
+      properties:
+        status:
+          type: integer
+          format: int32
+          example: {{ err.code }}
+        error:
+          type: string
+          example: {{ err.desc }}
+        reason:
+          type: string
+          example: server_side_details
+{% endmacro %}
+
+{% macro ErrorResponse(err) %}
+    {{ err.schema }}:
+      description: "{{ err.schema }} error: {{ err.desc }}"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError{{ err.schema }}'
+{% endmacro %}
+
 {% macro Schema(obj, required=[]) %}
     {{ obj.schema }}:
       type: object
@@ -33,35 +62,6 @@
 
 {% macro FloatProperty(name, desc, default=None) %}
 {{ Property(name, 'integer', desc, default, format='float') }}
-{% endmacro %}
-
-{% macro ErrorSchema(err) %}
-    ApiError{{ err.schema }}:
-      type: object
-      required:
-        - status
-        - error
-        - reason
-      properties:
-        status:
-          type: integer
-          format: int32
-          example: {{ err.code }}
-        error:
-          type: string
-          example: {{ err.desc }}
-        reason:
-          type: string
-          example: server_side_details
-{% endmacro %}
-
-{% macro ErrorResponse(err) %}
-    {{ err.schema }}:
-      description: "{{ err.schema }} error: {{ err.desc }}"
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError{{ err.schema }}'
 {% endmacro %}
 
 {% macro ArrayProperty(name, type, desc, default=None) %}
