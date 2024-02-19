@@ -51,7 +51,12 @@ resources:
     paramPublicId: public
     paramPublicSchema: KcePublic
   kfs:
+    tag: kfs
     desc: KFS (Kowabunga File System)
+    extended_desc: Kowabunga File System (KFS) provides an elastic NFS-like remote storage volume
+    schema: KFS
+    paramId: kfsId
+    paramSchema: KfsID
   kgw:
     desc: KGW (Kowabunga Network Gateway)
   netgw:

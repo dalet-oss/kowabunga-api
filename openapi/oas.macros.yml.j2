@@ -97,19 +97,29 @@
           $ref: '#/components/schemas/{{ schema }}'
 {% endmacro %}
 
-{% macro ArrayProperty(name, type, desc, default=None) %}
+{% macro ArrayProperty(name, type, desc, values=[], default=None) %}
         {{ name }}:
           type: array
           description: {{ desc }}.
           items:
             type: {{ type }}
+{% if values != [] %}
+            enum:
+{% for v in values %}
+              - {{ v }}
+{% endfor %}
+{% endif %}
 {% if default != None %}
           default: {{ default }}
 {% endif %}
 {% endmacro %}
 
-{% macro StringArrayProperty(name, desc, default=None) %}
-{{ ArrayProperty(name, 'string', desc, default) }}
+{% macro StringArrayProperty(name, desc, values=[], default=None) %}
+{{ ArrayProperty(name, 'string', desc, values, default) }}
+{% endmacro %}
+
+{% macro IntArrayProperty(name, desc, values=[], default=None) %}
+{{ ArrayProperty(name, 'integer', desc, values, default) }}
 {% endmacro %}
 
 {% macro SchemaBaseResource(obj, required=[]) %}

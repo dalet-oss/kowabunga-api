@@ -27,6 +27,8 @@ tags:
   name: instance
 - description: Everything about KCE (Kowabunga Compute Engine)
   name: kce
+- description: Everything about KFS (Kowabunga File System)
+  name: kfs
 paths:
   /adapter:
     get:
@@ -889,15 +891,15 @@ paths:
       - kce
   /kfs:
     get:
-      description: Returns the IDs of registered KFS storage volumes.
-      operationId: GetAllKFSs
+      description: Returns the IDs of KFS (Kowabunga File System) objects.
+      operationId: ListKFSs
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns the an array of KFS storage volume IDs.
+          description: Returns an array of KFS (Kowabunga File System) IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -906,13 +908,13 @@ paths:
       - kfs
   /kfs/{kfsId}:
     delete:
-      description: Deletes an existing KFS storage volume.
+      description: Deletes an existing KFS (Kowabunga File System).
       operationId: DeleteKFS
       parameters:
       - $ref: '#/components/parameters/KfsID'
       responses:
         "200":
-          description: The KFS storage volume has been successfully removed.
+          description: The KFS (Kowabunga File System) has been successfully removed.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -926,8 +928,8 @@ paths:
       tags:
       - kfs
     get:
-      description: Returns the description of the KFS storage volume.
-      operationId: GetKFS
+      description: Returns a KFS (Kowabunga File System).
+      operationId: ReadKFS
       parameters:
       - $ref: '#/components/parameters/KfsID'
       responses:
@@ -936,7 +938,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KFS'
-          description: Returns the KFS storage volume object.
+          description: Returns the KFS (Kowabunga File System) object.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -948,7 +950,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/KfsID'
     put:
-      description: Updates a KFS storage volume configuration.
+      description: Updates a KFS (Kowabunga File System) configuration.
       operationId: UpdateKFS
       parameters:
       - $ref: '#/components/parameters/KfsID'
@@ -957,7 +959,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/KFS'
-        description: KFS payload
+        description: KFS payload.
         required: true
       responses:
         "200":
@@ -965,7 +967,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KFS'
-          description: Updated KFS storage volume.
+          description: Returns the KFS (Kowabunga File System) object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -976,6 +978,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - kfs
   /kgw:
@@ -3293,7 +3297,7 @@ components:
         type: string
       style: form
     KfsID:
-      description: The ID of the KFS storage volume.
+      description: The ID of the KFS (Kowabunga File System).
       explode: false
       in: path
       name: kfsId
@@ -3976,7 +3980,7 @@ components:
       - name
       - vcpus
     KFS:
-      description: Kowabunga File System (KFS) provides an elastic NFS-like remote
+      description: A Kowabunga File System (KFS) provides an elastic NFS-like remote
         storage volume.
       example:
         endpoint: endpoint
@@ -3990,17 +3994,17 @@ components:
         - 0
       properties:
         id:
-          description: The KFS ID (auto-generated).
+          description: The KFS (Kowabunga File System) ID (auto-generated).
           type: string
         name:
-          description: The KFS storage volume name.
+          description: The KFS (Kowabunga File System) name.
           type: string
         description:
-          description: The KFS storage volume description.
+          description: The KFS (Kowabunga File System) description.
           type: string
         access:
           default: RW
-          description: The KFS storage volume access type.
+          description: The KFS (Kowabunga File System) volume access type.
           enum:
           - RO
           - RW
@@ -4009,7 +4013,8 @@ components:
           default:
           - 3
           - 4
-          description: The KFS storage volume's NFS protocol versions to be supported.
+          description: The KFS (Kowabunga File System) NFS protocol versions to be
+            supported.
           items:
             enum:
             - 3
@@ -4017,10 +4022,10 @@ components:
             type: integer
           type: array
         endpoint:
-          description: The KFS endpoint FQDN (read-only).
+          description: The KFS (Kowabunga File System) endpoint FQDN (read-only).
           type: string
         size:
-          description: The KFS storage volume bytes used (read-only).
+          description: The KFS (Kowabunga File System) volume bytes used (read-only).
           type: integer
       required:
       - name

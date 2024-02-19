@@ -1,141 +1,19 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
 components:
   schemas:
-    KFS:
-      type: object
-      required:
-        - name
-      description: Kowabunga File System (KFS) provides an elastic NFS-like remote storage volume.
-      properties:
-        id:
-          type: string
-          description: The KFS ID (auto-generated).
-        name:
-          type: string
-          description: The KFS storage volume name.
-        description:
-          type: string
-          description: The KFS storage volume description.
-        access:
-          type: string
-          description: The KFS storage volume access type.
-          enum:
-            - RO
-            - RW
-          default: RW
-        protocols:
-          type: array
-          description: The KFS storage volume's NFS protocol versions to be supported.
-          items:
-            type: integer
-            enum:
-              - 3
-              - 4
-          default:
-            - 3
-            - 4
-        endpoint:
-          type: string
-          description: The KFS endpoint FQDN (read-only).
-        size:
-          type: integer
-          description: The KFS storage volume bytes used (read-only).
+{{ oas.SchemaBaseResource(resources.kfs, ['name']) }}
+{{ oas.StringProperty('access', 'The ' + resources.kfs.desc + ' volume access type', values=['RO', 'RW'], default='RW') }}
+{{ oas.IntArrayProperty('protocols', 'The ' + resources.kfs.desc + ' NFS protocol versions to be supported', values=[3, 4], default=[3, 4]) }}
+{{ oas.StringProperty('endpoint', 'The ' + resources.kfs.desc + ' endpoint FQDN (read-only)') }}
+{{ oas.IntProperty('size', 'The ' + resources.kfs.desc + ' volume bytes used (read-only)') }}
 
   parameters:
-    KfsID:
-      name: kfsId
-      in: path
-      description: The ID of the KFS storage volume.
-      required: true
-      schema:
-        type: string
+{{ oas.PathParamID(resources.kfs) }}
 
 paths:
   /kfs:
-    get:
-      tags:
-        - kfs
-      operationId: GetAllKFSs
-      description: Returns the IDs of registered KFS storage volumes.
-      responses:
-        '200':
-          description: Returns the an array of KFS storage volume IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
+{{ oas.List(resources.kfs, [resources.kfs.tag]) }}
 
   /kfs/{kfsId}:
-    parameters:
-      - $ref: '#/components/parameters/KfsID'
-
-    get:
-      tags:
-        - kfs
-      operationId: GetKFS
-      description: Returns the description of the KFS storage volume.
-      responses:
-        '200':
-          description: Returns the KFS storage volume object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/KFS'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-
-    put:
-      tags:
-        - kfs
-      operationId: UpdateKFS
-      description: Updates a KFS storage volume configuration.
-      requestBody:
-        description: KFS payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/KFS'
-        required: true
-      responses:
-        '200':
-          description: Updated KFS storage volume.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/KFS'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-    delete:
-      tags:
-        - kfs
-      operationId: DeleteKFS
-      description: Deletes an existing KFS storage volume.
-      responses:
-        '200':
-          description: The KFS storage volume has been successfully removed.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+{{ oas.RUD(resources.kfs, [resources.kfs.tag], [resources.kfs.paramSchema]) }}

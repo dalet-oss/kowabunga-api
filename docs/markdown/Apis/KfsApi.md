@@ -6,10 +6,10 @@ All URIs are relative to */api/v1*
 |------------- | ------------- | -------------|
 | [**createProjectZoneKfs**](KfsApi.md#createProjectZoneKfs) | **POST** /project/{projectId}/zone/{zoneId}/kfs |  |
 | [**deleteKFS**](KfsApi.md#deleteKFS) | **DELETE** /kfs/{kfsId} |  |
-| [**getAllKFSs**](KfsApi.md#getAllKFSs) | **GET** /kfs |  |
-| [**getKFS**](KfsApi.md#getKFS) | **GET** /kfs/{kfsId} |  |
 | [**getNfsKfs**](KfsApi.md#getNfsKfs) | **GET** /nfs/{nfsId}/kfs |  |
 | [**getProjectZoneKfs**](KfsApi.md#getProjectZoneKfs) | **GET** /project/{projectId}/zone/{zoneId}/kfs |  |
+| [**listKFSs**](KfsApi.md#listKFSs) | **GET** /kfs |  |
+| [**readKFS**](KfsApi.md#readKFS) | **GET** /kfs/{kfsId} |  |
 | [**updateKFS**](KfsApi.md#updateKFS) | **PUT** /kfs/{kfsId} |  |
 
 
@@ -50,68 +50,17 @@ All URIs are relative to */api/v1*
 
 
 
-    Deletes an existing KFS storage volume.
+    Deletes an existing KFS (Kowabunga File System).
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **kfsId** | **String**| The ID of the KFS storage volume. | [default to null] |
+| **kfsId** | **String**| The ID of the KFS (Kowabunga File System). | [default to null] |
 
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getAllKFSs"></a>
-# **getAllKFSs**
-> List getAllKFSs()
-
-
-
-    Returns the IDs of registered KFS storage volumes.
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getKFS"></a>
-# **getKFS**
-> KFS getKFS(kfsId)
-
-
-
-    Returns the description of the KFS storage volume.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **kfsId** | **String**| The ID of the KFS storage volume. | [default to null] |
-
-### Return type
-
-[**KFS**](../Models/KFS.md)
 
 ### Authorization
 
@@ -179,20 +128,71 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+<a name="listKFSs"></a>
+# **listKFSs**
+> List listKFSs()
+
+
+
+    Returns the IDs of KFS (Kowabunga File System) objects.
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="readKFS"></a>
+# **readKFS**
+> KFS readKFS(kfsId)
+
+
+
+    Returns a KFS (Kowabunga File System).
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **kfsId** | **String**| The ID of the KFS (Kowabunga File System). | [default to null] |
+
+### Return type
+
+[**KFS**](../Models/KFS.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 <a name="updateKFS"></a>
 # **updateKFS**
 > KFS updateKFS(kfsId, KFS)
 
 
 
-    Updates a KFS storage volume configuration.
+    Updates a KFS (Kowabunga File System) configuration.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **kfsId** | **String**| The ID of the KFS storage volume. | [default to null] |
-| **KFS** | [**KFS**](../Models/KFS.md)| KFS payload | |
+| **kfsId** | **String**| The ID of the KFS (Kowabunga File System). | [default to null] |
+| **KFS** | [**KFS**](../Models/KFS.md)| KFS payload. | |
 
 ### Return type
 
