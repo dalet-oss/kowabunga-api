@@ -67,6 +67,9 @@ resources:
   kgw_nat:
     desc: KGW NAT mapping
     schema: KGWNat
+  metadata:
+    desc: key/value metadata
+    schema: Metadata
   netgw:
     desc: network gateways
   project:

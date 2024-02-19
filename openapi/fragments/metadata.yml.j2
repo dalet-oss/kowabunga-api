@@ -1,12 +1,7 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
 components:
   schemas:
-    Metadata:
-      type: object
-      description: A key/value metadata.
-      properties:
-        key:
-          type: string
-          description: The metadata key.
-        value:
-          type: string
-          description: The metadata value.
+{{ oas.Schema(resources.metadata) }}
+{{ oas.StringProperty('key', 'The metadata key') }}
+{{ oas.StringProperty('value', 'The metadata value') }}
