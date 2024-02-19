@@ -2,8 +2,7 @@
 
 components:
   schemas:
-{{ oas.Schema(resources.record.schema, resources.record.desc, ['name', 'addresses']) }}
-{{ oas.StringProperty('id', 'The DNS record ID (auto-generated)') }}
+{{ oas.SchemaWithID(resources.record, ['name', 'addresses']) }}
 {{ oas.StringProperty('name', "The DNS record name (zone's entry)") }}
 {{ oas.StringProperty('description', 'The DNS record description') }}
 {{ oas.StringProperty('domain', 'The DNS record associated domain (inherited from associated project)') }}

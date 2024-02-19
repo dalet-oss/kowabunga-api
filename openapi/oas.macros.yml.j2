@@ -1,7 +1,7 @@
-{% macro Schema(schema, desc, required=[]) %}
-    {{ schema }}:
+{% macro Schema(obj, required=[]) %}
+    {{ obj.schema }}:
       type: object
-      description: A {{ desc }}
+      description: A {{ obj.desc }}
 {%if required != [] %}
       required:
 {% for r in required %}
@@ -48,6 +48,11 @@
 
 {% macro StringArrayProperty(name, desc, default=None) %}
 {{ ArrayProperty(name, 'string', desc, default) }}
+{% endmacro %}
+
+{% macro SchemaWithID(obj, required=[]) %}
+{{ Schema(obj, required) }}
+{{ StringProperty('id', 'The ' + obj.desc + ' ID (auto-generated)') }}
 {% endmacro %}
 
 {% macro PathParam(key, name, desc, t) %}

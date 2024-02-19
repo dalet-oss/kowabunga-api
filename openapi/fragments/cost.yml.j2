@@ -2,6 +2,6 @@
 
 components:
   schemas:
-{{ oas.Schema(resources.cost.schema, resources.cost.desc, ['price', 'currency']) }}
+{{ oas.Schema(resources.cost, ['price', 'currency']) }}
 {{ oas.FloatProperty('price', 'The unit price information') }}
 {{ oas.StringProperty('currency', 'The associated currency') }}

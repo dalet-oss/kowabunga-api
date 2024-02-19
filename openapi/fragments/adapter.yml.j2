@@ -2,8 +2,7 @@
 
 components:
   schemas:
-{{ oas.Schema(resources.adapter.schema, resources.adapter.desc, ['name']) }}
-{{ oas.StringProperty('id', 'The network adapter ID (auto-generated)') }}
+{{ oas.SchemaWithID(resources.adapter, ['name']) }}
 {{ oas.StringProperty('name', 'The network adapter name') }}
 {{ oas.StringProperty('description', 'The network adapter description') }}
 {{ oas.StringProperty('mac', 'The network adapter hardware address (e.g. 00:11:22:33:44:55). Auto-generated if unspecified') }}
