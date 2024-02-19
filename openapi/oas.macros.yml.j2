@@ -293,7 +293,7 @@
 
 {% macro List(obj, tags, params=[]) %}
 {{ Parameters(params) }}
-{{ GetAll('List' + obj.schema + 's', resources.adapter.desc, [resources.adapter.tag]) }}
+{{ GetAll('List' + obj.schema + 's', obj.desc, tags) }}
 {% endmacro %}
 
 {% macro RUD(obj, tags, params=[]) %}
