@@ -5,19 +5,19 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createProjectZoneKce**](KceApi.md#createProjectZoneKce) | **POST** /project/{projectId}/zone/{zoneId}/kce |  |
-| [**deleteKCE**](KceApi.md#deleteKCE) | **DELETE** /kce/{kceId} |  |
-| [**getAllKCEs**](KceApi.md#getAllKCEs) | **GET** /kce |  |
-| [**getKCE**](KceApi.md#getKCE) | **GET** /kce/{kceId} |  |
-| [**getKCEState**](KceApi.md#getKCEState) | **GET** /kce/{kceId}/state |  |
+| [**deleteKCE**](KceApi.md#deleteKCE) | **DELETE** /kce/{ kceId } |  |
 | [**getProjectZoneKCEs**](KceApi.md#getProjectZoneKCEs) | **GET** /project/{projectId}/zone/{zoneId}/kces |  |
-| [**rebootKCE**](KceApi.md#rebootKCE) | **POST** /kce/{kceId}/reboot |  |
-| [**resetKCE**](KceApi.md#resetKCE) | **POST** /kce/{kceId}/reset |  |
-| [**resumeKCE**](KceApi.md#resumeKCE) | **POST** /kce/{kceId}/resume |  |
-| [**shutdownKCE**](KceApi.md#shutdownKCE) | **POST** /kce/{kceId}/shutdown |  |
-| [**startKCE**](KceApi.md#startKCE) | **POST** /kce/{kceId}/start |  |
-| [**stopKCE**](KceApi.md#stopKCE) | **POST** /kce/{kceId}/stop |  |
-| [**suspendKCE**](KceApi.md#suspendKCE) | **POST** /kce/{kceId}/suspend |  |
-| [**updateKCE**](KceApi.md#updateKCE) | **PUT** /kce/{kceId} |  |
+| [**listKCEs**](KceApi.md#listKCEs) | **GET** /kce |  |
+| [**readKCE**](KceApi.md#readKCE) | **GET** /kce/{ kceId } |  |
+| [**readKCEState**](KceApi.md#readKCEState) | **GET** /kce/{ kceId }/state |  |
+| [**rebootKCE**](KceApi.md#rebootKCE) | **POST** /kce/{ kceId }/reboot |  |
+| [**resetKCE**](KceApi.md#resetKCE) | **POST** /kce/{ kceId }/reset |  |
+| [**resumeKCE**](KceApi.md#resumeKCE) | **POST** /kce/{ kceId }/resume |  |
+| [**shutdownKCE**](KceApi.md#shutdownKCE) | **POST** /kce/{ kceId }/shutdown |  |
+| [**startKCE**](KceApi.md#startKCE) | **POST** /kce/{ kceId }/start |  |
+| [**stopKCE**](KceApi.md#stopKCE) | **POST** /kce/{ kceId }/stop |  |
+| [**suspendKCE**](KceApi.md#suspendKCE) | **POST** /kce/{ kceId }/suspend |  |
+| [**updateKCE**](KceApi.md#updateKCE) | **PUT** /kce/{ kceId } |  |
 
 
 <a name="createProjectZoneKce"></a>
@@ -37,7 +37,7 @@ All URIs are relative to */api/v1*
 | **KCE** | [**KCE**](../Models/KCE.md)| KCE payload | |
 | **poolId** | **String**| Storage pool ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **templateId** | **String**| Template to clone the storage volume from (optional, zone&#39;s default if unspecified) | [optional] [default to null] |
-| **public** | **Boolean**| Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false). | [optional] [default to null] |
+| **public** | **String**| Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false). | [optional] [default to null] |
 | **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 
 ### Return type
@@ -59,95 +59,17 @@ All URIs are relative to */api/v1*
 
 
 
-    Deletes an existing KCE virtual machine.
+    Deletes an existing KCE (Kowabunga Compute Engine).
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **kceId** | **String**| The ID of the KCE virtual machine. | [default to null] |
+| **kceId** | **String**| The ID of the KCE (Kowabunga Compute Engine). | [default to null] |
 
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getAllKCEs"></a>
-# **getAllKCEs**
-> List getAllKCEs()
-
-
-
-    Returns the IDs of registered KCE virtual machines.
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getKCE"></a>
-# **getKCE**
-> KCE getKCE(kceId)
-
-
-
-    Returns the description of the KCE virtual machine.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **kceId** | **String**| The ID of the KCE virtual machine. | [default to null] |
-
-### Return type
-
-[**KCE**](../Models/KCE.md)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getKCEState"></a>
-# **getKCEState**
-> InstanceState getKCEState(kceId)
-
-
-
-    Returns the state of the KCE virtual machine.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **kceId** | **String**| The ID of the KCE virtual machine. | [default to null] |
-
-### Return type
-
-[**InstanceState**](../Models/InstanceState.md)
 
 ### Authorization
 
@@ -186,19 +108,97 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+<a name="listKCEs"></a>
+# **listKCEs**
+> List listKCEs()
+
+
+
+    Returns the IDs of KCE (Kowabunga Compute Engine) objects.
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="readKCE"></a>
+# **readKCE**
+> KCE readKCE(kceId)
+
+
+
+    Returns a KCE (Kowabunga Compute Engine).
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **kceId** | **String**| The ID of the KCE (Kowabunga Compute Engine). | [default to null] |
+
+### Return type
+
+[**KCE**](../Models/KCE.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="readKCEState"></a>
+# **readKCEState**
+> InstanceState readKCEState(kceId)
+
+
+
+    Returns a virtual machine instance state.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **kceId** | **String**| The ID of the KCE (Kowabunga Compute Engine). | [default to null] |
+
+### Return type
+
+[**InstanceState**](../Models/InstanceState.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 <a name="rebootKCE"></a>
 # **rebootKCE**
 > rebootKCE(kceId)
 
 
 
-    Perform a KCE virtual machine software reboot.
+    Performs a KCE (Kowabunga Compute Engine) software reboot.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **kceId** | **String**| The ID of the KCE virtual machine. | [default to null] |
+| **kceId** | **String**| The ID of the KCE (Kowabunga Compute Engine). | [default to null] |
 
 ### Return type
 
@@ -219,13 +219,13 @@ null (empty response body)
 
 
 
-    Perform a KCE virtual machine hardware reset.
+    Performs a KCE (Kowabunga Compute Engine) hardware reset.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **kceId** | **String**| The ID of the KCE virtual machine. | [default to null] |
+| **kceId** | **String**| The ID of the KCE (Kowabunga Compute Engine). | [default to null] |
 
 ### Return type
 
@@ -246,13 +246,13 @@ null (empty response body)
 
 
 
-    Perform a KCE virtual machine software PM resume.
+    Performs a KCE (Kowabunga Compute Engine) software PM resume.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **kceId** | **String**| The ID of the KCE virtual machine. | [default to null] |
+| **kceId** | **String**| The ID of the KCE (Kowabunga Compute Engine). | [default to null] |
 
 ### Return type
 
@@ -273,13 +273,13 @@ null (empty response body)
 
 
 
-    Initiate a software shutdown of a KCE virtual machine.
+    Performs a KCE (Kowabunga Compute Engine) software shutdown.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **kceId** | **String**| The ID of the KCE virtual machine. | [default to null] |
+| **kceId** | **String**| The ID of the KCE (Kowabunga Compute Engine). | [default to null] |
 
 ### Return type
 
@@ -300,13 +300,13 @@ null (empty response body)
 
 
 
-    Boot up a KCE virtual machine.
+    Performs a KCE (Kowabunga Compute Engine) hardware boot-up.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **kceId** | **String**| The ID of the KCE virtual machine. | [default to null] |
+| **kceId** | **String**| The ID of the KCE (Kowabunga Compute Engine). | [default to null] |
 
 ### Return type
 
@@ -327,13 +327,13 @@ null (empty response body)
 
 
 
-    Initiate a hardware stop of a KCE virtual machine.
+    Performs a KCE (Kowabunga Compute Engine) hardware stop.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **kceId** | **String**| The ID of the KCE virtual machine. | [default to null] |
+| **kceId** | **String**| The ID of the KCE (Kowabunga Compute Engine). | [default to null] |
 
 ### Return type
 
@@ -354,13 +354,13 @@ null (empty response body)
 
 
 
-    Perform a KCE virtual machine software PM suspend.
+    Performs a KCE (Kowabunga Compute Engine) software PM suspend.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **kceId** | **String**| The ID of the KCE virtual machine. | [default to null] |
+| **kceId** | **String**| The ID of the KCE (Kowabunga Compute Engine). | [default to null] |
 
 ### Return type
 
@@ -381,14 +381,14 @@ null (empty response body)
 
 
 
-    Updates a KCE virtual machine configuration.
+    Updates a KCE (Kowabunga Compute Engine) configuration.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **kceId** | **String**| The ID of the KCE virtual machine. | [default to null] |
-| **KCE** | [**KCE**](../Models/KCE.md)| KCE payload | |
+| **kceId** | **String**| The ID of the KCE (Kowabunga Compute Engine). | [default to null] |
+| **KCE** | [**KCE**](../Models/KCE.md)| KCE payload. | |
 
 ### Return type
 

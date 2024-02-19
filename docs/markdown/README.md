@@ -38,19 +38,19 @@ All URIs are relative to */api/v1*
 *InstanceApi* | [**suspendInstance**](Apis/InstanceApi.md#suspendinstance) | **POST** /instance/{ instanceId }/suspend | Performs a virtual machine instance software PM suspend. |
 *InstanceApi* | [**updateInstance**](Apis/InstanceApi.md#updateinstance) | **PUT** /instance/{ instanceId } | Updates a virtual machine instance configuration. |
 | *KceApi* | [**createProjectZoneKce**](Apis/KceApi.md#createprojectzonekce) | **POST** /project/{projectId}/zone/{zoneId}/kce | Creates a new KCE virtual machine in specified zone. |
-*KceApi* | [**deleteKCE**](Apis/KceApi.md#deletekce) | **DELETE** /kce/{kceId} | Deletes an existing KCE virtual machine. |
-*KceApi* | [**getAllKCEs**](Apis/KceApi.md#getallkces) | **GET** /kce | Returns the IDs of registered KCE virtual machines. |
-*KceApi* | [**getKCE**](Apis/KceApi.md#getkce) | **GET** /kce/{kceId} | Returns the description of the KCE virtual machine. |
-*KceApi* | [**getKCEState**](Apis/KceApi.md#getkcestate) | **GET** /kce/{kceId}/state | Returns the state of the KCE virtual machine. |
+*KceApi* | [**deleteKCE**](Apis/KceApi.md#deletekce) | **DELETE** /kce/{ kceId } | Deletes an existing KCE (Kowabunga Compute Engine). |
 *KceApi* | [**getProjectZoneKCEs**](Apis/KceApi.md#getprojectzonekces) | **GET** /project/{projectId}/zone/{zoneId}/kces | Returns the IDs of the KCE virtual machines existing in the project in the specified zone. |
-*KceApi* | [**rebootKCE**](Apis/KceApi.md#rebootkce) | **POST** /kce/{kceId}/reboot | Perform a KCE virtual machine software reboot. |
-*KceApi* | [**resetKCE**](Apis/KceApi.md#resetkce) | **POST** /kce/{kceId}/reset | Perform a KCE virtual machine hardware reset. |
-*KceApi* | [**resumeKCE**](Apis/KceApi.md#resumekce) | **POST** /kce/{kceId}/resume | Perform a KCE virtual machine software PM resume. |
-*KceApi* | [**shutdownKCE**](Apis/KceApi.md#shutdownkce) | **POST** /kce/{kceId}/shutdown | Initiate a software shutdown of a KCE virtual machine. |
-*KceApi* | [**startKCE**](Apis/KceApi.md#startkce) | **POST** /kce/{kceId}/start | Boot up a KCE virtual machine. |
-*KceApi* | [**stopKCE**](Apis/KceApi.md#stopkce) | **POST** /kce/{kceId}/stop | Initiate a hardware stop of a KCE virtual machine. |
-*KceApi* | [**suspendKCE**](Apis/KceApi.md#suspendkce) | **POST** /kce/{kceId}/suspend | Perform a KCE virtual machine software PM suspend. |
-*KceApi* | [**updateKCE**](Apis/KceApi.md#updatekce) | **PUT** /kce/{kceId} | Updates a KCE virtual machine configuration. |
+*KceApi* | [**listKCEs**](Apis/KceApi.md#listkces) | **GET** /kce | Returns the IDs of KCE (Kowabunga Compute Engine) objects. |
+*KceApi* | [**readKCE**](Apis/KceApi.md#readkce) | **GET** /kce/{ kceId } | Returns a KCE (Kowabunga Compute Engine). |
+*KceApi* | [**readKCEState**](Apis/KceApi.md#readkcestate) | **GET** /kce/{ kceId }/state | Returns a virtual machine instance state. |
+*KceApi* | [**rebootKCE**](Apis/KceApi.md#rebootkce) | **POST** /kce/{ kceId }/reboot | Performs a KCE (Kowabunga Compute Engine) software reboot. |
+*KceApi* | [**resetKCE**](Apis/KceApi.md#resetkce) | **POST** /kce/{ kceId }/reset | Performs a KCE (Kowabunga Compute Engine) hardware reset. |
+*KceApi* | [**resumeKCE**](Apis/KceApi.md#resumekce) | **POST** /kce/{ kceId }/resume | Performs a KCE (Kowabunga Compute Engine) software PM resume. |
+*KceApi* | [**shutdownKCE**](Apis/KceApi.md#shutdownkce) | **POST** /kce/{ kceId }/shutdown | Performs a KCE (Kowabunga Compute Engine) software shutdown. |
+*KceApi* | [**startKCE**](Apis/KceApi.md#startkce) | **POST** /kce/{ kceId }/start | Performs a KCE (Kowabunga Compute Engine) hardware boot-up. |
+*KceApi* | [**stopKCE**](Apis/KceApi.md#stopkce) | **POST** /kce/{ kceId }/stop | Performs a KCE (Kowabunga Compute Engine) hardware stop. |
+*KceApi* | [**suspendKCE**](Apis/KceApi.md#suspendkce) | **POST** /kce/{ kceId }/suspend | Performs a KCE (Kowabunga Compute Engine) software PM suspend. |
+*KceApi* | [**updateKCE**](Apis/KceApi.md#updatekce) | **PUT** /kce/{ kceId } | Updates a KCE (Kowabunga Compute Engine) configuration. |
 | *KfsApi* | [**createProjectZoneKfs**](Apis/KfsApi.md#createprojectzonekfs) | **POST** /project/{projectId}/zone/{zoneId}/kfs | Creates a new KFS storage volume in specified zone. |
 *KfsApi* | [**deleteKFS**](Apis/KfsApi.md#deletekfs) | **DELETE** /kfs/{kfsId} | Deletes an existing KFS storage volume. |
 *KfsApi* | [**getAllKFSs**](Apis/KfsApi.md#getallkfss) | **GET** /kfs | Returns the IDs of registered KFS storage volumes. |

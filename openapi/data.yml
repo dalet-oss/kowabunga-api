@@ -42,7 +42,14 @@ resources:
     desc: virtual machine instance remote access characteristics
     schema: InstanceRemoteAccess
   kce:
+    tag: kce
     desc: KCE (Kowabunga Compute Engine)
+    extended_desc: Kowabunga Compute Engine (KCE) is a wrapper object for bare virtual machines. It consists of an instance, one to several attached volumes and 2 network adapters (a private one, a public one). This is the prefered way for creating virtual machines. IP addresses will be automatically assigned
+    schema: KCE
+    paramId: kceId
+    paramSchema: KceID
+    paramPublicId: public
+    paramPublicSchema: KcePublic
   kfs:
     desc: KFS (Kowabunga File System)
   kgw:

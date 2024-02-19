@@ -25,6 +25,8 @@ tags:
   name: host
 - description: Everything about virtual machine instance
   name: instance
+- description: Everything about KCE (Kowabunga Compute Engine)
+  name: kce
 paths:
   /adapter:
     get:
@@ -624,30 +626,30 @@ paths:
     - $ref: '#/components/parameters/InstanceID'
   /kce:
     get:
-      description: Returns the IDs of registered KCE virtual machines.
-      operationId: GetAllKCEs
+      description: Returns the IDs of KCE (Kowabunga Compute Engine) objects.
+      operationId: ListKCEs
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns the an array of KCE virtual machines IDs.
+          description: Returns an array of KCE (Kowabunga Compute Engine) IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
           $ref: '#/components/responses/Forbidden'
       tags:
       - kce
-  /kce/{kceId}:
+  /kce/{ kceId }:
     delete:
-      description: Deletes an existing KCE virtual machine.
+      description: Deletes an existing KCE (Kowabunga Compute Engine).
       operationId: DeleteKCE
       parameters:
       - $ref: '#/components/parameters/KceID'
       responses:
         "200":
-          description: The KCE virtual machine has been successfully removed.
+          description: The KCE (Kowabunga Compute Engine) has been successfully removed.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -661,8 +663,8 @@ paths:
       tags:
       - kce
     get:
-      description: Returns the description of the KCE virtual machine.
-      operationId: GetKCE
+      description: Returns a KCE (Kowabunga Compute Engine).
+      operationId: ReadKCE
       parameters:
       - $ref: '#/components/parameters/KceID'
       responses:
@@ -671,7 +673,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KCE'
-          description: Returns the KCE virtual machine object.
+          description: Returns the KCE (Kowabunga Compute Engine) object.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -683,7 +685,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/KceID'
     put:
-      description: Updates a KCE virtual machine configuration.
+      description: Updates a KCE (Kowabunga Compute Engine) configuration.
       operationId: UpdateKCE
       parameters:
       - $ref: '#/components/parameters/KceID'
@@ -692,7 +694,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/KCE'
-        description: KCE payload
+        description: KCE payload.
         required: true
       responses:
         "200":
@@ -700,7 +702,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KCE'
-          description: Updated KCE virtual machine.
+          description: Returns the KCE (Kowabunga Compute Engine) object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -715,10 +717,10 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - kce
-  /kce/{kceId}/state:
+  /kce/{ kceId }/state:
     get:
-      description: Returns the state of the KCE virtual machine.
-      operationId: GetKCEState
+      description: Returns a virtual machine instance state.
+      operationId: ReadKCEState
       parameters:
       - $ref: '#/components/parameters/KceID'
       responses:
@@ -727,7 +729,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InstanceState'
-          description: Returns the KCE virtual machine state object.
+          description: Returns the virtual machine instance state object.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -738,17 +740,17 @@ paths:
       - kce
     parameters:
     - $ref: '#/components/parameters/KceID'
-  /kce/{kceId}/reboot:
+  /kce/{ kceId }/reboot:
     parameters:
     - $ref: '#/components/parameters/KceID'
     post:
-      description: Perform a KCE virtual machine software reboot.
+      description: Performs a KCE (Kowabunga Compute Engine) software reboot.
       operationId: RebootKCE
       parameters:
       - $ref: '#/components/parameters/KceID'
       responses:
         "200":
-          description: The KCE virtual machine has been rebooted successfully.
+          description: The KCE (Kowabunga Compute Engine) software reboot is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -759,17 +761,17 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - kce
-  /kce/{kceId}/reset:
+  /kce/{ kceId }/reset:
     parameters:
     - $ref: '#/components/parameters/KceID'
     post:
-      description: Perform a KCE virtual machine hardware reset.
+      description: Performs a KCE (Kowabunga Compute Engine) hardware reset.
       operationId: ResetKCE
       parameters:
       - $ref: '#/components/parameters/KceID'
       responses:
         "200":
-          description: The KCE virtual machine has been reseted successfully.
+          description: The KCE (Kowabunga Compute Engine) hardware reset is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -780,17 +782,17 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - kce
-  /kce/{kceId}/suspend:
+  /kce/{ kceId }/suspend:
     parameters:
     - $ref: '#/components/parameters/KceID'
     post:
-      description: Perform a KCE virtual machine software PM suspend.
+      description: Performs a KCE (Kowabunga Compute Engine) software PM suspend.
       operationId: SuspendKCE
       parameters:
       - $ref: '#/components/parameters/KceID'
       responses:
         "200":
-          description: The KCE virtual machine has been suspended successfully.
+          description: The KCE (Kowabunga Compute Engine) software PM suspend is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -801,17 +803,17 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - kce
-  /kce/{kceId}/resume:
+  /kce/{ kceId }/resume:
     parameters:
     - $ref: '#/components/parameters/KceID'
     post:
-      description: Perform a KCE virtual machine software PM resume.
+      description: Performs a KCE (Kowabunga Compute Engine) software PM resume.
       operationId: ResumeKCE
       parameters:
       - $ref: '#/components/parameters/KceID'
       responses:
         "200":
-          description: The KCE virtual machine has been resumed successfully.
+          description: The KCE (Kowabunga Compute Engine) software PM resume is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -822,17 +824,17 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - kce
-  /kce/{kceId}/start:
+  /kce/{ kceId }/start:
     parameters:
     - $ref: '#/components/parameters/KceID'
     post:
-      description: Boot up a KCE virtual machine.
+      description: Performs a KCE (Kowabunga Compute Engine) hardware boot-up.
       operationId: StartKCE
       parameters:
       - $ref: '#/components/parameters/KceID'
       responses:
         "200":
-          description: The KCE virtual machine has been started successfully.
+          description: The KCE (Kowabunga Compute Engine) hardware boot-up is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -843,17 +845,17 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - kce
-  /kce/{kceId}/stop:
+  /kce/{ kceId }/stop:
     parameters:
     - $ref: '#/components/parameters/KceID'
     post:
-      description: Initiate a hardware stop of a KCE virtual machine.
+      description: Performs a KCE (Kowabunga Compute Engine) hardware stop.
       operationId: StopKCE
       parameters:
       - $ref: '#/components/parameters/KceID'
       responses:
         "200":
-          description: The KCE virtual machine has been stopped successfully.
+          description: The KCE (Kowabunga Compute Engine) hardware stop is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -864,17 +866,17 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - kce
-  /kce/{kceId}/shutdown:
+  /kce/{ kceId }/shutdown:
     parameters:
     - $ref: '#/components/parameters/KceID'
     post:
-      description: Initiate a software shutdown of a KCE virtual machine.
+      description: Performs a KCE (Kowabunga Compute Engine) software shutdown.
       operationId: ShutdownKCE
       parameters:
       - $ref: '#/components/parameters/KceID'
       responses:
         "200":
-          description: The KCE virtual machine has been shut down successfully.
+          description: The KCE (Kowabunga Compute Engine) software shutdown is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -3272,7 +3274,7 @@ components:
         type: string
       style: simple
     KceID:
-      description: The ID of the KCE virtual machine.
+      description: The ID of the KCE (Kowabunga Compute Engine).
       explode: false
       in: path
       name: kceId
@@ -3288,7 +3290,7 @@ components:
       name: public
       required: false
       schema:
-        type: boolean
+        type: string
       style: form
     KfsID:
       description: The ID of the KFS storage volume.
@@ -3927,10 +3929,10 @@ components:
       required:
       - url
     KCE:
-      description: "Kowabunga Compute Engine (KCE) is a wrapper object for bare virtual\
-        \ machines. It consists of an instance, one to several attached volumes and\
-        \ 2 network adapters (a private one, a public one). This is the prefered way\
-        \ for creating virtual machines. IP addresses will be automatically assigned."
+      description: "A Kowabunga Compute Engine (KCE) is a wrapper object for bare\
+        \ virtual machines. It consists of an instance, one to several attached volumes\
+        \ and 2 network adapters (a private one, a public one). This is the prefered\
+        \ way for creating virtual machines. IP addresses will be automatically assigned."
       example:
         disk: 1
         data_disk: 5
@@ -3942,30 +3944,31 @@ components:
         vcpus: 6
       properties:
         id:
-          description: The KCE ID  (auto-generated).
+          description: The KCE (Kowabunga Compute Engine) ID (auto-generated).
           type: string
         name:
-          description: The KCE virtual machine name
+          description: The KCE (Kowabunga Compute Engine) name.
           type: string
         description:
-          description: The KCE virtual machine description.
+          description: The KCE (Kowabunga Compute Engine) description.
           type: string
         memory:
-          description: The KCE virtual machine's memory size (in bytes).
+          description: The KCE (Kowabunga Compute Engine) memory size (in bytes).
           type: integer
         vcpus:
-          description: The KCE virtual machine's number of vCPUs.
+          description: The KCE (Kowabunga Compute Engine) number of vCPUs.
           type: integer
         disk:
-          description: The KCE virtual machine's OS disk size (in bytes).
+          description: The KCE (Kowabunga Compute Engine) OS disk size (in bytes).
           type: integer
         data_disk:
           default: 0
-          description: "The KCE virtual machine's extra data disk size (in bytes).\
-            \ If unspecified, no extra data disk will be assigned."
+          description: "The KCE (Kowabunga Compute Engine) extra data disk size (in\
+            \ bytes). If unspecified, no extra data disk will be assigned."
           type: integer
         ip:
-          description: The KCE virtual machine's assigned private IPv4 address (read-only).
+          description: The KCE (Kowabunga Compute Engine) assigned private IPv4 address
+            (read-only).
           type: string
       required:
       - disk

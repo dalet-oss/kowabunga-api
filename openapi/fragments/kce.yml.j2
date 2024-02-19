@@ -1,314 +1,53 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
 components:
   schemas:
-    KCE:
-      type: object
-      required:
-        - name
-        - memory
-        - vcpus
-        - disk
-      description: Kowabunga Compute Engine (KCE) is a wrapper object for bare virtual machines. It consists of an instance, one to several attached volumes and 2 network adapters (a private one, a public one). This is the prefered way for creating virtual machines. IP addresses will be automatically assigned.
-      properties:
-        id:
-          type: string
-          description: The KCE ID  (auto-generated).
-        name:
-          type: string
-          description: The KCE virtual machine name
-        description:
-          type: string
-          description: The KCE virtual machine description.
-        memory:
-          type: integer
-          description: The KCE virtual machine's memory size (in bytes).
-        vcpus:
-          type: integer
-          description: The KCE virtual machine's number of vCPUs.
-        disk:
-          type: integer
-          description: The KCE virtual machine's OS disk size (in bytes).
-        data_disk:
-          type: integer
-          description: The KCE virtual machine's extra data disk size (in bytes). If unspecified, no extra data disk will be assigned.
-          default: 0
-        ip:
-          type: string
-          description: The KCE virtual machine's assigned private IPv4 address (read-only).
+{{ oas.SchemaBaseResource(resources.kce, ['name', 'memory', 'vcpus', 'disk']) }}
+{{ oas.IntProperty('memory', 'The ' + resources.kce.desc + ' memory size (in bytes)') }}
+{{ oas.IntProperty('vcpus', 'The ' + resources.kce.desc + ' number of vCPUs') }}
+{{ oas.IntProperty('disk', 'The ' + resources.kce.desc + ' OS disk size (in bytes)') }}
+{{ oas.IntProperty('data_disk', 'The ' + resources.kce.desc + ' extra data disk size (in bytes). If unspecified, no extra data disk will be assigned', default=0) }}
+{{ oas.StringProperty('ip', 'The ' + resources.kce.desc + ' assigned private IPv4 address (read-only)') }}
 
   parameters:
-    KceID:
-      name: kceId
-      in: path
-      description: The ID of the KCE virtual machine.
-      required: true
-      schema:
-        type: string
-    OptionalQueryKcePublic:
-      name: public
-      in: query
-      description: Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).
-      schema:
-        type: boolean
+{{ oas.PathParamID(resources.kce) }}
+{{ oas.StringQueryParam(resources.kce.paramPublicSchema, resources.kce.paramPublicId, 'Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false)') }}
 
 paths:
   /kce:
-    get:
-      tags:
-        - kce
-      operationId: GetAllKCEs
-      description: Returns the IDs of registered KCE virtual machines.
-      responses:
-        '200':
-          description: Returns the an array of KCE virtual machines IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
+{{ oas.List(resources.kce, [resources.kce.tag]) }}
 
-  /kce/{kceId}:
-    parameters:
-      - $ref: '#/components/parameters/KceID'
+  /kce/{ {{ resources.kce.paramId }} }:
+{{ oas.RUD(resources.kce, [resources.kce.tag], [resources.kce.paramSchema]) }}
 
-    get:
-      tags:
-        - kce
-      operationId: GetKCE
-      description: Returns the description of the KCE virtual machine.
-      responses:
-        '200':
-          description: Returns the KCE virtual machine object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/KCE'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+  /kce/{ {{ resources.kce.paramId }} }/state:
+{{ oas.Parameters([resources.kce.paramSchema]) }}
+{{ oas.Read('ReadKCEState', resources.instance_state.schema, resources.instance_state.desc, [resources.kce.tag]) }}
 
-    put:
-      tags:
-        - kce
-      operationId: UpdateKCE
-      description: Updates a KCE virtual machine configuration.
-      requestBody:
-        description: KCE payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/KCE'
-        required: true
-      responses:
-        '200':
-          description: Updated KCE virtual machine.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/KCE'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-        '507':
-          $ref: '#/components/responses/InsufficientStorage'
+  /kce/{ {{ resources.kce.paramId }} }/reboot:
+{{ oas.Parameters([resources.kce.paramSchema]) }}
+{{ oas.Patch('RebootKCE', resources.kce.desc, 'software reboot', [resources.kce.tag]) }}
 
-    delete:
-      tags:
-        - kce
-      operationId: DeleteKCE
-      description: Deletes an existing KCE virtual machine.
-      responses:
-        '200':
-          description: The KCE virtual machine has been successfully removed.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /kce/{ {{ resources.kce.paramId }} }/reset:
+{{ oas.Parameters([resources.kce.paramSchema]) }}
+{{ oas.Patch('ResetKCE', resources.kce.desc, 'hardware reset', [resources.kce.tag]) }}
 
-  /kce/{kceId}/state:
-    parameters:
-      - $ref: '#/components/parameters/KceID'
+  /kce/{ {{ resources.kce.paramId }} }/suspend:
+{{ oas.Parameters([resources.kce.paramSchema]) }}
+{{ oas.Patch('SuspendKCE', resources.kce.desc, 'software PM suspend', [resources.kce.tag]) }}
 
-    get:
-      tags:
-        - kce
-      operationId: GetKCEState
-      description: Returns the state of the KCE virtual machine.
-      responses:
-        '200':
-          description: Returns the KCE virtual machine state object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InstanceState'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+  /kce/{ {{ resources.kce.paramId }} }/resume:
+{{ oas.Parameters([resources.kce.paramSchema]) }}
+{{ oas.Patch('ResumeKCE', resources.kce.desc, 'software PM resume', [resources.kce.tag]) }}
 
-  /kce/{kceId}/reboot:
-    parameters:
-      - $ref: '#/components/parameters/KceID'
+  /kce/{ {{ resources.kce.paramId }} }/start:
+{{ oas.Parameters([resources.kce.paramSchema]) }}
+{{ oas.Patch('StartKCE', resources.kce.desc, 'hardware boot-up', [resources.kce.tag]) }}
 
-    post:
-      tags:
-        - kce
-      operationId: RebootKCE
-      description: Perform a KCE virtual machine software reboot.
-      responses:
-        '200':
-          description: The KCE virtual machine has been rebooted successfully.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /kce/{ {{ resources.kce.paramId }} }/stop:
+{{ oas.Parameters([resources.kce.paramSchema]) }}
+{{ oas.Patch('StopKCE', resources.kce.desc, 'hardware stop', [resources.kce.tag]) }}
 
-  /kce/{kceId}/reset:
-    parameters:
-      - $ref: '#/components/parameters/KceID'
-
-    post:
-      tags:
-        - kce
-      operationId: ResetKCE
-      description: Perform a KCE virtual machine hardware reset.
-      responses:
-        '200':
-          description: The KCE virtual machine has been reseted successfully.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /kce/{kceId}/suspend:
-    parameters:
-      - $ref: '#/components/parameters/KceID'
-
-    post:
-      tags:
-        - kce
-      operationId: SuspendKCE
-      description: Perform a KCE virtual machine software PM suspend.
-      responses:
-        '200':
-          description: The KCE virtual machine has been suspended successfully.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /kce/{kceId}/resume:
-    parameters:
-      - $ref: '#/components/parameters/KceID'
-
-    post:
-      tags:
-        - kce
-      operationId: ResumeKCE
-      description: Perform a KCE virtual machine software PM resume.
-      responses:
-        '200':
-          description: The KCE virtual machine has been resumed successfully.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /kce/{kceId}/start:
-    parameters:
-      - $ref: '#/components/parameters/KceID'
-
-    post:
-      tags:
-        - kce
-      operationId: StartKCE
-      description: Boot up a KCE virtual machine.
-      responses:
-        '200':
-          description: The KCE virtual machine has been started successfully.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /kce/{kceId}/stop:
-    parameters:
-      - $ref: '#/components/parameters/KceID'
-
-    post:
-      tags:
-        - kce
-      operationId: StopKCE
-      description: Initiate a hardware stop of a KCE virtual machine.
-      responses:
-        '200':
-          description: The KCE virtual machine has been stopped successfully.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /kce/{kceId}/shutdown:
-    parameters:
-      - $ref: '#/components/parameters/KceID'
-
-    post:
-      tags:
-        - kce
-      operationId: ShutdownKCE
-      description: Initiate a software shutdown of a KCE virtual machine.
-      responses:
-        '200':
-          description: The KCE virtual machine has been shut down successfully.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /kce/{ {{ resources.kce.paramId }} }/shutdown:
+{{ oas.Parameters([resources.kce.paramSchema]) }}
+{{ oas.Patch('ShutdownKCE', resources.kce.desc, 'software shutdown', [resources.kce.tag]) }}

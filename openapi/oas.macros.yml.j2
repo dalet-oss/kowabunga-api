@@ -41,7 +41,7 @@
 {% endmacro %}
 
 {% macro Schema(obj, required=[]) %}
-{{ SchemaRaw(obj.schema, obj.desc, required) }}
+{{ SchemaRaw(obj.schema, obj.extended_desc | default(obj.desc), required) }}
 {% endmacro %}
 
 {% macro ArraySchema(name, desc, type) %}
