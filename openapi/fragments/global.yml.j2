@@ -1,13 +1,7 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
 components:
   schemas:
-    ObjectIds:
-      type: array
-      items:
-        type: string
+{{ oas.StringArraySchema('ObjectIds', 'list of resource IDs') }}
   parameters:
-    OptionalQueryNotify:
-      name: notify
-      in: query
-      description: Whether or not to send a notification email at resource creation.
-      schema:
-        type: boolean
+{{ oas.BoolQueryParam('Notify', 'notify', 'Whether or not to send a notification email at resource creation') }}
