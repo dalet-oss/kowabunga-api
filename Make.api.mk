@@ -3,23 +3,24 @@ YQ_VERSION = v4.34.1
 
 JINJA = jinjanate
 
-SWAGGER_YAML_TO_HTML = $(BIN_DIR)/swagger-yaml-to-html
-
 OPENAPI_DIR = openapi
 OPENAPI_TEMPLATIZE = "./templatize.sh"
 OPENAPI_TEMPLATES_DIR = $(OPENAPI_DIR)/templates
 OPENAPI_DEFINITION = $(OPENAPI_DIR)/openapi.generated.yml
-OPENAPI_DOC = $(DOCS_DIR)/index.html
+
+OPENAPI_HTML_GENERATOR = html2
+OPENAPI_DOCS_DIR_HTML = $(DOCS_DIR)/html
+
+OPENAPI_MARKDOWN_GENERATOR = markdown
+OPENAPI_DOCS_DIR_MARKDOWN = $(DOCS_DIR)/markdown
+
+OPENAPI_YAML_GENERATOR = openapi-yaml
+OPENAPI_DOCS_DIR_YAML = $(DOCS_DIR)/yaml
 
 .PHONY: get-yq
 get-yq: bin; $(info $(M) [Misc] downloading yq…) @
 	$Q test -x $(YQ) || curl -sL https://github.com/mikefarah/yq/releases/download/$(YQ_VERSION)/yq_$(shell uname -s | tr '[:upper:]' '[:lower:]')_$(shell uname -m | sed 's%x86_64%amd64%') --output $(YQ)
 	$Q chmod a+x $(YQ)
-
-.PHONY: get-swagger-yaml-to-html
-get-swagger-yaml-to-html: bin; $(info $(M) [Misc] downloading swagger-yaml-to-html…) @
-	$Q test -x $(SWAGGER_YAML_TO_HTML) || curl -sL https://raw.githubusercontent.com/yousan/swagger-yaml-to-html/master/swagger-yaml-to-html.py --output $(SWAGGER_YAML_TO_HTML)
-	$Q chmod a+x $(SWAGGER_YAML_TO_HTML)
 
 .PHONY: get-jinjanator
 get-jinjanator: ; $(info $(M) [Misc] installing jinjanator…) @
@@ -40,13 +41,40 @@ validate: get-openapi-generator ; $(info $(M) [OpenAPIv3] valid API syntax…) @
 	  -i $(OPENAPI_DEFINITION)
 
 .PHONY: doc
-doc: get-swagger-yaml-to-html ; $(info $(M) [OpenAPIv3] generate HTML documentation…) @
-	$Q mkdir -p $(shell dirname $(OPENAPI_DOC))
-	$Q python3 $(SWAGGER_YAML_TO_HTML) < $(OPENAPI_DEFINITION) > $(OPENAPI_DOC)
+doc: docs-yaml docs-html docs-markdown ; @
+
+.PHONY: docs-yaml
+docs-yaml: ; $(info $(M) [OpenAPIv3] generate YAML schema…) @
+	$Q mkdir -p $(OPENAPI_DOCS_DIR_HTML)
+	$Q $(OPENAPI_GENERATOR) generate \
+	  -g $(OPENAPI_YAML_GENERATOR) \
+	  --package-name $(PACKAGE_NAME) \
+	  -i $(OPENAPI_DEFINITION) \
+	  -o $(OPENAPI_DOCS_DIR_YAML) \
+	  $(OUT)
+
+.PHONY: docs-html
+docs-html: ; $(info $(M) [OpenAPIv3] generate HTML documentation…) @
+	$Q mkdir -p $(OPENAPI_DOCS_DIR_HTML)
+	$Q $(OPENAPI_GENERATOR) generate \
+	  -g $(OPENAPI_HTML_GENERATOR) \
+	  --package-name $(PACKAGE_NAME) \
+	  -i $(OPENAPI_DEFINITION) \
+	  -o $(OPENAPI_DOCS_DIR_HTML) \
+	  $(OUT)
+
+.PHONY: docs-markdown
+docs-markdown: ; $(info $(M) [OpenAPIv3] generate Markdown documentation…) @
+	$Q mkdir -p $(OPENAPI_DOCS_DIR_HTML)
+	$Q $(OPENAPI_GENERATOR) generate \
+	  -g $(OPENAPI_MARKDOWN_GENERATOR) \
+	  --package-name $(PACKAGE_NAME) \
+	  -i $(OPENAPI_DEFINITION) \
+	  -o $(OPENAPI_DOCS_DIR_MARKDOWN) \
+	  $(OUT)
 
 .PHONY: clean-api
 clean-api: ; @
-	$Q rm -rf $(OPENAPI_DOC)
 	$Q rm -rf $(OPENAPI_DEFINITION)
 	$Q rm -rf $(OPENAPI_TEMPLATES_DIR)
 	$Q rm -rf $(DOCS_DIR)
