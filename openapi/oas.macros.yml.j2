@@ -184,6 +184,11 @@
 {% endmacro %}
 
 {% macro ErrorsQuotas() %}
+        '507':
+          $ref: '#/components/responses/InsufficientStorage'
+{% endmacro %}
+
+{% macro ErrorsProcessing() %}
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 {% endmacro %}
@@ -203,13 +208,19 @@
 {% macro ErrorsUpdate() %}
 {{ ErrorsWrongParams() }}
 {{ ErrorsGetOne() }}
+{{ ErrorsProcessing() }}
 {{ ErrorsQuotas() }}
+{% endmacro %}
+
+{% macro ErrorsPatch() %}
+{{ ErrorsGetOne() }}
+{{ ErrorsProcessing() }}
 {% endmacro %}
 
 {% macro ErrorsDelete() %}
 {{ ErrorsGetOne() }}
 {{ ErrorsConflict() }}
-{{ ErrorsQuotas() }}
+{{ ErrorsProcessing() }}
 {% endmacro %}
 
 {% macro Parameters(params=[]) %}
@@ -282,6 +293,16 @@
       responses:
 {{ GetOneResource(schema, desc) }}
 {{ ErrorsUpdate() }}
+{% endmacro %}
+
+{% macro Patch(opId, desc, action, tags) %}
+    post:
+{{ Tags(tags) }}
+      description: Performs a {{ desc }} {{ action }}.
+      operationId: {{ opId }}
+      responses:
+{{ ResponseOk('The ' + desc + ' ' + action + ' is successful') }}
+{{ ErrorsPatch() }}
 {% endmacro %}
 
 {% macro Delete(opId, desc, tags) %}
