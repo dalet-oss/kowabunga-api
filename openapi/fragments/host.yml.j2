@@ -1,21 +1,10 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
 components:
   schemas:
-    Host:
-      type: object
-      required:
-        - name
-        - protocol
-        - address
-      properties:
-        id:
-          type: string
-          description: The host ID (auto-generated).
-        name:
-          type: string
-          description: The host name.
-        description:
-          type: string
-          description: The host description.
+{{ oas.SchemaBaseResource(resources.host, ['name', 'protocol', 'address']) }}
+{{ oas.StringProperty('name', 'The host name') }}
+{{ oas.StringProperty('description', 'The host description') }}
         protocol:
           type: string
           description: The protocol to use to issue libvirt connection.

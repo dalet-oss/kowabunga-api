@@ -15,7 +15,11 @@ resources:
     paramId: recordId
     paramSchema: RecordID
   host:
+    tag: host
     desc: computing hosts
+    schema: Host
+    paramId: hostId
+    paramSchema: HostID
   instance:
     desc: virtual machine instances
   kce:
