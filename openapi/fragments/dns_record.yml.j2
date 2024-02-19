@@ -1,105 +1,17 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
 components:
   schemas:
-    DnsRecord:
-      type: object
-      description: A DNS record
-      required:
-        - name
-        - addresses
-      properties:
-        id:
-          type: string
-          description: The DNS record ID (auto-generated).
-        name:
-          type: string
-          description: The DNS record name (zone's entry).
-        description:
-          type: string
-          description: The DNS record description.
-        domain:
-          type: string
-          description: The DNS record associated domain (inherited from associated project).
-        addresses:
-          type: array
-          description: A list of IPv4 addresses to be associated to the record.
-          items:
-            type: string
+{{ oas.Schema(resources.record.schema, resources.record.desc, ['name', 'addresses']) }}
+{{ oas.StringProperty('id', 'The DNS record ID (auto-generated)') }}
+{{ oas.StringProperty('name', "The DNS record name (zone's entry)") }}
+{{ oas.StringProperty('description', 'The DNS record description') }}
+{{ oas.StringProperty('domain', 'The DNS record associated domain (inherited from associated project)') }}
+{{ oas.StringArrayProperty('addresses', 'A list of IPv4 addresses to be associated to the record') }}
+
   parameters:
-    RecordID:
-      name: recordId
-      in: path
-      description: The ID of the DNS record to get.
-      required: true
-      schema:
-        type: string
+{{ oas.StringPathParam(resources.record.paramSchema, resources.record.paramId, 'The ID of the DNS record') }}
 
 paths:
-  /record/{recordId}:
-    parameters:
-      - $ref: '#/components/parameters/RecordID'
-    get:
-      tags:
-        - record
-      description: Returns a DNS record object
-      operationId: GetDnsRecord
-      responses:
-        '200':
-          description: Returns the DNS record object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DnsRecord'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-    put:
-      tags:
-        - record
-      description: Updates a DNS record configuration.
-      operationId: UpdateDnsRecord
-      requestBody:
-        description: DNS record payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DnsRecord'
-        required: true
-      responses:
-        '200':
-          description: Updated DNS record.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DnsRecord'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-    delete:
-      tags:
-        - record
-      description: Deletes an existing DNS record.
-      operationId: DeleteDnsRecord
-      responses:
-        '200':
-          description: The DNS record has been successfully removed.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /record/{ {{ resources.record.paramId }} }:
+{{ oas.RUD(resources.record, [resources.record.tag], [resources.record.paramSchema]) }}

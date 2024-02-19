@@ -9,7 +9,11 @@ resources:
     desc: key/value metadata
     schema: Cost
   record:
-    desc: DNS records
+    tag: record
+    desc: DNS record
+    schema: DnsRecord
+    paramId: recordId
+    paramSchema: RecordID
   host:
     desc: computing hosts
   instance:
