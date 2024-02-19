@@ -1,5 +1,5 @@
-{% macro ErrorSchema(name, err) %}
-    ApiError{{ name }}:
+{% macro ErrorSchema(err) %}
+    ApiError{{ err.schema }}:
       type: object
       required:
         - status
@@ -18,13 +18,13 @@
           example: server_side_details
 {% endmacro %}
 
-{% macro ErrorResponse(name, err) %}
-    {{ name }}:
-      description: "{{ name }} error: {{ err.desc }}."
+{% macro ErrorResponse(err) %}
+    {{ err.schema }}:
+      description: "{{ err.schema }} error: {{ err.desc }}."
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ApiError{{ name }}'
+            $ref: '#/components/schemas/ApiError{{ err.schema }}'
 {% endmacro %}
 
 {% macro SchemaRaw(schema, desc, required=[]) %}
@@ -161,36 +161,34 @@
 {% endfor %}
 {% endmacro %}
 
+{% macro ErrorDefinition(err) %}
+        '{{ err.code }}':
+          $ref: '#/components/responses/{{ err.schema }}'
+{% endmacro %}
+
 {% macro ErrorsWrongParams() %}
-        '400':
-          $ref: '#/components/responses/BadRequest'
+{{ ErrorDefinition(errors.BadRequest) }}
 {% endmacro %}
 
 {% macro ErrorsAuth() %}
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
+{{ ErrorDefinition(errors.Unauthorized) }}
+{{ ErrorDefinition(errors.Forbidden) }}
 {% endmacro %}
 
 {% macro ErrorsUnknownResource() %}
-        '404':
-          $ref: '#/components/responses/NotFound'
+{{ ErrorDefinition(errors.NotFound) }}
 {% endmacro %}
 
 {% macro ErrorsConflict() %}
-        '409':
-          $ref: '#/components/responses/Conflict'
+{{ ErrorDefinition(errors.Conflict) }}
 {% endmacro %}
 
 {% macro ErrorsQuotas() %}
-        '507':
-          $ref: '#/components/responses/InsufficientStorage'
+{{ ErrorDefinition(errors.InsufficientStorage) }}
 {% endmacro %}
 
 {% macro ErrorsProcessing() %}
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+{{ ErrorDefinition(errors.UnprocessableEntity) }}
 {% endmacro %}
 
 {% macro ErrorsGetAll(childOf=False) %}

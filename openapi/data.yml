@@ -71,22 +71,29 @@ resources:
 errors:
   BadRequest:
     code: 400
+    schema: BadRequest
     desc: Bad request (wrong input parameters)
   Unauthorized:
     code: 401
+    schema: Unauthorized
     desc: Unauthorized resource access (wrong auth/credentials)
   Forbidden:
     code: 403
+    schema: Forbidden
     desc: Forbidden resource access (restricted access control)
   NotFound:
     code: 404
+    schema: NotFound
     desc: Specified resource does not exist
   Conflict:
     code: 409
+    schema: Conflict
     desc: A similar resource already exists or resource is still being referenced somewhere
   UnprocessableEntity:
     code: 422
+    schema: UnprocessableEntity
     desc: Server can't process request
   InsufficientStorage:
     code: 507
+    schema: InsufficientStorage
     desc: Server can't process allocate resources (logical quotas or physical limits hit)

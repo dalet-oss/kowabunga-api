@@ -2,11 +2,11 @@
 
 components:
   schemas:
-{% for k, v in errors.items() %}
-{{ oas.ErrorSchema(k, v) }}
+{% for key, err in errors.items() %}
+{{ oas.ErrorSchema(err) }}
 {% endfor %}
 
   responses:
-{% for k, v in errors.items() %}
-{{ oas.ErrorResponse(k, v) }}
+{% for key, err in errors.items() %}
+{{ oas.ErrorResponse(err) }}
 {% endfor %}
