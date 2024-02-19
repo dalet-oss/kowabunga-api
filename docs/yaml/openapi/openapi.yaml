@@ -115,6 +115,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - adapter
   /record/{ recordId }:
@@ -189,6 +191,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - record
   /host:
@@ -280,6 +284,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - host
   /host/{ hostId }/caps:
@@ -331,22 +337,22 @@ paths:
     - $ref: '#/components/parameters/HostID'
   /instance:
     get:
-      description: Returns the IDs of registered virtual machines.
-      operationId: GetAllInstances
+      description: Returns the IDs of virtual machine instance objects.
+      operationId: ListInstances
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns the an array of virtual machines IDs.
+          description: Returns an array of virtual machine instance IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
           $ref: '#/components/responses/Forbidden'
       tags:
       - instance
-  /instance/{instanceId}:
+  /instance/{ instanceId }:
     delete:
       description: Deletes an existing virtual machine instance.
       operationId: DeleteInstance
@@ -354,7 +360,7 @@ paths:
       - $ref: '#/components/parameters/InstanceID'
       responses:
         "200":
-          description: The network adapter has been successfully removed.
+          description: The virtual machine instance has been successfully removed.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -368,8 +374,8 @@ paths:
       tags:
       - instance
     get:
-      description: Returns the description of the virtual machine.
-      operationId: GetInstance
+      description: Returns a virtual machine instance.
+      operationId: ReadInstance
       parameters:
       - $ref: '#/components/parameters/InstanceID'
       responses:
@@ -378,7 +384,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Instance'
-          description: Returns the virtual machine instance adapter object.
+          description: Returns the virtual machine instance object.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -390,7 +396,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
     put:
-      description: Updates a virtual machine configuration.
+      description: Updates a virtual machine instance configuration.
       operationId: UpdateInstance
       parameters:
       - $ref: '#/components/parameters/InstanceID'
@@ -399,15 +405,15 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Instance'
-        description: Adapter payload
+        description: Instance payload.
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Adapter'
-          description: Updated virtual machine instance.
+                $ref: '#/components/schemas/Instance'
+          description: Returns the virtual machine instance object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -422,10 +428,10 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - instance
-  /instance/{instanceId}/state:
+  /instance/{ instanceId }/state:
     get:
-      description: Returns the state of the virtual machine.
-      operationId: GetInstanceState
+      description: Returns a virtual machine instance state.
+      operationId: ReadInstanceState
       parameters:
       - $ref: '#/components/parameters/InstanceID'
       responses:
@@ -434,7 +440,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InstanceState'
-          description: Returns the virtual machine state object.
+          description: Returns the virtual machine instance state object.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -445,17 +451,17 @@ paths:
       - instance
     parameters:
     - $ref: '#/components/parameters/InstanceID'
-  /instance/{instanceId}/reboot:
+  /instance/{ instanceId }/reboot:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
     post:
-      description: Perform a virtual machine software reboot.
+      description: Performs a virtual machine instance software reboot.
       operationId: RebootInstance
       parameters:
       - $ref: '#/components/parameters/InstanceID'
       responses:
         "200":
-          description: The virtual machine has been rebooted successfully.
+          description: The virtual machine instance software reboot is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -466,17 +472,17 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - instance
-  /instance/{instanceId}/reset:
+  /instance/{ instanceId }/reset:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
     post:
-      description: Perform a virtual machine hardware reset.
+      description: Performs a virtual machine instance hardware reset.
       operationId: ResetInstance
       parameters:
       - $ref: '#/components/parameters/InstanceID'
       responses:
         "200":
-          description: The virtual machine has been reseted successfully.
+          description: The virtual machine instance hardware reset is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -487,17 +493,17 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - instance
-  /instance/{instanceId}/suspend:
+  /instance/{ instanceId }/suspend:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
     post:
-      description: Perform a virtual machine software PM suspend.
+      description: Performs a virtual machine instance software PM suspend.
       operationId: SuspendInstance
       parameters:
       - $ref: '#/components/parameters/InstanceID'
       responses:
         "200":
-          description: The virtual machine has been suspended successfully.
+          description: The virtual machine instance software PM suspend is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -508,17 +514,17 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - instance
-  /instance/{instanceId}/resume:
+  /instance/{ instanceId }/resume:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
     post:
-      description: Perform a virtual machine software PM resume.
+      description: Performs a virtual machine instance software PM resume.
       operationId: ResumeInstance
       parameters:
       - $ref: '#/components/parameters/InstanceID'
       responses:
         "200":
-          description: The virtual machine has been resumed successfully.
+          description: The virtual machine instance software PM resume is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -529,17 +535,17 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - instance
-  /instance/{instanceId}/start:
+  /instance/{ instanceId }/start:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
     post:
-      description: Boot up a virtual machine.
+      description: Performs a virtual machine instance hardware boot-up.
       operationId: StartInstance
       parameters:
       - $ref: '#/components/parameters/InstanceID'
       responses:
         "200":
-          description: The virtual machine has been started successfully.
+          description: The virtual machine instance hardware boot-up is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -550,17 +556,17 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - instance
-  /instance/{instanceId}/stop:
+  /instance/{ instanceId }/stop:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
     post:
-      description: Initiate a hardware stop of a virtual machine.
+      description: Performs a virtual machine instance hardware stop.
       operationId: StopInstance
       parameters:
       - $ref: '#/components/parameters/InstanceID'
       responses:
         "200":
-          description: The virtual machine has been stopped successfully.
+          description: The virtual machine instance hardware stop is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -571,17 +577,17 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - instance
-  /instance/{instanceId}/shutdown:
+  /instance/{ instanceId }/shutdown:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
     post:
-      description: Initiate a software shutdown of a virtual machine.
+      description: Performs a virtual machine instance software shutdown.
       operationId: ShutdownInstance
       parameters:
       - $ref: '#/components/parameters/InstanceID'
       responses:
         "200":
-          description: The virtual machine has been shut down successfully.
+          description: The virtual machine instance software shutdown is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -592,10 +598,10 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - instance
-  /instance/{instanceId}/connect:
+  /instance/{ instanceId }/connect:
     get:
-      description: Returns virtual machine remote access URL.
-      operationId: GetInstanceRemoteConnection
+      description: Returns a virtual machine instance remote access characteristics.
+      operationId: ReadInstanceRemoteConnection
       parameters:
       - $ref: '#/components/parameters/InstanceID'
       responses:
@@ -604,15 +610,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InstanceRemoteAccess'
-          description: Returns the virtual machine remote connection URL.
+          description: Returns the virtual machine instance remote access characteristics
+            object.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
           $ref: '#/components/responses/Forbidden'
         "404":
           $ref: '#/components/responses/NotFound'
-        "422":
-          $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - instance
     parameters:
@@ -3851,6 +3856,7 @@ components:
       - threads
       - vendor
     Instance:
+      description: A virtual machine instance.
       example:
         memory: 0
         adapters:
@@ -3865,19 +3871,19 @@ components:
         vcpus: 6
       properties:
         id:
-          description: The virtual machine instance ID  (auto-generated).
+          description: The virtual machine instance ID (auto-generated).
           type: string
         name:
-          description: The virtual machine name
+          description: The virtual machine instance name.
           type: string
         description:
-          description: The virtual machine description.
+          description: The virtual machine instance description.
           type: string
         memory:
-          description: the virtual machine's memory size (in bytes).
+          description: The virtual machine instance memory size (in bytes).
           type: integer
         vcpus:
-          description: the virtual machine's number of vCPUs.
+          description: The virtual machine instance number of vCPUs.
           type: integer
         adapters:
           description: a list of existing network adapters to be connected to the
@@ -3886,8 +3892,8 @@ components:
             type: string
           type: array
         volumes:
-          description: a list of existing storage volumes (i.e. disks) to be connected
-            to the instance.
+          description: volumes list of existing storage volumes (i.e. disks) to be
+            connected to the instance.
           items:
             type: string
           type: array
@@ -3896,25 +3902,27 @@ components:
       - name
       - vcpus
     InstanceState:
+      description: A virtual machine instance state.
       example:
         reason: reason
         state: state
       properties:
         state:
-          description: the state of the VM
+          description: The virtual machine instance state.
           type: string
         reason:
-          description: the reason of the state of the VM
+          description: The virtual machine instance reason of the state.
           type: string
       required:
       - reason
       - state
     InstanceRemoteAccess:
+      description: A virtual machine instance remote access characteristics.
       example:
         url: url
       properties:
         url:
-          description: the remote access URL
+          description: The virtual machine instance remote access URL.
           type: string
       required:
       - url

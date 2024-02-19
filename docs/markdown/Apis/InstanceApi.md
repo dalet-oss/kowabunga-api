@@ -5,21 +5,21 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createProjectZoneInstance**](InstanceApi.md#createProjectZoneInstance) | **POST** /project/{projectId}/zone/{zoneId}/instance |  |
-| [**deleteInstance**](InstanceApi.md#deleteInstance) | **DELETE** /instance/{instanceId} |  |
-| [**getAllInstances**](InstanceApi.md#getAllInstances) | **GET** /instance |  |
-| [**getInstance**](InstanceApi.md#getInstance) | **GET** /instance/{instanceId} |  |
-| [**getInstanceRemoteConnection**](InstanceApi.md#getInstanceRemoteConnection) | **GET** /instance/{instanceId}/connect |  |
-| [**getInstanceState**](InstanceApi.md#getInstanceState) | **GET** /instance/{instanceId}/state |  |
+| [**deleteInstance**](InstanceApi.md#deleteInstance) | **DELETE** /instance/{ instanceId } |  |
 | [**getProjectZoneInstances**](InstanceApi.md#getProjectZoneInstances) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
 | [**listHostInstances**](InstanceApi.md#listHostInstances) | **GET** /host/{ hostId }/instances |  |
-| [**rebootInstance**](InstanceApi.md#rebootInstance) | **POST** /instance/{instanceId}/reboot |  |
-| [**resetInstance**](InstanceApi.md#resetInstance) | **POST** /instance/{instanceId}/reset |  |
-| [**resumeInstance**](InstanceApi.md#resumeInstance) | **POST** /instance/{instanceId}/resume |  |
-| [**shutdownInstance**](InstanceApi.md#shutdownInstance) | **POST** /instance/{instanceId}/shutdown |  |
-| [**startInstance**](InstanceApi.md#startInstance) | **POST** /instance/{instanceId}/start |  |
-| [**stopInstance**](InstanceApi.md#stopInstance) | **POST** /instance/{instanceId}/stop |  |
-| [**suspendInstance**](InstanceApi.md#suspendInstance) | **POST** /instance/{instanceId}/suspend |  |
-| [**updateInstance**](InstanceApi.md#updateInstance) | **PUT** /instance/{instanceId} |  |
+| [**listInstances**](InstanceApi.md#listInstances) | **GET** /instance |  |
+| [**readInstance**](InstanceApi.md#readInstance) | **GET** /instance/{ instanceId } |  |
+| [**readInstanceRemoteConnection**](InstanceApi.md#readInstanceRemoteConnection) | **GET** /instance/{ instanceId }/connect |  |
+| [**readInstanceState**](InstanceApi.md#readInstanceState) | **GET** /instance/{ instanceId }/state |  |
+| [**rebootInstance**](InstanceApi.md#rebootInstance) | **POST** /instance/{ instanceId }/reboot |  |
+| [**resetInstance**](InstanceApi.md#resetInstance) | **POST** /instance/{ instanceId }/reset |  |
+| [**resumeInstance**](InstanceApi.md#resumeInstance) | **POST** /instance/{ instanceId }/resume |  |
+| [**shutdownInstance**](InstanceApi.md#shutdownInstance) | **POST** /instance/{ instanceId }/shutdown |  |
+| [**startInstance**](InstanceApi.md#startInstance) | **POST** /instance/{ instanceId }/start |  |
+| [**stopInstance**](InstanceApi.md#stopInstance) | **POST** /instance/{ instanceId }/stop |  |
+| [**suspendInstance**](InstanceApi.md#suspendInstance) | **POST** /instance/{ instanceId }/suspend |  |
+| [**updateInstance**](InstanceApi.md#updateInstance) | **PUT** /instance/{ instanceId } |  |
 
 
 <a name="createProjectZoneInstance"></a>
@@ -69,111 +69,6 @@ All URIs are relative to */api/v1*
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getAllInstances"></a>
-# **getAllInstances**
-> List getAllInstances()
-
-
-
-    Returns the IDs of registered virtual machines.
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getInstance"></a>
-# **getInstance**
-> Instance getInstance(instanceId)
-
-
-
-    Returns the description of the virtual machine.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **instanceId** | **String**| The ID of the virtual machine instance. | [default to null] |
-
-### Return type
-
-[**Instance**](../Models/Instance.md)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getInstanceRemoteConnection"></a>
-# **getInstanceRemoteConnection**
-> InstanceRemoteAccess getInstanceRemoteConnection(instanceId)
-
-
-
-    Returns virtual machine remote access URL.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **instanceId** | **String**| The ID of the virtual machine instance. | [default to null] |
-
-### Return type
-
-[**InstanceRemoteAccess**](../Models/InstanceRemoteAccess.md)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getInstanceState"></a>
-# **getInstanceState**
-> InstanceState getInstanceState(instanceId)
-
-
-
-    Returns the state of the virtual machine.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **instanceId** | **String**| The ID of the virtual machine instance. | [default to null] |
-
-### Return type
-
-[**InstanceState**](../Models/InstanceState.md)
 
 ### Authorization
 
@@ -239,13 +134,118 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+<a name="listInstances"></a>
+# **listInstances**
+> List listInstances()
+
+
+
+    Returns the IDs of virtual machine instance objects.
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="readInstance"></a>
+# **readInstance**
+> Instance readInstance(instanceId)
+
+
+
+    Returns a virtual machine instance.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **instanceId** | **String**| The ID of the virtual machine instance. | [default to null] |
+
+### Return type
+
+[**Instance**](../Models/Instance.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="readInstanceRemoteConnection"></a>
+# **readInstanceRemoteConnection**
+> InstanceRemoteAccess readInstanceRemoteConnection(instanceId)
+
+
+
+    Returns a virtual machine instance remote access characteristics.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **instanceId** | **String**| The ID of the virtual machine instance. | [default to null] |
+
+### Return type
+
+[**InstanceRemoteAccess**](../Models/InstanceRemoteAccess.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="readInstanceState"></a>
+# **readInstanceState**
+> InstanceState readInstanceState(instanceId)
+
+
+
+    Returns a virtual machine instance state.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **instanceId** | **String**| The ID of the virtual machine instance. | [default to null] |
+
+### Return type
+
+[**InstanceState**](../Models/InstanceState.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 <a name="rebootInstance"></a>
 # **rebootInstance**
 > rebootInstance(instanceId)
 
 
 
-    Perform a virtual machine software reboot.
+    Performs a virtual machine instance software reboot.
 
 ### Parameters
 
@@ -272,7 +272,7 @@ null (empty response body)
 
 
 
-    Perform a virtual machine hardware reset.
+    Performs a virtual machine instance hardware reset.
 
 ### Parameters
 
@@ -299,7 +299,7 @@ null (empty response body)
 
 
 
-    Perform a virtual machine software PM resume.
+    Performs a virtual machine instance software PM resume.
 
 ### Parameters
 
@@ -326,7 +326,7 @@ null (empty response body)
 
 
 
-    Initiate a software shutdown of a virtual machine.
+    Performs a virtual machine instance software shutdown.
 
 ### Parameters
 
@@ -353,7 +353,7 @@ null (empty response body)
 
 
 
-    Boot up a virtual machine.
+    Performs a virtual machine instance hardware boot-up.
 
 ### Parameters
 
@@ -380,7 +380,7 @@ null (empty response body)
 
 
 
-    Initiate a hardware stop of a virtual machine.
+    Performs a virtual machine instance hardware stop.
 
 ### Parameters
 
@@ -407,7 +407,7 @@ null (empty response body)
 
 
 
-    Perform a virtual machine software PM suspend.
+    Performs a virtual machine instance software PM suspend.
 
 ### Parameters
 
@@ -430,22 +430,22 @@ null (empty response body)
 
 <a name="updateInstance"></a>
 # **updateInstance**
-> Adapter updateInstance(instanceId, Instance)
+> Instance updateInstance(instanceId, Instance)
 
 
 
-    Updates a virtual machine configuration.
+    Updates a virtual machine instance configuration.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **instanceId** | **String**| The ID of the virtual machine instance. | [default to null] |
-| **Instance** | [**Instance**](../Models/Instance.md)| Adapter payload | |
+| **Instance** | [**Instance**](../Models/Instance.md)| Instance payload. | |
 
 ### Return type
 
-[**Adapter**](../Models/Adapter.md)
+[**Instance**](../Models/Instance.md)
 
 ### Authorization
 

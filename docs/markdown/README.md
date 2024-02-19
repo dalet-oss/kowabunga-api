@@ -22,21 +22,21 @@ All URIs are relative to */api/v1*
 *HostApi* | [**readHostCaps**](Apis/HostApi.md#readhostcaps) | **GET** /host/{ hostId }/caps | Returns a computing host capabilities. |
 *HostApi* | [**updateHost**](Apis/HostApi.md#updatehost) | **PUT** /host/{ hostId } | Updates a computing host configuration. |
 | *InstanceApi* | [**createProjectZoneInstance**](Apis/InstanceApi.md#createprojectzoneinstance) | **POST** /project/{projectId}/zone/{zoneId}/instance | Creates a new virtual machine instance in specified zone. |
-*InstanceApi* | [**deleteInstance**](Apis/InstanceApi.md#deleteinstance) | **DELETE** /instance/{instanceId} | Deletes an existing virtual machine instance. |
-*InstanceApi* | [**getAllInstances**](Apis/InstanceApi.md#getallinstances) | **GET** /instance | Returns the IDs of registered virtual machines. |
-*InstanceApi* | [**getInstance**](Apis/InstanceApi.md#getinstance) | **GET** /instance/{instanceId} | Returns the description of the virtual machine. |
-*InstanceApi* | [**getInstanceRemoteConnection**](Apis/InstanceApi.md#getinstanceremoteconnection) | **GET** /instance/{instanceId}/connect | Returns virtual machine remote access URL. |
-*InstanceApi* | [**getInstanceState**](Apis/InstanceApi.md#getinstancestate) | **GET** /instance/{instanceId}/state | Returns the state of the virtual machine. |
+*InstanceApi* | [**deleteInstance**](Apis/InstanceApi.md#deleteinstance) | **DELETE** /instance/{ instanceId } | Deletes an existing virtual machine instance. |
 *InstanceApi* | [**getProjectZoneInstances**](Apis/InstanceApi.md#getprojectzoneinstances) | **GET** /project/{projectId}/zone/{zoneId}/instances | Returns the IDs of the virtual machine instances existing in the project in the specified zone. |
 *InstanceApi* | [**listHostInstances**](Apis/InstanceApi.md#listhostinstances) | **GET** /host/{ hostId }/instances | Returns the IDs of virtual machine instance objects. |
-*InstanceApi* | [**rebootInstance**](Apis/InstanceApi.md#rebootinstance) | **POST** /instance/{instanceId}/reboot | Perform a virtual machine software reboot. |
-*InstanceApi* | [**resetInstance**](Apis/InstanceApi.md#resetinstance) | **POST** /instance/{instanceId}/reset | Perform a virtual machine hardware reset. |
-*InstanceApi* | [**resumeInstance**](Apis/InstanceApi.md#resumeinstance) | **POST** /instance/{instanceId}/resume | Perform a virtual machine software PM resume. |
-*InstanceApi* | [**shutdownInstance**](Apis/InstanceApi.md#shutdowninstance) | **POST** /instance/{instanceId}/shutdown | Initiate a software shutdown of a virtual machine. |
-*InstanceApi* | [**startInstance**](Apis/InstanceApi.md#startinstance) | **POST** /instance/{instanceId}/start | Boot up a virtual machine. |
-*InstanceApi* | [**stopInstance**](Apis/InstanceApi.md#stopinstance) | **POST** /instance/{instanceId}/stop | Initiate a hardware stop of a virtual machine. |
-*InstanceApi* | [**suspendInstance**](Apis/InstanceApi.md#suspendinstance) | **POST** /instance/{instanceId}/suspend | Perform a virtual machine software PM suspend. |
-*InstanceApi* | [**updateInstance**](Apis/InstanceApi.md#updateinstance) | **PUT** /instance/{instanceId} | Updates a virtual machine configuration. |
+*InstanceApi* | [**listInstances**](Apis/InstanceApi.md#listinstances) | **GET** /instance | Returns the IDs of virtual machine instance objects. |
+*InstanceApi* | [**readInstance**](Apis/InstanceApi.md#readinstance) | **GET** /instance/{ instanceId } | Returns a virtual machine instance. |
+*InstanceApi* | [**readInstanceRemoteConnection**](Apis/InstanceApi.md#readinstanceremoteconnection) | **GET** /instance/{ instanceId }/connect | Returns a virtual machine instance remote access characteristics. |
+*InstanceApi* | [**readInstanceState**](Apis/InstanceApi.md#readinstancestate) | **GET** /instance/{ instanceId }/state | Returns a virtual machine instance state. |
+*InstanceApi* | [**rebootInstance**](Apis/InstanceApi.md#rebootinstance) | **POST** /instance/{ instanceId }/reboot | Performs a virtual machine instance software reboot. |
+*InstanceApi* | [**resetInstance**](Apis/InstanceApi.md#resetinstance) | **POST** /instance/{ instanceId }/reset | Performs a virtual machine instance hardware reset. |
+*InstanceApi* | [**resumeInstance**](Apis/InstanceApi.md#resumeinstance) | **POST** /instance/{ instanceId }/resume | Performs a virtual machine instance software PM resume. |
+*InstanceApi* | [**shutdownInstance**](Apis/InstanceApi.md#shutdowninstance) | **POST** /instance/{ instanceId }/shutdown | Performs a virtual machine instance software shutdown. |
+*InstanceApi* | [**startInstance**](Apis/InstanceApi.md#startinstance) | **POST** /instance/{ instanceId }/start | Performs a virtual machine instance hardware boot-up. |
+*InstanceApi* | [**stopInstance**](Apis/InstanceApi.md#stopinstance) | **POST** /instance/{ instanceId }/stop | Performs a virtual machine instance hardware stop. |
+*InstanceApi* | [**suspendInstance**](Apis/InstanceApi.md#suspendinstance) | **POST** /instance/{ instanceId }/suspend | Performs a virtual machine instance software PM suspend. |
+*InstanceApi* | [**updateInstance**](Apis/InstanceApi.md#updateinstance) | **PUT** /instance/{ instanceId } | Updates a virtual machine instance configuration. |
 | *KceApi* | [**createProjectZoneKce**](Apis/KceApi.md#createprojectzonekce) | **POST** /project/{projectId}/zone/{zoneId}/kce | Creates a new KCE virtual machine in specified zone. |
 *KceApi* | [**deleteKCE**](Apis/KceApi.md#deletekce) | **DELETE** /kce/{kceId} | Deletes an existing KCE virtual machine. |
 *KceApi* | [**getAllKCEs**](Apis/KceApi.md#getallkces) | **GET** /kce | Returns the IDs of registered KCE virtual machines. |
