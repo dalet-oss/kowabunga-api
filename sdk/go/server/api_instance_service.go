@@ -85,106 +85,6 @@ func (s *InstanceAPIService) DeleteInstance(ctx context.Context, instanceId stri
 	return Response(http.StatusNotImplemented, nil), errors.New("DeleteInstance method not implemented")
 }
 
-// GetAllInstances - 
-func (s *InstanceAPIService) GetAllInstances(ctx context.Context) (ImplResponse, error) {
-	// TODO - update GetAllInstances with the required logic for this service method.
-	// Add api_instance_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetAllInstances method not implemented")
-}
-
-// GetHostInstances - 
-func (s *InstanceAPIService) GetHostInstances(ctx context.Context, hostId string) (ImplResponse, error) {
-	// TODO - update GetHostInstances with the required logic for this service method.
-	// Add api_instance_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetHostInstances method not implemented")
-}
-
-// GetInstance - 
-func (s *InstanceAPIService) GetInstance(ctx context.Context, instanceId string) (ImplResponse, error) {
-	// TODO - update GetInstance with the required logic for this service method.
-	// Add api_instance_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, Instance{}) or use other options such as http.Ok ...
-	// return Response(200, Instance{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetInstance method not implemented")
-}
-
-// GetInstanceRemoteConnection - 
-func (s *InstanceAPIService) GetInstanceRemoteConnection(ctx context.Context, instanceId string) (ImplResponse, error) {
-	// TODO - update GetInstanceRemoteConnection with the required logic for this service method.
-	// Add api_instance_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, InstanceRemoteAccess{}) or use other options such as http.Ok ...
-	// return Response(200, InstanceRemoteAccess{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
-	// return Response(422, ApiErrorUnprocessableEntity{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetInstanceRemoteConnection method not implemented")
-}
-
-// GetInstanceState - 
-func (s *InstanceAPIService) GetInstanceState(ctx context.Context, instanceId string) (ImplResponse, error) {
-	// TODO - update GetInstanceState with the required logic for this service method.
-	// Add api_instance_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, InstanceState{}) or use other options such as http.Ok ...
-	// return Response(200, InstanceState{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetInstanceState method not implemented")
-}
-
 // GetProjectZoneInstances - 
 func (s *InstanceAPIService) GetProjectZoneInstances(ctx context.Context, projectId string, zoneId string) (ImplResponse, error) {
 	// TODO - update GetProjectZoneInstances with the required logic for this service method.
@@ -203,6 +103,103 @@ func (s *InstanceAPIService) GetProjectZoneInstances(ctx context.Context, projec
 	// return Response(404, ApiErrorNotFound{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("GetProjectZoneInstances method not implemented")
+}
+
+// ListHostInstances - 
+func (s *InstanceAPIService) ListHostInstances(ctx context.Context, hostId string) (ImplResponse, error) {
+	// TODO - update ListHostInstances with the required logic for this service method.
+	// Add api_instance_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
+	// return Response(200, []string{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ListHostInstances method not implemented")
+}
+
+// ListInstances - 
+func (s *InstanceAPIService) ListInstances(ctx context.Context) (ImplResponse, error) {
+	// TODO - update ListInstances with the required logic for this service method.
+	// Add api_instance_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
+	// return Response(200, []string{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ListInstances method not implemented")
+}
+
+// ReadInstance - 
+func (s *InstanceAPIService) ReadInstance(ctx context.Context, instanceId string) (ImplResponse, error) {
+	// TODO - update ReadInstance with the required logic for this service method.
+	// Add api_instance_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, Instance{}) or use other options such as http.Ok ...
+	// return Response(200, Instance{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ReadInstance method not implemented")
+}
+
+// ReadInstanceRemoteConnection - 
+func (s *InstanceAPIService) ReadInstanceRemoteConnection(ctx context.Context, instanceId string) (ImplResponse, error) {
+	// TODO - update ReadInstanceRemoteConnection with the required logic for this service method.
+	// Add api_instance_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, InstanceRemoteAccess{}) or use other options such as http.Ok ...
+	// return Response(200, InstanceRemoteAccess{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ReadInstanceRemoteConnection method not implemented")
+}
+
+// ReadInstanceState - 
+func (s *InstanceAPIService) ReadInstanceState(ctx context.Context, instanceId string) (ImplResponse, error) {
+	// TODO - update ReadInstanceState with the required logic for this service method.
+	// Add api_instance_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, InstanceState{}) or use other options such as http.Ok ...
+	// return Response(200, InstanceState{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ReadInstanceState method not implemented")
 }
 
 // RebootInstance - 
@@ -371,8 +368,8 @@ func (s *InstanceAPIService) UpdateInstance(ctx context.Context, instanceId stri
 	// TODO - update UpdateInstance with the required logic for this service method.
 	// Add api_instance_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
-	// TODO: Uncomment the next line to return response Response(200, Adapter{}) or use other options such as http.Ok ...
-	// return Response(200, Adapter{}), nil
+	// TODO: Uncomment the next line to return response Response(200, Instance{}) or use other options such as http.Ok ...
+	// return Response(200, Instance{}), nil
 
 	// TODO: Uncomment the next line to return response Response(400, ApiErrorBadRequest{}) or use other options such as http.Ok ...
 	// return Response(400, ApiErrorBadRequest{}), nil

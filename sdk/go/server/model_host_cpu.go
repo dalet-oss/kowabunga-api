@@ -13,33 +13,33 @@ package server
 
 
 
-// HostCapsCpu - the host CPU characteristics
-type HostCapsCpu struct {
+// HostCpu - A computing host CPU characteristics.
+type HostCpu struct {
 
-	// the host CPU architecture
+	// The computing host CPU architecture.
 	Arch string `json:"arch"`
 
-	// the host CPU model
+	// The computing host CPU model.
 	Model string `json:"model"`
 
-	// the host CPU vendor
+	// The computing host CPU vendor.
 	Vendor string `json:"vendor"`
 
-	// the host CPU number of sockets
+	// The computing host CPU number of sockets.
 	Sockets int32 `json:"sockets"`
 
-	// the host CPU number of cores
+	// The computing host CPU number of cores.
 	Cores int32 `json:"cores"`
 
-	// the host CPU number of threads
+	// The computing host CPU number of threads.
 	Threads int32 `json:"threads"`
 
-	// the host memory size in bytes
+	// The computing host memory size (bytes).
 	Memory int32 `json:"memory,omitempty"`
 }
 
-// AssertHostCapsCpuRequired checks if the required fields are not zero-ed
-func AssertHostCapsCpuRequired(obj HostCapsCpu) error {
+// AssertHostCpuRequired checks if the required fields are not zero-ed
+func AssertHostCpuRequired(obj HostCpu) error {
 	elements := map[string]interface{}{
 		"arch": obj.Arch,
 		"model": obj.Model,
@@ -57,7 +57,7 @@ func AssertHostCapsCpuRequired(obj HostCapsCpu) error {
 	return nil
 }
 
-// AssertHostCapsCpuConstraints checks if the values respects the defined constraints
-func AssertHostCapsCpuConstraints(obj HostCapsCpu) error {
+// AssertHostCpuConstraints checks if the values respects the defined constraints
+func AssertHostCpuConstraints(obj HostCpu) error {
 	return nil
 }

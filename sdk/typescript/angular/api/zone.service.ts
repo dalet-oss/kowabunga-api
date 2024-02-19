@@ -612,10 +612,10 @@ export class ZoneService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createProjectZoneKce(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: boolean, notify?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<KCE>;
-    public createProjectZoneKce(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: boolean, notify?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<KCE>>;
-    public createProjectZoneKce(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: boolean, notify?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<KCE>>;
-    public createProjectZoneKce(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: boolean, notify?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public createProjectZoneKce(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: string, notify?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<KCE>;
+    public createProjectZoneKce(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: string, notify?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<KCE>>;
+    public createProjectZoneKce(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: string, notify?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<KCE>>;
+    public createProjectZoneKce(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: string, notify?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (projectId === null || projectId === undefined) {
             throw new Error('Required parameter projectId was null or undefined when calling createProjectZoneKce.');
         }

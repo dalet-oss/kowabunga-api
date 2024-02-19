@@ -11,9 +11,12 @@
  */
 
 
+/**
+ * A virtual machine instance remote access characteristics.
+ */
 export interface InstanceRemoteAccess { 
     /**
-     * the remote access URL
+     * The virtual machine instance remote access URL.
      */
     url: string;
 }

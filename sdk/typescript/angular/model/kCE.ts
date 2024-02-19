@@ -12,39 +12,39 @@
 
 
 /**
- * Kowabunga Compute Engine (KCE) is a wrapper object for bare virtual machines. It consists of an instance, one to several attached volumes and 2 network adapters (a private one, a public one). This is the prefered way for creating virtual machines. IP addresses will be automatically assigned.
+ * A Kowabunga Compute Engine (KCE) is a wrapper object for bare virtual machines. It consists of an instance, one to several attached volumes and 2 network adapters (a private one, a public one). This is the prefered way for creating virtual machines. IP addresses will be automatically assigned.
  */
 export interface KCE { 
     /**
-     * The KCE ID  (auto-generated).
+     * The KCE (Kowabunga Compute Engine) ID (auto-generated).
      */
     id?: string;
     /**
-     * The KCE virtual machine name
+     * The KCE (Kowabunga Compute Engine) name.
      */
     name: string;
     /**
-     * The KCE virtual machine description.
+     * The KCE (Kowabunga Compute Engine) description.
      */
     description?: string;
     /**
-     * The KCE virtual machine\'s memory size (in bytes).
+     * The KCE (Kowabunga Compute Engine) memory size (in bytes).
      */
     memory: number;
     /**
-     * The KCE virtual machine\'s number of vCPUs.
+     * The KCE (Kowabunga Compute Engine) number of vCPUs.
      */
     vcpus: number;
     /**
-     * The KCE virtual machine\'s OS disk size (in bytes).
+     * The KCE (Kowabunga Compute Engine) OS disk size (in bytes).
      */
     disk: number;
     /**
-     * The KCE virtual machine\'s extra data disk size (in bytes). If unspecified, no extra data disk will be assigned.
+     * The KCE (Kowabunga Compute Engine) extra data disk size (in bytes). If unspecified, no extra data disk will be assigned.
      */
     data_disk?: number;
     /**
-     * The KCE virtual machine\'s assigned private IPv4 address (read-only).
+     * The KCE (Kowabunga Compute Engine) assigned private IPv4 address (read-only).
      */
     ip?: string;
 }

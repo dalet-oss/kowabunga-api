@@ -82,83 +82,6 @@ func (s *HostAPIService) DeleteHost(ctx context.Context, hostId string) (ImplRes
 	return Response(http.StatusNotImplemented, nil), errors.New("DeleteHost method not implemented")
 }
 
-// GetAllHosts - 
-func (s *HostAPIService) GetAllHosts(ctx context.Context) (ImplResponse, error) {
-	// TODO - update GetAllHosts with the required logic for this service method.
-	// Add api_host_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetAllHosts method not implemented")
-}
-
-// GetHost - 
-func (s *HostAPIService) GetHost(ctx context.Context, hostId string) (ImplResponse, error) {
-	// TODO - update GetHost with the required logic for this service method.
-	// Add api_host_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, Host{}) or use other options such as http.Ok ...
-	// return Response(200, Host{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetHost method not implemented")
-}
-
-// GetHostCaps - 
-func (s *HostAPIService) GetHostCaps(ctx context.Context, hostId string) (ImplResponse, error) {
-	// TODO - update GetHostCaps with the required logic for this service method.
-	// Add api_host_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, HostCaps{}) or use other options such as http.Ok ...
-	// return Response(200, HostCaps{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetHostCaps method not implemented")
-}
-
-// GetHostInstances - 
-func (s *HostAPIService) GetHostInstances(ctx context.Context, hostId string) (ImplResponse, error) {
-	// TODO - update GetHostInstances with the required logic for this service method.
-	// Add api_host_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetHostInstances method not implemented")
-}
-
 // GetZoneHosts - 
 func (s *HostAPIService) GetZoneHosts(ctx context.Context, zoneId string) (ImplResponse, error) {
 	// TODO - update GetZoneHosts with the required logic for this service method.
@@ -177,6 +100,83 @@ func (s *HostAPIService) GetZoneHosts(ctx context.Context, zoneId string) (ImplR
 	// return Response(404, ApiErrorNotFound{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("GetZoneHosts method not implemented")
+}
+
+// ListHostInstances - 
+func (s *HostAPIService) ListHostInstances(ctx context.Context, hostId string) (ImplResponse, error) {
+	// TODO - update ListHostInstances with the required logic for this service method.
+	// Add api_host_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
+	// return Response(200, []string{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ListHostInstances method not implemented")
+}
+
+// ListHosts - 
+func (s *HostAPIService) ListHosts(ctx context.Context) (ImplResponse, error) {
+	// TODO - update ListHosts with the required logic for this service method.
+	// Add api_host_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
+	// return Response(200, []string{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ListHosts method not implemented")
+}
+
+// ReadHost - 
+func (s *HostAPIService) ReadHost(ctx context.Context, hostId string) (ImplResponse, error) {
+	// TODO - update ReadHost with the required logic for this service method.
+	// Add api_host_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, Host{}) or use other options such as http.Ok ...
+	// return Response(200, Host{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ReadHost method not implemented")
+}
+
+// ReadHostCaps - 
+func (s *HostAPIService) ReadHostCaps(ctx context.Context, hostId string) (ImplResponse, error) {
+	// TODO - update ReadHostCaps with the required logic for this service method.
+	// Add api_host_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, HostCaps{}) or use other options such as http.Ok ...
+	// return Response(200, HostCaps{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ReadHostCaps method not implemented")
 }
 
 // UpdateHost - 
@@ -201,6 +201,9 @@ func (s *HostAPIService) UpdateHost(ctx context.Context, hostId string, host Hos
 
 	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
 	// return Response(422, ApiErrorUnprocessableEntity{}), nil
+
+	// TODO: Uncomment the next line to return response Response(507, ApiErrorInsufficientStorage{}) or use other options such as http.Ok ...
+	// return Response(507, ApiErrorInsufficientStorage{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("UpdateHost method not implemented")
 }

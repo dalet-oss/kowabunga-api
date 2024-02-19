@@ -9,18 +9,24 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { HostCapsCpu } from './hostCapsCpu';
+import { HostCPU } from './hostCPU';
 
 
+/**
+ * A computing host capability.
+ */
 export interface HostCaps { 
     /**
-     * The host libvirt version.
+     * The computing host libvirt version.
      */
     version: string;
     /**
-     * the host UUID
+     * The computing host domain UUID.
      */
     uuid: string;
-    cpu: HostCapsCpu;
+    /**
+     * The computing host CPU characteristics.
+     */
+    cpu: HostCPU;
 }
 

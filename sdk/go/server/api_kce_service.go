@@ -28,7 +28,7 @@ func NewKceAPIService() KceAPIServicer {
 }
 
 // CreateProjectZoneKce - 
-func (s *KceAPIService) CreateProjectZoneKce(ctx context.Context, projectId string, zoneId string, kce Kce, poolId string, templateId string, public bool, notify bool) (ImplResponse, error) {
+func (s *KceAPIService) CreateProjectZoneKce(ctx context.Context, projectId string, zoneId string, kce Kce, poolId string, templateId string, public string, notify bool) (ImplResponse, error) {
 	// TODO - update CreateProjectZoneKce with the required logic for this service method.
 	// Add api_kce_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
@@ -85,63 +85,6 @@ func (s *KceAPIService) DeleteKCE(ctx context.Context, kceId string) (ImplRespon
 	return Response(http.StatusNotImplemented, nil), errors.New("DeleteKCE method not implemented")
 }
 
-// GetAllKCEs - 
-func (s *KceAPIService) GetAllKCEs(ctx context.Context) (ImplResponse, error) {
-	// TODO - update GetAllKCEs with the required logic for this service method.
-	// Add api_kce_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetAllKCEs method not implemented")
-}
-
-// GetKCE - 
-func (s *KceAPIService) GetKCE(ctx context.Context, kceId string) (ImplResponse, error) {
-	// TODO - update GetKCE with the required logic for this service method.
-	// Add api_kce_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, Kce{}) or use other options such as http.Ok ...
-	// return Response(200, Kce{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetKCE method not implemented")
-}
-
-// GetKCEState - 
-func (s *KceAPIService) GetKCEState(ctx context.Context, kceId string) (ImplResponse, error) {
-	// TODO - update GetKCEState with the required logic for this service method.
-	// Add api_kce_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, InstanceState{}) or use other options such as http.Ok ...
-	// return Response(200, InstanceState{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetKCEState method not implemented")
-}
-
 // GetProjectZoneKCEs - 
 func (s *KceAPIService) GetProjectZoneKCEs(ctx context.Context, projectId string, zoneId string) (ImplResponse, error) {
 	// TODO - update GetProjectZoneKCEs with the required logic for this service method.
@@ -160,6 +103,63 @@ func (s *KceAPIService) GetProjectZoneKCEs(ctx context.Context, projectId string
 	// return Response(404, ApiErrorNotFound{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("GetProjectZoneKCEs method not implemented")
+}
+
+// ListKCEs - 
+func (s *KceAPIService) ListKCEs(ctx context.Context) (ImplResponse, error) {
+	// TODO - update ListKCEs with the required logic for this service method.
+	// Add api_kce_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
+	// return Response(200, []string{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ListKCEs method not implemented")
+}
+
+// ReadKCE - 
+func (s *KceAPIService) ReadKCE(ctx context.Context, kceId string) (ImplResponse, error) {
+	// TODO - update ReadKCE with the required logic for this service method.
+	// Add api_kce_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, Kce{}) or use other options such as http.Ok ...
+	// return Response(200, Kce{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ReadKCE method not implemented")
+}
+
+// ReadKCEState - 
+func (s *KceAPIService) ReadKCEState(ctx context.Context, kceId string) (ImplResponse, error) {
+	// TODO - update ReadKCEState with the required logic for this service method.
+	// Add api_kce_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, InstanceState{}) or use other options such as http.Ok ...
+	// return Response(200, InstanceState{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ReadKCEState method not implemented")
 }
 
 // RebootKCE - 

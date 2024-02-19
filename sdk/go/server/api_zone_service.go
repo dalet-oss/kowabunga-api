@@ -176,7 +176,7 @@ func (s *ZoneAPIService) CreateProjectZoneInstance(ctx context.Context, projectI
 }
 
 // CreateProjectZoneKce - 
-func (s *ZoneAPIService) CreateProjectZoneKce(ctx context.Context, projectId string, zoneId string, kce Kce, poolId string, templateId string, public bool, notify bool) (ImplResponse, error) {
+func (s *ZoneAPIService) CreateProjectZoneKce(ctx context.Context, projectId string, zoneId string, kce Kce, poolId string, templateId string, public string, notify bool) (ImplResponse, error) {
 	// TODO - update CreateProjectZoneKce with the required logic for this service method.
 	// Add api_zone_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 

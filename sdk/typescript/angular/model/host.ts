@@ -9,7 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { HostTls } from './hostTls';
+import { HostTLS } from './hostTLS';
 import { Cost } from './cost';
 
 
@@ -41,7 +41,10 @@ export interface Host {
      * The host libvirt\'s port.
      */
     port?: number;
-    tls?: HostTls;
+    /**
+     * The host libvirt\'s TLS configuration.
+     */
+    tls?: HostTLS;
     /**
      * Global cost associated to the host (deprecated, will be removed).
      */

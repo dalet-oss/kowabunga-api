@@ -12,9 +12,9 @@
 
 
 /**
- * The host libvirt\'s TLS configuration.
+ * A computing host TLS connection characteristics.
  */
-export interface HostTls { 
+export interface HostTLS { 
     /**
      * The TLS client private key.
      */

@@ -13,7 +13,7 @@ package server
 
 
 
-// HostTls - The host libvirt's TLS configuration.
+// HostTls - A computing host TLS connection characteristics.
 type HostTls struct {
 
 	// The TLS client private key.

@@ -11,13 +11,16 @@
  */
 
 
+/**
+ * A virtual machine instance state.
+ */
 export interface InstanceState { 
     /**
-     * the state of the VM
+     * The virtual machine instance state.
      */
     state: string;
     /**
-     * the reason of the state of the VM
+     * The virtual machine instance reason of the state.
      */
     reason: string;
 }

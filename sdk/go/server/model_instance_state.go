@@ -13,12 +13,13 @@ package server
 
 
 
+// InstanceState - A virtual machine instance state.
 type InstanceState struct {
 
-	// the state of the VM
+	// The virtual machine instance state.
 	State string `json:"state"`
 
-	// the reason of the state of the VM
+	// The virtual machine instance reason of the state.
 	Reason string `json:"reason"`
 }
 

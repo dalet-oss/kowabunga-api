@@ -34,6 +34,7 @@ type Host struct {
 	// The host libvirt's port.
 	Port int32 `json:"port,omitempty"`
 
+	// The host libvirt's TLS configuration.
 	Tls HostTls `json:"tls,omitempty"`
 
 	// Global cost associated to the host (deprecated, will be removed).
@@ -65,9 +66,6 @@ func AssertHostRequired(obj Host) error {
 		}
 	}
 
-	if err := AssertHostTlsRequired(obj.Tls); err != nil {
-		return err
-	}
 	return nil
 }
 

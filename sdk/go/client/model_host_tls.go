@@ -17,11 +17,11 @@ import (
 	"fmt"
 )
 
-// checks if the HostTls type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &HostTls{}
+// checks if the HostTLS type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HostTLS{}
 
-// HostTls The host libvirt's TLS configuration.
-type HostTls struct {
+// HostTLS A computing host TLS connection characteristics.
+type HostTLS struct {
 	// The TLS client private key.
 	Key string `json:"key"`
 	// The TLS client public cert.
@@ -30,30 +30,30 @@ type HostTls struct {
 	Ca string `json:"ca"`
 }
 
-type _HostTls HostTls
+type _HostTLS HostTLS
 
-// NewHostTls instantiates a new HostTls object
+// NewHostTLS instantiates a new HostTLS object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHostTls(key string, cert string, ca string) *HostTls {
-	this := HostTls{}
+func NewHostTLS(key string, cert string, ca string) *HostTLS {
+	this := HostTLS{}
 	this.Key = key
 	this.Cert = cert
 	this.Ca = ca
 	return &this
 }
 
-// NewHostTlsWithDefaults instantiates a new HostTls object
+// NewHostTLSWithDefaults instantiates a new HostTLS object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewHostTlsWithDefaults() *HostTls {
-	this := HostTls{}
+func NewHostTLSWithDefaults() *HostTLS {
+	this := HostTLS{}
 	return &this
 }
 
 // GetKey returns the Key field value
-func (o *HostTls) GetKey() string {
+func (o *HostTLS) GetKey() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -64,7 +64,7 @@ func (o *HostTls) GetKey() string {
 
 // GetKeyOk returns a tuple with the Key field value
 // and a boolean to check if the value has been set.
-func (o *HostTls) GetKeyOk() (*string, bool) {
+func (o *HostTLS) GetKeyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -72,12 +72,12 @@ func (o *HostTls) GetKeyOk() (*string, bool) {
 }
 
 // SetKey sets field value
-func (o *HostTls) SetKey(v string) {
+func (o *HostTLS) SetKey(v string) {
 	o.Key = v
 }
 
 // GetCert returns the Cert field value
-func (o *HostTls) GetCert() string {
+func (o *HostTLS) GetCert() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -88,7 +88,7 @@ func (o *HostTls) GetCert() string {
 
 // GetCertOk returns a tuple with the Cert field value
 // and a boolean to check if the value has been set.
-func (o *HostTls) GetCertOk() (*string, bool) {
+func (o *HostTLS) GetCertOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -96,12 +96,12 @@ func (o *HostTls) GetCertOk() (*string, bool) {
 }
 
 // SetCert sets field value
-func (o *HostTls) SetCert(v string) {
+func (o *HostTLS) SetCert(v string) {
 	o.Cert = v
 }
 
 // GetCa returns the Ca field value
-func (o *HostTls) GetCa() string {
+func (o *HostTLS) GetCa() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -112,7 +112,7 @@ func (o *HostTls) GetCa() string {
 
 // GetCaOk returns a tuple with the Ca field value
 // and a boolean to check if the value has been set.
-func (o *HostTls) GetCaOk() (*string, bool) {
+func (o *HostTLS) GetCaOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -120,11 +120,11 @@ func (o *HostTls) GetCaOk() (*string, bool) {
 }
 
 // SetCa sets field value
-func (o *HostTls) SetCa(v string) {
+func (o *HostTLS) SetCa(v string) {
 	o.Ca = v
 }
 
-func (o HostTls) MarshalJSON() ([]byte, error) {
+func (o HostTLS) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -132,7 +132,7 @@ func (o HostTls) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o HostTls) ToMap() (map[string]interface{}, error) {
+func (o HostTLS) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["key"] = o.Key
 	toSerialize["cert"] = o.Cert
@@ -140,7 +140,7 @@ func (o HostTls) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *HostTls) UnmarshalJSON(data []byte) (err error) {
+func (o *HostTLS) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -164,53 +164,53 @@ func (o *HostTls) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varHostTls := _HostTls{}
+	varHostTLS := _HostTLS{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varHostTls)
+	err = decoder.Decode(&varHostTLS)
 
 	if err != nil {
 		return err
 	}
 
-	*o = HostTls(varHostTls)
+	*o = HostTLS(varHostTLS)
 
 	return err
 }
 
-type NullableHostTls struct {
-	value *HostTls
+type NullableHostTLS struct {
+	value *HostTLS
 	isSet bool
 }
 
-func (v NullableHostTls) Get() *HostTls {
+func (v NullableHostTLS) Get() *HostTLS {
 	return v.value
 }
 
-func (v *NullableHostTls) Set(val *HostTls) {
+func (v *NullableHostTLS) Set(val *HostTLS) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableHostTls) IsSet() bool {
+func (v NullableHostTLS) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableHostTls) Unset() {
+func (v *NullableHostTLS) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableHostTls(val *HostTls) *NullableHostTls {
-	return &NullableHostTls{value: val, isSet: true}
+func NewNullableHostTLS(val *HostTLS) *NullableHostTLS {
+	return &NullableHostTLS{value: val, isSet: true}
 }
 
-func (v NullableHostTls) MarshalJSON() ([]byte, error) {
+func (v NullableHostTLS) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableHostTls) UnmarshalJSON(src []byte) error {
+func (v *NullableHostTLS) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -20,9 +20,9 @@ import (
 // checks if the InstanceRemoteAccess type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &InstanceRemoteAccess{}
 
-// InstanceRemoteAccess struct for InstanceRemoteAccess
+// InstanceRemoteAccess A virtual machine instance remote access characteristics.
 type InstanceRemoteAccess struct {
-	// the remote access URL
+	// The virtual machine instance remote access URL.
 	Url string `json:"url"`
 }
 

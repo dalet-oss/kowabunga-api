@@ -442,16 +442,9 @@ func (c *ZoneAPIController) CreateProjectZoneKce(w http.ResponseWriter, r *http.
 		templateIdParam = param
 	} else {
 	}
-	var publicParam bool
+	var publicParam string
 	if query.Has("public") {
-		param, err := parseBoolParameter(
-			query.Get("public"),
-			WithParse[bool](parseBool),
-		)
-		if err != nil {
-			c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-			return
-		}
+		param := query.Get("public")
 
 		publicParam = param
 	} else {

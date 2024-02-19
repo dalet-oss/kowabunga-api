@@ -13,9 +13,10 @@ package server
 
 
 
+// InstanceRemoteAccess - A virtual machine instance remote access characteristics.
 type InstanceRemoteAccess struct {
 
-	// the remote access URL
+	// The virtual machine instance remote access URL.
 	Url string `json:"url"`
 }
 

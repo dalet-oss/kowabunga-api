@@ -12,35 +12,35 @@
 
 
 /**
- * the host CPU characteristics
+ * A computing host CPU characteristics.
  */
-export interface HostCapsCpu { 
+export interface HostCPU { 
     /**
-     * the host CPU architecture
+     * The computing host CPU architecture.
      */
     arch: string;
     /**
-     * the host CPU model
+     * The computing host CPU model.
      */
     model: string;
     /**
-     * the host CPU vendor
+     * The computing host CPU vendor.
      */
     vendor: string;
     /**
-     * the host CPU number of sockets
+     * The computing host CPU number of sockets.
      */
     sockets: number;
     /**
-     * the host CPU number of cores
+     * The computing host CPU number of cores.
      */
     cores: number;
     /**
-     * the host CPU number of threads
+     * The computing host CPU number of threads.
      */
     threads: number;
     /**
-     * the host memory size in bytes
+     * The computing host memory size (bytes).
      */
     memory?: number;
 }

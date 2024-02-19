@@ -34,7 +34,8 @@ type Host struct {
 	Address string `json:"address"`
 	// The host libvirt's port.
 	Port *int32 `json:"port,omitempty"`
-	Tls *HostTls `json:"tls,omitempty"`
+	// The host libvirt's TLS configuration.
+	Tls HostTLS `json:"tls,omitempty"`
 	// Global cost associated to the host (deprecated, will be removed).
 	Cost Cost `json:"cost,omitempty"`
 	// Cost associated to the host's CPU resources.
@@ -246,19 +247,19 @@ func (o *Host) SetPort(v int32) {
 }
 
 // GetTls returns the Tls field value if set, zero value otherwise.
-func (o *Host) GetTls() HostTls {
+func (o *Host) GetTls() HostTLS {
 	if o == nil || IsNil(o.Tls) {
-		var ret HostTls
+		var ret HostTLS
 		return ret
 	}
-	return *o.Tls
+	return o.Tls
 }
 
 // GetTlsOk returns a tuple with the Tls field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Host) GetTlsOk() (*HostTls, bool) {
+func (o *Host) GetTlsOk() (HostTLS, bool) {
 	if o == nil || IsNil(o.Tls) {
-		return nil, false
+		return HostTLS{}, false
 	}
 	return o.Tls, true
 }
@@ -272,9 +273,9 @@ func (o *Host) HasTls() bool {
 	return false
 }
 
-// SetTls gets a reference to the given HostTls and assigns it to the Tls field.
-func (o *Host) SetTls(v HostTls) {
-	o.Tls = &v
+// SetTls gets a reference to the given HostTLS and assigns it to the Tls field.
+func (o *Host) SetTls(v HostTLS) {
+	o.Tls = v
 }
 
 // GetCost returns the Cost field value if set, zero value otherwise.

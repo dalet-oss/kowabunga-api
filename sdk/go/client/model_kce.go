@@ -20,23 +20,23 @@ import (
 // checks if the KCE type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &KCE{}
 
-// KCE Kowabunga Compute Engine (KCE) is a wrapper object for bare virtual machines. It consists of an instance, one to several attached volumes and 2 network adapters (a private one, a public one). This is the prefered way for creating virtual machines. IP addresses will be automatically assigned.
+// KCE A Kowabunga Compute Engine (KCE) is a wrapper object for bare virtual machines. It consists of an instance, one to several attached volumes and 2 network adapters (a private one, a public one). This is the prefered way for creating virtual machines. IP addresses will be automatically assigned.
 type KCE struct {
-	// The KCE ID  (auto-generated).
+	// The KCE (Kowabunga Compute Engine) ID (auto-generated).
 	Id *string `json:"id,omitempty"`
-	// The KCE virtual machine name
+	// The KCE (Kowabunga Compute Engine) name.
 	Name string `json:"name"`
-	// The KCE virtual machine description.
+	// The KCE (Kowabunga Compute Engine) description.
 	Description *string `json:"description,omitempty"`
-	// The KCE virtual machine's memory size (in bytes).
+	// The KCE (Kowabunga Compute Engine) memory size (in bytes).
 	Memory int32 `json:"memory"`
-	// The KCE virtual machine's number of vCPUs.
+	// The KCE (Kowabunga Compute Engine) number of vCPUs.
 	Vcpus int32 `json:"vcpus"`
-	// The KCE virtual machine's OS disk size (in bytes).
+	// The KCE (Kowabunga Compute Engine) OS disk size (in bytes).
 	Disk int32 `json:"disk"`
-	// The KCE virtual machine's extra data disk size (in bytes). If unspecified, no extra data disk will be assigned.
+	// The KCE (Kowabunga Compute Engine) extra data disk size (in bytes). If unspecified, no extra data disk will be assigned.
 	DataDisk *int32 `json:"data_disk,omitempty"`
-	// The KCE virtual machine's assigned private IPv4 address (read-only).
+	// The KCE (Kowabunga Compute Engine) assigned private IPv4 address (read-only).
 	Ip *string `json:"ip,omitempty"`
 }
 

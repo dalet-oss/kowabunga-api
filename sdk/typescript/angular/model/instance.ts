@@ -11,25 +11,28 @@
  */
 
 
+/**
+ * A virtual machine instance.
+ */
 export interface Instance { 
     /**
-     * The virtual machine instance ID  (auto-generated).
+     * The virtual machine instance ID (auto-generated).
      */
     id?: string;
     /**
-     * The virtual machine name
+     * The virtual machine instance name.
      */
     name: string;
     /**
-     * The virtual machine description.
+     * The virtual machine instance description.
      */
     description?: string;
     /**
-     * the virtual machine\'s memory size (in bytes).
+     * The virtual machine instance memory size (in bytes).
      */
     memory: number;
     /**
-     * the virtual machine\'s number of vCPUs.
+     * The virtual machine instance number of vCPUs.
      */
     vcpus: number;
     /**
@@ -37,7 +40,7 @@ export interface Instance {
      */
     adapters?: Array<string>;
     /**
-     * a list of existing storage volumes (i.e. disks) to be connected to the instance.
+     * volumes list of existing storage volumes (i.e. disks) to be connected to the instance.
      */
     volumes?: Array<string>;
 }

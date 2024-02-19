@@ -58,77 +58,77 @@ func (c *InstanceAPIController) Routes() Routes {
 		},
 		"DeleteInstance": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/instance/{instanceId}",
+			"/api/v1/instance/{ instanceId }",
 			c.DeleteInstance,
-		},
-		"GetAllInstances": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/instance",
-			c.GetAllInstances,
-		},
-		"GetHostInstances": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/host/{hostId}/instances",
-			c.GetHostInstances,
-		},
-		"GetInstance": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/instance/{instanceId}",
-			c.GetInstance,
-		},
-		"GetInstanceRemoteConnection": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/instance/{instanceId}/connect",
-			c.GetInstanceRemoteConnection,
-		},
-		"GetInstanceState": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/instance/{instanceId}/state",
-			c.GetInstanceState,
 		},
 		"GetProjectZoneInstances": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/project/{projectId}/zone/{zoneId}/instances",
 			c.GetProjectZoneInstances,
 		},
+		"ListHostInstances": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/host/{ hostId }/instances",
+			c.ListHostInstances,
+		},
+		"ListInstances": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/instance",
+			c.ListInstances,
+		},
+		"ReadInstance": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/instance/{ instanceId }",
+			c.ReadInstance,
+		},
+		"ReadInstanceRemoteConnection": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/instance/{ instanceId }/connect",
+			c.ReadInstanceRemoteConnection,
+		},
+		"ReadInstanceState": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/instance/{ instanceId }/state",
+			c.ReadInstanceState,
+		},
 		"RebootInstance": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/instance/{instanceId}/reboot",
+			"/api/v1/instance/{ instanceId }/reboot",
 			c.RebootInstance,
 		},
 		"ResetInstance": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/instance/{instanceId}/reset",
+			"/api/v1/instance/{ instanceId }/reset",
 			c.ResetInstance,
 		},
 		"ResumeInstance": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/instance/{instanceId}/resume",
+			"/api/v1/instance/{ instanceId }/resume",
 			c.ResumeInstance,
 		},
 		"ShutdownInstance": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/instance/{instanceId}/shutdown",
+			"/api/v1/instance/{ instanceId }/shutdown",
 			c.ShutdownInstance,
 		},
 		"StartInstance": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/instance/{instanceId}/start",
+			"/api/v1/instance/{ instanceId }/start",
 			c.StartInstance,
 		},
 		"StopInstance": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/instance/{instanceId}/stop",
+			"/api/v1/instance/{ instanceId }/stop",
 			c.StopInstance,
 		},
 		"SuspendInstance": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/instance/{instanceId}/suspend",
+			"/api/v1/instance/{ instanceId }/suspend",
 			c.SuspendInstance,
 		},
 		"UpdateInstance": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/instance/{instanceId}",
+			"/api/v1/instance/{ instanceId }",
 			c.UpdateInstance,
 		},
 	}
@@ -209,90 +209,6 @@ func (c *InstanceAPIController) DeleteInstance(w http.ResponseWriter, r *http.Re
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetAllInstances - 
-func (c *InstanceAPIController) GetAllInstances(w http.ResponseWriter, r *http.Request) {
-	result, err := c.service.GetAllInstances(r.Context())
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetHostInstances - 
-func (c *InstanceAPIController) GetHostInstances(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	hostIdParam := params["hostId"]
-	if hostIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"hostId"}, nil)
-		return
-	}
-	result, err := c.service.GetHostInstances(r.Context(), hostIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetInstance - 
-func (c *InstanceAPIController) GetInstance(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	instanceIdParam := params["instanceId"]
-	if instanceIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"instanceId"}, nil)
-		return
-	}
-	result, err := c.service.GetInstance(r.Context(), instanceIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetInstanceRemoteConnection - 
-func (c *InstanceAPIController) GetInstanceRemoteConnection(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	instanceIdParam := params["instanceId"]
-	if instanceIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"instanceId"}, nil)
-		return
-	}
-	result, err := c.service.GetInstanceRemoteConnection(r.Context(), instanceIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetInstanceState - 
-func (c *InstanceAPIController) GetInstanceState(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	instanceIdParam := params["instanceId"]
-	if instanceIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"instanceId"}, nil)
-		return
-	}
-	result, err := c.service.GetInstanceState(r.Context(), instanceIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
 // GetProjectZoneInstances - 
 func (c *InstanceAPIController) GetProjectZoneInstances(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -307,6 +223,90 @@ func (c *InstanceAPIController) GetProjectZoneInstances(w http.ResponseWriter, r
 		return
 	}
 	result, err := c.service.GetProjectZoneInstances(r.Context(), projectIdParam, zoneIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListHostInstances - 
+func (c *InstanceAPIController) ListHostInstances(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	hostIdParam := params["hostId"]
+	if hostIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"hostId"}, nil)
+		return
+	}
+	result, err := c.service.ListHostInstances(r.Context(), hostIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListInstances - 
+func (c *InstanceAPIController) ListInstances(w http.ResponseWriter, r *http.Request) {
+	result, err := c.service.ListInstances(r.Context())
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ReadInstance - 
+func (c *InstanceAPIController) ReadInstance(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	instanceIdParam := params["instanceId"]
+	if instanceIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"instanceId"}, nil)
+		return
+	}
+	result, err := c.service.ReadInstance(r.Context(), instanceIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ReadInstanceRemoteConnection - 
+func (c *InstanceAPIController) ReadInstanceRemoteConnection(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	instanceIdParam := params["instanceId"]
+	if instanceIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"instanceId"}, nil)
+		return
+	}
+	result, err := c.service.ReadInstanceRemoteConnection(r.Context(), instanceIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ReadInstanceState - 
+func (c *InstanceAPIController) ReadInstanceState(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	instanceIdParam := params["instanceId"]
+	if instanceIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"instanceId"}, nil)
+		return
+	}
+	result, err := c.service.ReadInstanceState(r.Context(), instanceIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

@@ -20,13 +20,14 @@ import (
 // checks if the HostCaps type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HostCaps{}
 
-// HostCaps struct for HostCaps
+// HostCaps A computing host capability.
 type HostCaps struct {
-	// The host libvirt version.
+	// The computing host libvirt version.
 	Version string `json:"version"`
-	// the host UUID
+	// The computing host domain UUID.
 	Uuid string `json:"uuid"`
-	Cpu HostCapsCpu `json:"cpu"`
+	// The computing host CPU characteristics.
+	Cpu HostCPU `json:"cpu"`
 }
 
 type _HostCaps HostCaps
@@ -35,7 +36,7 @@ type _HostCaps HostCaps
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHostCaps(version string, uuid string, cpu HostCapsCpu) *HostCaps {
+func NewHostCaps(version string, uuid string, cpu HostCPU) *HostCaps {
 	this := HostCaps{}
 	this.Version = version
 	this.Uuid = uuid
@@ -100,9 +101,9 @@ func (o *HostCaps) SetUuid(v string) {
 }
 
 // GetCpu returns the Cpu field value
-func (o *HostCaps) GetCpu() HostCapsCpu {
+func (o *HostCaps) GetCpu() HostCPU {
 	if o == nil {
-		var ret HostCapsCpu
+		var ret HostCPU
 		return ret
 	}
 
@@ -111,15 +112,15 @@ func (o *HostCaps) GetCpu() HostCapsCpu {
 
 // GetCpuOk returns a tuple with the Cpu field value
 // and a boolean to check if the value has been set.
-func (o *HostCaps) GetCpuOk() (*HostCapsCpu, bool) {
+func (o *HostCaps) GetCpuOk() (HostCPU, bool) {
 	if o == nil {
-		return nil, false
+		return HostCPU{}, false
 	}
-	return &o.Cpu, true
+	return o.Cpu, true
 }
 
 // SetCpu sets field value
-func (o *HostCaps) SetCpu(v HostCapsCpu) {
+func (o *HostCaps) SetCpu(v HostCPU) {
 	o.Cpu = v
 }
 

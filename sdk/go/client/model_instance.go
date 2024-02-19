@@ -20,21 +20,21 @@ import (
 // checks if the Instance type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Instance{}
 
-// Instance struct for Instance
+// Instance A virtual machine instance.
 type Instance struct {
-	// The virtual machine instance ID  (auto-generated).
+	// The virtual machine instance ID (auto-generated).
 	Id *string `json:"id,omitempty"`
-	// The virtual machine name
+	// The virtual machine instance name.
 	Name string `json:"name"`
-	// The virtual machine description.
+	// The virtual machine instance description.
 	Description *string `json:"description,omitempty"`
-	// the virtual machine's memory size (in bytes).
+	// The virtual machine instance memory size (in bytes).
 	Memory int32 `json:"memory"`
-	// the virtual machine's number of vCPUs.
+	// The virtual machine instance number of vCPUs.
 	Vcpus int32 `json:"vcpus"`
 	// a list of existing network adapters to be connected to the instance.
 	Adapters []string `json:"adapters,omitempty"`
-	// a list of existing storage volumes (i.e. disks) to be connected to the instance.
+	// volumes list of existing storage volumes (i.e. disks) to be connected to the instance.
 	Volumes []string `json:"volumes,omitempty"`
 }
 

@@ -17,35 +17,35 @@ import (
 	"fmt"
 )
 
-// checks if the HostCapsCpu type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &HostCapsCpu{}
+// checks if the HostCPU type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HostCPU{}
 
-// HostCapsCpu the host CPU characteristics
-type HostCapsCpu struct {
-	// the host CPU architecture
+// HostCPU A computing host CPU characteristics.
+type HostCPU struct {
+	// The computing host CPU architecture.
 	Arch string `json:"arch"`
-	// the host CPU model
+	// The computing host CPU model.
 	Model string `json:"model"`
-	// the host CPU vendor
+	// The computing host CPU vendor.
 	Vendor string `json:"vendor"`
-	// the host CPU number of sockets
+	// The computing host CPU number of sockets.
 	Sockets int32 `json:"sockets"`
-	// the host CPU number of cores
+	// The computing host CPU number of cores.
 	Cores int32 `json:"cores"`
-	// the host CPU number of threads
+	// The computing host CPU number of threads.
 	Threads int32 `json:"threads"`
-	// the host memory size in bytes
+	// The computing host memory size (bytes).
 	Memory *int32 `json:"memory,omitempty"`
 }
 
-type _HostCapsCpu HostCapsCpu
+type _HostCPU HostCPU
 
-// NewHostCapsCpu instantiates a new HostCapsCpu object
+// NewHostCPU instantiates a new HostCPU object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHostCapsCpu(arch string, model string, vendor string, sockets int32, cores int32, threads int32) *HostCapsCpu {
-	this := HostCapsCpu{}
+func NewHostCPU(arch string, model string, vendor string, sockets int32, cores int32, threads int32) *HostCPU {
+	this := HostCPU{}
 	this.Arch = arch
 	this.Model = model
 	this.Vendor = vendor
@@ -55,16 +55,16 @@ func NewHostCapsCpu(arch string, model string, vendor string, sockets int32, cor
 	return &this
 }
 
-// NewHostCapsCpuWithDefaults instantiates a new HostCapsCpu object
+// NewHostCPUWithDefaults instantiates a new HostCPU object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewHostCapsCpuWithDefaults() *HostCapsCpu {
-	this := HostCapsCpu{}
+func NewHostCPUWithDefaults() *HostCPU {
+	this := HostCPU{}
 	return &this
 }
 
 // GetArch returns the Arch field value
-func (o *HostCapsCpu) GetArch() string {
+func (o *HostCPU) GetArch() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -75,7 +75,7 @@ func (o *HostCapsCpu) GetArch() string {
 
 // GetArchOk returns a tuple with the Arch field value
 // and a boolean to check if the value has been set.
-func (o *HostCapsCpu) GetArchOk() (*string, bool) {
+func (o *HostCPU) GetArchOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -83,12 +83,12 @@ func (o *HostCapsCpu) GetArchOk() (*string, bool) {
 }
 
 // SetArch sets field value
-func (o *HostCapsCpu) SetArch(v string) {
+func (o *HostCPU) SetArch(v string) {
 	o.Arch = v
 }
 
 // GetModel returns the Model field value
-func (o *HostCapsCpu) GetModel() string {
+func (o *HostCPU) GetModel() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -99,7 +99,7 @@ func (o *HostCapsCpu) GetModel() string {
 
 // GetModelOk returns a tuple with the Model field value
 // and a boolean to check if the value has been set.
-func (o *HostCapsCpu) GetModelOk() (*string, bool) {
+func (o *HostCPU) GetModelOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -107,12 +107,12 @@ func (o *HostCapsCpu) GetModelOk() (*string, bool) {
 }
 
 // SetModel sets field value
-func (o *HostCapsCpu) SetModel(v string) {
+func (o *HostCPU) SetModel(v string) {
 	o.Model = v
 }
 
 // GetVendor returns the Vendor field value
-func (o *HostCapsCpu) GetVendor() string {
+func (o *HostCPU) GetVendor() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -123,7 +123,7 @@ func (o *HostCapsCpu) GetVendor() string {
 
 // GetVendorOk returns a tuple with the Vendor field value
 // and a boolean to check if the value has been set.
-func (o *HostCapsCpu) GetVendorOk() (*string, bool) {
+func (o *HostCPU) GetVendorOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -131,12 +131,12 @@ func (o *HostCapsCpu) GetVendorOk() (*string, bool) {
 }
 
 // SetVendor sets field value
-func (o *HostCapsCpu) SetVendor(v string) {
+func (o *HostCPU) SetVendor(v string) {
 	o.Vendor = v
 }
 
 // GetSockets returns the Sockets field value
-func (o *HostCapsCpu) GetSockets() int32 {
+func (o *HostCPU) GetSockets() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -147,7 +147,7 @@ func (o *HostCapsCpu) GetSockets() int32 {
 
 // GetSocketsOk returns a tuple with the Sockets field value
 // and a boolean to check if the value has been set.
-func (o *HostCapsCpu) GetSocketsOk() (*int32, bool) {
+func (o *HostCPU) GetSocketsOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -155,12 +155,12 @@ func (o *HostCapsCpu) GetSocketsOk() (*int32, bool) {
 }
 
 // SetSockets sets field value
-func (o *HostCapsCpu) SetSockets(v int32) {
+func (o *HostCPU) SetSockets(v int32) {
 	o.Sockets = v
 }
 
 // GetCores returns the Cores field value
-func (o *HostCapsCpu) GetCores() int32 {
+func (o *HostCPU) GetCores() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -171,7 +171,7 @@ func (o *HostCapsCpu) GetCores() int32 {
 
 // GetCoresOk returns a tuple with the Cores field value
 // and a boolean to check if the value has been set.
-func (o *HostCapsCpu) GetCoresOk() (*int32, bool) {
+func (o *HostCPU) GetCoresOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -179,12 +179,12 @@ func (o *HostCapsCpu) GetCoresOk() (*int32, bool) {
 }
 
 // SetCores sets field value
-func (o *HostCapsCpu) SetCores(v int32) {
+func (o *HostCPU) SetCores(v int32) {
 	o.Cores = v
 }
 
 // GetThreads returns the Threads field value
-func (o *HostCapsCpu) GetThreads() int32 {
+func (o *HostCPU) GetThreads() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -195,7 +195,7 @@ func (o *HostCapsCpu) GetThreads() int32 {
 
 // GetThreadsOk returns a tuple with the Threads field value
 // and a boolean to check if the value has been set.
-func (o *HostCapsCpu) GetThreadsOk() (*int32, bool) {
+func (o *HostCPU) GetThreadsOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -203,12 +203,12 @@ func (o *HostCapsCpu) GetThreadsOk() (*int32, bool) {
 }
 
 // SetThreads sets field value
-func (o *HostCapsCpu) SetThreads(v int32) {
+func (o *HostCPU) SetThreads(v int32) {
 	o.Threads = v
 }
 
 // GetMemory returns the Memory field value if set, zero value otherwise.
-func (o *HostCapsCpu) GetMemory() int32 {
+func (o *HostCPU) GetMemory() int32 {
 	if o == nil || IsNil(o.Memory) {
 		var ret int32
 		return ret
@@ -218,7 +218,7 @@ func (o *HostCapsCpu) GetMemory() int32 {
 
 // GetMemoryOk returns a tuple with the Memory field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HostCapsCpu) GetMemoryOk() (*int32, bool) {
+func (o *HostCPU) GetMemoryOk() (*int32, bool) {
 	if o == nil || IsNil(o.Memory) {
 		return nil, false
 	}
@@ -226,7 +226,7 @@ func (o *HostCapsCpu) GetMemoryOk() (*int32, bool) {
 }
 
 // HasMemory returns a boolean if a field has been set.
-func (o *HostCapsCpu) HasMemory() bool {
+func (o *HostCPU) HasMemory() bool {
 	if o != nil && !IsNil(o.Memory) {
 		return true
 	}
@@ -235,11 +235,11 @@ func (o *HostCapsCpu) HasMemory() bool {
 }
 
 // SetMemory gets a reference to the given int32 and assigns it to the Memory field.
-func (o *HostCapsCpu) SetMemory(v int32) {
+func (o *HostCPU) SetMemory(v int32) {
 	o.Memory = &v
 }
 
-func (o HostCapsCpu) MarshalJSON() ([]byte, error) {
+func (o HostCPU) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -247,7 +247,7 @@ func (o HostCapsCpu) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o HostCapsCpu) ToMap() (map[string]interface{}, error) {
+func (o HostCPU) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["arch"] = o.Arch
 	toSerialize["model"] = o.Model
@@ -261,7 +261,7 @@ func (o HostCapsCpu) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *HostCapsCpu) UnmarshalJSON(data []byte) (err error) {
+func (o *HostCPU) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -288,53 +288,53 @@ func (o *HostCapsCpu) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varHostCapsCpu := _HostCapsCpu{}
+	varHostCPU := _HostCPU{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varHostCapsCpu)
+	err = decoder.Decode(&varHostCPU)
 
 	if err != nil {
 		return err
 	}
 
-	*o = HostCapsCpu(varHostCapsCpu)
+	*o = HostCPU(varHostCPU)
 
 	return err
 }
 
-type NullableHostCapsCpu struct {
-	value *HostCapsCpu
+type NullableHostCPU struct {
+	value *HostCPU
 	isSet bool
 }
 
-func (v NullableHostCapsCpu) Get() *HostCapsCpu {
+func (v NullableHostCPU) Get() *HostCPU {
 	return v.value
 }
 
-func (v *NullableHostCapsCpu) Set(val *HostCapsCpu) {
+func (v *NullableHostCPU) Set(val *HostCPU) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableHostCapsCpu) IsSet() bool {
+func (v NullableHostCPU) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableHostCapsCpu) Unset() {
+func (v *NullableHostCPU) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableHostCapsCpu(val *HostCapsCpu) *NullableHostCapsCpu {
-	return &NullableHostCapsCpu{value: val, isSet: true}
+func NewNullableHostCPU(val *HostCPU) *NullableHostCPU {
+	return &NullableHostCPU{value: val, isSet: true}
 }
 
-func (v NullableHostCapsCpu) MarshalJSON() ([]byte, error) {
+func (v NullableHostCPU) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableHostCapsCpu) UnmarshalJSON(src []byte) error {
+func (v *NullableHostCPU) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -58,67 +58,67 @@ func (c *KceAPIController) Routes() Routes {
 		},
 		"DeleteKCE": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/kce/{kceId}",
+			"/api/v1/kce/{ kceId }",
 			c.DeleteKCE,
-		},
-		"GetAllKCEs": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/kce",
-			c.GetAllKCEs,
-		},
-		"GetKCE": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/kce/{kceId}",
-			c.GetKCE,
-		},
-		"GetKCEState": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/kce/{kceId}/state",
-			c.GetKCEState,
 		},
 		"GetProjectZoneKCEs": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/project/{projectId}/zone/{zoneId}/kces",
 			c.GetProjectZoneKCEs,
 		},
+		"ListKCEs": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/kce",
+			c.ListKCEs,
+		},
+		"ReadKCE": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/kce/{ kceId }",
+			c.ReadKCE,
+		},
+		"ReadKCEState": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/kce/{ kceId }/state",
+			c.ReadKCEState,
+		},
 		"RebootKCE": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/kce/{kceId}/reboot",
+			"/api/v1/kce/{ kceId }/reboot",
 			c.RebootKCE,
 		},
 		"ResetKCE": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/kce/{kceId}/reset",
+			"/api/v1/kce/{ kceId }/reset",
 			c.ResetKCE,
 		},
 		"ResumeKCE": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/kce/{kceId}/resume",
+			"/api/v1/kce/{ kceId }/resume",
 			c.ResumeKCE,
 		},
 		"ShutdownKCE": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/kce/{kceId}/shutdown",
+			"/api/v1/kce/{ kceId }/shutdown",
 			c.ShutdownKCE,
 		},
 		"StartKCE": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/kce/{kceId}/start",
+			"/api/v1/kce/{ kceId }/start",
 			c.StartKCE,
 		},
 		"StopKCE": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/kce/{kceId}/stop",
+			"/api/v1/kce/{ kceId }/stop",
 			c.StopKCE,
 		},
 		"SuspendKCE": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/kce/{kceId}/suspend",
+			"/api/v1/kce/{ kceId }/suspend",
 			c.SuspendKCE,
 		},
 		"UpdateKCE": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/kce/{kceId}",
+			"/api/v1/kce/{ kceId }",
 			c.UpdateKCE,
 		},
 	}
@@ -171,16 +171,9 @@ func (c *KceAPIController) CreateProjectZoneKce(w http.ResponseWriter, r *http.R
 		templateIdParam = param
 	} else {
 	}
-	var publicParam bool
+	var publicParam string
 	if query.Has("public") {
-		param, err := parseBoolParameter(
-			query.Get("public"),
-			WithParse[bool](parseBool),
-		)
-		if err != nil {
-			c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-			return
-		}
+		param := query.Get("public")
 
 		publicParam = param
 	} else {
@@ -227,54 +220,6 @@ func (c *KceAPIController) DeleteKCE(w http.ResponseWriter, r *http.Request) {
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetAllKCEs - 
-func (c *KceAPIController) GetAllKCEs(w http.ResponseWriter, r *http.Request) {
-	result, err := c.service.GetAllKCEs(r.Context())
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetKCE - 
-func (c *KceAPIController) GetKCE(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	kceIdParam := params["kceId"]
-	if kceIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"kceId"}, nil)
-		return
-	}
-	result, err := c.service.GetKCE(r.Context(), kceIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetKCEState - 
-func (c *KceAPIController) GetKCEState(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	kceIdParam := params["kceId"]
-	if kceIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"kceId"}, nil)
-		return
-	}
-	result, err := c.service.GetKCEState(r.Context(), kceIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
 // GetProjectZoneKCEs - 
 func (c *KceAPIController) GetProjectZoneKCEs(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -289,6 +234,54 @@ func (c *KceAPIController) GetProjectZoneKCEs(w http.ResponseWriter, r *http.Req
 		return
 	}
 	result, err := c.service.GetProjectZoneKCEs(r.Context(), projectIdParam, zoneIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListKCEs - 
+func (c *KceAPIController) ListKCEs(w http.ResponseWriter, r *http.Request) {
+	result, err := c.service.ListKCEs(r.Context())
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ReadKCE - 
+func (c *KceAPIController) ReadKCE(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	kceIdParam := params["kceId"]
+	if kceIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"kceId"}, nil)
+		return
+	}
+	result, err := c.service.ReadKCE(r.Context(), kceIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ReadKCEState - 
+func (c *KceAPIController) ReadKCEState(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	kceIdParam := params["kceId"]
+	if kceIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"kceId"}, nil)
+		return
+	}
+	result, err := c.service.ReadKCEState(r.Context(), kceIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

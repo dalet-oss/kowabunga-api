@@ -32,7 +32,7 @@ type ApiCreateProjectZoneKceRequest struct {
 	kCE *KCE
 	poolId *string
 	templateId *string
-	public *bool
+	public *string
 	notify *bool
 }
 
@@ -55,7 +55,7 @@ func (r ApiCreateProjectZoneKceRequest) TemplateId(templateId string) ApiCreateP
 }
 
 // Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).
-func (r ApiCreateProjectZoneKceRequest) Public(public bool) ApiCreateProjectZoneKceRequest {
+func (r ApiCreateProjectZoneKceRequest) Public(public string) ApiCreateProjectZoneKceRequest {
 	r.public = &public
 	return r
 }
@@ -300,10 +300,10 @@ func (r ApiDeleteKCERequest) Execute() (*http.Response, error) {
 /*
 DeleteKCE Method for DeleteKCE
 
-Deletes an existing KCE virtual machine.
+Deletes an existing KCE (Kowabunga Compute Engine).
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param kceId The ID of the KCE virtual machine.
+ @param kceId The ID of the KCE (Kowabunga Compute Engine).
  @return ApiDeleteKCERequest
 */
 func (a *KceAPIService) DeleteKCE(ctx context.Context, kceId string) ApiDeleteKCERequest {
@@ -327,7 +327,7 @@ func (a *KceAPIService) DeleteKCEExecute(r ApiDeleteKCERequest) (*http.Response,
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kce/{kceId}"
+	localVarPath := localBasePath + "/kce/{ kceId }"
 	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -459,480 +459,6 @@ func (a *KceAPIService) DeleteKCEExecute(r ApiDeleteKCERequest) (*http.Response,
 	}
 
 	return localVarHTTPResponse, nil
-}
-
-type ApiGetAllKCEsRequest struct {
-	ctx context.Context
-	ApiService *KceAPIService
-}
-
-func (r ApiGetAllKCEsRequest) Execute() ([]string, *http.Response, error) {
-	return r.ApiService.GetAllKCEsExecute(r)
-}
-
-/*
-GetAllKCEs Method for GetAllKCEs
-
-Returns the IDs of registered KCE virtual machines.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAllKCEsRequest
-*/
-func (a *KceAPIService) GetAllKCEs(ctx context.Context) ApiGetAllKCEsRequest {
-	return ApiGetAllKCEsRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-// Execute executes the request
-//  @return []string
-func (a *KceAPIService) GetAllKCEsExecute(r ApiGetAllKCEsRequest) ([]string, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []string
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KceAPIService.GetAllKCEs")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/kce"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["TokenAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["x-token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-API-Key"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ApiErrorUnauthorized
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v ApiErrorForbidden
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetKCERequest struct {
-	ctx context.Context
-	ApiService *KceAPIService
-	kceId string
-}
-
-func (r ApiGetKCERequest) Execute() (*KCE, *http.Response, error) {
-	return r.ApiService.GetKCEExecute(r)
-}
-
-/*
-GetKCE Method for GetKCE
-
-Returns the description of the KCE virtual machine.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param kceId The ID of the KCE virtual machine.
- @return ApiGetKCERequest
-*/
-func (a *KceAPIService) GetKCE(ctx context.Context, kceId string) ApiGetKCERequest {
-	return ApiGetKCERequest{
-		ApiService: a,
-		ctx: ctx,
-		kceId: kceId,
-	}
-}
-
-// Execute executes the request
-//  @return KCE
-func (a *KceAPIService) GetKCEExecute(r ApiGetKCERequest) (*KCE, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *KCE
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KceAPIService.GetKCE")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/kce/{kceId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["TokenAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["x-token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-API-Key"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ApiErrorUnauthorized
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v ApiErrorForbidden
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ApiErrorNotFound
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetKCEStateRequest struct {
-	ctx context.Context
-	ApiService *KceAPIService
-	kceId string
-}
-
-func (r ApiGetKCEStateRequest) Execute() (*InstanceState, *http.Response, error) {
-	return r.ApiService.GetKCEStateExecute(r)
-}
-
-/*
-GetKCEState Method for GetKCEState
-
-Returns the state of the KCE virtual machine.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param kceId The ID of the KCE virtual machine.
- @return ApiGetKCEStateRequest
-*/
-func (a *KceAPIService) GetKCEState(ctx context.Context, kceId string) ApiGetKCEStateRequest {
-	return ApiGetKCEStateRequest{
-		ApiService: a,
-		ctx: ctx,
-		kceId: kceId,
-	}
-}
-
-// Execute executes the request
-//  @return InstanceState
-func (a *KceAPIService) GetKCEStateExecute(r ApiGetKCEStateRequest) (*InstanceState, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *InstanceState
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KceAPIService.GetKCEState")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/kce/{kceId}/state"
-	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["TokenAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["x-token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-API-Key"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ApiErrorUnauthorized
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v ApiErrorForbidden
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ApiErrorNotFound
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetProjectZoneKCEsRequest struct {
@@ -1102,6 +628,480 @@ func (a *KceAPIService) GetProjectZoneKCEsExecute(r ApiGetProjectZoneKCEsRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiListKCEsRequest struct {
+	ctx context.Context
+	ApiService *KceAPIService
+}
+
+func (r ApiListKCEsRequest) Execute() ([]string, *http.Response, error) {
+	return r.ApiService.ListKCEsExecute(r)
+}
+
+/*
+ListKCEs Method for ListKCEs
+
+Returns the IDs of KCE (Kowabunga Compute Engine) objects.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListKCEsRequest
+*/
+func (a *KceAPIService) ListKCEs(ctx context.Context) ApiListKCEsRequest {
+	return ApiListKCEsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return []string
+func (a *KceAPIService) ListKCEsExecute(r ApiListKCEsRequest) ([]string, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []string
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KceAPIService.ListKCEs")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/kce"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["TokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-token"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiErrorUnauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiErrorForbidden
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiReadKCERequest struct {
+	ctx context.Context
+	ApiService *KceAPIService
+	kceId string
+}
+
+func (r ApiReadKCERequest) Execute() (*KCE, *http.Response, error) {
+	return r.ApiService.ReadKCEExecute(r)
+}
+
+/*
+ReadKCE Method for ReadKCE
+
+Returns a KCE (Kowabunga Compute Engine).
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param kceId The ID of the KCE (Kowabunga Compute Engine).
+ @return ApiReadKCERequest
+*/
+func (a *KceAPIService) ReadKCE(ctx context.Context, kceId string) ApiReadKCERequest {
+	return ApiReadKCERequest{
+		ApiService: a,
+		ctx: ctx,
+		kceId: kceId,
+	}
+}
+
+// Execute executes the request
+//  @return KCE
+func (a *KceAPIService) ReadKCEExecute(r ApiReadKCERequest) (*KCE, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *KCE
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KceAPIService.ReadKCE")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/kce/{ kceId }"
+	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["TokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-token"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiErrorUnauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiErrorForbidden
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiErrorNotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiReadKCEStateRequest struct {
+	ctx context.Context
+	ApiService *KceAPIService
+	kceId string
+}
+
+func (r ApiReadKCEStateRequest) Execute() (*InstanceState, *http.Response, error) {
+	return r.ApiService.ReadKCEStateExecute(r)
+}
+
+/*
+ReadKCEState Method for ReadKCEState
+
+Returns a virtual machine instance state.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param kceId The ID of the KCE (Kowabunga Compute Engine).
+ @return ApiReadKCEStateRequest
+*/
+func (a *KceAPIService) ReadKCEState(ctx context.Context, kceId string) ApiReadKCEStateRequest {
+	return ApiReadKCEStateRequest{
+		ApiService: a,
+		ctx: ctx,
+		kceId: kceId,
+	}
+}
+
+// Execute executes the request
+//  @return InstanceState
+func (a *KceAPIService) ReadKCEStateExecute(r ApiReadKCEStateRequest) (*InstanceState, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *InstanceState
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KceAPIService.ReadKCEState")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/kce/{ kceId }/state"
+	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["TokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-token"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiErrorUnauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiErrorForbidden
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiErrorNotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiRebootKCERequest struct {
 	ctx context.Context
 	ApiService *KceAPIService
@@ -1115,10 +1115,10 @@ func (r ApiRebootKCERequest) Execute() (*http.Response, error) {
 /*
 RebootKCE Method for RebootKCE
 
-Perform a KCE virtual machine software reboot.
+Performs a KCE (Kowabunga Compute Engine) software reboot.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param kceId The ID of the KCE virtual machine.
+ @param kceId The ID of the KCE (Kowabunga Compute Engine).
  @return ApiRebootKCERequest
 */
 func (a *KceAPIService) RebootKCE(ctx context.Context, kceId string) ApiRebootKCERequest {
@@ -1142,7 +1142,7 @@ func (a *KceAPIService) RebootKCEExecute(r ApiRebootKCERequest) (*http.Response,
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kce/{kceId}/reboot"
+	localVarPath := localBasePath + "/kce/{ kceId }/reboot"
 	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1278,10 +1278,10 @@ func (r ApiResetKCERequest) Execute() (*http.Response, error) {
 /*
 ResetKCE Method for ResetKCE
 
-Perform a KCE virtual machine hardware reset.
+Performs a KCE (Kowabunga Compute Engine) hardware reset.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param kceId The ID of the KCE virtual machine.
+ @param kceId The ID of the KCE (Kowabunga Compute Engine).
  @return ApiResetKCERequest
 */
 func (a *KceAPIService) ResetKCE(ctx context.Context, kceId string) ApiResetKCERequest {
@@ -1305,7 +1305,7 @@ func (a *KceAPIService) ResetKCEExecute(r ApiResetKCERequest) (*http.Response, e
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kce/{kceId}/reset"
+	localVarPath := localBasePath + "/kce/{ kceId }/reset"
 	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1441,10 +1441,10 @@ func (r ApiResumeKCERequest) Execute() (*http.Response, error) {
 /*
 ResumeKCE Method for ResumeKCE
 
-Perform a KCE virtual machine software PM resume.
+Performs a KCE (Kowabunga Compute Engine) software PM resume.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param kceId The ID of the KCE virtual machine.
+ @param kceId The ID of the KCE (Kowabunga Compute Engine).
  @return ApiResumeKCERequest
 */
 func (a *KceAPIService) ResumeKCE(ctx context.Context, kceId string) ApiResumeKCERequest {
@@ -1468,7 +1468,7 @@ func (a *KceAPIService) ResumeKCEExecute(r ApiResumeKCERequest) (*http.Response,
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kce/{kceId}/resume"
+	localVarPath := localBasePath + "/kce/{ kceId }/resume"
 	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1604,10 +1604,10 @@ func (r ApiShutdownKCERequest) Execute() (*http.Response, error) {
 /*
 ShutdownKCE Method for ShutdownKCE
 
-Initiate a software shutdown of a KCE virtual machine.
+Performs a KCE (Kowabunga Compute Engine) software shutdown.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param kceId The ID of the KCE virtual machine.
+ @param kceId The ID of the KCE (Kowabunga Compute Engine).
  @return ApiShutdownKCERequest
 */
 func (a *KceAPIService) ShutdownKCE(ctx context.Context, kceId string) ApiShutdownKCERequest {
@@ -1631,7 +1631,7 @@ func (a *KceAPIService) ShutdownKCEExecute(r ApiShutdownKCERequest) (*http.Respo
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kce/{kceId}/shutdown"
+	localVarPath := localBasePath + "/kce/{ kceId }/shutdown"
 	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1767,10 +1767,10 @@ func (r ApiStartKCERequest) Execute() (*http.Response, error) {
 /*
 StartKCE Method for StartKCE
 
-Boot up a KCE virtual machine.
+Performs a KCE (Kowabunga Compute Engine) hardware boot-up.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param kceId The ID of the KCE virtual machine.
+ @param kceId The ID of the KCE (Kowabunga Compute Engine).
  @return ApiStartKCERequest
 */
 func (a *KceAPIService) StartKCE(ctx context.Context, kceId string) ApiStartKCERequest {
@@ -1794,7 +1794,7 @@ func (a *KceAPIService) StartKCEExecute(r ApiStartKCERequest) (*http.Response, e
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kce/{kceId}/start"
+	localVarPath := localBasePath + "/kce/{ kceId }/start"
 	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1930,10 +1930,10 @@ func (r ApiStopKCERequest) Execute() (*http.Response, error) {
 /*
 StopKCE Method for StopKCE
 
-Initiate a hardware stop of a KCE virtual machine.
+Performs a KCE (Kowabunga Compute Engine) hardware stop.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param kceId The ID of the KCE virtual machine.
+ @param kceId The ID of the KCE (Kowabunga Compute Engine).
  @return ApiStopKCERequest
 */
 func (a *KceAPIService) StopKCE(ctx context.Context, kceId string) ApiStopKCERequest {
@@ -1957,7 +1957,7 @@ func (a *KceAPIService) StopKCEExecute(r ApiStopKCERequest) (*http.Response, err
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kce/{kceId}/stop"
+	localVarPath := localBasePath + "/kce/{ kceId }/stop"
 	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -2093,10 +2093,10 @@ func (r ApiSuspendKCERequest) Execute() (*http.Response, error) {
 /*
 SuspendKCE Method for SuspendKCE
 
-Perform a KCE virtual machine software PM suspend.
+Performs a KCE (Kowabunga Compute Engine) software PM suspend.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param kceId The ID of the KCE virtual machine.
+ @param kceId The ID of the KCE (Kowabunga Compute Engine).
  @return ApiSuspendKCERequest
 */
 func (a *KceAPIService) SuspendKCE(ctx context.Context, kceId string) ApiSuspendKCERequest {
@@ -2120,7 +2120,7 @@ func (a *KceAPIService) SuspendKCEExecute(r ApiSuspendKCERequest) (*http.Respons
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kce/{kceId}/suspend"
+	localVarPath := localBasePath + "/kce/{ kceId }/suspend"
 	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -2250,7 +2250,7 @@ type ApiUpdateKCERequest struct {
 	kCE *KCE
 }
 
-// KCE payload
+// KCE payload.
 func (r ApiUpdateKCERequest) KCE(kCE KCE) ApiUpdateKCERequest {
 	r.kCE = &kCE
 	return r
@@ -2263,10 +2263,10 @@ func (r ApiUpdateKCERequest) Execute() (*KCE, *http.Response, error) {
 /*
 UpdateKCE Method for UpdateKCE
 
-Updates a KCE virtual machine configuration.
+Updates a KCE (Kowabunga Compute Engine) configuration.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param kceId The ID of the KCE virtual machine.
+ @param kceId The ID of the KCE (Kowabunga Compute Engine).
  @return ApiUpdateKCERequest
 */
 func (a *KceAPIService) UpdateKCE(ctx context.Context, kceId string) ApiUpdateKCERequest {
@@ -2292,7 +2292,7 @@ func (a *KceAPIService) UpdateKCEExecute(r ApiUpdateKCERequest) (*KCE, *http.Res
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kce/{kceId}"
+	localVarPath := localBasePath + "/kce/{ kceId }"
 	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
