@@ -82,138 +82,15 @@ components:
 
 paths:
   /host:
-    get:
-      tags:
-        - host
-      description: Returns the IDs of registered hosts.
-      operationId: GetAllHosts
-      responses:
-        '200':
-          description: Returns the an array of computing hosts IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
+{{ oas.List(resources.host, [resources.host.tag]) }}
 
-  /host/{hostId}:
-    parameters:
-      - $ref: '#/components/parameters/HostID'
-
-    get:
-      tags:
-        - host
-      description: Returns a description of the host
-      operationId: GetHost
-      responses:
-        '200':
-          description: Returns the computing host object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Host'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-
-    put:
-      tags:
-        - host
-      description: Updates a host configuration.
-      operationId: UpdateHost
-      requestBody:
-        description: Host payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Host'
-        required: true
-      responses:
-        '200':
-          description: Updated computing host.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Host'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-    delete:
-      tags:
-        - host
-      description: Deletes an existing host.
-      operationId: DeleteHost
-      responses:
-        '200':
-          description: The computing host has been successfully removed.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /host/{ {{ resources.host.paramId }} }:
+{{ oas.RUD(resources.host, [resources.host.tag], [resources.host.paramSchema]) }}
 
   /host/{hostId}/caps:
-    parameters:
-      - $ref: '#/components/parameters/HostID'
-
-    get:
-      tags:
-        - host
-      description: Returns the host capabilities.
-      operationId: GetHostCaps
-      responses:
-        '200':
-          description: Returns the computing host capabilities.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HostCaps'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+{{ oas.Parameters([resources.host.paramSchema]) }}
+{{ oas.Read('ReadHostCaps', 'HostCaps', resources.host.desc + ' capabilities', [resources.host.tag]) }}
 
   /host/{hostId}/instances:
-    parameters:
-      - $ref: '#/components/parameters/HostID'
-
-    get:
-      tags:
-        - host
-        - instance
-      operationId: GetHostInstances
-      description: Returns the UUIDs of the virtual machines running on the host.
-      responses:
-        '200':
-          description: Returns the an array of virtual machine UUIDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+{{ oas.Parameters([resources.host.paramSchema]) }}
+{{ oas.GetAll('ListHostInstances', resources.instance.desc, [resources.host.tag, resources.instance.tag], True) }}
