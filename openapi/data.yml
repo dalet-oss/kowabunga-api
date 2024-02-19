@@ -16,7 +16,7 @@ resources:
     paramSchema: RecordID
   host:
     tag: host
-    desc: computing hosts
+    desc: computing host
     schema: Host
     paramId: hostId
     paramSchema: HostID
