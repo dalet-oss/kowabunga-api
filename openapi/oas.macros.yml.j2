@@ -27,10 +27,10 @@
             $ref: '#/components/schemas/ApiError{{ err.schema }}'
 {% endmacro %}
 
-{% macro Schema(obj, required=[]) %}
-    {{ obj.schema }}:
+{% macro SchemaRaw(schema, desc, required=[]) %}
+    {{ schema }}:
       type: object
-      description: A {{ obj.desc }}
+      description: A {{ desc }}
 {%if required != [] %}
       required:
 {% for r in required %}
@@ -39,6 +39,23 @@
 {% endif %}
       properties:
 {% endmacro %}
+
+{% macro Schema(obj, required=[]) %}
+{{ SchemaRaw(obj.schema, obj.desc, required) }}
+{% endmacro %}
+
+{% macro ArraySchema(name, desc, type) %}
+    {{ name }}:
+      type: array
+      description: A {{ desc }}
+      items:
+        type: {{ type }}
+{% endmacro %}
+
+{% macro StringArraySchema(name, desc) %}
+{{ ArraySchema(name, desc, 'string') }}
+{% endmacro %}
+
 
 {% macro Property(name, type, desc, default=None, format=None) %}
         {{ name }}:
@@ -100,6 +117,19 @@
 
 {% macro PathParamID(obj) %}
 {{ StringPathParam(obj.paramSchema, obj.paramId, 'The ID of the ' + obj.desc) }}
+{% endmacro %}
+
+{% macro QueryParam(key, name, desc, t) %}
+    OptionalQuery{{ key }}:
+      name: {{ name }}
+      in: query
+      description: {{ desc }}
+      schema:
+        type: {{ t }}
+{% endmacro %}
+
+{% macro BoolQueryParam(key, name, desc) %}
+{{ QueryParam(key, name, desc, 'boolean') }}
 {% endmacro %}
 
 {% macro Tags(tgs) %}
