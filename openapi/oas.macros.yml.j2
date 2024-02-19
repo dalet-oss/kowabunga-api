@@ -56,29 +56,34 @@
 {{ ArraySchema(name, desc, 'string') }}
 {% endmacro %}
 
-
-{% macro Property(name, type, desc, default=None, format=None) %}
+{% macro Property(name, type, desc, values=[], default=None, format=None) %}
         {{ name }}:
           type: {{ type }}
 {% if format != None %}
           format: {{ format }}
 {% endif %}
           description: {{ desc }}
+{% if values != [] %}
+          enum:
+{% for v in values %}
+            - {{ v }}
+{% endfor %}
+{% endif %}
 {% if default != None %}
           default: {{ default }}
 {% endif %}
 {% endmacro %}
 
-{% macro StringProperty(name, desc, default=None) %}
-{{ Property(name, 'string', desc, default) }}
+{% macro StringProperty(name, desc, values=[], default=None) %}
+{{ Property(name, 'string', desc, values, default) }}
 {% endmacro %}
 
-{% macro BoolProperty(name, desc, default=None) %}
-{{ Property(name, 'boolean', desc, default) }}
+{% macro BoolProperty(name, desc, values=[], default=None) %}
+{{ Property(name, 'boolean', desc, values, default) }}
 {% endmacro %}
 
-{% macro FloatProperty(name, desc, default=None) %}
-{{ Property(name, 'integer', desc, default, format='float') }}
+{% macro FloatProperty(name, desc, values=[], default=None) %}
+{{ Property(name, 'integer', desc, values, default, format='float') }}
 {% endmacro %}
 
 {% macro ArrayProperty(name, type, desc, default=None) %}
