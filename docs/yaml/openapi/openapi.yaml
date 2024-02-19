@@ -3692,6 +3692,26 @@ components:
       items:
         type: string
       type: array
+    HostTLS:
+      description: A computing host TLS connection characteristics.
+      example:
+        cert: cert
+        key: key
+        ca: ca
+      properties:
+        key:
+          description: The TLS client private key.
+          type: string
+        cert:
+          description: The TLS client public cert.
+          type: string
+        ca:
+          description: The TLS certificate of authority.
+          type: string
+      required:
+      - ca
+      - cert
+      - key
     Host:
       description: A computing host.
       example:
@@ -3739,7 +3759,7 @@ components:
           description: The host libvirt's port.
           type: integer
         tls:
-          $ref: '#/components/schemas/Host_tls'
+          $ref: '#/components/schemas/HostTLS'
         cost:
           $ref: '#/components/schemas/Cost'
         cpu_cost:
@@ -3786,11 +3806,50 @@ components:
           description: The computing host domain UUID.
           type: string
         cpu:
-          $ref: '#/components/schemas/HostCaps_cpu'
+          $ref: '#/components/schemas/HostCPU'
       required:
       - cpu
       - uuid
       - version
+    HostCPU:
+      description: A computing host CPU characteristics.
+      example:
+        cores: 6
+        memory: 5
+        vendor: vendor
+        threads: 1
+        model: model
+        arch: arch
+        sockets: 0
+      properties:
+        arch:
+          description: The computing host CPU architecture.
+          type: string
+        model:
+          description: The computing host CPU model.
+          type: string
+        vendor:
+          description: The computing host CPU vendor.
+          type: string
+        sockets:
+          description: The computing host CPU number of sockets.
+          type: integer
+        cores:
+          description: The computing host CPU number of cores.
+          type: integer
+        threads:
+          description: The computing host CPU number of threads.
+          type: integer
+        memory:
+          description: The computing host memory size (bytes).
+          type: integer
+      required:
+      - arch
+      - cores
+      - model
+      - sockets
+      - threads
+      - vendor
     Instance:
       example:
         memory: 0
@@ -4469,65 +4528,6 @@ components:
           type: string
       required:
       - name
-    Host_tls:
-      description: The host libvirt's TLS configuration.
-      example:
-        cert: cert
-        key: key
-        ca: ca
-      properties:
-        key:
-          description: The TLS client private key.
-          type: string
-        cert:
-          description: The TLS client public cert.
-          type: string
-        ca:
-          description: The TLS certificate of authority.
-          type: string
-      required:
-      - ca
-      - cert
-      - key
-    HostCaps_cpu:
-      description: the host CPU characteristics
-      example:
-        cores: 6
-        memory: 5
-        vendor: vendor
-        threads: 1
-        model: model
-        arch: arch
-        sockets: 0
-      properties:
-        arch:
-          description: the host CPU architecture
-          type: string
-        model:
-          description: the host CPU model
-          type: string
-        vendor:
-          description: the host CPU vendor
-          type: string
-        sockets:
-          description: the host CPU number of sockets
-          type: integer
-        cores:
-          description: the host CPU number of cores
-          type: integer
-        threads:
-          description: the host CPU number of threads
-          type: integer
-        memory:
-          description: the host memory size in bytes
-          type: integer
-      required:
-      - arch
-      - cores
-      - model
-      - sockets
-      - threads
-      - vendor
   securitySchemes:
     ApiKeyAuth:
       description: API key to authorize machine-to-machine requests.

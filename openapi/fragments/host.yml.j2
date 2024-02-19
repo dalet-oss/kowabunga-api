@@ -2,27 +2,16 @@
 
 components:
   schemas:
+{{ oas.Schema(resources.host_tls, ['key', 'cert', 'ca']) }}
+{{ oas.StringProperty('key', 'The TLS client private key') }}
+{{ oas.StringProperty('cert', 'The TLS client public cert') }}
+{{ oas.StringProperty('ca', 'The TLS certificate of authority') }}
+
 {{ oas.SchemaBaseResource(resources.host, ['name', 'protocol', 'address']) }}
 {{ oas.StringProperty('protocol', 'The protocol to use to issue libvirt connection', values=['tcp', 'tls']) }}
 {{ oas.StringProperty('address', "The host libvirt's IPv4 address") }}
 {{ oas.IntProperty('port', "The host libvirt's port") }}
-        tls:
-          type: object
-          required:
-            - key
-            - cert
-            - ca
-          description: The host libvirt's TLS configuration.
-          properties:
-            key:
-              type: string
-              description: The TLS client private key.
-            cert:
-              type: string
-              description: The TLS client public cert.
-            ca:
-              type: string
-              description: The TLS certificate of authority.
+{{ oas.ObjectProperty('tls', "The host libvirt's TLS configuration", 'HostTLS') }}
 {{ oas.ObjectProperty('cost', 'Global cost associated to the host (deprecated, will be removed)', 'Cost') }}
 {{ oas.ObjectProperty('cpu_cost', "Cost associated to the host's CPU resources", 'Cost') }}
 {{ oas.ObjectProperty('memory_cost', "Cost associated to the host's memoery resources", 'Cost') }}
@@ -32,38 +21,16 @@ components:
 {{ oas.Schema(resources.host_caps, ['version', 'uuid', 'cpu', 'memory']) }}
 {{ oas.StringProperty('version', 'The ' + resources.host.desc + ' libvirt version') }}
 {{ oas.StringProperty('uuid', 'The ' + resources.host.desc + ' domain UUID') }}
-        cpu:
-          type: object
-          required:
-            - arch
-            - model
-            - vendor
-            - sockets
-            - cores
-            - threads
-          description: the host CPU characteristics
-          properties:
-            arch:
-              type: string
-              description: the host CPU architecture
-            model:
-              type: string
-              description: the host CPU model
-            vendor:
-              type: string
-              description: the host CPU vendor
-            sockets:
-              type: integer
-              description: the host CPU number of sockets
-            cores:
-              type: integer
-              description: the host CPU number of cores
-            threads:
-              type: integer
-              description: the host CPU number of threads
-            memory:
-              type: integer
-              description: the host memory size in bytes
+{{ oas.ObjectProperty('cpu', 'The ' + resources.host.desc + ' CPU characteristics', 'HostCPU') }}
+
+{{ oas.Schema(resources.host_cpu, ['arch', 'model', 'vendor', 'sockets', 'cores', 'threads']) }}
+{{ oas.StringProperty('arch', 'The ' + resources.host.desc + ' CPU architecture') }}
+{{ oas.StringProperty('model', 'The ' + resources.host.desc + ' CPU model') }}
+{{ oas.StringProperty('vendor', 'The ' + resources.host.desc + ' CPU vendor') }}
+{{ oas.IntProperty('sockets', 'The ' + resources.host.desc + ' CPU number of sockets') }}
+{{ oas.IntProperty('cores', 'The ' + resources.host.desc + ' CPU number of cores') }}
+{{ oas.IntProperty('threads', 'The ' + resources.host.desc + ' CPU number of threads') }}
+{{ oas.IntProperty('memory', 'The ' + resources.host.desc + ' memory size (bytes)') }}
 
   parameters:
 {{ oas.PathParamID(resources.host) }}
