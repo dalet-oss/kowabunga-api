@@ -56,7 +56,7 @@ tags:
 paths:
   /adapter:
     get:
-      description: Returns the IDs of network adapter objects
+      description: Returns the IDs of network adapter objects.
       operationId: ListAdapters
       responses:
         "200":
@@ -64,7 +64,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of network adapter IDs
+          description: Returns an array of network adapter IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -73,13 +73,13 @@ paths:
       - adapter
   /adapter/{ adapterId }:
     delete:
-      description: Deletes an existing network adapter
+      description: Deletes an existing network adapter.
       operationId: DeleteAdapter
       parameters:
       - $ref: '#/components/parameters/AdapterID'
       responses:
         "200":
-          description: The network adapter has been successfully removed
+          description: The network adapter has been successfully removed.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -93,7 +93,7 @@ paths:
       tags:
       - adapter
     get:
-      description: Returns a network adapter
+      description: Returns a network adapter.
       operationId: ReadAdapter
       parameters:
       - $ref: '#/components/parameters/AdapterID'
@@ -103,7 +103,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Adapter'
-          description: Returns the network adapter object
+          description: Returns the network adapter object.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -115,7 +115,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/AdapterID'
     put:
-      description: Updates a network adapter configuration
+      description: Updates a network adapter configuration.
       operationId: UpdateAdapter
       parameters:
       - $ref: '#/components/parameters/AdapterID'
@@ -124,7 +124,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Adapter'
-        description: Adapter payload
+        description: Adapter payload.
         required: true
       responses:
         "200":
@@ -132,7 +132,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Adapter'
-          description: Returns the network adapter object
+          description: Returns the network adapter object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -147,13 +147,13 @@ paths:
       - adapter
   /record/{ recordId }:
     delete:
-      description: Deletes an existing DNS record
+      description: Deletes an existing DNS record.
       operationId: DeleteDnsRecord
       parameters:
       - $ref: '#/components/parameters/RecordID'
       responses:
         "200":
-          description: The DNS record has been successfully removed
+          description: The DNS record has been successfully removed.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -167,7 +167,7 @@ paths:
       tags:
       - record
     get:
-      description: Returns a DNS record
+      description: Returns a DNS record.
       operationId: ReadDnsRecord
       parameters:
       - $ref: '#/components/parameters/RecordID'
@@ -177,7 +177,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DnsRecord'
-          description: Returns the DNS record object
+          description: Returns the DNS record object.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -189,7 +189,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/RecordID'
     put:
-      description: Updates a DNS record configuration
+      description: Updates a DNS record configuration.
       operationId: UpdateDnsRecord
       parameters:
       - $ref: '#/components/parameters/RecordID'
@@ -198,7 +198,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/DnsRecord'
-        description: DnsRecord payload
+        description: DnsRecord payload.
         required: true
       responses:
         "200":
@@ -206,7 +206,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DnsRecord'
-          description: Returns the DNS record object
+          description: Returns the DNS record object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -3240,7 +3240,7 @@ paths:
 components:
   parameters:
     AdapterID:
-      description: The ID of the network adapter
+      description: The ID of the network adapter.
       explode: false
       in: path
       name: adapterId
@@ -3249,7 +3249,7 @@ components:
         type: string
       style: simple
     RecordID:
-      description: The ID of the DNS record
+      description: The ID of the DNS record.
       explode: false
       in: path
       name: recordId
@@ -3258,7 +3258,7 @@ components:
         type: string
       style: simple
     OptionalQueryNotify:
-      description: Whether or not to send a notification email at resource creation
+      description: Whether or not to send a notification email at resource creation.
       explode: true
       in: query
       name: notify
@@ -3475,49 +3475,49 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiErrorBadRequest'
-      description: "BadRequest error: Bad request (wrong input parameters)"
+      description: "BadRequest error: Bad request (wrong input parameters)."
     Unauthorized:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiErrorUnauthorized'
-      description: "Unauthorized error: Unauthorized resource access (wrong auth/credentials)"
+      description: "Unauthorized error: Unauthorized resource access (wrong auth/credentials)."
     Forbidden:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiErrorForbidden'
       description: "Forbidden error: Forbidden resource access (restricted access\
-        \ control)"
+        \ control)."
     NotFound:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiErrorNotFound'
-      description: "NotFound error: Specified resource does not exist"
+      description: "NotFound error: Specified resource does not exist."
     Conflict:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiErrorConflict'
       description: "Conflict error: A similar resource already exists or resource\
-        \ is still being referenced somewhere"
+        \ is still being referenced somewhere."
     UnprocessableEntity:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiErrorUnprocessableEntity'
-      description: "UnprocessableEntity error: Server can't process request"
+      description: "UnprocessableEntity error: Server can't process request."
     InsufficientStorage:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiErrorInsufficientStorage'
       description: "InsufficientStorage error: Server can't process allocate resources\
-        \ (logical quotas or physical limits hit)"
+        \ (logical quotas or physical limits hit)."
   schemas:
     Adapter:
-      description: A network adapter
+      description: A network adapter.
       example:
         addresses:
         - addresses
@@ -3529,48 +3529,48 @@ components:
         mac: mac
       properties:
         id:
-          description: The network adapter ID (auto-generated)
+          description: The network adapter ID (auto-generated).
           type: string
         name:
-          description: The network adapter name
+          description: The network adapter name.
           type: string
         description:
-          description: The network adapter description
+          description: The network adapter description.
           type: string
         mac:
           description: The network adapter hardware address (e.g. 00:11:22:33:44:55).
-            Auto-generated if unspecified
+            Auto-generated if unspecified.
           type: string
         addresses:
-          description: The network adapter list of associated IPv4 addresses
+          description: The network adapter list of associated IPv4 addresses.
           items:
             type: string
           type: array
         reserved:
           default: false
           description: "The network adapter is a reserved adapter (e.g. router), where\
-            \ the same hardware address can be reused over several subnets"
+            \ the same hardware address can be reused over several subnets."
           type: boolean
       required:
       - name
     Cost:
-      description: A key/value metadata
+      description: A key/value metadata.
       example:
         price: 6
         currency: currency
       properties:
         price:
-          description: The unit price information
+          description: The unit price information.
           format: float
           type: integer
         currency:
-          description: The associated currency
+          description: The associated currency.
           type: string
       required:
       - currency
       - price
     DnsRecord:
-      description: A DNS record
+      description: A DNS record.
       example:
         addresses:
         - addresses
@@ -3581,20 +3581,20 @@ components:
         id: id
       properties:
         id:
-          description: The DNS record ID (auto-generated)
+          description: The DNS record ID (auto-generated).
           type: string
         name:
-          description: The DNS record name
+          description: The DNS record name.
           type: string
         description:
-          description: The DNS record description
+          description: The DNS record description.
           type: string
         domain:
           description: The DNS record associated domain (inherited from associated
-            project)
+            project).
           type: string
         addresses:
-          description: A list of IPv4 addresses to be associated to the record
+          description: A list of IPv4 addresses to be associated to the record.
           items:
             type: string
           type: array
@@ -3608,7 +3608,7 @@ components:
           format: int32
           type: integer
         error:
-          example: Bad request (wrong input parameters)
+          example: Bad request (wrong input parameters).
           type: string
         reason:
           example: server_side_details
@@ -3624,7 +3624,7 @@ components:
           format: int32
           type: integer
         error:
-          example: Unauthorized resource access (wrong auth/credentials)
+          example: Unauthorized resource access (wrong auth/credentials).
           type: string
         reason:
           example: server_side_details
@@ -3640,7 +3640,7 @@ components:
           format: int32
           type: integer
         error:
-          example: Forbidden resource access (restricted access control)
+          example: Forbidden resource access (restricted access control).
           type: string
         reason:
           example: server_side_details
@@ -3656,7 +3656,7 @@ components:
           format: int32
           type: integer
         error:
-          example: Specified resource does not exist
+          example: Specified resource does not exist.
           type: string
         reason:
           example: server_side_details
@@ -3673,7 +3673,7 @@ components:
           type: integer
         error:
           example: A similar resource already exists or resource is still being referenced
-            somewhere
+            somewhere.
           type: string
         reason:
           example: server_side_details
@@ -3689,7 +3689,7 @@ components:
           format: int32
           type: integer
         error:
-          example: Server can't process request
+          example: Server can't process request.
           type: string
         reason:
           example: server_side_details
@@ -3706,7 +3706,7 @@ components:
           type: integer
         error:
           example: Server can't process allocate resources (logical quotas or physical
-            limits hit)
+            limits hit).
           type: string
         reason:
           example: server_side_details
@@ -3716,12 +3716,12 @@ components:
       - reason
       - status
     ObjectIds:
-      description: A list of resource IDs
+      description: A list of resource IDs.
       items:
         type: string
       type: array
     Host:
-      description: A computing host
+      description: A computing host.
       example:
         protocol: tcp
         memory_cost:
@@ -3746,25 +3746,25 @@ components:
         overcommit_cpu_ratio: 1
       properties:
         id:
-          description: The computing host ID (auto-generated)
+          description: The computing host ID (auto-generated).
           type: string
         name:
-          description: The computing host name
+          description: The computing host name.
           type: string
         description:
-          description: The computing host description
+          description: The computing host description.
           type: string
         protocol:
-          description: The protocol to use to issue libvirt connection
+          description: The protocol to use to issue libvirt connection.
           enum:
           - tcp
           - tls
           type: string
         address:
-          description: The host libvirt's IPv4 address
+          description: The host libvirt's IPv4 address.
           type: string
         port:
-          description: The host libvirt's port
+          description: The host libvirt's port.
           type: integer
         tls:
           $ref: '#/components/schemas/Host_tls'
@@ -3780,14 +3780,14 @@ components:
             resources for VMs means allocating more virtual CPUs (vCPUs) to the virtual
             machines (VMs) than the physical cores available on the host. This can
             help optimize the utilization of the host CPU and increase the density
-            of VMs per host
+            of VMs per host.
           type: integer
         overcommit_memory_ratio:
           default: 2
           description: "The host memory resource over-commit ratio. Memory overcommitment\
             \ is a concept in computing that covers the assignment of more memory\
             \ to virtual computing devices (or processes) than the physical machine\
-            \ they are hosted, or running on, actually has"
+            \ they are hosted, or running on, actually has."
           type: integer
       required:
       - address

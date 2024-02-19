@@ -245,10 +245,10 @@ func (r ApiDeleteDnsRecordRequest) Execute() (*http.Response, error) {
 /*
 DeleteDnsRecord Method for DeleteDnsRecord
 
-Deletes an existing DNS record
+Deletes an existing DNS record.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param recordId The ID of the DNS record
+ @param recordId The ID of the DNS record.
  @return ApiDeleteDnsRecordRequest
 */
 func (a *RecordAPIService) DeleteDnsRecord(ctx context.Context, recordId string) ApiDeleteDnsRecordRequest {
@@ -582,10 +582,10 @@ func (r ApiReadDnsRecordRequest) Execute() (*DnsRecord, *http.Response, error) {
 /*
 ReadDnsRecord Method for ReadDnsRecord
 
-Returns a DNS record
+Returns a DNS record.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param recordId The ID of the DNS record
+ @param recordId The ID of the DNS record.
  @return ApiReadDnsRecordRequest
 */
 func (a *RecordAPIService) ReadDnsRecord(ctx context.Context, recordId string) ApiReadDnsRecordRequest {
@@ -739,7 +739,7 @@ type ApiUpdateDnsRecordRequest struct {
 	dnsRecord *DnsRecord
 }
 
-// DnsRecord payload
+// DnsRecord payload.
 func (r ApiUpdateDnsRecordRequest) DnsRecord(dnsRecord DnsRecord) ApiUpdateDnsRecordRequest {
 	r.dnsRecord = &dnsRecord
 	return r
@@ -752,10 +752,10 @@ func (r ApiUpdateDnsRecordRequest) Execute() (*DnsRecord, *http.Response, error)
 /*
 UpdateDnsRecord Method for UpdateDnsRecord
 
-Updates a DNS record configuration
+Updates a DNS record configuration.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param recordId The ID of the DNS record
+ @param recordId The ID of the DNS record.
  @return ApiUpdateDnsRecordRequest
 */
 func (a *RecordAPIService) UpdateDnsRecord(ctx context.Context, recordId string) ApiUpdateDnsRecordRequest {

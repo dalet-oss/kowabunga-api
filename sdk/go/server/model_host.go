@@ -13,15 +13,16 @@ package server
 
 
 
+// Host - A computing host.
 type Host struct {
 
-	// The host ID (auto-generated).
+	// The computing host ID (auto-generated).
 	Id string `json:"id,omitempty"`
 
-	// The host name.
+	// The computing host name.
 	Name string `json:"name"`
 
-	// The host description.
+	// The computing host description.
 	Description string `json:"description,omitempty"`
 
 	// The protocol to use to issue libvirt connection.
@@ -41,7 +42,7 @@ type Host struct {
 	// Cost associated to the host's CPU resources.
 	CpuCost Cost `json:"cpu_cost,omitempty"`
 
-	// Cost associated to the host's memory resources.
+	// Cost associated to the host's memoery resources.
 	MemoryCost Cost `json:"memory_cost,omitempty"`
 
 	// The host CPU resource over-commit ratio. Overcommitting CPU resources for VMs means allocating more virtual CPUs (vCPUs) to the virtual machines (VMs) than the physical cores available on the host. This can help optimize the utilization of the host CPU and increase the density of VMs per host.

@@ -20,19 +20,19 @@ import (
 // checks if the Adapter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Adapter{}
 
-// Adapter A network adapter
+// Adapter A network adapter.
 type Adapter struct {
-	// The network adapter ID (auto-generated)
+	// The network adapter ID (auto-generated).
 	Id *string `json:"id,omitempty"`
-	// The network adapter name
+	// The network adapter name.
 	Name string `json:"name"`
-	// The network adapter description
+	// The network adapter description.
 	Description *string `json:"description,omitempty"`
-	// The network adapter hardware address (e.g. 00:11:22:33:44:55). Auto-generated if unspecified
+	// The network adapter hardware address (e.g. 00:11:22:33:44:55). Auto-generated if unspecified.
 	Mac *string `json:"mac,omitempty"`
-	// The network adapter list of associated IPv4 addresses
+	// The network adapter list of associated IPv4 addresses.
 	Addresses []string `json:"addresses,omitempty"`
-	// The network adapter is a reserved adapter (e.g. router), where the same hardware address can be reused over several subnets
+	// The network adapter is a reserved adapter (e.g. router), where the same hardware address can be reused over several subnets.
 	Reserved *bool `json:"reserved,omitempty"`
 }
 

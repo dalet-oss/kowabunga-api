@@ -12,27 +12,27 @@
 
 
 /**
- * A DNS record
+ * A DNS record.
  */
 export interface DnsRecord { 
     /**
-     * The DNS record ID (auto-generated)
+     * The DNS record ID (auto-generated).
      */
     id?: string;
     /**
-     * The DNS record name (zone\'s entry)
+     * The DNS record name.
      */
     name: string;
     /**
-     * The DNS record description
+     * The DNS record description.
      */
     description?: string;
     /**
-     * The DNS record associated domain (inherited from associated project)
+     * The DNS record associated domain (inherited from associated project).
      */
     domain?: string;
     /**
-     * A list of IPv4 addresses to be associated to the record
+     * A list of IPv4 addresses to be associated to the record.
      */
     addresses: Array<string>;
 }

@@ -12,7 +12,7 @@
           example: {{ err.code }}
         error:
           type: string
-          example: {{ err.desc }}
+          example: {{ err.desc }}.
         reason:
           type: string
           example: server_side_details
@@ -20,7 +20,7 @@
 
 {% macro ErrorResponse(err) %}
     {{ err.schema }}:
-      description: "{{ err.schema }} error: {{ err.desc }}"
+      description: "{{ err.schema }} error: {{ err.desc }}."
       content:
         application/json:
           schema:
@@ -30,7 +30,7 @@
 {% macro SchemaRaw(schema, desc, required=[]) %}
     {{ schema }}:
       type: object
-      description: A {{ desc }}
+      description: A {{ desc }}.
 {%if required != [] %}
       required:
 {% for r in required %}
@@ -47,7 +47,7 @@
 {% macro ArraySchema(name, desc, type) %}
     {{ name }}:
       type: array
-      description: A {{ desc }}
+      description: A {{ desc }}.
       items:
         type: {{ type }}
 {% endmacro %}
@@ -62,7 +62,7 @@
 {% if format != None %}
           format: {{ format }}
 {% endif %}
-          description: {{ desc }}
+          description: {{ desc }}.
 {% if values != [] %}
           enum:
 {% for v in values %}
@@ -93,14 +93,14 @@
 {% macro ObjectProperty(name, desc, schema) %}
         {{ name }}:
           type: object
-          description: {{ desc }}
+          description: {{ desc }}.
           $ref: '#/components/schemas/{{ schema }}'
 {% endmacro %}
 
 {% macro ArrayProperty(name, type, desc, default=None) %}
         {{ name }}:
           type: array
-          description: {{ desc }}
+          description: {{ desc }}.
           items:
             type: {{ type }}
 {% if default != None %}
@@ -123,7 +123,7 @@
     {{ key }}:
       name: {{ name }}
       in: path
-      description: {{ desc }}
+      description: {{ desc }}.
       required: true
       schema:
         type: {{ t }}
@@ -141,7 +141,7 @@
     OptionalQuery{{ key }}:
       name: {{ name }}
       in: query
-      description: {{ desc }}
+      description: {{ desc }}.
       schema:
         type: {{ t }}
 {% endmacro %}
@@ -216,12 +216,12 @@
 
 {% macro ResponseOk(desc) %}
         '200':
-          description: {{ desc }}
+          description: {{ desc }}.
 {% endmacro %}
 
 {% macro GetResource(schema, desc) %}
         '200':
-          description: {{ desc }}
+          description: {{ desc }}.
           content:
             application/json:
               schema:
@@ -230,7 +230,7 @@
 
 {% macro Payload(schema) %}
       requestBody:
-        description: {{ schema }} payload
+        description: {{ schema }} payload.
         content:
           application/json:
             schema:
@@ -249,7 +249,7 @@
 {% macro GetAll(opId, desc, tags) %}
     get:
 {{ Tags(tags) }}
-      description: Returns the IDs of {{ desc }} objects
+      description: Returns the IDs of {{ desc }} objects.
       operationId: {{ opId }}
       responses:
 {{ GetAllResource(desc) }}
@@ -259,7 +259,7 @@
 {% macro Read(opId, schema, desc, tags) %}
     get:
 {{ Tags(tags) }}
-      description: Returns a {{ desc }}
+      description: Returns a {{ desc }}.
       operationId: {{ opId }}
       responses:
 {{ GetOneResource(schema, desc) }}
@@ -269,7 +269,7 @@
 {% macro Update(opId, schema, desc, tags) %}
     put:
 {{ Tags(tags) }}
-      description: Updates a {{ desc }} configuration
+      description: Updates a {{ desc }} configuration.
       operationId: {{ opId }}
 {{ Payload(schema) }}
       responses:
@@ -280,7 +280,7 @@
 {% macro Delete(opId, desc, tags) %}
     delete:
 {{ Tags(tags) }}
-      description: Deletes an existing {{ desc }}
+      description: Deletes an existing {{ desc }}.
       operationId: {{ opId }}
       responses:
 {{ ResponseOk('The ' + desc + ' has been successfully removed') }}

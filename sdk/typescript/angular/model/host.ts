@@ -13,17 +13,20 @@ import { HostTls } from './hostTls';
 import { Cost } from './cost';
 
 
+/**
+ * A computing host.
+ */
 export interface Host { 
     /**
-     * The host ID (auto-generated).
+     * The computing host ID (auto-generated).
      */
     id?: string;
     /**
-     * The host name.
+     * The computing host name.
      */
     name: string;
     /**
-     * The host description.
+     * The computing host description.
      */
     description?: string;
     /**
@@ -48,7 +51,7 @@ export interface Host {
      */
     cpu_cost?: Cost;
     /**
-     * Cost associated to the host\'s memory resources.
+     * Cost associated to the host\'s memoery resources.
      */
     memory_cost?: Cost;
     /**

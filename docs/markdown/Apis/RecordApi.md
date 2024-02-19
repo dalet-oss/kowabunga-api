@@ -45,13 +45,13 @@ All URIs are relative to */api/v1*
 
 
 
-    Deletes an existing DNS record
+    Deletes an existing DNS record.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **recordId** | **String**| The ID of the DNS record | [default to null] |
+| **recordId** | **String**| The ID of the DNS record. | [default to null] |
 
 ### Return type
 
@@ -99,13 +99,13 @@ null (empty response body)
 
 
 
-    Returns a DNS record
+    Returns a DNS record.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **recordId** | **String**| The ID of the DNS record | [default to null] |
+| **recordId** | **String**| The ID of the DNS record. | [default to null] |
 
 ### Return type
 
@@ -126,14 +126,14 @@ null (empty response body)
 
 
 
-    Updates a DNS record configuration
+    Updates a DNS record configuration.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **recordId** | **String**| The ID of the DNS record | [default to null] |
-| **DnsRecord** | [**DnsRecord**](../Models/DnsRecord.md)| DnsRecord payload | |
+| **recordId** | **String**| The ID of the DNS record. | [default to null] |
+| **DnsRecord** | [**DnsRecord**](../Models/DnsRecord.md)| DnsRecord payload. | |
 
 ### Return type
 

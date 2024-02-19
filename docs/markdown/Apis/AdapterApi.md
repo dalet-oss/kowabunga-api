@@ -47,13 +47,13 @@ All URIs are relative to */api/v1*
 
 
 
-    Deletes an existing network adapter
+    Deletes an existing network adapter.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **adapterId** | **String**| The ID of the network adapter | [default to null] |
+| **adapterId** | **String**| The ID of the network adapter. | [default to null] |
 
 ### Return type
 
@@ -101,7 +101,7 @@ null (empty response body)
 
 
 
-    Returns the IDs of network adapter objects
+    Returns the IDs of network adapter objects.
 
 ### Parameters
 This endpoint does not need any parameter.
@@ -125,13 +125,13 @@ This endpoint does not need any parameter.
 
 
 
-    Returns a network adapter
+    Returns a network adapter.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **adapterId** | **String**| The ID of the network adapter | [default to null] |
+| **adapterId** | **String**| The ID of the network adapter. | [default to null] |
 
 ### Return type
 
@@ -152,14 +152,14 @@ This endpoint does not need any parameter.
 
 
 
-    Updates a network adapter configuration
+    Updates a network adapter configuration.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **adapterId** | **String**| The ID of the network adapter | [default to null] |
-| **Adapter** | [**Adapter**](../Models/Adapter.md)| Adapter payload | |
+| **adapterId** | **String**| The ID of the network adapter. | [default to null] |
+| **Adapter** | [**Adapter**](../Models/Adapter.md)| Adapter payload. | |
 
 ### Return type
 

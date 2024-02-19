@@ -13,22 +13,22 @@ package server
 
 
 
-// DnsRecord - A DNS record
+// DnsRecord - A DNS record.
 type DnsRecord struct {
 
-	// The DNS record ID (auto-generated)
+	// The DNS record ID (auto-generated).
 	Id string `json:"id,omitempty"`
 
-	// The DNS record name (zone's entry)
+	// The DNS record name.
 	Name string `json:"name"`
 
-	// The DNS record description
+	// The DNS record description.
 	Description string `json:"description,omitempty"`
 
-	// The DNS record associated domain (inherited from associated project)
+	// The DNS record associated domain (inherited from associated project).
 	Domain string `json:"domain,omitempty"`
 
-	// A list of IPv4 addresses to be associated to the record
+	// A list of IPv4 addresses to be associated to the record.
 	Addresses []string `json:"addresses"`
 }
 

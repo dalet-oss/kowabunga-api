@@ -195,8 +195,8 @@ export class RecordService {
     }
 
     /**
-     * Deletes an existing DNS record
-     * @param recordId The ID of the DNS record
+     * Deletes an existing DNS record.
+     * @param recordId The ID of the DNS record.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -349,8 +349,8 @@ export class RecordService {
     }
 
     /**
-     * Returns a DNS record
-     * @param recordId The ID of the DNS record
+     * Returns a DNS record.
+     * @param recordId The ID of the DNS record.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -426,9 +426,9 @@ export class RecordService {
     }
 
     /**
-     * Updates a DNS record configuration
-     * @param recordId The ID of the DNS record
-     * @param dnsRecord DnsRecord payload
+     * Updates a DNS record configuration.
+     * @param recordId The ID of the DNS record.
+     * @param dnsRecord DnsRecord payload.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */

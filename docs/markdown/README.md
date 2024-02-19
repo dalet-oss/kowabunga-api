@@ -8,11 +8,11 @@ All URIs are relative to */api/v1*
 | Class | Method | HTTP request | Description |
 |------------ | ------------- | ------------- | -------------|
 | *AdapterApi* | [**createAdapter**](Apis/AdapterApi.md#createadapter) | **POST** /subnet/{subnetId}/adapter | Creates a new network adapter. |
-*AdapterApi* | [**deleteAdapter**](Apis/AdapterApi.md#deleteadapter) | **DELETE** /adapter/{ adapterId } | Deletes an existing network adapter |
+*AdapterApi* | [**deleteAdapter**](Apis/AdapterApi.md#deleteadapter) | **DELETE** /adapter/{ adapterId } | Deletes an existing network adapter. |
 *AdapterApi* | [**getSubnetAdapters**](Apis/AdapterApi.md#getsubnetadapters) | **GET** /subnet/{subnetId}/adapters | Returns the IDs of the network adapters existing in the subnet. |
-*AdapterApi* | [**listAdapters**](Apis/AdapterApi.md#listadapters) | **GET** /adapter | Returns the IDs of network adapter objects |
-*AdapterApi* | [**readAdapter**](Apis/AdapterApi.md#readadapter) | **GET** /adapter/{ adapterId } | Returns a network adapter |
-*AdapterApi* | [**updateAdapter**](Apis/AdapterApi.md#updateadapter) | **PUT** /adapter/{ adapterId } | Updates a network adapter configuration |
+*AdapterApi* | [**listAdapters**](Apis/AdapterApi.md#listadapters) | **GET** /adapter | Returns the IDs of network adapter objects. |
+*AdapterApi* | [**readAdapter**](Apis/AdapterApi.md#readadapter) | **GET** /adapter/{ adapterId } | Returns a network adapter. |
+*AdapterApi* | [**updateAdapter**](Apis/AdapterApi.md#updateadapter) | **PUT** /adapter/{ adapterId } | Updates a network adapter configuration. |
 | *HostApi* | [**createHost**](Apis/HostApi.md#createhost) | **POST** /zone/{zoneId}/host | Creates a new host. |
 *HostApi* | [**deleteHost**](Apis/HostApi.md#deletehost) | **DELETE** /host/{hostId} | Deletes an existing host. |
 *HostApi* | [**getAllHosts**](Apis/HostApi.md#getallhosts) | **GET** /host | Returns the IDs of registered hosts. |
@@ -109,10 +109,10 @@ All URIs are relative to */api/v1*
 *ProjectApi* | [**getProjectZoneVolumes**](Apis/ProjectApi.md#getprojectzonevolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes | Returns the IDs of the storage volumes existing in the project in the specified zone. |
 *ProjectApi* | [**updateProject**](Apis/ProjectApi.md#updateproject) | **PUT** /project/{projectId} | Updates a project configuration. |
 | *RecordApi* | [**createProjectDnsRecord**](Apis/RecordApi.md#createprojectdnsrecord) | **POST** /project/{projectId}/record | Creates a new DNS record in specified project. |
-*RecordApi* | [**deleteDnsRecord**](Apis/RecordApi.md#deletednsrecord) | **DELETE** /record/{ recordId } | Deletes an existing DNS record |
+*RecordApi* | [**deleteDnsRecord**](Apis/RecordApi.md#deletednsrecord) | **DELETE** /record/{ recordId } | Deletes an existing DNS record. |
 *RecordApi* | [**getProjectDnsRecords**](Apis/RecordApi.md#getprojectdnsrecords) | **GET** /project/{projectId}/records | Returns the IDs of the DNS records existing in the project. |
-*RecordApi* | [**readDnsRecord**](Apis/RecordApi.md#readdnsrecord) | **GET** /record/{ recordId } | Returns a DNS record |
-*RecordApi* | [**updateDnsRecord**](Apis/RecordApi.md#updatednsrecord) | **PUT** /record/{ recordId } | Updates a DNS record configuration |
+*RecordApi* | [**readDnsRecord**](Apis/RecordApi.md#readdnsrecord) | **GET** /record/{ recordId } | Returns a DNS record. |
+*RecordApi* | [**updateDnsRecord**](Apis/RecordApi.md#updatednsrecord) | **PUT** /record/{ recordId } | Updates a DNS record configuration. |
 | *RegionApi* | [**createRegion**](Apis/RegionApi.md#createregion) | **POST** /region | Creates a new region. |
 *RegionApi* | [**createZone**](Apis/RegionApi.md#createzone) | **POST** /region/{regionId}/zone | Creates a new zone. |
 *RegionApi* | [**deleteRegion**](Apis/RegionApi.md#deleteregion) | **DELETE** /region/{regionId} | Deletes an existing region. |

@@ -255,10 +255,10 @@ func (r ApiDeleteAdapterRequest) Execute() (*http.Response, error) {
 /*
 DeleteAdapter Method for DeleteAdapter
 
-Deletes an existing network adapter
+Deletes an existing network adapter.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param adapterId The ID of the network adapter
+ @param adapterId The ID of the network adapter.
  @return ApiDeleteAdapterRequest
 */
 func (a *AdapterAPIService) DeleteAdapter(ctx context.Context, adapterId string) ApiDeleteAdapterRequest {
@@ -591,7 +591,7 @@ func (r ApiListAdaptersRequest) Execute() ([]string, *http.Response, error) {
 /*
 ListAdapters Method for ListAdapters
 
-Returns the IDs of network adapter objects
+Returns the IDs of network adapter objects.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiListAdaptersRequest
@@ -740,10 +740,10 @@ func (r ApiReadAdapterRequest) Execute() (*Adapter, *http.Response, error) {
 /*
 ReadAdapter Method for ReadAdapter
 
-Returns a network adapter
+Returns a network adapter.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param adapterId The ID of the network adapter
+ @param adapterId The ID of the network adapter.
  @return ApiReadAdapterRequest
 */
 func (a *AdapterAPIService) ReadAdapter(ctx context.Context, adapterId string) ApiReadAdapterRequest {
@@ -897,7 +897,7 @@ type ApiUpdateAdapterRequest struct {
 	adapter *Adapter
 }
 
-// Adapter payload
+// Adapter payload.
 func (r ApiUpdateAdapterRequest) Adapter(adapter Adapter) ApiUpdateAdapterRequest {
 	r.adapter = &adapter
 	return r
@@ -910,10 +910,10 @@ func (r ApiUpdateAdapterRequest) Execute() (*Adapter, *http.Response, error) {
 /*
 UpdateAdapter Method for UpdateAdapter
 
-Updates a network adapter configuration
+Updates a network adapter configuration.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param adapterId The ID of the network adapter
+ @param adapterId The ID of the network adapter.
  @return ApiUpdateAdapterRequest
 */
 func (a *AdapterAPIService) UpdateAdapter(ctx context.Context, adapterId string) ApiUpdateAdapterRequest {

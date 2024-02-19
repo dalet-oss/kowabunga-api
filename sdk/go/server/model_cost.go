@@ -13,13 +13,13 @@ package server
 
 
 
-// Cost - A key/value metadata
+// Cost - A key/value metadata.
 type Cost struct {
 
-	// The unit price information
+	// The unit price information.
 	Price int32 `json:"price"`
 
-	// The associated currency
+	// The associated currency.
 	Currency string `json:"currency"`
 }
 
