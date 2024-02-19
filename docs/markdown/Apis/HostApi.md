@@ -5,13 +5,13 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createHost**](HostApi.md#createHost) | **POST** /zone/{zoneId}/host |  |
-| [**deleteHost**](HostApi.md#deleteHost) | **DELETE** /host/{hostId} |  |
-| [**getAllHosts**](HostApi.md#getAllHosts) | **GET** /host |  |
-| [**getHost**](HostApi.md#getHost) | **GET** /host/{hostId} |  |
-| [**getHostCaps**](HostApi.md#getHostCaps) | **GET** /host/{hostId}/caps |  |
-| [**getHostInstances**](HostApi.md#getHostInstances) | **GET** /host/{hostId}/instances |  |
+| [**deleteHost**](HostApi.md#deleteHost) | **DELETE** /host/{ hostId } |  |
 | [**getZoneHosts**](HostApi.md#getZoneHosts) | **GET** /zone/{zoneId}/hosts |  |
-| [**updateHost**](HostApi.md#updateHost) | **PUT** /host/{hostId} |  |
+| [**listHostInstances**](HostApi.md#listHostInstances) | **GET** /host/{hostId}/instances |  |
+| [**listHosts**](HostApi.md#listHosts) | **GET** /host |  |
+| [**readHost**](HostApi.md#readHost) | **GET** /host/{ hostId } |  |
+| [**readHostCaps**](HostApi.md#readHostCaps) | **GET** /host/{hostId}/caps |  |
+| [**updateHost**](HostApi.md#updateHost) | **PUT** /host/{ hostId } |  |
 
 
 <a name="createHost"></a>
@@ -48,7 +48,7 @@ All URIs are relative to */api/v1*
 
 
 
-    Deletes an existing host.
+    Deletes an existing computing host.
 
 ### Parameters
 
@@ -59,111 +59,6 @@ All URIs are relative to */api/v1*
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getAllHosts"></a>
-# **getAllHosts**
-> List getAllHosts()
-
-
-
-    Returns the IDs of registered hosts.
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getHost"></a>
-# **getHost**
-> Host getHost(hostId)
-
-
-
-    Returns a description of the host
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **hostId** | **String**| The ID of the computing host. | [default to null] |
-
-### Return type
-
-[**Host**](../Models/Host.md)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getHostCaps"></a>
-# **getHostCaps**
-> HostCaps getHostCaps(hostId)
-
-
-
-    Returns the host capabilities.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **hostId** | **String**| The ID of the computing host. | [default to null] |
-
-### Return type
-
-[**HostCaps**](../Models/HostCaps.md)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getHostInstances"></a>
-# **getHostInstances**
-> List getHostInstances(hostId)
-
-
-
-    Returns the UUIDs of the virtual machines running on the host.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **hostId** | **String**| The ID of the computing host. | [default to null] |
-
-### Return type
-
-**List**
 
 ### Authorization
 
@@ -201,20 +96,125 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="updateHost"></a>
-# **updateHost**
-> Host updateHost(hostId, Host)
+<a name="listHostInstances"></a>
+# **listHostInstances**
+> List listHostInstances(hostId)
 
 
 
-    Updates a host configuration.
+    Returns the IDs of virtual machine instance objects.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **hostId** | **String**| The ID of the computing host. | [default to null] |
-| **Host** | [**Host**](../Models/Host.md)| Host payload | |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listHosts"></a>
+# **listHosts**
+> List listHosts()
+
+
+
+    Returns the IDs of computing host objects.
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="readHost"></a>
+# **readHost**
+> Host readHost(hostId)
+
+
+
+    Returns a computing host.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **hostId** | **String**| The ID of the computing host. | [default to null] |
+
+### Return type
+
+[**Host**](../Models/Host.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="readHostCaps"></a>
+# **readHostCaps**
+> HostCaps readHostCaps(hostId)
+
+
+
+    Returns a computing host capabilities.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **hostId** | **String**| The ID of the computing host. | [default to null] |
+
+### Return type
+
+[**HostCaps**](../Models/HostCaps.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="updateHost"></a>
+# **updateHost**
+> Host updateHost(hostId, Host)
+
+
+
+    Updates a computing host configuration.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **hostId** | **String**| The ID of the computing host. | [default to null] |
+| **Host** | [**Host**](../Models/Host.md)| Host payload. | |
 
 ### Return type
 

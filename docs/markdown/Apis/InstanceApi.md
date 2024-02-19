@@ -7,11 +7,11 @@ All URIs are relative to */api/v1*
 | [**createProjectZoneInstance**](InstanceApi.md#createProjectZoneInstance) | **POST** /project/{projectId}/zone/{zoneId}/instance |  |
 | [**deleteInstance**](InstanceApi.md#deleteInstance) | **DELETE** /instance/{instanceId} |  |
 | [**getAllInstances**](InstanceApi.md#getAllInstances) | **GET** /instance |  |
-| [**getHostInstances**](InstanceApi.md#getHostInstances) | **GET** /host/{hostId}/instances |  |
 | [**getInstance**](InstanceApi.md#getInstance) | **GET** /instance/{instanceId} |  |
 | [**getInstanceRemoteConnection**](InstanceApi.md#getInstanceRemoteConnection) | **GET** /instance/{instanceId}/connect |  |
 | [**getInstanceState**](InstanceApi.md#getInstanceState) | **GET** /instance/{instanceId}/state |  |
 | [**getProjectZoneInstances**](InstanceApi.md#getProjectZoneInstances) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
+| [**listHostInstances**](InstanceApi.md#listHostInstances) | **GET** /host/{hostId}/instances |  |
 | [**rebootInstance**](InstanceApi.md#rebootInstance) | **POST** /instance/{instanceId}/reboot |  |
 | [**resetInstance**](InstanceApi.md#resetInstance) | **POST** /instance/{instanceId}/reset |  |
 | [**resumeInstance**](InstanceApi.md#resumeInstance) | **POST** /instance/{instanceId}/resume |  |
@@ -89,33 +89,6 @@ null (empty response body)
 
 ### Parameters
 This endpoint does not need any parameter.
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getHostInstances"></a>
-# **getHostInstances**
-> List getHostInstances(hostId)
-
-
-
-    Returns the UUIDs of the virtual machines running on the host.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **hostId** | **String**| The ID of the computing host. | [default to null] |
 
 ### Return type
 
@@ -225,6 +198,33 @@ This endpoint does not need any parameter.
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
 | **zoneId** | **String**| The ID of the zone. | [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listHostInstances"></a>
+# **listHostInstances**
+> List listHostInstances(hostId)
+
+
+
+    Returns the IDs of virtual machine instance objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **hostId** | **String**| The ID of the computing host. | [default to null] |
 
 ### Return type
 

@@ -25,7 +25,7 @@ tags:
   name: record
 - description: Everything about computing host
   name: host
-- description: Everything about virtual machine instances
+- description: Everything about virtual machine instance
   name: instance
 - description: Everything about KCE (Kowabunga Compute Engine)
   name: kce
@@ -221,24 +221,24 @@ paths:
       - record
   /host:
     get:
-      description: Returns the IDs of registered hosts.
-      operationId: GetAllHosts
+      description: Returns the IDs of computing host objects.
+      operationId: ListHosts
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns the an array of computing hosts IDs.
+          description: Returns an array of computing host IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
           $ref: '#/components/responses/Forbidden'
       tags:
       - host
-  /host/{hostId}:
+  /host/{ hostId }:
     delete:
-      description: Deletes an existing host.
+      description: Deletes an existing computing host.
       operationId: DeleteHost
       parameters:
       - $ref: '#/components/parameters/HostID'
@@ -258,8 +258,8 @@ paths:
       tags:
       - host
     get:
-      description: Returns a description of the host
-      operationId: GetHost
+      description: Returns a computing host.
+      operationId: ReadHost
       parameters:
       - $ref: '#/components/parameters/HostID'
       responses:
@@ -280,7 +280,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/HostID'
     put:
-      description: Updates a host configuration.
+      description: Updates a computing host configuration.
       operationId: UpdateHost
       parameters:
       - $ref: '#/components/parameters/HostID'
@@ -289,7 +289,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Host'
-        description: Host payload
+        description: Host payload.
         required: true
       responses:
         "200":
@@ -297,7 +297,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Host'
-          description: Updated computing host.
+          description: Returns the computing host object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -312,8 +312,8 @@ paths:
       - host
   /host/{hostId}/caps:
     get:
-      description: Returns the host capabilities.
-      operationId: GetHostCaps
+      description: Returns a computing host capabilities.
+      operationId: ReadHostCaps
       parameters:
       - $ref: '#/components/parameters/HostID'
       responses:
@@ -322,7 +322,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HostCaps'
-          description: Returns the computing host capabilities.
+          description: Returns the computing host capabilities object.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -335,8 +335,8 @@ paths:
     - $ref: '#/components/parameters/HostID'
   /host/{hostId}/instances:
     get:
-      description: Returns the UUIDs of the virtual machines running on the host.
-      operationId: GetHostInstances
+      description: Returns the IDs of virtual machine instance objects.
+      operationId: ListHostInstances
       parameters:
       - $ref: '#/components/parameters/HostID'
       responses:
@@ -345,7 +345,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns the an array of virtual machine UUIDs.
+          description: Returns an array of virtual machine instance IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
