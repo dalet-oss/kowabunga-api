@@ -1,353 +1,62 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
 components:
   schemas:
-    Instance:
-      type: object
-      required:
-        - name
-        - memory
-        - vcpus
-      properties:
-        id:
-          type: string
-          description: The virtual machine instance ID  (auto-generated).
-        name:
-          type: string
-          description: The virtual machine name
-        description:
-          type: string
-          description: The virtual machine description.
-        memory:
-          type: integer
-          description: the virtual machine's memory size (in bytes).
-        vcpus:
-          type: integer
-          description: the virtual machine's number of vCPUs.
-        adapters:
-          type: array
-          description: a list of existing network adapters to be connected to the instance.
-          items:
-            type: string
-        volumes:
-          type: array
-          description: a list of existing storage volumes (i.e. disks) to be connected to the instance.
-          items:
-            type: string
+{{ oas.SchemaBaseResource(resources.instance, ['name', 'memory', 'vcpus']) }}
+{{ oas.IntProperty('memory', 'The ' + resources.instance.desc + ' memory size (in bytes)') }}
+{{ oas.IntProperty('vcpus', 'The ' + resources.instance.desc + ' number of vCPUs') }}
+{{ oas.StringArrayProperty('adapters', 'a list of existing network adapters to be connected to the instance') }}
+{{ oas.StringArrayProperty('volumes', 'volumes list of existing storage volumes (i.e. disks) to be connected to the instance') }}
 
-    InstanceState:
-      type: object
-      required:
-        - state
-        - reason
-      properties:
-        state:
-          type: string
-          description: the state of the VM
-        reason:
-          type: string
-          description: the reason of the state of the VM
+{{ oas.Schema(resources.instance_state, ['state', 'reason']) }}
+{{ oas.StringProperty('state', 'The ' + resources.instance.desc + ' state') }}
+{{ oas.StringProperty('reason', 'The ' + resources.instance.desc + ' reason of the state') }}
 
-    InstanceRemoteAccess:
-      type: object
-      required:
-        - url
-      properties:
-        url:
-          type: string
-          description: the remote access URL
+{{ oas.Schema(resources.instance_ra, ['url']) }}
+{{ oas.StringProperty('url', 'The ' + resources.instance.desc + ' remote access URL') }}
 
   parameters:
-    InstanceID:
-      name: instanceId
-      in: path
-      description: The ID of the virtual machine instance.
-      required: true
-      schema:
-        type: string
+{{ oas.PathParamID(resources.instance) }}
 
 paths:
   /instance:
-    get:
-      tags:
-        - instance
-      description: Returns the IDs of registered virtual machines.
-      operationId: GetAllInstances
-      responses:
-        '200':
-          description: Returns the an array of virtual machines IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
+{{ oas.List(resources.instance, [resources.instance.tag]) }}
 
-  /instance/{instanceId}:
-    parameters:
-      - $ref: '#/components/parameters/InstanceID'
+  /instance/{ {{ resources.instance.paramId }} }:
+{{ oas.RUD(resources.instance, [resources.instance.tag], [resources.instance.paramSchema]) }}
 
-    get:
-      tags:
-        - instance
-      operationId: GetInstance
-      description: Returns the description of the virtual machine.
-      responses:
-        '200':
-          description: Returns the virtual machine instance adapter object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Instance'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+  /instance/{ {{ resources.instance.paramId }} }/state:
+{{ oas.Parameters([resources.instance.paramSchema]) }}
+{{ oas.Read('ReadInstanceState', resources.instance_state.schema, resources.instance_state.desc, [resources.instance.tag]) }}
 
-    put:
-      tags:
-        - instance
-      operationId: UpdateInstance
-      description: Updates a virtual machine configuration.
-      requestBody:
-        description: Adapter payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Instance'
-        required: true
-      responses:
-        '200':
-          description: Updated virtual machine instance.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Adapter'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-        '507':
-          $ref: '#/components/responses/InsufficientStorage'
+  /instance/{ {{ resources.instance.paramId }} }/reboot:
+{{ oas.Parameters([resources.instance.paramSchema]) }}
+{{ oas.Patch('RebootInstance', resources.instance.desc, 'software reboot', [resources.instance.tag]) }}
 
-    delete:
-      tags:
-        - instance
-      operationId: DeleteInstance
-      description: Deletes an existing virtual machine instance.
-      responses:
-        '200':
-          description: The network adapter has been successfully removed.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /instance/{ {{ resources.instance.paramId }} }/reset:
+{{ oas.Parameters([resources.instance.paramSchema]) }}
+{{ oas.Patch('ResetInstance', resources.instance.desc, 'hardware reset', [resources.instance.tag]) }}
 
-  /instance/{instanceId}/state:
-    parameters:
-      - $ref: '#/components/parameters/InstanceID'
+  /instance/{ {{ resources.instance.paramId }} }/suspend:
+{{ oas.Parameters([resources.instance.paramSchema]) }}
+{{ oas.Patch('SuspendInstance', resources.instance.desc, 'software PM suspend', [resources.instance.tag]) }}
 
-    get:
-      tags:
-        - instance
-      operationId: GetInstanceState
-      description: Returns the state of the virtual machine.
-      responses:
-        '200':
-          description: Returns the virtual machine state object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InstanceState'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+  /instance/{ {{ resources.instance.paramId }} }/resume:
+{{ oas.Parameters([resources.instance.paramSchema]) }}
+{{ oas.Patch('ResumeInstance', resources.instance.desc, 'software PM resume', [resources.instance.tag]) }}
 
-  /instance/{instanceId}/reboot:
-    parameters:
-      - $ref: '#/components/parameters/InstanceID'
+  /instance/{ {{ resources.instance.paramId }} }/start:
+{{ oas.Parameters([resources.instance.paramSchema]) }}
+{{ oas.Patch('StartInstance', resources.instance.desc, 'hardware boot-up', [resources.instance.tag]) }}
 
-    post:
-      tags:
-        - instance
-      operationId: RebootInstance
-      description: Perform a virtual machine software reboot.
-      responses:
-        '200':
-          description: The virtual machine has been rebooted successfully.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /instance/{ {{ resources.instance.paramId }} }/stop:
+{{ oas.Parameters([resources.instance.paramSchema]) }}
+{{ oas.Patch('StopInstance', resources.instance.desc, 'hardware stop', [resources.instance.tag]) }}
 
-  /instance/{instanceId}/reset:
-    parameters:
-      - $ref: '#/components/parameters/InstanceID'
+  /instance/{ {{ resources.instance.paramId }} }/shutdown:
+{{ oas.Parameters([resources.instance.paramSchema]) }}
+{{ oas.Patch('ShutdownInstance', resources.instance.desc, 'software shutdown', [resources.instance.tag]) }}
 
-    post:
-      tags:
-        - instance
-      operationId: ResetInstance
-      description: Perform a virtual machine hardware reset.
-      responses:
-        '200':
-          description: The virtual machine has been reseted successfully.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /instance/{instanceId}/suspend:
-    parameters:
-      - $ref: '#/components/parameters/InstanceID'
-
-    post:
-      tags:
-        - instance
-      operationId: SuspendInstance
-      description: Perform a virtual machine software PM suspend.
-      responses:
-        '200':
-          description: The virtual machine has been suspended successfully.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /instance/{instanceId}/resume:
-    parameters:
-      - $ref: '#/components/parameters/InstanceID'
-
-    post:
-      tags:
-        - instance
-      operationId: ResumeInstance
-      description: Perform a virtual machine software PM resume.
-      responses:
-        '200':
-          description: The virtual machine has been resumed successfully.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /instance/{instanceId}/start:
-    parameters:
-      - $ref: '#/components/parameters/InstanceID'
-
-    post:
-      tags:
-        - instance
-      operationId: StartInstance
-      description: Boot up a virtual machine.
-      responses:
-        '200':
-          description: The virtual machine has been started successfully.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /instance/{instanceId}/stop:
-    parameters:
-      - $ref: '#/components/parameters/InstanceID'
-
-    post:
-      tags:
-        - instance
-      operationId: StopInstance
-      description: Initiate a hardware stop of a virtual machine.
-      responses:
-        '200':
-          description: The virtual machine has been stopped successfully.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /instance/{instanceId}/shutdown:
-    parameters:
-      - $ref: '#/components/parameters/InstanceID'
-
-    post:
-      tags:
-        - instance
-      operationId: ShutdownInstance
-      description: Initiate a software shutdown of a virtual machine.
-      responses:
-        '200':
-          description: The virtual machine has been shut down successfully.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /instance/{instanceId}/connect:
-    parameters:
-      - $ref: '#/components/parameters/InstanceID'
-
-    get:
-      tags:
-        - instance
-      operationId: GetInstanceRemoteConnection
-      description: Returns virtual machine remote access URL.
-      responses:
-        '200':
-          description: Returns the virtual machine remote connection URL.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InstanceRemoteAccess'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /instance/{ {{ resources.instance.paramId }} }/connect:
+{{ oas.Parameters([resources.instance.paramSchema]) }}
+{{ oas.Read('ReadInstanceRemoteConnection', resources.instance_ra.schema, resources.instance_ra.desc, [resources.instance.tag]) }}

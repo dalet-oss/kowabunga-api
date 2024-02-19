@@ -32,6 +32,15 @@ resources:
   instance:
     tag: instance
     desc: virtual machine instance
+    schema: Instance
+    paramId: instanceId
+    paramSchema: InstanceID
+  instance_state:
+    desc: virtual machine instance state
+    schema: InstanceState
+  instance_ra:
+    desc: virtual machine instance remote access characteristics
+    schema: InstanceRemoteAccess
   kce:
     desc: KCE (Kowabunga Compute Engine)
   kfs:
