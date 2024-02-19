@@ -82,8 +82,19 @@
 {{ Property(name, 'boolean', desc, values, default) }}
 {% endmacro %}
 
+{% macro IntProperty(name, desc, values=[], default=None) %}
+{{ Property(name, 'integer', desc, values, default) }}
+{% endmacro %}
+
 {% macro FloatProperty(name, desc, values=[], default=None) %}
 {{ Property(name, 'integer', desc, values, default, format='float') }}
+{% endmacro %}
+
+{% macro ObjectProperty(name, desc, schema) %}
+        {{ name }}:
+          type: object
+          description: {{ desc }}
+          $ref: '#/components/schemas/{{ schema }}'
 {% endmacro %}
 
 {% macro ArrayProperty(name, type, desc, default=None) %}
