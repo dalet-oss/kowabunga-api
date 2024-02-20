@@ -25,7 +25,7 @@ All URIs are relative to */api/v1*
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **KGW** | [**KGW**](../Models/KGW.md)| KGW payload | |
 
 ### Return type
@@ -81,7 +81,7 @@ null (empty response body)
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
 

@@ -4,10 +4,10 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createNetGW**](NetgwApi.md#createNetGW) | **POST** /zone/{zoneId}/netgw |  |
+| [**createNetGW**](NetgwApi.md#createNetGW) | **POST** /zone/{ zoneId }/netgw |  |
 | [**deleteNetGW**](NetgwApi.md#deleteNetGW) | **DELETE** /netgw/{ netgwId } |  |
-| [**getZoneNetGWs**](NetgwApi.md#getZoneNetGWs) | **GET** /zone/{zoneId}/netgws |  |
 | [**listNetGWs**](NetgwApi.md#listNetGWs) | **GET** /netgw |  |
+| [**listZoneNetGWs**](NetgwApi.md#listZoneNetGWs) | **GET** /zone/{ zoneId }/netgws |  |
 | [**readNetGW**](NetgwApi.md#readNetGW) | **GET** /netgw/{ netgwId } |  |
 | [**updateNetGW**](NetgwApi.md#updateNetGW) | **PUT** /netgw/{ netgwId } |  |
 
@@ -18,14 +18,14 @@ All URIs are relative to */api/v1*
 
 
 
-    Creates a new network gateway.
+    Creates a new Iris network gateway.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
-| **NetGW** | [**NetGW**](../Models/NetGW.md)| NetGW payload | |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **NetGW** | [**NetGW**](../Models/NetGW.md)| NetGW payload. | |
 
 ### Return type
 
@@ -67,19 +67,16 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getZoneNetGWs"></a>
-# **getZoneNetGWs**
-> List getZoneNetGWs(zoneId)
+<a name="listNetGWs"></a>
+# **listNetGWs**
+> List listNetGWs()
 
 
 
-    Returns the IDs of the hosts existing in the zone.
+    Returns the IDs of Iris network gateway objects.
 
 ### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -94,16 +91,19 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listNetGWs"></a>
-# **listNetGWs**
-> List listNetGWs()
+<a name="listZoneNetGWs"></a>
+# **listZoneNetGWs**
+> List listZoneNetGWs(zoneId)
 
 
 
     Returns the IDs of Iris network gateway objects.
 
 ### Parameters
-This endpoint does not need any parameter.
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
 

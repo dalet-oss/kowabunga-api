@@ -4,11 +4,11 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createHost**](HostApi.md#createHost) | **POST** /zone/{zoneId}/host |  |
+| [**createHost**](HostApi.md#createHost) | **POST** /zone/{ zoneId }/host |  |
 | [**deleteHost**](HostApi.md#deleteHost) | **DELETE** /host/{ hostId } |  |
-| [**getZoneHosts**](HostApi.md#getZoneHosts) | **GET** /zone/{zoneId}/hosts |  |
 | [**listHostInstances**](HostApi.md#listHostInstances) | **GET** /host/{ hostId }/instances |  |
 | [**listHosts**](HostApi.md#listHosts) | **GET** /host |  |
+| [**listZoneHosts**](HostApi.md#listZoneHosts) | **GET** /zone/{zoneId}/hosts |  |
 | [**readHost**](HostApi.md#readHost) | **GET** /host/{ hostId } |  |
 | [**readHostCaps**](HostApi.md#readHostCaps) | **GET** /host/{ hostId }/caps |  |
 | [**updateHost**](HostApi.md#updateHost) | **PUT** /host/{ hostId } |  |
@@ -20,14 +20,14 @@ All URIs are relative to */api/v1*
 
 
 
-    Creates a new host.
+    Creates a new computing host.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
-| **Host** | [**Host**](../Models/Host.md)| Host payload | |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **Host** | [**Host**](../Models/Host.md)| Host payload. | |
 
 ### Return type
 
@@ -59,33 +59,6 @@ All URIs are relative to */api/v1*
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getZoneHosts"></a>
-# **getZoneHosts**
-> List getZoneHosts(zoneId)
-
-
-
-    Returns the IDs of the hosts existing in the zone.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
-
-### Return type
-
-**List**
 
 ### Authorization
 
@@ -133,6 +106,33 @@ null (empty response body)
 
 ### Parameters
 This endpoint does not need any parameter.
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listZoneHosts"></a>
+# **listZoneHosts**
+> List listZoneHosts(zoneId)
+
+
+
+    Returns the IDs of computing host objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
 

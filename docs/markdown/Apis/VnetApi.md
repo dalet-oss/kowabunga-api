@@ -5,11 +5,11 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createSubnet**](VnetApi.md#createSubnet) | **POST** /vnet/{ vnetId }/subnet |  |
-| [**createVNet**](VnetApi.md#createVNet) | **POST** /zone/{zoneId}/vnet |  |
+| [**createVNet**](VnetApi.md#createVNet) | **POST** /zone/{ zoneId }/vnet |  |
 | [**deleteVNet**](VnetApi.md#deleteVNet) | **DELETE** /vnet/{ vnetId } |  |
-| [**getZoneVNets**](VnetApi.md#getZoneVNets) | **GET** /zone/{zoneId}/vnets |  |
 | [**listVNetSubnets**](VnetApi.md#listVNetSubnets) | **GET** /vnet/{ vnetId }/subnets |  |
 | [**listVNets**](VnetApi.md#listVNets) | **GET** /vnet |  |
+| [**listZoneVNets**](VnetApi.md#listZoneVNets) | **GET** /zone/{ zoneId }/vnets |  |
 | [**readVNet**](VnetApi.md#readVNet) | **GET** /vnet/{ vnetId } |  |
 | [**setVNetDefaultSubnet**](VnetApi.md#setVNetDefaultSubnet) | **PATCH** /vnet/{ vnetId }/subnet/{ subnetId }/default |  |
 | [**updateVNet**](VnetApi.md#updateVNet) | **PUT** /vnet/{ vnetId } |  |
@@ -55,8 +55,8 @@ All URIs are relative to */api/v1*
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
-| **VNet** | [**VNet**](../Models/VNet.md)| VNet payload | |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **VNet** | [**VNet**](../Models/VNet.md)| VNet payload. | |
 
 ### Return type
 
@@ -88,33 +88,6 @@ All URIs are relative to */api/v1*
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getZoneVNets"></a>
-# **getZoneVNets**
-> List getZoneVNets(zoneId)
-
-
-
-    Returns the IDs of the virtual networks existing in the zone.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
-
-### Return type
-
-**List**
 
 ### Authorization
 
@@ -162,6 +135,33 @@ null (empty response body)
 
 ### Parameters
 This endpoint does not need any parameter.
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listZoneVNets"></a>
+# **listZoneVNets**
+> List listZoneVNets(zoneId)
+
+
+
+    Returns the IDs of virtual network objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
 

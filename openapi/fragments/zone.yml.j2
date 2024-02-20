@@ -1,468 +1,60 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
 components:
   schemas:
-    Zone:
-      type: object
-      required:
-        - name
-      properties:
-        id:
-          type: string
-          description: The zone ID (auto-generated).
-        name:
-          type: string
-          description: The zone name.
-        description:
-          type: string
-          description: The zone description.
+{{ oas.SchemaBaseResource(resources.zone, ['name']) }}
 
   parameters:
-    ZoneID:
-      name: zoneId
-      in: path
-      description: The ID of the zone.
-      required: true
-      schema:
-        type: string
+{{ oas.PathParamID(resources.zone) }}
 
 paths:
   /zone:
-    get:
-      tags:
-        - zone
-      operationId: GetAllZones
-      description: Returns the IDs of registered zones.
-      responses:
-        '200':
-          description: Returns the an array of zone IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
+{{ oas.List(resources.zone, [resources.zone.tag]) }}
 
-  /zone/{zoneId}:
-    parameters:
-      - $ref: '#/components/parameters/ZoneID'
+  /zone/{ {{ resources.zone.paramId }} }:
+{{ oas.RUD(resources.zone, [resources.zone.tag], [resources.zone.paramSchema]) }}
 
-    get:
-      tags:
-        - zone
-      operationId: GetZone
-      description: Returns a description of the zone
-      responses:
-        '200':
-          description: Returns the zone object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Zone'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+  /zone/{ {{ resources.zone.paramId }} }/netgw:
+{{ oas.Parameters([resources.zone.paramSchema]) }}
+{{ oas.Create('Create' + resources.netgw.schema, resources.netgw.schema, resources.netgw.desc, [resources.zone.tag, resources.netgw.tag]) }}
 
-    put:
-      tags:
-        - zone
-      operationId: UpdateZone
-      description: Updates a zone configuration.
-      requestBody:
-        description: Zone payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Zone'
-        required: true
-      responses:
-        '200':
-          description: Updated zone.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Zone'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /zone/{ {{ resources.zone.paramId }} }/netgws:
+{{ oas.Parameters([resources.zone.paramSchema]) }}
+{{ oas.GetAll('List' + resources.zone.schema + resources.netgw.schema + 's', resources.netgw.desc, [resources.zone.tag, resources.netgw.tag], True) }}
 
-    delete:
-      tags:
-        - zone
-      operationId: DeleteZone
-      description: Deletes an existing zone.
-      responses:
-        '200':
-          description: The network adapter has been successfully removed.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /zone/{zoneId}/netgw:
-    parameters:
-      - $ref: '#/components/parameters/ZoneID'
-
-    post:
-      tags:
-        - zone
-        - netgw
-      operationId: CreateNetGW
-      description: Creates a new network gateway.
-      requestBody:
-        description: NetGW payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NetGW'
-        required: true
-      responses:
-        '201':
-          description: Returns the newly created network gateway object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NetGW'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /zone/{zoneId}/netgws:
-    parameters:
-      - $ref: '#/components/parameters/ZoneID'
-
-    get:
-      tags:
-        - zone
-        - netgw
-      operationId: GetZoneNetGWs
-      description: Returns the IDs of the hosts existing in the zone.
-      responses:
-        '200':
-          description: Returns an array of network gateway IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-
-  /zone/{zoneId}/host:
-    parameters:
-      - $ref: '#/components/parameters/ZoneID'
-
-    post:
-      tags:
-        - zone
-        - host
-      operationId: CreateHost
-      description: Creates a new host.
-      requestBody:
-        description: Host payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Host'
-        required: true
-      responses:
-        '201':
-          description: Returns the newly created host object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Host'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /zone/{ {{ resources.zone.paramId }} }/host:
+{{ oas.Parameters([resources.zone.paramSchema]) }}
+{{ oas.Create('Create' + resources.host.schema, resources.host.schema, resources.host.desc, [resources.zone.tag, resources.host.tag]) }}
 
   /zone/{zoneId}/hosts:
-    parameters:
-      - $ref: '#/components/parameters/ZoneID'
+{{ oas.Parameters([resources.zone.paramSchema]) }}
+{{ oas.GetAll('List' + resources.zone.schema + resources.host.schema + 's', resources.host.desc, [resources.zone.tag, resources.host.tag], True) }}
 
-    get:
-      tags:
-        - zone
-        - host
-      operationId: GetZoneHosts
-      description: Returns the IDs of the hosts existing in the zone.
-      responses:
-        '200':
-          description: Returns an array of network gateway IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+  /zone/{ {{ resources.zone.paramId }} }/pool:
+{{ oas.Parameters([resources.zone.paramSchema, 'OptionalQuery' + resources.host.paramSchema]) }}
+{{ oas.Create('Create' + resources.pool.schema, resources.pool.schema, resources.pool.desc, [resources.zone.tag, resources.pool.tag]) }}
 
-  /zone/{zoneId}/pool:
-    parameters:
-      - $ref: '#/components/parameters/ZoneID'
-      - $ref: '#/components/parameters/OptionalQueryHostID'
+  /zone/{ {{ resources.zone.paramId }} }/pool/{ {{ resources.pool.paramId }} }/default:
+{{ oas.Parameters([resources.zone.paramSchema, resources.pool.paramSchema]) }}
+{{ oas.Patch('Set' + resources.zone.schema + 'Default' + resources.pool.schema, resources.zone.desc, 'setting of default ' + resources.pool.desc, [resources.zone.tag, resources.pool.tag]) }}
 
-    post:
-      tags:
-        - zone
-        - pool
-      operationId: CreatePool
-      description: Creates a new storage pool.
-      requestBody:
-        description: Pool payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/StoragePool'
-        required: true
-      responses:
-        '201':
-          description: Returns the newly created storage pool object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/StoragePool'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /zone/{ {{ resources.zone.paramId }} }/pools:
+{{ oas.Parameters([resources.zone.paramSchema]) }}
+{{ oas.GetAll('List' + resources.zone.schema + resources.pool.schema + 's', resources.pool.desc, [resources.zone.tag, resources.pool.tag], True) }}
 
-  /zone/{zoneId}/pool/{poolId}/default:
-    parameters:
-      - $ref: '#/components/parameters/ZoneID'
-      - $ref: '#/components/parameters/PoolID'
+  /zone/{ {{ resources.zone.paramId }} }/nfs:
+{{ oas.Parameters([resources.zone.paramSchema]) }}
+{{ oas.GetAll('List' + resources.zone.schema + resources.nfs.schema + 's', resources.nfs.desc, [resources.zone.tag, resources.nfs.tag], True) }}
+{{ oas.Create('Create' + resources.nfs.schema, resources.nfs.schema, resources.nfs.desc, [resources.zone.tag, resources.nfs.tag]) }}
 
-    put:
-      tags:
-        - zone
-        - pool
-      operationId: UpdateZoneDefaultPool
-      description: Set a zone's default storage pool.
-      responses:
-        '200':
-          description: Pool has been set as default one.
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /zone/{ {{ resources.zone.paramId }} }/nfs/{ {{ resources.nfs.paramId }} }/default:
+{{ oas.Parameters([resources.zone.paramSchema, resources.nfs.paramSchema]) }}
+{{ oas.Patch('Set' + resources.zone.schema + 'Default' + resources.nfs.schema, resources.zone.desc, 'setting of default ' + resources.nfs.desc, [resources.zone.tag, resources.nfs.tag]) }}
 
-  /zone/{zoneId}/pools:
-    parameters:
-      - $ref: '#/components/parameters/ZoneID'
+  /zone/{ {{ resources.zone.paramId }} }/vnet:
+{{ oas.Parameters([resources.zone.paramSchema]) }}
+{{ oas.Create('Create' + resources.vnet.schema, resources.vnet.schema, resources.vnet.desc, [resources.zone.tag, resources.vnet.tag]) }}
 
-    get:
-      tags:
-        - zone
-        - pool
-      operationId: GetZonePools
-      description: Returns the IDs of the pools existing in the zone.
-      responses:
-        '200':
-          description: Returns an array of storage pool IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-
-  /zone/{zoneId}/nfs:
-    parameters:
-      - $ref: '#/components/parameters/ZoneID'
-
-    get:
-      tags:
-        - zone
-        - nfs
-      operationId: GetZoneNfsStorages
-      description: Returns the IDs of the NFS storages existing in the zone.
-      responses:
-        '200':
-          description: Returns an array of NFS storage IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-
-    post:
-      tags:
-        - zone
-        - nfs
-      operationId: CreateNfsStorage
-      description: Creates a new NFS storage.
-      requestBody:
-        description: NFS payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/StorageNFS'
-        required: true
-      responses:
-        '201':
-          description: Returns the newly created NFS storage object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/StorageNFS'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /zone/{zoneId}/nfs/{nfsId}/default:
-    parameters:
-      - $ref: '#/components/parameters/ZoneID'
-      - $ref: '#/components/parameters/NfsID'
-
-    put:
-      tags:
-        - zone
-        - nfs
-      operationId: UpdateZoneDefaultNfsStorage
-      description: Set a zone's default NFS storage.
-      responses:
-        '200':
-          description: NFS has been set as default one.
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /zone/{zoneId}/vnet:
-    parameters:
-      - $ref: '#/components/parameters/ZoneID'
-
-    post:
-      tags:
-        - zone
-        - vnet
-      operationId: CreateVNet
-      description: Creates a new virtual network.
-      requestBody:
-        description: VNet payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VNet'
-        required: true
-      responses:
-        '201':
-          description: Returns the newly created virtual network object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VNet'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /zone/{zoneId}/vnets:
-    parameters:
-      - $ref: '#/components/parameters/ZoneID'
-
-    get:
-      tags:
-        - zone
-        - vnet
-      operationId: GetZoneVNets
-      description: Returns the IDs of the virtual networks existing in the zone.
-      responses:
-        '200':
-          description: Returns an array of virtual network IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+  /zone/{ {{ resources.zone.paramId }} }/vnets:
+{{ oas.Parameters([resources.zone.paramSchema]) }}
+{{ oas.GetAll('List' + resources.zone.schema + resources.vnet.schema + 's', resources.vnet.desc, [resources.zone.tag, resources.vnet.tag], True) }}

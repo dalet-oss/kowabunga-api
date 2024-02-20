@@ -26,7 +26,7 @@ All URIs are relative to */api/v1*
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **KFS** | [**KFS**](../Models/KFS.md)| KFS payload | |
 | **nfsId** | **String**| NFS storage ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
@@ -84,7 +84,7 @@ null (empty response body)
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **nfsId** | **String**| NFS storage ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 

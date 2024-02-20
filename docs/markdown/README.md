@@ -13,11 +13,11 @@ All URIs are relative to */api/v1*
 *AdapterApi* | [**listSubnetAdapters**](Apis/AdapterApi.md#listsubnetadapters) | **GET** /subnet/{ subnetId }/adapters | Returns the IDs of network adapter objects. |
 *AdapterApi* | [**readAdapter**](Apis/AdapterApi.md#readadapter) | **GET** /adapter/{ adapterId } | Returns a network adapter. |
 *AdapterApi* | [**updateAdapter**](Apis/AdapterApi.md#updateadapter) | **PUT** /adapter/{ adapterId } | Updates a network adapter configuration. |
-| *HostApi* | [**createHost**](Apis/HostApi.md#createhost) | **POST** /zone/{zoneId}/host | Creates a new host. |
+| *HostApi* | [**createHost**](Apis/HostApi.md#createhost) | **POST** /zone/{ zoneId }/host | Creates a new computing host. |
 *HostApi* | [**deleteHost**](Apis/HostApi.md#deletehost) | **DELETE** /host/{ hostId } | Deletes an existing computing host. |
-*HostApi* | [**getZoneHosts**](Apis/HostApi.md#getzonehosts) | **GET** /zone/{zoneId}/hosts | Returns the IDs of the hosts existing in the zone. |
 *HostApi* | [**listHostInstances**](Apis/HostApi.md#listhostinstances) | **GET** /host/{ hostId }/instances | Returns the IDs of virtual machine instance objects. |
 *HostApi* | [**listHosts**](Apis/HostApi.md#listhosts) | **GET** /host | Returns the IDs of computing host objects. |
+*HostApi* | [**listZoneHosts**](Apis/HostApi.md#listzonehosts) | **GET** /zone/{zoneId}/hosts | Returns the IDs of computing host objects. |
 *HostApi* | [**readHost**](Apis/HostApi.md#readhost) | **GET** /host/{ hostId } | Returns a computing host. |
 *HostApi* | [**readHostCaps**](Apis/HostApi.md#readhostcaps) | **GET** /host/{ hostId }/caps | Returns a computing host capability. |
 *HostApi* | [**updateHost**](Apis/HostApi.md#updatehost) | **PUT** /host/{ hostId } | Updates a computing host configuration. |
@@ -64,31 +64,31 @@ All URIs are relative to */api/v1*
 *KgwApi* | [**listKGWs**](Apis/KgwApi.md#listkgws) | **GET** /kgw | Returns the IDs of KGW (Kowabunga Network Gateway) objects. |
 *KgwApi* | [**readKGW**](Apis/KgwApi.md#readkgw) | **GET** /kgw/kgwId } | Returns a KGW (Kowabunga Network Gateway). |
 *KgwApi* | [**updateKGW**](Apis/KgwApi.md#updatekgw) | **PUT** /kgw/kgwId } | Updates a KGW (Kowabunga Network Gateway) configuration. |
-| *NetgwApi* | [**createNetGW**](Apis/NetgwApi.md#createnetgw) | **POST** /zone/{zoneId}/netgw | Creates a new network gateway. |
+| *NetgwApi* | [**createNetGW**](Apis/NetgwApi.md#createnetgw) | **POST** /zone/{ zoneId }/netgw | Creates a new Iris network gateway. |
 *NetgwApi* | [**deleteNetGW**](Apis/NetgwApi.md#deletenetgw) | **DELETE** /netgw/{ netgwId } | Deletes an existing Iris network gateway. |
-*NetgwApi* | [**getZoneNetGWs**](Apis/NetgwApi.md#getzonenetgws) | **GET** /zone/{zoneId}/netgws | Returns the IDs of the hosts existing in the zone. |
 *NetgwApi* | [**listNetGWs**](Apis/NetgwApi.md#listnetgws) | **GET** /netgw | Returns the IDs of Iris network gateway objects. |
+*NetgwApi* | [**listZoneNetGWs**](Apis/NetgwApi.md#listzonenetgws) | **GET** /zone/{ zoneId }/netgws | Returns the IDs of Iris network gateway objects. |
 *NetgwApi* | [**readNetGW**](Apis/NetgwApi.md#readnetgw) | **GET** /netgw/{ netgwId } | Returns a Iris network gateway. |
 *NetgwApi* | [**updateNetGW**](Apis/NetgwApi.md#updatenetgw) | **PUT** /netgw/{ netgwId } | Updates a Iris network gateway configuration. |
-| *NfsApi* | [**createNfsStorage**](Apis/NfsApi.md#createnfsstorage) | **POST** /zone/{zoneId}/nfs | Creates a new NFS storage. |
+| *NfsApi* | [**createStorageNFS**](Apis/NfsApi.md#createstoragenfs) | **POST** /zone/{ zoneId }/nfs | Creates a new NFS storage. |
 *NfsApi* | [**deleteStorageNFS**](Apis/NfsApi.md#deletestoragenfs) | **DELETE** /nfs/{ nfsId } | Deletes an existing NFS storage. |
-*NfsApi* | [**getZoneNfsStorages**](Apis/NfsApi.md#getzonenfsstorages) | **GET** /zone/{zoneId}/nfs | Returns the IDs of the NFS storages existing in the zone. |
 *NfsApi* | [**listStorageNFSKFSs**](Apis/NfsApi.md#liststoragenfskfss) | **GET** /nfs/{ nfsId }/kfs | Returns the IDs of KFS (Kowabunga File System) objects. |
 *NfsApi* | [**listStorageNFSs**](Apis/NfsApi.md#liststoragenfss) | **GET** /nfs | Returns the IDs of NFS storage objects. |
+*NfsApi* | [**listZoneStorageNFSs**](Apis/NfsApi.md#listzonestoragenfss) | **GET** /zone/{ zoneId }/nfs | Returns the IDs of NFS storage objects. |
 *NfsApi* | [**readStorageNFS**](Apis/NfsApi.md#readstoragenfs) | **GET** /nfs/{ nfsId } | Returns a NFS storage. |
+*NfsApi* | [**setZoneDefaultStorageNFS**](Apis/NfsApi.md#setzonedefaultstoragenfs) | **PATCH** /zone/{ zoneId }/nfs/{ nfsId }/default | Performs a availability zone setting of default NFS storage. |
 *NfsApi* | [**updateStorageNFS**](Apis/NfsApi.md#updatestoragenfs) | **PUT** /nfs/{ nfsId } | Updates a NFS storage configuration. |
-*NfsApi* | [**updateZoneDefaultNfsStorage**](Apis/NfsApi.md#updatezonedefaultnfsstorage) | **PUT** /zone/{zoneId}/nfs/{nfsId}/default | Set a zone's default NFS storage. |
-| *PoolApi* | [**createPool**](Apis/PoolApi.md#createpool) | **POST** /zone/{zoneId}/pool | Creates a new storage pool. |
+| *PoolApi* | [**createStoragePool**](Apis/PoolApi.md#createstoragepool) | **POST** /zone/{ zoneId }/pool | Creates a new storage pool. |
 *PoolApi* | [**createTemplate**](Apis/PoolApi.md#createtemplate) | **POST** /pool/{ poolId }/template | Creates a new image template. |
 *PoolApi* | [**deleteStoragePool**](Apis/PoolApi.md#deletestoragepool) | **DELETE** /pool/{ poolId } | Deletes an existing storage pool. |
-*PoolApi* | [**getZonePools**](Apis/PoolApi.md#getzonepools) | **GET** /zone/{zoneId}/pools | Returns the IDs of the pools existing in the zone. |
 *PoolApi* | [**listStoragePoolTemplates**](Apis/PoolApi.md#liststoragepooltemplates) | **GET** /pool/{ poolId }/templates | Returns the IDs of image template objects. |
 *PoolApi* | [**listStoragePoolVolumes**](Apis/PoolApi.md#liststoragepoolvolumes) | **GET** /pool/{ poolId }/volumes | Returns the IDs of storage volume objects. |
 *PoolApi* | [**listStoragePools**](Apis/PoolApi.md#liststoragepools) | **GET** /pool | Returns the IDs of storage pool objects. |
+*PoolApi* | [**listZoneStoragePools**](Apis/PoolApi.md#listzonestoragepools) | **GET** /zone/{ zoneId }/pools | Returns the IDs of storage pool objects. |
 *PoolApi* | [**readStoragePool**](Apis/PoolApi.md#readstoragepool) | **GET** /pool/{ poolId } | Returns a storage pool. |
 *PoolApi* | [**setStoragePoolDefaultTemplate**](Apis/PoolApi.md#setstoragepooldefaulttemplate) | **PATCH** /pool/{ poolId }/template/{ templateId }/default | Performs a storage pool setting of default template. |
+*PoolApi* | [**setZoneDefaultStoragePool**](Apis/PoolApi.md#setzonedefaultstoragepool) | **PATCH** /zone/{ zoneId }/pool/{ poolId }/default | Performs a availability zone setting of default storage pool. |
 *PoolApi* | [**updateStoragePool**](Apis/PoolApi.md#updatestoragepool) | **PUT** /pool/{ poolId } | Updates a storage pool configuration. |
-*PoolApi* | [**updateZoneDefaultPool**](Apis/PoolApi.md#updatezonedefaultpool) | **PUT** /zone/{zoneId}/pool/{poolId}/default | Set a zone's default storage pool. |
 | *ProjectApi* | [**createProject**](Apis/ProjectApi.md#createproject) | **POST** /project | Creates a new project. |
 *ProjectApi* | [**createProjectDnsRecord**](Apis/ProjectApi.md#createprojectdnsrecord) | **POST** /project/{projectId}/record | Creates a new DNS record in specified project. |
 *ProjectApi* | [**createProjectZoneInstance**](Apis/ProjectApi.md#createprojectzoneinstance) | **POST** /project/{projectId}/zone/{zoneId}/instance | Creates a new virtual machine instance in specified zone. |
@@ -137,11 +137,11 @@ All URIs are relative to */api/v1*
 *TemplateApi* | [**setStoragePoolDefaultTemplate**](Apis/TemplateApi.md#setstoragepooldefaulttemplate) | **PATCH** /pool/{ poolId }/template/{ templateId }/default | Performs a storage pool setting of default template. |
 *TemplateApi* | [**updateTemplate**](Apis/TemplateApi.md#updatetemplate) | **PUT** /template/{ templateId } | Updates a image template configuration. |
 | *VnetApi* | [**createSubnet**](Apis/VnetApi.md#createsubnet) | **POST** /vnet/{ vnetId }/subnet | Creates a new network subnet. |
-*VnetApi* | [**createVNet**](Apis/VnetApi.md#createvnet) | **POST** /zone/{zoneId}/vnet | Creates a new virtual network. |
+*VnetApi* | [**createVNet**](Apis/VnetApi.md#createvnet) | **POST** /zone/{ zoneId }/vnet | Creates a new virtual network. |
 *VnetApi* | [**deleteVNet**](Apis/VnetApi.md#deletevnet) | **DELETE** /vnet/{ vnetId } | Deletes an existing virtual network. |
-*VnetApi* | [**getZoneVNets**](Apis/VnetApi.md#getzonevnets) | **GET** /zone/{zoneId}/vnets | Returns the IDs of the virtual networks existing in the zone. |
 *VnetApi* | [**listVNetSubnets**](Apis/VnetApi.md#listvnetsubnets) | **GET** /vnet/{ vnetId }/subnets | Returns the IDs of network subnet objects. |
 *VnetApi* | [**listVNets**](Apis/VnetApi.md#listvnets) | **GET** /vnet | Returns the IDs of virtual network objects. |
+*VnetApi* | [**listZoneVNets**](Apis/VnetApi.md#listzonevnets) | **GET** /zone/{ zoneId }/vnets | Returns the IDs of virtual network objects. |
 *VnetApi* | [**readVNet**](Apis/VnetApi.md#readvnet) | **GET** /vnet/{ vnetId } | Returns a virtual network. |
 *VnetApi* | [**setVNetDefaultSubnet**](Apis/VnetApi.md#setvnetdefaultsubnet) | **PATCH** /vnet/{ vnetId }/subnet/{ subnetId }/default | Performs a virtual network setting of default network subnet. |
 *VnetApi* | [**updateVNet**](Apis/VnetApi.md#updatevnet) | **PUT** /vnet/{ vnetId } | Updates a virtual network configuration. |
@@ -152,34 +152,34 @@ All URIs are relative to */api/v1*
 *VolumeApi* | [**listVolumes**](Apis/VolumeApi.md#listvolumes) | **GET** /volume | Returns the IDs of storage volume objects. |
 *VolumeApi* | [**readVolume**](Apis/VolumeApi.md#readvolume) | **GET** /volume/{ volumeId } | Returns a storage volume. |
 *VolumeApi* | [**updateVolume**](Apis/VolumeApi.md#updatevolume) | **PUT** /volume/{ volumeId } | Updates a storage volume configuration. |
-| *ZoneApi* | [**createHost**](Apis/ZoneApi.md#createhost) | **POST** /zone/{zoneId}/host | Creates a new host. |
-*ZoneApi* | [**createNetGW**](Apis/ZoneApi.md#createnetgw) | **POST** /zone/{zoneId}/netgw | Creates a new network gateway. |
-*ZoneApi* | [**createNfsStorage**](Apis/ZoneApi.md#createnfsstorage) | **POST** /zone/{zoneId}/nfs | Creates a new NFS storage. |
-*ZoneApi* | [**createPool**](Apis/ZoneApi.md#createpool) | **POST** /zone/{zoneId}/pool | Creates a new storage pool. |
+| *ZoneApi* | [**createHost**](Apis/ZoneApi.md#createhost) | **POST** /zone/{ zoneId }/host | Creates a new computing host. |
+*ZoneApi* | [**createNetGW**](Apis/ZoneApi.md#createnetgw) | **POST** /zone/{ zoneId }/netgw | Creates a new Iris network gateway. |
 *ZoneApi* | [**createProjectZoneInstance**](Apis/ZoneApi.md#createprojectzoneinstance) | **POST** /project/{projectId}/zone/{zoneId}/instance | Creates a new virtual machine instance in specified zone. |
 *ZoneApi* | [**createProjectZoneKce**](Apis/ZoneApi.md#createprojectzonekce) | **POST** /project/{projectId}/zone/{zoneId}/kce | Creates a new KCE virtual machine in specified zone. |
 *ZoneApi* | [**createProjectZoneKfs**](Apis/ZoneApi.md#createprojectzonekfs) | **POST** /project/{projectId}/zone/{zoneId}/kfs | Creates a new KFS storage volume in specified zone. |
 *ZoneApi* | [**createProjectZoneKgw**](Apis/ZoneApi.md#createprojectzonekgw) | **POST** /project/{projectId}/zone/{zoneId}/kgw | Creates a new KGW in the specified zone. |
 *ZoneApi* | [**createProjectZoneVolume**](Apis/ZoneApi.md#createprojectzonevolume) | **POST** /project/{projectId}/zone/{zoneId}/volume | Creates a new storage volume in specified zone. |
-*ZoneApi* | [**createVNet**](Apis/ZoneApi.md#createvnet) | **POST** /zone/{zoneId}/vnet | Creates a new virtual network. |
+*ZoneApi* | [**createStorageNFS**](Apis/ZoneApi.md#createstoragenfs) | **POST** /zone/{ zoneId }/nfs | Creates a new NFS storage. |
+*ZoneApi* | [**createStoragePool**](Apis/ZoneApi.md#createstoragepool) | **POST** /zone/{ zoneId }/pool | Creates a new storage pool. |
+*ZoneApi* | [**createVNet**](Apis/ZoneApi.md#createvnet) | **POST** /zone/{ zoneId }/vnet | Creates a new virtual network. |
 *ZoneApi* | [**createZone**](Apis/ZoneApi.md#createzone) | **POST** /region/{ regionId }/zone | Creates a new availability zone. |
-*ZoneApi* | [**deleteZone**](Apis/ZoneApi.md#deletezone) | **DELETE** /zone/{zoneId} | Deletes an existing zone. |
-*ZoneApi* | [**getAllZones**](Apis/ZoneApi.md#getallzones) | **GET** /zone | Returns the IDs of registered zones. |
+*ZoneApi* | [**deleteZone**](Apis/ZoneApi.md#deletezone) | **DELETE** /zone/{ zoneId } | Deletes an existing availability zone. |
 *ZoneApi* | [**getProjectZoneInstances**](Apis/ZoneApi.md#getprojectzoneinstances) | **GET** /project/{projectId}/zone/{zoneId}/instances | Returns the IDs of the virtual machine instances existing in the project in the specified zone. |
 *ZoneApi* | [**getProjectZoneKCEs**](Apis/ZoneApi.md#getprojectzonekces) | **GET** /project/{projectId}/zone/{zoneId}/kces | Returns the IDs of the KCE virtual machines existing in the project in the specified zone. |
 *ZoneApi* | [**getProjectZoneKGWs**](Apis/ZoneApi.md#getprojectzonekgws) | **GET** /project/{projectId}/zone/{zoneId}/kgws | Returns the IDs of the KGW existing in the project in the specified zone. |
 *ZoneApi* | [**getProjectZoneKfs**](Apis/ZoneApi.md#getprojectzonekfs) | **GET** /project/{projectId}/zone/{zoneId}/kfs | Returns the IDs of the KFS storage volumes existing in the project in the specified zone. |
 *ZoneApi* | [**getProjectZoneVolumes**](Apis/ZoneApi.md#getprojectzonevolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes | Returns the IDs of the storage volumes existing in the project in the specified zone. |
-*ZoneApi* | [**getZone**](Apis/ZoneApi.md#getzone) | **GET** /zone/{zoneId} | Returns a description of the zone |
-*ZoneApi* | [**getZoneHosts**](Apis/ZoneApi.md#getzonehosts) | **GET** /zone/{zoneId}/hosts | Returns the IDs of the hosts existing in the zone. |
-*ZoneApi* | [**getZoneNetGWs**](Apis/ZoneApi.md#getzonenetgws) | **GET** /zone/{zoneId}/netgws | Returns the IDs of the hosts existing in the zone. |
-*ZoneApi* | [**getZoneNfsStorages**](Apis/ZoneApi.md#getzonenfsstorages) | **GET** /zone/{zoneId}/nfs | Returns the IDs of the NFS storages existing in the zone. |
-*ZoneApi* | [**getZonePools**](Apis/ZoneApi.md#getzonepools) | **GET** /zone/{zoneId}/pools | Returns the IDs of the pools existing in the zone. |
-*ZoneApi* | [**getZoneVNets**](Apis/ZoneApi.md#getzonevnets) | **GET** /zone/{zoneId}/vnets | Returns the IDs of the virtual networks existing in the zone. |
 *ZoneApi* | [**listRegionZones**](Apis/ZoneApi.md#listregionzones) | **GET** /region/{ regionId }/zones | Returns the IDs of availability zone objects. |
-*ZoneApi* | [**updateZone**](Apis/ZoneApi.md#updatezone) | **PUT** /zone/{zoneId} | Updates a zone configuration. |
-*ZoneApi* | [**updateZoneDefaultNfsStorage**](Apis/ZoneApi.md#updatezonedefaultnfsstorage) | **PUT** /zone/{zoneId}/nfs/{nfsId}/default | Set a zone's default NFS storage. |
-*ZoneApi* | [**updateZoneDefaultPool**](Apis/ZoneApi.md#updatezonedefaultpool) | **PUT** /zone/{zoneId}/pool/{poolId}/default | Set a zone's default storage pool. |
+*ZoneApi* | [**listZoneHosts**](Apis/ZoneApi.md#listzonehosts) | **GET** /zone/{zoneId}/hosts | Returns the IDs of computing host objects. |
+*ZoneApi* | [**listZoneNetGWs**](Apis/ZoneApi.md#listzonenetgws) | **GET** /zone/{ zoneId }/netgws | Returns the IDs of Iris network gateway objects. |
+*ZoneApi* | [**listZoneStorageNFSs**](Apis/ZoneApi.md#listzonestoragenfss) | **GET** /zone/{ zoneId }/nfs | Returns the IDs of NFS storage objects. |
+*ZoneApi* | [**listZoneStoragePools**](Apis/ZoneApi.md#listzonestoragepools) | **GET** /zone/{ zoneId }/pools | Returns the IDs of storage pool objects. |
+*ZoneApi* | [**listZoneVNets**](Apis/ZoneApi.md#listzonevnets) | **GET** /zone/{ zoneId }/vnets | Returns the IDs of virtual network objects. |
+*ZoneApi* | [**listZones**](Apis/ZoneApi.md#listzones) | **GET** /zone | Returns the IDs of availability zone objects. |
+*ZoneApi* | [**readZone**](Apis/ZoneApi.md#readzone) | **GET** /zone/{ zoneId } | Returns a availability zone. |
+*ZoneApi* | [**setZoneDefaultStorageNFS**](Apis/ZoneApi.md#setzonedefaultstoragenfs) | **PATCH** /zone/{ zoneId }/nfs/{ nfsId }/default | Performs a availability zone setting of default NFS storage. |
+*ZoneApi* | [**setZoneDefaultStoragePool**](Apis/ZoneApi.md#setzonedefaultstoragepool) | **PATCH** /zone/{ zoneId }/pool/{ poolId }/default | Performs a availability zone setting of default storage pool. |
+*ZoneApi* | [**updateZone**](Apis/ZoneApi.md#updatezone) | **PUT** /zone/{ zoneId } | Updates a availability zone configuration. |
 
 
 <a name="documentation-for-models"></a>

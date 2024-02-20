@@ -95,7 +95,7 @@ All URIs are relative to */api/v1*
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **Instance** | [**Instance**](../Models/Instance.md)| Instance payload | |
 | **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 
@@ -125,7 +125,7 @@ All URIs are relative to */api/v1*
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **KCE** | [**KCE**](../Models/KCE.md)| KCE payload | |
 | **poolId** | **String**| Storage pool ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **templateId** | **String**| Template to clone the storage volume from (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
@@ -158,7 +158,7 @@ All URIs are relative to */api/v1*
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **KFS** | [**KFS**](../Models/KFS.md)| KFS payload | |
 | **nfsId** | **String**| NFS storage ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
@@ -189,7 +189,7 @@ All URIs are relative to */api/v1*
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **KGW** | [**KGW**](../Models/KGW.md)| KGW payload | |
 
 ### Return type
@@ -218,7 +218,7 @@ All URIs are relative to */api/v1*
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **Volume** | [**Volume**](../Models/Volume.md)| Volume payload | |
 | **poolId** | **String**| Storage pool ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **templateId** | **String**| Template to clone the storage volume from (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
@@ -408,7 +408,7 @@ This endpoint does not need any parameter.
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
 
@@ -436,7 +436,7 @@ This endpoint does not need any parameter.
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
 
@@ -464,7 +464,7 @@ This endpoint does not need any parameter.
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
 
@@ -492,7 +492,7 @@ This endpoint does not need any parameter.
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **nfsId** | **String**| NFS storage ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 
@@ -522,7 +522,7 @@ This endpoint does not need any parameter.
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
 

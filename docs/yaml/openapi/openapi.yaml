@@ -2820,30 +2820,30 @@ paths:
       - volume
   /zone:
     get:
-      description: Returns the IDs of registered zones.
-      operationId: GetAllZones
+      description: Returns the IDs of availability zone objects.
+      operationId: ListZones
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns the an array of zone IDs.
+          description: Returns an array of availability zone IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
           $ref: '#/components/responses/Forbidden'
       tags:
       - zone
-  /zone/{zoneId}:
+  /zone/{ zoneId }:
     delete:
-      description: Deletes an existing zone.
+      description: Deletes an existing availability zone.
       operationId: DeleteZone
       parameters:
       - $ref: '#/components/parameters/ZoneID'
       responses:
         "200":
-          description: The network adapter has been successfully removed.
+          description: The availability zone has been successfully removed.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -2857,8 +2857,8 @@ paths:
       tags:
       - zone
     get:
-      description: Returns a description of the zone
-      operationId: GetZone
+      description: Returns a availability zone.
+      operationId: ReadZone
       parameters:
       - $ref: '#/components/parameters/ZoneID'
       responses:
@@ -2867,7 +2867,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Zone'
-          description: Returns the zone object.
+          description: Returns the availability zone object.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -2879,7 +2879,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/ZoneID'
     put:
-      description: Updates a zone configuration.
+      description: Updates a availability zone configuration.
       operationId: UpdateZone
       parameters:
       - $ref: '#/components/parameters/ZoneID'
@@ -2888,7 +2888,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Zone'
-        description: Zone payload
+        description: Zone payload.
         required: true
       responses:
         "200":
@@ -2896,7 +2896,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Zone'
-          description: Updated zone.
+          description: Returns the availability zone object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -2907,13 +2907,15 @@ paths:
           $ref: '#/components/responses/NotFound'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - zone
-  /zone/{zoneId}/netgw:
+  /zone/{ zoneId }/netgw:
     parameters:
     - $ref: '#/components/parameters/ZoneID'
     post:
-      description: Creates a new network gateway.
+      description: Creates a new Iris network gateway.
       operationId: CreateNetGW
       parameters:
       - $ref: '#/components/parameters/ZoneID'
@@ -2922,7 +2924,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/NetGW'
-        description: NetGW payload
+        description: NetGW payload.
         required: true
       responses:
         "201":
@@ -2930,7 +2932,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NetGW'
-          description: Returns the newly created network gateway object.
+          description: Returns the newly created Iris network gateway object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -2943,13 +2945,15 @@ paths:
           $ref: '#/components/responses/Conflict'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - zone
       - netgw
-  /zone/{zoneId}/netgws:
+  /zone/{ zoneId }/netgws:
     get:
-      description: Returns the IDs of the hosts existing in the zone.
-      operationId: GetZoneNetGWs
+      description: Returns the IDs of Iris network gateway objects.
+      operationId: ListZoneNetGWs
       parameters:
       - $ref: '#/components/parameters/ZoneID'
       responses:
@@ -2958,7 +2962,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of network gateway IDs.
+          description: Returns an array of Iris network gateway IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -2970,11 +2974,11 @@ paths:
       - netgw
     parameters:
     - $ref: '#/components/parameters/ZoneID'
-  /zone/{zoneId}/host:
+  /zone/{ zoneId }/host:
     parameters:
     - $ref: '#/components/parameters/ZoneID'
     post:
-      description: Creates a new host.
+      description: Creates a new computing host.
       operationId: CreateHost
       parameters:
       - $ref: '#/components/parameters/ZoneID'
@@ -2983,7 +2987,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Host'
-        description: Host payload
+        description: Host payload.
         required: true
       responses:
         "201":
@@ -2991,7 +2995,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Host'
-          description: Returns the newly created host object.
+          description: Returns the newly created computing host object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -3004,13 +3008,15 @@ paths:
           $ref: '#/components/responses/Conflict'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - zone
       - host
   /zone/{zoneId}/hosts:
     get:
-      description: Returns the IDs of the hosts existing in the zone.
-      operationId: GetZoneHosts
+      description: Returns the IDs of computing host objects.
+      operationId: ListZoneHosts
       parameters:
       - $ref: '#/components/parameters/ZoneID'
       responses:
@@ -3019,7 +3025,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of network gateway IDs.
+          description: Returns an array of computing host IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -3031,13 +3037,13 @@ paths:
       - host
     parameters:
     - $ref: '#/components/parameters/ZoneID'
-  /zone/{zoneId}/pool:
+  /zone/{ zoneId }/pool:
     parameters:
     - $ref: '#/components/parameters/ZoneID'
     - $ref: '#/components/parameters/OptionalQueryHostID'
     post:
       description: Creates a new storage pool.
-      operationId: CreatePool
+      operationId: CreateStoragePool
       parameters:
       - $ref: '#/components/parameters/ZoneID'
       - $ref: '#/components/parameters/OptionalQueryHostID'
@@ -3046,7 +3052,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/StoragePool'
-        description: Pool payload
+        description: StoragePool payload.
         required: true
       responses:
         "201":
@@ -3067,24 +3073,24 @@ paths:
           $ref: '#/components/responses/Conflict'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - zone
       - pool
-  /zone/{zoneId}/pool/{poolId}/default:
+  /zone/{ zoneId }/pool/{ poolId }/default:
     parameters:
     - $ref: '#/components/parameters/ZoneID'
     - $ref: '#/components/parameters/PoolID'
-    put:
-      description: Set a zone's default storage pool.
-      operationId: UpdateZoneDefaultPool
+    patch:
+      description: Performs a availability zone setting of default storage pool.
+      operationId: SetZoneDefaultStoragePool
       parameters:
       - $ref: '#/components/parameters/ZoneID'
       - $ref: '#/components/parameters/PoolID'
       responses:
         "200":
-          description: Pool has been set as default one.
-        "400":
-          $ref: '#/components/responses/BadRequest'
+          description: The availability zone setting of default storage pool is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -3096,10 +3102,10 @@ paths:
       tags:
       - zone
       - pool
-  /zone/{zoneId}/pools:
+  /zone/{ zoneId }/pools:
     get:
-      description: Returns the IDs of the pools existing in the zone.
-      operationId: GetZonePools
+      description: Returns the IDs of storage pool objects.
+      operationId: ListZoneStoragePools
       parameters:
       - $ref: '#/components/parameters/ZoneID'
       responses:
@@ -3120,10 +3126,10 @@ paths:
       - pool
     parameters:
     - $ref: '#/components/parameters/ZoneID'
-  /zone/{zoneId}/nfs:
+  /zone/{ zoneId }/nfs:
     get:
-      description: Returns the IDs of the NFS storages existing in the zone.
-      operationId: GetZoneNfsStorages
+      description: Returns the IDs of NFS storage objects.
+      operationId: ListZoneStorageNFSs
       parameters:
       - $ref: '#/components/parameters/ZoneID'
       responses:
@@ -3146,7 +3152,7 @@ paths:
     - $ref: '#/components/parameters/ZoneID'
     post:
       description: Creates a new NFS storage.
-      operationId: CreateNfsStorage
+      operationId: CreateStorageNFS
       parameters:
       - $ref: '#/components/parameters/ZoneID'
       requestBody:
@@ -3154,7 +3160,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/StorageNFS'
-        description: NFS payload
+        description: StorageNFS payload.
         required: true
       responses:
         "201":
@@ -3175,24 +3181,24 @@ paths:
           $ref: '#/components/responses/Conflict'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - zone
       - nfs
-  /zone/{zoneId}/nfs/{nfsId}/default:
+  /zone/{ zoneId }/nfs/{ nfsId }/default:
     parameters:
     - $ref: '#/components/parameters/ZoneID'
     - $ref: '#/components/parameters/NfsID'
-    put:
-      description: Set a zone's default NFS storage.
-      operationId: UpdateZoneDefaultNfsStorage
+    patch:
+      description: Performs a availability zone setting of default NFS storage.
+      operationId: SetZoneDefaultStorageNFS
       parameters:
       - $ref: '#/components/parameters/ZoneID'
       - $ref: '#/components/parameters/NfsID'
       responses:
         "200":
-          description: NFS has been set as default one.
-        "400":
-          $ref: '#/components/responses/BadRequest'
+          description: The availability zone setting of default NFS storage is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -3204,7 +3210,7 @@ paths:
       tags:
       - zone
       - nfs
-  /zone/{zoneId}/vnet:
+  /zone/{ zoneId }/vnet:
     parameters:
     - $ref: '#/components/parameters/ZoneID'
     post:
@@ -3217,7 +3223,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/VNet'
-        description: VNet payload
+        description: VNet payload.
         required: true
       responses:
         "201":
@@ -3238,13 +3244,15 @@ paths:
           $ref: '#/components/responses/Conflict'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - zone
       - vnet
-  /zone/{zoneId}/vnets:
+  /zone/{ zoneId }/vnets:
     get:
-      description: Returns the IDs of the virtual networks existing in the zone.
-      operationId: GetZoneVNets
+      description: Returns the IDs of virtual network objects.
+      operationId: ListZoneVNets
       parameters:
       - $ref: '#/components/parameters/ZoneID'
       responses:
@@ -3489,7 +3497,7 @@ components:
         type: string
       style: simple
     ZoneID:
-      description: The ID of the zone.
+      description: The ID of the availability zone.
       explode: false
       in: path
       name: zoneId
@@ -4586,19 +4594,20 @@ components:
       - size
       - type
     Zone:
+      description: A availability zone.
       example:
         name: name
         description: description
         id: id
       properties:
         id:
-          description: The zone ID (auto-generated).
+          description: The availability zone ID (auto-generated).
           type: string
         name:
-          description: The zone name.
+          description: The availability zone name.
           type: string
         description:
-          description: The zone description.
+          description: The availability zone description.
           type: string
       required:
       - name

@@ -4,34 +4,34 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createHost**](ZoneApi.md#createHost) | **POST** /zone/{zoneId}/host |  |
-| [**createNetGW**](ZoneApi.md#createNetGW) | **POST** /zone/{zoneId}/netgw |  |
-| [**createNfsStorage**](ZoneApi.md#createNfsStorage) | **POST** /zone/{zoneId}/nfs |  |
-| [**createPool**](ZoneApi.md#createPool) | **POST** /zone/{zoneId}/pool |  |
+| [**createHost**](ZoneApi.md#createHost) | **POST** /zone/{ zoneId }/host |  |
+| [**createNetGW**](ZoneApi.md#createNetGW) | **POST** /zone/{ zoneId }/netgw |  |
 | [**createProjectZoneInstance**](ZoneApi.md#createProjectZoneInstance) | **POST** /project/{projectId}/zone/{zoneId}/instance |  |
 | [**createProjectZoneKce**](ZoneApi.md#createProjectZoneKce) | **POST** /project/{projectId}/zone/{zoneId}/kce |  |
 | [**createProjectZoneKfs**](ZoneApi.md#createProjectZoneKfs) | **POST** /project/{projectId}/zone/{zoneId}/kfs |  |
 | [**createProjectZoneKgw**](ZoneApi.md#createProjectZoneKgw) | **POST** /project/{projectId}/zone/{zoneId}/kgw |  |
 | [**createProjectZoneVolume**](ZoneApi.md#createProjectZoneVolume) | **POST** /project/{projectId}/zone/{zoneId}/volume |  |
-| [**createVNet**](ZoneApi.md#createVNet) | **POST** /zone/{zoneId}/vnet |  |
+| [**createStorageNFS**](ZoneApi.md#createStorageNFS) | **POST** /zone/{ zoneId }/nfs |  |
+| [**createStoragePool**](ZoneApi.md#createStoragePool) | **POST** /zone/{ zoneId }/pool |  |
+| [**createVNet**](ZoneApi.md#createVNet) | **POST** /zone/{ zoneId }/vnet |  |
 | [**createZone**](ZoneApi.md#createZone) | **POST** /region/{ regionId }/zone |  |
-| [**deleteZone**](ZoneApi.md#deleteZone) | **DELETE** /zone/{zoneId} |  |
-| [**getAllZones**](ZoneApi.md#getAllZones) | **GET** /zone |  |
+| [**deleteZone**](ZoneApi.md#deleteZone) | **DELETE** /zone/{ zoneId } |  |
 | [**getProjectZoneInstances**](ZoneApi.md#getProjectZoneInstances) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
 | [**getProjectZoneKCEs**](ZoneApi.md#getProjectZoneKCEs) | **GET** /project/{projectId}/zone/{zoneId}/kces |  |
 | [**getProjectZoneKGWs**](ZoneApi.md#getProjectZoneKGWs) | **GET** /project/{projectId}/zone/{zoneId}/kgws |  |
 | [**getProjectZoneKfs**](ZoneApi.md#getProjectZoneKfs) | **GET** /project/{projectId}/zone/{zoneId}/kfs |  |
 | [**getProjectZoneVolumes**](ZoneApi.md#getProjectZoneVolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes |  |
-| [**getZone**](ZoneApi.md#getZone) | **GET** /zone/{zoneId} |  |
-| [**getZoneHosts**](ZoneApi.md#getZoneHosts) | **GET** /zone/{zoneId}/hosts |  |
-| [**getZoneNetGWs**](ZoneApi.md#getZoneNetGWs) | **GET** /zone/{zoneId}/netgws |  |
-| [**getZoneNfsStorages**](ZoneApi.md#getZoneNfsStorages) | **GET** /zone/{zoneId}/nfs |  |
-| [**getZonePools**](ZoneApi.md#getZonePools) | **GET** /zone/{zoneId}/pools |  |
-| [**getZoneVNets**](ZoneApi.md#getZoneVNets) | **GET** /zone/{zoneId}/vnets |  |
 | [**listRegionZones**](ZoneApi.md#listRegionZones) | **GET** /region/{ regionId }/zones |  |
-| [**updateZone**](ZoneApi.md#updateZone) | **PUT** /zone/{zoneId} |  |
-| [**updateZoneDefaultNfsStorage**](ZoneApi.md#updateZoneDefaultNfsStorage) | **PUT** /zone/{zoneId}/nfs/{nfsId}/default |  |
-| [**updateZoneDefaultPool**](ZoneApi.md#updateZoneDefaultPool) | **PUT** /zone/{zoneId}/pool/{poolId}/default |  |
+| [**listZoneHosts**](ZoneApi.md#listZoneHosts) | **GET** /zone/{zoneId}/hosts |  |
+| [**listZoneNetGWs**](ZoneApi.md#listZoneNetGWs) | **GET** /zone/{ zoneId }/netgws |  |
+| [**listZoneStorageNFSs**](ZoneApi.md#listZoneStorageNFSs) | **GET** /zone/{ zoneId }/nfs |  |
+| [**listZoneStoragePools**](ZoneApi.md#listZoneStoragePools) | **GET** /zone/{ zoneId }/pools |  |
+| [**listZoneVNets**](ZoneApi.md#listZoneVNets) | **GET** /zone/{ zoneId }/vnets |  |
+| [**listZones**](ZoneApi.md#listZones) | **GET** /zone |  |
+| [**readZone**](ZoneApi.md#readZone) | **GET** /zone/{ zoneId } |  |
+| [**setZoneDefaultStorageNFS**](ZoneApi.md#setZoneDefaultStorageNFS) | **PATCH** /zone/{ zoneId }/nfs/{ nfsId }/default |  |
+| [**setZoneDefaultStoragePool**](ZoneApi.md#setZoneDefaultStoragePool) | **PATCH** /zone/{ zoneId }/pool/{ poolId }/default |  |
+| [**updateZone**](ZoneApi.md#updateZone) | **PUT** /zone/{ zoneId } |  |
 
 
 <a name="createHost"></a>
@@ -40,14 +40,14 @@ All URIs are relative to */api/v1*
 
 
 
-    Creates a new host.
+    Creates a new computing host.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
-| **Host** | [**Host**](../Models/Host.md)| Host payload | |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **Host** | [**Host**](../Models/Host.md)| Host payload. | |
 
 ### Return type
 
@@ -68,75 +68,18 @@ All URIs are relative to */api/v1*
 
 
 
-    Creates a new network gateway.
+    Creates a new Iris network gateway.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
-| **NetGW** | [**NetGW**](../Models/NetGW.md)| NetGW payload | |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **NetGW** | [**NetGW**](../Models/NetGW.md)| NetGW payload. | |
 
 ### Return type
 
 [**NetGW**](../Models/NetGW.md)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-<a name="createNfsStorage"></a>
-# **createNfsStorage**
-> StorageNFS createNfsStorage(zoneId, StorageNFS)
-
-
-
-    Creates a new NFS storage.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
-| **StorageNFS** | [**StorageNFS**](../Models/StorageNFS.md)| NFS payload | |
-
-### Return type
-
-[**StorageNFS**](../Models/StorageNFS.md)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-<a name="createPool"></a>
-# **createPool**
-> StoragePool createPool(zoneId, StoragePool, hostId)
-
-
-
-    Creates a new storage pool.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
-| **StoragePool** | [**StoragePool**](../Models/StoragePool.md)| Pool payload | |
-| **hostId** | **String**| The ID of the computing host (useless for RBD pools, mandatory for local ones). | [optional] [default to null] |
-
-### Return type
-
-[**StoragePool**](../Models/StoragePool.md)
 
 ### Authorization
 
@@ -160,7 +103,7 @@ All URIs are relative to */api/v1*
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **Instance** | [**Instance**](../Models/Instance.md)| Instance payload | |
 | **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 
@@ -190,7 +133,7 @@ All URIs are relative to */api/v1*
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **KCE** | [**KCE**](../Models/KCE.md)| KCE payload | |
 | **poolId** | **String**| Storage pool ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **templateId** | **String**| Template to clone the storage volume from (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
@@ -223,7 +166,7 @@ All URIs are relative to */api/v1*
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **KFS** | [**KFS**](../Models/KFS.md)| KFS payload | |
 | **nfsId** | **String**| NFS storage ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
@@ -254,7 +197,7 @@ All URIs are relative to */api/v1*
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **KGW** | [**KGW**](../Models/KGW.md)| KGW payload | |
 
 ### Return type
@@ -283,7 +226,7 @@ All URIs are relative to */api/v1*
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **Volume** | [**Volume**](../Models/Volume.md)| Volume payload | |
 | **poolId** | **String**| Storage pool ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **templateId** | **String**| Template to clone the storage volume from (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
@@ -291,6 +234,63 @@ All URIs are relative to */api/v1*
 ### Return type
 
 [**Volume**](../Models/Volume.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+<a name="createStorageNFS"></a>
+# **createStorageNFS**
+> StorageNFS createStorageNFS(zoneId, StorageNFS)
+
+
+
+    Creates a new NFS storage.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **StorageNFS** | [**StorageNFS**](../Models/StorageNFS.md)| StorageNFS payload. | |
+
+### Return type
+
+[**StorageNFS**](../Models/StorageNFS.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+<a name="createStoragePool"></a>
+# **createStoragePool**
+> StoragePool createStoragePool(zoneId, StoragePool, hostId)
+
+
+
+    Creates a new storage pool.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **StoragePool** | [**StoragePool**](../Models/StoragePool.md)| StoragePool payload. | |
+| **hostId** | **String**| The ID of the computing host (useless for RBD pools, mandatory for local ones). | [optional] [default to null] |
+
+### Return type
+
+[**StoragePool**](../Models/StoragePool.md)
 
 ### Authorization
 
@@ -313,8 +313,8 @@ All URIs are relative to */api/v1*
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
-| **VNet** | [**VNet**](../Models/VNet.md)| VNet payload | |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **VNet** | [**VNet**](../Models/VNet.md)| VNet payload. | |
 
 ### Return type
 
@@ -363,41 +363,17 @@ All URIs are relative to */api/v1*
 
 
 
-    Deletes an existing zone.
+    Deletes an existing availability zone.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getAllZones"></a>
-# **getAllZones**
-> List getAllZones()
-
-
-
-    Returns the IDs of registered zones.
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-**List**
 
 ### Authorization
 
@@ -421,7 +397,7 @@ This endpoint does not need any parameter.
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
 
@@ -449,7 +425,7 @@ This endpoint does not need any parameter.
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
 
@@ -477,7 +453,7 @@ This endpoint does not need any parameter.
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
 
@@ -505,7 +481,7 @@ This endpoint does not need any parameter.
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **nfsId** | **String**| NFS storage ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 
@@ -535,169 +511,7 @@ This endpoint does not need any parameter.
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getZone"></a>
-# **getZone**
-> Zone getZone(zoneId)
-
-
-
-    Returns a description of the zone
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
-
-### Return type
-
-[**Zone**](../Models/Zone.md)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getZoneHosts"></a>
-# **getZoneHosts**
-> List getZoneHosts(zoneId)
-
-
-
-    Returns the IDs of the hosts existing in the zone.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getZoneNetGWs"></a>
-# **getZoneNetGWs**
-> List getZoneNetGWs(zoneId)
-
-
-
-    Returns the IDs of the hosts existing in the zone.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getZoneNfsStorages"></a>
-# **getZoneNfsStorages**
-> List getZoneNfsStorages(zoneId)
-
-
-
-    Returns the IDs of the NFS storages existing in the zone.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getZonePools"></a>
-# **getZonePools**
-> List getZonePools(zoneId)
-
-
-
-    Returns the IDs of the pools existing in the zone.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getZoneVNets"></a>
-# **getZoneVNets**
-> List getZoneVNets(zoneId)
-
-
-
-    Returns the IDs of the virtual networks existing in the zone.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
 
@@ -739,20 +553,178 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="updateZone"></a>
-# **updateZone**
-> Zone updateZone(zoneId, Zone)
+<a name="listZoneHosts"></a>
+# **listZoneHosts**
+> List listZoneHosts(zoneId)
 
 
 
-    Updates a zone configuration.
+    Returns the IDs of computing host objects.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
-| **Zone** | [**Zone**](../Models/Zone.md)| Zone payload | |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listZoneNetGWs"></a>
+# **listZoneNetGWs**
+> List listZoneNetGWs(zoneId)
+
+
+
+    Returns the IDs of Iris network gateway objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listZoneStorageNFSs"></a>
+# **listZoneStorageNFSs**
+> List listZoneStorageNFSs(zoneId)
+
+
+
+    Returns the IDs of NFS storage objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listZoneStoragePools"></a>
+# **listZoneStoragePools**
+> List listZoneStoragePools(zoneId)
+
+
+
+    Returns the IDs of storage pool objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listZoneVNets"></a>
+# **listZoneVNets**
+> List listZoneVNets(zoneId)
+
+
+
+    Returns the IDs of virtual network objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listZones"></a>
+# **listZones**
+> List listZones()
+
+
+
+    Returns the IDs of availability zone objects.
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="readZone"></a>
+# **readZone**
+> Zone readZone(zoneId)
+
+
+
+    Returns a availability zone.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
 
@@ -764,22 +736,22 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="updateZoneDefaultNfsStorage"></a>
-# **updateZoneDefaultNfsStorage**
-> updateZoneDefaultNfsStorage(zoneId, nfsId)
+<a name="setZoneDefaultStorageNFS"></a>
+# **setZoneDefaultStorageNFS**
+> setZoneDefaultStorageNFS(zoneId, nfsId)
 
 
 
-    Set a zone&#39;s default NFS storage.
+    Performs a availability zone setting of default NFS storage.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **nfsId** | **String**| The ID of the NFS storage. | [default to null] |
 
 ### Return type
@@ -795,19 +767,19 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="updateZoneDefaultPool"></a>
-# **updateZoneDefaultPool**
-> updateZoneDefaultPool(zoneId, poolId)
+<a name="setZoneDefaultStoragePool"></a>
+# **setZoneDefaultStoragePool**
+> setZoneDefaultStoragePool(zoneId, poolId)
 
 
 
-    Set a zone&#39;s default storage pool.
+    Performs a availability zone setting of default storage pool.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **poolId** | **String**| The ID of the storage pool. | [default to null] |
 
 ### Return type
@@ -821,5 +793,33 @@ null (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="updateZone"></a>
+# **updateZone**
+> Zone updateZone(zoneId, Zone)
+
+
+
+    Updates a availability zone configuration.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **Zone** | [**Zone**](../Models/Zone.md)| Zone payload. | |
+
+### Return type
+
+[**Zone**](../Models/Zone.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 

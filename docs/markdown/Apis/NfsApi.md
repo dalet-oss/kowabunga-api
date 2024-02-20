@@ -4,19 +4,19 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createNfsStorage**](NfsApi.md#createNfsStorage) | **POST** /zone/{zoneId}/nfs |  |
+| [**createStorageNFS**](NfsApi.md#createStorageNFS) | **POST** /zone/{ zoneId }/nfs |  |
 | [**deleteStorageNFS**](NfsApi.md#deleteStorageNFS) | **DELETE** /nfs/{ nfsId } |  |
-| [**getZoneNfsStorages**](NfsApi.md#getZoneNfsStorages) | **GET** /zone/{zoneId}/nfs |  |
 | [**listStorageNFSKFSs**](NfsApi.md#listStorageNFSKFSs) | **GET** /nfs/{ nfsId }/kfs |  |
 | [**listStorageNFSs**](NfsApi.md#listStorageNFSs) | **GET** /nfs |  |
+| [**listZoneStorageNFSs**](NfsApi.md#listZoneStorageNFSs) | **GET** /zone/{ zoneId }/nfs |  |
 | [**readStorageNFS**](NfsApi.md#readStorageNFS) | **GET** /nfs/{ nfsId } |  |
+| [**setZoneDefaultStorageNFS**](NfsApi.md#setZoneDefaultStorageNFS) | **PATCH** /zone/{ zoneId }/nfs/{ nfsId }/default |  |
 | [**updateStorageNFS**](NfsApi.md#updateStorageNFS) | **PUT** /nfs/{ nfsId } |  |
-| [**updateZoneDefaultNfsStorage**](NfsApi.md#updateZoneDefaultNfsStorage) | **PUT** /zone/{zoneId}/nfs/{nfsId}/default |  |
 
 
-<a name="createNfsStorage"></a>
-# **createNfsStorage**
-> StorageNFS createNfsStorage(zoneId, StorageNFS)
+<a name="createStorageNFS"></a>
+# **createStorageNFS**
+> StorageNFS createStorageNFS(zoneId, StorageNFS)
 
 
 
@@ -26,8 +26,8 @@ All URIs are relative to */api/v1*
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
-| **StorageNFS** | [**StorageNFS**](../Models/StorageNFS.md)| NFS payload | |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **StorageNFS** | [**StorageNFS**](../Models/StorageNFS.md)| StorageNFS payload. | |
 
 ### Return type
 
@@ -59,33 +59,6 @@ All URIs are relative to */api/v1*
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getZoneNfsStorages"></a>
-# **getZoneNfsStorages**
-> List getZoneNfsStorages(zoneId)
-
-
-
-    Returns the IDs of the NFS storages existing in the zone.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
-
-### Return type
-
-**List**
 
 ### Authorization
 
@@ -147,6 +120,33 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+<a name="listZoneStorageNFSs"></a>
+# **listZoneStorageNFSs**
+> List listZoneStorageNFSs(zoneId)
+
+
+
+    Returns the IDs of NFS storage objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 <a name="readStorageNFS"></a>
 # **readStorageNFS**
 > StorageNFS readStorageNFS(nfsId)
@@ -164,6 +164,34 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**StorageNFS**](../Models/StorageNFS.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="setZoneDefaultStorageNFS"></a>
+# **setZoneDefaultStorageNFS**
+> setZoneDefaultStorageNFS(zoneId, nfsId)
+
+
+
+    Performs a availability zone setting of default NFS storage.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **nfsId** | **String**| The ID of the NFS storage. | [default to null] |
+
+### Return type
+
+null (empty response body)
 
 ### Authorization
 
@@ -200,33 +228,5 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
-
-<a name="updateZoneDefaultNfsStorage"></a>
-# **updateZoneDefaultNfsStorage**
-> updateZoneDefaultNfsStorage(zoneId, nfsId)
-
-
-
-    Set a zone&#39;s default NFS storage.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the zone. | [default to null] |
-| **nfsId** | **String**| The ID of the NFS storage. | [default to null] |
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
 - **Accept**: application/json
 
