@@ -6,9 +6,9 @@ All URIs are relative to */api/v1*
 |------------- | ------------- | -------------|
 | [**createProjectZoneKfs**](KfsApi.md#createProjectZoneKfs) | **POST** /project/{projectId}/zone/{zoneId}/kfs |  |
 | [**deleteKFS**](KfsApi.md#deleteKFS) | **DELETE** /kfs/{ kfsId } |  |
-| [**getNfsKfs**](KfsApi.md#getNfsKfs) | **GET** /nfs/{nfsId}/kfs |  |
 | [**getProjectZoneKfs**](KfsApi.md#getProjectZoneKfs) | **GET** /project/{projectId}/zone/{zoneId}/kfs |  |
 | [**listKFSs**](KfsApi.md#listKFSs) | **GET** /kfs |  |
+| [**listStorageNFSKFSs**](KfsApi.md#listStorageNFSKFSs) | **GET** /nfs/{ nfsId }/kfs |  |
 | [**readKFS**](KfsApi.md#readKFS) | **GET** /kfs/{ kfsId } |  |
 | [**updateKFS**](KfsApi.md#updateKFS) | **PUT** /kfs/{ kfsId } |  |
 
@@ -71,33 +71,6 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getNfsKfs"></a>
-# **getNfsKfs**
-> List getNfsKfs(nfsId)
-
-
-
-    Returns the IDs of the KFS volumes existing in the NFS storage.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **nfsId** | **String**| The ID of the NFS storage. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
 <a name="getProjectZoneKfs"></a>
 # **getProjectZoneKfs**
 > List getProjectZoneKfs(projectId, zoneId, nfsId, notify)
@@ -138,6 +111,33 @@ null (empty response body)
 
 ### Parameters
 This endpoint does not need any parameter.
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listStorageNFSKFSs"></a>
+# **listStorageNFSKFSs**
+> List listStorageNFSKFSs(nfsId)
+
+
+
+    Returns the IDs of KFS (Kowabunga File System) objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **nfsId** | **String**| The ID of the NFS storage. | [default to null] |
 
 ### Return type
 

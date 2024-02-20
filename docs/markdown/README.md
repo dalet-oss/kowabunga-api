@@ -53,9 +53,9 @@ All URIs are relative to */api/v1*
 *KceApi* | [**updateKCE**](Apis/KceApi.md#updatekce) | **PUT** /kce/{ kceId } | Updates a KCE (Kowabunga Compute Engine) configuration. |
 | *KfsApi* | [**createProjectZoneKfs**](Apis/KfsApi.md#createprojectzonekfs) | **POST** /project/{projectId}/zone/{zoneId}/kfs | Creates a new KFS storage volume in specified zone. |
 *KfsApi* | [**deleteKFS**](Apis/KfsApi.md#deletekfs) | **DELETE** /kfs/{ kfsId } | Deletes an existing KFS (Kowabunga File System). |
-*KfsApi* | [**getNfsKfs**](Apis/KfsApi.md#getnfskfs) | **GET** /nfs/{nfsId}/kfs | Returns the IDs of the KFS volumes existing in the NFS storage. |
 *KfsApi* | [**getProjectZoneKfs**](Apis/KfsApi.md#getprojectzonekfs) | **GET** /project/{projectId}/zone/{zoneId}/kfs | Returns the IDs of the KFS storage volumes existing in the project in the specified zone. |
 *KfsApi* | [**listKFSs**](Apis/KfsApi.md#listkfss) | **GET** /kfs | Returns the IDs of KFS (Kowabunga File System) objects. |
+*KfsApi* | [**listStorageNFSKFSs**](Apis/KfsApi.md#liststoragenfskfss) | **GET** /nfs/{ nfsId }/kfs | Returns the IDs of KFS (Kowabunga File System) objects. |
 *KfsApi* | [**readKFS**](Apis/KfsApi.md#readkfs) | **GET** /kfs/{ kfsId } | Returns a KFS (Kowabunga File System). |
 *KfsApi* | [**updateKFS**](Apis/KfsApi.md#updatekfs) | **PUT** /kfs/{ kfsId } | Updates a KFS (Kowabunga File System) configuration. |
 | *KgwApi* | [**createProjectZoneKgw**](Apis/KgwApi.md#createprojectzonekgw) | **POST** /project/{projectId}/zone/{zoneId}/kgw | Creates a new KGW in the specified zone. |
@@ -71,12 +71,12 @@ All URIs are relative to */api/v1*
 *NetgwApi* | [**readNetGW**](Apis/NetgwApi.md#readnetgw) | **GET** /netgw/{ netgwId } | Returns a Iris network gateway. |
 *NetgwApi* | [**updateNetGW**](Apis/NetgwApi.md#updatenetgw) | **PUT** /netgw/{ netgwId } | Updates a Iris network gateway configuration. |
 | *NfsApi* | [**createNfsStorage**](Apis/NfsApi.md#createnfsstorage) | **POST** /zone/{zoneId}/nfs | Creates a new NFS storage. |
-*NfsApi* | [**deleteNfsStorage**](Apis/NfsApi.md#deletenfsstorage) | **DELETE** /nfs/{nfsId} | Deletes an existing NFS storage. |
-*NfsApi* | [**getAllNfsStorages**](Apis/NfsApi.md#getallnfsstorages) | **GET** /nfs | Returns the IDs of registered NFS storages. |
-*NfsApi* | [**getNfsKfs**](Apis/NfsApi.md#getnfskfs) | **GET** /nfs/{nfsId}/kfs | Returns the IDs of the KFS volumes existing in the NFS storage. |
-*NfsApi* | [**getNfsStorage**](Apis/NfsApi.md#getnfsstorage) | **GET** /nfs/{nfsId} | Returns a description of the NFS storage. |
+*NfsApi* | [**deleteStorageNFS**](Apis/NfsApi.md#deletestoragenfs) | **DELETE** /nfs/{ nfsId } | Deletes an existing NFS storage. |
 *NfsApi* | [**getZoneNfsStorages**](Apis/NfsApi.md#getzonenfsstorages) | **GET** /zone/{zoneId}/nfs | Returns the IDs of the NFS storages existing in the zone. |
-*NfsApi* | [**updateNfsStorage**](Apis/NfsApi.md#updatenfsstorage) | **PUT** /nfs/{nfsId} | Updates an NFS storage configuration. |
+*NfsApi* | [**listStorageNFSKFSs**](Apis/NfsApi.md#liststoragenfskfss) | **GET** /nfs/{ nfsId }/kfs | Returns the IDs of KFS (Kowabunga File System) objects. |
+*NfsApi* | [**listStorageNFSs**](Apis/NfsApi.md#liststoragenfss) | **GET** /nfs | Returns the IDs of NFS storage objects. |
+*NfsApi* | [**readStorageNFS**](Apis/NfsApi.md#readstoragenfs) | **GET** /nfs/{ nfsId } | Returns a NFS storage. |
+*NfsApi* | [**updateStorageNFS**](Apis/NfsApi.md#updatestoragenfs) | **PUT** /nfs/{ nfsId } | Updates a NFS storage configuration. |
 *NfsApi* | [**updateZoneDefaultNfsStorage**](Apis/NfsApi.md#updatezonedefaultnfsstorage) | **PUT** /zone/{zoneId}/nfs/{nfsId}/default | Set a zone's default NFS storage. |
 | *PoolApi* | [**createPool**](Apis/PoolApi.md#createpool) | **POST** /zone/{zoneId}/pool | Creates a new storage pool. |
 *PoolApi* | [**createTemplate**](Apis/PoolApi.md#createtemplate) | **POST** /pool/{poolId}/template | Creates a new volume template. |

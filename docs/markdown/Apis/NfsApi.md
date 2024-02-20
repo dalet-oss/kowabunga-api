@@ -5,12 +5,12 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createNfsStorage**](NfsApi.md#createNfsStorage) | **POST** /zone/{zoneId}/nfs |  |
-| [**deleteNfsStorage**](NfsApi.md#deleteNfsStorage) | **DELETE** /nfs/{nfsId} |  |
-| [**getAllNfsStorages**](NfsApi.md#getAllNfsStorages) | **GET** /nfs |  |
-| [**getNfsKfs**](NfsApi.md#getNfsKfs) | **GET** /nfs/{nfsId}/kfs |  |
-| [**getNfsStorage**](NfsApi.md#getNfsStorage) | **GET** /nfs/{nfsId} |  |
+| [**deleteStorageNFS**](NfsApi.md#deleteStorageNFS) | **DELETE** /nfs/{ nfsId } |  |
 | [**getZoneNfsStorages**](NfsApi.md#getZoneNfsStorages) | **GET** /zone/{zoneId}/nfs |  |
-| [**updateNfsStorage**](NfsApi.md#updateNfsStorage) | **PUT** /nfs/{nfsId} |  |
+| [**listStorageNFSKFSs**](NfsApi.md#listStorageNFSKFSs) | **GET** /nfs/{ nfsId }/kfs |  |
+| [**listStorageNFSs**](NfsApi.md#listStorageNFSs) | **GET** /nfs |  |
+| [**readStorageNFS**](NfsApi.md#readStorageNFS) | **GET** /nfs/{ nfsId } |  |
+| [**updateStorageNFS**](NfsApi.md#updateStorageNFS) | **PUT** /nfs/{ nfsId } |  |
 | [**updateZoneDefaultNfsStorage**](NfsApi.md#updateZoneDefaultNfsStorage) | **PUT** /zone/{zoneId}/nfs/{nfsId}/default |  |
 
 
@@ -42,9 +42,9 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="deleteNfsStorage"></a>
-# **deleteNfsStorage**
-> deleteNfsStorage(nfsId)
+<a name="deleteStorageNFS"></a>
+# **deleteStorageNFS**
+> deleteStorageNFS(nfsId)
 
 
 
@@ -59,84 +59,6 @@ All URIs are relative to */api/v1*
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getAllNfsStorages"></a>
-# **getAllNfsStorages**
-> List getAllNfsStorages()
-
-
-
-    Returns the IDs of registered NFS storages.
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getNfsKfs"></a>
-# **getNfsKfs**
-> List getNfsKfs(nfsId)
-
-
-
-    Returns the IDs of the KFS volumes existing in the NFS storage.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **nfsId** | **String**| The ID of the NFS storage. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getNfsStorage"></a>
-# **getNfsStorage**
-> StorageNFS getNfsStorage(nfsId)
-
-
-
-    Returns a description of the NFS storage.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **nfsId** | **String**| The ID of the NFS storage. | [default to null] |
-
-### Return type
-
-[**StorageNFS**](../Models/StorageNFS.md)
 
 ### Authorization
 
@@ -174,20 +96,98 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="updateNfsStorage"></a>
-# **updateNfsStorage**
-> StorageNFS updateNfsStorage(nfsId, StorageNFS)
+<a name="listStorageNFSKFSs"></a>
+# **listStorageNFSKFSs**
+> List listStorageNFSKFSs(nfsId)
 
 
 
-    Updates an NFS storage configuration.
+    Returns the IDs of KFS (Kowabunga File System) objects.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **nfsId** | **String**| The ID of the NFS storage. | [default to null] |
-| **StorageNFS** | [**StorageNFS**](../Models/StorageNFS.md)| NFS storage payload | |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listStorageNFSs"></a>
+# **listStorageNFSs**
+> List listStorageNFSs()
+
+
+
+    Returns the IDs of NFS storage objects.
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="readStorageNFS"></a>
+# **readStorageNFS**
+> StorageNFS readStorageNFS(nfsId)
+
+
+
+    Returns a NFS storage.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **nfsId** | **String**| The ID of the NFS storage. | [default to null] |
+
+### Return type
+
+[**StorageNFS**](../Models/StorageNFS.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="updateStorageNFS"></a>
+# **updateStorageNFS**
+> StorageNFS updateStorageNFS(nfsId, StorageNFS)
+
+
+
+    Updates a NFS storage configuration.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **nfsId** | **String**| The ID of the NFS storage. | [default to null] |
+| **StorageNFS** | [**StorageNFS**](../Models/StorageNFS.md)| StorageNFS payload. | |
 
 ### Return type
 

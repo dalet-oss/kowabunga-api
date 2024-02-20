@@ -35,6 +35,8 @@ tags:
   name: netgw
 - description: Everything about region
   name: region
+- description: Everything about NFS storage
+  name: nfs
 - description: Everything about availability zone
   name: zone
 paths:
@@ -1963,25 +1965,25 @@ paths:
     - $ref: '#/components/parameters/RegionID'
   /nfs:
     get:
-      description: Returns the IDs of registered NFS storages.
-      operationId: GetAllNfsStorages
+      description: Returns the IDs of NFS storage objects.
+      operationId: ListStorageNFSs
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns the an array of NFS storage IDs.
+          description: Returns an array of NFS storage IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
           $ref: '#/components/responses/Forbidden'
       tags:
       - nfs
-  /nfs/{nfsId}:
+  /nfs/{ nfsId }:
     delete:
       description: Deletes an existing NFS storage.
-      operationId: DeleteNfsStorage
+      operationId: DeleteStorageNFS
       parameters:
       - $ref: '#/components/parameters/NfsID'
       responses:
@@ -2000,8 +2002,8 @@ paths:
       tags:
       - nfs
     get:
-      description: Returns a description of the NFS storage.
-      operationId: GetNfsStorage
+      description: Returns a NFS storage.
+      operationId: ReadStorageNFS
       parameters:
       - $ref: '#/components/parameters/NfsID'
       responses:
@@ -2022,8 +2024,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/NfsID'
     put:
-      description: Updates an NFS storage configuration.
-      operationId: UpdateNfsStorage
+      description: Updates a NFS storage configuration.
+      operationId: UpdateStorageNFS
       parameters:
       - $ref: '#/components/parameters/NfsID'
       requestBody:
@@ -2031,7 +2033,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/StorageNFS'
-        description: NFS storage payload
+        description: StorageNFS payload.
         required: true
       responses:
         "200":
@@ -2039,7 +2041,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/StorageNFS'
-          description: Updated NFS storage.
+          description: Returns the NFS storage object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -2050,12 +2052,14 @@ paths:
           $ref: '#/components/responses/NotFound'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - nfs
-  /nfs/{nfsId}/kfs:
+  /nfs/{ nfsId }/kfs:
     get:
-      description: Returns the IDs of the KFS volumes existing in the NFS storage.
-      operationId: GetNfsKfs
+      description: Returns the IDs of KFS (Kowabunga File System) objects.
+      operationId: ListStorageNFSKFSs
       parameters:
       - $ref: '#/components/parameters/NfsID'
       responses:
@@ -2064,7 +2068,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of KFS storage volume IDs.
+          description: Returns an array of KFS (Kowabunga File System) IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -4278,6 +4282,7 @@ components:
       required:
       - name
     StorageNFS:
+      description: A NFS storage.
       example:
         endpoint: endpoint
         port: 0
@@ -4303,7 +4308,7 @@ components:
           type: string
         fs:
           default: nfs
-          description: The underlying associated CephFS volume name.
+          description: The underlying associated Ceph volume name.
           type: string
         backends:
           description: List of NFS Ganesha API server IP addresses.

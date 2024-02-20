@@ -1,162 +1,24 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
 components:
   schemas:
-    StorageNFS:
-      type: object
-      required:
-        - name
-        - endpoint
-      properties:
-        id:
-          type: string
-          description: The NFS storage ID (auto-generated).
-        name:
-          type: string
-          description: The NFS storage name.
-        description:
-          type: string
-          description: The NFS storage description.
-        endpoint:
-          type: string
-          description: The associated NFS endpoint FQDN.
-        fs:
-          type: string
-          description: The underlying associated CephFS volume name.
-          default: 'nfs'
-        backends:
-          type: array
-          items:
-            type: string
-          description: List of NFS Ganesha API server IP addresses.
-        port:
-          type: integer
-          description: NFS Ganesha API server port (default 54934).
-          default: 54934
+{{ oas.SchemaBaseResource(resources.nfs, ['name', 'endpoint']) }}
+{{ oas.StringProperty('endpoint', 'The associated NFS endpoint FQDN') }}
+{{ oas.StringProperty('fs', 'The underlying associated Ceph volume name', default='nfs') }}
+{{ oas.StringArrayProperty('backends', 'List of NFS Ganesha API server IP addresses') }}
+{{ oas.IntProperty('port', 'NFS Ganesha API server port (default 54934)', default=54934) }}
+
   parameters:
-    NfsID:
-      name: nfsId
-      in: path
-      description: The ID of the NFS storage.
-      required: true
-      schema:
-        type: string
-    OptionalQueryNfsID:
-      name: nfsId
-      in: query
-      description: NFS storage ID (optional, zone's default if unspecified).
-      schema:
-        type: string
+{{ oas.PathParamID(resources.nfs) }}
+{{ oas.StringQueryParam(resources.nfs.paramSchema, resources.nfs.paramId, "NFS storage ID (optional, zone's default if unspecified)") }}
 
 paths:
   /nfs:
-    get:
-      tags:
-        - nfs
-      operationId: GetAllNfsStorages
-      description: Returns the IDs of registered NFS storages.
-      responses:
-        '200':
-          description: Returns the an array of NFS storage IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
+{{ oas.List(resources.nfs, [resources.nfs.tag]) }}
 
-  /nfs/{nfsId}:
-    parameters:
-      - $ref: '#/components/parameters/NfsID'
+  /nfs/{ {{ resources.nfs.paramId }} }:
+{{ oas.RUD(resources.nfs, [resources.nfs.tag], [resources.nfs.paramSchema]) }}
 
-    get:
-      tags:
-        - nfs
-      operationId: GetNfsStorage
-      description: Returns a description of the NFS storage.
-      responses:
-        '200':
-          description: Returns the NFS storage object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/StorageNFS'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-
-    put:
-      tags:
-        - nfs
-      operationId: UpdateNfsStorage
-      description: Updates an NFS storage configuration.
-      requestBody:
-        description: NFS storage payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/StorageNFS'
-        required: true
-      responses:
-        '200':
-          description: Updated NFS storage.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/StorageNFS'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-    delete:
-      tags:
-        - nfs
-      operationId: DeleteNfsStorage
-      description: Deletes an existing NFS storage.
-      responses:
-        '200':
-          description: The NFS storage has been successfully removed.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /nfs/{nfsId}/kfs:
-    parameters:
-      - $ref: '#/components/parameters/NfsID'
-
-    get:
-      tags:
-        - nfs
-        - kfs
-      operationId: GetNfsKfs
-      description: Returns the IDs of the KFS volumes existing in the NFS storage.
-      responses:
-        '200':
-          description: Returns an array of KFS storage volume IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+  /nfs/{ {{ resources.nfs.paramId }} }/kfs:
+{{ oas.Parameters([resources.nfs.paramSchema]) }}
+{{ oas.GetAll('List' + resources.nfs.schema + resources.kfs.schema + 's', resources.kfs.desc, [resources.nfs.tag, resources.kfs.tag], True) }}

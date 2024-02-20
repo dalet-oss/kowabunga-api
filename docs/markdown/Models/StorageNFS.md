@@ -7,7 +7,7 @@
 | **name** | **String** | The NFS storage name. | [default to null] |
 | **description** | **String** | The NFS storage description. | [optional] [default to null] |
 | **endpoint** | **String** | The associated NFS endpoint FQDN. | [default to null] |
-| **fs** | **String** | The underlying associated CephFS volume name. | [optional] [default to nfs] |
+| **fs** | **String** | The underlying associated Ceph volume name. | [optional] [default to nfs] |
 | **backends** | **List** | List of NFS Ganesha API server IP addresses. | [optional] [default to null] |
 | **port** | **Integer** | NFS Ganesha API server port (default 54934). | [optional] [default to 54934] |
 

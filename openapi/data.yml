@@ -85,7 +85,11 @@ resources:
     paramId: regionId
     paramSchema: RegionID
   nfs:
-    desc: NFS storages
+    tag: nfs
+    desc: NFS storage
+    schema: StorageNFS
+    paramId: nfsId
+    paramSchema: NfsID
   pool:
     desc: storage pools
   subnet:
