@@ -4,15 +4,15 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createSubnet**](VnetApi.md#createSubnet) | **POST** /vnet/{vnetId}/subnet |  |
+| [**createSubnet**](VnetApi.md#createSubnet) | **POST** /vnet/{ vnetId }/subnet |  |
 | [**createVNet**](VnetApi.md#createVNet) | **POST** /zone/{zoneId}/vnet |  |
-| [**deleteVNet**](VnetApi.md#deleteVNet) | **DELETE** /vnet/{vnetId} |  |
-| [**getAllVNets**](VnetApi.md#getAllVNets) | **GET** /vnet |  |
-| [**getVNet**](VnetApi.md#getVNet) | **GET** /vnet/{vnetId} |  |
-| [**getVNetSubnets**](VnetApi.md#getVNetSubnets) | **GET** /vnet/{vnetId}/subnets |  |
+| [**deleteVNet**](VnetApi.md#deleteVNet) | **DELETE** /vnet/{ vnetId } |  |
 | [**getZoneVNets**](VnetApi.md#getZoneVNets) | **GET** /zone/{zoneId}/vnets |  |
-| [**updateVNet**](VnetApi.md#updateVNet) | **PUT** /vnet/{vnetId} |  |
-| [**updateVNetDefaultSubnet**](VnetApi.md#updateVNetDefaultSubnet) | **PUT** /vnet/{vnetId}/subnet/{subnetId}/default |  |
+| [**listVNetSubnets**](VnetApi.md#listVNetSubnets) | **GET** /vnet/{ vnetId }/subnets |  |
+| [**listVNets**](VnetApi.md#listVNets) | **GET** /vnet |  |
+| [**readVNet**](VnetApi.md#readVNet) | **GET** /vnet/{ vnetId } |  |
+| [**setVNetDefaultSubnet**](VnetApi.md#setVNetDefaultSubnet) | **PATCH** /vnet/{ vnetId }/subnet/{ subnetId }/default |  |
+| [**updateVNet**](VnetApi.md#updateVNet) | **PUT** /vnet/{ vnetId } |  |
 
 
 <a name="createSubnet"></a>
@@ -21,14 +21,14 @@ All URIs are relative to */api/v1*
 
 
 
-    Creates a new subnet.
+    Creates a new network subnet.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **vnetId** | **String**| The ID of the virtual network. | [default to null] |
-| **Subnet** | [**Subnet**](../Models/Subnet.md)| Subnet payload | |
+| **Subnet** | [**Subnet**](../Models/Subnet.md)| Subnet payload. | |
 
 ### Return type
 
@@ -98,84 +98,6 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getAllVNets"></a>
-# **getAllVNets**
-> List getAllVNets()
-
-
-
-    Returns the IDs of virtual networks.
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getVNet"></a>
-# **getVNet**
-> VNet getVNet(vnetId)
-
-
-
-    Returns a description of the virtual network
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **vnetId** | **String**| The ID of the virtual network. | [default to null] |
-
-### Return type
-
-[**VNet**](../Models/VNet.md)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getVNetSubnets"></a>
-# **getVNetSubnets**
-> List getVNetSubnets(vnetId)
-
-
-
-    Returns the IDs of the subnets existing in the virtual network.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **vnetId** | **String**| The ID of the virtual network. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
 <a name="getZoneVNets"></a>
 # **getZoneVNets**
 > List getZoneVNets(zoneId)
@@ -203,20 +125,70 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="updateVNet"></a>
-# **updateVNet**
-> VNet updateVNet(vnetId, VNet)
+<a name="listVNetSubnets"></a>
+# **listVNetSubnets**
+> List listVNetSubnets(vnetId)
 
 
 
-    Updates a virtual network configuration.
+    Returns the IDs of network subnet objects.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **vnetId** | **String**| The ID of the virtual network. | [default to null] |
-| **VNet** | [**VNet**](../Models/VNet.md)| VNet payload | |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listVNets"></a>
+# **listVNets**
+> List listVNets()
+
+
+
+    Returns the IDs of virtual network objects.
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="readVNet"></a>
+# **readVNet**
+> VNet readVNet(vnetId)
+
+
+
+    Returns a virtual network.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **vnetId** | **String**| The ID of the virtual network. | [default to null] |
 
 ### Return type
 
@@ -228,16 +200,16 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="updateVNetDefaultSubnet"></a>
-# **updateVNetDefaultSubnet**
-> updateVNetDefaultSubnet(vnetId, subnetId)
+<a name="setVNetDefaultSubnet"></a>
+# **setVNetDefaultSubnet**
+> setVNetDefaultSubnet(vnetId, subnetId)
 
 
 
-    Set a virtual network default subnet.
+    Performs a virtual network setting of default network subnet.
 
 ### Parameters
 
@@ -257,5 +229,33 @@ null (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="updateVNet"></a>
+# **updateVNet**
+> VNet updateVNet(vnetId, VNet)
+
+
+
+    Updates a virtual network configuration.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **vnetId** | **String**| The ID of the virtual network. | [default to null] |
+| **VNet** | [**VNet**](../Models/VNet.md)| VNet payload. | |
+
+### Return type
+
+[**VNet**](../Models/VNet.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 

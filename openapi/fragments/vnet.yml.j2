@@ -1,211 +1,30 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
 components:
   schemas:
-    VNet:
-      type: object
-      required:
-        - name
-        - vlan
-        - interface
-      properties:
-        id:
-          type: string
-          description: The virtual network ID (auto-generated).
-        name:
-          type: string
-          description: The virtual network name.
-        description:
-          type: string
-          description: The virtual network description.
-        vlan:
-          type: integer
-          description: The VLAN identifier.
-        interface:
-          type: string
-          description: The libvirt's bridge network interface (brX).
-        private:
-          type: boolean
-          description: Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?
-          default: true
+{{ oas.SchemaBaseResource(resources.vnet, ['name', 'vlan', 'interface']) }}
+{{ oas.IntProperty('vlan', 'The VLAN identifier') }}
+{{ oas.StringProperty('interface', "The libvirt's bridge network interface (brX)") }}
+{{ oas.BoolProperty('private', 'Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?', default=True) }}
+
   parameters:
-    VnetID:
-      name: vnetId
-      in: path
-      description: The ID of the virtual network.
-      required: true
-      schema:
-        type: string
+{{ oas.PathParamID(resources.vnet) }}
 
 paths:
   /vnet:
-    get:
-      tags:
-        - vnet
-      operationId: GetAllVNets
-      description: Returns the IDs of virtual networks.
-      responses:
-        '200':
-          description: Returns the an array of virtual network IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
+{{ oas.List(resources.vnet, [resources.vnet.tag]) }}
 
-  /vnet/{vnetId}:
-    parameters:
-      - $ref: '#/components/parameters/VnetID'
+  /vnet/{ {{ resources.vnet.paramId }} }:
+{{ oas.RUD(resources.vnet, [resources.vnet.tag], [resources.vnet.paramSchema]) }}
 
-    get:
-      tags:
-        - vnet
-      operationId: GetVNet
-      description: Returns a description of the virtual network
-      responses:
-        '200':
-          description: Returns the virtual network object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VNet'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+  /vnet/{ {{ resources.vnet.paramId }} }/subnet:
+{{ oas.Parameters([resources.vnet.paramSchema]) }}
+{{ oas.Create('Create' + resources.subnet.schema, resources.subnet.schema, resources.subnet.desc, [resources.vnet.tag, resources.subnet.tag]) }}
 
-    put:
-      tags:
-        - vnet
-      operationId: UpdateVNet
-      description: Updates a virtual network configuration.
-      requestBody:
-        description: VNet payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VNet'
-        required: true
-      responses:
-        '200':
-          description: Updated virtual network.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VNet'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /vnet/{ {{ resources.vnet.paramId }} }/subnet/{ {{ resources.subnet.paramId }} }/default:
+{{ oas.Parameters([resources.vnet.paramSchema, resources.subnet.paramSchema]) }}
+{{ oas.Patch('Set' + resources.vnet.schema + 'Default' + resources.subnet.schema, resources.vnet.desc, 'setting of default ' + resources.subnet.desc, [resources.vnet.tag, resources.subnet.tag]) }}
 
-    delete:
-      tags:
-        - vnet
-      operationId: DeleteVNet
-      description: Deletes an existing virtual network.
-      responses:
-        '200':
-          description: The virtual network has been successfully removed.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /vnet/{vnetId}/subnet:
-    parameters:
-      - $ref: '#/components/parameters/VnetID'
-
-    post:
-      tags:
-        - vnet
-        - subnet
-      operationId: CreateSubnet
-      description: Creates a new subnet.
-      requestBody:
-        description: Subnet payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Subnet'
-        required: true
-      responses:
-        '201':
-          description: Returns the newly created subnet object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Subnet'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /vnet/{vnetId}/subnet/{subnetId}/default:
-    parameters:
-      - $ref: '#/components/parameters/VnetID'
-      - $ref: '#/components/parameters/SubnetID'
-
-    put:
-      tags:
-        - vnet
-        - subnet
-      operationId: UpdateVNetDefaultSubnet
-      description: Set a virtual network default subnet.
-      responses:
-        '200':
-          description: The subnet has been set as default one.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /vnet/{vnetId}/subnets:
-    parameters:
-      - $ref: '#/components/parameters/VnetID'
-
-    get:
-      tags:
-        - vnet
-        - subnet
-      operationId: GetVNetSubnets
-      description: Returns the IDs of the subnets existing in the virtual network.
-      responses:
-        '200':
-          description: Returns an array of subnet IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+  /vnet/{ {{ resources.vnet.paramId }} }/subnets:
+{{ oas.Parameters([resources.vnet.paramSchema]) }}
+{{ oas.GetAll('List' + resources.vnet.schema + resources.subnet.schema + 's', resources.subnet.desc, [resources.vnet.tag, resources.subnet.tag], True) }}

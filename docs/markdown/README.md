@@ -121,14 +121,14 @@ All URIs are relative to */api/v1*
 *RegionApi* | [**readRegion**](Apis/RegionApi.md#readregion) | **GET** /region/{ regionId } | Returns a region. |
 *RegionApi* | [**updateRegion**](Apis/RegionApi.md#updateregion) | **PUT** /region/{ regionId } | Updates a region configuration. |
 | *SubnetApi* | [**createAdapter**](Apis/SubnetApi.md#createadapter) | **POST** /subnet/{ subnetId }/adapter | Creates a new network adapter. |
-*SubnetApi* | [**createSubnet**](Apis/SubnetApi.md#createsubnet) | **POST** /vnet/{vnetId}/subnet | Creates a new subnet. |
+*SubnetApi* | [**createSubnet**](Apis/SubnetApi.md#createsubnet) | **POST** /vnet/{ vnetId }/subnet | Creates a new network subnet. |
 *SubnetApi* | [**deleteSubnet**](Apis/SubnetApi.md#deletesubnet) | **DELETE** /subnet/{ subnetId } | Deletes an existing network subnet. |
-*SubnetApi* | [**getVNetSubnets**](Apis/SubnetApi.md#getvnetsubnets) | **GET** /vnet/{vnetId}/subnets | Returns the IDs of the subnets existing in the virtual network. |
 *SubnetApi* | [**listSubnetAdapters**](Apis/SubnetApi.md#listsubnetadapters) | **GET** /subnet/{ subnetId }/adapters | Returns the IDs of network adapter objects. |
 *SubnetApi* | [**listSubnets**](Apis/SubnetApi.md#listsubnets) | **GET** /subnet | Returns the IDs of network subnet objects. |
+*SubnetApi* | [**listVNetSubnets**](Apis/SubnetApi.md#listvnetsubnets) | **GET** /vnet/{ vnetId }/subnets | Returns the IDs of network subnet objects. |
 *SubnetApi* | [**readSubnet**](Apis/SubnetApi.md#readsubnet) | **GET** /subnet/{ subnetId } | Returns a network subnet. |
+*SubnetApi* | [**setVNetDefaultSubnet**](Apis/SubnetApi.md#setvnetdefaultsubnet) | **PATCH** /vnet/{ vnetId }/subnet/{ subnetId }/default | Performs a virtual network setting of default network subnet. |
 *SubnetApi* | [**updateSubnet**](Apis/SubnetApi.md#updatesubnet) | **PUT** /subnet/{ subnetId } | Updates a network subnet configuration. |
-*SubnetApi* | [**updateVNetDefaultSubnet**](Apis/SubnetApi.md#updatevnetdefaultsubnet) | **PUT** /vnet/{vnetId}/subnet/{subnetId}/default | Set a virtual network default subnet. |
 | *TemplateApi* | [**createTemplate**](Apis/TemplateApi.md#createtemplate) | **POST** /pool/{ poolId }/template | Creates a new image template. |
 *TemplateApi* | [**deleteTemplate**](Apis/TemplateApi.md#deletetemplate) | **DELETE** /template/{ templateId } | Deletes an existing image template. |
 *TemplateApi* | [**listStoragePoolTemplates**](Apis/TemplateApi.md#liststoragepooltemplates) | **GET** /pool/{ poolId }/templates | Returns the IDs of image template objects. |
@@ -136,15 +136,15 @@ All URIs are relative to */api/v1*
 *TemplateApi* | [**readTemplate**](Apis/TemplateApi.md#readtemplate) | **GET** /template/{ templateId } | Returns a image template. |
 *TemplateApi* | [**setStoragePoolDefaultTemplate**](Apis/TemplateApi.md#setstoragepooldefaulttemplate) | **PATCH** /pool/{ poolId }/template/{ templateId }/default | Performs a storage pool setting of default template. |
 *TemplateApi* | [**updateTemplate**](Apis/TemplateApi.md#updatetemplate) | **PUT** /template/{ templateId } | Updates a image template configuration. |
-| *VnetApi* | [**createSubnet**](Apis/VnetApi.md#createsubnet) | **POST** /vnet/{vnetId}/subnet | Creates a new subnet. |
+| *VnetApi* | [**createSubnet**](Apis/VnetApi.md#createsubnet) | **POST** /vnet/{ vnetId }/subnet | Creates a new network subnet. |
 *VnetApi* | [**createVNet**](Apis/VnetApi.md#createvnet) | **POST** /zone/{zoneId}/vnet | Creates a new virtual network. |
-*VnetApi* | [**deleteVNet**](Apis/VnetApi.md#deletevnet) | **DELETE** /vnet/{vnetId} | Deletes an existing virtual network. |
-*VnetApi* | [**getAllVNets**](Apis/VnetApi.md#getallvnets) | **GET** /vnet | Returns the IDs of virtual networks. |
-*VnetApi* | [**getVNet**](Apis/VnetApi.md#getvnet) | **GET** /vnet/{vnetId} | Returns a description of the virtual network |
-*VnetApi* | [**getVNetSubnets**](Apis/VnetApi.md#getvnetsubnets) | **GET** /vnet/{vnetId}/subnets | Returns the IDs of the subnets existing in the virtual network. |
+*VnetApi* | [**deleteVNet**](Apis/VnetApi.md#deletevnet) | **DELETE** /vnet/{ vnetId } | Deletes an existing virtual network. |
 *VnetApi* | [**getZoneVNets**](Apis/VnetApi.md#getzonevnets) | **GET** /zone/{zoneId}/vnets | Returns the IDs of the virtual networks existing in the zone. |
-*VnetApi* | [**updateVNet**](Apis/VnetApi.md#updatevnet) | **PUT** /vnet/{vnetId} | Updates a virtual network configuration. |
-*VnetApi* | [**updateVNetDefaultSubnet**](Apis/VnetApi.md#updatevnetdefaultsubnet) | **PUT** /vnet/{vnetId}/subnet/{subnetId}/default | Set a virtual network default subnet. |
+*VnetApi* | [**listVNetSubnets**](Apis/VnetApi.md#listvnetsubnets) | **GET** /vnet/{ vnetId }/subnets | Returns the IDs of network subnet objects. |
+*VnetApi* | [**listVNets**](Apis/VnetApi.md#listvnets) | **GET** /vnet | Returns the IDs of virtual network objects. |
+*VnetApi* | [**readVNet**](Apis/VnetApi.md#readvnet) | **GET** /vnet/{ vnetId } | Returns a virtual network. |
+*VnetApi* | [**setVNetDefaultSubnet**](Apis/VnetApi.md#setvnetdefaultsubnet) | **PATCH** /vnet/{ vnetId }/subnet/{ subnetId }/default | Performs a virtual network setting of default network subnet. |
+*VnetApi* | [**updateVNet**](Apis/VnetApi.md#updatevnet) | **PUT** /vnet/{ vnetId } | Updates a virtual network configuration. |
 | *VolumeApi* | [**createProjectZoneVolume**](Apis/VolumeApi.md#createprojectzonevolume) | **POST** /project/{projectId}/zone/{zoneId}/volume | Creates a new storage volume in specified zone. |
 *VolumeApi* | [**deleteVolume**](Apis/VolumeApi.md#deletevolume) | **DELETE** /volume/{volumeId} | Deletes an existing storage volume. |
 *VolumeApi* | [**getAllVolumes**](Apis/VolumeApi.md#getallvolumes) | **GET** /volume | Returns the IDs of storage volumes. |

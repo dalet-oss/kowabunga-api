@@ -43,6 +43,8 @@ tags:
   name: subnet
 - description: Everything about image template
   name: template
+- description: Everything about virtual network
+  name: vnet
 - description: Everything about storage volume
   name: volume
 - description: Everything about availability zone
@@ -2545,22 +2547,22 @@ paths:
       - template
   /vnet:
     get:
-      description: Returns the IDs of virtual networks.
-      operationId: GetAllVNets
+      description: Returns the IDs of virtual network objects.
+      operationId: ListVNets
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns the an array of virtual network IDs.
+          description: Returns an array of virtual network IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
           $ref: '#/components/responses/Forbidden'
       tags:
       - vnet
-  /vnet/{vnetId}:
+  /vnet/{ vnetId }:
     delete:
       description: Deletes an existing virtual network.
       operationId: DeleteVNet
@@ -2582,8 +2584,8 @@ paths:
       tags:
       - vnet
     get:
-      description: Returns a description of the virtual network
-      operationId: GetVNet
+      description: Returns a virtual network.
+      operationId: ReadVNet
       parameters:
       - $ref: '#/components/parameters/VnetID'
       responses:
@@ -2613,7 +2615,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/VNet'
-        description: VNet payload
+        description: VNet payload.
         required: true
       responses:
         "200":
@@ -2621,7 +2623,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/VNet'
-          description: Updated virtual network.
+          description: Returns the virtual network object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -2632,13 +2634,15 @@ paths:
           $ref: '#/components/responses/NotFound'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - vnet
-  /vnet/{vnetId}/subnet:
+  /vnet/{ vnetId }/subnet:
     parameters:
     - $ref: '#/components/parameters/VnetID'
     post:
-      description: Creates a new subnet.
+      description: Creates a new network subnet.
       operationId: CreateSubnet
       parameters:
       - $ref: '#/components/parameters/VnetID'
@@ -2647,7 +2651,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Subnet'
-        description: Subnet payload
+        description: Subnet payload.
         required: true
       responses:
         "201":
@@ -2655,7 +2659,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Subnet'
-          description: Returns the newly created subnet object.
+          description: Returns the newly created network subnet object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -2668,22 +2672,24 @@ paths:
           $ref: '#/components/responses/Conflict'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - vnet
       - subnet
-  /vnet/{vnetId}/subnet/{subnetId}/default:
+  /vnet/{ vnetId }/subnet/{ subnetId }/default:
     parameters:
     - $ref: '#/components/parameters/VnetID'
     - $ref: '#/components/parameters/SubnetID'
-    put:
-      description: Set a virtual network default subnet.
-      operationId: UpdateVNetDefaultSubnet
+    patch:
+      description: Performs a virtual network setting of default network subnet.
+      operationId: SetVNetDefaultSubnet
       parameters:
       - $ref: '#/components/parameters/VnetID'
       - $ref: '#/components/parameters/SubnetID'
       responses:
         "200":
-          description: The subnet has been set as default one.
+          description: The virtual network setting of default network subnet is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -2695,10 +2701,10 @@ paths:
       tags:
       - vnet
       - subnet
-  /vnet/{vnetId}/subnets:
+  /vnet/{ vnetId }/subnets:
     get:
-      description: Returns the IDs of the subnets existing in the virtual network.
-      operationId: GetVNetSubnets
+      description: Returns the IDs of network subnet objects.
+      operationId: ListVNetSubnets
       parameters:
       - $ref: '#/components/parameters/VnetID'
       responses:
@@ -2707,7 +2713,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of subnet IDs.
+          description: Returns an array of network subnet IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -4508,6 +4514,7 @@ components:
       required:
       - name
     VNet:
+      description: A virtual network.
       example:
         private: true
         vlan: 0
@@ -4534,7 +4541,7 @@ components:
         private:
           default: true
           description: Is the virtual network adapter connected to private (LAN) or
-            public (WAN) physical network ?
+            public (WAN) physical network ?.
           type: boolean
       required:
       - interface

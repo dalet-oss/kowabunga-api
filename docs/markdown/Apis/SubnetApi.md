@@ -5,14 +5,14 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createAdapter**](SubnetApi.md#createAdapter) | **POST** /subnet/{ subnetId }/adapter |  |
-| [**createSubnet**](SubnetApi.md#createSubnet) | **POST** /vnet/{vnetId}/subnet |  |
+| [**createSubnet**](SubnetApi.md#createSubnet) | **POST** /vnet/{ vnetId }/subnet |  |
 | [**deleteSubnet**](SubnetApi.md#deleteSubnet) | **DELETE** /subnet/{ subnetId } |  |
-| [**getVNetSubnets**](SubnetApi.md#getVNetSubnets) | **GET** /vnet/{vnetId}/subnets |  |
 | [**listSubnetAdapters**](SubnetApi.md#listSubnetAdapters) | **GET** /subnet/{ subnetId }/adapters |  |
 | [**listSubnets**](SubnetApi.md#listSubnets) | **GET** /subnet |  |
+| [**listVNetSubnets**](SubnetApi.md#listVNetSubnets) | **GET** /vnet/{ vnetId }/subnets |  |
 | [**readSubnet**](SubnetApi.md#readSubnet) | **GET** /subnet/{ subnetId } |  |
+| [**setVNetDefaultSubnet**](SubnetApi.md#setVNetDefaultSubnet) | **PATCH** /vnet/{ vnetId }/subnet/{ subnetId }/default |  |
 | [**updateSubnet**](SubnetApi.md#updateSubnet) | **PUT** /subnet/{ subnetId } |  |
-| [**updateVNetDefaultSubnet**](SubnetApi.md#updateVNetDefaultSubnet) | **PUT** /vnet/{vnetId}/subnet/{subnetId}/default |  |
 
 
 <a name="createAdapter"></a>
@@ -50,14 +50,14 @@ All URIs are relative to */api/v1*
 
 
 
-    Creates a new subnet.
+    Creates a new network subnet.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **vnetId** | **String**| The ID of the virtual network. | [default to null] |
-| **Subnet** | [**Subnet**](../Models/Subnet.md)| Subnet payload | |
+| **Subnet** | [**Subnet**](../Models/Subnet.md)| Subnet payload. | |
 
 ### Return type
 
@@ -89,33 +89,6 @@ All URIs are relative to */api/v1*
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getVNetSubnets"></a>
-# **getVNetSubnets**
-> List getVNetSubnets(vnetId)
-
-
-
-    Returns the IDs of the subnets existing in the virtual network.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **vnetId** | **String**| The ID of the virtual network. | [default to null] |
-
-### Return type
-
-**List**
 
 ### Authorization
 
@@ -177,6 +150,33 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+<a name="listVNetSubnets"></a>
+# **listVNetSubnets**
+> List listVNetSubnets(vnetId)
+
+
+
+    Returns the IDs of network subnet objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **vnetId** | **String**| The ID of the virtual network. | [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 <a name="readSubnet"></a>
 # **readSubnet**
 > Subnet readSubnet(subnetId)
@@ -194,6 +194,34 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**Subnet**](../Models/Subnet.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="setVNetDefaultSubnet"></a>
+# **setVNetDefaultSubnet**
+> setVNetDefaultSubnet(vnetId, subnetId)
+
+
+
+    Performs a virtual network setting of default network subnet.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **vnetId** | **String**| The ID of the virtual network. | [default to null] |
+| **subnetId** | **String**| The ID of the network subnet. | [default to null] |
+
+### Return type
+
+null (empty response body)
 
 ### Authorization
 
@@ -230,33 +258,5 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
-
-<a name="updateVNetDefaultSubnet"></a>
-# **updateVNetDefaultSubnet**
-> updateVNetDefaultSubnet(vnetId, subnetId)
-
-
-
-    Set a virtual network default subnet.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **vnetId** | **String**| The ID of the virtual network. | [default to null] |
-| **subnetId** | **String**| The ID of the network subnet. | [default to null] |
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
 - **Accept**: application/json
 

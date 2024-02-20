@@ -116,7 +116,11 @@ resources:
     paramId: templateId
     paramSchema: TemplateID
   vnet:
-    desc: virtual networks
+    tag: vnet
+    desc: virtual network
+    schema: VNet
+    paramId: vnetId
+    paramSchema: VnetID
   volume:
     tag: volume
     desc: storage volume
