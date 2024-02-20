@@ -5,7 +5,7 @@ components:
 {{ oas.SchemaBaseResource(resources.volume, ['name', 'type', 'size']) }}
 {{ oas.StringProperty('type', 'The ' + resources.volume.desc + ' type', values=['os', 'iso', 'raw']) }}
 {{ oas.IntProperty('size', 'The ' + resources.volume.desc + ' size (in bytes)') }}
-{{ oas.BoolProperty('resizeable', 'Is the ' + resources.volume.desc + ' allowed to grow (filesystem dependant) ?', default=False) }}
+{{ oas.BoolProperty('resizable', 'Is the ' + resources.volume.desc + ' allowed to grow (filesystem dependant) ?', default=False) }}
 
   parameters:
 {{ oas.PathParamID(resources.volume) }}

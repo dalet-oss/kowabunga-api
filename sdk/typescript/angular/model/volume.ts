@@ -38,7 +38,7 @@ export interface Volume {
     /**
      * Is the storage volume allowed to grow (filesystem dependant) ?.
      */
-    resizeable?: boolean;
+    resizable?: boolean;
 }
 export namespace Volume {
     export type TypeEnum = 'os' | 'iso' | 'raw';
