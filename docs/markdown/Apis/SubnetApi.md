@@ -4,14 +4,14 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createAdapter**](SubnetApi.md#createAdapter) | **POST** /subnet/{subnetId}/adapter |  |
+| [**createAdapter**](SubnetApi.md#createAdapter) | **POST** /subnet/{ subnetId }/adapter |  |
 | [**createSubnet**](SubnetApi.md#createSubnet) | **POST** /vnet/{vnetId}/subnet |  |
-| [**deleteSubnet**](SubnetApi.md#deleteSubnet) | **DELETE** /subnet/{subnetId} |  |
-| [**getAllSubnets**](SubnetApi.md#getAllSubnets) | **GET** /subnet |  |
-| [**getSubnet**](SubnetApi.md#getSubnet) | **GET** /subnet/{subnetId} |  |
-| [**getSubnetAdapters**](SubnetApi.md#getSubnetAdapters) | **GET** /subnet/{subnetId}/adapters |  |
+| [**deleteSubnet**](SubnetApi.md#deleteSubnet) | **DELETE** /subnet/{ subnetId } |  |
 | [**getVNetSubnets**](SubnetApi.md#getVNetSubnets) | **GET** /vnet/{vnetId}/subnets |  |
-| [**updateSubnet**](SubnetApi.md#updateSubnet) | **PUT** /subnet/{subnetId} |  |
+| [**listSubnetAdapters**](SubnetApi.md#listSubnetAdapters) | **GET** /subnet/{ subnetId }/adapters |  |
+| [**listSubnets**](SubnetApi.md#listSubnets) | **GET** /subnet |  |
+| [**readSubnet**](SubnetApi.md#readSubnet) | **GET** /subnet/{ subnetId } |  |
+| [**updateSubnet**](SubnetApi.md#updateSubnet) | **PUT** /subnet/{ subnetId } |  |
 | [**updateVNetDefaultSubnet**](SubnetApi.md#updateVNetDefaultSubnet) | **PUT** /vnet/{vnetId}/subnet/{subnetId}/default |  |
 
 
@@ -28,8 +28,8 @@ All URIs are relative to */api/v1*
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **subnetId** | **String**| The ID of the network subnet. | [default to null] |
-| **Adapter** | [**Adapter**](../Models/Adapter.md)| Adapter payload | |
-| **assignIP** | **Boolean**| whether Kowabunga should pick and assign an IP address to this adapter. | [optional] [default to null] |
+| **Adapter** | [**Adapter**](../Models/Adapter.md)| Adapter payload. | |
+| **assignIP** | **Boolean**| Whether Kowabunga should pick and assign an IP address to this adapter. | [optional] [default to null] |
 
 ### Return type
 
@@ -78,7 +78,7 @@ All URIs are relative to */api/v1*
 
 
 
-    Deletes an existing subnet.
+    Deletes an existing network subnet.
 
 ### Parameters
 
@@ -89,84 +89,6 @@ All URIs are relative to */api/v1*
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getAllSubnets"></a>
-# **getAllSubnets**
-> List getAllSubnets()
-
-
-
-    Returns the IDs of subnets.
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getSubnet"></a>
-# **getSubnet**
-> Subnet getSubnet(subnetId)
-
-
-
-    Returns a description of the subnet.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **subnetId** | **String**| The ID of the network subnet. | [default to null] |
-
-### Return type
-
-[**Subnet**](../Models/Subnet.md)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getSubnetAdapters"></a>
-# **getSubnetAdapters**
-> List getSubnetAdapters(subnetId)
-
-
-
-    Returns the IDs of the network adapters existing in the subnet.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **subnetId** | **String**| The ID of the network subnet. | [default to null] |
-
-### Return type
-
-**List**
 
 ### Authorization
 
@@ -204,20 +126,98 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="updateSubnet"></a>
-# **updateSubnet**
-> Subnet updateSubnet(subnetId, Subnet)
+<a name="listSubnetAdapters"></a>
+# **listSubnetAdapters**
+> List listSubnetAdapters(subnetId)
 
 
 
-    Updates a subnet configuration.
+    Returns the IDs of network adapter objects.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **subnetId** | **String**| The ID of the network subnet. | [default to null] |
-| **Subnet** | [**Subnet**](../Models/Subnet.md)| Subnet payload | |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listSubnets"></a>
+# **listSubnets**
+> List listSubnets()
+
+
+
+    Returns the IDs of network subnet objects.
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="readSubnet"></a>
+# **readSubnet**
+> Subnet readSubnet(subnetId)
+
+
+
+    Returns a network subnet.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **subnetId** | **String**| The ID of the network subnet. | [default to null] |
+
+### Return type
+
+[**Subnet**](../Models/Subnet.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="updateSubnet"></a>
+# **updateSubnet**
+> Subnet updateSubnet(subnetId, Subnet)
+
+
+
+    Updates a network subnet configuration.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **subnetId** | **String**| The ID of the network subnet. | [default to null] |
+| **Subnet** | [**Subnet**](../Models/Subnet.md)| Subnet payload. | |
 
 ### Return type
 

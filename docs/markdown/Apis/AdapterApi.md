@@ -4,10 +4,10 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createAdapter**](AdapterApi.md#createAdapter) | **POST** /subnet/{subnetId}/adapter |  |
+| [**createAdapter**](AdapterApi.md#createAdapter) | **POST** /subnet/{ subnetId }/adapter |  |
 | [**deleteAdapter**](AdapterApi.md#deleteAdapter) | **DELETE** /adapter/{ adapterId } |  |
-| [**getSubnetAdapters**](AdapterApi.md#getSubnetAdapters) | **GET** /subnet/{subnetId}/adapters |  |
 | [**listAdapters**](AdapterApi.md#listAdapters) | **GET** /adapter |  |
+| [**listSubnetAdapters**](AdapterApi.md#listSubnetAdapters) | **GET** /subnet/{ subnetId }/adapters |  |
 | [**readAdapter**](AdapterApi.md#readAdapter) | **GET** /adapter/{ adapterId } |  |
 | [**updateAdapter**](AdapterApi.md#updateAdapter) | **PUT** /adapter/{ adapterId } |  |
 
@@ -25,8 +25,8 @@ All URIs are relative to */api/v1*
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **subnetId** | **String**| The ID of the network subnet. | [default to null] |
-| **Adapter** | [**Adapter**](../Models/Adapter.md)| Adapter payload | |
-| **assignIP** | **Boolean**| whether Kowabunga should pick and assign an IP address to this adapter. | [optional] [default to null] |
+| **Adapter** | [**Adapter**](../Models/Adapter.md)| Adapter payload. | |
+| **assignIP** | **Boolean**| Whether Kowabunga should pick and assign an IP address to this adapter. | [optional] [default to null] |
 
 ### Return type
 
@@ -68,19 +68,16 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getSubnetAdapters"></a>
-# **getSubnetAdapters**
-> List getSubnetAdapters(subnetId)
+<a name="listAdapters"></a>
+# **listAdapters**
+> List listAdapters()
 
 
 
-    Returns the IDs of the network adapters existing in the subnet.
+    Returns the IDs of network adapter objects.
 
 ### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **subnetId** | **String**| The ID of the network subnet. | [default to null] |
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -95,16 +92,19 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listAdapters"></a>
-# **listAdapters**
-> List listAdapters()
+<a name="listSubnetAdapters"></a>
+# **listSubnetAdapters**
+> List listSubnetAdapters(subnetId)
 
 
 
     Returns the IDs of network adapter objects.
 
 ### Parameters
-This endpoint does not need any parameter.
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **subnetId** | **String**| The ID of the network subnet. | [default to null] |
 
 ### Return type
 

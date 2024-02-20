@@ -1,236 +1,38 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
 components:
   schemas:
-    Subnet:
-      type: object
-      required:
-        - name
-        - cidr
-        - gateway
-      properties:
-        id:
-          type: string
-          description: The subnet ID (auto-generated).
-        name:
-          type: string
-          description: The subnet name.
-        description:
-          type: string
-          description: The subnet description.
-        cidr:
-          type: string
-          description: The subnet CIDR (e.g. 192.168.0.0/24).
-        gateway:
-          type: string
-          description: The subnet router/gateway IP address (e.g. 192.168.0.254).
-        dns:
-          type: string
-          description: The subnet DNS server IP address (gateway value if unspecified).
-        extra_routes:
-          type: array
-          description: The list of extra routes to be access through designated gateway (format is 10.0.0.0/8).
-          items:
-            type: string
-        reserved:
-          type: array
-          description: The subnet list of reserved IPv4 ranges (i.e. no IP address can be assigned from there).
-          items:
-            $ref: '#/components/schemas/IpRange'
+{{ oas.SchemaBaseResource(resources.subnet, ['name', 'cidr', 'gateway']) }}
+{{ oas.StringProperty('cidr', 'The ' + resources.subnet.desc + ' CIDR (e.g. 192.168.0.0/24)') }}
+{{ oas.StringProperty('gateway', 'The ' + resources.subnet.desc + ' router/gateway IP address (e.g. 192.168.0.254)') }}
+{{ oas.StringProperty('dns', 'The ' + resources.subnet.desc + ' DNS server IP address (gateway value if unspecified)') }}
+{{ oas.StringArrayProperty('extra_routes', 'The list of extra routes to be access through designated gateway (format is 10.0.0.0/8)') }}
+{{ oas.ObjectArrayProperty('reserved', 'The ' + resources.subnet.desc + ' reserved IPv4 ranges (i.e. no IP address can be assigned from there)', resources.ip_range.schema) }}
 
-    IpRange:
-      type: object
-      required:
-        - first
-        - last
-      description: A reserved IPv4 pool range, non-addressable by Kowabunga.
-      properties:
-        first:
-          type: string
-          description: The range's first IP address.
-        last:
-          type: string
-          description: The range's last IP address.
+{{ oas.Schema(resources.ip_range, ['first', 'last']) }}
+{{ oas.StringProperty('first', "The range's first IP address") }}
+{{ oas.StringProperty('last', "The range's last IP address") }}
 
-    ZoneSubnet:
-      type: object
-      description: A zone/subnet map.
-      properties:
-        key:
-          type: string
-          description: The zone key.
-        value:
-          type: string
-          description: The subnet ID.
+{{ oas.Schema(resources.zone_subnet) }}
+{{ oas.StringProperty('key', 'The zone key') }}
+{{ oas.StringProperty('value', 'The subnet ID') }}
 
   parameters:
-    SubnetID:
-      name: subnetId
-      in: path
-      description: The ID of the network subnet.
-      required: true
-      schema:
-        type: string
-    OptionalQueryAssignIP:
-      name: assignIP
-      in: query
-      description: whether Kowabunga should pick and assign an IP address to this adapter.
-      schema:
-        type: boolean
-    OptionalQuerySubnetSize:
-      name: subnetSize
-      in: query
-      description: The minimum VPC subnet size to be affected to the project. WARNING, this cannot be changed later.
-      schema:
-        type: integer
+{{ oas.PathParamID(resources.subnet) }}
+{{ oas.BoolQueryParam(resources.subnet.paramAssignIpSchema, resources.subnet.paramAssignIpId, 'Whether Kowabunga should pick and assign an IP address to this adapter') }}
+{{ oas.IntQueryParam(resources.subnet.paramSubnetSizeSchema, resources.subnet.paramSubnetSizeId, 'The minimum VPC subnet size to be affected to the project. WARNING, this cannot be changed later') }}
 
 paths:
   /subnet:
-    get:
-      tags:
-        - subnet
-      operationId: GetAllSubnets
-      description: Returns the IDs of subnets.
-      responses:
-        '200':
-          description: Returns the an array of subnet IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
+{{ oas.List(resources.subnet, [resources.subnet.tag]) }}
 
-  /subnet/{subnetId}:
-    parameters:
-      - $ref: '#/components/parameters/SubnetID'
+  /subnet/{ {{ resources.subnet.paramId }} }:
+{{ oas.RUD(resources.subnet, [resources.subnet.tag], [resources.subnet.paramSchema]) }}
 
-    get:
-      tags:
-        - subnet
-      operationId: GetSubnet
-      description: Returns a description of the subnet.
-      responses:
-        '200':
-          description: Returns the subnet object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Subnet'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+  /subnet/{ {{ resources.subnet.paramId }} }/adapter:
+{{ oas.Parameters([resources.subnet.paramSchema, 'OptionalQuery' + resources.subnet.paramAssignIpSchema]) }}
+{{ oas.Create('Create' + resources.adapter.schema, resources.adapter.schema, resources.adapter.desc, [resources.subnet.tag, resources.adapter.tag]) }}
 
-    put:
-      tags:
-        - subnet
-      operationId: UpdateSubnet
-      description: Updates a subnet configuration.
-      requestBody:
-        description: Subnet payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Subnet'
-        required: true
-      responses:
-        '200':
-          description: Updated network subnet.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Subnet'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-    delete:
-      tags:
-        - subnet
-      operationId: DeleteSubnet
-      description: Deletes an existing subnet.
-      responses:
-        '200':
-          description: The subnet has been successfully removed.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /subnet/{subnetId}/adapter:
-    parameters:
-      - $ref: '#/components/parameters/SubnetID'
-      - $ref: '#/components/parameters/OptionalQueryAssignIP'
-
-    post:
-      tags:
-        - subnet
-        - adapter
-      operationId: CreateAdapter
-      description: Creates a new network adapter.
-      requestBody:
-        description: Adapter payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Adapter'
-        required: true
-      responses:
-        '201':
-          description: Returns the newly created network adapter object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Adapter'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /subnet/{subnetId}/adapters:
-    parameters:
-      - $ref: '#/components/parameters/SubnetID'
-
-    get:
-      tags:
-        - subnet
-        - adapter
-      operationId: GetSubnetAdapters
-      description: Returns the IDs of the network adapters existing in the subnet.
-      responses:
-        '200':
-          description: Returns an array of network adapter IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+  /subnet/{ {{ resources.subnet.paramId }} }/adapters:
+{{ oas.Parameters([resources.subnet.paramSchema]) }}
+{{ oas.GetAll('List' + resources.subnet.schema + resources.adapter.schema + 's', resources.adapter.desc, [resources.subnet.tag, resources.adapter.tag], True) }}

@@ -41,6 +41,9 @@ resources:
   instance_ra:
     desc: virtual machine instance remote access characteristics
     schema: InstanceRemoteAccess
+  ip_range:
+    desc: reserved IPv4 addresses pool range, non-addressable by Kowabunga
+    schema: IpRange
   kce:
     tag: kce
     desc: KCE (Kowabunga Compute Engine)
@@ -97,7 +100,15 @@ resources:
     paramId: poolId
     paramSchema: PoolID
   subnet:
-    desc: network subnets
+    tag: subnet
+    desc: network subnet
+    schema: Subnet
+    paramId: subnetId
+    paramSchema: SubnetID
+    paramAssignIpId: assignIP
+    paramAssignIpSchema: AssignIP
+    paramSubnetSizeId: subnetSize
+    paramSubnetSizeSchema: SubnetSize
   template:
     tag: template
     desc: image template
@@ -118,6 +129,9 @@ resources:
     schema: Zone
     paramId: zoneId
     paramSchema: ZoneID
+  zone_subnet:
+    desc: zone/subnet map
+    schema: ZoneSubnet
 
 errors:
   BadRequest:

@@ -7,10 +7,10 @@ All URIs are relative to */api/v1*
 
 | Class | Method | HTTP request | Description |
 |------------ | ------------- | ------------- | -------------|
-| *AdapterApi* | [**createAdapter**](Apis/AdapterApi.md#createadapter) | **POST** /subnet/{subnetId}/adapter | Creates a new network adapter. |
+| *AdapterApi* | [**createAdapter**](Apis/AdapterApi.md#createadapter) | **POST** /subnet/{ subnetId }/adapter | Creates a new network adapter. |
 *AdapterApi* | [**deleteAdapter**](Apis/AdapterApi.md#deleteadapter) | **DELETE** /adapter/{ adapterId } | Deletes an existing network adapter. |
-*AdapterApi* | [**getSubnetAdapters**](Apis/AdapterApi.md#getsubnetadapters) | **GET** /subnet/{subnetId}/adapters | Returns the IDs of the network adapters existing in the subnet. |
 *AdapterApi* | [**listAdapters**](Apis/AdapterApi.md#listadapters) | **GET** /adapter | Returns the IDs of network adapter objects. |
+*AdapterApi* | [**listSubnetAdapters**](Apis/AdapterApi.md#listsubnetadapters) | **GET** /subnet/{ subnetId }/adapters | Returns the IDs of network adapter objects. |
 *AdapterApi* | [**readAdapter**](Apis/AdapterApi.md#readadapter) | **GET** /adapter/{ adapterId } | Returns a network adapter. |
 *AdapterApi* | [**updateAdapter**](Apis/AdapterApi.md#updateadapter) | **PUT** /adapter/{ adapterId } | Updates a network adapter configuration. |
 | *HostApi* | [**createHost**](Apis/HostApi.md#createhost) | **POST** /zone/{zoneId}/host | Creates a new host. |
@@ -120,14 +120,14 @@ All URIs are relative to */api/v1*
 *RegionApi* | [**listRegions**](Apis/RegionApi.md#listregions) | **GET** /region | Returns the IDs of region objects. |
 *RegionApi* | [**readRegion**](Apis/RegionApi.md#readregion) | **GET** /region/{ regionId } | Returns a region. |
 *RegionApi* | [**updateRegion**](Apis/RegionApi.md#updateregion) | **PUT** /region/{ regionId } | Updates a region configuration. |
-| *SubnetApi* | [**createAdapter**](Apis/SubnetApi.md#createadapter) | **POST** /subnet/{subnetId}/adapter | Creates a new network adapter. |
+| *SubnetApi* | [**createAdapter**](Apis/SubnetApi.md#createadapter) | **POST** /subnet/{ subnetId }/adapter | Creates a new network adapter. |
 *SubnetApi* | [**createSubnet**](Apis/SubnetApi.md#createsubnet) | **POST** /vnet/{vnetId}/subnet | Creates a new subnet. |
-*SubnetApi* | [**deleteSubnet**](Apis/SubnetApi.md#deletesubnet) | **DELETE** /subnet/{subnetId} | Deletes an existing subnet. |
-*SubnetApi* | [**getAllSubnets**](Apis/SubnetApi.md#getallsubnets) | **GET** /subnet | Returns the IDs of subnets. |
-*SubnetApi* | [**getSubnet**](Apis/SubnetApi.md#getsubnet) | **GET** /subnet/{subnetId} | Returns a description of the subnet. |
-*SubnetApi* | [**getSubnetAdapters**](Apis/SubnetApi.md#getsubnetadapters) | **GET** /subnet/{subnetId}/adapters | Returns the IDs of the network adapters existing in the subnet. |
+*SubnetApi* | [**deleteSubnet**](Apis/SubnetApi.md#deletesubnet) | **DELETE** /subnet/{ subnetId } | Deletes an existing network subnet. |
 *SubnetApi* | [**getVNetSubnets**](Apis/SubnetApi.md#getvnetsubnets) | **GET** /vnet/{vnetId}/subnets | Returns the IDs of the subnets existing in the virtual network. |
-*SubnetApi* | [**updateSubnet**](Apis/SubnetApi.md#updatesubnet) | **PUT** /subnet/{subnetId} | Updates a subnet configuration. |
+*SubnetApi* | [**listSubnetAdapters**](Apis/SubnetApi.md#listsubnetadapters) | **GET** /subnet/{ subnetId }/adapters | Returns the IDs of network adapter objects. |
+*SubnetApi* | [**listSubnets**](Apis/SubnetApi.md#listsubnets) | **GET** /subnet | Returns the IDs of network subnet objects. |
+*SubnetApi* | [**readSubnet**](Apis/SubnetApi.md#readsubnet) | **GET** /subnet/{ subnetId } | Returns a network subnet. |
+*SubnetApi* | [**updateSubnet**](Apis/SubnetApi.md#updatesubnet) | **PUT** /subnet/{ subnetId } | Updates a network subnet configuration. |
 *SubnetApi* | [**updateVNetDefaultSubnet**](Apis/SubnetApi.md#updatevnetdefaultsubnet) | **PUT** /vnet/{vnetId}/subnet/{subnetId}/default | Set a virtual network default subnet. |
 | *TemplateApi* | [**createTemplate**](Apis/TemplateApi.md#createtemplate) | **POST** /pool/{ poolId }/template | Creates a new image template. |
 *TemplateApi* | [**deleteTemplate**](Apis/TemplateApi.md#deletetemplate) | **DELETE** /template/{templateId} | Deletes an existing volume template. |
