@@ -5,24 +5,24 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createProject**](ProjectApi.md#createProject) | **POST** /project |  |
-| [**createProjectDnsRecord**](ProjectApi.md#createProjectDnsRecord) | **POST** /project/{projectId}/record |  |
-| [**createProjectZoneInstance**](ProjectApi.md#createProjectZoneInstance) | **POST** /project/{projectId}/zone/{zoneId}/instance |  |
-| [**createProjectZoneKce**](ProjectApi.md#createProjectZoneKce) | **POST** /project/{projectId}/zone/{zoneId}/kce |  |
-| [**createProjectZoneKfs**](ProjectApi.md#createProjectZoneKfs) | **POST** /project/{projectId}/zone/{zoneId}/kfs |  |
-| [**createProjectZoneKgw**](ProjectApi.md#createProjectZoneKgw) | **POST** /project/{projectId}/zone/{zoneId}/kgw |  |
-| [**createProjectZoneVolume**](ProjectApi.md#createProjectZoneVolume) | **POST** /project/{projectId}/zone/{zoneId}/volume |  |
-| [**deleteProject**](ProjectApi.md#deleteProject) | **DELETE** /project/{projectId} |  |
-| [**getAllProjects**](ProjectApi.md#getAllProjects) | **GET** /project |  |
-| [**getProject**](ProjectApi.md#getProject) | **GET** /project/{projectId} |  |
-| [**getProjectCost**](ProjectApi.md#getProjectCost) | **GET** /project/{projectId}/cost |  |
-| [**getProjectDnsRecords**](ProjectApi.md#getProjectDnsRecords) | **GET** /project/{projectId}/records |  |
-| [**getProjectUsage**](ProjectApi.md#getProjectUsage) | **GET** /project/{projectId}/usage |  |
-| [**getProjectZoneInstances**](ProjectApi.md#getProjectZoneInstances) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
-| [**getProjectZoneKCEs**](ProjectApi.md#getProjectZoneKCEs) | **GET** /project/{projectId}/zone/{zoneId}/kces |  |
-| [**getProjectZoneKGWs**](ProjectApi.md#getProjectZoneKGWs) | **GET** /project/{projectId}/zone/{zoneId}/kgws |  |
-| [**getProjectZoneKfs**](ProjectApi.md#getProjectZoneKfs) | **GET** /project/{projectId}/zone/{zoneId}/kfs |  |
-| [**getProjectZoneVolumes**](ProjectApi.md#getProjectZoneVolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes |  |
-| [**updateProject**](ProjectApi.md#updateProject) | **PUT** /project/{projectId} |  |
+| [**createProjectDnsRecord**](ProjectApi.md#createProjectDnsRecord) | **POST** /project/{ projectId }/record |  |
+| [**createProjectZoneInstance**](ProjectApi.md#createProjectZoneInstance) | **POST** /project/{ projectId }/zone/{ zoneId }/instance |  |
+| [**createProjectZoneKCE**](ProjectApi.md#createProjectZoneKCE) | **POST** /project/{ projectId }/zone/{ zoneId }/kce |  |
+| [**createProjectZoneKFS**](ProjectApi.md#createProjectZoneKFS) | **POST** /project/{ projectId }/zone/{ zoneId }/kfs |  |
+| [**createProjectZoneKGW**](ProjectApi.md#createProjectZoneKGW) | **POST** /project/{ projectId }/zone/{ zoneId }/kgw |  |
+| [**createProjectZoneVolume**](ProjectApi.md#createProjectZoneVolume) | **POST** /project/{ projectId }/zone/{ zoneId }/volume |  |
+| [**deleteProject**](ProjectApi.md#deleteProject) | **DELETE** /project/{ projectId } |  |
+| [**listProjectDnsRecords**](ProjectApi.md#listProjectDnsRecords) | **GET** /project/{ projectId}/records |  |
+| [**listProjectZoneInstances**](ProjectApi.md#listProjectZoneInstances) | **GET** /project/{ projectId }/zone/{ zoneId }/instances |  |
+| [**listProjectZoneKCEs**](ProjectApi.md#listProjectZoneKCEs) | **GET** /project/{ projectId }/zone/{ zoneId }/kces |  |
+| [**listProjectZoneKFSs**](ProjectApi.md#listProjectZoneKFSs) | **GET** /project/{ projectId }/zone/{ zoneId }/kfs |  |
+| [**listProjectZoneKGWs**](ProjectApi.md#listProjectZoneKGWs) | **GET** /project/{ projectId }/zone/{ zoneId }/kgws |  |
+| [**listProjectZoneVolumes**](ProjectApi.md#listProjectZoneVolumes) | **GET** /project/{ projectId }/zone/{ zoneId }/volumes |  |
+| [**listProjects**](ProjectApi.md#listProjects) | **GET** /project |  |
+| [**readProject**](ProjectApi.md#readProject) | **GET** /project/{ projectId } |  |
+| [**readProjectCost**](ProjectApi.md#readProjectCost) | **GET** /project/{ projectId }/cost |  |
+| [**readProjectUsage**](ProjectApi.md#readProjectUsage) | **GET** /project/{ projectId }/usage |  |
+| [**updateProject**](ProjectApi.md#updateProject) | **PUT** /project/{ projectId } |  |
 
 
 <a name="createProject"></a>
@@ -37,7 +37,7 @@ All URIs are relative to */api/v1*
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **Project** | [**Project**](../Models/Project.md)| Project payload | |
+| **Project** | [**Project**](../Models/Project.md)| Project payload. | |
 | **subnetSize** | **Integer**| The minimum VPC subnet size to be affected to the project. WARNING, this cannot be changed later. | [optional] [default to null] |
 | **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 
@@ -60,14 +60,14 @@ All URIs are relative to */api/v1*
 
 
 
-    Creates a new DNS record in specified project.
+    Creates a new DNS record.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **DnsRecord** | [**DnsRecord**](../Models/DnsRecord.md)| DNS record payload | |
+| **projectId** | **String**| The ID of the project. | [default to null] |
+| **DnsRecord** | [**DnsRecord**](../Models/DnsRecord.md)| DnsRecord payload. | |
 
 ### Return type
 
@@ -88,15 +88,15 @@ All URIs are relative to */api/v1*
 
 
 
-    Creates a new virtual machine instance in specified zone.
+    Creates a new virtual machine instance.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **Instance** | [**Instance**](../Models/Instance.md)| Instance payload | |
+| **Instance** | [**Instance**](../Models/Instance.md)| Instance payload. | |
 | **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 
 ### Return type
@@ -112,21 +112,21 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createProjectZoneKce"></a>
-# **createProjectZoneKce**
-> KCE createProjectZoneKce(projectId, zoneId, KCE, poolId, templateId, public, notify)
+<a name="createProjectZoneKCE"></a>
+# **createProjectZoneKCE**
+> KCE createProjectZoneKCE(projectId, zoneId, KCE, poolId, templateId, public, notify)
 
 
 
-    Creates a new KCE virtual machine in specified zone.
+    Creates a new KCE (Kowabunga Compute Engine).
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **KCE** | [**KCE**](../Models/KCE.md)| KCE payload | |
+| **KCE** | [**KCE**](../Models/KCE.md)| KCE payload. | |
 | **poolId** | **String**| Storage pool ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **templateId** | **String**| Template to clone the storage volume from (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **public** | **String**| Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false). | [optional] [default to null] |
@@ -145,21 +145,21 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createProjectZoneKfs"></a>
-# **createProjectZoneKfs**
-> KFS createProjectZoneKfs(projectId, zoneId, KFS, nfsId, notify)
+<a name="createProjectZoneKFS"></a>
+# **createProjectZoneKFS**
+> KFS createProjectZoneKFS(projectId, zoneId, KFS, nfsId, notify)
 
 
 
-    Creates a new KFS storage volume in specified zone.
+    Creates a new KFS (Kowabunga File System).
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **KFS** | [**KFS**](../Models/KFS.md)| KFS payload | |
+| **KFS** | [**KFS**](../Models/KFS.md)| KFS payload. | |
 | **nfsId** | **String**| NFS storage ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 
@@ -176,21 +176,21 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createProjectZoneKgw"></a>
-# **createProjectZoneKgw**
-> KGW createProjectZoneKgw(projectId, zoneId, KGW)
+<a name="createProjectZoneKGW"></a>
+# **createProjectZoneKGW**
+> KGW createProjectZoneKGW(projectId, zoneId, KGW)
 
 
 
-    Creates a new KGW in the specified zone.
+    Creates a new KGW (Kowabunga Network Gateway).
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **KGW** | [**KGW**](../Models/KGW.md)| KGW payload | |
+| **KGW** | [**KGW**](../Models/KGW.md)| KGW payload. | |
 
 ### Return type
 
@@ -211,15 +211,15 @@ All URIs are relative to */api/v1*
 
 
 
-    Creates a new storage volume in specified zone.
+    Creates a new storage volume.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **Volume** | [**Volume**](../Models/Volume.md)| Volume payload | |
+| **Volume** | [**Volume**](../Models/Volume.md)| Volume payload. | |
 | **poolId** | **String**| Storage pool ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **templateId** | **String**| Template to clone the storage volume from (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 
@@ -248,7 +248,7 @@ All URIs are relative to */api/v1*
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 
 ### Return type
 
@@ -263,16 +263,19 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getAllProjects"></a>
-# **getAllProjects**
-> List getAllProjects()
+<a name="listProjectDnsRecords"></a>
+# **listProjectDnsRecords**
+> List listProjectDnsRecords(projectId)
 
 
 
-    Returns the IDs of registered projects.
+    Returns the IDs of DNS record objects.
 
 ### Parameters
-This endpoint does not need any parameter.
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
 
 ### Return type
 
@@ -287,127 +290,19 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getProject"></a>
-# **getProject**
-> Project getProject(projectId)
+<a name="listProjectZoneInstances"></a>
+# **listProjectZoneInstances**
+> List listProjectZoneInstances(projectId, zoneId)
 
 
 
-    Returns a description of the project
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
-
-### Return type
-
-[**Project**](../Models/Project.md)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getProjectCost"></a>
-# **getProjectCost**
-> Cost getProjectCost(projectId)
-
-
-
-    Returns the current cost for the project.
+    Returns the IDs of virtual machine instance objects.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
-
-### Return type
-
-[**Cost**](../Models/Cost.md)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getProjectDnsRecords"></a>
-# **getProjectDnsRecords**
-> List getProjectDnsRecords(projectId)
-
-
-
-    Returns the IDs of the DNS records existing in the project.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getProjectUsage"></a>
-# **getProjectUsage**
-> ProjectResources getProjectUsage(projectId)
-
-
-
-    Returns the current resources usage for the project.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
-
-### Return type
-
-[**ProjectResources**](../Models/ProjectResources.md)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getProjectZoneInstances"></a>
-# **getProjectZoneInstances**
-> List getProjectZoneInstances(projectId, zoneId)
-
-
-
-    Returns the IDs of the virtual machine instances existing in the project in the specified zone.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
@@ -423,19 +318,19 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getProjectZoneKCEs"></a>
-# **getProjectZoneKCEs**
-> List getProjectZoneKCEs(projectId, zoneId)
+<a name="listProjectZoneKCEs"></a>
+# **listProjectZoneKCEs**
+> List listProjectZoneKCEs(projectId, zoneId)
 
 
 
-    Returns the IDs of the KCE virtual machines existing in the project in the specified zone.
+    Returns the IDs of KCE (Kowabunga Compute Engine) objects.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
@@ -451,47 +346,19 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getProjectZoneKGWs"></a>
-# **getProjectZoneKGWs**
-> List getProjectZoneKGWs(projectId, zoneId)
+<a name="listProjectZoneKFSs"></a>
+# **listProjectZoneKFSs**
+> List listProjectZoneKFSs(projectId, zoneId, nfsId, notify)
 
 
 
-    Returns the IDs of the KGW existing in the project in the specified zone.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getProjectZoneKfs"></a>
-# **getProjectZoneKfs**
-> List getProjectZoneKfs(projectId, zoneId, nfsId, notify)
-
-
-
-    Returns the IDs of the KFS storage volumes existing in the project in the specified zone.
+    Returns the IDs of KFS (Kowabunga File System) objects.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **nfsId** | **String**| NFS storage ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
@@ -509,24 +376,161 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getProjectZoneVolumes"></a>
-# **getProjectZoneVolumes**
-> List getProjectZoneVolumes(projectId, zoneId)
+<a name="listProjectZoneKGWs"></a>
+# **listProjectZoneKGWs**
+> List listProjectZoneKGWs(projectId, zoneId)
 
 
 
-    Returns the IDs of the storage volumes existing in the project in the specified zone.
+    Returns the IDs of KGW (Kowabunga Network Gateway) objects.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
 
 **List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listProjectZoneVolumes"></a>
+# **listProjectZoneVolumes**
+> List listProjectZoneVolumes(projectId, zoneId)
+
+
+
+    Returns the IDs of storage volume objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listProjects"></a>
+# **listProjects**
+> List listProjects(subnetSize, notify)
+
+
+
+    Returns the IDs of project objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **subnetSize** | **Integer**| The minimum VPC subnet size to be affected to the project. WARNING, this cannot be changed later. | [optional] [default to null] |
+| **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="readProject"></a>
+# **readProject**
+> Project readProject(projectId)
+
+
+
+    Returns a project.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
+
+### Return type
+
+[**Project**](../Models/Project.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="readProjectCost"></a>
+# **readProjectCost**
+> Cost readProjectCost(projectId)
+
+
+
+    Returns a resource cost.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
+
+### Return type
+
+[**Cost**](../Models/Cost.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="readProjectUsage"></a>
+# **readProjectUsage**
+> ProjectResources readProjectUsage(projectId)
+
+
+
+    Returns a global project resource quotas/usage (0 for unlimited).
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
+
+### Return type
+
+[**ProjectResources**](../Models/ProjectResources.md)
 
 ### Authorization
 
@@ -549,8 +553,8 @@ This endpoint does not need any parameter.
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **Project** | [**Project**](../Models/Project.md)| Project payload | |
+| **projectId** | **String**| The ID of the project. | [default to null] |
+| **Project** | [**Project**](../Models/Project.md)| Project payload. | |
 
 ### Return type
 

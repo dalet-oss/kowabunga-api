@@ -4,9 +4,9 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createProjectDnsRecord**](RecordApi.md#createProjectDnsRecord) | **POST** /project/{projectId}/record |  |
+| [**createProjectDnsRecord**](RecordApi.md#createProjectDnsRecord) | **POST** /project/{ projectId }/record |  |
 | [**deleteDnsRecord**](RecordApi.md#deleteDnsRecord) | **DELETE** /record/{ recordId } |  |
-| [**getProjectDnsRecords**](RecordApi.md#getProjectDnsRecords) | **GET** /project/{projectId}/records |  |
+| [**listProjectDnsRecords**](RecordApi.md#listProjectDnsRecords) | **GET** /project/{ projectId}/records |  |
 | [**readDnsRecord**](RecordApi.md#readDnsRecord) | **GET** /record/{ recordId } |  |
 | [**updateDnsRecord**](RecordApi.md#updateDnsRecord) | **PUT** /record/{ recordId } |  |
 
@@ -17,14 +17,14 @@ All URIs are relative to */api/v1*
 
 
 
-    Creates a new DNS record in specified project.
+    Creates a new DNS record.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **DnsRecord** | [**DnsRecord**](../Models/DnsRecord.md)| DNS record payload | |
+| **projectId** | **String**| The ID of the project. | [default to null] |
+| **DnsRecord** | [**DnsRecord**](../Models/DnsRecord.md)| DnsRecord payload. | |
 
 ### Return type
 
@@ -66,19 +66,19 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getProjectDnsRecords"></a>
-# **getProjectDnsRecords**
-> List getProjectDnsRecords(projectId)
+<a name="listProjectDnsRecords"></a>
+# **listProjectDnsRecords**
+> List listProjectDnsRecords(projectId)
 
 
 
-    Returns the IDs of the DNS records existing in the project.
+    Returns the IDs of DNS record objects.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 
 ### Return type
 

@@ -4,11 +4,11 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createProjectZoneInstance**](InstanceApi.md#createProjectZoneInstance) | **POST** /project/{projectId}/zone/{zoneId}/instance |  |
+| [**createProjectZoneInstance**](InstanceApi.md#createProjectZoneInstance) | **POST** /project/{ projectId }/zone/{ zoneId }/instance |  |
 | [**deleteInstance**](InstanceApi.md#deleteInstance) | **DELETE** /instance/{ instanceId } |  |
-| [**getProjectZoneInstances**](InstanceApi.md#getProjectZoneInstances) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
 | [**listHostInstances**](InstanceApi.md#listHostInstances) | **GET** /host/{ hostId }/instances |  |
 | [**listInstances**](InstanceApi.md#listInstances) | **GET** /instance |  |
+| [**listProjectZoneInstances**](InstanceApi.md#listProjectZoneInstances) | **GET** /project/{ projectId }/zone/{ zoneId }/instances |  |
 | [**readInstance**](InstanceApi.md#readInstance) | **GET** /instance/{ instanceId } |  |
 | [**readInstanceRemoteConnection**](InstanceApi.md#readInstanceRemoteConnection) | **GET** /instance/{ instanceId }/connect |  |
 | [**readInstanceState**](InstanceApi.md#readInstanceState) | **GET** /instance/{ instanceId }/state |  |
@@ -28,15 +28,15 @@ All URIs are relative to */api/v1*
 
 
 
-    Creates a new virtual machine instance in specified zone.
+    Creates a new virtual machine instance.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **Instance** | [**Instance**](../Models/Instance.md)| Instance payload | |
+| **Instance** | [**Instance**](../Models/Instance.md)| Instance payload. | |
 | **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 
 ### Return type
@@ -69,34 +69,6 @@ All URIs are relative to */api/v1*
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getProjectZoneInstances"></a>
-# **getProjectZoneInstances**
-> List getProjectZoneInstances(projectId, zoneId)
-
-
-
-    Returns the IDs of the virtual machine instances existing in the project in the specified zone.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-
-### Return type
-
-**List**
 
 ### Authorization
 
@@ -144,6 +116,34 @@ null (empty response body)
 
 ### Parameters
 This endpoint does not need any parameter.
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listProjectZoneInstances"></a>
+# **listProjectZoneInstances**
+> List listProjectZoneInstances(projectId, zoneId)
+
+
+
+    Returns the IDs of virtual machine instance objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
 

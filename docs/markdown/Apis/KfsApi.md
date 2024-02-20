@@ -4,30 +4,30 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createProjectZoneKfs**](KfsApi.md#createProjectZoneKfs) | **POST** /project/{projectId}/zone/{zoneId}/kfs |  |
+| [**createProjectZoneKFS**](KfsApi.md#createProjectZoneKFS) | **POST** /project/{ projectId }/zone/{ zoneId }/kfs |  |
 | [**deleteKFS**](KfsApi.md#deleteKFS) | **DELETE** /kfs/{ kfsId } |  |
-| [**getProjectZoneKfs**](KfsApi.md#getProjectZoneKfs) | **GET** /project/{projectId}/zone/{zoneId}/kfs |  |
 | [**listKFSs**](KfsApi.md#listKFSs) | **GET** /kfs |  |
+| [**listProjectZoneKFSs**](KfsApi.md#listProjectZoneKFSs) | **GET** /project/{ projectId }/zone/{ zoneId }/kfs |  |
 | [**listStorageNFSKFSs**](KfsApi.md#listStorageNFSKFSs) | **GET** /nfs/{ nfsId }/kfs |  |
 | [**readKFS**](KfsApi.md#readKFS) | **GET** /kfs/{ kfsId } |  |
 | [**updateKFS**](KfsApi.md#updateKFS) | **PUT** /kfs/{ kfsId } |  |
 
 
-<a name="createProjectZoneKfs"></a>
-# **createProjectZoneKfs**
-> KFS createProjectZoneKfs(projectId, zoneId, KFS, nfsId, notify)
+<a name="createProjectZoneKFS"></a>
+# **createProjectZoneKFS**
+> KFS createProjectZoneKFS(projectId, zoneId, KFS, nfsId, notify)
 
 
 
-    Creates a new KFS storage volume in specified zone.
+    Creates a new KFS (Kowabunga File System).
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **KFS** | [**KFS**](../Models/KFS.md)| KFS payload | |
+| **KFS** | [**KFS**](../Models/KFS.md)| KFS payload. | |
 | **nfsId** | **String**| NFS storage ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 
@@ -71,22 +71,16 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getProjectZoneKfs"></a>
-# **getProjectZoneKfs**
-> List getProjectZoneKfs(projectId, zoneId, nfsId, notify)
+<a name="listKFSs"></a>
+# **listKFSs**
+> List listKFSs()
 
 
 
-    Returns the IDs of the KFS storage volumes existing in the project in the specified zone.
+    Returns the IDs of KFS (Kowabunga File System) objects.
 
 ### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **nfsId** | **String**| NFS storage ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
-| **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -101,16 +95,22 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listKFSs"></a>
-# **listKFSs**
-> List listKFSs()
+<a name="listProjectZoneKFSs"></a>
+# **listProjectZoneKFSs**
+> List listProjectZoneKFSs(projectId, zoneId, nfsId, notify)
 
 
 
     Returns the IDs of KFS (Kowabunga File System) objects.
 
 ### Parameters
-This endpoint does not need any parameter.
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **nfsId** | **String**| NFS storage ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
+| **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 
 ### Return type
 

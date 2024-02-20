@@ -33,6 +33,8 @@ tags:
   name: kgw
 - description: Everything about Iris network gateway
   name: netgw
+- description: Everything about project
+  name: project
 - description: Everything about region
   name: region
 - description: Everything about NFS storage
@@ -1190,21 +1192,27 @@ paths:
       - netgw
   /project:
     get:
-      description: Returns the IDs of registered projects.
-      operationId: GetAllProjects
+      description: Returns the IDs of project objects.
+      operationId: ListProjects
+      parameters:
+      - $ref: '#/components/parameters/OptionalQuerySubnetSize'
+      - $ref: '#/components/parameters/OptionalQueryNotify'
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns the an array of project IDs.
+          description: Returns an array of project IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
           $ref: '#/components/responses/Forbidden'
       tags:
       - project
+    parameters:
+    - $ref: '#/components/parameters/OptionalQuerySubnetSize'
+    - $ref: '#/components/parameters/OptionalQueryNotify'
     post:
       description: Creates a new project.
       operationId: CreateProject
@@ -1216,7 +1224,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Project'
-        description: Project payload
+        description: Project payload.
         required: true
       responses:
         "201":
@@ -1241,7 +1249,7 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - project
-  /project/{projectId}:
+  /project/{ projectId }:
     delete:
       description: Deletes an existing project.
       operationId: DeleteProject
@@ -1263,8 +1271,8 @@ paths:
       tags:
       - project
     get:
-      description: Returns a description of the project
-      operationId: GetProject
+      description: Returns a project.
+      operationId: ReadProject
       parameters:
       - $ref: '#/components/parameters/ProjectID'
       responses:
@@ -1294,7 +1302,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Project'
-        description: Project payload
+        description: Project payload.
         required: true
       responses:
         "200":
@@ -1302,7 +1310,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Project'
-          description: Updated project.
+          description: Returns the project object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -1313,12 +1321,14 @@ paths:
           $ref: '#/components/responses/NotFound'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - project
-  /project/{projectId}/cost:
+  /project/{ projectId }/cost:
     get:
-      description: Returns the current cost for the project.
-      operationId: GetProjectCost
+      description: Returns a resource cost.
+      operationId: ReadProjectCost
       parameters:
       - $ref: '#/components/parameters/ProjectID'
       responses:
@@ -1327,7 +1337,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Cost'
-          description: Returns the project cost object.
+          description: Returns the resource cost object.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -1338,10 +1348,10 @@ paths:
       - project
     parameters:
     - $ref: '#/components/parameters/ProjectID'
-  /project/{projectId}/usage:
+  /project/{ projectId }/usage:
     get:
-      description: Returns the current resources usage for the project.
-      operationId: GetProjectUsage
+      description: Returns a global project resource quotas/usage (0 for unlimited).
+      operationId: ReadProjectUsage
       parameters:
       - $ref: '#/components/parameters/ProjectID'
       responses:
@@ -1350,7 +1360,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProjectResources'
-          description: Returns the project resources object.
+          description: Returns the global project resource quotas/usage (0 for unlimited)
+            object.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -1361,11 +1372,11 @@ paths:
       - project
     parameters:
     - $ref: '#/components/parameters/ProjectID'
-  /project/{projectId}/record:
+  /project/{ projectId }/record:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     post:
-      description: Creates a new DNS record in specified project.
+      description: Creates a new DNS record.
       operationId: CreateProjectDnsRecord
       parameters:
       - $ref: '#/components/parameters/ProjectID'
@@ -1374,7 +1385,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/DnsRecord'
-        description: DNS record payload
+        description: DnsRecord payload.
         required: true
       responses:
         "201":
@@ -1395,13 +1406,15 @@ paths:
           $ref: '#/components/responses/Conflict'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - project
       - record
-  /project/{projectId}/records:
+  /project/{ projectId}/records:
     get:
-      description: Returns the IDs of the DNS records existing in the project.
-      operationId: GetProjectDnsRecords
+      description: Returns the IDs of DNS record objects.
+      operationId: ListProjectDnsRecords
       parameters:
       - $ref: '#/components/parameters/ProjectID'
       responses:
@@ -1422,14 +1435,14 @@ paths:
       - record
     parameters:
     - $ref: '#/components/parameters/ProjectID'
-  /project/{projectId}/zone/{zoneId}/volume:
+  /project/{ projectId }/zone/{ zoneId }/volume:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/ZoneID'
     - $ref: '#/components/parameters/OptionalQueryPoolID'
     - $ref: '#/components/parameters/OptionalQueryTemplateID'
     post:
-      description: Creates a new storage volume in specified zone.
+      description: Creates a new storage volume.
       operationId: CreateProjectZoneVolume
       parameters:
       - $ref: '#/components/parameters/ProjectID'
@@ -1441,7 +1454,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Volume'
-        description: Volume payload
+        description: Volume payload.
         required: true
       responses:
         "201":
@@ -1468,11 +1481,10 @@ paths:
       - project
       - zone
       - volume
-  /project/{projectId}/zone/{zoneId}/volumes:
+  /project/{ projectId }/zone/{ zoneId }/volumes:
     get:
-      description: Returns the IDs of the storage volumes existing in the project
-        in the specified zone.
-      operationId: GetProjectZoneVolumes
+      description: Returns the IDs of storage volume objects.
+      operationId: ListProjectZoneVolumes
       parameters:
       - $ref: '#/components/parameters/ProjectID'
       - $ref: '#/components/parameters/ZoneID'
@@ -1496,13 +1508,13 @@ paths:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/ZoneID'
-  /project/{projectId}/zone/{zoneId}/instance:
+  /project/{ projectId }/zone/{ zoneId }/instance:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/ZoneID'
     - $ref: '#/components/parameters/OptionalQueryNotify'
     post:
-      description: Creates a new virtual machine instance in specified zone.
+      description: Creates a new virtual machine instance.
       operationId: CreateProjectZoneInstance
       parameters:
       - $ref: '#/components/parameters/ProjectID'
@@ -1513,7 +1525,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Instance'
-        description: Instance payload
+        description: Instance payload.
         required: true
       responses:
         "201":
@@ -1540,11 +1552,10 @@ paths:
       - project
       - zone
       - instance
-  /project/{projectId}/zone/{zoneId}/instances:
+  /project/{ projectId }/zone/{ zoneId }/instances:
     get:
-      description: Returns the IDs of the virtual machine instances existing in the
-        project in the specified zone.
-      operationId: GetProjectZoneInstances
+      description: Returns the IDs of virtual machine instance objects.
+      operationId: ListProjectZoneInstances
       parameters:
       - $ref: '#/components/parameters/ProjectID'
       - $ref: '#/components/parameters/ZoneID'
@@ -1568,7 +1579,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/ZoneID'
-  /project/{projectId}/zone/{zoneId}/kce:
+  /project/{ projectId }/zone/{ zoneId }/kce:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/ZoneID'
@@ -1577,8 +1588,8 @@ paths:
     - $ref: '#/components/parameters/OptionalQueryKcePublic'
     - $ref: '#/components/parameters/OptionalQueryNotify'
     post:
-      description: Creates a new KCE virtual machine in specified zone.
-      operationId: CreateProjectZoneKce
+      description: Creates a new KCE (Kowabunga Compute Engine).
+      operationId: CreateProjectZoneKCE
       parameters:
       - $ref: '#/components/parameters/ProjectID'
       - $ref: '#/components/parameters/ZoneID'
@@ -1591,7 +1602,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/KCE'
-        description: KCE payload
+        description: KCE payload.
         required: true
       responses:
         "201":
@@ -1599,7 +1610,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KCE'
-          description: Returns the newly created KCE virtual machine object.
+          description: Returns the newly created KCE (Kowabunga Compute Engine) object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -1618,11 +1629,10 @@ paths:
       - project
       - zone
       - kce
-  /project/{projectId}/zone/{zoneId}/kces:
+  /project/{ projectId }/zone/{ zoneId }/kces:
     get:
-      description: Returns the IDs of the KCE virtual machines existing in the project
-        in the specified zone.
-      operationId: GetProjectZoneKCEs
+      description: Returns the IDs of KCE (Kowabunga Compute Engine) objects.
+      operationId: ListProjectZoneKCEs
       parameters:
       - $ref: '#/components/parameters/ProjectID'
       - $ref: '#/components/parameters/ZoneID'
@@ -1632,7 +1642,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of KCE virtual machine IDs.
+          description: Returns an array of KCE (Kowabunga Compute Engine) IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -1646,11 +1656,10 @@ paths:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/ZoneID'
-  /project/{projectId}/zone/{zoneId}/kfs:
+  /project/{ projectId }/zone/{ zoneId }/kfs:
     get:
-      description: Returns the IDs of the KFS storage volumes existing in the project
-        in the specified zone.
-      operationId: GetProjectZoneKfs
+      description: Returns the IDs of KFS (Kowabunga File System) objects.
+      operationId: ListProjectZoneKFSs
       parameters:
       - $ref: '#/components/parameters/ProjectID'
       - $ref: '#/components/parameters/ZoneID'
@@ -1662,7 +1671,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of KFS storage volume IDs.
+          description: Returns an array of KFS (Kowabunga File System) IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -1679,8 +1688,8 @@ paths:
     - $ref: '#/components/parameters/OptionalQueryNfsID'
     - $ref: '#/components/parameters/OptionalQueryNotify'
     post:
-      description: Creates a new KFS storage volume in specified zone.
-      operationId: CreateProjectZoneKfs
+      description: Creates a new KFS (Kowabunga File System).
+      operationId: CreateProjectZoneKFS
       parameters:
       - $ref: '#/components/parameters/ProjectID'
       - $ref: '#/components/parameters/ZoneID'
@@ -1691,7 +1700,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/KFS'
-        description: KFS payload
+        description: KFS payload.
         required: true
       responses:
         "201":
@@ -1699,7 +1708,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KFS'
-          description: Returns the newly created KFS storage volume object.
+          description: Returns the newly created KFS (Kowabunga File System) object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -1712,17 +1721,19 @@ paths:
           $ref: '#/components/responses/Conflict'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - project
       - zone
       - kfs
-  /project/{projectId}/zone/{zoneId}/kgw:
+  /project/{ projectId }/zone/{ zoneId }/kgw:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/ZoneID'
     post:
-      description: Creates a new KGW in the specified zone.
-      operationId: CreateProjectZoneKgw
+      description: Creates a new KGW (Kowabunga Network Gateway).
+      operationId: CreateProjectZoneKGW
       parameters:
       - $ref: '#/components/parameters/ProjectID'
       - $ref: '#/components/parameters/ZoneID'
@@ -1731,7 +1742,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/KGW'
-        description: KGW payload
+        description: KGW payload.
         required: true
       responses:
         "201":
@@ -1739,7 +1750,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KGW'
-          description: Returns the newly created KGW object.
+          description: Returns the newly created KGW (Kowabunga Network Gateway) object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -1752,15 +1763,16 @@ paths:
           $ref: '#/components/responses/Conflict'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - project
       - zone
       - kgw
-  /project/{projectId}/zone/{zoneId}/kgws:
+  /project/{ projectId }/zone/{ zoneId }/kgws:
     get:
-      description: Returns the IDs of the KGW existing in the project in the specified
-        zone.
-      operationId: GetProjectZoneKGWs
+      description: Returns the IDs of KGW (Kowabunga Network Gateway) objects.
+      operationId: ListProjectZoneKGWs
       parameters:
       - $ref: '#/components/parameters/ProjectID'
       - $ref: '#/components/parameters/ZoneID'
@@ -1770,7 +1782,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of KGW virtual machine IDs.
+          description: Returns an array of KGW (Kowabunga Network Gateway) IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -3377,7 +3389,7 @@ components:
         type: string
       style: simple
     ProjectID:
-      description: The ID of the network adapter.
+      description: The ID of the project.
       explode: false
       in: path
       name: projectId
@@ -3590,7 +3602,7 @@ components:
       required:
       - name
     Cost:
-      description: A key/value metadata.
+      description: A resource cost.
       example:
         price: 6
         currency: currency
@@ -4185,6 +4197,8 @@ components:
       - name
       - token
     Project:
+      description: "A Kowabunga project corresponds to a single tenant, isolated set\
+        \ of resources."
       example:
         owner: owner
         quotas:
@@ -4224,27 +4238,26 @@ components:
           description: The project description.
           type: string
         owner:
-          description: The project's owner name.
+          description: Owner's name.
           type: string
         email:
-          description: "The project associated email address, used to receive notifications."
+          description: "Associated email address, used to receive notifications."
           type: string
         domain:
-          description: The project associated internal domain name (e.g. myproject.acme.com).
+          description: Internal domain name (e.g. myproject.acme.com).
           type: string
         root_password:
-          description: "The project default root password, set at cloud-init instance\
-            \ bootstrap phase. Will be randomly auto-generated at each instance creation\
-            \ if unspecified."
+          description: "Default root password, set at cloud-init instance bootstrap\
+            \ phase. Will be randomly auto-generated at each instance creation if\
+            \ unspecified."
           type: string
         bootstrap_user:
-          description: "The project default service user name, created at cloud-init\
-            \ instance bootstrap phase. Will use Kowabunga's default configuration\
-            \ one if unspecified."
+          description: "Default service user name, created at cloud-init instance\
+            \ bootstrap phase. Will use Kowabunga's default configuration one if unspecified."
           type: string
         bootstrap_pubkey:
-          description: "The project default public SSH key, to be associated to bootstrap\
-            \ user. Will use Kowabunga's default configuration one if unspecified."
+          description: "Default public SSH key, to be associated to bootstrap user.\
+            \ Will use Kowabunga's default configuration one if unspecified."
           type: string
         tags:
           description: A list of tags to be associated to the project.
@@ -4252,7 +4265,7 @@ components:
             type: string
           type: array
         metadatas:
-          description: A list of metadata to be associated to the project
+          description: A list of metadata to be associated to the project.
           items:
             $ref: '#/components/schemas/Metadata'
           type: array
@@ -4268,7 +4281,7 @@ components:
       - name
       - owner
     ProjectResources:
-      description: The global project resource quotas/usage (0 for unlimited).
+      description: A global project resource quotas/usage (0 for unlimited).
       example:
         memory: 6
         instances: 5
@@ -4276,22 +4289,22 @@ components:
         vcpus: 0
       properties:
         vcpus:
-          description: the maximum total number of vCPUs allowed to be consumed by
+          description: The maximum total number of vCPUs allowed to be consumed by
             sum of all instances.
           format: uint16
           type: integer
         memory:
-          description: the maximum total memory (in bytes) allowed to be consumed
+          description: The maximum total memory (in bytes) allowed to be consumed
             by sum of all instances.
           format: uint64
           type: integer
         storage:
-          description: the maximum total disk capacity allowed to be consumed by sum
+          description: The maximum total disk capacity allowed to be consumed by sum
             of all instances.
           format: uint64
           type: integer
         instances:
-          description: the maximum number of instances allowed to be spawned.
+          description: The maximum number of instances allowed to be spawned.
           format: uint16
           type: integer
     Region:

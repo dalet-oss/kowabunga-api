@@ -21,11 +21,11 @@ All URIs are relative to */api/v1*
 *HostApi* | [**readHost**](Apis/HostApi.md#readhost) | **GET** /host/{ hostId } | Returns a computing host. |
 *HostApi* | [**readHostCaps**](Apis/HostApi.md#readhostcaps) | **GET** /host/{ hostId }/caps | Returns a computing host capability. |
 *HostApi* | [**updateHost**](Apis/HostApi.md#updatehost) | **PUT** /host/{ hostId } | Updates a computing host configuration. |
-| *InstanceApi* | [**createProjectZoneInstance**](Apis/InstanceApi.md#createprojectzoneinstance) | **POST** /project/{projectId}/zone/{zoneId}/instance | Creates a new virtual machine instance in specified zone. |
+| *InstanceApi* | [**createProjectZoneInstance**](Apis/InstanceApi.md#createprojectzoneinstance) | **POST** /project/{ projectId }/zone/{ zoneId }/instance | Creates a new virtual machine instance. |
 *InstanceApi* | [**deleteInstance**](Apis/InstanceApi.md#deleteinstance) | **DELETE** /instance/{ instanceId } | Deletes an existing virtual machine instance. |
-*InstanceApi* | [**getProjectZoneInstances**](Apis/InstanceApi.md#getprojectzoneinstances) | **GET** /project/{projectId}/zone/{zoneId}/instances | Returns the IDs of the virtual machine instances existing in the project in the specified zone. |
 *InstanceApi* | [**listHostInstances**](Apis/InstanceApi.md#listhostinstances) | **GET** /host/{ hostId }/instances | Returns the IDs of virtual machine instance objects. |
 *InstanceApi* | [**listInstances**](Apis/InstanceApi.md#listinstances) | **GET** /instance | Returns the IDs of virtual machine instance objects. |
+*InstanceApi* | [**listProjectZoneInstances**](Apis/InstanceApi.md#listprojectzoneinstances) | **GET** /project/{ projectId }/zone/{ zoneId }/instances | Returns the IDs of virtual machine instance objects. |
 *InstanceApi* | [**readInstance**](Apis/InstanceApi.md#readinstance) | **GET** /instance/{ instanceId } | Returns a virtual machine instance. |
 *InstanceApi* | [**readInstanceRemoteConnection**](Apis/InstanceApi.md#readinstanceremoteconnection) | **GET** /instance/{ instanceId }/connect | Returns a virtual machine instance remote access characteristics. |
 *InstanceApi* | [**readInstanceState**](Apis/InstanceApi.md#readinstancestate) | **GET** /instance/{ instanceId }/state | Returns a virtual machine instance state. |
@@ -37,10 +37,10 @@ All URIs are relative to */api/v1*
 *InstanceApi* | [**stopInstance**](Apis/InstanceApi.md#stopinstance) | **PATCH** /instance/{ instanceId }/stop | Performs a virtual machine instance hardware stop. |
 *InstanceApi* | [**suspendInstance**](Apis/InstanceApi.md#suspendinstance) | **PATCH** /instance/{ instanceId }/suspend | Performs a virtual machine instance software PM suspend. |
 *InstanceApi* | [**updateInstance**](Apis/InstanceApi.md#updateinstance) | **PUT** /instance/{ instanceId } | Updates a virtual machine instance configuration. |
-| *KceApi* | [**createProjectZoneKce**](Apis/KceApi.md#createprojectzonekce) | **POST** /project/{projectId}/zone/{zoneId}/kce | Creates a new KCE virtual machine in specified zone. |
+| *KceApi* | [**createProjectZoneKCE**](Apis/KceApi.md#createprojectzonekce) | **POST** /project/{ projectId }/zone/{ zoneId }/kce | Creates a new KCE (Kowabunga Compute Engine). |
 *KceApi* | [**deleteKCE**](Apis/KceApi.md#deletekce) | **DELETE** /kce/{ kceId } | Deletes an existing KCE (Kowabunga Compute Engine). |
-*KceApi* | [**getProjectZoneKCEs**](Apis/KceApi.md#getprojectzonekces) | **GET** /project/{projectId}/zone/{zoneId}/kces | Returns the IDs of the KCE virtual machines existing in the project in the specified zone. |
 *KceApi* | [**listKCEs**](Apis/KceApi.md#listkces) | **GET** /kce | Returns the IDs of KCE (Kowabunga Compute Engine) objects. |
+*KceApi* | [**listProjectZoneKCEs**](Apis/KceApi.md#listprojectzonekces) | **GET** /project/{ projectId }/zone/{ zoneId }/kces | Returns the IDs of KCE (Kowabunga Compute Engine) objects. |
 *KceApi* | [**readKCE**](Apis/KceApi.md#readkce) | **GET** /kce/{ kceId } | Returns a KCE (Kowabunga Compute Engine). |
 *KceApi* | [**readKCEState**](Apis/KceApi.md#readkcestate) | **GET** /kce/{ kceId }/state | Returns a virtual machine instance state. |
 *KceApi* | [**rebootKCE**](Apis/KceApi.md#rebootkce) | **PATCH** /kce/{ kceId }/reboot | Performs a KCE (Kowabunga Compute Engine) software reboot. |
@@ -51,17 +51,17 @@ All URIs are relative to */api/v1*
 *KceApi* | [**stopKCE**](Apis/KceApi.md#stopkce) | **PATCH** /kce/{ kceId }/stop | Performs a KCE (Kowabunga Compute Engine) hardware stop. |
 *KceApi* | [**suspendKCE**](Apis/KceApi.md#suspendkce) | **PATCH** /kce/{ kceId }/suspend | Performs a KCE (Kowabunga Compute Engine) software PM suspend. |
 *KceApi* | [**updateKCE**](Apis/KceApi.md#updatekce) | **PUT** /kce/{ kceId } | Updates a KCE (Kowabunga Compute Engine) configuration. |
-| *KfsApi* | [**createProjectZoneKfs**](Apis/KfsApi.md#createprojectzonekfs) | **POST** /project/{projectId}/zone/{zoneId}/kfs | Creates a new KFS storage volume in specified zone. |
+| *KfsApi* | [**createProjectZoneKFS**](Apis/KfsApi.md#createprojectzonekfs) | **POST** /project/{ projectId }/zone/{ zoneId }/kfs | Creates a new KFS (Kowabunga File System). |
 *KfsApi* | [**deleteKFS**](Apis/KfsApi.md#deletekfs) | **DELETE** /kfs/{ kfsId } | Deletes an existing KFS (Kowabunga File System). |
-*KfsApi* | [**getProjectZoneKfs**](Apis/KfsApi.md#getprojectzonekfs) | **GET** /project/{projectId}/zone/{zoneId}/kfs | Returns the IDs of the KFS storage volumes existing in the project in the specified zone. |
 *KfsApi* | [**listKFSs**](Apis/KfsApi.md#listkfss) | **GET** /kfs | Returns the IDs of KFS (Kowabunga File System) objects. |
+*KfsApi* | [**listProjectZoneKFSs**](Apis/KfsApi.md#listprojectzonekfss) | **GET** /project/{ projectId }/zone/{ zoneId }/kfs | Returns the IDs of KFS (Kowabunga File System) objects. |
 *KfsApi* | [**listStorageNFSKFSs**](Apis/KfsApi.md#liststoragenfskfss) | **GET** /nfs/{ nfsId }/kfs | Returns the IDs of KFS (Kowabunga File System) objects. |
 *KfsApi* | [**readKFS**](Apis/KfsApi.md#readkfs) | **GET** /kfs/{ kfsId } | Returns a KFS (Kowabunga File System). |
 *KfsApi* | [**updateKFS**](Apis/KfsApi.md#updatekfs) | **PUT** /kfs/{ kfsId } | Updates a KFS (Kowabunga File System) configuration. |
-| *KgwApi* | [**createProjectZoneKgw**](Apis/KgwApi.md#createprojectzonekgw) | **POST** /project/{projectId}/zone/{zoneId}/kgw | Creates a new KGW in the specified zone. |
+| *KgwApi* | [**createProjectZoneKGW**](Apis/KgwApi.md#createprojectzonekgw) | **POST** /project/{ projectId }/zone/{ zoneId }/kgw | Creates a new KGW (Kowabunga Network Gateway). |
 *KgwApi* | [**deleteKGW**](Apis/KgwApi.md#deletekgw) | **DELETE** /kgw/kgwId } | Deletes an existing KGW (Kowabunga Network Gateway). |
-*KgwApi* | [**getProjectZoneKGWs**](Apis/KgwApi.md#getprojectzonekgws) | **GET** /project/{projectId}/zone/{zoneId}/kgws | Returns the IDs of the KGW existing in the project in the specified zone. |
 *KgwApi* | [**listKGWs**](Apis/KgwApi.md#listkgws) | **GET** /kgw | Returns the IDs of KGW (Kowabunga Network Gateway) objects. |
+*KgwApi* | [**listProjectZoneKGWs**](Apis/KgwApi.md#listprojectzonekgws) | **GET** /project/{ projectId }/zone/{ zoneId }/kgws | Returns the IDs of KGW (Kowabunga Network Gateway) objects. |
 *KgwApi* | [**readKGW**](Apis/KgwApi.md#readkgw) | **GET** /kgw/kgwId } | Returns a KGW (Kowabunga Network Gateway). |
 *KgwApi* | [**updateKGW**](Apis/KgwApi.md#updatekgw) | **PUT** /kgw/kgwId } | Updates a KGW (Kowabunga Network Gateway) configuration. |
 | *NetgwApi* | [**createNetGW**](Apis/NetgwApi.md#createnetgw) | **POST** /zone/{ zoneId }/netgw | Creates a new Iris network gateway. |
@@ -90,27 +90,27 @@ All URIs are relative to */api/v1*
 *PoolApi* | [**setZoneDefaultStoragePool**](Apis/PoolApi.md#setzonedefaultstoragepool) | **PATCH** /zone/{ zoneId }/pool/{ poolId }/default | Performs a availability zone setting of default storage pool. |
 *PoolApi* | [**updateStoragePool**](Apis/PoolApi.md#updatestoragepool) | **PUT** /pool/{ poolId } | Updates a storage pool configuration. |
 | *ProjectApi* | [**createProject**](Apis/ProjectApi.md#createproject) | **POST** /project | Creates a new project. |
-*ProjectApi* | [**createProjectDnsRecord**](Apis/ProjectApi.md#createprojectdnsrecord) | **POST** /project/{projectId}/record | Creates a new DNS record in specified project. |
-*ProjectApi* | [**createProjectZoneInstance**](Apis/ProjectApi.md#createprojectzoneinstance) | **POST** /project/{projectId}/zone/{zoneId}/instance | Creates a new virtual machine instance in specified zone. |
-*ProjectApi* | [**createProjectZoneKce**](Apis/ProjectApi.md#createprojectzonekce) | **POST** /project/{projectId}/zone/{zoneId}/kce | Creates a new KCE virtual machine in specified zone. |
-*ProjectApi* | [**createProjectZoneKfs**](Apis/ProjectApi.md#createprojectzonekfs) | **POST** /project/{projectId}/zone/{zoneId}/kfs | Creates a new KFS storage volume in specified zone. |
-*ProjectApi* | [**createProjectZoneKgw**](Apis/ProjectApi.md#createprojectzonekgw) | **POST** /project/{projectId}/zone/{zoneId}/kgw | Creates a new KGW in the specified zone. |
-*ProjectApi* | [**createProjectZoneVolume**](Apis/ProjectApi.md#createprojectzonevolume) | **POST** /project/{projectId}/zone/{zoneId}/volume | Creates a new storage volume in specified zone. |
-*ProjectApi* | [**deleteProject**](Apis/ProjectApi.md#deleteproject) | **DELETE** /project/{projectId} | Deletes an existing project. |
-*ProjectApi* | [**getAllProjects**](Apis/ProjectApi.md#getallprojects) | **GET** /project | Returns the IDs of registered projects. |
-*ProjectApi* | [**getProject**](Apis/ProjectApi.md#getproject) | **GET** /project/{projectId} | Returns a description of the project |
-*ProjectApi* | [**getProjectCost**](Apis/ProjectApi.md#getprojectcost) | **GET** /project/{projectId}/cost | Returns the current cost for the project. |
-*ProjectApi* | [**getProjectDnsRecords**](Apis/ProjectApi.md#getprojectdnsrecords) | **GET** /project/{projectId}/records | Returns the IDs of the DNS records existing in the project. |
-*ProjectApi* | [**getProjectUsage**](Apis/ProjectApi.md#getprojectusage) | **GET** /project/{projectId}/usage | Returns the current resources usage for the project. |
-*ProjectApi* | [**getProjectZoneInstances**](Apis/ProjectApi.md#getprojectzoneinstances) | **GET** /project/{projectId}/zone/{zoneId}/instances | Returns the IDs of the virtual machine instances existing in the project in the specified zone. |
-*ProjectApi* | [**getProjectZoneKCEs**](Apis/ProjectApi.md#getprojectzonekces) | **GET** /project/{projectId}/zone/{zoneId}/kces | Returns the IDs of the KCE virtual machines existing in the project in the specified zone. |
-*ProjectApi* | [**getProjectZoneKGWs**](Apis/ProjectApi.md#getprojectzonekgws) | **GET** /project/{projectId}/zone/{zoneId}/kgws | Returns the IDs of the KGW existing in the project in the specified zone. |
-*ProjectApi* | [**getProjectZoneKfs**](Apis/ProjectApi.md#getprojectzonekfs) | **GET** /project/{projectId}/zone/{zoneId}/kfs | Returns the IDs of the KFS storage volumes existing in the project in the specified zone. |
-*ProjectApi* | [**getProjectZoneVolumes**](Apis/ProjectApi.md#getprojectzonevolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes | Returns the IDs of the storage volumes existing in the project in the specified zone. |
-*ProjectApi* | [**updateProject**](Apis/ProjectApi.md#updateproject) | **PUT** /project/{projectId} | Updates a project configuration. |
-| *RecordApi* | [**createProjectDnsRecord**](Apis/RecordApi.md#createprojectdnsrecord) | **POST** /project/{projectId}/record | Creates a new DNS record in specified project. |
+*ProjectApi* | [**createProjectDnsRecord**](Apis/ProjectApi.md#createprojectdnsrecord) | **POST** /project/{ projectId }/record | Creates a new DNS record. |
+*ProjectApi* | [**createProjectZoneInstance**](Apis/ProjectApi.md#createprojectzoneinstance) | **POST** /project/{ projectId }/zone/{ zoneId }/instance | Creates a new virtual machine instance. |
+*ProjectApi* | [**createProjectZoneKCE**](Apis/ProjectApi.md#createprojectzonekce) | **POST** /project/{ projectId }/zone/{ zoneId }/kce | Creates a new KCE (Kowabunga Compute Engine). |
+*ProjectApi* | [**createProjectZoneKFS**](Apis/ProjectApi.md#createprojectzonekfs) | **POST** /project/{ projectId }/zone/{ zoneId }/kfs | Creates a new KFS (Kowabunga File System). |
+*ProjectApi* | [**createProjectZoneKGW**](Apis/ProjectApi.md#createprojectzonekgw) | **POST** /project/{ projectId }/zone/{ zoneId }/kgw | Creates a new KGW (Kowabunga Network Gateway). |
+*ProjectApi* | [**createProjectZoneVolume**](Apis/ProjectApi.md#createprojectzonevolume) | **POST** /project/{ projectId }/zone/{ zoneId }/volume | Creates a new storage volume. |
+*ProjectApi* | [**deleteProject**](Apis/ProjectApi.md#deleteproject) | **DELETE** /project/{ projectId } | Deletes an existing project. |
+*ProjectApi* | [**listProjectDnsRecords**](Apis/ProjectApi.md#listprojectdnsrecords) | **GET** /project/{ projectId}/records | Returns the IDs of DNS record objects. |
+*ProjectApi* | [**listProjectZoneInstances**](Apis/ProjectApi.md#listprojectzoneinstances) | **GET** /project/{ projectId }/zone/{ zoneId }/instances | Returns the IDs of virtual machine instance objects. |
+*ProjectApi* | [**listProjectZoneKCEs**](Apis/ProjectApi.md#listprojectzonekces) | **GET** /project/{ projectId }/zone/{ zoneId }/kces | Returns the IDs of KCE (Kowabunga Compute Engine) objects. |
+*ProjectApi* | [**listProjectZoneKFSs**](Apis/ProjectApi.md#listprojectzonekfss) | **GET** /project/{ projectId }/zone/{ zoneId }/kfs | Returns the IDs of KFS (Kowabunga File System) objects. |
+*ProjectApi* | [**listProjectZoneKGWs**](Apis/ProjectApi.md#listprojectzonekgws) | **GET** /project/{ projectId }/zone/{ zoneId }/kgws | Returns the IDs of KGW (Kowabunga Network Gateway) objects. |
+*ProjectApi* | [**listProjectZoneVolumes**](Apis/ProjectApi.md#listprojectzonevolumes) | **GET** /project/{ projectId }/zone/{ zoneId }/volumes | Returns the IDs of storage volume objects. |
+*ProjectApi* | [**listProjects**](Apis/ProjectApi.md#listprojects) | **GET** /project | Returns the IDs of project objects. |
+*ProjectApi* | [**readProject**](Apis/ProjectApi.md#readproject) | **GET** /project/{ projectId } | Returns a project. |
+*ProjectApi* | [**readProjectCost**](Apis/ProjectApi.md#readprojectcost) | **GET** /project/{ projectId }/cost | Returns a resource cost. |
+*ProjectApi* | [**readProjectUsage**](Apis/ProjectApi.md#readprojectusage) | **GET** /project/{ projectId }/usage | Returns a global project resource quotas/usage (0 for unlimited). |
+*ProjectApi* | [**updateProject**](Apis/ProjectApi.md#updateproject) | **PUT** /project/{ projectId } | Updates a project configuration. |
+| *RecordApi* | [**createProjectDnsRecord**](Apis/RecordApi.md#createprojectdnsrecord) | **POST** /project/{ projectId }/record | Creates a new DNS record. |
 *RecordApi* | [**deleteDnsRecord**](Apis/RecordApi.md#deletednsrecord) | **DELETE** /record/{ recordId } | Deletes an existing DNS record. |
-*RecordApi* | [**getProjectDnsRecords**](Apis/RecordApi.md#getprojectdnsrecords) | **GET** /project/{projectId}/records | Returns the IDs of the DNS records existing in the project. |
+*RecordApi* | [**listProjectDnsRecords**](Apis/RecordApi.md#listprojectdnsrecords) | **GET** /project/{ projectId}/records | Returns the IDs of DNS record objects. |
 *RecordApi* | [**readDnsRecord**](Apis/RecordApi.md#readdnsrecord) | **GET** /record/{ recordId } | Returns a DNS record. |
 *RecordApi* | [**updateDnsRecord**](Apis/RecordApi.md#updatednsrecord) | **PUT** /record/{ recordId } | Updates a DNS record configuration. |
 | *RegionApi* | [**createRegion**](Apis/RegionApi.md#createregion) | **POST** /region | Creates a new region. |
@@ -145,30 +145,30 @@ All URIs are relative to */api/v1*
 *VnetApi* | [**readVNet**](Apis/VnetApi.md#readvnet) | **GET** /vnet/{ vnetId } | Returns a virtual network. |
 *VnetApi* | [**setVNetDefaultSubnet**](Apis/VnetApi.md#setvnetdefaultsubnet) | **PATCH** /vnet/{ vnetId }/subnet/{ subnetId }/default | Performs a virtual network setting of default network subnet. |
 *VnetApi* | [**updateVNet**](Apis/VnetApi.md#updatevnet) | **PUT** /vnet/{ vnetId } | Updates a virtual network configuration. |
-| *VolumeApi* | [**createProjectZoneVolume**](Apis/VolumeApi.md#createprojectzonevolume) | **POST** /project/{projectId}/zone/{zoneId}/volume | Creates a new storage volume in specified zone. |
+| *VolumeApi* | [**createProjectZoneVolume**](Apis/VolumeApi.md#createprojectzonevolume) | **POST** /project/{ projectId }/zone/{ zoneId }/volume | Creates a new storage volume. |
 *VolumeApi* | [**deleteVolume**](Apis/VolumeApi.md#deletevolume) | **DELETE** /volume/{ volumeId } | Deletes an existing storage volume. |
-*VolumeApi* | [**getProjectZoneVolumes**](Apis/VolumeApi.md#getprojectzonevolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes | Returns the IDs of the storage volumes existing in the project in the specified zone. |
+*VolumeApi* | [**listProjectZoneVolumes**](Apis/VolumeApi.md#listprojectzonevolumes) | **GET** /project/{ projectId }/zone/{ zoneId }/volumes | Returns the IDs of storage volume objects. |
 *VolumeApi* | [**listStoragePoolVolumes**](Apis/VolumeApi.md#liststoragepoolvolumes) | **GET** /pool/{ poolId }/volumes | Returns the IDs of storage volume objects. |
 *VolumeApi* | [**listVolumes**](Apis/VolumeApi.md#listvolumes) | **GET** /volume | Returns the IDs of storage volume objects. |
 *VolumeApi* | [**readVolume**](Apis/VolumeApi.md#readvolume) | **GET** /volume/{ volumeId } | Returns a storage volume. |
 *VolumeApi* | [**updateVolume**](Apis/VolumeApi.md#updatevolume) | **PUT** /volume/{ volumeId } | Updates a storage volume configuration. |
 | *ZoneApi* | [**createHost**](Apis/ZoneApi.md#createhost) | **POST** /zone/{ zoneId }/host | Creates a new computing host. |
 *ZoneApi* | [**createNetGW**](Apis/ZoneApi.md#createnetgw) | **POST** /zone/{ zoneId }/netgw | Creates a new Iris network gateway. |
-*ZoneApi* | [**createProjectZoneInstance**](Apis/ZoneApi.md#createprojectzoneinstance) | **POST** /project/{projectId}/zone/{zoneId}/instance | Creates a new virtual machine instance in specified zone. |
-*ZoneApi* | [**createProjectZoneKce**](Apis/ZoneApi.md#createprojectzonekce) | **POST** /project/{projectId}/zone/{zoneId}/kce | Creates a new KCE virtual machine in specified zone. |
-*ZoneApi* | [**createProjectZoneKfs**](Apis/ZoneApi.md#createprojectzonekfs) | **POST** /project/{projectId}/zone/{zoneId}/kfs | Creates a new KFS storage volume in specified zone. |
-*ZoneApi* | [**createProjectZoneKgw**](Apis/ZoneApi.md#createprojectzonekgw) | **POST** /project/{projectId}/zone/{zoneId}/kgw | Creates a new KGW in the specified zone. |
-*ZoneApi* | [**createProjectZoneVolume**](Apis/ZoneApi.md#createprojectzonevolume) | **POST** /project/{projectId}/zone/{zoneId}/volume | Creates a new storage volume in specified zone. |
+*ZoneApi* | [**createProjectZoneInstance**](Apis/ZoneApi.md#createprojectzoneinstance) | **POST** /project/{ projectId }/zone/{ zoneId }/instance | Creates a new virtual machine instance. |
+*ZoneApi* | [**createProjectZoneKCE**](Apis/ZoneApi.md#createprojectzonekce) | **POST** /project/{ projectId }/zone/{ zoneId }/kce | Creates a new KCE (Kowabunga Compute Engine). |
+*ZoneApi* | [**createProjectZoneKFS**](Apis/ZoneApi.md#createprojectzonekfs) | **POST** /project/{ projectId }/zone/{ zoneId }/kfs | Creates a new KFS (Kowabunga File System). |
+*ZoneApi* | [**createProjectZoneKGW**](Apis/ZoneApi.md#createprojectzonekgw) | **POST** /project/{ projectId }/zone/{ zoneId }/kgw | Creates a new KGW (Kowabunga Network Gateway). |
+*ZoneApi* | [**createProjectZoneVolume**](Apis/ZoneApi.md#createprojectzonevolume) | **POST** /project/{ projectId }/zone/{ zoneId }/volume | Creates a new storage volume. |
 *ZoneApi* | [**createStorageNFS**](Apis/ZoneApi.md#createstoragenfs) | **POST** /zone/{ zoneId }/nfs | Creates a new NFS storage. |
 *ZoneApi* | [**createStoragePool**](Apis/ZoneApi.md#createstoragepool) | **POST** /zone/{ zoneId }/pool | Creates a new storage pool. |
 *ZoneApi* | [**createVNet**](Apis/ZoneApi.md#createvnet) | **POST** /zone/{ zoneId }/vnet | Creates a new virtual network. |
 *ZoneApi* | [**createZone**](Apis/ZoneApi.md#createzone) | **POST** /region/{ regionId }/zone | Creates a new availability zone. |
 *ZoneApi* | [**deleteZone**](Apis/ZoneApi.md#deletezone) | **DELETE** /zone/{ zoneId } | Deletes an existing availability zone. |
-*ZoneApi* | [**getProjectZoneInstances**](Apis/ZoneApi.md#getprojectzoneinstances) | **GET** /project/{projectId}/zone/{zoneId}/instances | Returns the IDs of the virtual machine instances existing in the project in the specified zone. |
-*ZoneApi* | [**getProjectZoneKCEs**](Apis/ZoneApi.md#getprojectzonekces) | **GET** /project/{projectId}/zone/{zoneId}/kces | Returns the IDs of the KCE virtual machines existing in the project in the specified zone. |
-*ZoneApi* | [**getProjectZoneKGWs**](Apis/ZoneApi.md#getprojectzonekgws) | **GET** /project/{projectId}/zone/{zoneId}/kgws | Returns the IDs of the KGW existing in the project in the specified zone. |
-*ZoneApi* | [**getProjectZoneKfs**](Apis/ZoneApi.md#getprojectzonekfs) | **GET** /project/{projectId}/zone/{zoneId}/kfs | Returns the IDs of the KFS storage volumes existing in the project in the specified zone. |
-*ZoneApi* | [**getProjectZoneVolumes**](Apis/ZoneApi.md#getprojectzonevolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes | Returns the IDs of the storage volumes existing in the project in the specified zone. |
+*ZoneApi* | [**listProjectZoneInstances**](Apis/ZoneApi.md#listprojectzoneinstances) | **GET** /project/{ projectId }/zone/{ zoneId }/instances | Returns the IDs of virtual machine instance objects. |
+*ZoneApi* | [**listProjectZoneKCEs**](Apis/ZoneApi.md#listprojectzonekces) | **GET** /project/{ projectId }/zone/{ zoneId }/kces | Returns the IDs of KCE (Kowabunga Compute Engine) objects. |
+*ZoneApi* | [**listProjectZoneKFSs**](Apis/ZoneApi.md#listprojectzonekfss) | **GET** /project/{ projectId }/zone/{ zoneId }/kfs | Returns the IDs of KFS (Kowabunga File System) objects. |
+*ZoneApi* | [**listProjectZoneKGWs**](Apis/ZoneApi.md#listprojectzonekgws) | **GET** /project/{ projectId }/zone/{ zoneId }/kgws | Returns the IDs of KGW (Kowabunga Network Gateway) objects. |
+*ZoneApi* | [**listProjectZoneVolumes**](Apis/ZoneApi.md#listprojectzonevolumes) | **GET** /project/{ projectId }/zone/{ zoneId }/volumes | Returns the IDs of storage volume objects. |
 *ZoneApi* | [**listRegionZones**](Apis/ZoneApi.md#listregionzones) | **GET** /region/{ regionId }/zones | Returns the IDs of availability zone objects. |
 *ZoneApi* | [**listZoneHosts**](Apis/ZoneApi.md#listzonehosts) | **GET** /zone/{zoneId}/hosts | Returns the IDs of computing host objects. |
 *ZoneApi* | [**listZoneNetGWs**](Apis/ZoneApi.md#listzonenetgws) | **GET** /zone/{ zoneId }/netgws | Returns the IDs of Iris network gateway objects. |

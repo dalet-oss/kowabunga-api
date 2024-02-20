@@ -4,10 +4,10 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createProjectZoneKce**](KceApi.md#createProjectZoneKce) | **POST** /project/{projectId}/zone/{zoneId}/kce |  |
+| [**createProjectZoneKCE**](KceApi.md#createProjectZoneKCE) | **POST** /project/{ projectId }/zone/{ zoneId }/kce |  |
 | [**deleteKCE**](KceApi.md#deleteKCE) | **DELETE** /kce/{ kceId } |  |
-| [**getProjectZoneKCEs**](KceApi.md#getProjectZoneKCEs) | **GET** /project/{projectId}/zone/{zoneId}/kces |  |
 | [**listKCEs**](KceApi.md#listKCEs) | **GET** /kce |  |
+| [**listProjectZoneKCEs**](KceApi.md#listProjectZoneKCEs) | **GET** /project/{ projectId }/zone/{ zoneId }/kces |  |
 | [**readKCE**](KceApi.md#readKCE) | **GET** /kce/{ kceId } |  |
 | [**readKCEState**](KceApi.md#readKCEState) | **GET** /kce/{ kceId }/state |  |
 | [**rebootKCE**](KceApi.md#rebootKCE) | **PATCH** /kce/{ kceId }/reboot |  |
@@ -20,21 +20,21 @@ All URIs are relative to */api/v1*
 | [**updateKCE**](KceApi.md#updateKCE) | **PUT** /kce/{ kceId } |  |
 
 
-<a name="createProjectZoneKce"></a>
-# **createProjectZoneKce**
-> KCE createProjectZoneKce(projectId, zoneId, KCE, poolId, templateId, public, notify)
+<a name="createProjectZoneKCE"></a>
+# **createProjectZoneKCE**
+> KCE createProjectZoneKCE(projectId, zoneId, KCE, poolId, templateId, public, notify)
 
 
 
-    Creates a new KCE virtual machine in specified zone.
+    Creates a new KCE (Kowabunga Compute Engine).
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **KCE** | [**KCE**](../Models/KCE.md)| KCE payload | |
+| **KCE** | [**KCE**](../Models/KCE.md)| KCE payload. | |
 | **poolId** | **String**| Storage pool ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **templateId** | **String**| Template to clone the storage volume from (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **public** | **String**| Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false). | [optional] [default to null] |
@@ -80,20 +80,16 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getProjectZoneKCEs"></a>
-# **getProjectZoneKCEs**
-> List getProjectZoneKCEs(projectId, zoneId)
+<a name="listKCEs"></a>
+# **listKCEs**
+> List listKCEs()
 
 
 
-    Returns the IDs of the KCE virtual machines existing in the project in the specified zone.
+    Returns the IDs of KCE (Kowabunga Compute Engine) objects.
 
 ### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -108,16 +104,20 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listKCEs"></a>
-# **listKCEs**
-> List listKCEs()
+<a name="listProjectZoneKCEs"></a>
+# **listProjectZoneKCEs**
+> List listProjectZoneKCEs(projectId, zoneId)
 
 
 
     Returns the IDs of KCE (Kowabunga Compute Engine) objects.
 
 ### Parameters
-This endpoint does not need any parameter.
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
 

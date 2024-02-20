@@ -4,29 +4,29 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createProjectZoneKgw**](KgwApi.md#createProjectZoneKgw) | **POST** /project/{projectId}/zone/{zoneId}/kgw |  |
+| [**createProjectZoneKGW**](KgwApi.md#createProjectZoneKGW) | **POST** /project/{ projectId }/zone/{ zoneId }/kgw |  |
 | [**deleteKGW**](KgwApi.md#deleteKGW) | **DELETE** /kgw/kgwId } |  |
-| [**getProjectZoneKGWs**](KgwApi.md#getProjectZoneKGWs) | **GET** /project/{projectId}/zone/{zoneId}/kgws |  |
 | [**listKGWs**](KgwApi.md#listKGWs) | **GET** /kgw |  |
+| [**listProjectZoneKGWs**](KgwApi.md#listProjectZoneKGWs) | **GET** /project/{ projectId }/zone/{ zoneId }/kgws |  |
 | [**readKGW**](KgwApi.md#readKGW) | **GET** /kgw/kgwId } |  |
 | [**updateKGW**](KgwApi.md#updateKGW) | **PUT** /kgw/kgwId } |  |
 
 
-<a name="createProjectZoneKgw"></a>
-# **createProjectZoneKgw**
-> KGW createProjectZoneKgw(projectId, zoneId, KGW)
+<a name="createProjectZoneKGW"></a>
+# **createProjectZoneKGW**
+> KGW createProjectZoneKGW(projectId, zoneId, KGW)
 
 
 
-    Creates a new KGW in the specified zone.
+    Creates a new KGW (Kowabunga Network Gateway).
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **KGW** | [**KGW**](../Models/KGW.md)| KGW payload | |
+| **KGW** | [**KGW**](../Models/KGW.md)| KGW payload. | |
 
 ### Return type
 
@@ -68,20 +68,16 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getProjectZoneKGWs"></a>
-# **getProjectZoneKGWs**
-> List getProjectZoneKGWs(projectId, zoneId)
+<a name="listKGWs"></a>
+# **listKGWs**
+> List listKGWs()
 
 
 
-    Returns the IDs of the KGW existing in the project in the specified zone.
+    Returns the IDs of KGW (Kowabunga Network Gateway) objects.
 
 ### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -96,16 +92,20 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listKGWs"></a>
-# **listKGWs**
-> List listKGWs()
+<a name="listProjectZoneKGWs"></a>
+# **listProjectZoneKGWs**
+> List listProjectZoneKGWs(projectId, zoneId)
 
 
 
     Returns the IDs of KGW (Kowabunga Network Gateway) objects.
 
 ### Parameters
-This endpoint does not need any parameter.
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
 

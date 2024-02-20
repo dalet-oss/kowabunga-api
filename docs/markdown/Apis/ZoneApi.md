@@ -6,21 +6,21 @@ All URIs are relative to */api/v1*
 |------------- | ------------- | -------------|
 | [**createHost**](ZoneApi.md#createHost) | **POST** /zone/{ zoneId }/host |  |
 | [**createNetGW**](ZoneApi.md#createNetGW) | **POST** /zone/{ zoneId }/netgw |  |
-| [**createProjectZoneInstance**](ZoneApi.md#createProjectZoneInstance) | **POST** /project/{projectId}/zone/{zoneId}/instance |  |
-| [**createProjectZoneKce**](ZoneApi.md#createProjectZoneKce) | **POST** /project/{projectId}/zone/{zoneId}/kce |  |
-| [**createProjectZoneKfs**](ZoneApi.md#createProjectZoneKfs) | **POST** /project/{projectId}/zone/{zoneId}/kfs |  |
-| [**createProjectZoneKgw**](ZoneApi.md#createProjectZoneKgw) | **POST** /project/{projectId}/zone/{zoneId}/kgw |  |
-| [**createProjectZoneVolume**](ZoneApi.md#createProjectZoneVolume) | **POST** /project/{projectId}/zone/{zoneId}/volume |  |
+| [**createProjectZoneInstance**](ZoneApi.md#createProjectZoneInstance) | **POST** /project/{ projectId }/zone/{ zoneId }/instance |  |
+| [**createProjectZoneKCE**](ZoneApi.md#createProjectZoneKCE) | **POST** /project/{ projectId }/zone/{ zoneId }/kce |  |
+| [**createProjectZoneKFS**](ZoneApi.md#createProjectZoneKFS) | **POST** /project/{ projectId }/zone/{ zoneId }/kfs |  |
+| [**createProjectZoneKGW**](ZoneApi.md#createProjectZoneKGW) | **POST** /project/{ projectId }/zone/{ zoneId }/kgw |  |
+| [**createProjectZoneVolume**](ZoneApi.md#createProjectZoneVolume) | **POST** /project/{ projectId }/zone/{ zoneId }/volume |  |
 | [**createStorageNFS**](ZoneApi.md#createStorageNFS) | **POST** /zone/{ zoneId }/nfs |  |
 | [**createStoragePool**](ZoneApi.md#createStoragePool) | **POST** /zone/{ zoneId }/pool |  |
 | [**createVNet**](ZoneApi.md#createVNet) | **POST** /zone/{ zoneId }/vnet |  |
 | [**createZone**](ZoneApi.md#createZone) | **POST** /region/{ regionId }/zone |  |
 | [**deleteZone**](ZoneApi.md#deleteZone) | **DELETE** /zone/{ zoneId } |  |
-| [**getProjectZoneInstances**](ZoneApi.md#getProjectZoneInstances) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
-| [**getProjectZoneKCEs**](ZoneApi.md#getProjectZoneKCEs) | **GET** /project/{projectId}/zone/{zoneId}/kces |  |
-| [**getProjectZoneKGWs**](ZoneApi.md#getProjectZoneKGWs) | **GET** /project/{projectId}/zone/{zoneId}/kgws |  |
-| [**getProjectZoneKfs**](ZoneApi.md#getProjectZoneKfs) | **GET** /project/{projectId}/zone/{zoneId}/kfs |  |
-| [**getProjectZoneVolumes**](ZoneApi.md#getProjectZoneVolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes |  |
+| [**listProjectZoneInstances**](ZoneApi.md#listProjectZoneInstances) | **GET** /project/{ projectId }/zone/{ zoneId }/instances |  |
+| [**listProjectZoneKCEs**](ZoneApi.md#listProjectZoneKCEs) | **GET** /project/{ projectId }/zone/{ zoneId }/kces |  |
+| [**listProjectZoneKFSs**](ZoneApi.md#listProjectZoneKFSs) | **GET** /project/{ projectId }/zone/{ zoneId }/kfs |  |
+| [**listProjectZoneKGWs**](ZoneApi.md#listProjectZoneKGWs) | **GET** /project/{ projectId }/zone/{ zoneId }/kgws |  |
+| [**listProjectZoneVolumes**](ZoneApi.md#listProjectZoneVolumes) | **GET** /project/{ projectId }/zone/{ zoneId }/volumes |  |
 | [**listRegionZones**](ZoneApi.md#listRegionZones) | **GET** /region/{ regionId }/zones |  |
 | [**listZoneHosts**](ZoneApi.md#listZoneHosts) | **GET** /zone/{zoneId}/hosts |  |
 | [**listZoneNetGWs**](ZoneApi.md#listZoneNetGWs) | **GET** /zone/{ zoneId }/netgws |  |
@@ -96,15 +96,15 @@ All URIs are relative to */api/v1*
 
 
 
-    Creates a new virtual machine instance in specified zone.
+    Creates a new virtual machine instance.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **Instance** | [**Instance**](../Models/Instance.md)| Instance payload | |
+| **Instance** | [**Instance**](../Models/Instance.md)| Instance payload. | |
 | **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 
 ### Return type
@@ -120,21 +120,21 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createProjectZoneKce"></a>
-# **createProjectZoneKce**
-> KCE createProjectZoneKce(projectId, zoneId, KCE, poolId, templateId, public, notify)
+<a name="createProjectZoneKCE"></a>
+# **createProjectZoneKCE**
+> KCE createProjectZoneKCE(projectId, zoneId, KCE, poolId, templateId, public, notify)
 
 
 
-    Creates a new KCE virtual machine in specified zone.
+    Creates a new KCE (Kowabunga Compute Engine).
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **KCE** | [**KCE**](../Models/KCE.md)| KCE payload | |
+| **KCE** | [**KCE**](../Models/KCE.md)| KCE payload. | |
 | **poolId** | **String**| Storage pool ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **templateId** | **String**| Template to clone the storage volume from (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **public** | **String**| Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false). | [optional] [default to null] |
@@ -153,21 +153,21 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createProjectZoneKfs"></a>
-# **createProjectZoneKfs**
-> KFS createProjectZoneKfs(projectId, zoneId, KFS, nfsId, notify)
+<a name="createProjectZoneKFS"></a>
+# **createProjectZoneKFS**
+> KFS createProjectZoneKFS(projectId, zoneId, KFS, nfsId, notify)
 
 
 
-    Creates a new KFS storage volume in specified zone.
+    Creates a new KFS (Kowabunga File System).
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **KFS** | [**KFS**](../Models/KFS.md)| KFS payload | |
+| **KFS** | [**KFS**](../Models/KFS.md)| KFS payload. | |
 | **nfsId** | **String**| NFS storage ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 
@@ -184,21 +184,21 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createProjectZoneKgw"></a>
-# **createProjectZoneKgw**
-> KGW createProjectZoneKgw(projectId, zoneId, KGW)
+<a name="createProjectZoneKGW"></a>
+# **createProjectZoneKGW**
+> KGW createProjectZoneKGW(projectId, zoneId, KGW)
 
 
 
-    Creates a new KGW in the specified zone.
+    Creates a new KGW (Kowabunga Network Gateway).
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **KGW** | [**KGW**](../Models/KGW.md)| KGW payload | |
+| **KGW** | [**KGW**](../Models/KGW.md)| KGW payload. | |
 
 ### Return type
 
@@ -219,15 +219,15 @@ All URIs are relative to */api/v1*
 
 
 
-    Creates a new storage volume in specified zone.
+    Creates a new storage volume.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **Volume** | [**Volume**](../Models/Volume.md)| Volume payload | |
+| **Volume** | [**Volume**](../Models/Volume.md)| Volume payload. | |
 | **poolId** | **String**| Storage pool ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **templateId** | **String**| Template to clone the storage volume from (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 
@@ -384,19 +384,19 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getProjectZoneInstances"></a>
-# **getProjectZoneInstances**
-> List getProjectZoneInstances(projectId, zoneId)
+<a name="listProjectZoneInstances"></a>
+# **listProjectZoneInstances**
+> List listProjectZoneInstances(projectId, zoneId)
 
 
 
-    Returns the IDs of the virtual machine instances existing in the project in the specified zone.
+    Returns the IDs of virtual machine instance objects.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
@@ -412,19 +412,19 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getProjectZoneKCEs"></a>
-# **getProjectZoneKCEs**
-> List getProjectZoneKCEs(projectId, zoneId)
+<a name="listProjectZoneKCEs"></a>
+# **listProjectZoneKCEs**
+> List listProjectZoneKCEs(projectId, zoneId)
 
 
 
-    Returns the IDs of the KCE virtual machines existing in the project in the specified zone.
+    Returns the IDs of KCE (Kowabunga Compute Engine) objects.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
@@ -440,47 +440,19 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getProjectZoneKGWs"></a>
-# **getProjectZoneKGWs**
-> List getProjectZoneKGWs(projectId, zoneId)
+<a name="listProjectZoneKFSs"></a>
+# **listProjectZoneKFSs**
+> List listProjectZoneKFSs(projectId, zoneId, nfsId, notify)
 
 
 
-    Returns the IDs of the KGW existing in the project in the specified zone.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getProjectZoneKfs"></a>
-# **getProjectZoneKfs**
-> List getProjectZoneKfs(projectId, zoneId, nfsId, notify)
-
-
-
-    Returns the IDs of the KFS storage volumes existing in the project in the specified zone.
+    Returns the IDs of KFS (Kowabunga File System) objects.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **nfsId** | **String**| NFS storage ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
@@ -498,19 +470,47 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getProjectZoneVolumes"></a>
-# **getProjectZoneVolumes**
-> List getProjectZoneVolumes(projectId, zoneId)
+<a name="listProjectZoneKGWs"></a>
+# **listProjectZoneKGWs**
+> List listProjectZoneKGWs(projectId, zoneId)
 
 
 
-    Returns the IDs of the storage volumes existing in the project in the specified zone.
+    Returns the IDs of KGW (Kowabunga Network Gateway) objects.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the network adapter. | [default to null] |
+| **projectId** | **String**| The ID of the project. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listProjectZoneVolumes"></a>
+# **listProjectZoneVolumes**
+> List listProjectZoneVolumes(projectId, zoneId)
+
+
+
+    Returns the IDs of storage volume objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 
 ### Return type
