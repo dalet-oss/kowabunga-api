@@ -1,206 +1,23 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
 components:
   schemas:
-    Region:
-      type: object
-      required:
-        - name
-      properties:
-        id:
-          type: string
-          description: The region ID (auto-generated).
-        name:
-          type: string
-          description: The region name.
-        description:
-          type: string
-          description: The region description.
+{{ oas.SchemaBaseResource(resources.region, ['name']) }}
+
   parameters:
-    RegionID:
-      name: regionId
-      in: path
-      description: The ID of the region.
-      required: true
-      schema:
-        type: string
+{{ oas.PathParamID(resources.region) }}
 
 paths:
   /region:
-    get:
-      tags:
-        - region
-      operationId: GetAllRegions
-      description: Returns the IDs of registered regions.
-      responses:
-        '200':
-          description: Returns the an array of region IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
+{{ oas.LC(resources.region, [resources.region.tag]) }}
 
-    post:
-      tags:
-        - region
-      operationId: CreateRegion
-      description: Creates a new region.
-      requestBody:
-        description: Region payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Region'
-        required: true
-      responses:
-        '201':
-          description: Returns the newly created region object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Region'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /region/{ {{ resources.region.paramId }} }:
+{{ oas.RUD(resources.region, [resources.region.tag], [resources.region.paramSchema]) }}
 
-  /region/{regionId}:
-    parameters:
-      - $ref: '#/components/parameters/RegionID'
+  /region/{ {{ resources.region.paramId }} }/zone:
+{{ oas.Parameters([resources.region.paramSchema]) }}
+{{ oas.Create('Create' + resources.zone.schema, resources.zone.schema, resources.zone.desc, [resources.region.tag, resources.zone.tag]) }}
 
-    get:
-      tags:
-        - region
-      operationId: GetRegion
-      description: Returns a description of the region
-      responses:
-        '200':
-          description: Returns the region object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Region'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-
-    put:
-      tags:
-        - region
-      operationId: UpdateRegion
-      description: Updates a region configuration.
-      requestBody:
-        description: Region payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Region'
-        required: true
-      responses:
-        '200':
-          description: Updated region.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Region'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-
-    delete:
-      tags:
-        - region
-      operationId: DeleteRegion
-      description: Deletes an existing region.
-      responses:
-        '200':
-          description: The region has been successfully removed.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /region/{regionId}/zone:
-    parameters:
-      - $ref: '#/components/parameters/RegionID'
-
-    post:
-      tags:
-        - region
-        - zone
-      operationId: CreateZone
-      description: Creates a new zone.
-      requestBody:
-        description: Zone payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Zone'
-        required: true
-      responses:
-        '201':
-          description: Returns the newly created zone object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Zone'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /region/{regionId}/zones:
-    parameters:
-      - $ref: '#/components/parameters/RegionID'
-
-    get:
-      tags:
-        - region
-        - zone
-      operationId: GetRegionZones
-      description: Returns the IDs of the availability zones existing in the region.
-      responses:
-        '200':
-          description: Returns an array of availability zone IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+  /region/{ {{ resources.region.paramId }} }/zones:
+{{ oas.Parameters([resources.region.paramSchema]) }}
+{{ oas.GetAll('ListRegionZones', resources.zone.desc, [resources.region.tag, resources.zone.tag], True) }}

@@ -114,12 +114,12 @@ All URIs are relative to */api/v1*
 *RecordApi* | [**readDnsRecord**](Apis/RecordApi.md#readdnsrecord) | **GET** /record/{ recordId } | Returns a DNS record. |
 *RecordApi* | [**updateDnsRecord**](Apis/RecordApi.md#updatednsrecord) | **PUT** /record/{ recordId } | Updates a DNS record configuration. |
 | *RegionApi* | [**createRegion**](Apis/RegionApi.md#createregion) | **POST** /region | Creates a new region. |
-*RegionApi* | [**createZone**](Apis/RegionApi.md#createzone) | **POST** /region/{regionId}/zone | Creates a new zone. |
-*RegionApi* | [**deleteRegion**](Apis/RegionApi.md#deleteregion) | **DELETE** /region/{regionId} | Deletes an existing region. |
-*RegionApi* | [**getAllRegions**](Apis/RegionApi.md#getallregions) | **GET** /region | Returns the IDs of registered regions. |
-*RegionApi* | [**getRegion**](Apis/RegionApi.md#getregion) | **GET** /region/{regionId} | Returns a description of the region |
-*RegionApi* | [**getRegionZones**](Apis/RegionApi.md#getregionzones) | **GET** /region/{regionId}/zones | Returns the IDs of the availability zones existing in the region. |
-*RegionApi* | [**updateRegion**](Apis/RegionApi.md#updateregion) | **PUT** /region/{regionId} | Updates a region configuration. |
+*RegionApi* | [**createZone**](Apis/RegionApi.md#createzone) | **POST** /region/{ regionId }/zone | Creates a new availability zone. |
+*RegionApi* | [**deleteRegion**](Apis/RegionApi.md#deleteregion) | **DELETE** /region/{ regionId } | Deletes an existing region. |
+*RegionApi* | [**listRegionZones**](Apis/RegionApi.md#listregionzones) | **GET** /region/{ regionId }/zones | Returns the IDs of availability zone objects. |
+*RegionApi* | [**listRegions**](Apis/RegionApi.md#listregions) | **GET** /region | Returns the IDs of region objects. |
+*RegionApi* | [**readRegion**](Apis/RegionApi.md#readregion) | **GET** /region/{ regionId } | Returns a region. |
+*RegionApi* | [**updateRegion**](Apis/RegionApi.md#updateregion) | **PUT** /region/{ regionId } | Updates a region configuration. |
 | *SubnetApi* | [**createAdapter**](Apis/SubnetApi.md#createadapter) | **POST** /subnet/{subnetId}/adapter | Creates a new network adapter. |
 *SubnetApi* | [**createSubnet**](Apis/SubnetApi.md#createsubnet) | **POST** /vnet/{vnetId}/subnet | Creates a new subnet. |
 *SubnetApi* | [**deleteSubnet**](Apis/SubnetApi.md#deletesubnet) | **DELETE** /subnet/{subnetId} | Deletes an existing subnet. |
@@ -162,7 +162,7 @@ All URIs are relative to */api/v1*
 *ZoneApi* | [**createProjectZoneKgw**](Apis/ZoneApi.md#createprojectzonekgw) | **POST** /project/{projectId}/zone/{zoneId}/kgw | Creates a new KGW in the specified zone. |
 *ZoneApi* | [**createProjectZoneVolume**](Apis/ZoneApi.md#createprojectzonevolume) | **POST** /project/{projectId}/zone/{zoneId}/volume | Creates a new storage volume in specified zone. |
 *ZoneApi* | [**createVNet**](Apis/ZoneApi.md#createvnet) | **POST** /zone/{zoneId}/vnet | Creates a new virtual network. |
-*ZoneApi* | [**createZone**](Apis/ZoneApi.md#createzone) | **POST** /region/{regionId}/zone | Creates a new zone. |
+*ZoneApi* | [**createZone**](Apis/ZoneApi.md#createzone) | **POST** /region/{ regionId }/zone | Creates a new availability zone. |
 *ZoneApi* | [**deleteZone**](Apis/ZoneApi.md#deletezone) | **DELETE** /zone/{zoneId} | Deletes an existing zone. |
 *ZoneApi* | [**getAllZones**](Apis/ZoneApi.md#getallzones) | **GET** /zone | Returns the IDs of registered zones. |
 *ZoneApi* | [**getProjectZoneInstances**](Apis/ZoneApi.md#getprojectzoneinstances) | **GET** /project/{projectId}/zone/{zoneId}/instances | Returns the IDs of the virtual machine instances existing in the project in the specified zone. |
@@ -170,13 +170,13 @@ All URIs are relative to */api/v1*
 *ZoneApi* | [**getProjectZoneKGWs**](Apis/ZoneApi.md#getprojectzonekgws) | **GET** /project/{projectId}/zone/{zoneId}/kgws | Returns the IDs of the KGW existing in the project in the specified zone. |
 *ZoneApi* | [**getProjectZoneKfs**](Apis/ZoneApi.md#getprojectzonekfs) | **GET** /project/{projectId}/zone/{zoneId}/kfs | Returns the IDs of the KFS storage volumes existing in the project in the specified zone. |
 *ZoneApi* | [**getProjectZoneVolumes**](Apis/ZoneApi.md#getprojectzonevolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes | Returns the IDs of the storage volumes existing in the project in the specified zone. |
-*ZoneApi* | [**getRegionZones**](Apis/ZoneApi.md#getregionzones) | **GET** /region/{regionId}/zones | Returns the IDs of the availability zones existing in the region. |
 *ZoneApi* | [**getZone**](Apis/ZoneApi.md#getzone) | **GET** /zone/{zoneId} | Returns a description of the zone |
 *ZoneApi* | [**getZoneHosts**](Apis/ZoneApi.md#getzonehosts) | **GET** /zone/{zoneId}/hosts | Returns the IDs of the hosts existing in the zone. |
 *ZoneApi* | [**getZoneNetGWs**](Apis/ZoneApi.md#getzonenetgws) | **GET** /zone/{zoneId}/netgws | Returns the IDs of the hosts existing in the zone. |
 *ZoneApi* | [**getZoneNfsStorages**](Apis/ZoneApi.md#getzonenfsstorages) | **GET** /zone/{zoneId}/nfs | Returns the IDs of the NFS storages existing in the zone. |
 *ZoneApi* | [**getZonePools**](Apis/ZoneApi.md#getzonepools) | **GET** /zone/{zoneId}/pools | Returns the IDs of the pools existing in the zone. |
 *ZoneApi* | [**getZoneVNets**](Apis/ZoneApi.md#getzonevnets) | **GET** /zone/{zoneId}/vnets | Returns the IDs of the virtual networks existing in the zone. |
+*ZoneApi* | [**listRegionZones**](Apis/ZoneApi.md#listregionzones) | **GET** /region/{ regionId }/zones | Returns the IDs of availability zone objects. |
 *ZoneApi* | [**updateZone**](Apis/ZoneApi.md#updatezone) | **PUT** /zone/{zoneId} | Updates a zone configuration. |
 *ZoneApi* | [**updateZoneDefaultNfsStorage**](Apis/ZoneApi.md#updatezonedefaultnfsstorage) | **PUT** /zone/{zoneId}/nfs/{nfsId}/default | Set a zone's default NFS storage. |
 *ZoneApi* | [**updateZoneDefaultPool**](Apis/ZoneApi.md#updatezonedefaultpool) | **PUT** /zone/{zoneId}/pool/{poolId}/default | Set a zone's default storage pool. |

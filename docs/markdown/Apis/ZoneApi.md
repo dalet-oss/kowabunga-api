@@ -14,7 +14,7 @@ All URIs are relative to */api/v1*
 | [**createProjectZoneKgw**](ZoneApi.md#createProjectZoneKgw) | **POST** /project/{projectId}/zone/{zoneId}/kgw |  |
 | [**createProjectZoneVolume**](ZoneApi.md#createProjectZoneVolume) | **POST** /project/{projectId}/zone/{zoneId}/volume |  |
 | [**createVNet**](ZoneApi.md#createVNet) | **POST** /zone/{zoneId}/vnet |  |
-| [**createZone**](ZoneApi.md#createZone) | **POST** /region/{regionId}/zone |  |
+| [**createZone**](ZoneApi.md#createZone) | **POST** /region/{ regionId }/zone |  |
 | [**deleteZone**](ZoneApi.md#deleteZone) | **DELETE** /zone/{zoneId} |  |
 | [**getAllZones**](ZoneApi.md#getAllZones) | **GET** /zone |  |
 | [**getProjectZoneInstances**](ZoneApi.md#getProjectZoneInstances) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
@@ -22,13 +22,13 @@ All URIs are relative to */api/v1*
 | [**getProjectZoneKGWs**](ZoneApi.md#getProjectZoneKGWs) | **GET** /project/{projectId}/zone/{zoneId}/kgws |  |
 | [**getProjectZoneKfs**](ZoneApi.md#getProjectZoneKfs) | **GET** /project/{projectId}/zone/{zoneId}/kfs |  |
 | [**getProjectZoneVolumes**](ZoneApi.md#getProjectZoneVolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes |  |
-| [**getRegionZones**](ZoneApi.md#getRegionZones) | **GET** /region/{regionId}/zones |  |
 | [**getZone**](ZoneApi.md#getZone) | **GET** /zone/{zoneId} |  |
 | [**getZoneHosts**](ZoneApi.md#getZoneHosts) | **GET** /zone/{zoneId}/hosts |  |
 | [**getZoneNetGWs**](ZoneApi.md#getZoneNetGWs) | **GET** /zone/{zoneId}/netgws |  |
 | [**getZoneNfsStorages**](ZoneApi.md#getZoneNfsStorages) | **GET** /zone/{zoneId}/nfs |  |
 | [**getZonePools**](ZoneApi.md#getZonePools) | **GET** /zone/{zoneId}/pools |  |
 | [**getZoneVNets**](ZoneApi.md#getZoneVNets) | **GET** /zone/{zoneId}/vnets |  |
+| [**listRegionZones**](ZoneApi.md#listRegionZones) | **GET** /region/{ regionId }/zones |  |
 | [**updateZone**](ZoneApi.md#updateZone) | **PUT** /zone/{zoneId} |  |
 | [**updateZoneDefaultNfsStorage**](ZoneApi.md#updateZoneDefaultNfsStorage) | **PUT** /zone/{zoneId}/nfs/{nfsId}/default |  |
 | [**updateZoneDefaultPool**](ZoneApi.md#updateZoneDefaultPool) | **PUT** /zone/{zoneId}/pool/{poolId}/default |  |
@@ -335,14 +335,14 @@ All URIs are relative to */api/v1*
 
 
 
-    Creates a new zone.
+    Creates a new availability zone.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **regionId** | **String**| The ID of the region. | [default to null] |
-| **Zone** | [**Zone**](../Models/Zone.md)| Zone payload | |
+| **Zone** | [**Zone**](../Models/Zone.md)| Zone payload. | |
 
 ### Return type
 
@@ -550,33 +550,6 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getRegionZones"></a>
-# **getRegionZones**
-> List getRegionZones(regionId)
-
-
-
-    Returns the IDs of the availability zones existing in the region.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **regionId** | **String**| The ID of the region. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
 <a name="getZone"></a>
 # **getZone**
 > Zone getZone(zoneId)
@@ -725,6 +698,33 @@ This endpoint does not need any parameter.
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **zoneId** | **String**| The ID of the zone. | [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listRegionZones"></a>
+# **listRegionZones**
+> List listRegionZones(regionId)
+
+
+
+    Returns the IDs of availability zone objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **regionId** | **String**| The ID of the region. | [default to null] |
 
 ### Return type
 

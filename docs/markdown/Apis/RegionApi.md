@@ -5,12 +5,12 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createRegion**](RegionApi.md#createRegion) | **POST** /region |  |
-| [**createZone**](RegionApi.md#createZone) | **POST** /region/{regionId}/zone |  |
-| [**deleteRegion**](RegionApi.md#deleteRegion) | **DELETE** /region/{regionId} |  |
-| [**getAllRegions**](RegionApi.md#getAllRegions) | **GET** /region |  |
-| [**getRegion**](RegionApi.md#getRegion) | **GET** /region/{regionId} |  |
-| [**getRegionZones**](RegionApi.md#getRegionZones) | **GET** /region/{regionId}/zones |  |
-| [**updateRegion**](RegionApi.md#updateRegion) | **PUT** /region/{regionId} |  |
+| [**createZone**](RegionApi.md#createZone) | **POST** /region/{ regionId }/zone |  |
+| [**deleteRegion**](RegionApi.md#deleteRegion) | **DELETE** /region/{ regionId } |  |
+| [**listRegionZones**](RegionApi.md#listRegionZones) | **GET** /region/{ regionId }/zones |  |
+| [**listRegions**](RegionApi.md#listRegions) | **GET** /region |  |
+| [**readRegion**](RegionApi.md#readRegion) | **GET** /region/{ regionId } |  |
+| [**updateRegion**](RegionApi.md#updateRegion) | **PUT** /region/{ regionId } |  |
 
 
 <a name="createRegion"></a>
@@ -25,7 +25,7 @@ All URIs are relative to */api/v1*
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **Region** | [**Region**](../Models/Region.md)| Region payload | |
+| **Region** | [**Region**](../Models/Region.md)| Region payload. | |
 
 ### Return type
 
@@ -46,14 +46,14 @@ All URIs are relative to */api/v1*
 
 
 
-    Creates a new zone.
+    Creates a new availability zone.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **regionId** | **String**| The ID of the region. | [default to null] |
-| **Zone** | [**Zone**](../Models/Zone.md)| Zone payload | |
+| **Zone** | [**Zone**](../Models/Zone.md)| Zone payload. | |
 
 ### Return type
 
@@ -95,13 +95,40 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getAllRegions"></a>
-# **getAllRegions**
-> List getAllRegions()
+<a name="listRegionZones"></a>
+# **listRegionZones**
+> List listRegionZones(regionId)
 
 
 
-    Returns the IDs of registered regions.
+    Returns the IDs of availability zone objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **regionId** | **String**| The ID of the region. | [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listRegions"></a>
+# **listRegions**
+> List listRegions()
+
+
+
+    Returns the IDs of region objects.
 
 ### Parameters
 This endpoint does not need any parameter.
@@ -119,13 +146,13 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getRegion"></a>
-# **getRegion**
-> Region getRegion(regionId)
+<a name="readRegion"></a>
+# **readRegion**
+> Region readRegion(regionId)
 
 
 
-    Returns a description of the region
+    Returns a region.
 
 ### Parameters
 
@@ -136,33 +163,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**Region**](../Models/Region.md)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getRegionZones"></a>
-# **getRegionZones**
-> List getRegionZones(regionId)
-
-
-
-    Returns the IDs of the availability zones existing in the region.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **regionId** | **String**| The ID of the region. | [default to null] |
-
-### Return type
-
-**List**
 
 ### Authorization
 
@@ -186,7 +186,7 @@ This endpoint does not need any parameter.
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **regionId** | **String**| The ID of the region. | [default to null] |
-| **Region** | [**Region**](../Models/Region.md)| Region payload | |
+| **Region** | [**Region**](../Models/Region.md)| Region payload. | |
 
 ### Return type
 

@@ -33,6 +33,10 @@ tags:
   name: kgw
 - description: Everything about Iris network gateway
   name: netgw
+- description: Everything about region
+  name: region
+- description: Everything about availability zone
+  name: zone
 paths:
   /adapter:
     get:
@@ -1770,15 +1774,15 @@ paths:
     - $ref: '#/components/parameters/ZoneID'
   /region:
     get:
-      description: Returns the IDs of registered regions.
-      operationId: GetAllRegions
+      description: Returns the IDs of region objects.
+      operationId: ListRegions
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns the an array of region IDs.
+          description: Returns an array of region IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -1793,7 +1797,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Region'
-        description: Region payload
+        description: Region payload.
         required: true
       responses:
         "201":
@@ -1814,9 +1818,11 @@ paths:
           $ref: '#/components/responses/Conflict'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - region
-  /region/{regionId}:
+  /region/{ regionId }:
     delete:
       description: Deletes an existing region.
       operationId: DeleteRegion
@@ -1838,8 +1844,8 @@ paths:
       tags:
       - region
     get:
-      description: Returns a description of the region
-      operationId: GetRegion
+      description: Returns a region.
+      operationId: ReadRegion
       parameters:
       - $ref: '#/components/parameters/RegionID'
       responses:
@@ -1869,7 +1875,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Region'
-        description: Region payload
+        description: Region payload.
         required: true
       responses:
         "200":
@@ -1877,7 +1883,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Region'
-          description: Updated region.
+          description: Returns the region object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -1886,13 +1892,17 @@ paths:
           $ref: '#/components/responses/Forbidden'
         "404":
           $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - region
-  /region/{regionId}/zone:
+  /region/{ regionId }/zone:
     parameters:
     - $ref: '#/components/parameters/RegionID'
     post:
-      description: Creates a new zone.
+      description: Creates a new availability zone.
       operationId: CreateZone
       parameters:
       - $ref: '#/components/parameters/RegionID'
@@ -1901,7 +1911,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Zone'
-        description: Zone payload
+        description: Zone payload.
         required: true
       responses:
         "201":
@@ -1909,7 +1919,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Zone'
-          description: Returns the newly created zone object.
+          description: Returns the newly created availability zone object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -1922,13 +1932,15 @@ paths:
           $ref: '#/components/responses/Conflict'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - region
       - zone
-  /region/{regionId}/zones:
+  /region/{ regionId }/zones:
     get:
-      description: Returns the IDs of the availability zones existing in the region.
-      operationId: GetRegionZones
+      description: Returns the IDs of availability zone objects.
+      operationId: ListRegionZones
       parameters:
       - $ref: '#/components/parameters/RegionID'
       responses:
@@ -4248,6 +4260,7 @@ components:
           format: uint16
           type: integer
     Region:
+      description: A region.
       example:
         name: name
         description: description

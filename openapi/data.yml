@@ -79,7 +79,11 @@ resources:
   project:
     desc: projects
   region:
-    desc: regions
+    tag: region
+    desc: region
+    schema: Region
+    paramId: regionId
+    paramSchema: RegionID
   nfs:
     desc: NFS storages
   pool:
@@ -93,7 +97,11 @@ resources:
   volume:
     desc: storage volumes
   zone:
-    desc: zones
+    tag: zone
+    desc: availability zone
+    schema: Zone
+    paramId: zoneId
+    paramSchema: ZoneID
 
 errors:
   BadRequest:
