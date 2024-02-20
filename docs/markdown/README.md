@@ -146,12 +146,12 @@ All URIs are relative to */api/v1*
 *VnetApi* | [**setVNetDefaultSubnet**](Apis/VnetApi.md#setvnetdefaultsubnet) | **PATCH** /vnet/{ vnetId }/subnet/{ subnetId }/default | Performs a virtual network setting of default network subnet. |
 *VnetApi* | [**updateVNet**](Apis/VnetApi.md#updatevnet) | **PUT** /vnet/{ vnetId } | Updates a virtual network configuration. |
 | *VolumeApi* | [**createProjectZoneVolume**](Apis/VolumeApi.md#createprojectzonevolume) | **POST** /project/{projectId}/zone/{zoneId}/volume | Creates a new storage volume in specified zone. |
-*VolumeApi* | [**deleteVolume**](Apis/VolumeApi.md#deletevolume) | **DELETE** /volume/{volumeId} | Deletes an existing storage volume. |
-*VolumeApi* | [**getAllVolumes**](Apis/VolumeApi.md#getallvolumes) | **GET** /volume | Returns the IDs of storage volumes. |
+*VolumeApi* | [**deleteVolume**](Apis/VolumeApi.md#deletevolume) | **DELETE** /volume/{ volumeId } | Deletes an existing storage volume. |
 *VolumeApi* | [**getProjectZoneVolumes**](Apis/VolumeApi.md#getprojectzonevolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes | Returns the IDs of the storage volumes existing in the project in the specified zone. |
-*VolumeApi* | [**getVolume**](Apis/VolumeApi.md#getvolume) | **GET** /volume/{volumeId} | Returns a description of the storage volume. |
 *VolumeApi* | [**listStoragePoolVolumes**](Apis/VolumeApi.md#liststoragepoolvolumes) | **GET** /pool/{ poolId }/volumes | Returns the IDs of storage volume objects. |
-*VolumeApi* | [**updateVolume**](Apis/VolumeApi.md#updatevolume) | **PUT** /volume/{volumeId} | Updates/resizes a storage volume configuration. |
+*VolumeApi* | [**listVolumes**](Apis/VolumeApi.md#listvolumes) | **GET** /volume | Returns the IDs of storage volume objects. |
+*VolumeApi* | [**readVolume**](Apis/VolumeApi.md#readvolume) | **GET** /volume/{ volumeId } | Returns a storage volume. |
+*VolumeApi* | [**updateVolume**](Apis/VolumeApi.md#updatevolume) | **PUT** /volume/{ volumeId } | Updates a storage volume configuration. |
 | *ZoneApi* | [**createHost**](Apis/ZoneApi.md#createhost) | **POST** /zone/{zoneId}/host | Creates a new host. |
 *ZoneApi* | [**createNetGW**](Apis/ZoneApi.md#createnetgw) | **POST** /zone/{zoneId}/netgw | Creates a new network gateway. |
 *ZoneApi* | [**createNfsStorage**](Apis/ZoneApi.md#createnfsstorage) | **POST** /zone/{zoneId}/nfs | Creates a new NFS storage. |

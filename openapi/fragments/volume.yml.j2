@@ -1,133 +1,18 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
 components:
   schemas:
-    Volume:
-      type: object
-      required:
-        - name
-        - type
-        - size
-      properties:
-        id:
-          type: string
-          description: The storage volume ID (auto-generated).
-        name:
-          type: string
-          description: The storage volume name.
-        description:
-          type: string
-          description: The storage volume description.
-        type:
-          type: string
-          description: The type of storage volume.
-          enum:
-            - os
-            - iso
-            - raw
-        size:
-          type: integer
-          description: The storage volume size in bytes.
-        resizable:
-          type: boolean
-          description: Is the storage volume allowed to grow (filesystem dependant) ?
-          default: false
+{{ oas.SchemaBaseResource(resources.volume, ['name', 'type', 'size']) }}
+{{ oas.StringProperty('type', 'The ' + resources.volume.desc + ' type', values=['os', 'iso', 'raw']) }}
+{{ oas.IntProperty('size', 'The ' + resources.volume.desc + ' size (in bytes)') }}
+{{ oas.BoolProperty('resizeable', 'Is the ' + resources.volume.desc + ' allowed to grow (filesystem dependant) ?', default=False) }}
+
   parameters:
-    VolumeID:
-      name: volumeId
-      in: path
-      description: The ID of the storage volume.
-      required: true
-      schema:
-        type: string
+{{ oas.PathParamID(resources.volume) }}
 
 paths:
   /volume:
-    get:
-      tags:
-        - volume
-      operationId: GetAllVolumes
-      description: Returns the IDs of storage volumes.
-      responses:
-        '200':
-          description: Returns the an array of storage volume IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
+{{ oas.List(resources.volume, [resources.volume.tag]) }}
 
-  /volume/{volumeId}:
-    parameters:
-      - $ref: '#/components/parameters/VolumeID'
-
-    get:
-      tags:
-        - volume
-      operationId: GetVolume
-      description: Returns a description of the storage volume.
-      responses:
-        '200':
-          description: Returns the storage volume object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Volume'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-
-    put:
-      tags:
-        - volume
-      operationId: UpdateVolume
-      description: Updates/resizes a storage volume configuration.
-      requestBody:
-        description: Volume payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Volume'
-        required: true
-      responses:
-        '200':
-          description: Updated storage volume.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Volume'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-        '507':
-          $ref: '#/components/responses/InsufficientStorage'
-
-    delete:
-      tags:
-        - volume
-      operationId: DeleteVolume
-      description: Deletes an existing storage volume.
-      responses:
-        '200':
-          description: The storage volume has been successfully removed.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /volume/{ {{ resources.volume.paramId }} }:
+{{ oas.RUD(resources.volume, [resources.volume.tag], [resources.volume.paramSchema]) }}

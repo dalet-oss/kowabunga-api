@@ -2727,22 +2727,22 @@ paths:
     - $ref: '#/components/parameters/VnetID'
   /volume:
     get:
-      description: Returns the IDs of storage volumes.
-      operationId: GetAllVolumes
+      description: Returns the IDs of storage volume objects.
+      operationId: ListVolumes
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns the an array of storage volume IDs.
+          description: Returns an array of storage volume IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
           $ref: '#/components/responses/Forbidden'
       tags:
       - volume
-  /volume/{volumeId}:
+  /volume/{ volumeId }:
     delete:
       description: Deletes an existing storage volume.
       operationId: DeleteVolume
@@ -2764,8 +2764,8 @@ paths:
       tags:
       - volume
     get:
-      description: Returns a description of the storage volume.
-      operationId: GetVolume
+      description: Returns a storage volume.
+      operationId: ReadVolume
       parameters:
       - $ref: '#/components/parameters/VolumeID'
       responses:
@@ -2786,7 +2786,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/VolumeID'
     put:
-      description: Updates/resizes a storage volume configuration.
+      description: Updates a storage volume configuration.
       operationId: UpdateVolume
       parameters:
       - $ref: '#/components/parameters/VolumeID'
@@ -2795,7 +2795,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Volume'
-        description: Volume payload
+        description: Volume payload.
         required: true
       responses:
         "200":
@@ -2803,7 +2803,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Volume'
-          description: Updated storage volume.
+          description: Returns the storage volume object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -4548,12 +4548,13 @@ components:
       - name
       - vlan
     Volume:
+      description: A storage volume.
       example:
         size: 0
-        resizable: false
         name: name
         description: description
         id: id
+        resizeable: false
         type: os
       properties:
         id:
@@ -4566,19 +4567,19 @@ components:
           description: The storage volume description.
           type: string
         type:
-          description: The type of storage volume.
+          description: The storage volume type.
           enum:
           - os
           - iso
           - raw
           type: string
         size:
-          description: The storage volume size in bytes.
+          description: The storage volume size (in bytes).
           type: integer
-        resizable:
+        resizeable:
           default: false
           description: Is the storage volume allowed to grow (filesystem dependant)
-            ?
+            ?.
           type: boolean
       required:
       - name

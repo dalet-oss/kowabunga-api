@@ -5,12 +5,12 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createProjectZoneVolume**](VolumeApi.md#createProjectZoneVolume) | **POST** /project/{projectId}/zone/{zoneId}/volume |  |
-| [**deleteVolume**](VolumeApi.md#deleteVolume) | **DELETE** /volume/{volumeId} |  |
-| [**getAllVolumes**](VolumeApi.md#getAllVolumes) | **GET** /volume |  |
+| [**deleteVolume**](VolumeApi.md#deleteVolume) | **DELETE** /volume/{ volumeId } |  |
 | [**getProjectZoneVolumes**](VolumeApi.md#getProjectZoneVolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes |  |
-| [**getVolume**](VolumeApi.md#getVolume) | **GET** /volume/{volumeId} |  |
 | [**listStoragePoolVolumes**](VolumeApi.md#listStoragePoolVolumes) | **GET** /pool/{ poolId }/volumes |  |
-| [**updateVolume**](VolumeApi.md#updateVolume) | **PUT** /volume/{volumeId} |  |
+| [**listVolumes**](VolumeApi.md#listVolumes) | **GET** /volume |  |
+| [**readVolume**](VolumeApi.md#readVolume) | **GET** /volume/{ volumeId } |  |
+| [**updateVolume**](VolumeApi.md#updateVolume) | **PUT** /volume/{ volumeId } |  |
 
 
 <a name="createProjectZoneVolume"></a>
@@ -71,30 +71,6 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getAllVolumes"></a>
-# **getAllVolumes**
-> List getAllVolumes()
-
-
-
-    Returns the IDs of storage volumes.
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
 <a name="getProjectZoneVolumes"></a>
 # **getProjectZoneVolumes**
 > List getProjectZoneVolumes(projectId, zoneId)
@@ -113,33 +89,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 **List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getVolume"></a>
-# **getVolume**
-> Volume getVolume(volumeId)
-
-
-
-    Returns a description of the storage volume.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **volumeId** | **String**| The ID of the storage volume. | [default to null] |
-
-### Return type
-
-[**Volume**](../Models/Volume.md)
 
 ### Authorization
 
@@ -177,20 +126,71 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="updateVolume"></a>
-# **updateVolume**
-> Volume updateVolume(volumeId, Volume)
+<a name="listVolumes"></a>
+# **listVolumes**
+> List listVolumes()
 
 
 
-    Updates/resizes a storage volume configuration.
+    Returns the IDs of storage volume objects.
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="readVolume"></a>
+# **readVolume**
+> Volume readVolume(volumeId)
+
+
+
+    Returns a storage volume.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **volumeId** | **String**| The ID of the storage volume. | [default to null] |
-| **Volume** | [**Volume**](../Models/Volume.md)| Volume payload | |
+
+### Return type
+
+[**Volume**](../Models/Volume.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="updateVolume"></a>
+# **updateVolume**
+> Volume updateVolume(volumeId, Volume)
+
+
+
+    Updates a storage volume configuration.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **volumeId** | **String**| The ID of the storage volume. | [default to null] |
+| **Volume** | [**Volume**](../Models/Volume.md)| Volume payload. | |
 
 ### Return type
 
