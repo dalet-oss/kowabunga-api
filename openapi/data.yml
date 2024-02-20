@@ -71,7 +71,11 @@ resources:
     desc: key/value metadata
     schema: Metadata
   netgw:
-    desc: network gateways
+    tag: netgw
+    desc: Iris network gateway
+    schema: NetGW
+    paramId: netgwId
+    paramSchema: NetgwID
   project:
     desc: projects
   region:

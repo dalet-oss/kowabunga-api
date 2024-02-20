@@ -1,127 +1,18 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
 components:
   schemas:
-    NetGW:
-      type: object
-      required:
-        - name
-        - address
-        - token
-      properties:
-        id:
-          type: string
-          description: The network gateway ID (auto-generated).
-        name:
-          type: string
-          description: The network gateway name.
-        description:
-          type: string
-          description: The network gateway description.
-        address:
-          type: string
-          description: The network gateway IPv4 address.
-        port:
-          type: integer
-          description: The network gateway service port (default to 8080).
-          default: 8080
-        token:
-          type: string
-          description: The network gateway admin API token.
+{{ oas.SchemaBaseResource(resources.netgw, ['name', 'address', 'token']) }}
+{{ oas.StringProperty('address', 'The ' + resources.netgw.desc + ' IPv4 address') }}
+{{ oas.IntProperty('port', 'The ' + resources.netgw.desc + ' service port (default to 8080)', default=8080) }}
+{{ oas.StringProperty('token', 'The ' + resources.netgw.desc + ' admin API token') }}
+
   parameters:
-    NetgwID:
-      name: netgwId
-      in: path
-      description: The ID of the network gateway.
-      required: true
-      schema:
-        type: string
+{{ oas.PathParamID(resources.netgw) }}
 
 paths:
   /netgw:
-    get:
-      tags:
-        - netgw
-      operationId: GetAllNetGWs
-      description: Returns the IDs of network gateways.
-      responses:
-        '200':
-          description: Returns an array of network gateway IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
+{{ oas.List(resources.netgw, [resources.netgw.tag]) }}
 
-  /netgw/{netgwId}:
-    parameters:
-      - $ref: '#/components/parameters/NetgwID'
-
-    get:
-      tags:
-        - netgw
-      operationId: GetNetGW
-      description: Returns a description of the network gateway
-      responses:
-        '200':
-          description: Returns the network gateway object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NetGW'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-
-    put:
-      tags:
-        - netgw
-      operationId: UpdateNetGW
-      description: Updates a network gateway configuration.
-      requestBody:
-        description: NetGW payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NetGW'
-        required: true
-      responses:
-        '200':
-          description: Updated network gateway.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NetGW'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-    delete:
-      tags:
-        - netgw
-      operationId: DeleteNetGW
-      description: Deletes an existing network gateway.
-      responses:
-        '200':
-          description: The network gateway has been successfully removed.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /netgw/{ {{ resources.netgw.paramId }} }:
+{{ oas.RUD(resources.netgw, [resources.netgw.tag], [resources.netgw.paramSchema]) }}

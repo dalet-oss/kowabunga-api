@@ -5,11 +5,11 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createNetGW**](NetgwApi.md#createNetGW) | **POST** /zone/{zoneId}/netgw |  |
-| [**deleteNetGW**](NetgwApi.md#deleteNetGW) | **DELETE** /netgw/{netgwId} |  |
-| [**getAllNetGWs**](NetgwApi.md#getAllNetGWs) | **GET** /netgw |  |
-| [**getNetGW**](NetgwApi.md#getNetGW) | **GET** /netgw/{netgwId} |  |
+| [**deleteNetGW**](NetgwApi.md#deleteNetGW) | **DELETE** /netgw/{ netgwId } |  |
 | [**getZoneNetGWs**](NetgwApi.md#getZoneNetGWs) | **GET** /zone/{zoneId}/netgws |  |
-| [**updateNetGW**](NetgwApi.md#updateNetGW) | **PUT** /netgw/{netgwId} |  |
+| [**listNetGWs**](NetgwApi.md#listNetGWs) | **GET** /netgw |  |
+| [**readNetGW**](NetgwApi.md#readNetGW) | **GET** /netgw/{ netgwId } |  |
+| [**updateNetGW**](NetgwApi.md#updateNetGW) | **PUT** /netgw/{ netgwId } |  |
 
 
 <a name="createNetGW"></a>
@@ -46,68 +46,17 @@ All URIs are relative to */api/v1*
 
 
 
-    Deletes an existing network gateway.
+    Deletes an existing Iris network gateway.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **netgwId** | **String**| The ID of the network gateway. | [default to null] |
+| **netgwId** | **String**| The ID of the Iris network gateway. | [default to null] |
 
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getAllNetGWs"></a>
-# **getAllNetGWs**
-> List getAllNetGWs()
-
-
-
-    Returns the IDs of network gateways.
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getNetGW"></a>
-# **getNetGW**
-> NetGW getNetGW(netgwId)
-
-
-
-    Returns a description of the network gateway
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **netgwId** | **String**| The ID of the network gateway. | [default to null] |
-
-### Return type
-
-[**NetGW**](../Models/NetGW.md)
 
 ### Authorization
 
@@ -145,20 +94,71 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+<a name="listNetGWs"></a>
+# **listNetGWs**
+> List listNetGWs()
+
+
+
+    Returns the IDs of Iris network gateway objects.
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="readNetGW"></a>
+# **readNetGW**
+> NetGW readNetGW(netgwId)
+
+
+
+    Returns a Iris network gateway.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **netgwId** | **String**| The ID of the Iris network gateway. | [default to null] |
+
+### Return type
+
+[**NetGW**](../Models/NetGW.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 <a name="updateNetGW"></a>
 # **updateNetGW**
 > NetGW updateNetGW(netgwId, NetGW)
 
 
 
-    Updates a network gateway configuration.
+    Updates a Iris network gateway configuration.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **netgwId** | **String**| The ID of the network gateway. | [default to null] |
-| **NetGW** | [**NetGW**](../Models/NetGW.md)| NetGW payload | |
+| **netgwId** | **String**| The ID of the Iris network gateway. | [default to null] |
+| **NetGW** | [**NetGW**](../Models/NetGW.md)| NetGW payload. | |
 
 ### Return type
 

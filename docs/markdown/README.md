@@ -65,11 +65,11 @@ All URIs are relative to */api/v1*
 *KgwApi* | [**readKGW**](Apis/KgwApi.md#readkgw) | **GET** /kgw/kgwId } | Returns a KGW (Kowabunga Network Gateway). |
 *KgwApi* | [**updateKGW**](Apis/KgwApi.md#updatekgw) | **PUT** /kgw/kgwId } | Updates a KGW (Kowabunga Network Gateway) configuration. |
 | *NetgwApi* | [**createNetGW**](Apis/NetgwApi.md#createnetgw) | **POST** /zone/{zoneId}/netgw | Creates a new network gateway. |
-*NetgwApi* | [**deleteNetGW**](Apis/NetgwApi.md#deletenetgw) | **DELETE** /netgw/{netgwId} | Deletes an existing network gateway. |
-*NetgwApi* | [**getAllNetGWs**](Apis/NetgwApi.md#getallnetgws) | **GET** /netgw | Returns the IDs of network gateways. |
-*NetgwApi* | [**getNetGW**](Apis/NetgwApi.md#getnetgw) | **GET** /netgw/{netgwId} | Returns a description of the network gateway |
+*NetgwApi* | [**deleteNetGW**](Apis/NetgwApi.md#deletenetgw) | **DELETE** /netgw/{ netgwId } | Deletes an existing Iris network gateway. |
 *NetgwApi* | [**getZoneNetGWs**](Apis/NetgwApi.md#getzonenetgws) | **GET** /zone/{zoneId}/netgws | Returns the IDs of the hosts existing in the zone. |
-*NetgwApi* | [**updateNetGW**](Apis/NetgwApi.md#updatenetgw) | **PUT** /netgw/{netgwId} | Updates a network gateway configuration. |
+*NetgwApi* | [**listNetGWs**](Apis/NetgwApi.md#listnetgws) | **GET** /netgw | Returns the IDs of Iris network gateway objects. |
+*NetgwApi* | [**readNetGW**](Apis/NetgwApi.md#readnetgw) | **GET** /netgw/{ netgwId } | Returns a Iris network gateway. |
+*NetgwApi* | [**updateNetGW**](Apis/NetgwApi.md#updatenetgw) | **PUT** /netgw/{ netgwId } | Updates a Iris network gateway configuration. |
 | *NfsApi* | [**createNfsStorage**](Apis/NfsApi.md#createnfsstorage) | **POST** /zone/{zoneId}/nfs | Creates a new NFS storage. |
 *NfsApi* | [**deleteNfsStorage**](Apis/NfsApi.md#deletenfsstorage) | **DELETE** /nfs/{nfsId} | Deletes an existing NFS storage. |
 *NfsApi* | [**getAllNfsStorages**](Apis/NfsApi.md#getallnfsstorages) | **GET** /nfs | Returns the IDs of registered NFS storages. |

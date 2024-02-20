@@ -31,6 +31,8 @@ tags:
   name: kfs
 - description: Everything about KGW (Kowabunga Network Gateway)
   name: kgw
+- description: Everything about Iris network gateway
+  name: netgw
 paths:
   /adapter:
     get:
@@ -1079,30 +1081,30 @@ paths:
       - kgw
   /netgw:
     get:
-      description: Returns the IDs of network gateways.
-      operationId: GetAllNetGWs
+      description: Returns the IDs of Iris network gateway objects.
+      operationId: ListNetGWs
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of network gateway IDs.
+          description: Returns an array of Iris network gateway IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
           $ref: '#/components/responses/Forbidden'
       tags:
       - netgw
-  /netgw/{netgwId}:
+  /netgw/{ netgwId }:
     delete:
-      description: Deletes an existing network gateway.
+      description: Deletes an existing Iris network gateway.
       operationId: DeleteNetGW
       parameters:
       - $ref: '#/components/parameters/NetgwID'
       responses:
         "200":
-          description: The network gateway has been successfully removed.
+          description: The Iris network gateway has been successfully removed.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -1116,8 +1118,8 @@ paths:
       tags:
       - netgw
     get:
-      description: Returns a description of the network gateway
-      operationId: GetNetGW
+      description: Returns a Iris network gateway.
+      operationId: ReadNetGW
       parameters:
       - $ref: '#/components/parameters/NetgwID'
       responses:
@@ -1126,7 +1128,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NetGW'
-          description: Returns the network gateway object.
+          description: Returns the Iris network gateway object.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -1138,7 +1140,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/NetgwID'
     put:
-      description: Updates a network gateway configuration.
+      description: Updates a Iris network gateway configuration.
       operationId: UpdateNetGW
       parameters:
       - $ref: '#/components/parameters/NetgwID'
@@ -1147,7 +1149,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/NetGW'
-        description: NetGW payload
+        description: NetGW payload.
         required: true
       responses:
         "200":
@@ -1155,7 +1157,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NetGW'
-          description: Updated network gateway.
+          description: Returns the Iris network gateway object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -1166,6 +1168,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - netgw
   /project:
@@ -3317,7 +3321,7 @@ components:
         type: string
       style: simple
     NetgwID:
-      description: The ID of the network gateway.
+      description: The ID of the Iris network gateway.
       explode: false
       in: path
       name: netgwId
@@ -4101,6 +4105,7 @@ components:
           description: The metadata value.
           type: string
     NetGW:
+      description: A Iris network gateway.
       example:
         address: address
         port: 0
@@ -4110,23 +4115,23 @@ components:
         token: token
       properties:
         id:
-          description: The network gateway ID (auto-generated).
+          description: The Iris network gateway ID (auto-generated).
           type: string
         name:
-          description: The network gateway name.
+          description: The Iris network gateway name.
           type: string
         description:
-          description: The network gateway description.
+          description: The Iris network gateway description.
           type: string
         address:
-          description: The network gateway IPv4 address.
+          description: The Iris network gateway IPv4 address.
           type: string
         port:
           default: 8080
-          description: The network gateway service port (default to 8080).
+          description: The Iris network gateway service port (default to 8080).
           type: integer
         token:
-          description: The network gateway admin API token.
+          description: The Iris network gateway admin API token.
           type: string
       required:
       - address
