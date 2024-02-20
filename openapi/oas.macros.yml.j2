@@ -224,12 +224,16 @@
 {% macro ErrorsCreate() %}
 {{ ErrorsWrongParams() }}
 {{ ErrorsGetOne() }}
+{{ ErrorsConflict() }}
 {{ ErrorsProcessing() }}
 {{ ErrorsQuotas() }}
 {% endmacro %}
 
 {% macro ErrorsUpdate() %}
-{{ ErrorsCreate() }}
+{{ ErrorsWrongParams() }}
+{{ ErrorsGetOne() }}
+{{ ErrorsProcessing() }}
+{{ ErrorsQuotas() }}
 {% endmacro %}
 
 {% macro ErrorsPatch() %}
@@ -367,6 +371,12 @@
 
 {% macro CRUD(obj, tags, params=[]) %}
 {{ REST(obj, tags, params, True) }}
+{% endmacro %}
+
+{% macro LC(obj, tags, params=[]) %}
+{{ Parameters(params) }}
+{{ List(obj, tags) }}
+{{ Create('Create' + obj.schema, obj.schema, obj.desc, tags) }}
 {% endmacro %}
 
 {% macro RUD(obj, tags, params=[]) %}
