@@ -6,7 +6,7 @@ resources:
     paramId: adapterId
     paramSchema: AdapterID
   cost:
-    desc: key/value metadata
+    desc: resource cost
     schema: Cost
   record:
     tag: record
@@ -80,7 +80,15 @@ resources:
     paramId: netgwId
     paramSchema: NetgwID
   project:
-    desc: projects
+    tag: project
+    desc: project
+    extended_desc: Kowabunga project corresponds to a single tenant, isolated set of resources
+    schema: Project
+    paramId: projectId
+    paramSchema: ProjectID
+  project_resources:
+    desc: global project resource quotas/usage (0 for unlimited)
+    schema: ProjectResources
   region:
     tag: region
     desc: region
