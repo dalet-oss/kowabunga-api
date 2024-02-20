@@ -11,17 +11,17 @@ components:
 {{ oas.StringProperty('protocol', 'The protocol to use to issue libvirt connection', values=['tcp', 'tls']) }}
 {{ oas.StringProperty('address', "The host libvirt's IPv4 address") }}
 {{ oas.IntProperty('port', "The host libvirt's port") }}
-{{ oas.ObjectProperty('tls', "The host libvirt's TLS configuration", 'HostTLS') }}
-{{ oas.ObjectProperty('cost', 'Global cost associated to the host (deprecated, will be removed)', 'Cost') }}
-{{ oas.ObjectProperty('cpu_cost', "Cost associated to the host's CPU resources", 'Cost') }}
-{{ oas.ObjectProperty('memory_cost', "Cost associated to the host's memoery resources", 'Cost') }}
+{{ oas.ObjectProperty('tls', "The host libvirt's TLS configuration", resources.host_tls.schema) }}
+{{ oas.ObjectProperty('cost', 'Global cost associated to the host (deprecated, will be removed)', resources.cost.schema) }}
+{{ oas.ObjectProperty('cpu_cost', "Cost associated to the host's CPU resources", resources.cost.schema) }}
+{{ oas.ObjectProperty('memory_cost', "Cost associated to the host's memoery resources", resources.cost.schema) }}
 {{ oas.IntProperty('overcommit_cpu_ratio', 'The host CPU resource over-commit ratio. Overcommitting CPU resources for VMs means allocating more virtual CPUs (vCPUs) to the virtual machines (VMs) than the physical cores available on the host. This can help optimize the utilization of the host CPU and increase the density of VMs per host', default=3) }}
 {{ oas.IntProperty('overcommit_memory_ratio', 'The host memory resource over-commit ratio. Memory overcommitment is a concept in computing that covers the assignment of more memory to virtual computing devices (or processes) than the physical machine they are hosted, or running on, actually has', default=2) }}
 
 {{ oas.Schema(resources.host_caps, ['version', 'uuid', 'cpu', 'memory']) }}
 {{ oas.StringProperty('version', 'The ' + resources.host.desc + ' libvirt version') }}
 {{ oas.StringProperty('uuid', 'The ' + resources.host.desc + ' domain UUID') }}
-{{ oas.ObjectProperty('cpu', 'The ' + resources.host.desc + ' CPU characteristics', 'HostCPU') }}
+{{ oas.ObjectProperty('cpu', 'The ' + resources.host.desc + ' CPU characteristics', resources.host_cpu.schema) }}
 
 {{ oas.Schema(resources.host_cpu, ['arch', 'model', 'vendor', 'sockets', 'cores', 'threads']) }}
 {{ oas.StringProperty('arch', 'The ' + resources.host.desc + ' CPU architecture') }}
