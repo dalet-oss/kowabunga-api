@@ -29,7 +29,7 @@ type NetGw struct {
 	Address string `json:"address"`
 
 	// The Iris network gateway service port (default to 8080).
-	Port int32 `json:"port,omitempty"`
+	Port int64 `json:"port,omitempty"`
 
 	// The Iris network gateway admin API token.
 	Token string `json:"token"`

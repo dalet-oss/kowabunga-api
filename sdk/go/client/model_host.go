@@ -33,7 +33,7 @@ type Host struct {
 	// The host libvirt's IPv4 address.
 	Address string `json:"address"`
 	// The host libvirt's port.
-	Port *int32 `json:"port,omitempty"`
+	Port *int64 `json:"port,omitempty"`
 	// The host libvirt's TLS configuration.
 	Tls HostTLS `json:"tls,omitempty"`
 	// Cost associated to the host's CPU resources.
@@ -41,9 +41,9 @@ type Host struct {
 	// Cost associated to the host's memoery resources.
 	MemoryCost Cost `json:"memory_cost,omitempty"`
 	// The host CPU resource over-commit ratio. Overcommitting CPU resources for VMs means allocating more virtual CPUs (vCPUs) to the virtual machines (VMs) than the physical cores available on the host. This can help optimize the utilization of the host CPU and increase the density of VMs per host.
-	OvercommitCpuRatio *int32 `json:"overcommit_cpu_ratio,omitempty"`
+	OvercommitCpuRatio *int64 `json:"overcommit_cpu_ratio,omitempty"`
 	// The host memory resource over-commit ratio. Memory overcommitment is a concept in computing that covers the assignment of more memory to virtual computing devices (or processes) than the physical machine they are hosted, or running on, actually has.
-	OvercommitMemoryRatio *int32 `json:"overcommit_memory_ratio,omitempty"`
+	OvercommitMemoryRatio *int64 `json:"overcommit_memory_ratio,omitempty"`
 }
 
 type _Host Host
@@ -57,9 +57,9 @@ func NewHost(name string, protocol string, address string) *Host {
 	this.Name = name
 	this.Protocol = protocol
 	this.Address = address
-	var overcommitCpuRatio int32 = 3
+	var overcommitCpuRatio int64 = 3
 	this.OvercommitCpuRatio = &overcommitCpuRatio
-	var overcommitMemoryRatio int32 = 2
+	var overcommitMemoryRatio int64 = 2
 	this.OvercommitMemoryRatio = &overcommitMemoryRatio
 	return &this
 }
@@ -69,9 +69,9 @@ func NewHost(name string, protocol string, address string) *Host {
 // but it doesn't guarantee that properties required by API are set
 func NewHostWithDefaults() *Host {
 	this := Host{}
-	var overcommitCpuRatio int32 = 3
+	var overcommitCpuRatio int64 = 3
 	this.OvercommitCpuRatio = &overcommitCpuRatio
-	var overcommitMemoryRatio int32 = 2
+	var overcommitMemoryRatio int64 = 2
 	this.OvercommitMemoryRatio = &overcommitMemoryRatio
 	return &this
 }
@@ -213,9 +213,9 @@ func (o *Host) SetAddress(v string) {
 }
 
 // GetPort returns the Port field value if set, zero value otherwise.
-func (o *Host) GetPort() int32 {
+func (o *Host) GetPort() int64 {
 	if o == nil || IsNil(o.Port) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.Port
@@ -223,7 +223,7 @@ func (o *Host) GetPort() int32 {
 
 // GetPortOk returns a tuple with the Port field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Host) GetPortOk() (*int32, bool) {
+func (o *Host) GetPortOk() (*int64, bool) {
 	if o == nil || IsNil(o.Port) {
 		return nil, false
 	}
@@ -239,8 +239,8 @@ func (o *Host) HasPort() bool {
 	return false
 }
 
-// SetPort gets a reference to the given int32 and assigns it to the Port field.
-func (o *Host) SetPort(v int32) {
+// SetPort gets a reference to the given int64 and assigns it to the Port field.
+func (o *Host) SetPort(v int64) {
 	o.Port = &v
 }
 
@@ -341,9 +341,9 @@ func (o *Host) SetMemoryCost(v Cost) {
 }
 
 // GetOvercommitCpuRatio returns the OvercommitCpuRatio field value if set, zero value otherwise.
-func (o *Host) GetOvercommitCpuRatio() int32 {
+func (o *Host) GetOvercommitCpuRatio() int64 {
 	if o == nil || IsNil(o.OvercommitCpuRatio) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.OvercommitCpuRatio
@@ -351,7 +351,7 @@ func (o *Host) GetOvercommitCpuRatio() int32 {
 
 // GetOvercommitCpuRatioOk returns a tuple with the OvercommitCpuRatio field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Host) GetOvercommitCpuRatioOk() (*int32, bool) {
+func (o *Host) GetOvercommitCpuRatioOk() (*int64, bool) {
 	if o == nil || IsNil(o.OvercommitCpuRatio) {
 		return nil, false
 	}
@@ -367,15 +367,15 @@ func (o *Host) HasOvercommitCpuRatio() bool {
 	return false
 }
 
-// SetOvercommitCpuRatio gets a reference to the given int32 and assigns it to the OvercommitCpuRatio field.
-func (o *Host) SetOvercommitCpuRatio(v int32) {
+// SetOvercommitCpuRatio gets a reference to the given int64 and assigns it to the OvercommitCpuRatio field.
+func (o *Host) SetOvercommitCpuRatio(v int64) {
 	o.OvercommitCpuRatio = &v
 }
 
 // GetOvercommitMemoryRatio returns the OvercommitMemoryRatio field value if set, zero value otherwise.
-func (o *Host) GetOvercommitMemoryRatio() int32 {
+func (o *Host) GetOvercommitMemoryRatio() int64 {
 	if o == nil || IsNil(o.OvercommitMemoryRatio) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.OvercommitMemoryRatio
@@ -383,7 +383,7 @@ func (o *Host) GetOvercommitMemoryRatio() int32 {
 
 // GetOvercommitMemoryRatioOk returns a tuple with the OvercommitMemoryRatio field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Host) GetOvercommitMemoryRatioOk() (*int32, bool) {
+func (o *Host) GetOvercommitMemoryRatioOk() (*int64, bool) {
 	if o == nil || IsNil(o.OvercommitMemoryRatio) {
 		return nil, false
 	}
@@ -399,8 +399,8 @@ func (o *Host) HasOvercommitMemoryRatio() bool {
 	return false
 }
 
-// SetOvercommitMemoryRatio gets a reference to the given int32 and assigns it to the OvercommitMemoryRatio field.
-func (o *Host) SetOvercommitMemoryRatio(v int32) {
+// SetOvercommitMemoryRatio gets a reference to the given int64 and assigns it to the OvercommitMemoryRatio field.
+func (o *Host) SetOvercommitMemoryRatio(v int64) {
 	o.OvercommitMemoryRatio = &v
 }
 

@@ -20,10 +20,10 @@ type ProjectResources struct {
 	Vcpus int32 `json:"vcpus,omitempty"`
 
 	// The maximum total memory (in bytes) allowed to be consumed by sum of all instances.
-	Memory int32 `json:"memory,omitempty"`
+	Memory int64 `json:"memory,omitempty"`
 
 	// The maximum total disk capacity allowed to be consumed by sum of all instances.
-	Storage int32 `json:"storage,omitempty"`
+	Storage int64 `json:"storage,omitempty"`
 
 	// The maximum number of instances allowed to be spawned.
 	Instances int32 `json:"instances,omitempty"`

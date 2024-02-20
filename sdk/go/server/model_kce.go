@@ -26,16 +26,16 @@ type Kce struct {
 	Description string `json:"description,omitempty"`
 
 	// The KCE (Kowabunga Compute Engine) memory size (in bytes).
-	Memory int32 `json:"memory"`
+	Memory int64 `json:"memory"`
 
 	// The KCE (Kowabunga Compute Engine) number of vCPUs.
-	Vcpus int32 `json:"vcpus"`
+	Vcpus int64 `json:"vcpus"`
 
 	// The KCE (Kowabunga Compute Engine) OS disk size (in bytes).
-	Disk int32 `json:"disk"`
+	Disk int64 `json:"disk"`
 
 	// The KCE (Kowabunga Compute Engine) extra data disk size (in bytes). If unspecified, no extra data disk will be assigned.
-	DataDisk int32 `json:"data_disk,omitempty"`
+	DataDisk int64 `json:"data_disk,omitempty"`
 
 	// The KCE (Kowabunga Compute Engine) assigned private IPv4 address (read-only).
 	Ip string `json:"ip,omitempty"`

@@ -3604,13 +3604,13 @@ components:
     Cost:
       description: A resource cost.
       example:
-        price: 6
+        price: 6.0274563
         currency: currency
       properties:
         price:
           description: The unit price information.
           format: float
-          type: integer
+          type: number
         currency:
           description: The associated currency.
           type: string
@@ -3793,7 +3793,7 @@ components:
       example:
         protocol: tcp
         memory_cost:
-          price: 6
+          price: 6.0274563
           currency: currency
         address: address
         port: 0
@@ -3805,7 +3805,7 @@ components:
           key: key
           ca: ca
         cpu_cost:
-          price: 6
+          price: 6.0274563
           currency: currency
         id: id
         overcommit_cpu_ratio: 1
@@ -3830,6 +3830,7 @@ components:
           type: string
         port:
           description: The host libvirt's port.
+          format: int64
           type: integer
         tls:
           $ref: '#/components/schemas/HostTLS'
@@ -3844,6 +3845,7 @@ components:
             machines (VMs) than the physical cores available on the host. This can
             help optimize the utilization of the host CPU and increase the density
             of VMs per host.
+          format: int64
           type: integer
         overcommit_memory_ratio:
           default: 2
@@ -3851,6 +3853,7 @@ components:
             \ is a concept in computing that covers the assignment of more memory\
             \ to virtual computing devices (or processes) than the physical machine\
             \ they are hosted, or running on, actually has."
+          format: int64
           type: integer
       required:
       - address
@@ -3904,15 +3907,19 @@ components:
           type: string
         sockets:
           description: The computing host CPU number of sockets.
+          format: int64
           type: integer
         cores:
           description: The computing host CPU number of cores.
+          format: int64
           type: integer
         threads:
           description: The computing host CPU number of threads.
+          format: int64
           type: integer
         memory:
           description: The computing host memory size (bytes).
+          format: int64
           type: integer
       required:
       - arch
@@ -3947,9 +3954,11 @@ components:
           type: string
         memory:
           description: The virtual machine instance memory size (in bytes).
+          format: int64
           type: integer
         vcpus:
           description: The virtual machine instance number of vCPUs.
+          format: int64
           type: integer
         adapters:
           description: a list of existing network adapters to be connected to the
@@ -4018,17 +4027,21 @@ components:
           type: string
         memory:
           description: The KCE (Kowabunga Compute Engine) memory size (in bytes).
+          format: int64
           type: integer
         vcpus:
           description: The KCE (Kowabunga Compute Engine) number of vCPUs.
+          format: int64
           type: integer
         disk:
           description: The KCE (Kowabunga Compute Engine) OS disk size (in bytes).
+          format: int64
           type: integer
         data_disk:
           default: 0
           description: "The KCE (Kowabunga Compute Engine) extra data disk size (in\
             \ bytes). If unspecified, no extra data disk will be assigned."
+          format: int64
           type: integer
         ip:
           description: The KCE (Kowabunga Compute Engine) assigned private IPv4 address
@@ -4086,6 +4099,7 @@ components:
           type: string
         size:
           description: The KFS (Kowabunga File System) volume bytes used (read-only).
+          format: int64
           type: integer
       required:
       - name
@@ -4183,6 +4197,7 @@ components:
         port:
           default: 8080
           description: The Iris network gateway service port (default to 8080).
+          format: int64
           type: integer
         token:
           description: The Iris network gateway admin API token.
@@ -4286,21 +4301,21 @@ components:
         vcpus:
           description: The maximum total number of vCPUs allowed to be consumed by
             sum of all instances.
-          format: uint16
+          format: int32
           type: integer
         memory:
           description: The maximum total memory (in bytes) allowed to be consumed
             by sum of all instances.
-          format: uint64
+          format: int64
           type: integer
         storage:
           description: The maximum total disk capacity allowed to be consumed by sum
             of all instances.
-          format: uint64
+          format: int64
           type: integer
         instances:
           description: The maximum number of instances allowed to be spawned.
-          format: uint16
+          format: int32
           type: integer
     Region:
       description: A region.
@@ -4357,6 +4372,7 @@ components:
         port:
           default: 54934
           description: NFS Ganesha API server port (default 54934).
+          format: int64
           type: integer
       required:
       - endpoint
@@ -4366,7 +4382,7 @@ components:
       example:
         ceph_secret_uuid: ceph_secret_uuid
         cost:
-          price: 6
+          price: 6.0274563
           currency: currency
         name: name
         pool: pool
@@ -4404,6 +4420,7 @@ components:
           default: 3300
           description: "The local Ceph Monitor(s) port (default 3300), empty for local\
             \ pool type."
+          format: int64
           type: integer
         ceph_secret_uuid:
           description: "The libvirt secret UUID for CephX authentication, empty for\
@@ -4550,6 +4567,7 @@ components:
           type: string
         vlan:
           description: The VLAN identifier.
+          format: int64
           type: integer
         interface:
           description: The libvirt's bridge network interface (brX).
@@ -4591,6 +4609,7 @@ components:
           type: string
         size:
           description: The storage volume size (in bytes).
+          format: int64
           type: integer
         resizeable:
           default: false

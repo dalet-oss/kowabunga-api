@@ -32,7 +32,7 @@ type Host struct {
 	Address string `json:"address"`
 
 	// The host libvirt's port.
-	Port int32 `json:"port,omitempty"`
+	Port int64 `json:"port,omitempty"`
 
 	// The host libvirt's TLS configuration.
 	Tls HostTls `json:"tls,omitempty"`
@@ -44,10 +44,10 @@ type Host struct {
 	MemoryCost Cost `json:"memory_cost,omitempty"`
 
 	// The host CPU resource over-commit ratio. Overcommitting CPU resources for VMs means allocating more virtual CPUs (vCPUs) to the virtual machines (VMs) than the physical cores available on the host. This can help optimize the utilization of the host CPU and increase the density of VMs per host.
-	OvercommitCpuRatio int32 `json:"overcommit_cpu_ratio,omitempty"`
+	OvercommitCpuRatio int64 `json:"overcommit_cpu_ratio,omitempty"`
 
 	// The host memory resource over-commit ratio. Memory overcommitment is a concept in computing that covers the assignment of more memory to virtual computing devices (or processes) than the physical machine they are hosted, or running on, actually has.
-	OvercommitMemoryRatio int32 `json:"overcommit_memory_ratio,omitempty"`
+	OvercommitMemoryRatio int64 `json:"overcommit_memory_ratio,omitempty"`
 }
 
 // AssertHostRequired checks if the required fields are not zero-ed

@@ -29,9 +29,9 @@ type Instance struct {
 	// The virtual machine instance description.
 	Description *string `json:"description,omitempty"`
 	// The virtual machine instance memory size (in bytes).
-	Memory int32 `json:"memory"`
+	Memory int64 `json:"memory"`
 	// The virtual machine instance number of vCPUs.
-	Vcpus int32 `json:"vcpus"`
+	Vcpus int64 `json:"vcpus"`
 	// a list of existing network adapters to be connected to the instance.
 	Adapters []string `json:"adapters,omitempty"`
 	// volumes list of existing storage volumes (i.e. disks) to be connected to the instance.
@@ -44,7 +44,7 @@ type _Instance Instance
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstance(name string, memory int32, vcpus int32) *Instance {
+func NewInstance(name string, memory int64, vcpus int64) *Instance {
 	this := Instance{}
 	this.Name = name
 	this.Memory = memory
@@ -149,9 +149,9 @@ func (o *Instance) SetDescription(v string) {
 }
 
 // GetMemory returns the Memory field value
-func (o *Instance) GetMemory() int32 {
+func (o *Instance) GetMemory() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -160,7 +160,7 @@ func (o *Instance) GetMemory() int32 {
 
 // GetMemoryOk returns a tuple with the Memory field value
 // and a boolean to check if the value has been set.
-func (o *Instance) GetMemoryOk() (*int32, bool) {
+func (o *Instance) GetMemoryOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -168,14 +168,14 @@ func (o *Instance) GetMemoryOk() (*int32, bool) {
 }
 
 // SetMemory sets field value
-func (o *Instance) SetMemory(v int32) {
+func (o *Instance) SetMemory(v int64) {
 	o.Memory = v
 }
 
 // GetVcpus returns the Vcpus field value
-func (o *Instance) GetVcpus() int32 {
+func (o *Instance) GetVcpus() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -184,7 +184,7 @@ func (o *Instance) GetVcpus() int32 {
 
 // GetVcpusOk returns a tuple with the Vcpus field value
 // and a boolean to check if the value has been set.
-func (o *Instance) GetVcpusOk() (*int32, bool) {
+func (o *Instance) GetVcpusOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -192,7 +192,7 @@ func (o *Instance) GetVcpusOk() (*int32, bool) {
 }
 
 // SetVcpus sets field value
-func (o *Instance) SetVcpus(v int32) {
+func (o *Instance) SetVcpus(v int64) {
 	o.Vcpus = v
 }
 

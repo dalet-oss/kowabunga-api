@@ -83,19 +83,19 @@
 {% endmacro %}
 
 {% macro IntProperty(name, desc, values=[], default=None) %}
-{{ Property(name, 'integer', desc, values, default) }}
+{{ Property(name, 'integer', desc, values, default, format='int64') }}
 {% endmacro %}
 
 {% macro ShortIntProperty(name, desc, values=[], default=None) %}
-{{ Property(name, 'integer', desc, values, default, format='uint16') }}
+{{ Property(name, 'integer', desc, values, default, format='int32') }}
 {% endmacro %}
 
 {% macro LongIntProperty(name, desc, values=[], default=None) %}
-{{ Property(name, 'integer', desc, values, default, format='uint64') }}
+{{ Property(name, 'integer', desc, values, default, format='int64') }}
 {% endmacro %}
 
 {% macro FloatProperty(name, desc, values=[], default=None) %}
-{{ Property(name, 'integer', desc, values, default, format='float') }}
+{{ Property(name, 'number', desc, values, default, format='float') }}
 {% endmacro %}
 
 {% macro ObjectProperty(name, desc, schema) %}

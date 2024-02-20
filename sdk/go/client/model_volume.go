@@ -31,7 +31,7 @@ type Volume struct {
 	// The storage volume type.
 	Type string `json:"type"`
 	// The storage volume size (in bytes).
-	Size int32 `json:"size"`
+	Size int64 `json:"size"`
 	// Is the storage volume allowed to grow (filesystem dependant) ?.
 	Resizeable *bool `json:"resizeable,omitempty"`
 }
@@ -42,7 +42,7 @@ type _Volume Volume
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVolume(name string, type_ string, size int32) *Volume {
+func NewVolume(name string, type_ string, size int64) *Volume {
 	this := Volume{}
 	this.Name = name
 	this.Type = type_
@@ -175,9 +175,9 @@ func (o *Volume) SetType(v string) {
 }
 
 // GetSize returns the Size field value
-func (o *Volume) GetSize() int32 {
+func (o *Volume) GetSize() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -186,7 +186,7 @@ func (o *Volume) GetSize() int32 {
 
 // GetSizeOk returns a tuple with the Size field value
 // and a boolean to check if the value has been set.
-func (o *Volume) GetSizeOk() (*int32, bool) {
+func (o *Volume) GetSizeOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -194,7 +194,7 @@ func (o *Volume) GetSizeOk() (*int32, bool) {
 }
 
 // SetSize sets field value
-func (o *Volume) SetSize(v int32) {
+func (o *Volume) SetSize(v int64) {
 	o.Size = v
 }
 

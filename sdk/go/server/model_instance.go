@@ -26,10 +26,10 @@ type Instance struct {
 	Description string `json:"description,omitempty"`
 
 	// The virtual machine instance memory size (in bytes).
-	Memory int32 `json:"memory"`
+	Memory int64 `json:"memory"`
 
 	// The virtual machine instance number of vCPUs.
-	Vcpus int32 `json:"vcpus"`
+	Vcpus int64 `json:"vcpus"`
 
 	// a list of existing network adapters to be connected to the instance.
 	Adapters []string `json:"adapters,omitempty"`

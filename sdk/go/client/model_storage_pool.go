@@ -35,7 +35,7 @@ type StoragePool struct {
 	// The local Ceph Monitor(s) address or FQDN, empty for local pool type.
 	CephAddress *string `json:"ceph_address,omitempty"`
 	// The local Ceph Monitor(s) port (default 3300), empty for local pool type.
-	CephPort *int32 `json:"ceph_port,omitempty"`
+	CephPort *int64 `json:"ceph_port,omitempty"`
 	// The libvirt secret UUID for CephX authentication, empty for local pool type.
 	CephSecretUuid *string `json:"ceph_secret_uuid,omitempty"`
 	// Cost associated to the storage pool.
@@ -56,7 +56,7 @@ func NewStoragePool(name string, pool string) *StoragePool {
 	this.Pool = pool
 	var cephAddress string = "localhost"
 	this.CephAddress = &cephAddress
-	var cephPort int32 = 3300
+	var cephPort int64 = 3300
 	this.CephPort = &cephPort
 	return &this
 }
@@ -70,7 +70,7 @@ func NewStoragePoolWithDefaults() *StoragePool {
 	this.Type = &type_
 	var cephAddress string = "localhost"
 	this.CephAddress = &cephAddress
-	var cephPort int32 = 3300
+	var cephPort int64 = 3300
 	this.CephPort = &cephPort
 	return &this
 }
@@ -252,9 +252,9 @@ func (o *StoragePool) SetCephAddress(v string) {
 }
 
 // GetCephPort returns the CephPort field value if set, zero value otherwise.
-func (o *StoragePool) GetCephPort() int32 {
+func (o *StoragePool) GetCephPort() int64 {
 	if o == nil || IsNil(o.CephPort) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.CephPort
@@ -262,7 +262,7 @@ func (o *StoragePool) GetCephPort() int32 {
 
 // GetCephPortOk returns a tuple with the CephPort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StoragePool) GetCephPortOk() (*int32, bool) {
+func (o *StoragePool) GetCephPortOk() (*int64, bool) {
 	if o == nil || IsNil(o.CephPort) {
 		return nil, false
 	}
@@ -278,8 +278,8 @@ func (o *StoragePool) HasCephPort() bool {
 	return false
 }
 
-// SetCephPort gets a reference to the given int32 and assigns it to the CephPort field.
-func (o *StoragePool) SetCephPort(v int32) {
+// SetCephPort gets a reference to the given int64 and assigns it to the CephPort field.
+func (o *StoragePool) SetCephPort(v int64) {
 	o.CephPort = &v
 }
 

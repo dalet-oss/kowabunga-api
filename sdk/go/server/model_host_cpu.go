@@ -26,16 +26,16 @@ type HostCpu struct {
 	Vendor string `json:"vendor"`
 
 	// The computing host CPU number of sockets.
-	Sockets int32 `json:"sockets"`
+	Sockets int64 `json:"sockets"`
 
 	// The computing host CPU number of cores.
-	Cores int32 `json:"cores"`
+	Cores int64 `json:"cores"`
 
 	// The computing host CPU number of threads.
-	Threads int32 `json:"threads"`
+	Threads int64 `json:"threads"`
 
 	// The computing host memory size (bytes).
-	Memory int32 `json:"memory,omitempty"`
+	Memory int64 `json:"memory,omitempty"`
 }
 
 // AssertHostCpuRequired checks if the required fields are not zero-ed

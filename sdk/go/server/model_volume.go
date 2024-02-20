@@ -29,7 +29,7 @@ type Volume struct {
 	Type string `json:"type"`
 
 	// The storage volume size (in bytes).
-	Size int32 `json:"size"`
+	Size int64 `json:"size"`
 
 	// Is the storage volume allowed to grow (filesystem dependant) ?.
 	Resizeable bool `json:"resizeable,omitempty"`

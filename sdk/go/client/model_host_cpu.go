@@ -29,13 +29,13 @@ type HostCPU struct {
 	// The computing host CPU vendor.
 	Vendor string `json:"vendor"`
 	// The computing host CPU number of sockets.
-	Sockets int32 `json:"sockets"`
+	Sockets int64 `json:"sockets"`
 	// The computing host CPU number of cores.
-	Cores int32 `json:"cores"`
+	Cores int64 `json:"cores"`
 	// The computing host CPU number of threads.
-	Threads int32 `json:"threads"`
+	Threads int64 `json:"threads"`
 	// The computing host memory size (bytes).
-	Memory *int32 `json:"memory,omitempty"`
+	Memory *int64 `json:"memory,omitempty"`
 }
 
 type _HostCPU HostCPU
@@ -44,7 +44,7 @@ type _HostCPU HostCPU
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHostCPU(arch string, model string, vendor string, sockets int32, cores int32, threads int32) *HostCPU {
+func NewHostCPU(arch string, model string, vendor string, sockets int64, cores int64, threads int64) *HostCPU {
 	this := HostCPU{}
 	this.Arch = arch
 	this.Model = model
@@ -136,9 +136,9 @@ func (o *HostCPU) SetVendor(v string) {
 }
 
 // GetSockets returns the Sockets field value
-func (o *HostCPU) GetSockets() int32 {
+func (o *HostCPU) GetSockets() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -147,7 +147,7 @@ func (o *HostCPU) GetSockets() int32 {
 
 // GetSocketsOk returns a tuple with the Sockets field value
 // and a boolean to check if the value has been set.
-func (o *HostCPU) GetSocketsOk() (*int32, bool) {
+func (o *HostCPU) GetSocketsOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -155,14 +155,14 @@ func (o *HostCPU) GetSocketsOk() (*int32, bool) {
 }
 
 // SetSockets sets field value
-func (o *HostCPU) SetSockets(v int32) {
+func (o *HostCPU) SetSockets(v int64) {
 	o.Sockets = v
 }
 
 // GetCores returns the Cores field value
-func (o *HostCPU) GetCores() int32 {
+func (o *HostCPU) GetCores() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -171,7 +171,7 @@ func (o *HostCPU) GetCores() int32 {
 
 // GetCoresOk returns a tuple with the Cores field value
 // and a boolean to check if the value has been set.
-func (o *HostCPU) GetCoresOk() (*int32, bool) {
+func (o *HostCPU) GetCoresOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -179,14 +179,14 @@ func (o *HostCPU) GetCoresOk() (*int32, bool) {
 }
 
 // SetCores sets field value
-func (o *HostCPU) SetCores(v int32) {
+func (o *HostCPU) SetCores(v int64) {
 	o.Cores = v
 }
 
 // GetThreads returns the Threads field value
-func (o *HostCPU) GetThreads() int32 {
+func (o *HostCPU) GetThreads() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -195,7 +195,7 @@ func (o *HostCPU) GetThreads() int32 {
 
 // GetThreadsOk returns a tuple with the Threads field value
 // and a boolean to check if the value has been set.
-func (o *HostCPU) GetThreadsOk() (*int32, bool) {
+func (o *HostCPU) GetThreadsOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -203,14 +203,14 @@ func (o *HostCPU) GetThreadsOk() (*int32, bool) {
 }
 
 // SetThreads sets field value
-func (o *HostCPU) SetThreads(v int32) {
+func (o *HostCPU) SetThreads(v int64) {
 	o.Threads = v
 }
 
 // GetMemory returns the Memory field value if set, zero value otherwise.
-func (o *HostCPU) GetMemory() int32 {
+func (o *HostCPU) GetMemory() int64 {
 	if o == nil || IsNil(o.Memory) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.Memory
@@ -218,7 +218,7 @@ func (o *HostCPU) GetMemory() int32 {
 
 // GetMemoryOk returns a tuple with the Memory field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HostCPU) GetMemoryOk() (*int32, bool) {
+func (o *HostCPU) GetMemoryOk() (*int64, bool) {
 	if o == nil || IsNil(o.Memory) {
 		return nil, false
 	}
@@ -234,8 +234,8 @@ func (o *HostCPU) HasMemory() bool {
 	return false
 }
 
-// SetMemory gets a reference to the given int32 and assigns it to the Memory field.
-func (o *HostCPU) SetMemory(v int32) {
+// SetMemory gets a reference to the given int64 and assigns it to the Memory field.
+func (o *HostCPU) SetMemory(v int64) {
 	o.Memory = &v
 }
 

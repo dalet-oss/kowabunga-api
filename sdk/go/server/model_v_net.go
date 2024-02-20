@@ -26,7 +26,7 @@ type VNet struct {
 	Description string `json:"description,omitempty"`
 
 	// The VLAN identifier.
-	Vlan int32 `json:"vlan"`
+	Vlan int64 `json:"vlan"`
 
 	// The libvirt's bridge network interface (brX).
 	Interface string `json:"interface"`

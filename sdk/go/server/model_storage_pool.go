@@ -35,7 +35,7 @@ type StoragePool struct {
 	CephAddress string `json:"ceph_address,omitempty"`
 
 	// The local Ceph Monitor(s) port (default 3300), empty for local pool type.
-	CephPort int32 `json:"ceph_port,omitempty"`
+	CephPort int64 `json:"ceph_port,omitempty"`
 
 	// The libvirt secret UUID for CephX authentication, empty for local pool type.
 	CephSecretUuid string `json:"ceph_secret_uuid,omitempty"`

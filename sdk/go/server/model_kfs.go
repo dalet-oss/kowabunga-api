@@ -35,7 +35,7 @@ type Kfs struct {
 	Endpoint string `json:"endpoint,omitempty"`
 
 	// The KFS (Kowabunga File System) volume bytes used (read-only).
-	Size int32 `json:"size,omitempty"`
+	Size int64 `json:"size,omitempty"`
 }
 
 // AssertKfsRequired checks if the required fields are not zero-ed

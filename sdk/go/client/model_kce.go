@@ -29,13 +29,13 @@ type KCE struct {
 	// The KCE (Kowabunga Compute Engine) description.
 	Description *string `json:"description,omitempty"`
 	// The KCE (Kowabunga Compute Engine) memory size (in bytes).
-	Memory int32 `json:"memory"`
+	Memory int64 `json:"memory"`
 	// The KCE (Kowabunga Compute Engine) number of vCPUs.
-	Vcpus int32 `json:"vcpus"`
+	Vcpus int64 `json:"vcpus"`
 	// The KCE (Kowabunga Compute Engine) OS disk size (in bytes).
-	Disk int32 `json:"disk"`
+	Disk int64 `json:"disk"`
 	// The KCE (Kowabunga Compute Engine) extra data disk size (in bytes). If unspecified, no extra data disk will be assigned.
-	DataDisk *int32 `json:"data_disk,omitempty"`
+	DataDisk *int64 `json:"data_disk,omitempty"`
 	// The KCE (Kowabunga Compute Engine) assigned private IPv4 address (read-only).
 	Ip *string `json:"ip,omitempty"`
 }
@@ -46,13 +46,13 @@ type _KCE KCE
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewKCE(name string, memory int32, vcpus int32, disk int32) *KCE {
+func NewKCE(name string, memory int64, vcpus int64, disk int64) *KCE {
 	this := KCE{}
 	this.Name = name
 	this.Memory = memory
 	this.Vcpus = vcpus
 	this.Disk = disk
-	var dataDisk int32 = 0
+	var dataDisk int64 = 0
 	this.DataDisk = &dataDisk
 	return &this
 }
@@ -62,7 +62,7 @@ func NewKCE(name string, memory int32, vcpus int32, disk int32) *KCE {
 // but it doesn't guarantee that properties required by API are set
 func NewKCEWithDefaults() *KCE {
 	this := KCE{}
-	var dataDisk int32 = 0
+	var dataDisk int64 = 0
 	this.DataDisk = &dataDisk
 	return &this
 }
@@ -156,9 +156,9 @@ func (o *KCE) SetDescription(v string) {
 }
 
 // GetMemory returns the Memory field value
-func (o *KCE) GetMemory() int32 {
+func (o *KCE) GetMemory() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -167,7 +167,7 @@ func (o *KCE) GetMemory() int32 {
 
 // GetMemoryOk returns a tuple with the Memory field value
 // and a boolean to check if the value has been set.
-func (o *KCE) GetMemoryOk() (*int32, bool) {
+func (o *KCE) GetMemoryOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -175,14 +175,14 @@ func (o *KCE) GetMemoryOk() (*int32, bool) {
 }
 
 // SetMemory sets field value
-func (o *KCE) SetMemory(v int32) {
+func (o *KCE) SetMemory(v int64) {
 	o.Memory = v
 }
 
 // GetVcpus returns the Vcpus field value
-func (o *KCE) GetVcpus() int32 {
+func (o *KCE) GetVcpus() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -191,7 +191,7 @@ func (o *KCE) GetVcpus() int32 {
 
 // GetVcpusOk returns a tuple with the Vcpus field value
 // and a boolean to check if the value has been set.
-func (o *KCE) GetVcpusOk() (*int32, bool) {
+func (o *KCE) GetVcpusOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -199,14 +199,14 @@ func (o *KCE) GetVcpusOk() (*int32, bool) {
 }
 
 // SetVcpus sets field value
-func (o *KCE) SetVcpus(v int32) {
+func (o *KCE) SetVcpus(v int64) {
 	o.Vcpus = v
 }
 
 // GetDisk returns the Disk field value
-func (o *KCE) GetDisk() int32 {
+func (o *KCE) GetDisk() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -215,7 +215,7 @@ func (o *KCE) GetDisk() int32 {
 
 // GetDiskOk returns a tuple with the Disk field value
 // and a boolean to check if the value has been set.
-func (o *KCE) GetDiskOk() (*int32, bool) {
+func (o *KCE) GetDiskOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -223,14 +223,14 @@ func (o *KCE) GetDiskOk() (*int32, bool) {
 }
 
 // SetDisk sets field value
-func (o *KCE) SetDisk(v int32) {
+func (o *KCE) SetDisk(v int64) {
 	o.Disk = v
 }
 
 // GetDataDisk returns the DataDisk field value if set, zero value otherwise.
-func (o *KCE) GetDataDisk() int32 {
+func (o *KCE) GetDataDisk() int64 {
 	if o == nil || IsNil(o.DataDisk) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.DataDisk
@@ -238,7 +238,7 @@ func (o *KCE) GetDataDisk() int32 {
 
 // GetDataDiskOk returns a tuple with the DataDisk field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *KCE) GetDataDiskOk() (*int32, bool) {
+func (o *KCE) GetDataDiskOk() (*int64, bool) {
 	if o == nil || IsNil(o.DataDisk) {
 		return nil, false
 	}
@@ -254,8 +254,8 @@ func (o *KCE) HasDataDisk() bool {
 	return false
 }
 
-// SetDataDisk gets a reference to the given int32 and assigns it to the DataDisk field.
-func (o *KCE) SetDataDisk(v int32) {
+// SetDataDisk gets a reference to the given int64 and assigns it to the DataDisk field.
+func (o *KCE) SetDataDisk(v int64) {
 	o.DataDisk = &v
 }
 

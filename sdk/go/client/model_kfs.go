@@ -35,7 +35,7 @@ type KFS struct {
 	// The KFS (Kowabunga File System) endpoint FQDN (read-only).
 	Endpoint *string `json:"endpoint,omitempty"`
 	// The KFS (Kowabunga File System) volume bytes used (read-only).
-	Size *int32 `json:"size,omitempty"`
+	Size *int64 `json:"size,omitempty"`
 }
 
 type _KFS KFS
@@ -247,9 +247,9 @@ func (o *KFS) SetEndpoint(v string) {
 }
 
 // GetSize returns the Size field value if set, zero value otherwise.
-func (o *KFS) GetSize() int32 {
+func (o *KFS) GetSize() int64 {
 	if o == nil || IsNil(o.Size) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.Size
@@ -257,7 +257,7 @@ func (o *KFS) GetSize() int32 {
 
 // GetSizeOk returns a tuple with the Size field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *KFS) GetSizeOk() (*int32, bool) {
+func (o *KFS) GetSizeOk() (*int64, bool) {
 	if o == nil || IsNil(o.Size) {
 		return nil, false
 	}
@@ -273,8 +273,8 @@ func (o *KFS) HasSize() bool {
 	return false
 }
 
-// SetSize gets a reference to the given int32 and assigns it to the Size field.
-func (o *KFS) SetSize(v int32) {
+// SetSize gets a reference to the given int64 and assigns it to the Size field.
+func (o *KFS) SetSize(v int64) {
 	o.Size = &v
 }
 

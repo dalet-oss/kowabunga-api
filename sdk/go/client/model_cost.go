@@ -23,7 +23,7 @@ var _ MappedNullable = &Cost{}
 // Cost A resource cost.
 type Cost struct {
 	// The unit price information.
-	Price int32 `json:"price"`
+	Price float32 `json:"price"`
 	// The associated currency.
 	Currency string `json:"currency"`
 }
@@ -34,7 +34,7 @@ type _Cost Cost
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCost(price int32, currency string) *Cost {
+func NewCost(price float32, currency string) *Cost {
 	this := Cost{}
 	this.Price = price
 	this.Currency = currency
@@ -50,9 +50,9 @@ func NewCostWithDefaults() *Cost {
 }
 
 // GetPrice returns the Price field value
-func (o *Cost) GetPrice() int32 {
+func (o *Cost) GetPrice() float32 {
 	if o == nil {
-		var ret int32
+		var ret float32
 		return ret
 	}
 
@@ -61,7 +61,7 @@ func (o *Cost) GetPrice() int32 {
 
 // GetPriceOk returns a tuple with the Price field value
 // and a boolean to check if the value has been set.
-func (o *Cost) GetPriceOk() (*int32, bool) {
+func (o *Cost) GetPriceOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,7 +69,7 @@ func (o *Cost) GetPriceOk() (*int32, bool) {
 }
 
 // SetPrice sets field value
-func (o *Cost) SetPrice(v int32) {
+func (o *Cost) SetPrice(v float32) {
 	o.Price = v
 }
 

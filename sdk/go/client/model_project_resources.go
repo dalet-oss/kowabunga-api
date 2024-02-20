@@ -23,9 +23,9 @@ type ProjectResources struct {
 	// The maximum total number of vCPUs allowed to be consumed by sum of all instances.
 	Vcpus *int32 `json:"vcpus,omitempty"`
 	// The maximum total memory (in bytes) allowed to be consumed by sum of all instances.
-	Memory *int32 `json:"memory,omitempty"`
+	Memory *int64 `json:"memory,omitempty"`
 	// The maximum total disk capacity allowed to be consumed by sum of all instances.
-	Storage *int32 `json:"storage,omitempty"`
+	Storage *int64 `json:"storage,omitempty"`
 	// The maximum number of instances allowed to be spawned.
 	Instances *int32 `json:"instances,omitempty"`
 }
@@ -80,9 +80,9 @@ func (o *ProjectResources) SetVcpus(v int32) {
 }
 
 // GetMemory returns the Memory field value if set, zero value otherwise.
-func (o *ProjectResources) GetMemory() int32 {
+func (o *ProjectResources) GetMemory() int64 {
 	if o == nil || IsNil(o.Memory) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.Memory
@@ -90,7 +90,7 @@ func (o *ProjectResources) GetMemory() int32 {
 
 // GetMemoryOk returns a tuple with the Memory field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProjectResources) GetMemoryOk() (*int32, bool) {
+func (o *ProjectResources) GetMemoryOk() (*int64, bool) {
 	if o == nil || IsNil(o.Memory) {
 		return nil, false
 	}
@@ -106,15 +106,15 @@ func (o *ProjectResources) HasMemory() bool {
 	return false
 }
 
-// SetMemory gets a reference to the given int32 and assigns it to the Memory field.
-func (o *ProjectResources) SetMemory(v int32) {
+// SetMemory gets a reference to the given int64 and assigns it to the Memory field.
+func (o *ProjectResources) SetMemory(v int64) {
 	o.Memory = &v
 }
 
 // GetStorage returns the Storage field value if set, zero value otherwise.
-func (o *ProjectResources) GetStorage() int32 {
+func (o *ProjectResources) GetStorage() int64 {
 	if o == nil || IsNil(o.Storage) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.Storage
@@ -122,7 +122,7 @@ func (o *ProjectResources) GetStorage() int32 {
 
 // GetStorageOk returns a tuple with the Storage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProjectResources) GetStorageOk() (*int32, bool) {
+func (o *ProjectResources) GetStorageOk() (*int64, bool) {
 	if o == nil || IsNil(o.Storage) {
 		return nil, false
 	}
@@ -138,8 +138,8 @@ func (o *ProjectResources) HasStorage() bool {
 	return false
 }
 
-// SetStorage gets a reference to the given int32 and assigns it to the Storage field.
-func (o *ProjectResources) SetStorage(v int32) {
+// SetStorage gets a reference to the given int64 and assigns it to the Storage field.
+func (o *ProjectResources) SetStorage(v int64) {
 	o.Storage = &v
 }
 

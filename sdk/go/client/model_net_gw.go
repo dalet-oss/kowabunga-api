@@ -31,7 +31,7 @@ type NetGW struct {
 	// The Iris network gateway IPv4 address.
 	Address string `json:"address"`
 	// The Iris network gateway service port (default to 8080).
-	Port *int32 `json:"port,omitempty"`
+	Port *int64 `json:"port,omitempty"`
 	// The Iris network gateway admin API token.
 	Token string `json:"token"`
 }
@@ -46,7 +46,7 @@ func NewNetGW(name string, address string, token string) *NetGW {
 	this := NetGW{}
 	this.Name = name
 	this.Address = address
-	var port int32 = 8080
+	var port int64 = 8080
 	this.Port = &port
 	this.Token = token
 	return &this
@@ -57,7 +57,7 @@ func NewNetGW(name string, address string, token string) *NetGW {
 // but it doesn't guarantee that properties required by API are set
 func NewNetGWWithDefaults() *NetGW {
 	this := NetGW{}
-	var port int32 = 8080
+	var port int64 = 8080
 	this.Port = &port
 	return &this
 }
@@ -175,9 +175,9 @@ func (o *NetGW) SetAddress(v string) {
 }
 
 // GetPort returns the Port field value if set, zero value otherwise.
-func (o *NetGW) GetPort() int32 {
+func (o *NetGW) GetPort() int64 {
 	if o == nil || IsNil(o.Port) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.Port
@@ -185,7 +185,7 @@ func (o *NetGW) GetPort() int32 {
 
 // GetPortOk returns a tuple with the Port field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetGW) GetPortOk() (*int32, bool) {
+func (o *NetGW) GetPortOk() (*int64, bool) {
 	if o == nil || IsNil(o.Port) {
 		return nil, false
 	}
@@ -201,8 +201,8 @@ func (o *NetGW) HasPort() bool {
 	return false
 }
 
-// SetPort gets a reference to the given int32 and assigns it to the Port field.
-func (o *NetGW) SetPort(v int32) {
+// SetPort gets a reference to the given int64 and assigns it to the Port field.
+func (o *NetGW) SetPort(v int64) {
 	o.Port = &v
 }
 

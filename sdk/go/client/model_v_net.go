@@ -29,7 +29,7 @@ type VNet struct {
 	// The virtual network description.
 	Description *string `json:"description,omitempty"`
 	// The VLAN identifier.
-	Vlan int32 `json:"vlan"`
+	Vlan int64 `json:"vlan"`
 	// The libvirt's bridge network interface (brX).
 	Interface string `json:"interface"`
 	// Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?.
@@ -42,7 +42,7 @@ type _VNet VNet
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVNet(name string, vlan int32, interface_ string) *VNet {
+func NewVNet(name string, vlan int64, interface_ string) *VNet {
 	this := VNet{}
 	this.Name = name
 	this.Vlan = vlan
@@ -151,9 +151,9 @@ func (o *VNet) SetDescription(v string) {
 }
 
 // GetVlan returns the Vlan field value
-func (o *VNet) GetVlan() int32 {
+func (o *VNet) GetVlan() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -162,7 +162,7 @@ func (o *VNet) GetVlan() int32 {
 
 // GetVlanOk returns a tuple with the Vlan field value
 // and a boolean to check if the value has been set.
-func (o *VNet) GetVlanOk() (*int32, bool) {
+func (o *VNet) GetVlanOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -170,7 +170,7 @@ func (o *VNet) GetVlanOk() (*int32, bool) {
 }
 
 // SetVlan sets field value
-func (o *VNet) SetVlan(v int32) {
+func (o *VNet) SetVlan(v int64) {
 	o.Vlan = v
 }
 

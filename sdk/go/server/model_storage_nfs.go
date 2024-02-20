@@ -35,7 +35,7 @@ type StorageNfs struct {
 	Backends []string `json:"backends,omitempty"`
 
 	// NFS Ganesha API server port (default 54934).
-	Port int32 `json:"port,omitempty"`
+	Port int64 `json:"port,omitempty"`
 }
 
 // AssertStorageNfsRequired checks if the required fields are not zero-ed
