@@ -1,654 +1,84 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
 components:
   schemas:
-    Project:
-      type: object
-      required:
-        - name
-        - owner
-        - email
-      properties:
-        id:
-          type: string
-          description: The project ID (auto-generated).
-        name:
-          type: string
-          description: The project name.
-        description:
-          type: string
-          description: The project description.
-        owner:
-          type: string
-          description: The project's owner name.
-        email:
-          type: string
-          description: The project associated email address, used to receive notifications.
-        domain:
-          type: string
-          description: The project associated internal domain name (e.g. myproject.acme.com).
-        root_password:
-          type: string
-          description: The project default root password, set at cloud-init instance bootstrap phase. Will be randomly auto-generated at each instance creation if unspecified.
-        bootstrap_user:
-          type: string
-          description: The project default service user name, created at cloud-init instance bootstrap phase. Will use Kowabunga's default configuration one if unspecified.
-        bootstrap_pubkey:
-          type: string
-          description: The project default public SSH key, to be associated to bootstrap user. Will use Kowabunga's default configuration one if unspecified.
-        tags:
-          type: array
-          description: A list of tags to be associated to the project.
-          items:
-            type: string
-        metadatas:
-          type: array
-          description: A list of metadata to be associated to the project
-          items:
-            $ref: '#/components/schemas/Metadata'
-        quotas:
-          type: object
-          description: The global project resource quotas (0 for unlimited)
-          $ref: '#/components/schemas/ProjectResources'
-        private_subnets:
-          type: array
-          description: The assigned project VPC private subnets IDs (read-only).
-          items:
-            $ref: '#/components/schemas/ZoneSubnet'
+{{ oas.SchemaBaseResource(resources.project, ['name', 'owner', 'email']) }}
+{{ oas.StringProperty('owner', "Owner's name") }}
+{{ oas.StringProperty('email', 'Associated email address, used to receive notifications') }}
+{{ oas.StringProperty('domain', 'Internal domain name (e.g. myproject.acme.com)') }}
+{{ oas.StringProperty('root_password', 'Default root password, set at cloud-init instance bootstrap phase. Will be randomly auto-generated at each instance creation if unspecified') }}
+{{ oas.StringProperty('bootstrap_user', "Default service user name, created at cloud-init instance bootstrap phase. Will use Kowabunga's default configuration one if unspecified") }}
+{{ oas.StringProperty('bootstrap_pubkey', "Default public SSH key, to be associated to bootstrap user. Will use Kowabunga's default configuration one if unspecified") }}
+{{ oas.StringArrayProperty('tags', 'A list of tags to be associated to the project') }}
+{{ oas.ObjectArrayProperty('metadatas', 'A list of metadata to be associated to the project', resources.metadata.schema) }}
+{{ oas.ObjectProperty('quotas', 'The global project resource quotas (0 for unlimited)', resources.project_resources.schema) }}
+{{ oas.ObjectArrayProperty('private_subnets', 'The assigned project VPC private subnets IDs (read-only)', resources.zone_subnet.schema) }}
 
-    ProjectResources:
-      type: object
-      description: The global project resource quotas/usage (0 for unlimited).
-      properties:
-        vcpus:
-          type: integer
-          format: uint16
-          description: the maximum total number of vCPUs allowed to be consumed by sum of all instances.
-        memory:
-          type: integer
-          format: uint64
-          description: the maximum total memory (in bytes) allowed to be consumed by sum of all instances.
-        storage:
-          type: integer
-          format: uint64
-          description: the maximum total disk capacity allowed to be consumed by sum of all instances.
-        instances:
-          type: integer
-          format: uint16
-          description: the maximum number of instances allowed to be spawned.
+{{ oas.Schema(resources.project_resources) }}
+{{ oas.ShortIntProperty('vcpus', 'The maximum total number of vCPUs allowed to be consumed by sum of all instances') }}
+{{ oas.LongIntProperty('memory', 'The maximum total memory (in bytes) allowed to be consumed by sum of all instances') }}
+{{ oas.LongIntProperty('storage', 'The maximum total disk capacity allowed to be consumed by sum of all instances') }}
+{{ oas.ShortIntProperty('instances', 'The maximum number of instances allowed to be spawned') }}
+
   parameters:
-    ProjectID:
-      name: projectId
-      in: path
-      description: The ID of the network adapter.
-      required: true
-      schema:
-        type: string
+{{ oas.PathParamID(resources.project) }}
 
 paths:
   /project:
-    get:
-      tags:
-        - project
-      operationId: GetAllProjects
-      description: Returns the IDs of registered projects.
-      responses:
-        '200':
-          description: Returns the an array of project IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
+{{ oas.LC(resources.project, [resources.project.tag], ['OptionalQuery' + resources.subnet.paramSubnetSizeSchema, 'OptionalQueryNotify']) }}
 
-    post:
-      tags:
-        - project
-      operationId: CreateProject
-      description: Creates a new project.
-      parameters:
-        - $ref: '#/components/parameters/OptionalQuerySubnetSize'
-        - $ref: '#/components/parameters/OptionalQueryNotify'
-      requestBody:
-        description: Project payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Project'
-        required: true
-      responses:
-        '201':
-          description: Returns the newly created project object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Project'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-        '507':
-          $ref: '#/components/responses/InsufficientStorage'
+  /project/{ {{ resources.project.paramId }} }:
+{{ oas.RUD(resources.project, [resources.project.tag], [resources.project.paramSchema]) }}
 
-  /project/{projectId}:
-    parameters:
-      - $ref: '#/components/parameters/ProjectID'
+  /project/{ {{ resources.project.paramId }} }/cost:
+{{ oas.Parameters([resources.project.paramSchema]) }}
+{{ oas.Read('Read' + resources.project.schema + resources.cost.schema, resources.cost.schema, resources.cost.desc, [resources.project.tag]) }}
 
-    get:
-      tags:
-        - project
-      operationId: GetProject
-      description: Returns a description of the project
-      responses:
-        '200':
-          description: Returns the project object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Project'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+  /project/{ {{ resources.project.paramId }} }/usage:
+{{ oas.Parameters([resources.project.paramSchema]) }}
+{{ oas.Read('Read' + resources.project.schema + 'Usage', resources.project_resources.schema, resources.project_resources.desc, [resources.project.tag]) }}
 
-    put:
-      tags:
-        - project
-      operationId: UpdateProject
-      description: Updates a project configuration.
-      requestBody:
-        description: Project payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Project'
-        required: true
-      responses:
-        '200':
-          description: Updated project.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Project'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /project/{ {{ resources.project.paramId }} }/record:
+{{ oas.Parameters([resources.project.paramSchema]) }}
+{{ oas.Create('Create' + resources.project.schema + resources.record.schema, resources.record.schema, resources.record.desc, [resources.project.tag, resources.record.tag]) }}
 
-    delete:
-      tags:
-        - project
-      operationId: DeleteProject
-      description: Deletes an existing project.
-      responses:
-        '200':
-          description: The project has been successfully removed.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /project/{ {{ resources.project.paramId }}}/records:
+{{ oas.Parameters([resources.project.paramSchema]) }}
+{{ oas.GetAll('List' + resources.project.schema + resources.record.schema + 's', resources.record.desc, [resources.project.tag, resources.record.tag], True) }}
 
-  /project/{projectId}/cost:
-    parameters:
-      - $ref: '#/components/parameters/ProjectID'
+  /project/{ {{ resources.project.paramId }} }/zone/{ {{ resources.zone.paramId }} }/volume:
+{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema, 'OptionalQuery' + resources.pool.paramSchema, 'OptionalQuery' + resources.template.paramSchema]) }}
+{{ oas.Create('Create' + resources.project.schema + resources.zone.schema + resources.volume.schema, resources.volume.schema, resources.volume.desc, [resources.project.tag, resources.zone.tag, resources.volume.tag]) }}
 
-    get:
-      tags:
-        - project
-      operationId: GetProjectCost
-      description: Returns the current cost for the project.
-      responses:
-        '200':
-          description: Returns the project cost object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Cost'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+  /project/{ {{ resources.project.paramId }} }/zone/{ {{ resources.zone.paramId }} }/volumes:
+{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema]) }}
+{{ oas.GetAll('List' + resources.project.schema + resources.zone.schema + resources.volume.schema + 's', resources.volume.desc, [resources.project.tag, resources.zone.tag, resources.volume.tag], True) }}
 
-  /project/{projectId}/usage:
-    parameters:
-      - $ref: '#/components/parameters/ProjectID'
+  /project/{ {{ resources.project.paramId }} }/zone/{ {{ resources.zone.paramId }} }/instance:
+{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema, 'OptionalQueryNotify']) }}
+{{ oas.Create('Create' + resources.project.schema + resources.zone.schema + resources.instance.schema, resources.instance.schema, resources.instance.desc, [resources.project.tag, resources.zone.tag, resources.instance.tag]) }}
 
-    get:
-      tags:
-        - project
-      operationId: GetProjectUsage
-      description: Returns the current resources usage for the project.
-      responses:
-        '200':
-          description: Returns the project resources object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProjectResources'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+  /project/{ {{ resources.project.paramId }} }/zone/{ {{ resources.zone.paramId }} }/instances:
+{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema]) }}
+{{ oas.GetAll('List' + resources.project.schema + resources.zone.schema + resources.instance.schema + 's', resources.instance.desc, [resources.project.tag, resources.zone.tag, resources.instance.tag], True) }}
 
-  /project/{projectId}/record:
-    parameters:
-      - $ref: '#/components/parameters/ProjectID'
+  /project/{ {{ resources.project.paramId }} }/zone/{ {{ resources.zone.paramId }} }/kce:
+{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema, 'OptionalQuery' + resources.pool.paramSchema, 'OptionalQuery' + resources.template.paramSchema, 'OptionalQuery' + resources.kce.paramPublicSchema, 'OptionalQueryNotify']) }}
+{{ oas.Create('Create' + resources.project.schema + resources.zone.schema + resources.kce.schema, resources.kce.schema, resources.kce.desc, [resources.project.tag, resources.zone.tag, resources.kce.tag]) }}
 
-    post:
-      tags:
-        - project
-        - record
-      operationId: CreateProjectDnsRecord
-      description: Creates a new DNS record in specified project.
-      requestBody:
-        description: DNS record payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DnsRecord'
-        required: true
-      responses:
-        '201':
-          description: Returns the newly created DNS record object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DnsRecord'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /project/{ {{ resources.project.paramId }} }/zone/{ {{ resources.zone.paramId }} }/kces:
+{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema]) }}
+{{ oas.GetAll('List' + resources.project.schema + resources.zone.schema + resources.kce.schema + 's', resources.kce.desc, [resources.project.tag, resources.zone.tag, resources.kce.tag], True) }}
 
-  /project/{projectId}/records:
-    parameters:
-      - $ref: '#/components/parameters/ProjectID'
+  /project/{ {{ resources.project.paramId }} }/zone/{ {{ resources.zone.paramId }} }/kfs:
+{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema, 'OptionalQuery' + resources.nfs.paramSchema, 'OptionalQueryNotify']) }}
+{{ oas.GetAll('List' + resources.project.schema + resources.zone.schema + resources.kfs.schema + 's', resources.kfs.desc, [resources.project.tag, resources.zone.tag, resources.kfs.tag], True) }}
+{{ oas.Create('Create' + resources.project.schema + resources.zone.schema + resources.kfs.schema, resources.kfs.schema, resources.kfs.desc, [resources.project.tag, resources.zone.tag, resources.kfs.tag]) }}
 
-    get:
-      tags:
-        - project
-        - record
-      operationId: GetProjectDnsRecords
-      description: Returns the IDs of the DNS records existing in the project.
-      responses:
-        '200':
-          description: Returns an array of DNS record IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+  /project/{ {{ resources.project.paramId }} }/zone/{ {{ resources.zone.paramId }} }/kgw:
+{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema]) }}
+{{ oas.Create('Create' + resources.project.schema + resources.zone.schema + resources.kgw.schema, resources.kgw.schema, resources.kgw.desc, [resources.project.tag, resources.zone.tag, resources.kgw.tag]) }}
 
-  /project/{projectId}/zone/{zoneId}/volume:
-    parameters:
-      - $ref: '#/components/parameters/ProjectID'
-      - $ref: '#/components/parameters/ZoneID'
-      - $ref: '#/components/parameters/OptionalQueryPoolID'
-      - $ref: '#/components/parameters/OptionalQueryTemplateID'
-
-    post:
-      tags:
-        - project
-        - zone
-        - volume
-      operationId: CreateProjectZoneVolume
-      description: Creates a new storage volume in specified zone.
-      requestBody:
-        description: Volume payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Volume'
-        required: true
-      responses:
-        '201':
-          description: Returns the newly created storage volume object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Volume'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-        '507':
-          $ref: '#/components/responses/InsufficientStorage'
-
-  /project/{projectId}/zone/{zoneId}/volumes:
-    parameters:
-      - $ref: '#/components/parameters/ProjectID'
-      - $ref: '#/components/parameters/ZoneID'
-
-    get:
-      tags:
-        - project
-        - zone
-        - volume
-      operationId: GetProjectZoneVolumes
-      description: Returns the IDs of the storage volumes existing in the project in the specified zone.
-      responses:
-        '200':
-          description: Returns an array of storage volume IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-
-  /project/{projectId}/zone/{zoneId}/instance:
-    parameters:
-      - $ref: '#/components/parameters/ProjectID'
-      - $ref: '#/components/parameters/ZoneID'
-      - $ref: '#/components/parameters/OptionalQueryNotify'
-
-    post:
-      tags:
-        - project
-        - zone
-        - instance
-      operationId: CreateProjectZoneInstance
-      description: Creates a new virtual machine instance in specified zone.
-      requestBody:
-        description: Instance payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Instance'
-        required: true
-      responses:
-        '201':
-          description: Returns the newly created virtual machine instance object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Instance'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-        '507':
-          $ref: '#/components/responses/InsufficientStorage'
-
-  /project/{projectId}/zone/{zoneId}/instances:
-    parameters:
-      - $ref: '#/components/parameters/ProjectID'
-      - $ref: '#/components/parameters/ZoneID'
-
-    get:
-      tags:
-        - project
-        - zone
-        - instance
-      operationId: GetProjectZoneInstances
-      description: Returns the IDs of the virtual machine instances existing in the project in the specified zone.
-      responses:
-        '200':
-          description: Returns an array of virtual machine instance IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-
-  /project/{projectId}/zone/{zoneId}/kce:
-    parameters:
-      - $ref: '#/components/parameters/ProjectID'
-      - $ref: '#/components/parameters/ZoneID'
-      - $ref: '#/components/parameters/OptionalQueryPoolID'
-      - $ref: '#/components/parameters/OptionalQueryTemplateID'
-      - $ref: '#/components/parameters/OptionalQueryKcePublic'
-      - $ref: '#/components/parameters/OptionalQueryNotify'
-
-    post:
-      tags:
-        - project
-        - zone
-        - kce
-      operationId: CreateProjectZoneKce
-      description: Creates a new KCE virtual machine in specified zone.
-      requestBody:
-        description: KCE payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/KCE'
-        required: true
-      responses:
-        '201':
-          description: Returns the newly created KCE virtual machine object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/KCE'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-        '507':
-          $ref: '#/components/responses/InsufficientStorage'
-
-  /project/{projectId}/zone/{zoneId}/kces:
-    parameters:
-      - $ref: '#/components/parameters/ProjectID'
-      - $ref: '#/components/parameters/ZoneID'
-
-    get:
-      tags:
-        - project
-        - zone
-        - kce
-      operationId: GetProjectZoneKCEs
-      description: Returns the IDs of the KCE virtual machines existing in the project in the specified zone.
-      responses:
-        '200':
-          description: Returns an array of KCE virtual machine IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-
-  /project/{projectId}/zone/{zoneId}/kfs:
-    parameters:
-      - $ref: '#/components/parameters/ProjectID'
-      - $ref: '#/components/parameters/ZoneID'
-      - $ref: '#/components/parameters/OptionalQueryNfsID'
-      - $ref: '#/components/parameters/OptionalQueryNotify'
-
-    get:
-      tags:
-        - project
-        - zone
-        - kfs
-      operationId: GetProjectZoneKfs
-      description: Returns the IDs of the KFS storage volumes existing in the project in the specified zone.
-      responses:
-        '200':
-          description: Returns an array of KFS storage volume IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-
-    post:
-      tags:
-        - project
-        - zone
-        - kfs
-      operationId: CreateProjectZoneKfs
-      description: Creates a new KFS storage volume in specified zone.
-      requestBody:
-        description: KFS payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/KFS'
-        required: true
-      responses:
-        '201':
-          description: Returns the newly created KFS storage volume object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/KFS'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /project/{projectId}/zone/{zoneId}/kgw:
-    parameters:
-      - $ref: '#/components/parameters/ProjectID'
-      - $ref: '#/components/parameters/ZoneID'
-
-    post:
-      tags:
-        - project
-        - zone
-        - kgw
-      operationId: CreateProjectZoneKgw
-      description: Creates a new KGW in the specified zone.
-      requestBody:
-        description: KGW payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/KGW'
-        required: true
-      responses:
-        '201':
-          description: Returns the newly created KGW object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/KGW'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /project/{projectId}/zone/{zoneId}/kgws:
-    parameters:
-      - $ref: '#/components/parameters/ProjectID'
-      - $ref: '#/components/parameters/ZoneID'
-
-    get:
-      tags:
-        - project
-        - zone
-        - kgw
-      operationId: GetProjectZoneKGWs
-      description: Returns the IDs of the KGW existing in the project in the specified zone.
-      responses:
-        '200':
-          description: Returns an array of KGW virtual machine IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+  /project/{ {{ resources.project.paramId }} }/zone/{ {{ resources.zone.paramId }} }/kgws:
+{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema]) }}
+{{ oas.GetAll('List' + resources.project.schema + resources.zone.schema + resources.kgw.schema + 's', resources.kgw.desc, [resources.project.tag, resources.zone.tag, resources.kgw.tag], True) }}
