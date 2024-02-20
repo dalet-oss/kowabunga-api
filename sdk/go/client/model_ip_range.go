@@ -20,7 +20,7 @@ import (
 // checks if the IpRange type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IpRange{}
 
-// IpRange A reserved IPv4 pool range, non-addressable by Kowabunga.
+// IpRange A reserved IPv4 addresses pool range, non-addressable by Kowabunga.
 type IpRange struct {
 	// The range's first IP address.
 	First string `json:"first"`

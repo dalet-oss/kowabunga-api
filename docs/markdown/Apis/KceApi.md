@@ -36,7 +36,7 @@ All URIs are relative to */api/v1*
 | **zoneId** | **String**| The ID of the zone. | [default to null] |
 | **KCE** | [**KCE**](../Models/KCE.md)| KCE payload | |
 | **poolId** | **String**| Storage pool ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
-| **templateId** | **String**| Template to clone the storage volume from (optional, zone&#39;s default if unspecified) | [optional] [default to null] |
+| **templateId** | **String**| Template to clone the storage volume from (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **public** | **String**| Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false). | [optional] [default to null] |
 | **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 

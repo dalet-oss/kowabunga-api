@@ -31,7 +31,7 @@ type ApiCreateTemplateRequest struct {
 	template *Template
 }
 
-// Template payload
+// Template payload.
 func (r ApiCreateTemplateRequest) Template(template Template) ApiCreateTemplateRequest {
 	r.template = &template
 	return r
@@ -44,7 +44,7 @@ func (r ApiCreateTemplateRequest) Execute() (*Template, *http.Response, error) {
 /*
 CreateTemplate Method for CreateTemplate
 
-Creates a new volume template.
+Creates a new image template.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param poolId The ID of the storage pool.
@@ -73,7 +73,7 @@ func (a *TemplateAPIService) CreateTemplateExecute(r ApiCreateTemplateRequest) (
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/pool/{poolId}/template"
+	localVarPath := localBasePath + "/pool/{ poolId }/template"
 	localVarPath = strings.Replace(localVarPath, "{"+"poolId"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -216,6 +216,17 @@ func (a *TemplateAPIService) CreateTemplateExecute(r ApiCreateTemplateRequest) (
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 507 {
+			var v ApiErrorInsufficientStorage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -245,10 +256,10 @@ func (r ApiDeleteTemplateRequest) Execute() (*http.Response, error) {
 /*
 DeleteTemplate Method for DeleteTemplate
 
-Deletes an existing volume template.
+Deletes an existing image template.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param templateId The ID of the volume template.
+ @param templateId The ID of the image template.
  @return ApiDeleteTemplateRequest
 */
 func (a *TemplateAPIService) DeleteTemplate(ctx context.Context, templateId string) ApiDeleteTemplateRequest {
@@ -272,7 +283,7 @@ func (a *TemplateAPIService) DeleteTemplateExecute(r ApiDeleteTemplateRequest) (
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/template/{templateId}"
+	localVarPath := localBasePath + "/template/{ templateId }"
 	localVarPath = strings.Replace(localVarPath, "{"+"templateId"+"}", url.PathEscape(parameterValueToString(r.templateId, "templateId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -406,33 +417,36 @@ func (a *TemplateAPIService) DeleteTemplateExecute(r ApiDeleteTemplateRequest) (
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetAllTemplatesRequest struct {
+type ApiListStoragePoolTemplatesRequest struct {
 	ctx context.Context
 	ApiService *TemplateAPIService
+	poolId string
 }
 
-func (r ApiGetAllTemplatesRequest) Execute() ([]string, *http.Response, error) {
-	return r.ApiService.GetAllTemplatesExecute(r)
+func (r ApiListStoragePoolTemplatesRequest) Execute() ([]string, *http.Response, error) {
+	return r.ApiService.ListStoragePoolTemplatesExecute(r)
 }
 
 /*
-GetAllTemplates Method for GetAllTemplates
+ListStoragePoolTemplates Method for ListStoragePoolTemplates
 
-Returns the IDs of volume templates.
+Returns the IDs of image template objects.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAllTemplatesRequest
+ @param poolId The ID of the storage pool.
+ @return ApiListStoragePoolTemplatesRequest
 */
-func (a *TemplateAPIService) GetAllTemplates(ctx context.Context) ApiGetAllTemplatesRequest {
-	return ApiGetAllTemplatesRequest{
+func (a *TemplateAPIService) ListStoragePoolTemplates(ctx context.Context, poolId string) ApiListStoragePoolTemplatesRequest {
+	return ApiListStoragePoolTemplatesRequest{
 		ApiService: a,
 		ctx: ctx,
+		poolId: poolId,
 	}
 }
 
 // Execute executes the request
 //  @return []string
-func (a *TemplateAPIService) GetAllTemplatesExecute(r ApiGetAllTemplatesRequest) ([]string, *http.Response, error) {
+func (a *TemplateAPIService) ListStoragePoolTemplatesExecute(r ApiListStoragePoolTemplatesRequest) ([]string, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -440,7 +454,167 @@ func (a *TemplateAPIService) GetAllTemplatesExecute(r ApiGetAllTemplatesRequest)
 		localVarReturnValue  []string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TemplateAPIService.GetAllTemplates")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TemplateAPIService.ListStoragePoolTemplates")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/pool/{ poolId }/templates"
+	localVarPath = strings.Replace(localVarPath, "{"+"poolId"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["TokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-token"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiErrorUnauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiErrorForbidden
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiErrorNotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListTemplatesRequest struct {
+	ctx context.Context
+	ApiService *TemplateAPIService
+}
+
+func (r ApiListTemplatesRequest) Execute() ([]string, *http.Response, error) {
+	return r.ApiService.ListTemplatesExecute(r)
+}
+
+/*
+ListTemplates Method for ListTemplates
+
+Returns the IDs of image template objects.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListTemplatesRequest
+*/
+func (a *TemplateAPIService) ListTemplates(ctx context.Context) ApiListTemplatesRequest {
+	return ApiListTemplatesRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return []string
+func (a *TemplateAPIService) ListTemplatesExecute(r ApiListTemplatesRequest) ([]string, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []string
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TemplateAPIService.ListTemplates")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -554,27 +728,27 @@ func (a *TemplateAPIService) GetAllTemplatesExecute(r ApiGetAllTemplatesRequest)
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetTemplateRequest struct {
+type ApiReadTemplateRequest struct {
 	ctx context.Context
 	ApiService *TemplateAPIService
 	templateId string
 }
 
-func (r ApiGetTemplateRequest) Execute() (*Template, *http.Response, error) {
-	return r.ApiService.GetTemplateExecute(r)
+func (r ApiReadTemplateRequest) Execute() (*Template, *http.Response, error) {
+	return r.ApiService.ReadTemplateExecute(r)
 }
 
 /*
-GetTemplate Method for GetTemplate
+ReadTemplate Method for ReadTemplate
 
-Returns a description of the volume template.
+Returns a image template.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param templateId The ID of the volume template.
- @return ApiGetTemplateRequest
+ @param templateId The ID of the image template.
+ @return ApiReadTemplateRequest
 */
-func (a *TemplateAPIService) GetTemplate(ctx context.Context, templateId string) ApiGetTemplateRequest {
-	return ApiGetTemplateRequest{
+func (a *TemplateAPIService) ReadTemplate(ctx context.Context, templateId string) ApiReadTemplateRequest {
+	return ApiReadTemplateRequest{
 		ApiService: a,
 		ctx: ctx,
 		templateId: templateId,
@@ -583,7 +757,7 @@ func (a *TemplateAPIService) GetTemplate(ctx context.Context, templateId string)
 
 // Execute executes the request
 //  @return Template
-func (a *TemplateAPIService) GetTemplateExecute(r ApiGetTemplateRequest) (*Template, *http.Response, error) {
+func (a *TemplateAPIService) ReadTemplateExecute(r ApiReadTemplateRequest) (*Template, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -591,12 +765,12 @@ func (a *TemplateAPIService) GetTemplateExecute(r ApiGetTemplateRequest) (*Templ
 		localVarReturnValue  *Template
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TemplateAPIService.GetTemplate")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TemplateAPIService.ReadTemplate")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/template/{templateId}"
+	localVarPath := localBasePath + "/template/{ templateId }"
 	localVarPath = strings.Replace(localVarPath, "{"+"templateId"+"}", url.PathEscape(parameterValueToString(r.templateId, "templateId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -717,29 +891,29 @@ func (a *TemplateAPIService) GetTemplateExecute(r ApiGetTemplateRequest) (*Templ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdatePoolDefaultTemplateRequest struct {
+type ApiSetStoragePoolDefaultTemplateRequest struct {
 	ctx context.Context
 	ApiService *TemplateAPIService
 	poolId string
 	templateId string
 }
 
-func (r ApiUpdatePoolDefaultTemplateRequest) Execute() (*http.Response, error) {
-	return r.ApiService.UpdatePoolDefaultTemplateExecute(r)
+func (r ApiSetStoragePoolDefaultTemplateRequest) Execute() (*http.Response, error) {
+	return r.ApiService.SetStoragePoolDefaultTemplateExecute(r)
 }
 
 /*
-UpdatePoolDefaultTemplate Method for UpdatePoolDefaultTemplate
+SetStoragePoolDefaultTemplate Method for SetStoragePoolDefaultTemplate
 
-Set a storage pool default volume template.
+Performs a storage pool setting of default template.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param poolId The ID of the storage pool.
- @param templateId The ID of the volume template.
- @return ApiUpdatePoolDefaultTemplateRequest
+ @param templateId The ID of the image template.
+ @return ApiSetStoragePoolDefaultTemplateRequest
 */
-func (a *TemplateAPIService) UpdatePoolDefaultTemplate(ctx context.Context, poolId string, templateId string) ApiUpdatePoolDefaultTemplateRequest {
-	return ApiUpdatePoolDefaultTemplateRequest{
+func (a *TemplateAPIService) SetStoragePoolDefaultTemplate(ctx context.Context, poolId string, templateId string) ApiSetStoragePoolDefaultTemplateRequest {
+	return ApiSetStoragePoolDefaultTemplateRequest{
 		ApiService: a,
 		ctx: ctx,
 		poolId: poolId,
@@ -748,19 +922,19 @@ func (a *TemplateAPIService) UpdatePoolDefaultTemplate(ctx context.Context, pool
 }
 
 // Execute executes the request
-func (a *TemplateAPIService) UpdatePoolDefaultTemplateExecute(r ApiUpdatePoolDefaultTemplateRequest) (*http.Response, error) {
+func (a *TemplateAPIService) SetStoragePoolDefaultTemplateExecute(r ApiSetStoragePoolDefaultTemplateRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TemplateAPIService.UpdatePoolDefaultTemplate")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TemplateAPIService.SetStoragePoolDefaultTemplate")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/pool/{poolId}/template/{templateId}/default"
+	localVarPath := localBasePath + "/pool/{ poolId }/template/{ templateId }/default"
 	localVarPath = strings.Replace(localVarPath, "{"+"poolId"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"templateId"+"}", url.PathEscape(parameterValueToString(r.templateId, "templateId")), -1)
 
@@ -835,17 +1009,6 @@ func (a *TemplateAPIService) UpdatePoolDefaultTemplateExecute(r ApiUpdatePoolDef
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ApiErrorBadRequest
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v ApiErrorUnauthorized
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -902,7 +1065,7 @@ type ApiUpdateTemplateRequest struct {
 	template *Template
 }
 
-// Template payload
+// Template payload.
 func (r ApiUpdateTemplateRequest) Template(template Template) ApiUpdateTemplateRequest {
 	r.template = &template
 	return r
@@ -915,10 +1078,10 @@ func (r ApiUpdateTemplateRequest) Execute() (*Template, *http.Response, error) {
 /*
 UpdateTemplate Method for UpdateTemplate
 
-Updates a volume template configuration.
+Updates a image template configuration.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param templateId The ID of the volume template.
+ @param templateId The ID of the image template.
  @return ApiUpdateTemplateRequest
 */
 func (a *TemplateAPIService) UpdateTemplate(ctx context.Context, templateId string) ApiUpdateTemplateRequest {
@@ -944,7 +1107,7 @@ func (a *TemplateAPIService) UpdateTemplateExecute(r ApiUpdateTemplateRequest) (
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/template/{templateId}"
+	localVarPath := localBasePath + "/template/{ templateId }"
 	localVarPath = strings.Replace(localVarPath, "{"+"templateId"+"}", url.PathEscape(parameterValueToString(r.templateId, "templateId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1069,6 +1232,17 @@ func (a *TemplateAPIService) UpdateTemplateExecute(r ApiUpdateTemplateRequest) (
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v ApiErrorUnprocessableEntity
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 507 {
+			var v ApiErrorInsufficientStorage
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

@@ -11,29 +11,32 @@
  */
 
 
+/**
+ * A Iris network gateway.
+ */
 export interface NetGW { 
     /**
-     * The network gateway ID (auto-generated).
+     * The Iris network gateway ID (auto-generated).
      */
     id?: string;
     /**
-     * The network gateway name.
+     * The Iris network gateway name.
      */
     name: string;
     /**
-     * The network gateway description.
+     * The Iris network gateway description.
      */
     description?: string;
     /**
-     * The network gateway IPv4 address.
+     * The Iris network gateway IPv4 address.
      */
     address: string;
     /**
-     * The network gateway service port (default to 8080).
+     * The Iris network gateway service port (default to 8080).
      */
     port?: number;
     /**
-     * The network gateway admin API token.
+     * The Iris network gateway admin API token.
      */
     token: string;
 }

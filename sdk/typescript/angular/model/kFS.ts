@@ -12,35 +12,35 @@
 
 
 /**
- * Kowabunga File System (KFS) provides an elastic NFS-like remote storage volume.
+ * A Kowabunga File System (KFS) provides an elastic NFS-like remote storage volume.
  */
 export interface KFS { 
     /**
-     * The KFS ID (auto-generated).
+     * The KFS (Kowabunga File System) ID (auto-generated).
      */
     id?: string;
     /**
-     * The KFS storage volume name.
+     * The KFS (Kowabunga File System) name.
      */
     name: string;
     /**
-     * The KFS storage volume description.
+     * The KFS (Kowabunga File System) description.
      */
     description?: string;
     /**
-     * The KFS storage volume access type.
+     * The KFS (Kowabunga File System) volume access type.
      */
     access?: KFS.AccessEnum;
     /**
-     * The KFS storage volume\'s NFS protocol versions to be supported.
+     * The KFS (Kowabunga File System) NFS protocol versions to be supported.
      */
     protocols?: Array<KFS.ProtocolsEnum>;
     /**
-     * The KFS endpoint FQDN (read-only).
+     * The KFS (Kowabunga File System) endpoint FQDN (read-only).
      */
     endpoint?: string;
     /**
-     * The KFS storage volume bytes used (read-only).
+     * The KFS (Kowabunga File System) volume bytes used (read-only).
      */
     size?: number;
 }

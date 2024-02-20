@@ -724,7 +724,7 @@ func (r ApiCreateProjectZoneKceRequest) PoolId(poolId string) ApiCreateProjectZo
 	return r
 }
 
-// Template to clone the storage volume from (optional, zone&#39;s default if unspecified)
+// Template to clone the storage volume from (optional, zone&#39;s default if unspecified).
 func (r ApiCreateProjectZoneKceRequest) TemplateId(templateId string) ApiCreateProjectZoneKceRequest {
 	r.templateId = &templateId
 	return r
@@ -1429,7 +1429,7 @@ func (r ApiCreateProjectZoneVolumeRequest) PoolId(poolId string) ApiCreateProjec
 	return r
 }
 
-// Template to clone the storage volume from (optional, zone&#39;s default if unspecified)
+// Template to clone the storage volume from (optional, zone&#39;s default if unspecified).
 func (r ApiCreateProjectZoneVolumeRequest) TemplateId(templateId string) ApiCreateProjectZoneVolumeRequest {
 	r.templateId = &templateId
 	return r

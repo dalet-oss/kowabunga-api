@@ -1,135 +1,18 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
 components:
   schemas:
-    Template:
-      type: object
-      required:
-        - name
-      properties:
-        id:
-          type: string
-          description: The volume template ID (auto-generated).
-        name:
-          type: string
-          description: The volume template name.
-        description:
-          type: string
-          description: The volume template description.
-        type:
-          type: string
-          description: The type of volume template.
-          enum:
-            - os
-            - raw
-          default: os
-        os:
-          type: string
-          description: Type of operating system if OS kind (useful to determine cloud-init parameters for instance)
-          enum:
-            - linux
-            - windows
-          default: linux
+{{ oas.SchemaBaseResource(resources.template, ['name']) }}
+{{ oas.StringProperty('type', 'The ' + resources.template.desc + ' volume type', values=['os', 'raw'], default='os') }}
+{{ oas.StringProperty('os', 'Type of operating system if OS kind (useful to determine cloud-init parameters for instance)', values=['linux', 'windows'], default='linux') }}
+
   parameters:
-    TemplateID:
-      name: templateId
-      in: path
-      description: The ID of the volume template.
-      required: true
-      schema:
-        type: string
-    OptionalQueryTemplateID:
-      name: templateId
-      in: query
-      description: Template to clone the storage volume from (optional, zone's default if unspecified)
-      schema:
-        type: string
+{{ oas.PathParamID(resources.template) }}
+{{ oas.StringQueryParam(resources.template.paramSchema, resources.template.paramId, "Template to clone the storage volume from (optional, zone's default if unspecified)") }}
 
 paths:
   /template:
-    get:
-      tags:
-        - template
-      operationId: GetAllTemplates
-      description: Returns the IDs of volume templates.
-      responses:
-        '200':
-          description: Returns the an array of volume template IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
+{{ oas.List(resources.template, [resources.template.tag]) }}
 
-  /template/{templateId}:
-    parameters:
-      - $ref: '#/components/parameters/TemplateID'
-
-    get:
-      tags:
-        - template
-      operationId: GetTemplate
-      description: Returns a description of the volume template.
-      responses:
-        '200':
-          description: Returns the volume template object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Template'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-
-    put:
-      tags:
-        - template
-      operationId: UpdateTemplate
-      description: Updates a volume template configuration.
-      requestBody:
-        description: Template payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Template'
-        required: true
-      responses:
-        '200':
-          description: Updated volume template adapter.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Template'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-    delete:
-      tags:
-        - template
-      operationId: DeleteTemplate
-      description: Deletes an existing volume template.
-      responses:
-        '200':
-          description: The volume template has been successfully removed.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /template/{ {{ resources.template.paramId }} }:
+{{ oas.RUD(resources.template, [resources.template.tag], [resources.template.paramSchema]) }}

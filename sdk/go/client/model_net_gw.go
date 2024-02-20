@@ -20,19 +20,19 @@ import (
 // checks if the NetGW type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &NetGW{}
 
-// NetGW struct for NetGW
+// NetGW A Iris network gateway.
 type NetGW struct {
-	// The network gateway ID (auto-generated).
+	// The Iris network gateway ID (auto-generated).
 	Id *string `json:"id,omitempty"`
-	// The network gateway name.
+	// The Iris network gateway name.
 	Name string `json:"name"`
-	// The network gateway description.
+	// The Iris network gateway description.
 	Description *string `json:"description,omitempty"`
-	// The network gateway IPv4 address.
+	// The Iris network gateway IPv4 address.
 	Address string `json:"address"`
-	// The network gateway service port (default to 8080).
+	// The Iris network gateway service port (default to 8080).
 	Port *int32 `json:"port,omitempty"`
-	// The network gateway admin API token.
+	// The Iris network gateway admin API token.
 	Token string `json:"token"`
 }
 

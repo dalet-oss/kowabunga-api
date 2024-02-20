@@ -20,7 +20,7 @@ import (
 // checks if the Region type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Region{}
 
-// Region struct for Region
+// Region A region.
 type Region struct {
 	// The region ID (auto-generated).
 	Id *string `json:"id,omitempty"`

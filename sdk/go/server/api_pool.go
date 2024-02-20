@@ -58,48 +58,48 @@ func (c *PoolAPIController) Routes() Routes {
 		},
 		"CreateTemplate": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/pool/{poolId}/template",
+			"/api/v1/pool/{ poolId }/template",
 			c.CreateTemplate,
 		},
-		"DeletePool": Route{
+		"DeleteStoragePool": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/pool/{poolId}",
-			c.DeletePool,
-		},
-		"GetAllPools": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/pool",
-			c.GetAllPools,
-		},
-		"GetPool": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/pool/{poolId}",
-			c.GetPool,
-		},
-		"GetPoolTemplates": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/pool/{poolId}/templates",
-			c.GetPoolTemplates,
-		},
-		"GetPoolVolumes": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/pool/{poolId}/volumes",
-			c.GetPoolVolumes,
+			"/api/v1/pool/{ poolId }",
+			c.DeleteStoragePool,
 		},
 		"GetZonePools": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/zone/{zoneId}/pools",
 			c.GetZonePools,
 		},
-		"UpdatePool": Route{
-			strings.ToUpper("Put"),
-			"/api/v1/pool/{poolId}",
-			c.UpdatePool,
+		"ListStoragePoolTemplates": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/pool/{ poolId }/templates",
+			c.ListStoragePoolTemplates,
 		},
-		"UpdatePoolDefaultTemplate": Route{
+		"ListStoragePoolVolumes": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/pool/{ poolId }/volumes",
+			c.ListStoragePoolVolumes,
+		},
+		"ListStoragePools": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/pool",
+			c.ListStoragePools,
+		},
+		"ReadStoragePool": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/pool/{ poolId }",
+			c.ReadStoragePool,
+		},
+		"SetStoragePoolDefaultTemplate": Route{
+			strings.ToUpper("Patch"),
+			"/api/v1/pool/{ poolId }/template/{ templateId }/default",
+			c.SetStoragePoolDefaultTemplate,
+		},
+		"UpdateStoragePool": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/pool/{poolId}/template/{templateId}/default",
-			c.UpdatePoolDefaultTemplate,
+			"/api/v1/pool/{ poolId }",
+			c.UpdateStoragePool,
 		},
 		"UpdateZoneDefaultPool": Route{
 			strings.ToUpper("Put"),
@@ -187,81 +187,15 @@ func (c *PoolAPIController) CreateTemplate(w http.ResponseWriter, r *http.Reques
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// DeletePool - 
-func (c *PoolAPIController) DeletePool(w http.ResponseWriter, r *http.Request) {
+// DeleteStoragePool - 
+func (c *PoolAPIController) DeleteStoragePool(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	poolIdParam := params["poolId"]
 	if poolIdParam == "" {
 		c.errorHandler(w, r, &RequiredError{"poolId"}, nil)
 		return
 	}
-	result, err := c.service.DeletePool(r.Context(), poolIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetAllPools - 
-func (c *PoolAPIController) GetAllPools(w http.ResponseWriter, r *http.Request) {
-	result, err := c.service.GetAllPools(r.Context())
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetPool - 
-func (c *PoolAPIController) GetPool(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	poolIdParam := params["poolId"]
-	if poolIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"poolId"}, nil)
-		return
-	}
-	result, err := c.service.GetPool(r.Context(), poolIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetPoolTemplates - 
-func (c *PoolAPIController) GetPoolTemplates(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	poolIdParam := params["poolId"]
-	if poolIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"poolId"}, nil)
-		return
-	}
-	result, err := c.service.GetPoolTemplates(r.Context(), poolIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetPoolVolumes - 
-func (c *PoolAPIController) GetPoolVolumes(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	poolIdParam := params["poolId"]
-	if poolIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"poolId"}, nil)
-		return
-	}
-	result, err := c.service.GetPoolVolumes(r.Context(), poolIdParam)
+	result, err := c.service.DeleteStoragePool(r.Context(), poolIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -289,8 +223,97 @@ func (c *PoolAPIController) GetZonePools(w http.ResponseWriter, r *http.Request)
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// UpdatePool - 
-func (c *PoolAPIController) UpdatePool(w http.ResponseWriter, r *http.Request) {
+// ListStoragePoolTemplates - 
+func (c *PoolAPIController) ListStoragePoolTemplates(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	poolIdParam := params["poolId"]
+	if poolIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"poolId"}, nil)
+		return
+	}
+	result, err := c.service.ListStoragePoolTemplates(r.Context(), poolIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListStoragePoolVolumes - 
+func (c *PoolAPIController) ListStoragePoolVolumes(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	poolIdParam := params["poolId"]
+	if poolIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"poolId"}, nil)
+		return
+	}
+	result, err := c.service.ListStoragePoolVolumes(r.Context(), poolIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListStoragePools - 
+func (c *PoolAPIController) ListStoragePools(w http.ResponseWriter, r *http.Request) {
+	result, err := c.service.ListStoragePools(r.Context())
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ReadStoragePool - 
+func (c *PoolAPIController) ReadStoragePool(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	poolIdParam := params["poolId"]
+	if poolIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"poolId"}, nil)
+		return
+	}
+	result, err := c.service.ReadStoragePool(r.Context(), poolIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// SetStoragePoolDefaultTemplate - 
+func (c *PoolAPIController) SetStoragePoolDefaultTemplate(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	poolIdParam := params["poolId"]
+	if poolIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"poolId"}, nil)
+		return
+	}
+	templateIdParam := params["templateId"]
+	if templateIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"templateId"}, nil)
+		return
+	}
+	result, err := c.service.SetStoragePoolDefaultTemplate(r.Context(), poolIdParam, templateIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// UpdateStoragePool - 
+func (c *PoolAPIController) UpdateStoragePool(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	poolIdParam := params["poolId"]
 	if poolIdParam == "" {
@@ -312,30 +335,7 @@ func (c *PoolAPIController) UpdatePool(w http.ResponseWriter, r *http.Request) {
 		c.errorHandler(w, r, err, nil)
 		return
 	}
-	result, err := c.service.UpdatePool(r.Context(), poolIdParam, storagePoolParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// UpdatePoolDefaultTemplate - 
-func (c *PoolAPIController) UpdatePoolDefaultTemplate(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	poolIdParam := params["poolId"]
-	if poolIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"poolId"}, nil)
-		return
-	}
-	templateIdParam := params["templateId"]
-	if templateIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"templateId"}, nil)
-		return
-	}
-	result, err := c.service.UpdatePoolDefaultTemplate(r.Context(), poolIdParam, templateIdParam)
+	result, err := c.service.UpdateStoragePool(r.Context(), poolIdParam, storagePoolParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

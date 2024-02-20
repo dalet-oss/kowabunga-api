@@ -13,6 +13,7 @@ package server
 
 
 
+// StoragePool - A storage pool.
 type StoragePool struct {
 
 	// The storage pool ID (auto-generated).

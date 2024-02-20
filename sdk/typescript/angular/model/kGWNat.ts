@@ -12,20 +12,20 @@
 
 
 /**
- * KGW Nat definition
+ * A KGW NAT mapping.
  */
 export interface KGWNat { 
     /**
-     * Target Private IP. Leave blank for a new generated one
+     * Target Private IP. Leave blank for a new generated one.
      */
     private_ip: string;
     /**
-     * Public IP from created Adapter. Leave empty to use the default Public IP
+     * Public IP from created adapter. Leave empty to use the default public IP.
      */
     public_ip?: string;
     /**
-     * Ports being forwarded from the public to the private IP. Accept Ranges
+     * Ports being forwarded from the public to the private IP. Accept Ranges.
      */
-    ports: string;
+    ports?: string;
 }
 

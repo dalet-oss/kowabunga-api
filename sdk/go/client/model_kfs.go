@@ -20,21 +20,21 @@ import (
 // checks if the KFS type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &KFS{}
 
-// KFS Kowabunga File System (KFS) provides an elastic NFS-like remote storage volume.
+// KFS A Kowabunga File System (KFS) provides an elastic NFS-like remote storage volume.
 type KFS struct {
-	// The KFS ID (auto-generated).
+	// The KFS (Kowabunga File System) ID (auto-generated).
 	Id *string `json:"id,omitempty"`
-	// The KFS storage volume name.
+	// The KFS (Kowabunga File System) name.
 	Name string `json:"name"`
-	// The KFS storage volume description.
+	// The KFS (Kowabunga File System) description.
 	Description *string `json:"description,omitempty"`
-	// The KFS storage volume access type.
+	// The KFS (Kowabunga File System) volume access type.
 	Access *string `json:"access,omitempty"`
-	// The KFS storage volume's NFS protocol versions to be supported.
+	// The KFS (Kowabunga File System) NFS protocol versions to be supported.
 	Protocols []int32 `json:"protocols,omitempty"`
-	// The KFS endpoint FQDN (read-only).
+	// The KFS (Kowabunga File System) endpoint FQDN (read-only).
 	Endpoint *string `json:"endpoint,omitempty"`
-	// The KFS storage volume bytes used (read-only).
+	// The KFS (Kowabunga File System) volume bytes used (read-only).
 	Size *int32 `json:"size,omitempty"`
 }
 

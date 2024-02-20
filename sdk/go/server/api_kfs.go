@@ -58,32 +58,32 @@ func (c *KfsAPIController) Routes() Routes {
 		},
 		"DeleteKFS": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/kfs/{kfsId}",
+			"/api/v1/kfs/{ kfsId }",
 			c.DeleteKFS,
-		},
-		"GetAllKFSs": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/kfs",
-			c.GetAllKFSs,
-		},
-		"GetKFS": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/kfs/{kfsId}",
-			c.GetKFS,
-		},
-		"GetNfsKfs": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/nfs/{nfsId}/kfs",
-			c.GetNfsKfs,
 		},
 		"GetProjectZoneKfs": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/project/{projectId}/zone/{zoneId}/kfs",
 			c.GetProjectZoneKfs,
 		},
+		"ListKFSs": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/kfs",
+			c.ListKFSs,
+		},
+		"ListStorageNFSKFSs": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/nfs/{ nfsId }/kfs",
+			c.ListStorageNFSKFSs,
+		},
+		"ReadKFS": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/kfs/{ kfsId }",
+			c.ReadKFS,
+		},
 		"UpdateKFS": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/kfs/{kfsId}",
+			"/api/v1/kfs/{ kfsId }",
 			c.UpdateKFS,
 		},
 	}
@@ -171,54 +171,6 @@ func (c *KfsAPIController) DeleteKFS(w http.ResponseWriter, r *http.Request) {
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetAllKFSs - 
-func (c *KfsAPIController) GetAllKFSs(w http.ResponseWriter, r *http.Request) {
-	result, err := c.service.GetAllKFSs(r.Context())
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetKFS - 
-func (c *KfsAPIController) GetKFS(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	kfsIdParam := params["kfsId"]
-	if kfsIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"kfsId"}, nil)
-		return
-	}
-	result, err := c.service.GetKFS(r.Context(), kfsIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetNfsKfs - 
-func (c *KfsAPIController) GetNfsKfs(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	nfsIdParam := params["nfsId"]
-	if nfsIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"nfsId"}, nil)
-		return
-	}
-	result, err := c.service.GetNfsKfs(r.Context(), nfsIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
 // GetProjectZoneKfs - 
 func (c *KfsAPIController) GetProjectZoneKfs(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -259,6 +211,54 @@ func (c *KfsAPIController) GetProjectZoneKfs(w http.ResponseWriter, r *http.Requ
 	} else {
 	}
 	result, err := c.service.GetProjectZoneKfs(r.Context(), projectIdParam, zoneIdParam, nfsIdParam, notifyParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListKFSs - 
+func (c *KfsAPIController) ListKFSs(w http.ResponseWriter, r *http.Request) {
+	result, err := c.service.ListKFSs(r.Context())
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListStorageNFSKFSs - 
+func (c *KfsAPIController) ListStorageNFSKFSs(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	nfsIdParam := params["nfsId"]
+	if nfsIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"nfsId"}, nil)
+		return
+	}
+	result, err := c.service.ListStorageNFSKFSs(r.Context(), nfsIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ReadKFS - 
+func (c *KfsAPIController) ReadKFS(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	kfsIdParam := params["kfsId"]
+	if kfsIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"kfsId"}, nil)
+		return
+	}
+	result, err := c.service.ReadKFS(r.Context(), kfsIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

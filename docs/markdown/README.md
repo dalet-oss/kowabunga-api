@@ -130,12 +130,12 @@ All URIs are relative to */api/v1*
 *SubnetApi* | [**updateSubnet**](Apis/SubnetApi.md#updatesubnet) | **PUT** /subnet/{ subnetId } | Updates a network subnet configuration. |
 *SubnetApi* | [**updateVNetDefaultSubnet**](Apis/SubnetApi.md#updatevnetdefaultsubnet) | **PUT** /vnet/{vnetId}/subnet/{subnetId}/default | Set a virtual network default subnet. |
 | *TemplateApi* | [**createTemplate**](Apis/TemplateApi.md#createtemplate) | **POST** /pool/{ poolId }/template | Creates a new image template. |
-*TemplateApi* | [**deleteTemplate**](Apis/TemplateApi.md#deletetemplate) | **DELETE** /template/{templateId} | Deletes an existing volume template. |
-*TemplateApi* | [**getAllTemplates**](Apis/TemplateApi.md#getalltemplates) | **GET** /template | Returns the IDs of volume templates. |
-*TemplateApi* | [**getTemplate**](Apis/TemplateApi.md#gettemplate) | **GET** /template/{templateId} | Returns a description of the volume template. |
+*TemplateApi* | [**deleteTemplate**](Apis/TemplateApi.md#deletetemplate) | **DELETE** /template/{ templateId } | Deletes an existing image template. |
 *TemplateApi* | [**listStoragePoolTemplates**](Apis/TemplateApi.md#liststoragepooltemplates) | **GET** /pool/{ poolId }/templates | Returns the IDs of image template objects. |
+*TemplateApi* | [**listTemplates**](Apis/TemplateApi.md#listtemplates) | **GET** /template | Returns the IDs of image template objects. |
+*TemplateApi* | [**readTemplate**](Apis/TemplateApi.md#readtemplate) | **GET** /template/{ templateId } | Returns a image template. |
 *TemplateApi* | [**setStoragePoolDefaultTemplate**](Apis/TemplateApi.md#setstoragepooldefaulttemplate) | **PATCH** /pool/{ poolId }/template/{ templateId }/default | Performs a storage pool setting of default template. |
-*TemplateApi* | [**updateTemplate**](Apis/TemplateApi.md#updatetemplate) | **PUT** /template/{templateId} | Updates a volume template configuration. |
+*TemplateApi* | [**updateTemplate**](Apis/TemplateApi.md#updatetemplate) | **PUT** /template/{ templateId } | Updates a image template configuration. |
 | *VnetApi* | [**createSubnet**](Apis/VnetApi.md#createsubnet) | **POST** /vnet/{vnetId}/subnet | Creates a new subnet. |
 *VnetApi* | [**createVNet**](Apis/VnetApi.md#createvnet) | **POST** /zone/{zoneId}/vnet | Creates a new virtual network. |
 *VnetApi* | [**deleteVNet**](Apis/VnetApi.md#deletevnet) | **DELETE** /vnet/{vnetId} | Deletes an existing virtual network. |

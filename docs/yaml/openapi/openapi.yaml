@@ -2452,30 +2452,30 @@ paths:
     - $ref: '#/components/parameters/SubnetID'
   /template:
     get:
-      description: Returns the IDs of volume templates.
-      operationId: GetAllTemplates
+      description: Returns the IDs of image template objects.
+      operationId: ListTemplates
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns the an array of volume template IDs.
+          description: Returns an array of image template IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
           $ref: '#/components/responses/Forbidden'
       tags:
       - template
-  /template/{templateId}:
+  /template/{ templateId }:
     delete:
-      description: Deletes an existing volume template.
+      description: Deletes an existing image template.
       operationId: DeleteTemplate
       parameters:
       - $ref: '#/components/parameters/TemplateID'
       responses:
         "200":
-          description: The volume template has been successfully removed.
+          description: The image template has been successfully removed.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -2489,8 +2489,8 @@ paths:
       tags:
       - template
     get:
-      description: Returns a description of the volume template.
-      operationId: GetTemplate
+      description: Returns a image template.
+      operationId: ReadTemplate
       parameters:
       - $ref: '#/components/parameters/TemplateID'
       responses:
@@ -2499,7 +2499,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Template'
-          description: Returns the volume template object.
+          description: Returns the image template object.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -2511,7 +2511,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/TemplateID'
     put:
-      description: Updates a volume template configuration.
+      description: Updates a image template configuration.
       operationId: UpdateTemplate
       parameters:
       - $ref: '#/components/parameters/TemplateID'
@@ -2520,7 +2520,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Template'
-        description: Template payload
+        description: Template payload.
         required: true
       responses:
         "200":
@@ -2528,7 +2528,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Template'
-          description: Updated volume template adapter.
+          description: Returns the image template object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -2539,6 +2539,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - template
   /vnet:
@@ -3444,7 +3446,7 @@ components:
         type: integer
       style: form
     TemplateID:
-      description: The ID of the volume template.
+      description: The ID of the image template.
       explode: false
       in: path
       name: templateId
@@ -3454,7 +3456,7 @@ components:
       style: simple
     OptionalQueryTemplateID:
       description: "Template to clone the storage volume from (optional, zone's default\
-        \ if unspecified)"
+        \ if unspecified)."
       explode: true
       in: query
       name: templateId
@@ -4471,6 +4473,7 @@ components:
           description: The subnet ID.
           type: string
     Template:
+      description: A image template.
       example:
         os: linux
         name: name
@@ -4479,17 +4482,17 @@ components:
         type: os
       properties:
         id:
-          description: The volume template ID (auto-generated).
+          description: The image template ID (auto-generated).
           type: string
         name:
-          description: The volume template name.
+          description: The image template name.
           type: string
         description:
-          description: The volume template description.
+          description: The image template description.
           type: string
         type:
           default: os
-          description: The type of volume template.
+          description: The image template volume type.
           enum:
           - os
           - raw
@@ -4497,7 +4500,7 @@ components:
         os:
           default: linux
           description: Type of operating system if OS kind (useful to determine cloud-init
-            parameters for instance)
+            parameters for instance).
           enum:
           - linux
           - windows

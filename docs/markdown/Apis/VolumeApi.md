@@ -29,7 +29,7 @@ All URIs are relative to */api/v1*
 | **zoneId** | **String**| The ID of the zone. | [default to null] |
 | **Volume** | [**Volume**](../Models/Volume.md)| Volume payload | |
 | **poolId** | **String**| Storage pool ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
-| **templateId** | **String**| Template to clone the storage volume from (optional, zone&#39;s default if unspecified) | [optional] [default to null] |
+| **templateId** | **String**| Template to clone the storage volume from (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 
 ### Return type
 

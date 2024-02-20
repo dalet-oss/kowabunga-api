@@ -13,6 +13,7 @@ package server
 
 
 
+// Region - A region.
 type Region struct {
 
 	// The region ID (auto-generated).

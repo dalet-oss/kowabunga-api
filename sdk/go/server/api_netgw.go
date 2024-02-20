@@ -58,27 +58,27 @@ func (c *NetgwAPIController) Routes() Routes {
 		},
 		"DeleteNetGW": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/netgw/{netgwId}",
+			"/api/v1/netgw/{ netgwId }",
 			c.DeleteNetGW,
-		},
-		"GetAllNetGWs": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/netgw",
-			c.GetAllNetGWs,
-		},
-		"GetNetGW": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/netgw/{netgwId}",
-			c.GetNetGW,
 		},
 		"GetZoneNetGWs": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/zone/{zoneId}/netgws",
 			c.GetZoneNetGWs,
 		},
+		"ListNetGWs": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/netgw",
+			c.ListNetGWs,
+		},
+		"ReadNetGW": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/netgw/{ netgwId }",
+			c.ReadNetGW,
+		},
 		"UpdateNetGW": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/netgw/{netgwId}",
+			"/api/v1/netgw/{ netgwId }",
 			c.UpdateNetGW,
 		},
 	}
@@ -135,36 +135,6 @@ func (c *NetgwAPIController) DeleteNetGW(w http.ResponseWriter, r *http.Request)
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetAllNetGWs - 
-func (c *NetgwAPIController) GetAllNetGWs(w http.ResponseWriter, r *http.Request) {
-	result, err := c.service.GetAllNetGWs(r.Context())
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetNetGW - 
-func (c *NetgwAPIController) GetNetGW(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	netgwIdParam := params["netgwId"]
-	if netgwIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"netgwId"}, nil)
-		return
-	}
-	result, err := c.service.GetNetGW(r.Context(), netgwIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
 // GetZoneNetGWs - 
 func (c *NetgwAPIController) GetZoneNetGWs(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -174,6 +144,36 @@ func (c *NetgwAPIController) GetZoneNetGWs(w http.ResponseWriter, r *http.Reques
 		return
 	}
 	result, err := c.service.GetZoneNetGWs(r.Context(), zoneIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListNetGWs - 
+func (c *NetgwAPIController) ListNetGWs(w http.ResponseWriter, r *http.Request) {
+	result, err := c.service.ListNetGWs(r.Context())
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ReadNetGW - 
+func (c *NetgwAPIController) ReadNetGW(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	netgwIdParam := params["netgwId"]
+	if netgwIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"netgwId"}, nil)
+		return
+	}
+	result, err := c.service.ReadNetGW(r.Context(), netgwIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

@@ -13,7 +13,7 @@ package server
 
 
 
-// IpRange - A reserved IPv4 pool range, non-addressable by Kowabunga.
+// IpRange - A reserved IPv4 addresses pool range, non-addressable by Kowabunga.
 type IpRange struct {
 
 	// The range's first IP address.

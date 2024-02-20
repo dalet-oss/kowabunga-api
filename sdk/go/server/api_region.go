@@ -58,32 +58,32 @@ func (c *RegionAPIController) Routes() Routes {
 		},
 		"CreateZone": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/region/{regionId}/zone",
+			"/api/v1/region/{ regionId }/zone",
 			c.CreateZone,
 		},
 		"DeleteRegion": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/region/{regionId}",
+			"/api/v1/region/{ regionId }",
 			c.DeleteRegion,
 		},
-		"GetAllRegions": Route{
+		"ListRegionZones": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/region/{ regionId }/zones",
+			c.ListRegionZones,
+		},
+		"ListRegions": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/region",
-			c.GetAllRegions,
+			c.ListRegions,
 		},
-		"GetRegion": Route{
+		"ReadRegion": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/region/{regionId}",
-			c.GetRegion,
-		},
-		"GetRegionZones": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/region/{regionId}/zones",
-			c.GetRegionZones,
+			"/api/v1/region/{ regionId }",
+			c.ReadRegion,
 		},
 		"UpdateRegion": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/region/{regionId}",
+			"/api/v1/region/{ regionId }",
 			c.UpdateRegion,
 		},
 	}
@@ -167,9 +167,15 @@ func (c *RegionAPIController) DeleteRegion(w http.ResponseWriter, r *http.Reques
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetAllRegions - 
-func (c *RegionAPIController) GetAllRegions(w http.ResponseWriter, r *http.Request) {
-	result, err := c.service.GetAllRegions(r.Context())
+// ListRegionZones - 
+func (c *RegionAPIController) ListRegionZones(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	regionIdParam := params["regionId"]
+	if regionIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
+		return
+	}
+	result, err := c.service.ListRegionZones(r.Context(), regionIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -179,15 +185,9 @@ func (c *RegionAPIController) GetAllRegions(w http.ResponseWriter, r *http.Reque
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetRegion - 
-func (c *RegionAPIController) GetRegion(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	regionIdParam := params["regionId"]
-	if regionIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
-		return
-	}
-	result, err := c.service.GetRegion(r.Context(), regionIdParam)
+// ListRegions - 
+func (c *RegionAPIController) ListRegions(w http.ResponseWriter, r *http.Request) {
+	result, err := c.service.ListRegions(r.Context())
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -197,15 +197,15 @@ func (c *RegionAPIController) GetRegion(w http.ResponseWriter, r *http.Request) 
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetRegionZones - 
-func (c *RegionAPIController) GetRegionZones(w http.ResponseWriter, r *http.Request) {
+// ReadRegion - 
+func (c *RegionAPIController) ReadRegion(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	regionIdParam := params["regionId"]
 	if regionIdParam == "" {
 		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
 		return
 	}
-	result, err := c.service.GetRegionZones(r.Context(), regionIdParam)
+	result, err := c.service.ReadRegion(r.Context(), regionIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

@@ -82,43 +82,6 @@ func (s *NetgwAPIService) DeleteNetGW(ctx context.Context, netgwId string) (Impl
 	return Response(http.StatusNotImplemented, nil), errors.New("DeleteNetGW method not implemented")
 }
 
-// GetAllNetGWs - 
-func (s *NetgwAPIService) GetAllNetGWs(ctx context.Context) (ImplResponse, error) {
-	// TODO - update GetAllNetGWs with the required logic for this service method.
-	// Add api_netgw_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetAllNetGWs method not implemented")
-}
-
-// GetNetGW - 
-func (s *NetgwAPIService) GetNetGW(ctx context.Context, netgwId string) (ImplResponse, error) {
-	// TODO - update GetNetGW with the required logic for this service method.
-	// Add api_netgw_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, NetGw{}) or use other options such as http.Ok ...
-	// return Response(200, NetGw{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetNetGW method not implemented")
-}
-
 // GetZoneNetGWs - 
 func (s *NetgwAPIService) GetZoneNetGWs(ctx context.Context, zoneId string) (ImplResponse, error) {
 	// TODO - update GetZoneNetGWs with the required logic for this service method.
@@ -137,6 +100,43 @@ func (s *NetgwAPIService) GetZoneNetGWs(ctx context.Context, zoneId string) (Imp
 	// return Response(404, ApiErrorNotFound{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("GetZoneNetGWs method not implemented")
+}
+
+// ListNetGWs - 
+func (s *NetgwAPIService) ListNetGWs(ctx context.Context) (ImplResponse, error) {
+	// TODO - update ListNetGWs with the required logic for this service method.
+	// Add api_netgw_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
+	// return Response(200, []string{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ListNetGWs method not implemented")
+}
+
+// ReadNetGW - 
+func (s *NetgwAPIService) ReadNetGW(ctx context.Context, netgwId string) (ImplResponse, error) {
+	// TODO - update ReadNetGW with the required logic for this service method.
+	// Add api_netgw_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, NetGw{}) or use other options such as http.Ok ...
+	// return Response(200, NetGw{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ReadNetGW method not implemented")
 }
 
 // UpdateNetGW - 
@@ -161,6 +161,9 @@ func (s *NetgwAPIService) UpdateNetGW(ctx context.Context, netgwId string, netGw
 
 	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
 	// return Response(422, ApiErrorUnprocessableEntity{}), nil
+
+	// TODO: Uncomment the next line to return response Response(507, ApiErrorInsufficientStorage{}) or use other options such as http.Ok ...
+	// return Response(507, ApiErrorInsufficientStorage{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("UpdateNetGW method not implemented")
 }

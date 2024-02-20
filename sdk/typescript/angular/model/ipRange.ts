@@ -12,7 +12,7 @@
 
 
 /**
- * A reserved IPv4 pool range, non-addressable by Kowabunga.
+ * A reserved IPv4 addresses pool range, non-addressable by Kowabunga.
  */
 export interface IpRange { 
     /**

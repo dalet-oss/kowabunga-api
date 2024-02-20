@@ -48,7 +48,7 @@ func (r ApiCreateProjectZoneKceRequest) PoolId(poolId string) ApiCreateProjectZo
 	return r
 }
 
-// Template to clone the storage volume from (optional, zone&#39;s default if unspecified)
+// Template to clone the storage volume from (optional, zone&#39;s default if unspecified).
 func (r ApiCreateProjectZoneKceRequest) TemplateId(templateId string) ApiCreateProjectZoneKceRequest {
 	r.templateId = &templateId
 	return r
@@ -1132,7 +1132,7 @@ func (a *KceAPIService) RebootKCE(ctx context.Context, kceId string) ApiRebootKC
 // Execute executes the request
 func (a *KceAPIService) RebootKCEExecute(r ApiRebootKCERequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
@@ -1295,7 +1295,7 @@ func (a *KceAPIService) ResetKCE(ctx context.Context, kceId string) ApiResetKCER
 // Execute executes the request
 func (a *KceAPIService) ResetKCEExecute(r ApiResetKCERequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
@@ -1458,7 +1458,7 @@ func (a *KceAPIService) ResumeKCE(ctx context.Context, kceId string) ApiResumeKC
 // Execute executes the request
 func (a *KceAPIService) ResumeKCEExecute(r ApiResumeKCERequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
@@ -1621,7 +1621,7 @@ func (a *KceAPIService) ShutdownKCE(ctx context.Context, kceId string) ApiShutdo
 // Execute executes the request
 func (a *KceAPIService) ShutdownKCEExecute(r ApiShutdownKCERequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
@@ -1784,7 +1784,7 @@ func (a *KceAPIService) StartKCE(ctx context.Context, kceId string) ApiStartKCER
 // Execute executes the request
 func (a *KceAPIService) StartKCEExecute(r ApiStartKCERequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
@@ -1947,7 +1947,7 @@ func (a *KceAPIService) StopKCE(ctx context.Context, kceId string) ApiStopKCEReq
 // Execute executes the request
 func (a *KceAPIService) StopKCEExecute(r ApiStopKCERequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
@@ -2110,7 +2110,7 @@ func (a *KceAPIService) SuspendKCE(ctx context.Context, kceId string) ApiSuspend
 // Execute executes the request
 func (a *KceAPIService) SuspendKCEExecute(r ApiSuspendKCERequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)

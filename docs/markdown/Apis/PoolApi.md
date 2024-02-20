@@ -246,7 +246,7 @@ This endpoint does not need any parameter.
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **poolId** | **String**| The ID of the storage pool. | [default to null] |
-| **templateId** | **String**| The ID of the volume template. | [default to null] |
+| **templateId** | **String**| The ID of the image template. | [default to null] |
 
 ### Return type
 

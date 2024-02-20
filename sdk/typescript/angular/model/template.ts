@@ -11,25 +11,28 @@
  */
 
 
+/**
+ * A image template.
+ */
 export interface Template { 
     /**
-     * The volume template ID (auto-generated).
+     * The image template ID (auto-generated).
      */
     id?: string;
     /**
-     * The volume template name.
+     * The image template name.
      */
     name: string;
     /**
-     * The volume template description.
+     * The image template description.
      */
     description?: string;
     /**
-     * The type of volume template.
+     * The image template volume type.
      */
     type?: Template.TypeEnum;
     /**
-     * Type of operating system if OS kind (useful to determine cloud-init parameters for instance)
+     * Type of operating system if OS kind (useful to determine cloud-init parameters for instance).
      */
     os?: Template.OsEnum;
 }

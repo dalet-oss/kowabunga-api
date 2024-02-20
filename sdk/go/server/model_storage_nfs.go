@@ -13,6 +13,7 @@ package server
 
 
 
+// StorageNfs - A NFS storage.
 type StorageNfs struct {
 
 	// The NFS storage ID (auto-generated).
@@ -27,7 +28,7 @@ type StorageNfs struct {
 	// The associated NFS endpoint FQDN.
 	Endpoint string `json:"endpoint"`
 
-	// The underlying associated CephFS volume name.
+	// The underlying associated Ceph volume name.
 	Fs string `json:"fs,omitempty"`
 
 	// List of NFS Ganesha API server IP addresses.

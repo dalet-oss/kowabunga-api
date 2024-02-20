@@ -53,7 +53,7 @@ func (c *SubnetAPIController) Routes() Routes {
 	return Routes{
 		"CreateAdapter": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/subnet/{subnetId}/adapter",
+			"/api/v1/subnet/{ subnetId }/adapter",
 			c.CreateAdapter,
 		},
 		"CreateSubnet": Route{
@@ -63,32 +63,32 @@ func (c *SubnetAPIController) Routes() Routes {
 		},
 		"DeleteSubnet": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/subnet/{subnetId}",
+			"/api/v1/subnet/{ subnetId }",
 			c.DeleteSubnet,
-		},
-		"GetAllSubnets": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/subnet",
-			c.GetAllSubnets,
-		},
-		"GetSubnet": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/subnet/{subnetId}",
-			c.GetSubnet,
-		},
-		"GetSubnetAdapters": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/subnet/{subnetId}/adapters",
-			c.GetSubnetAdapters,
 		},
 		"GetVNetSubnets": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/vnet/{vnetId}/subnets",
 			c.GetVNetSubnets,
 		},
+		"ListSubnetAdapters": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/subnet/{ subnetId }/adapters",
+			c.ListSubnetAdapters,
+		},
+		"ListSubnets": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/subnet",
+			c.ListSubnets,
+		},
+		"ReadSubnet": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/subnet/{ subnetId }",
+			c.ReadSubnet,
+		},
 		"UpdateSubnet": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/subnet/{subnetId}",
+			"/api/v1/subnet/{ subnetId }",
 			c.UpdateSubnet,
 		},
 		"UpdateVNetDefaultSubnet": Route{
@@ -202,54 +202,6 @@ func (c *SubnetAPIController) DeleteSubnet(w http.ResponseWriter, r *http.Reques
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetAllSubnets - 
-func (c *SubnetAPIController) GetAllSubnets(w http.ResponseWriter, r *http.Request) {
-	result, err := c.service.GetAllSubnets(r.Context())
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetSubnet - 
-func (c *SubnetAPIController) GetSubnet(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	subnetIdParam := params["subnetId"]
-	if subnetIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"subnetId"}, nil)
-		return
-	}
-	result, err := c.service.GetSubnet(r.Context(), subnetIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetSubnetAdapters - 
-func (c *SubnetAPIController) GetSubnetAdapters(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	subnetIdParam := params["subnetId"]
-	if subnetIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"subnetId"}, nil)
-		return
-	}
-	result, err := c.service.GetSubnetAdapters(r.Context(), subnetIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
 // GetVNetSubnets - 
 func (c *SubnetAPIController) GetVNetSubnets(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -259,6 +211,54 @@ func (c *SubnetAPIController) GetVNetSubnets(w http.ResponseWriter, r *http.Requ
 		return
 	}
 	result, err := c.service.GetVNetSubnets(r.Context(), vnetIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListSubnetAdapters - 
+func (c *SubnetAPIController) ListSubnetAdapters(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	subnetIdParam := params["subnetId"]
+	if subnetIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"subnetId"}, nil)
+		return
+	}
+	result, err := c.service.ListSubnetAdapters(r.Context(), subnetIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListSubnets - 
+func (c *SubnetAPIController) ListSubnets(w http.ResponseWriter, r *http.Request) {
+	result, err := c.service.ListSubnets(r.Context())
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ReadSubnet - 
+func (c *SubnetAPIController) ReadSubnet(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	subnetIdParam := params["subnetId"]
+	if subnetIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"subnetId"}, nil)
+		return
+	}
+	result, err := c.service.ReadSubnet(r.Context(), subnetIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

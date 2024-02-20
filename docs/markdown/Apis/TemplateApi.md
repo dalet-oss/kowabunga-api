@@ -5,12 +5,12 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createTemplate**](TemplateApi.md#createTemplate) | **POST** /pool/{ poolId }/template |  |
-| [**deleteTemplate**](TemplateApi.md#deleteTemplate) | **DELETE** /template/{templateId} |  |
-| [**getAllTemplates**](TemplateApi.md#getAllTemplates) | **GET** /template |  |
-| [**getTemplate**](TemplateApi.md#getTemplate) | **GET** /template/{templateId} |  |
+| [**deleteTemplate**](TemplateApi.md#deleteTemplate) | **DELETE** /template/{ templateId } |  |
 | [**listStoragePoolTemplates**](TemplateApi.md#listStoragePoolTemplates) | **GET** /pool/{ poolId }/templates |  |
+| [**listTemplates**](TemplateApi.md#listTemplates) | **GET** /template |  |
+| [**readTemplate**](TemplateApi.md#readTemplate) | **GET** /template/{ templateId } |  |
 | [**setStoragePoolDefaultTemplate**](TemplateApi.md#setStoragePoolDefaultTemplate) | **PATCH** /pool/{ poolId }/template/{ templateId }/default |  |
-| [**updateTemplate**](TemplateApi.md#updateTemplate) | **PUT** /template/{templateId} |  |
+| [**updateTemplate**](TemplateApi.md#updateTemplate) | **PUT** /template/{ templateId } |  |
 
 
 <a name="createTemplate"></a>
@@ -47,68 +47,17 @@ All URIs are relative to */api/v1*
 
 
 
-    Deletes an existing volume template.
+    Deletes an existing image template.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **templateId** | **String**| The ID of the volume template. | [default to null] |
+| **templateId** | **String**| The ID of the image template. | [default to null] |
 
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getAllTemplates"></a>
-# **getAllTemplates**
-> List getAllTemplates()
-
-
-
-    Returns the IDs of volume templates.
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getTemplate"></a>
-# **getTemplate**
-> Template getTemplate(templateId)
-
-
-
-    Returns a description of the volume template.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **templateId** | **String**| The ID of the volume template. | [default to null] |
-
-### Return type
-
-[**Template**](../Models/Template.md)
 
 ### Authorization
 
@@ -146,6 +95,57 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+<a name="listTemplates"></a>
+# **listTemplates**
+> List listTemplates()
+
+
+
+    Returns the IDs of image template objects.
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="readTemplate"></a>
+# **readTemplate**
+> Template readTemplate(templateId)
+
+
+
+    Returns a image template.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **templateId** | **String**| The ID of the image template. | [default to null] |
+
+### Return type
+
+[**Template**](../Models/Template.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 <a name="setStoragePoolDefaultTemplate"></a>
 # **setStoragePoolDefaultTemplate**
 > setStoragePoolDefaultTemplate(poolId, templateId)
@@ -159,7 +159,7 @@ This endpoint does not need any parameter.
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **poolId** | **String**| The ID of the storage pool. | [default to null] |
-| **templateId** | **String**| The ID of the volume template. | [default to null] |
+| **templateId** | **String**| The ID of the image template. | [default to null] |
 
 ### Return type
 
@@ -180,14 +180,14 @@ null (empty response body)
 
 
 
-    Updates a volume template configuration.
+    Updates a image template configuration.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **templateId** | **String**| The ID of the volume template. | [default to null] |
-| **Template** | [**Template**](../Models/Template.md)| Template payload | |
+| **templateId** | **String**| The ID of the image template. | [default to null] |
+| **Template** | [**Template**](../Models/Template.md)| Template payload. | |
 
 ### Return type
 

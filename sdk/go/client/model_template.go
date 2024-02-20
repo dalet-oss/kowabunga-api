@@ -20,17 +20,17 @@ import (
 // checks if the Template type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Template{}
 
-// Template struct for Template
+// Template A image template.
 type Template struct {
-	// The volume template ID (auto-generated).
+	// The image template ID (auto-generated).
 	Id *string `json:"id,omitempty"`
-	// The volume template name.
+	// The image template name.
 	Name string `json:"name"`
-	// The volume template description.
+	// The image template description.
 	Description *string `json:"description,omitempty"`
-	// The type of volume template.
+	// The image template volume type.
 	Type *string `json:"type,omitempty"`
-	// Type of operating system if OS kind (useful to determine cloud-init parameters for instance)
+	// Type of operating system if OS kind (useful to determine cloud-init parameters for instance).
 	Os *string `json:"os,omitempty"`
 }
 

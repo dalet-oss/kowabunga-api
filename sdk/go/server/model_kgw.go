@@ -13,21 +13,25 @@ package server
 
 
 
-// Kgw - Kowabunga Network Gateway is a network gateway used for your internet inbound and outbound traffic
+// Kgw - A Kowabunga Network Gateway is a network gateway used for your internet inbound and outbound traffic.
 type Kgw struct {
 
-	// The Kowabunga network gateway ID (auto-generated).
+	// The KGW (Kowabunga Network Gateway) ID (auto-generated).
 	Id string `json:"id,omitempty"`
 
-	// The KGW description.
+	// The KGW (Kowabunga Network Gateway) name.
+	Name string `json:"name,omitempty"`
+
+	// The KGW (Kowabunga Network Gateway) description.
 	Description string `json:"description,omitempty"`
 
-	// The Kowabunga network gateway public IPs (read only)
+	// The KGW (Kowabunga Network Gateway) public IP (read-only).
 	PublicIp string `json:"public_ip,omitempty"`
 
-	// The Kowabunga network gateway private IP (read only)
+	// The KGW (Kowabunga Network Gateway) private IP (read-only).
 	PrivateIp string `json:"private_ip,omitempty"`
 
+	// The KGW (Kowabunga Network Gateway) list of NAT entries.
 	Nats []KgwNat `json:"nats,omitempty"`
 }
 

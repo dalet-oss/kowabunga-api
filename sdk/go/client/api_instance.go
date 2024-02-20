@@ -1428,7 +1428,7 @@ func (a *InstanceAPIService) RebootInstance(ctx context.Context, instanceId stri
 // Execute executes the request
 func (a *InstanceAPIService) RebootInstanceExecute(r ApiRebootInstanceRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
@@ -1591,7 +1591,7 @@ func (a *InstanceAPIService) ResetInstance(ctx context.Context, instanceId strin
 // Execute executes the request
 func (a *InstanceAPIService) ResetInstanceExecute(r ApiResetInstanceRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
@@ -1754,7 +1754,7 @@ func (a *InstanceAPIService) ResumeInstance(ctx context.Context, instanceId stri
 // Execute executes the request
 func (a *InstanceAPIService) ResumeInstanceExecute(r ApiResumeInstanceRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
@@ -1917,7 +1917,7 @@ func (a *InstanceAPIService) ShutdownInstance(ctx context.Context, instanceId st
 // Execute executes the request
 func (a *InstanceAPIService) ShutdownInstanceExecute(r ApiShutdownInstanceRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
@@ -2080,7 +2080,7 @@ func (a *InstanceAPIService) StartInstance(ctx context.Context, instanceId strin
 // Execute executes the request
 func (a *InstanceAPIService) StartInstanceExecute(r ApiStartInstanceRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
@@ -2243,7 +2243,7 @@ func (a *InstanceAPIService) StopInstance(ctx context.Context, instanceId string
 // Execute executes the request
 func (a *InstanceAPIService) StopInstanceExecute(r ApiStopInstanceRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
@@ -2406,7 +2406,7 @@ func (a *InstanceAPIService) SuspendInstance(ctx context.Context, instanceId str
 // Execute executes the request
 func (a *InstanceAPIService) SuspendInstanceExecute(r ApiSuspendInstanceRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)

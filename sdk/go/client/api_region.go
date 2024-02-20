@@ -30,7 +30,7 @@ type ApiCreateRegionRequest struct {
 	region *Region
 }
 
-// Region payload
+// Region payload.
 func (r ApiCreateRegionRequest) Region(region Region) ApiCreateRegionRequest {
 	r.region = &region
 	return r
@@ -212,6 +212,17 @@ func (a *RegionAPIService) CreateRegionExecute(r ApiCreateRegionRequest) (*Regio
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 507 {
+			var v ApiErrorInsufficientStorage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -235,7 +246,7 @@ type ApiCreateZoneRequest struct {
 	zone *Zone
 }
 
-// Zone payload
+// Zone payload.
 func (r ApiCreateZoneRequest) Zone(zone Zone) ApiCreateZoneRequest {
 	r.zone = &zone
 	return r
@@ -248,7 +259,7 @@ func (r ApiCreateZoneRequest) Execute() (*Zone, *http.Response, error) {
 /*
 CreateZone Method for CreateZone
 
-Creates a new zone.
+Creates a new availability zone.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param regionId The ID of the region.
@@ -277,7 +288,7 @@ func (a *RegionAPIService) CreateZoneExecute(r ApiCreateZoneRequest) (*Zone, *ht
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/region/{regionId}/zone"
+	localVarPath := localBasePath + "/region/{ regionId }/zone"
 	localVarPath = strings.Replace(localVarPath, "{"+"regionId"+"}", url.PathEscape(parameterValueToString(r.regionId, "regionId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -420,6 +431,17 @@ func (a *RegionAPIService) CreateZoneExecute(r ApiCreateZoneRequest) (*Zone, *ht
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 507 {
+			var v ApiErrorInsufficientStorage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -476,7 +498,7 @@ func (a *RegionAPIService) DeleteRegionExecute(r ApiDeleteRegionRequest) (*http.
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/region/{regionId}"
+	localVarPath := localBasePath + "/region/{ regionId }"
 	localVarPath = strings.Replace(localVarPath, "{"+"regionId"+"}", url.PathEscape(parameterValueToString(r.regionId, "regionId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -610,175 +632,27 @@ func (a *RegionAPIService) DeleteRegionExecute(r ApiDeleteRegionRequest) (*http.
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetAllRegionsRequest struct {
-	ctx context.Context
-	ApiService *RegionAPIService
-}
-
-func (r ApiGetAllRegionsRequest) Execute() ([]string, *http.Response, error) {
-	return r.ApiService.GetAllRegionsExecute(r)
-}
-
-/*
-GetAllRegions Method for GetAllRegions
-
-Returns the IDs of registered regions.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAllRegionsRequest
-*/
-func (a *RegionAPIService) GetAllRegions(ctx context.Context) ApiGetAllRegionsRequest {
-	return ApiGetAllRegionsRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-// Execute executes the request
-//  @return []string
-func (a *RegionAPIService) GetAllRegionsExecute(r ApiGetAllRegionsRequest) ([]string, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []string
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RegionAPIService.GetAllRegions")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/region"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["TokenAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["x-token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-API-Key"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ApiErrorUnauthorized
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v ApiErrorForbidden
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetRegionRequest struct {
+type ApiListRegionZonesRequest struct {
 	ctx context.Context
 	ApiService *RegionAPIService
 	regionId string
 }
 
-func (r ApiGetRegionRequest) Execute() (*Region, *http.Response, error) {
-	return r.ApiService.GetRegionExecute(r)
+func (r ApiListRegionZonesRequest) Execute() ([]string, *http.Response, error) {
+	return r.ApiService.ListRegionZonesExecute(r)
 }
 
 /*
-GetRegion Method for GetRegion
+ListRegionZones Method for ListRegionZones
 
-Returns a description of the region
+Returns the IDs of availability zone objects.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param regionId The ID of the region.
- @return ApiGetRegionRequest
+ @return ApiListRegionZonesRequest
 */
-func (a *RegionAPIService) GetRegion(ctx context.Context, regionId string) ApiGetRegionRequest {
-	return ApiGetRegionRequest{
+func (a *RegionAPIService) ListRegionZones(ctx context.Context, regionId string) ApiListRegionZonesRequest {
+	return ApiListRegionZonesRequest{
 		ApiService: a,
 		ctx: ctx,
 		regionId: regionId,
@@ -786,21 +660,21 @@ func (a *RegionAPIService) GetRegion(ctx context.Context, regionId string) ApiGe
 }
 
 // Execute executes the request
-//  @return Region
-func (a *RegionAPIService) GetRegionExecute(r ApiGetRegionRequest) (*Region, *http.Response, error) {
+//  @return []string
+func (a *RegionAPIService) ListRegionZonesExecute(r ApiListRegionZonesRequest) ([]string, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Region
+		localVarReturnValue  []string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RegionAPIService.GetRegion")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RegionAPIService.ListRegionZones")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/region/{regionId}"
+	localVarPath := localBasePath + "/region/{ regionId }/zones"
 	localVarPath = strings.Replace(localVarPath, "{"+"regionId"+"}", url.PathEscape(parameterValueToString(r.regionId, "regionId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -921,36 +795,33 @@ func (a *RegionAPIService) GetRegionExecute(r ApiGetRegionRequest) (*Region, *ht
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetRegionZonesRequest struct {
+type ApiListRegionsRequest struct {
 	ctx context.Context
 	ApiService *RegionAPIService
-	regionId string
 }
 
-func (r ApiGetRegionZonesRequest) Execute() ([]string, *http.Response, error) {
-	return r.ApiService.GetRegionZonesExecute(r)
+func (r ApiListRegionsRequest) Execute() ([]string, *http.Response, error) {
+	return r.ApiService.ListRegionsExecute(r)
 }
 
 /*
-GetRegionZones Method for GetRegionZones
+ListRegions Method for ListRegions
 
-Returns the IDs of the availability zones existing in the region.
+Returns the IDs of region objects.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param regionId The ID of the region.
- @return ApiGetRegionZonesRequest
+ @return ApiListRegionsRequest
 */
-func (a *RegionAPIService) GetRegionZones(ctx context.Context, regionId string) ApiGetRegionZonesRequest {
-	return ApiGetRegionZonesRequest{
+func (a *RegionAPIService) ListRegions(ctx context.Context) ApiListRegionsRequest {
+	return ApiListRegionsRequest{
 		ApiService: a,
 		ctx: ctx,
-		regionId: regionId,
 	}
 }
 
 // Execute executes the request
 //  @return []string
-func (a *RegionAPIService) GetRegionZonesExecute(r ApiGetRegionZonesRequest) ([]string, *http.Response, error) {
+func (a *RegionAPIService) ListRegionsExecute(r ApiListRegionsRequest) ([]string, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -958,12 +829,163 @@ func (a *RegionAPIService) GetRegionZonesExecute(r ApiGetRegionZonesRequest) ([]
 		localVarReturnValue  []string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RegionAPIService.GetRegionZones")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RegionAPIService.ListRegions")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/region/{regionId}/zones"
+	localVarPath := localBasePath + "/region"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["TokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-token"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiErrorUnauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiErrorForbidden
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiReadRegionRequest struct {
+	ctx context.Context
+	ApiService *RegionAPIService
+	regionId string
+}
+
+func (r ApiReadRegionRequest) Execute() (*Region, *http.Response, error) {
+	return r.ApiService.ReadRegionExecute(r)
+}
+
+/*
+ReadRegion Method for ReadRegion
+
+Returns a region.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param regionId The ID of the region.
+ @return ApiReadRegionRequest
+*/
+func (a *RegionAPIService) ReadRegion(ctx context.Context, regionId string) ApiReadRegionRequest {
+	return ApiReadRegionRequest{
+		ApiService: a,
+		ctx: ctx,
+		regionId: regionId,
+	}
+}
+
+// Execute executes the request
+//  @return Region
+func (a *RegionAPIService) ReadRegionExecute(r ApiReadRegionRequest) (*Region, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Region
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RegionAPIService.ReadRegion")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/region/{ regionId }"
 	localVarPath = strings.Replace(localVarPath, "{"+"regionId"+"}", url.PathEscape(parameterValueToString(r.regionId, "regionId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1091,7 +1113,7 @@ type ApiUpdateRegionRequest struct {
 	region *Region
 }
 
-// Region payload
+// Region payload.
 func (r ApiUpdateRegionRequest) Region(region Region) ApiUpdateRegionRequest {
 	r.region = &region
 	return r
@@ -1133,7 +1155,7 @@ func (a *RegionAPIService) UpdateRegionExecute(r ApiUpdateRegionRequest) (*Regio
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/region/{regionId}"
+	localVarPath := localBasePath + "/region/{ regionId }"
 	localVarPath = strings.Replace(localVarPath, "{"+"regionId"+"}", url.PathEscape(parameterValueToString(r.regionId, "regionId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1247,6 +1269,28 @@ func (a *RegionAPIService) UpdateRegionExecute(r ApiUpdateRegionRequest) (*Regio
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ApiErrorNotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v ApiErrorUnprocessableEntity
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 507 {
+			var v ApiErrorInsufficientStorage
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

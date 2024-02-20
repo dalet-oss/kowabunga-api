@@ -82,43 +82,6 @@ func (s *KgwAPIService) DeleteKGW(ctx context.Context, kgwId string) (ImplRespon
 	return Response(http.StatusNotImplemented, nil), errors.New("DeleteKGW method not implemented")
 }
 
-// GetAllKgw - 
-func (s *KgwAPIService) GetAllKgw(ctx context.Context) (ImplResponse, error) {
-	// TODO - update GetAllKgw with the required logic for this service method.
-	// Add api_kgw_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetAllKgw method not implemented")
-}
-
-// GetKgw - 
-func (s *KgwAPIService) GetKgw(ctx context.Context, kgwId string) (ImplResponse, error) {
-	// TODO - update GetKgw with the required logic for this service method.
-	// Add api_kgw_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, Kgw{}) or use other options such as http.Ok ...
-	// return Response(200, Kgw{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetKgw method not implemented")
-}
-
 // GetProjectZoneKGWs - 
 func (s *KgwAPIService) GetProjectZoneKGWs(ctx context.Context, projectId string, zoneId string) (ImplResponse, error) {
 	// TODO - update GetProjectZoneKGWs with the required logic for this service method.
@@ -137,6 +100,43 @@ func (s *KgwAPIService) GetProjectZoneKGWs(ctx context.Context, projectId string
 	// return Response(404, ApiErrorNotFound{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("GetProjectZoneKGWs method not implemented")
+}
+
+// ListKGWs - 
+func (s *KgwAPIService) ListKGWs(ctx context.Context) (ImplResponse, error) {
+	// TODO - update ListKGWs with the required logic for this service method.
+	// Add api_kgw_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
+	// return Response(200, []string{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ListKGWs method not implemented")
+}
+
+// ReadKGW - 
+func (s *KgwAPIService) ReadKGW(ctx context.Context, kgwId string) (ImplResponse, error) {
+	// TODO - update ReadKGW with the required logic for this service method.
+	// Add api_kgw_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, Kgw{}) or use other options such as http.Ok ...
+	// return Response(200, Kgw{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ReadKGW method not implemented")
 }
 
 // UpdateKGW - 

@@ -56,9 +56,9 @@ func (s *NfsAPIService) CreateNfsStorage(ctx context.Context, zoneId string, sto
 	return Response(http.StatusNotImplemented, nil), errors.New("CreateNfsStorage method not implemented")
 }
 
-// DeleteNfsStorage - 
-func (s *NfsAPIService) DeleteNfsStorage(ctx context.Context, nfsId string) (ImplResponse, error) {
-	// TODO - update DeleteNfsStorage with the required logic for this service method.
+// DeleteStorageNFS - 
+func (s *NfsAPIService) DeleteStorageNFS(ctx context.Context, nfsId string) (ImplResponse, error) {
+	// TODO - update DeleteStorageNFS with the required logic for this service method.
 	// Add api_nfs_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
 	// TODO: Uncomment the next line to return response Response(200, {}) or use other options such as http.Ok ...
@@ -79,64 +79,7 @@ func (s *NfsAPIService) DeleteNfsStorage(ctx context.Context, nfsId string) (Imp
 	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
 	// return Response(422, ApiErrorUnprocessableEntity{}), nil
 
-	return Response(http.StatusNotImplemented, nil), errors.New("DeleteNfsStorage method not implemented")
-}
-
-// GetAllNfsStorages - 
-func (s *NfsAPIService) GetAllNfsStorages(ctx context.Context) (ImplResponse, error) {
-	// TODO - update GetAllNfsStorages with the required logic for this service method.
-	// Add api_nfs_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetAllNfsStorages method not implemented")
-}
-
-// GetNfsKfs - 
-func (s *NfsAPIService) GetNfsKfs(ctx context.Context, nfsId string) (ImplResponse, error) {
-	// TODO - update GetNfsKfs with the required logic for this service method.
-	// Add api_nfs_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetNfsKfs method not implemented")
-}
-
-// GetNfsStorage - 
-func (s *NfsAPIService) GetNfsStorage(ctx context.Context, nfsId string) (ImplResponse, error) {
-	// TODO - update GetNfsStorage with the required logic for this service method.
-	// Add api_nfs_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, StorageNfs{}) or use other options such as http.Ok ...
-	// return Response(200, StorageNfs{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetNfsStorage method not implemented")
+	return Response(http.StatusNotImplemented, nil), errors.New("DeleteStorageNFS method not implemented")
 }
 
 // GetZoneNfsStorages - 
@@ -159,9 +102,66 @@ func (s *NfsAPIService) GetZoneNfsStorages(ctx context.Context, zoneId string) (
 	return Response(http.StatusNotImplemented, nil), errors.New("GetZoneNfsStorages method not implemented")
 }
 
-// UpdateNfsStorage - 
-func (s *NfsAPIService) UpdateNfsStorage(ctx context.Context, nfsId string, storageNfs StorageNfs) (ImplResponse, error) {
-	// TODO - update UpdateNfsStorage with the required logic for this service method.
+// ListStorageNFSKFSs - 
+func (s *NfsAPIService) ListStorageNFSKFSs(ctx context.Context, nfsId string) (ImplResponse, error) {
+	// TODO - update ListStorageNFSKFSs with the required logic for this service method.
+	// Add api_nfs_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
+	// return Response(200, []string{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ListStorageNFSKFSs method not implemented")
+}
+
+// ListStorageNFSs - 
+func (s *NfsAPIService) ListStorageNFSs(ctx context.Context) (ImplResponse, error) {
+	// TODO - update ListStorageNFSs with the required logic for this service method.
+	// Add api_nfs_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
+	// return Response(200, []string{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ListStorageNFSs method not implemented")
+}
+
+// ReadStorageNFS - 
+func (s *NfsAPIService) ReadStorageNFS(ctx context.Context, nfsId string) (ImplResponse, error) {
+	// TODO - update ReadStorageNFS with the required logic for this service method.
+	// Add api_nfs_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, StorageNfs{}) or use other options such as http.Ok ...
+	// return Response(200, StorageNfs{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ReadStorageNFS method not implemented")
+}
+
+// UpdateStorageNFS - 
+func (s *NfsAPIService) UpdateStorageNFS(ctx context.Context, nfsId string, storageNfs StorageNfs) (ImplResponse, error) {
+	// TODO - update UpdateStorageNFS with the required logic for this service method.
 	// Add api_nfs_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
 	// TODO: Uncomment the next line to return response Response(200, StorageNfs{}) or use other options such as http.Ok ...
@@ -182,7 +182,10 @@ func (s *NfsAPIService) UpdateNfsStorage(ctx context.Context, nfsId string, stor
 	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
 	// return Response(422, ApiErrorUnprocessableEntity{}), nil
 
-	return Response(http.StatusNotImplemented, nil), errors.New("UpdateNfsStorage method not implemented")
+	// TODO: Uncomment the next line to return response Response(507, ApiErrorInsufficientStorage{}) or use other options such as http.Ok ...
+	// return Response(507, ApiErrorInsufficientStorage{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("UpdateStorageNFS method not implemented")
 }
 
 // UpdateZoneDefaultNfsStorage - 

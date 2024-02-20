@@ -103,7 +103,7 @@ func (c *ZoneAPIController) Routes() Routes {
 		},
 		"CreateZone": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/region/{regionId}/zone",
+			"/api/v1/region/{ regionId }/zone",
 			c.CreateZone,
 		},
 		"DeleteZone": Route{
@@ -141,11 +141,6 @@ func (c *ZoneAPIController) Routes() Routes {
 			"/api/v1/project/{projectId}/zone/{zoneId}/volumes",
 			c.GetProjectZoneVolumes,
 		},
-		"GetRegionZones": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/region/{regionId}/zones",
-			c.GetRegionZones,
-		},
 		"GetZone": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/zone/{zoneId}",
@@ -175,6 +170,11 @@ func (c *ZoneAPIController) Routes() Routes {
 			strings.ToUpper("Get"),
 			"/api/v1/zone/{zoneId}/vnets",
 			c.GetZoneVNets,
+		},
+		"ListRegionZones": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/region/{ regionId }/zones",
+			c.ListRegionZones,
 		},
 		"UpdateZone": Route{
 			strings.ToUpper("Put"),
@@ -869,24 +869,6 @@ func (c *ZoneAPIController) GetProjectZoneVolumes(w http.ResponseWriter, r *http
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetRegionZones - 
-func (c *ZoneAPIController) GetRegionZones(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	regionIdParam := params["regionId"]
-	if regionIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
-		return
-	}
-	result, err := c.service.GetRegionZones(r.Context(), regionIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
 // GetZone - 
 func (c *ZoneAPIController) GetZone(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -986,6 +968,24 @@ func (c *ZoneAPIController) GetZoneVNets(w http.ResponseWriter, r *http.Request)
 		return
 	}
 	result, err := c.service.GetZoneVNets(r.Context(), zoneIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListRegionZones - 
+func (c *ZoneAPIController) ListRegionZones(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	regionIdParam := params["regionId"]
+	if regionIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
+		return
+	}
+	result, err := c.service.ListRegionZones(r.Context(), regionIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

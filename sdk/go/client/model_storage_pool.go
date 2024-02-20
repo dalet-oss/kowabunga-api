@@ -20,7 +20,7 @@ import (
 // checks if the StoragePool type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StoragePool{}
 
-// StoragePool struct for StoragePool
+// StoragePool A storage pool.
 type StoragePool struct {
 	// The storage pool ID (auto-generated).
 	Id *string `json:"id,omitempty"`

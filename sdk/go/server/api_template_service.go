@@ -53,6 +53,9 @@ func (s *TemplateAPIService) CreateTemplate(ctx context.Context, poolId string, 
 	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
 	// return Response(422, ApiErrorUnprocessableEntity{}), nil
 
+	// TODO: Uncomment the next line to return response Response(507, ApiErrorInsufficientStorage{}) or use other options such as http.Ok ...
+	// return Response(507, ApiErrorInsufficientStorage{}), nil
+
 	return Response(http.StatusNotImplemented, nil), errors.New("CreateTemplate method not implemented")
 }
 
@@ -82,9 +85,9 @@ func (s *TemplateAPIService) DeleteTemplate(ctx context.Context, templateId stri
 	return Response(http.StatusNotImplemented, nil), errors.New("DeleteTemplate method not implemented")
 }
 
-// GetAllTemplates - 
-func (s *TemplateAPIService) GetAllTemplates(ctx context.Context) (ImplResponse, error) {
-	// TODO - update GetAllTemplates with the required logic for this service method.
+// ListStoragePoolTemplates - 
+func (s *TemplateAPIService) ListStoragePoolTemplates(ctx context.Context, poolId string) (ImplResponse, error) {
+	// TODO - update ListStoragePoolTemplates with the required logic for this service method.
 	// Add api_template_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
 	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
@@ -96,12 +99,32 @@ func (s *TemplateAPIService) GetAllTemplates(ctx context.Context) (ImplResponse,
 	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
 	// return Response(403, ApiErrorForbidden{}), nil
 
-	return Response(http.StatusNotImplemented, nil), errors.New("GetAllTemplates method not implemented")
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ListStoragePoolTemplates method not implemented")
 }
 
-// GetTemplate - 
-func (s *TemplateAPIService) GetTemplate(ctx context.Context, templateId string) (ImplResponse, error) {
-	// TODO - update GetTemplate with the required logic for this service method.
+// ListTemplates - 
+func (s *TemplateAPIService) ListTemplates(ctx context.Context) (ImplResponse, error) {
+	// TODO - update ListTemplates with the required logic for this service method.
+	// Add api_template_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
+	// return Response(200, []string{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ListTemplates method not implemented")
+}
+
+// ReadTemplate - 
+func (s *TemplateAPIService) ReadTemplate(ctx context.Context, templateId string) (ImplResponse, error) {
+	// TODO - update ReadTemplate with the required logic for this service method.
 	// Add api_template_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
 	// TODO: Uncomment the next line to return response Response(200, Template{}) or use other options such as http.Ok ...
@@ -116,19 +139,16 @@ func (s *TemplateAPIService) GetTemplate(ctx context.Context, templateId string)
 	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
 	// return Response(404, ApiErrorNotFound{}), nil
 
-	return Response(http.StatusNotImplemented, nil), errors.New("GetTemplate method not implemented")
+	return Response(http.StatusNotImplemented, nil), errors.New("ReadTemplate method not implemented")
 }
 
-// UpdatePoolDefaultTemplate - 
-func (s *TemplateAPIService) UpdatePoolDefaultTemplate(ctx context.Context, poolId string, templateId string) (ImplResponse, error) {
-	// TODO - update UpdatePoolDefaultTemplate with the required logic for this service method.
+// SetStoragePoolDefaultTemplate - 
+func (s *TemplateAPIService) SetStoragePoolDefaultTemplate(ctx context.Context, poolId string, templateId string) (ImplResponse, error) {
+	// TODO - update SetStoragePoolDefaultTemplate with the required logic for this service method.
 	// Add api_template_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
 	// TODO: Uncomment the next line to return response Response(200, {}) or use other options such as http.Ok ...
 	// return Response(200, nil),nil
-
-	// TODO: Uncomment the next line to return response Response(400, ApiErrorBadRequest{}) or use other options such as http.Ok ...
-	// return Response(400, ApiErrorBadRequest{}), nil
 
 	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
 	// return Response(401, ApiErrorUnauthorized{}), nil
@@ -142,7 +162,7 @@ func (s *TemplateAPIService) UpdatePoolDefaultTemplate(ctx context.Context, pool
 	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
 	// return Response(422, ApiErrorUnprocessableEntity{}), nil
 
-	return Response(http.StatusNotImplemented, nil), errors.New("UpdatePoolDefaultTemplate method not implemented")
+	return Response(http.StatusNotImplemented, nil), errors.New("SetStoragePoolDefaultTemplate method not implemented")
 }
 
 // UpdateTemplate - 
@@ -167,6 +187,9 @@ func (s *TemplateAPIService) UpdateTemplate(ctx context.Context, templateId stri
 
 	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
 	// return Response(422, ApiErrorUnprocessableEntity{}), nil
+
+	// TODO: Uncomment the next line to return response Response(507, ApiErrorInsufficientStorage{}) or use other options such as http.Ok ...
+	// return Response(507, ApiErrorInsufficientStorage{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("UpdateTemplate method not implemented")
 }

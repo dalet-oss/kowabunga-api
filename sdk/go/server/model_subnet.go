@@ -13,30 +13,31 @@ package server
 
 
 
+// Subnet - A network subnet.
 type Subnet struct {
 
-	// The subnet ID (auto-generated).
+	// The network subnet ID (auto-generated).
 	Id string `json:"id,omitempty"`
 
-	// The subnet name.
+	// The network subnet name.
 	Name string `json:"name"`
 
-	// The subnet description.
+	// The network subnet description.
 	Description string `json:"description,omitempty"`
 
-	// The subnet CIDR (e.g. 192.168.0.0/24).
+	// The network subnet CIDR (e.g. 192.168.0.0/24).
 	Cidr string `json:"cidr"`
 
-	// The subnet router/gateway IP address (e.g. 192.168.0.254).
+	// The network subnet router/gateway IP address (e.g. 192.168.0.254).
 	Gateway string `json:"gateway"`
 
-	// The subnet DNS server IP address (gateway value if unspecified).
+	// The network subnet DNS server IP address (gateway value if unspecified).
 	Dns string `json:"dns,omitempty"`
 
 	// The list of extra routes to be access through designated gateway (format is 10.0.0.0/8).
 	ExtraRoutes []string `json:"extra_routes,omitempty"`
 
-	// The subnet list of reserved IPv4 ranges (i.e. no IP address can be assigned from there).
+	// The network subnet reserved IPv4 ranges (i.e. no IP address can be assigned from there).
 	Reserved []IpRange `json:"reserved,omitempty"`
 }
 

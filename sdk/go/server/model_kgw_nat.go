@@ -13,24 +13,23 @@ package server
 
 
 
-// KgwNat - KGW Nat definition
+// KgwNat - A KGW NAT mapping.
 type KgwNat struct {
 
-	// Target Private IP. Leave blank for a new generated one
+	// Target Private IP. Leave blank for a new generated one.
 	PrivateIp string `json:"private_ip"`
 
-	// Public IP from created Adapter. Leave empty to use the default Public IP
+	// Public IP from created adapter. Leave empty to use the default public IP.
 	PublicIp string `json:"public_ip,omitempty"`
 
-	// Ports being forwarded from the public to the private IP. Accept Ranges
-	Ports string `json:"ports"`
+	// Ports being forwarded from the public to the private IP. Accept Ranges.
+	Ports string `json:"ports,omitempty"`
 }
 
 // AssertKgwNatRequired checks if the required fields are not zero-ed
 func AssertKgwNatRequired(obj KgwNat) error {
 	elements := map[string]interface{}{
 		"private_ip": obj.PrivateIp,
-		"ports": obj.Ports,
 	}
 	for name, el := range elements {
 		if isZero := IsZeroValue(el); isZero {

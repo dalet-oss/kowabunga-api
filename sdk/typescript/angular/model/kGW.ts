@@ -13,25 +13,32 @@ import { KGWNat } from './kGWNat';
 
 
 /**
- * Kowabunga Network Gateway is a network gateway used for your internet inbound and outbound traffic
+ * A Kowabunga Network Gateway is a network gateway used for your internet inbound and outbound traffic.
  */
 export interface KGW { 
     /**
-     * The Kowabunga network gateway ID (auto-generated).
+     * The KGW (Kowabunga Network Gateway) ID (auto-generated).
      */
     id?: string;
     /**
-     * The KGW description.
+     * The KGW (Kowabunga Network Gateway) name.
+     */
+    name?: string;
+    /**
+     * The KGW (Kowabunga Network Gateway) description.
      */
     description?: string;
     /**
-     * The Kowabunga network gateway public IPs (read only)
+     * The KGW (Kowabunga Network Gateway) public IP (read-only).
      */
     public_ip?: string;
     /**
-     * The Kowabunga network gateway private IP (read only)
+     * The KGW (Kowabunga Network Gateway) private IP (read-only).
      */
     private_ip?: string;
+    /**
+     * The KGW (Kowabunga Network Gateway) list of NAT entries.
+     */
     nats?: Array<KGWNat>;
 }
 

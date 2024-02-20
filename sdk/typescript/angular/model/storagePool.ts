@@ -12,6 +12,9 @@
 import { Cost } from './cost';
 
 
+/**
+ * A storage pool.
+ */
 export interface StoragePool { 
     /**
      * The storage pool ID (auto-generated).

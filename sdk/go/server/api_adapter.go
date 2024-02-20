@@ -53,7 +53,7 @@ func (c *AdapterAPIController) Routes() Routes {
 	return Routes{
 		"CreateAdapter": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/subnet/{subnetId}/adapter",
+			"/api/v1/subnet/{ subnetId }/adapter",
 			c.CreateAdapter,
 		},
 		"DeleteAdapter": Route{
@@ -61,15 +61,15 @@ func (c *AdapterAPIController) Routes() Routes {
 			"/api/v1/adapter/{ adapterId }",
 			c.DeleteAdapter,
 		},
-		"GetSubnetAdapters": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/subnet/{subnetId}/adapters",
-			c.GetSubnetAdapters,
-		},
 		"ListAdapters": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/adapter",
 			c.ListAdapters,
+		},
+		"ListSubnetAdapters": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/subnet/{ subnetId }/adapters",
+			c.ListSubnetAdapters,
 		},
 		"ReadAdapter": Route{
 			strings.ToUpper("Get"),
@@ -154,15 +154,9 @@ func (c *AdapterAPIController) DeleteAdapter(w http.ResponseWriter, r *http.Requ
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetSubnetAdapters - 
-func (c *AdapterAPIController) GetSubnetAdapters(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	subnetIdParam := params["subnetId"]
-	if subnetIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"subnetId"}, nil)
-		return
-	}
-	result, err := c.service.GetSubnetAdapters(r.Context(), subnetIdParam)
+// ListAdapters - 
+func (c *AdapterAPIController) ListAdapters(w http.ResponseWriter, r *http.Request) {
+	result, err := c.service.ListAdapters(r.Context())
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -172,9 +166,15 @@ func (c *AdapterAPIController) GetSubnetAdapters(w http.ResponseWriter, r *http.
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// ListAdapters - 
-func (c *AdapterAPIController) ListAdapters(w http.ResponseWriter, r *http.Request) {
-	result, err := c.service.ListAdapters(r.Context())
+// ListSubnetAdapters - 
+func (c *AdapterAPIController) ListSubnetAdapters(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	subnetIdParam := params["subnetId"]
+	if subnetIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"subnetId"}, nil)
+		return
+	}
+	result, err := c.service.ListSubnetAdapters(r.Context(), subnetIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

@@ -421,7 +421,7 @@ export class ProjectService {
      * @param zoneId The ID of the zone.
      * @param kCE KCE payload
      * @param poolId Storage pool ID (optional, zone\&#39;s default if unspecified).
-     * @param templateId Template to clone the storage volume from (optional, zone\&#39;s default if unspecified)
+     * @param templateId Template to clone the storage volume from (optional, zone\&#39;s default if unspecified).
      * @param _public Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).
      * @param notify Whether or not to send a notification email at resource creation.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -742,7 +742,7 @@ export class ProjectService {
      * @param zoneId The ID of the zone.
      * @param volume Volume payload
      * @param poolId Storage pool ID (optional, zone\&#39;s default if unspecified).
-     * @param templateId Template to clone the storage volume from (optional, zone\&#39;s default if unspecified)
+     * @param templateId Template to clone the storage volume from (optional, zone\&#39;s default if unspecified).
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */

@@ -53,32 +53,37 @@ func (c *TemplateAPIController) Routes() Routes {
 	return Routes{
 		"CreateTemplate": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/pool/{poolId}/template",
+			"/api/v1/pool/{ poolId }/template",
 			c.CreateTemplate,
 		},
 		"DeleteTemplate": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/template/{templateId}",
+			"/api/v1/template/{ templateId }",
 			c.DeleteTemplate,
 		},
-		"GetAllTemplates": Route{
+		"ListStoragePoolTemplates": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/pool/{ poolId }/templates",
+			c.ListStoragePoolTemplates,
+		},
+		"ListTemplates": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/template",
-			c.GetAllTemplates,
+			c.ListTemplates,
 		},
-		"GetTemplate": Route{
+		"ReadTemplate": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/template/{templateId}",
-			c.GetTemplate,
+			"/api/v1/template/{ templateId }",
+			c.ReadTemplate,
 		},
-		"UpdatePoolDefaultTemplate": Route{
-			strings.ToUpper("Put"),
-			"/api/v1/pool/{poolId}/template/{templateId}/default",
-			c.UpdatePoolDefaultTemplate,
+		"SetStoragePoolDefaultTemplate": Route{
+			strings.ToUpper("Patch"),
+			"/api/v1/pool/{ poolId }/template/{ templateId }/default",
+			c.SetStoragePoolDefaultTemplate,
 		},
 		"UpdateTemplate": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/template/{templateId}",
+			"/api/v1/template/{ templateId }",
 			c.UpdateTemplate,
 		},
 	}
@@ -135,9 +140,15 @@ func (c *TemplateAPIController) DeleteTemplate(w http.ResponseWriter, r *http.Re
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetAllTemplates - 
-func (c *TemplateAPIController) GetAllTemplates(w http.ResponseWriter, r *http.Request) {
-	result, err := c.service.GetAllTemplates(r.Context())
+// ListStoragePoolTemplates - 
+func (c *TemplateAPIController) ListStoragePoolTemplates(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	poolIdParam := params["poolId"]
+	if poolIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"poolId"}, nil)
+		return
+	}
+	result, err := c.service.ListStoragePoolTemplates(r.Context(), poolIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -147,15 +158,27 @@ func (c *TemplateAPIController) GetAllTemplates(w http.ResponseWriter, r *http.R
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetTemplate - 
-func (c *TemplateAPIController) GetTemplate(w http.ResponseWriter, r *http.Request) {
+// ListTemplates - 
+func (c *TemplateAPIController) ListTemplates(w http.ResponseWriter, r *http.Request) {
+	result, err := c.service.ListTemplates(r.Context())
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ReadTemplate - 
+func (c *TemplateAPIController) ReadTemplate(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	templateIdParam := params["templateId"]
 	if templateIdParam == "" {
 		c.errorHandler(w, r, &RequiredError{"templateId"}, nil)
 		return
 	}
-	result, err := c.service.GetTemplate(r.Context(), templateIdParam)
+	result, err := c.service.ReadTemplate(r.Context(), templateIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -165,8 +188,8 @@ func (c *TemplateAPIController) GetTemplate(w http.ResponseWriter, r *http.Reque
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// UpdatePoolDefaultTemplate - 
-func (c *TemplateAPIController) UpdatePoolDefaultTemplate(w http.ResponseWriter, r *http.Request) {
+// SetStoragePoolDefaultTemplate - 
+func (c *TemplateAPIController) SetStoragePoolDefaultTemplate(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	poolIdParam := params["poolId"]
 	if poolIdParam == "" {
@@ -178,7 +201,7 @@ func (c *TemplateAPIController) UpdatePoolDefaultTemplate(w http.ResponseWriter,
 		c.errorHandler(w, r, &RequiredError{"templateId"}, nil)
 		return
 	}
-	result, err := c.service.UpdatePoolDefaultTemplate(r.Context(), poolIdParam, templateIdParam)
+	result, err := c.service.SetStoragePoolDefaultTemplate(r.Context(), poolIdParam, templateIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

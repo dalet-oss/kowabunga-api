@@ -11,6 +11,9 @@
  */
 
 
+/**
+ * A region.
+ */
 export interface Region { 
     /**
      * The region ID (auto-generated).

@@ -20,14 +20,14 @@ import (
 // checks if the KGWNat type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &KGWNat{}
 
-// KGWNat KGW Nat definition
+// KGWNat A KGW NAT mapping.
 type KGWNat struct {
-	// Target Private IP. Leave blank for a new generated one
+	// Target Private IP. Leave blank for a new generated one.
 	PrivateIp string `json:"private_ip"`
-	// Public IP from created Adapter. Leave empty to use the default Public IP
+	// Public IP from created adapter. Leave empty to use the default public IP.
 	PublicIp *string `json:"public_ip,omitempty"`
-	// Ports being forwarded from the public to the private IP. Accept Ranges
-	Ports string `json:"ports"`
+	// Ports being forwarded from the public to the private IP. Accept Ranges.
+	Ports *string `json:"ports,omitempty"`
 }
 
 type _KGWNat KGWNat
@@ -36,10 +36,9 @@ type _KGWNat KGWNat
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewKGWNat(privateIp string, ports string) *KGWNat {
+func NewKGWNat(privateIp string) *KGWNat {
 	this := KGWNat{}
 	this.PrivateIp = privateIp
-	this.Ports = ports
 	return &this
 }
 
@@ -107,28 +106,36 @@ func (o *KGWNat) SetPublicIp(v string) {
 	o.PublicIp = &v
 }
 
-// GetPorts returns the Ports field value
+// GetPorts returns the Ports field value if set, zero value otherwise.
 func (o *KGWNat) GetPorts() string {
-	if o == nil {
+	if o == nil || IsNil(o.Ports) {
 		var ret string
 		return ret
 	}
-
-	return o.Ports
+	return *o.Ports
 }
 
-// GetPortsOk returns a tuple with the Ports field value
+// GetPortsOk returns a tuple with the Ports field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *KGWNat) GetPortsOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Ports) {
 		return nil, false
 	}
-	return &o.Ports, true
+	return o.Ports, true
 }
 
-// SetPorts sets field value
+// HasPorts returns a boolean if a field has been set.
+func (o *KGWNat) HasPorts() bool {
+	if o != nil && !IsNil(o.Ports) {
+		return true
+	}
+
+	return false
+}
+
+// SetPorts gets a reference to the given string and assigns it to the Ports field.
 func (o *KGWNat) SetPorts(v string) {
-	o.Ports = v
+	o.Ports = &v
 }
 
 func (o KGWNat) MarshalJSON() ([]byte, error) {
@@ -145,7 +152,9 @@ func (o KGWNat) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PublicIp) {
 		toSerialize["public_ip"] = o.PublicIp
 	}
-	toSerialize["ports"] = o.Ports
+	if !IsNil(o.Ports) {
+		toSerialize["ports"] = o.Ports
+	}
 	return toSerialize, nil
 }
 
@@ -155,7 +164,6 @@ func (o *KGWNat) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"private_ip",
-		"ports",
 	}
 
 	allProperties := make(map[string]interface{})

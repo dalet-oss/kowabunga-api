@@ -11,6 +11,9 @@
  */
 
 
+/**
+ * A NFS storage.
+ */
 export interface StorageNFS { 
     /**
      * The NFS storage ID (auto-generated).
@@ -29,7 +32,7 @@ export interface StorageNFS {
      */
     endpoint: string;
     /**
-     * The underlying associated CephFS volume name.
+     * The underlying associated Ceph volume name.
      */
     fs?: string;
     /**

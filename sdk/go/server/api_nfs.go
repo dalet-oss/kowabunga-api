@@ -56,35 +56,35 @@ func (c *NfsAPIController) Routes() Routes {
 			"/api/v1/zone/{zoneId}/nfs",
 			c.CreateNfsStorage,
 		},
-		"DeleteNfsStorage": Route{
+		"DeleteStorageNFS": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/nfs/{nfsId}",
-			c.DeleteNfsStorage,
-		},
-		"GetAllNfsStorages": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/nfs",
-			c.GetAllNfsStorages,
-		},
-		"GetNfsKfs": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/nfs/{nfsId}/kfs",
-			c.GetNfsKfs,
-		},
-		"GetNfsStorage": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/nfs/{nfsId}",
-			c.GetNfsStorage,
+			"/api/v1/nfs/{ nfsId }",
+			c.DeleteStorageNFS,
 		},
 		"GetZoneNfsStorages": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/zone/{zoneId}/nfs",
 			c.GetZoneNfsStorages,
 		},
-		"UpdateNfsStorage": Route{
+		"ListStorageNFSKFSs": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/nfs/{ nfsId }/kfs",
+			c.ListStorageNFSKFSs,
+		},
+		"ListStorageNFSs": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/nfs",
+			c.ListStorageNFSs,
+		},
+		"ReadStorageNFS": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/nfs/{ nfsId }",
+			c.ReadStorageNFS,
+		},
+		"UpdateStorageNFS": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/nfs/{nfsId}",
-			c.UpdateNfsStorage,
+			"/api/v1/nfs/{ nfsId }",
+			c.UpdateStorageNFS,
 		},
 		"UpdateZoneDefaultNfsStorage": Route{
 			strings.ToUpper("Put"),
@@ -127,63 +127,15 @@ func (c *NfsAPIController) CreateNfsStorage(w http.ResponseWriter, r *http.Reque
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// DeleteNfsStorage - 
-func (c *NfsAPIController) DeleteNfsStorage(w http.ResponseWriter, r *http.Request) {
+// DeleteStorageNFS - 
+func (c *NfsAPIController) DeleteStorageNFS(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	nfsIdParam := params["nfsId"]
 	if nfsIdParam == "" {
 		c.errorHandler(w, r, &RequiredError{"nfsId"}, nil)
 		return
 	}
-	result, err := c.service.DeleteNfsStorage(r.Context(), nfsIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetAllNfsStorages - 
-func (c *NfsAPIController) GetAllNfsStorages(w http.ResponseWriter, r *http.Request) {
-	result, err := c.service.GetAllNfsStorages(r.Context())
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetNfsKfs - 
-func (c *NfsAPIController) GetNfsKfs(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	nfsIdParam := params["nfsId"]
-	if nfsIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"nfsId"}, nil)
-		return
-	}
-	result, err := c.service.GetNfsKfs(r.Context(), nfsIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetNfsStorage - 
-func (c *NfsAPIController) GetNfsStorage(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	nfsIdParam := params["nfsId"]
-	if nfsIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"nfsId"}, nil)
-		return
-	}
-	result, err := c.service.GetNfsStorage(r.Context(), nfsIdParam)
+	result, err := c.service.DeleteStorageNFS(r.Context(), nfsIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -211,8 +163,56 @@ func (c *NfsAPIController) GetZoneNfsStorages(w http.ResponseWriter, r *http.Req
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// UpdateNfsStorage - 
-func (c *NfsAPIController) UpdateNfsStorage(w http.ResponseWriter, r *http.Request) {
+// ListStorageNFSKFSs - 
+func (c *NfsAPIController) ListStorageNFSKFSs(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	nfsIdParam := params["nfsId"]
+	if nfsIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"nfsId"}, nil)
+		return
+	}
+	result, err := c.service.ListStorageNFSKFSs(r.Context(), nfsIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListStorageNFSs - 
+func (c *NfsAPIController) ListStorageNFSs(w http.ResponseWriter, r *http.Request) {
+	result, err := c.service.ListStorageNFSs(r.Context())
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ReadStorageNFS - 
+func (c *NfsAPIController) ReadStorageNFS(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	nfsIdParam := params["nfsId"]
+	if nfsIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"nfsId"}, nil)
+		return
+	}
+	result, err := c.service.ReadStorageNFS(r.Context(), nfsIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// UpdateStorageNFS - 
+func (c *NfsAPIController) UpdateStorageNFS(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	nfsIdParam := params["nfsId"]
 	if nfsIdParam == "" {
@@ -234,7 +234,7 @@ func (c *NfsAPIController) UpdateNfsStorage(w http.ResponseWriter, r *http.Reque
 		c.errorHandler(w, r, err, nil)
 		return
 	}
-	result, err := c.service.UpdateNfsStorage(r.Context(), nfsIdParam, storageNfsParam)
+	result, err := c.service.UpdateStorageNFS(r.Context(), nfsIdParam, storageNfsParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

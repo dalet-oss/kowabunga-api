@@ -82,12 +82,15 @@ func (s *PoolAPIService) CreateTemplate(ctx context.Context, poolId string, temp
 	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
 	// return Response(422, ApiErrorUnprocessableEntity{}), nil
 
+	// TODO: Uncomment the next line to return response Response(507, ApiErrorInsufficientStorage{}) or use other options such as http.Ok ...
+	// return Response(507, ApiErrorInsufficientStorage{}), nil
+
 	return Response(http.StatusNotImplemented, nil), errors.New("CreateTemplate method not implemented")
 }
 
-// DeletePool - 
-func (s *PoolAPIService) DeletePool(ctx context.Context, poolId string) (ImplResponse, error) {
-	// TODO - update DeletePool with the required logic for this service method.
+// DeleteStoragePool - 
+func (s *PoolAPIService) DeleteStoragePool(ctx context.Context, poolId string) (ImplResponse, error) {
+	// TODO - update DeleteStoragePool with the required logic for this service method.
 	// Add api_pool_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
 	// TODO: Uncomment the next line to return response Response(200, {}) or use other options such as http.Ok ...
@@ -108,81 +111,7 @@ func (s *PoolAPIService) DeletePool(ctx context.Context, poolId string) (ImplRes
 	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
 	// return Response(422, ApiErrorUnprocessableEntity{}), nil
 
-	return Response(http.StatusNotImplemented, nil), errors.New("DeletePool method not implemented")
-}
-
-// GetAllPools - 
-func (s *PoolAPIService) GetAllPools(ctx context.Context) (ImplResponse, error) {
-	// TODO - update GetAllPools with the required logic for this service method.
-	// Add api_pool_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetAllPools method not implemented")
-}
-
-// GetPool - 
-func (s *PoolAPIService) GetPool(ctx context.Context, poolId string) (ImplResponse, error) {
-	// TODO - update GetPool with the required logic for this service method.
-	// Add api_pool_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, StoragePool{}) or use other options such as http.Ok ...
-	// return Response(200, StoragePool{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetPool method not implemented")
-}
-
-// GetPoolTemplates - 
-func (s *PoolAPIService) GetPoolTemplates(ctx context.Context, poolId string) (ImplResponse, error) {
-	// TODO - update GetPoolTemplates with the required logic for this service method.
-	// Add api_pool_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetPoolTemplates method not implemented")
-}
-
-// GetPoolVolumes - 
-func (s *PoolAPIService) GetPoolVolumes(ctx context.Context, poolId string) (ImplResponse, error) {
-	// TODO - update GetPoolVolumes with the required logic for this service method.
-	// Add api_pool_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetPoolVolumes method not implemented")
+	return Response(http.StatusNotImplemented, nil), errors.New("DeleteStoragePool method not implemented")
 }
 
 // GetZonePools - 
@@ -205,9 +134,109 @@ func (s *PoolAPIService) GetZonePools(ctx context.Context, zoneId string) (ImplR
 	return Response(http.StatusNotImplemented, nil), errors.New("GetZonePools method not implemented")
 }
 
-// UpdatePool - 
-func (s *PoolAPIService) UpdatePool(ctx context.Context, poolId string, storagePool StoragePool) (ImplResponse, error) {
-	// TODO - update UpdatePool with the required logic for this service method.
+// ListStoragePoolTemplates - 
+func (s *PoolAPIService) ListStoragePoolTemplates(ctx context.Context, poolId string) (ImplResponse, error) {
+	// TODO - update ListStoragePoolTemplates with the required logic for this service method.
+	// Add api_pool_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
+	// return Response(200, []string{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ListStoragePoolTemplates method not implemented")
+}
+
+// ListStoragePoolVolumes - 
+func (s *PoolAPIService) ListStoragePoolVolumes(ctx context.Context, poolId string) (ImplResponse, error) {
+	// TODO - update ListStoragePoolVolumes with the required logic for this service method.
+	// Add api_pool_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
+	// return Response(200, []string{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ListStoragePoolVolumes method not implemented")
+}
+
+// ListStoragePools - 
+func (s *PoolAPIService) ListStoragePools(ctx context.Context) (ImplResponse, error) {
+	// TODO - update ListStoragePools with the required logic for this service method.
+	// Add api_pool_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
+	// return Response(200, []string{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ListStoragePools method not implemented")
+}
+
+// ReadStoragePool - 
+func (s *PoolAPIService) ReadStoragePool(ctx context.Context, poolId string) (ImplResponse, error) {
+	// TODO - update ReadStoragePool with the required logic for this service method.
+	// Add api_pool_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, StoragePool{}) or use other options such as http.Ok ...
+	// return Response(200, StoragePool{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ReadStoragePool method not implemented")
+}
+
+// SetStoragePoolDefaultTemplate - 
+func (s *PoolAPIService) SetStoragePoolDefaultTemplate(ctx context.Context, poolId string, templateId string) (ImplResponse, error) {
+	// TODO - update SetStoragePoolDefaultTemplate with the required logic for this service method.
+	// Add api_pool_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, {}) or use other options such as http.Ok ...
+	// return Response(200, nil),nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
+	// return Response(422, ApiErrorUnprocessableEntity{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("SetStoragePoolDefaultTemplate method not implemented")
+}
+
+// UpdateStoragePool - 
+func (s *PoolAPIService) UpdateStoragePool(ctx context.Context, poolId string, storagePool StoragePool) (ImplResponse, error) {
+	// TODO - update UpdateStoragePool with the required logic for this service method.
 	// Add api_pool_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
 	// TODO: Uncomment the next line to return response Response(200, StoragePool{}) or use other options such as http.Ok ...
@@ -228,33 +257,10 @@ func (s *PoolAPIService) UpdatePool(ctx context.Context, poolId string, storageP
 	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
 	// return Response(422, ApiErrorUnprocessableEntity{}), nil
 
-	return Response(http.StatusNotImplemented, nil), errors.New("UpdatePool method not implemented")
-}
+	// TODO: Uncomment the next line to return response Response(507, ApiErrorInsufficientStorage{}) or use other options such as http.Ok ...
+	// return Response(507, ApiErrorInsufficientStorage{}), nil
 
-// UpdatePoolDefaultTemplate - 
-func (s *PoolAPIService) UpdatePoolDefaultTemplate(ctx context.Context, poolId string, templateId string) (ImplResponse, error) {
-	// TODO - update UpdatePoolDefaultTemplate with the required logic for this service method.
-	// Add api_pool_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, {}) or use other options such as http.Ok ...
-	// return Response(200, nil),nil
-
-	// TODO: Uncomment the next line to return response Response(400, ApiErrorBadRequest{}) or use other options such as http.Ok ...
-	// return Response(400, ApiErrorBadRequest{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
-	// return Response(422, ApiErrorUnprocessableEntity{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("UpdatePoolDefaultTemplate method not implemented")
+	return Response(http.StatusNotImplemented, nil), errors.New("UpdateStoragePool method not implemented")
 }
 
 // UpdateZoneDefaultPool - 

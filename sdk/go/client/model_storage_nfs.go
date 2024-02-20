@@ -20,7 +20,7 @@ import (
 // checks if the StorageNFS type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StorageNFS{}
 
-// StorageNFS struct for StorageNFS
+// StorageNFS A NFS storage.
 type StorageNFS struct {
 	// The NFS storage ID (auto-generated).
 	Id *string `json:"id,omitempty"`
@@ -30,7 +30,7 @@ type StorageNFS struct {
 	Description *string `json:"description,omitempty"`
 	// The associated NFS endpoint FQDN.
 	Endpoint string `json:"endpoint"`
-	// The underlying associated CephFS volume name.
+	// The underlying associated Ceph volume name.
 	Fs *string `json:"fs,omitempty"`
 	// List of NFS Ganesha API server IP addresses.
 	Backends []string `json:"backends,omitempty"`

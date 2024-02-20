@@ -66,11 +66,6 @@ func (c *VolumeAPIController) Routes() Routes {
 			"/api/v1/volume",
 			c.GetAllVolumes,
 		},
-		"GetPoolVolumes": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/pool/{poolId}/volumes",
-			c.GetPoolVolumes,
-		},
 		"GetProjectZoneVolumes": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/project/{projectId}/zone/{zoneId}/volumes",
@@ -80,6 +75,11 @@ func (c *VolumeAPIController) Routes() Routes {
 			strings.ToUpper("Get"),
 			"/api/v1/volume/{volumeId}",
 			c.GetVolume,
+		},
+		"ListStoragePoolVolumes": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/pool/{ poolId }/volumes",
+			c.ListStoragePoolVolumes,
 		},
 		"UpdateVolume": Route{
 			strings.ToUpper("Put"),
@@ -176,24 +176,6 @@ func (c *VolumeAPIController) GetAllVolumes(w http.ResponseWriter, r *http.Reque
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetPoolVolumes - 
-func (c *VolumeAPIController) GetPoolVolumes(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	poolIdParam := params["poolId"]
-	if poolIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"poolId"}, nil)
-		return
-	}
-	result, err := c.service.GetPoolVolumes(r.Context(), poolIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
 // GetProjectZoneVolumes - 
 func (c *VolumeAPIController) GetProjectZoneVolumes(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -226,6 +208,24 @@ func (c *VolumeAPIController) GetVolume(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 	result, err := c.service.GetVolume(r.Context(), volumeIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListStoragePoolVolumes - 
+func (c *VolumeAPIController) ListStoragePoolVolumes(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	poolIdParam := params["poolId"]
+	if poolIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"poolId"}, nil)
+		return
+	}
+	result, err := c.service.ListStoragePoolVolumes(r.Context(), poolIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
