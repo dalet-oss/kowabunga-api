@@ -49,4 +49,4 @@ paths:
 
   /host/{ {{ resources.host.paramId }} }/instances:
 {{ oas.Parameters([resources.host.paramSchema]) }}
-{{ oas.GetAll('ListHostInstances', resources.instance.desc, [resources.host.tag, resources.instance.tag], True) }}
+{{ oas.GetAll('List' + resources.host.schema + resources.instance.schema + 's', resources.instance.desc, [resources.host.tag, resources.instance.tag], True) }}
