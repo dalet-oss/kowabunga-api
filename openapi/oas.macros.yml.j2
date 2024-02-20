@@ -221,11 +221,15 @@
 {{ ErrorsUnknownResource() }}
 {% endmacro %}
 
-{% macro ErrorsUpdate() %}
+{% macro ErrorsCreate() %}
 {{ ErrorsWrongParams() }}
 {{ ErrorsGetOne() }}
 {{ ErrorsProcessing() }}
 {{ ErrorsQuotas() }}
+{% endmacro %}
+
+{% macro ErrorsUpdate() %}
+{{ ErrorsCreate() }}
 {% endmacro %}
 
 {% macro ErrorsPatch() %}
@@ -253,8 +257,8 @@
           description: {{ desc }}.
 {% endmacro %}
 
-{% macro GetResource(schema, desc) %}
-        '200':
+{% macro GetResource(code, schema, desc) %}
+        '{{ code }}':
           description: {{ desc }}.
           content:
             application/json:
@@ -272,12 +276,16 @@
         required: true
 {% endmacro %}
 
+{% macro CreateOneResource(schema, desc) %}
+{{ GetResource(201, schema, 'Returns the newly created ' + desc + ' object') }}
+{% endmacro %}
+
 {% macro GetOneResource(schema, desc) %}
-{{ GetResource(schema, 'Returns the ' + desc + ' object') }}
+{{ GetResource(200, schema, 'Returns the ' + desc + ' object') }}
 {% endmacro %}
 
 {% macro GetAllResource(desc) %}
-{{ GetResource('ObjectIds', 'Returns an array of ' + desc + ' IDs') }}
+{{ GetResource(200, 'ObjectIds', 'Returns an array of ' + desc + ' IDs') }}
 {% endmacro %}
 
 {% macro GetAll(opId, desc, tags, childOf=False) %}
@@ -288,6 +296,17 @@
       responses:
 {{ GetAllResource(desc) }}
 {{ ErrorsGetAll(childOf) }}
+{% endmacro %}
+
+{% macro Create(opId, schema, desc, tags) %}
+    post:
+{{ Tags(tags) }}
+      description: Creates a new {{ desc }}.
+      operationId: {{ opId }}
+{{ Payload(schema) }}
+      responses:
+{{ CreateOneResource(schema, desc) }}
+{{ ErrorsCreate() }}
 {% endmacro %}
 
 {% macro Read(opId, schema, desc, tags) %}
@@ -336,9 +355,20 @@
 {{ GetAll('List' + obj.schema + 's', obj.desc, tags) }}
 {% endmacro %}
 
-{% macro RUD(obj, tags, params=[]) %}
+{% macro REST(obj, tags, params=[], create=False) %}
 {{ Parameters(params) }}
+{% if create %}
+{{ Create('Create' + obj.schema, obj.schema, obj.desc, tags) }}
+{% endif %}
 {{ Read('Read' + obj.schema, obj.schema, obj.desc, tags) }}
 {{ Update('Update' + obj.schema, obj.schema, obj.desc, tags) }}
 {{ Delete('Delete' + obj.schema, obj.desc, tags) }}
+{% endmacro %}
+
+{% macro CRUD(obj, tags, params=[]) %}
+{{ REST(obj, tags, params, True) }}
+{% endmacro %}
+
+{% macro RUD(obj, tags, params=[]) %}
+{{ REST(obj, tags, params, False) }}
 {% endmacro %}
