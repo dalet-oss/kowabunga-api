@@ -28,6 +28,8 @@ type HostCaps struct {
 	Uuid string `json:"uuid"`
 	// The computing host CPU characteristics.
 	Cpu HostCPU `json:"cpu"`
+	// The computing host memory size (bytes).
+	Memory int64 `json:"memory"`
 }
 
 type _HostCaps HostCaps
@@ -36,11 +38,12 @@ type _HostCaps HostCaps
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHostCaps(version string, uuid string, cpu HostCPU) *HostCaps {
+func NewHostCaps(version string, uuid string, cpu HostCPU, memory int64) *HostCaps {
 	this := HostCaps{}
 	this.Version = version
 	this.Uuid = uuid
 	this.Cpu = cpu
+	this.Memory = memory
 	return &this
 }
 
@@ -124,6 +127,30 @@ func (o *HostCaps) SetCpu(v HostCPU) {
 	o.Cpu = v
 }
 
+// GetMemory returns the Memory field value
+func (o *HostCaps) GetMemory() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.Memory
+}
+
+// GetMemoryOk returns a tuple with the Memory field value
+// and a boolean to check if the value has been set.
+func (o *HostCaps) GetMemoryOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Memory, true
+}
+
+// SetMemory sets field value
+func (o *HostCaps) SetMemory(v int64) {
+	o.Memory = v
+}
+
 func (o HostCaps) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -137,6 +164,7 @@ func (o HostCaps) ToMap() (map[string]interface{}, error) {
 	toSerialize["version"] = o.Version
 	toSerialize["uuid"] = o.Uuid
 	toSerialize["cpu"] = o.Cpu
+	toSerialize["memory"] = o.Memory
 	return toSerialize, nil
 }
 
@@ -148,6 +176,7 @@ func (o *HostCaps) UnmarshalJSON(data []byte) (err error) {
 		"version",
 		"uuid",
 		"cpu",
+		"memory",
 	}
 
 	allProperties := make(map[string]interface{})

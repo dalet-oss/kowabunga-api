@@ -39,9 +39,5 @@ export interface HostCPU {
      * The computing host CPU number of threads.
      */
     threads: number;
-    /**
-     * The computing host memory size (bytes).
-     */
-    memory?: number;
 }
 

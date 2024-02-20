@@ -34,8 +34,6 @@ type HostCPU struct {
 	Cores int64 `json:"cores"`
 	// The computing host CPU number of threads.
 	Threads int64 `json:"threads"`
-	// The computing host memory size (bytes).
-	Memory *int64 `json:"memory,omitempty"`
 }
 
 type _HostCPU HostCPU
@@ -207,38 +205,6 @@ func (o *HostCPU) SetThreads(v int64) {
 	o.Threads = v
 }
 
-// GetMemory returns the Memory field value if set, zero value otherwise.
-func (o *HostCPU) GetMemory() int64 {
-	if o == nil || IsNil(o.Memory) {
-		var ret int64
-		return ret
-	}
-	return *o.Memory
-}
-
-// GetMemoryOk returns a tuple with the Memory field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *HostCPU) GetMemoryOk() (*int64, bool) {
-	if o == nil || IsNil(o.Memory) {
-		return nil, false
-	}
-	return o.Memory, true
-}
-
-// HasMemory returns a boolean if a field has been set.
-func (o *HostCPU) HasMemory() bool {
-	if o != nil && !IsNil(o.Memory) {
-		return true
-	}
-
-	return false
-}
-
-// SetMemory gets a reference to the given int64 and assigns it to the Memory field.
-func (o *HostCPU) SetMemory(v int64) {
-	o.Memory = &v
-}
-
 func (o HostCPU) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -255,9 +221,6 @@ func (o HostCPU) ToMap() (map[string]interface{}, error) {
 	toSerialize["sockets"] = o.Sockets
 	toSerialize["cores"] = o.Cores
 	toSerialize["threads"] = o.Threads
-	if !IsNil(o.Memory) {
-		toSerialize["memory"] = o.Memory
-	}
 	return toSerialize, nil
 }
 

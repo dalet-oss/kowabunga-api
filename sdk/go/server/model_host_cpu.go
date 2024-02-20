@@ -33,9 +33,6 @@ type HostCpu struct {
 
 	// The computing host CPU number of threads.
 	Threads int64 `json:"threads"`
-
-	// The computing host memory size (bytes).
-	Memory int64 `json:"memory,omitempty"`
 }
 
 // AssertHostCpuRequired checks if the required fields are not zero-ed

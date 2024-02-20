@@ -21,6 +21,7 @@ components:
 {{ oas.StringProperty('version', 'The ' + resources.host.desc + ' libvirt version') }}
 {{ oas.StringProperty('uuid', 'The ' + resources.host.desc + ' domain UUID') }}
 {{ oas.ObjectProperty('cpu', 'The ' + resources.host.desc + ' CPU characteristics', resources.host_cpu.schema) }}
+{{ oas.IntProperty('memory', 'The ' + resources.host.desc + ' memory size (bytes)') }}
 
 {{ oas.Schema(resources.host_cpu, ['arch', 'model', 'vendor', 'sockets', 'cores', 'threads']) }}
 {{ oas.StringProperty('arch', 'The ' + resources.host.desc + ' CPU architecture') }}
@@ -29,7 +30,6 @@ components:
 {{ oas.IntProperty('sockets', 'The ' + resources.host.desc + ' CPU number of sockets') }}
 {{ oas.IntProperty('cores', 'The ' + resources.host.desc + ' CPU number of cores') }}
 {{ oas.IntProperty('threads', 'The ' + resources.host.desc + ' CPU number of threads') }}
-{{ oas.IntProperty('memory', 'The ' + resources.host.desc + ' memory size (bytes)') }}
 
   parameters:
 {{ oas.PathParamID(resources.host) }}

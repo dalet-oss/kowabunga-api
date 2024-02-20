@@ -3862,9 +3862,9 @@ components:
     HostCaps:
       description: A computing host capability.
       example:
+        memory: 5
         cpu:
           cores: 6
-          memory: 5
           vendor: vendor
           threads: 1
           model: model
@@ -3881,15 +3881,19 @@ components:
           type: string
         cpu:
           $ref: '#/components/schemas/HostCPU'
+        memory:
+          description: The computing host memory size (bytes).
+          format: int64
+          type: integer
       required:
       - cpu
+      - memory
       - uuid
       - version
     HostCPU:
       description: A computing host CPU characteristics.
       example:
         cores: 6
-        memory: 5
         vendor: vendor
         threads: 1
         model: model
@@ -3915,10 +3919,6 @@ components:
           type: integer
         threads:
           description: The computing host CPU number of threads.
-          format: int64
-          type: integer
-        memory:
-          description: The computing host memory size (bytes).
           format: int64
           type: integer
       required:

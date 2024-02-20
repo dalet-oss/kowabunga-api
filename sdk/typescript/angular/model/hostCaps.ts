@@ -28,5 +28,9 @@ export interface HostCaps {
      * The computing host CPU characteristics.
      */
     cpu: HostCPU;
+    /**
+     * The computing host memory size (bytes).
+     */
+    memory: number;
 }
 

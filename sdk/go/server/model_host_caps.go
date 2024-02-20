@@ -24,6 +24,9 @@ type HostCaps struct {
 
 	// The computing host CPU characteristics.
 	Cpu HostCpu `json:"cpu"`
+
+	// The computing host memory size (bytes).
+	Memory int64 `json:"memory"`
 }
 
 // AssertHostCapsRequired checks if the required fields are not zero-ed
@@ -32,6 +35,7 @@ func AssertHostCapsRequired(obj HostCaps) error {
 		"version": obj.Version,
 		"uuid": obj.Uuid,
 		"cpu": obj.Cpu,
+		"memory": obj.Memory,
 	}
 	for name, el := range elements {
 		if isZero := IsZeroValue(el); isZero {

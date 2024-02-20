@@ -9,7 +9,6 @@
 | **sockets** | **Long** | The computing host CPU number of sockets. | [default to null] |
 | **cores** | **Long** | The computing host CPU number of cores. | [default to null] |
 | **threads** | **Long** | The computing host CPU number of threads. | [default to null] |
-| **memory** | **Long** | The computing host memory size (bytes). | [optional] [default to null] |
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
