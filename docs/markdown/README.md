@@ -29,13 +29,13 @@ All URIs are relative to */api/v1*
 *InstanceApi* | [**readInstance**](Apis/InstanceApi.md#readinstance) | **GET** /instance/{ instanceId } | Returns a virtual machine instance. |
 *InstanceApi* | [**readInstanceRemoteConnection**](Apis/InstanceApi.md#readinstanceremoteconnection) | **GET** /instance/{ instanceId }/connect | Returns a virtual machine instance remote access characteristics. |
 *InstanceApi* | [**readInstanceState**](Apis/InstanceApi.md#readinstancestate) | **GET** /instance/{ instanceId }/state | Returns a virtual machine instance state. |
-*InstanceApi* | [**rebootInstance**](Apis/InstanceApi.md#rebootinstance) | **POST** /instance/{ instanceId }/reboot | Performs a virtual machine instance software reboot. |
-*InstanceApi* | [**resetInstance**](Apis/InstanceApi.md#resetinstance) | **POST** /instance/{ instanceId }/reset | Performs a virtual machine instance hardware reset. |
-*InstanceApi* | [**resumeInstance**](Apis/InstanceApi.md#resumeinstance) | **POST** /instance/{ instanceId }/resume | Performs a virtual machine instance software PM resume. |
-*InstanceApi* | [**shutdownInstance**](Apis/InstanceApi.md#shutdowninstance) | **POST** /instance/{ instanceId }/shutdown | Performs a virtual machine instance software shutdown. |
-*InstanceApi* | [**startInstance**](Apis/InstanceApi.md#startinstance) | **POST** /instance/{ instanceId }/start | Performs a virtual machine instance hardware boot-up. |
-*InstanceApi* | [**stopInstance**](Apis/InstanceApi.md#stopinstance) | **POST** /instance/{ instanceId }/stop | Performs a virtual machine instance hardware stop. |
-*InstanceApi* | [**suspendInstance**](Apis/InstanceApi.md#suspendinstance) | **POST** /instance/{ instanceId }/suspend | Performs a virtual machine instance software PM suspend. |
+*InstanceApi* | [**rebootInstance**](Apis/InstanceApi.md#rebootinstance) | **PATCH** /instance/{ instanceId }/reboot | Performs a virtual machine instance software reboot. |
+*InstanceApi* | [**resetInstance**](Apis/InstanceApi.md#resetinstance) | **PATCH** /instance/{ instanceId }/reset | Performs a virtual machine instance hardware reset. |
+*InstanceApi* | [**resumeInstance**](Apis/InstanceApi.md#resumeinstance) | **PATCH** /instance/{ instanceId }/resume | Performs a virtual machine instance software PM resume. |
+*InstanceApi* | [**shutdownInstance**](Apis/InstanceApi.md#shutdowninstance) | **PATCH** /instance/{ instanceId }/shutdown | Performs a virtual machine instance software shutdown. |
+*InstanceApi* | [**startInstance**](Apis/InstanceApi.md#startinstance) | **PATCH** /instance/{ instanceId }/start | Performs a virtual machine instance hardware boot-up. |
+*InstanceApi* | [**stopInstance**](Apis/InstanceApi.md#stopinstance) | **PATCH** /instance/{ instanceId }/stop | Performs a virtual machine instance hardware stop. |
+*InstanceApi* | [**suspendInstance**](Apis/InstanceApi.md#suspendinstance) | **PATCH** /instance/{ instanceId }/suspend | Performs a virtual machine instance software PM suspend. |
 *InstanceApi* | [**updateInstance**](Apis/InstanceApi.md#updateinstance) | **PUT** /instance/{ instanceId } | Updates a virtual machine instance configuration. |
 | *KceApi* | [**createProjectZoneKce**](Apis/KceApi.md#createprojectzonekce) | **POST** /project/{projectId}/zone/{zoneId}/kce | Creates a new KCE virtual machine in specified zone. |
 *KceApi* | [**deleteKCE**](Apis/KceApi.md#deletekce) | **DELETE** /kce/{ kceId } | Deletes an existing KCE (Kowabunga Compute Engine). |
@@ -43,13 +43,13 @@ All URIs are relative to */api/v1*
 *KceApi* | [**listKCEs**](Apis/KceApi.md#listkces) | **GET** /kce | Returns the IDs of KCE (Kowabunga Compute Engine) objects. |
 *KceApi* | [**readKCE**](Apis/KceApi.md#readkce) | **GET** /kce/{ kceId } | Returns a KCE (Kowabunga Compute Engine). |
 *KceApi* | [**readKCEState**](Apis/KceApi.md#readkcestate) | **GET** /kce/{ kceId }/state | Returns a virtual machine instance state. |
-*KceApi* | [**rebootKCE**](Apis/KceApi.md#rebootkce) | **POST** /kce/{ kceId }/reboot | Performs a KCE (Kowabunga Compute Engine) software reboot. |
-*KceApi* | [**resetKCE**](Apis/KceApi.md#resetkce) | **POST** /kce/{ kceId }/reset | Performs a KCE (Kowabunga Compute Engine) hardware reset. |
-*KceApi* | [**resumeKCE**](Apis/KceApi.md#resumekce) | **POST** /kce/{ kceId }/resume | Performs a KCE (Kowabunga Compute Engine) software PM resume. |
-*KceApi* | [**shutdownKCE**](Apis/KceApi.md#shutdownkce) | **POST** /kce/{ kceId }/shutdown | Performs a KCE (Kowabunga Compute Engine) software shutdown. |
-*KceApi* | [**startKCE**](Apis/KceApi.md#startkce) | **POST** /kce/{ kceId }/start | Performs a KCE (Kowabunga Compute Engine) hardware boot-up. |
-*KceApi* | [**stopKCE**](Apis/KceApi.md#stopkce) | **POST** /kce/{ kceId }/stop | Performs a KCE (Kowabunga Compute Engine) hardware stop. |
-*KceApi* | [**suspendKCE**](Apis/KceApi.md#suspendkce) | **POST** /kce/{ kceId }/suspend | Performs a KCE (Kowabunga Compute Engine) software PM suspend. |
+*KceApi* | [**rebootKCE**](Apis/KceApi.md#rebootkce) | **PATCH** /kce/{ kceId }/reboot | Performs a KCE (Kowabunga Compute Engine) software reboot. |
+*KceApi* | [**resetKCE**](Apis/KceApi.md#resetkce) | **PATCH** /kce/{ kceId }/reset | Performs a KCE (Kowabunga Compute Engine) hardware reset. |
+*KceApi* | [**resumeKCE**](Apis/KceApi.md#resumekce) | **PATCH** /kce/{ kceId }/resume | Performs a KCE (Kowabunga Compute Engine) software PM resume. |
+*KceApi* | [**shutdownKCE**](Apis/KceApi.md#shutdownkce) | **PATCH** /kce/{ kceId }/shutdown | Performs a KCE (Kowabunga Compute Engine) software shutdown. |
+*KceApi* | [**startKCE**](Apis/KceApi.md#startkce) | **PATCH** /kce/{ kceId }/start | Performs a KCE (Kowabunga Compute Engine) hardware boot-up. |
+*KceApi* | [**stopKCE**](Apis/KceApi.md#stopkce) | **PATCH** /kce/{ kceId }/stop | Performs a KCE (Kowabunga Compute Engine) hardware stop. |
+*KceApi* | [**suspendKCE**](Apis/KceApi.md#suspendkce) | **PATCH** /kce/{ kceId }/suspend | Performs a KCE (Kowabunga Compute Engine) software PM suspend. |
 *KceApi* | [**updateKCE**](Apis/KceApi.md#updatekce) | **PUT** /kce/{ kceId } | Updates a KCE (Kowabunga Compute Engine) configuration. |
 | *KfsApi* | [**createProjectZoneKfs**](Apis/KfsApi.md#createprojectzonekfs) | **POST** /project/{projectId}/zone/{zoneId}/kfs | Creates a new KFS storage volume in specified zone. |
 *KfsApi* | [**deleteKFS**](Apis/KfsApi.md#deletekfs) | **DELETE** /kfs/{ kfsId } | Deletes an existing KFS (Kowabunga File System). |
@@ -87,7 +87,7 @@ All URIs are relative to */api/v1*
 *PoolApi* | [**listStoragePools**](Apis/PoolApi.md#liststoragepools) | **GET** /pool | Returns the IDs of storage pool objects. |
 *PoolApi* | [**readStoragePool**](Apis/PoolApi.md#readstoragepool) | **GET** /pool/{ poolId } | Returns a storage pool. |
 *PoolApi* | [**updateStoragePool**](Apis/PoolApi.md#updatestoragepool) | **PUT** /pool/{ poolId } | Updates a storage pool configuration. |
-*PoolApi* | [**updateStoragePoolDefaultTemplate**](Apis/PoolApi.md#updatestoragepooldefaulttemplate) | **POST** /pool/{ poolId }/template/{ templateId }/default | Performs a storage pool setting of default template. |
+*PoolApi* | [**updateStoragePoolDefaultTemplate**](Apis/PoolApi.md#updatestoragepooldefaulttemplate) | **PATCH** /pool/{ poolId }/template/{ templateId }/default | Performs a storage pool setting of default template. |
 *PoolApi* | [**updateZoneDefaultPool**](Apis/PoolApi.md#updatezonedefaultpool) | **PUT** /zone/{zoneId}/pool/{poolId}/default | Set a zone's default storage pool. |
 | *ProjectApi* | [**createProject**](Apis/ProjectApi.md#createproject) | **POST** /project | Creates a new project. |
 *ProjectApi* | [**createProjectDnsRecord**](Apis/ProjectApi.md#createprojectdnsrecord) | **POST** /project/{projectId}/record | Creates a new DNS record in specified project. |
@@ -134,7 +134,7 @@ All URIs are relative to */api/v1*
 *TemplateApi* | [**getAllTemplates**](Apis/TemplateApi.md#getalltemplates) | **GET** /template | Returns the IDs of volume templates. |
 *TemplateApi* | [**getTemplate**](Apis/TemplateApi.md#gettemplate) | **GET** /template/{templateId} | Returns a description of the volume template. |
 *TemplateApi* | [**listStoragePoolTemplates**](Apis/TemplateApi.md#liststoragepooltemplates) | **GET** /pool/{ poolId }/templates | Returns the IDs of image template objects. |
-*TemplateApi* | [**updateStoragePoolDefaultTemplate**](Apis/TemplateApi.md#updatestoragepooldefaulttemplate) | **POST** /pool/{ poolId }/template/{ templateId }/default | Performs a storage pool setting of default template. |
+*TemplateApi* | [**updateStoragePoolDefaultTemplate**](Apis/TemplateApi.md#updatestoragepooldefaulttemplate) | **PATCH** /pool/{ poolId }/template/{ templateId }/default | Performs a storage pool setting of default template. |
 *TemplateApi* | [**updateTemplate**](Apis/TemplateApi.md#updatetemplate) | **PUT** /template/{templateId} | Updates a volume template configuration. |
 | *VnetApi* | [**createSubnet**](Apis/VnetApi.md#createsubnet) | **POST** /vnet/{vnetId}/subnet | Creates a new subnet. |
 *VnetApi* | [**createVNet**](Apis/VnetApi.md#createvnet) | **POST** /zone/{zoneId}/vnet | Creates a new virtual network. |

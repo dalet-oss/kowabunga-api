@@ -474,7 +474,7 @@ paths:
   /instance/{ instanceId }/reboot:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
-    post:
+    patch:
       description: Performs a virtual machine instance software reboot.
       operationId: RebootInstance
       parameters:
@@ -495,7 +495,7 @@ paths:
   /instance/{ instanceId }/reset:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
-    post:
+    patch:
       description: Performs a virtual machine instance hardware reset.
       operationId: ResetInstance
       parameters:
@@ -516,7 +516,7 @@ paths:
   /instance/{ instanceId }/suspend:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
-    post:
+    patch:
       description: Performs a virtual machine instance software PM suspend.
       operationId: SuspendInstance
       parameters:
@@ -537,7 +537,7 @@ paths:
   /instance/{ instanceId }/resume:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
-    post:
+    patch:
       description: Performs a virtual machine instance software PM resume.
       operationId: ResumeInstance
       parameters:
@@ -558,7 +558,7 @@ paths:
   /instance/{ instanceId }/start:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
-    post:
+    patch:
       description: Performs a virtual machine instance hardware boot-up.
       operationId: StartInstance
       parameters:
@@ -579,7 +579,7 @@ paths:
   /instance/{ instanceId }/stop:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
-    post:
+    patch:
       description: Performs a virtual machine instance hardware stop.
       operationId: StopInstance
       parameters:
@@ -600,7 +600,7 @@ paths:
   /instance/{ instanceId }/shutdown:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
-    post:
+    patch:
       description: Performs a virtual machine instance software shutdown.
       operationId: ShutdownInstance
       parameters:
@@ -761,7 +761,7 @@ paths:
   /kce/{ kceId }/reboot:
     parameters:
     - $ref: '#/components/parameters/KceID'
-    post:
+    patch:
       description: Performs a KCE (Kowabunga Compute Engine) software reboot.
       operationId: RebootKCE
       parameters:
@@ -782,7 +782,7 @@ paths:
   /kce/{ kceId }/reset:
     parameters:
     - $ref: '#/components/parameters/KceID'
-    post:
+    patch:
       description: Performs a KCE (Kowabunga Compute Engine) hardware reset.
       operationId: ResetKCE
       parameters:
@@ -803,7 +803,7 @@ paths:
   /kce/{ kceId }/suspend:
     parameters:
     - $ref: '#/components/parameters/KceID'
-    post:
+    patch:
       description: Performs a KCE (Kowabunga Compute Engine) software PM suspend.
       operationId: SuspendKCE
       parameters:
@@ -824,7 +824,7 @@ paths:
   /kce/{ kceId }/resume:
     parameters:
     - $ref: '#/components/parameters/KceID'
-    post:
+    patch:
       description: Performs a KCE (Kowabunga Compute Engine) software PM resume.
       operationId: ResumeKCE
       parameters:
@@ -845,7 +845,7 @@ paths:
   /kce/{ kceId }/start:
     parameters:
     - $ref: '#/components/parameters/KceID'
-    post:
+    patch:
       description: Performs a KCE (Kowabunga Compute Engine) hardware boot-up.
       operationId: StartKCE
       parameters:
@@ -866,7 +866,7 @@ paths:
   /kce/{ kceId }/stop:
     parameters:
     - $ref: '#/components/parameters/KceID'
-    post:
+    patch:
       description: Performs a KCE (Kowabunga Compute Engine) hardware stop.
       operationId: StopKCE
       parameters:
@@ -887,7 +887,7 @@ paths:
   /kce/{ kceId }/shutdown:
     parameters:
     - $ref: '#/components/parameters/KceID'
-    post:
+    patch:
       description: Performs a KCE (Kowabunga Compute Engine) software shutdown.
       operationId: ShutdownKCE
       parameters:
@@ -2246,7 +2246,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/PoolID'
     - $ref: '#/components/parameters/TemplateID'
-    post:
+    patch:
       description: Performs a storage pool setting of default template.
       operationId: UpdateStoragePoolDefaultTemplate
       parameters:

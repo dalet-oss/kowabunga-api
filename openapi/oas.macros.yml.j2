@@ -335,7 +335,7 @@
 {% endmacro %}
 
 {% macro Patch(opId, desc, action, tags) %}
-    post:
+    patch:
 {{ Tags(tags) }}
       description: Performs a {{ desc }} {{ action }}.
       operationId: {{ opId }}

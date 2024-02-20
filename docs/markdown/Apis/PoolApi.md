@@ -13,7 +13,7 @@ All URIs are relative to */api/v1*
 | [**listStoragePools**](PoolApi.md#listStoragePools) | **GET** /pool |  |
 | [**readStoragePool**](PoolApi.md#readStoragePool) | **GET** /pool/{ poolId } |  |
 | [**updateStoragePool**](PoolApi.md#updateStoragePool) | **PUT** /pool/{ poolId } |  |
-| [**updateStoragePoolDefaultTemplate**](PoolApi.md#updateStoragePoolDefaultTemplate) | **POST** /pool/{ poolId }/template/{ templateId }/default |  |
+| [**updateStoragePoolDefaultTemplate**](PoolApi.md#updateStoragePoolDefaultTemplate) | **PATCH** /pool/{ poolId }/template/{ templateId }/default |  |
 | [**updateZoneDefaultPool**](PoolApi.md#updateZoneDefaultPool) | **PUT** /zone/{zoneId}/pool/{poolId}/default |  |
 
 

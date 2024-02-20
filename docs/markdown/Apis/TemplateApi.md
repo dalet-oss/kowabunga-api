@@ -9,7 +9,7 @@ All URIs are relative to */api/v1*
 | [**getAllTemplates**](TemplateApi.md#getAllTemplates) | **GET** /template |  |
 | [**getTemplate**](TemplateApi.md#getTemplate) | **GET** /template/{templateId} |  |
 | [**listStoragePoolTemplates**](TemplateApi.md#listStoragePoolTemplates) | **GET** /pool/{ poolId }/templates |  |
-| [**updateStoragePoolDefaultTemplate**](TemplateApi.md#updateStoragePoolDefaultTemplate) | **POST** /pool/{ poolId }/template/{ templateId }/default |  |
+| [**updateStoragePoolDefaultTemplate**](TemplateApi.md#updateStoragePoolDefaultTemplate) | **PATCH** /pool/{ poolId }/template/{ templateId }/default |  |
 | [**updateTemplate**](TemplateApi.md#updateTemplate) | **PUT** /template/{templateId} |  |
 
 

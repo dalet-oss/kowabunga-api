@@ -12,13 +12,13 @@ All URIs are relative to */api/v1*
 | [**readInstance**](InstanceApi.md#readInstance) | **GET** /instance/{ instanceId } |  |
 | [**readInstanceRemoteConnection**](InstanceApi.md#readInstanceRemoteConnection) | **GET** /instance/{ instanceId }/connect |  |
 | [**readInstanceState**](InstanceApi.md#readInstanceState) | **GET** /instance/{ instanceId }/state |  |
-| [**rebootInstance**](InstanceApi.md#rebootInstance) | **POST** /instance/{ instanceId }/reboot |  |
-| [**resetInstance**](InstanceApi.md#resetInstance) | **POST** /instance/{ instanceId }/reset |  |
-| [**resumeInstance**](InstanceApi.md#resumeInstance) | **POST** /instance/{ instanceId }/resume |  |
-| [**shutdownInstance**](InstanceApi.md#shutdownInstance) | **POST** /instance/{ instanceId }/shutdown |  |
-| [**startInstance**](InstanceApi.md#startInstance) | **POST** /instance/{ instanceId }/start |  |
-| [**stopInstance**](InstanceApi.md#stopInstance) | **POST** /instance/{ instanceId }/stop |  |
-| [**suspendInstance**](InstanceApi.md#suspendInstance) | **POST** /instance/{ instanceId }/suspend |  |
+| [**rebootInstance**](InstanceApi.md#rebootInstance) | **PATCH** /instance/{ instanceId }/reboot |  |
+| [**resetInstance**](InstanceApi.md#resetInstance) | **PATCH** /instance/{ instanceId }/reset |  |
+| [**resumeInstance**](InstanceApi.md#resumeInstance) | **PATCH** /instance/{ instanceId }/resume |  |
+| [**shutdownInstance**](InstanceApi.md#shutdownInstance) | **PATCH** /instance/{ instanceId }/shutdown |  |
+| [**startInstance**](InstanceApi.md#startInstance) | **PATCH** /instance/{ instanceId }/start |  |
+| [**stopInstance**](InstanceApi.md#stopInstance) | **PATCH** /instance/{ instanceId }/stop |  |
+| [**suspendInstance**](InstanceApi.md#suspendInstance) | **PATCH** /instance/{ instanceId }/suspend |  |
 | [**updateInstance**](InstanceApi.md#updateInstance) | **PUT** /instance/{ instanceId } |  |
 
 
