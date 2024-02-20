@@ -4,11 +4,12 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createTemplate**](TemplateApi.md#createTemplate) | **POST** /pool/{poolId}/template |  |
+| [**createTemplate**](TemplateApi.md#createTemplate) | **POST** /pool/{ poolId }/template |  |
 | [**deleteTemplate**](TemplateApi.md#deleteTemplate) | **DELETE** /template/{templateId} |  |
 | [**getAllTemplates**](TemplateApi.md#getAllTemplates) | **GET** /template |  |
 | [**getTemplate**](TemplateApi.md#getTemplate) | **GET** /template/{templateId} |  |
-| [**updatePoolDefaultTemplate**](TemplateApi.md#updatePoolDefaultTemplate) | **PUT** /pool/{poolId}/template/{templateId}/default |  |
+| [**listStoragePoolTemplates**](TemplateApi.md#listStoragePoolTemplates) | **GET** /pool/{ poolId }/templates |  |
+| [**updateStoragePoolDefaultTemplate**](TemplateApi.md#updateStoragePoolDefaultTemplate) | **POST** /pool/{ poolId }/template/{ templateId }/default |  |
 | [**updateTemplate**](TemplateApi.md#updateTemplate) | **PUT** /template/{templateId} |  |
 
 
@@ -18,14 +19,14 @@ All URIs are relative to */api/v1*
 
 
 
-    Creates a new volume template.
+    Creates a new image template.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **poolId** | **String**| The ID of the storage pool. | [default to null] |
-| **Template** | [**Template**](../Models/Template.md)| Template payload | |
+| **Template** | [**Template**](../Models/Template.md)| Template payload. | |
 
 ### Return type
 
@@ -118,13 +119,40 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="updatePoolDefaultTemplate"></a>
-# **updatePoolDefaultTemplate**
-> updatePoolDefaultTemplate(poolId, templateId)
+<a name="listStoragePoolTemplates"></a>
+# **listStoragePoolTemplates**
+> List listStoragePoolTemplates(poolId)
 
 
 
-    Set a storage pool default volume template.
+    Returns the IDs of image template objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **poolId** | **String**| The ID of the storage pool. | [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="updateStoragePoolDefaultTemplate"></a>
+# **updateStoragePoolDefaultTemplate**
+> updateStoragePoolDefaultTemplate(poolId, templateId)
+
+
+
+    Performs a storage pool setting of default template.
 
 ### Parameters
 

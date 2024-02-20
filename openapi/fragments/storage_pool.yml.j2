@@ -1,255 +1,38 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
 components:
   schemas:
-    StoragePool:
-      type: object
-      required:
-        - name
-        - pool
-      properties:
-        id:
-          type: string
-          description: The storage pool ID (auto-generated).
-        name:
-          type: string
-          description: The storage pool name.
-        description:
-          type: string
-          description: The storage pool description.
-        type:
-          type: string
-          description: The storage pool type.
-          enum:
-            - local
-            - rbd
-          default: rbd
-        pool:
-          type: string
-          description: The libvirt pool name.
-        ceph_address:
-          type: string
-          description: The local Ceph Monitor(s) address or FQDN, empty for local pool type.
-          default: "localhost"
-        ceph_port:
-          type: integer
-          description: The local Ceph Monitor(s) port (default 3300), empty for local pool type.
-          default: 3300
-        ceph_secret_uuid:
-          type: string
-          description: The libvirt secret UUID for CephX authentication, empty for local pool type.
-        cost:
-          type: object
-          description: Cost associated to the storage pool.
-          $ref: '#/components/schemas/Cost'
+{{ oas.SchemaBaseResource(resources.pool, ['name', 'pool']) }}
+{{ oas.StringProperty('type', 'The ' + resources.pool.desc + ' type', values=['local', 'rbd'], default='rbd') }}
+{{ oas.StringProperty('pool', 'The libvirt pool name') }}
+{{ oas.StringProperty('ceph_address', 'The local Ceph Monitor(s) address or FQDN, empty for local pool type', default='localhost') }}
+{{ oas.IntProperty('ceph_port', 'The local Ceph Monitor(s) port (default 3300), empty for local pool type', default=3300) }}
+{{ oas.StringProperty('ceph_secret_uuid', 'The libvirt secret UUID for CephX authentication, empty for local pool type') }}
+{{ oas.ObjectProperty('cost', 'Cost associated to the storage pool', resources.cost.schema) }}
+
   parameters:
-    PoolID:
-      name: poolId
-      in: path
-      description: The ID of the storage pool.
-      required: true
-      schema:
-        type: string
-    OptionalQueryPoolID:
-      name: poolId
-      in: query
-      description: Storage pool ID (optional, zone's default if unspecified).
-      schema:
-        type: string
+{{ oas.PathParamID(resources.pool) }}
+{{ oas.StringQueryParam(resources.pool.paramSchema, resources.pool.paramId, "Storage pool ID (optional, zone's default if unspecified)") }}
 
 paths:
   /pool:
-    get:
-      tags:
-        - pool
-      operationId: GetAllPools
-      description: Returns the IDs of registered pools.
-      responses:
-        '200':
-          description: Returns the an array of pool IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
+{{ oas.List(resources.pool, [resources.pool.tag]) }}
 
-  /pool/{poolId}:
-    parameters:
-      - $ref: '#/components/parameters/PoolID'
+  /pool/{ {{ resources.pool.paramId }} }:
+{{ oas.RUD(resources.pool, [resources.pool.tag], [resources.pool.paramSchema]) }}
 
-    get:
-      tags:
-        - pool
-      operationId: GetPool
-      description: Returns a description of the pool
-      responses:
-        '200':
-          description: Returns the storage pool object.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/StoragePool'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+  /pool/{ {{ resources.pool.paramId }} }/volumes:
+{{ oas.Parameters([resources.pool.paramSchema]) }}
+{{ oas.GetAll('List' + resources.pool.schema + 'Volumes', resources.volume.desc, [resources.pool.tag, resources.volume.tag], True) }}
 
-    put:
-      tags:
-        - pool
-      operationId: UpdatePool
-      description: Updates a pool configuration.
-      requestBody:
-        description: Storage pool payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/StoragePool'
-        required: true
-      responses:
-        '200':
-          description: Updated storage pool.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/StoragePool'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /pool/{ {{ resources.pool.paramId }} }/template:
+{{ oas.Parameters([resources.pool.paramSchema]) }}
+{{ oas.Create('Create' + resources.template.schema, resources.template.schema, resources.template.desc, [resources.pool.tag, resources.template.tag]) }}
 
-    delete:
-      tags:
-        - pool
-      operationId: DeletePool
-      description: Deletes an existing pool.
-      responses:
-        '200':
-          description: The pool has been successfully removed.
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+  /pool/{ {{ resources.pool.paramId }} }/template/{ {{ resources.template.paramId }} }/default:
+{{ oas.Parameters([resources.pool.paramSchema, resources.template.paramSchema]) }}
+{{ oas.Patch('Update' + resources.pool.schema + 'Default' + resources.template.schema, resources.pool.desc, 'setting of default template', [resources.pool.tag, resources.template.tag]) }}
 
-  /pool/{poolId}/volumes:
-    parameters:
-      - $ref: '#/components/parameters/PoolID'
-
-    get:
-      tags:
-        - pool
-        - volume
-      operationId: GetPoolVolumes
-      description: Returns the IDs of the storage volumes existing in the pool.
-      responses:
-        '200':
-          description: Returns an array of storage volume IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-
-  /pool/{poolId}/template:
-    parameters:
-      - $ref: '#/components/parameters/PoolID'
-
-    post:
-      tags:
-        - pool
-        - template
-      operationId: CreateTemplate
-      description: Creates a new volume template.
-      requestBody:
-        description: Template payload
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Template'
-        required: true
-      responses:
-        '201':
-          description: Returns the newly created volume template.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Template'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /pool/{poolId}/template/{templateId}/default:
-    parameters:
-      - $ref: '#/components/parameters/PoolID'
-      - $ref: '#/components/parameters/TemplateID'
-
-    put:
-      tags:
-        - pool
-        - template
-      operationId: UpdatePoolDefaultTemplate
-      description: Set a storage pool default volume template.
-      responses:
-        '200':
-          description: Template has been set as default one.
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '422':
-          $ref: '#/components/responses/UnprocessableEntity'
-
-  /pool/{poolId}/templates:
-    parameters:
-      - $ref: '#/components/parameters/PoolID'
-
-    get:
-      tags:
-        - pool
-        - templates
-      operationId: GetPoolTemplates
-      description: Returns the IDs of the volume templates existing in the storage pool.
-      responses:
-        '200':
-          description: Returns an array of volume template IDs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
+  /pool/{ {{ resources.pool.paramId }} }/templates:
+{{ oas.Parameters([resources.pool.paramSchema]) }}
+{{ oas.GetAll('List' + resources.pool.schema + 'Templates', resources.template.desc, [resources.pool.tag, resources.template.tag], True) }}

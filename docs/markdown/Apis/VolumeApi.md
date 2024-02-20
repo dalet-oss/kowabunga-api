@@ -7,9 +7,9 @@ All URIs are relative to */api/v1*
 | [**createProjectZoneVolume**](VolumeApi.md#createProjectZoneVolume) | **POST** /project/{projectId}/zone/{zoneId}/volume |  |
 | [**deleteVolume**](VolumeApi.md#deleteVolume) | **DELETE** /volume/{volumeId} |  |
 | [**getAllVolumes**](VolumeApi.md#getAllVolumes) | **GET** /volume |  |
-| [**getPoolVolumes**](VolumeApi.md#getPoolVolumes) | **GET** /pool/{poolId}/volumes |  |
 | [**getProjectZoneVolumes**](VolumeApi.md#getProjectZoneVolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes |  |
 | [**getVolume**](VolumeApi.md#getVolume) | **GET** /volume/{volumeId} |  |
+| [**listStoragePoolVolumes**](VolumeApi.md#listStoragePoolVolumes) | **GET** /pool/{ poolId }/volumes |  |
 | [**updateVolume**](VolumeApi.md#updateVolume) | **PUT** /volume/{volumeId} |  |
 
 
@@ -95,33 +95,6 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getPoolVolumes"></a>
-# **getPoolVolumes**
-> List getPoolVolumes(poolId)
-
-
-
-    Returns the IDs of the storage volumes existing in the pool.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **poolId** | **String**| The ID of the storage pool. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
 <a name="getProjectZoneVolumes"></a>
 # **getProjectZoneVolumes**
 > List getProjectZoneVolumes(projectId, zoneId)
@@ -167,6 +140,33 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**Volume**](../Models/Volume.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listStoragePoolVolumes"></a>
+# **listStoragePoolVolumes**
+> List listStoragePoolVolumes(poolId)
+
+
+
+    Returns the IDs of storage volume objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **poolId** | **String**| The ID of the storage pool. | [default to null] |
+
+### Return type
+
+**List**
 
 ### Authorization
 

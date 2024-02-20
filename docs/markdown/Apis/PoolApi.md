@@ -5,15 +5,15 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createPool**](PoolApi.md#createPool) | **POST** /zone/{zoneId}/pool |  |
-| [**createTemplate**](PoolApi.md#createTemplate) | **POST** /pool/{poolId}/template |  |
-| [**deletePool**](PoolApi.md#deletePool) | **DELETE** /pool/{poolId} |  |
-| [**getAllPools**](PoolApi.md#getAllPools) | **GET** /pool |  |
-| [**getPool**](PoolApi.md#getPool) | **GET** /pool/{poolId} |  |
-| [**getPoolTemplates**](PoolApi.md#getPoolTemplates) | **GET** /pool/{poolId}/templates |  |
-| [**getPoolVolumes**](PoolApi.md#getPoolVolumes) | **GET** /pool/{poolId}/volumes |  |
+| [**createTemplate**](PoolApi.md#createTemplate) | **POST** /pool/{ poolId }/template |  |
+| [**deleteStoragePool**](PoolApi.md#deleteStoragePool) | **DELETE** /pool/{ poolId } |  |
 | [**getZonePools**](PoolApi.md#getZonePools) | **GET** /zone/{zoneId}/pools |  |
-| [**updatePool**](PoolApi.md#updatePool) | **PUT** /pool/{poolId} |  |
-| [**updatePoolDefaultTemplate**](PoolApi.md#updatePoolDefaultTemplate) | **PUT** /pool/{poolId}/template/{templateId}/default |  |
+| [**listStoragePoolTemplates**](PoolApi.md#listStoragePoolTemplates) | **GET** /pool/{ poolId }/templates |  |
+| [**listStoragePoolVolumes**](PoolApi.md#listStoragePoolVolumes) | **GET** /pool/{ poolId }/volumes |  |
+| [**listStoragePools**](PoolApi.md#listStoragePools) | **GET** /pool |  |
+| [**readStoragePool**](PoolApi.md#readStoragePool) | **GET** /pool/{ poolId } |  |
+| [**updateStoragePool**](PoolApi.md#updateStoragePool) | **PUT** /pool/{ poolId } |  |
+| [**updateStoragePoolDefaultTemplate**](PoolApi.md#updateStoragePoolDefaultTemplate) | **POST** /pool/{ poolId }/template/{ templateId }/default |  |
 | [**updateZoneDefaultPool**](PoolApi.md#updateZoneDefaultPool) | **PUT** /zone/{zoneId}/pool/{poolId}/default |  |
 
 
@@ -52,14 +52,14 @@ All URIs are relative to */api/v1*
 
 
 
-    Creates a new volume template.
+    Creates a new image template.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **poolId** | **String**| The ID of the storage pool. | [default to null] |
-| **Template** | [**Template**](../Models/Template.md)| Template payload | |
+| **Template** | [**Template**](../Models/Template.md)| Template payload. | |
 
 ### Return type
 
@@ -74,13 +74,13 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="deletePool"></a>
-# **deletePool**
-> deletePool(poolId)
+<a name="deleteStoragePool"></a>
+# **deleteStoragePool**
+> deleteStoragePool(poolId)
 
 
 
-    Deletes an existing pool.
+    Deletes an existing storage pool.
 
 ### Parameters
 
@@ -91,111 +91,6 @@ All URIs are relative to */api/v1*
 ### Return type
 
 null (empty response body)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getAllPools"></a>
-# **getAllPools**
-> List getAllPools()
-
-
-
-    Returns the IDs of registered pools.
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getPool"></a>
-# **getPool**
-> StoragePool getPool(poolId)
-
-
-
-    Returns a description of the pool
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **poolId** | **String**| The ID of the storage pool. | [default to null] |
-
-### Return type
-
-[**StoragePool**](../Models/StoragePool.md)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getPoolTemplates"></a>
-# **getPoolTemplates**
-> List getPoolTemplates(poolId)
-
-
-
-    Returns the IDs of the volume templates existing in the storage pool.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **poolId** | **String**| The ID of the storage pool. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="getPoolVolumes"></a>
-# **getPoolVolumes**
-> List getPoolVolumes(poolId)
-
-
-
-    Returns the IDs of the storage volumes existing in the pool.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **poolId** | **String**| The ID of the storage pool. | [default to null] |
-
-### Return type
-
-**List**
 
 ### Authorization
 
@@ -233,20 +128,125 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="updatePool"></a>
-# **updatePool**
-> StoragePool updatePool(poolId, StoragePool)
+<a name="listStoragePoolTemplates"></a>
+# **listStoragePoolTemplates**
+> List listStoragePoolTemplates(poolId)
 
 
 
-    Updates a pool configuration.
+    Returns the IDs of image template objects.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **poolId** | **String**| The ID of the storage pool. | [default to null] |
-| **StoragePool** | [**StoragePool**](../Models/StoragePool.md)| Storage pool payload | |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listStoragePoolVolumes"></a>
+# **listStoragePoolVolumes**
+> List listStoragePoolVolumes(poolId)
+
+
+
+    Returns the IDs of storage volume objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **poolId** | **String**| The ID of the storage pool. | [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listStoragePools"></a>
+# **listStoragePools**
+> List listStoragePools()
+
+
+
+    Returns the IDs of storage pool objects.
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**List**
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="readStoragePool"></a>
+# **readStoragePool**
+> StoragePool readStoragePool(poolId)
+
+
+
+    Returns a storage pool.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **poolId** | **String**| The ID of the storage pool. | [default to null] |
+
+### Return type
+
+[**StoragePool**](../Models/StoragePool.md)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="updateStoragePool"></a>
+# **updateStoragePool**
+> StoragePool updateStoragePool(poolId, StoragePool)
+
+
+
+    Updates a storage pool configuration.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **poolId** | **String**| The ID of the storage pool. | [default to null] |
+| **StoragePool** | [**StoragePool**](../Models/StoragePool.md)| StoragePool payload. | |
 
 ### Return type
 
@@ -261,13 +261,13 @@ This endpoint does not need any parameter.
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="updatePoolDefaultTemplate"></a>
-# **updatePoolDefaultTemplate**
-> updatePoolDefaultTemplate(poolId, templateId)
+<a name="updateStoragePoolDefaultTemplate"></a>
+# **updateStoragePoolDefaultTemplate**
+> updateStoragePoolDefaultTemplate(poolId, templateId)
 
 
 
-    Set a storage pool default volume template.
+    Performs a storage pool setting of default template.
 
 ### Parameters
 

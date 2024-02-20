@@ -79,15 +79,15 @@ All URIs are relative to */api/v1*
 *NfsApi* | [**updateStorageNFS**](Apis/NfsApi.md#updatestoragenfs) | **PUT** /nfs/{ nfsId } | Updates a NFS storage configuration. |
 *NfsApi* | [**updateZoneDefaultNfsStorage**](Apis/NfsApi.md#updatezonedefaultnfsstorage) | **PUT** /zone/{zoneId}/nfs/{nfsId}/default | Set a zone's default NFS storage. |
 | *PoolApi* | [**createPool**](Apis/PoolApi.md#createpool) | **POST** /zone/{zoneId}/pool | Creates a new storage pool. |
-*PoolApi* | [**createTemplate**](Apis/PoolApi.md#createtemplate) | **POST** /pool/{poolId}/template | Creates a new volume template. |
-*PoolApi* | [**deletePool**](Apis/PoolApi.md#deletepool) | **DELETE** /pool/{poolId} | Deletes an existing pool. |
-*PoolApi* | [**getAllPools**](Apis/PoolApi.md#getallpools) | **GET** /pool | Returns the IDs of registered pools. |
-*PoolApi* | [**getPool**](Apis/PoolApi.md#getpool) | **GET** /pool/{poolId} | Returns a description of the pool |
-*PoolApi* | [**getPoolTemplates**](Apis/PoolApi.md#getpooltemplates) | **GET** /pool/{poolId}/templates | Returns the IDs of the volume templates existing in the storage pool. |
-*PoolApi* | [**getPoolVolumes**](Apis/PoolApi.md#getpoolvolumes) | **GET** /pool/{poolId}/volumes | Returns the IDs of the storage volumes existing in the pool. |
+*PoolApi* | [**createTemplate**](Apis/PoolApi.md#createtemplate) | **POST** /pool/{ poolId }/template | Creates a new image template. |
+*PoolApi* | [**deleteStoragePool**](Apis/PoolApi.md#deletestoragepool) | **DELETE** /pool/{ poolId } | Deletes an existing storage pool. |
 *PoolApi* | [**getZonePools**](Apis/PoolApi.md#getzonepools) | **GET** /zone/{zoneId}/pools | Returns the IDs of the pools existing in the zone. |
-*PoolApi* | [**updatePool**](Apis/PoolApi.md#updatepool) | **PUT** /pool/{poolId} | Updates a pool configuration. |
-*PoolApi* | [**updatePoolDefaultTemplate**](Apis/PoolApi.md#updatepooldefaulttemplate) | **PUT** /pool/{poolId}/template/{templateId}/default | Set a storage pool default volume template. |
+*PoolApi* | [**listStoragePoolTemplates**](Apis/PoolApi.md#liststoragepooltemplates) | **GET** /pool/{ poolId }/templates | Returns the IDs of image template objects. |
+*PoolApi* | [**listStoragePoolVolumes**](Apis/PoolApi.md#liststoragepoolvolumes) | **GET** /pool/{ poolId }/volumes | Returns the IDs of storage volume objects. |
+*PoolApi* | [**listStoragePools**](Apis/PoolApi.md#liststoragepools) | **GET** /pool | Returns the IDs of storage pool objects. |
+*PoolApi* | [**readStoragePool**](Apis/PoolApi.md#readstoragepool) | **GET** /pool/{ poolId } | Returns a storage pool. |
+*PoolApi* | [**updateStoragePool**](Apis/PoolApi.md#updatestoragepool) | **PUT** /pool/{ poolId } | Updates a storage pool configuration. |
+*PoolApi* | [**updateStoragePoolDefaultTemplate**](Apis/PoolApi.md#updatestoragepooldefaulttemplate) | **POST** /pool/{ poolId }/template/{ templateId }/default | Performs a storage pool setting of default template. |
 *PoolApi* | [**updateZoneDefaultPool**](Apis/PoolApi.md#updatezonedefaultpool) | **PUT** /zone/{zoneId}/pool/{poolId}/default | Set a zone's default storage pool. |
 | *ProjectApi* | [**createProject**](Apis/ProjectApi.md#createproject) | **POST** /project | Creates a new project. |
 *ProjectApi* | [**createProjectDnsRecord**](Apis/ProjectApi.md#createprojectdnsrecord) | **POST** /project/{projectId}/record | Creates a new DNS record in specified project. |
@@ -129,13 +129,13 @@ All URIs are relative to */api/v1*
 *SubnetApi* | [**getVNetSubnets**](Apis/SubnetApi.md#getvnetsubnets) | **GET** /vnet/{vnetId}/subnets | Returns the IDs of the subnets existing in the virtual network. |
 *SubnetApi* | [**updateSubnet**](Apis/SubnetApi.md#updatesubnet) | **PUT** /subnet/{subnetId} | Updates a subnet configuration. |
 *SubnetApi* | [**updateVNetDefaultSubnet**](Apis/SubnetApi.md#updatevnetdefaultsubnet) | **PUT** /vnet/{vnetId}/subnet/{subnetId}/default | Set a virtual network default subnet. |
-| *TemplateApi* | [**createTemplate**](Apis/TemplateApi.md#createtemplate) | **POST** /pool/{poolId}/template | Creates a new volume template. |
+| *TemplateApi* | [**createTemplate**](Apis/TemplateApi.md#createtemplate) | **POST** /pool/{ poolId }/template | Creates a new image template. |
 *TemplateApi* | [**deleteTemplate**](Apis/TemplateApi.md#deletetemplate) | **DELETE** /template/{templateId} | Deletes an existing volume template. |
 *TemplateApi* | [**getAllTemplates**](Apis/TemplateApi.md#getalltemplates) | **GET** /template | Returns the IDs of volume templates. |
 *TemplateApi* | [**getTemplate**](Apis/TemplateApi.md#gettemplate) | **GET** /template/{templateId} | Returns a description of the volume template. |
-*TemplateApi* | [**updatePoolDefaultTemplate**](Apis/TemplateApi.md#updatepooldefaulttemplate) | **PUT** /pool/{poolId}/template/{templateId}/default | Set a storage pool default volume template. |
+*TemplateApi* | [**listStoragePoolTemplates**](Apis/TemplateApi.md#liststoragepooltemplates) | **GET** /pool/{ poolId }/templates | Returns the IDs of image template objects. |
+*TemplateApi* | [**updateStoragePoolDefaultTemplate**](Apis/TemplateApi.md#updatestoragepooldefaulttemplate) | **POST** /pool/{ poolId }/template/{ templateId }/default | Performs a storage pool setting of default template. |
 *TemplateApi* | [**updateTemplate**](Apis/TemplateApi.md#updatetemplate) | **PUT** /template/{templateId} | Updates a volume template configuration. |
-| *TemplatesApi* | [**getPoolTemplates**](Apis/TemplatesApi.md#getpooltemplates) | **GET** /pool/{poolId}/templates | Returns the IDs of the volume templates existing in the storage pool. |
 | *VnetApi* | [**createSubnet**](Apis/VnetApi.md#createsubnet) | **POST** /vnet/{vnetId}/subnet | Creates a new subnet. |
 *VnetApi* | [**createVNet**](Apis/VnetApi.md#createvnet) | **POST** /zone/{zoneId}/vnet | Creates a new virtual network. |
 *VnetApi* | [**deleteVNet**](Apis/VnetApi.md#deletevnet) | **DELETE** /vnet/{vnetId} | Deletes an existing virtual network. |
@@ -148,9 +148,9 @@ All URIs are relative to */api/v1*
 | *VolumeApi* | [**createProjectZoneVolume**](Apis/VolumeApi.md#createprojectzonevolume) | **POST** /project/{projectId}/zone/{zoneId}/volume | Creates a new storage volume in specified zone. |
 *VolumeApi* | [**deleteVolume**](Apis/VolumeApi.md#deletevolume) | **DELETE** /volume/{volumeId} | Deletes an existing storage volume. |
 *VolumeApi* | [**getAllVolumes**](Apis/VolumeApi.md#getallvolumes) | **GET** /volume | Returns the IDs of storage volumes. |
-*VolumeApi* | [**getPoolVolumes**](Apis/VolumeApi.md#getpoolvolumes) | **GET** /pool/{poolId}/volumes | Returns the IDs of the storage volumes existing in the pool. |
 *VolumeApi* | [**getProjectZoneVolumes**](Apis/VolumeApi.md#getprojectzonevolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes | Returns the IDs of the storage volumes existing in the project in the specified zone. |
 *VolumeApi* | [**getVolume**](Apis/VolumeApi.md#getvolume) | **GET** /volume/{volumeId} | Returns a description of the storage volume. |
+*VolumeApi* | [**listStoragePoolVolumes**](Apis/VolumeApi.md#liststoragepoolvolumes) | **GET** /pool/{ poolId }/volumes | Returns the IDs of storage volume objects. |
 *VolumeApi* | [**updateVolume**](Apis/VolumeApi.md#updatevolume) | **PUT** /volume/{volumeId} | Updates/resizes a storage volume configuration. |
 | *ZoneApi* | [**createHost**](Apis/ZoneApi.md#createhost) | **POST** /zone/{zoneId}/host | Creates a new host. |
 *ZoneApi* | [**createNetGW**](Apis/ZoneApi.md#createnetgw) | **POST** /zone/{zoneId}/netgw | Creates a new network gateway. |

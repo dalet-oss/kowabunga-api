@@ -91,15 +91,27 @@ resources:
     paramId: nfsId
     paramSchema: NfsID
   pool:
-    desc: storage pools
+    tag: pool
+    desc: storage pool
+    schema: StoragePool
+    paramId: poolId
+    paramSchema: PoolID
   subnet:
     desc: network subnets
   template:
-    desc: image templates
+    tag: template
+    desc: image template
+    schema: Template
+    paramId: templateId
+    paramSchema: TemplateID
   vnet:
     desc: virtual networks
   volume:
-    desc: storage volumes
+    tag: volume
+    desc: storage volume
+    schema: Volume
+    paramId: volumeId
+    paramSchema: VolumeID
   zone:
     tag: zone
     desc: availability zone

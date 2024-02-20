@@ -37,6 +37,12 @@ tags:
   name: region
 - description: Everything about NFS storage
   name: nfs
+- description: Everything about storage pool
+  name: pool
+- description: Everything about image template
+  name: template
+- description: Everything about storage volume
+  name: volume
 - description: Everything about availability zone
   name: zone
 paths:
@@ -2082,30 +2088,30 @@ paths:
     - $ref: '#/components/parameters/NfsID'
   /pool:
     get:
-      description: Returns the IDs of registered pools.
-      operationId: GetAllPools
+      description: Returns the IDs of storage pool objects.
+      operationId: ListStoragePools
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns the an array of pool IDs.
+          description: Returns an array of storage pool IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
           $ref: '#/components/responses/Forbidden'
       tags:
       - pool
-  /pool/{poolId}:
+  /pool/{ poolId }:
     delete:
-      description: Deletes an existing pool.
-      operationId: DeletePool
+      description: Deletes an existing storage pool.
+      operationId: DeleteStoragePool
       parameters:
       - $ref: '#/components/parameters/PoolID'
       responses:
         "200":
-          description: The pool has been successfully removed.
+          description: The storage pool has been successfully removed.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -2119,8 +2125,8 @@ paths:
       tags:
       - pool
     get:
-      description: Returns a description of the pool
-      operationId: GetPool
+      description: Returns a storage pool.
+      operationId: ReadStoragePool
       parameters:
       - $ref: '#/components/parameters/PoolID'
       responses:
@@ -2141,8 +2147,8 @@ paths:
     parameters:
     - $ref: '#/components/parameters/PoolID'
     put:
-      description: Updates a pool configuration.
-      operationId: UpdatePool
+      description: Updates a storage pool configuration.
+      operationId: UpdateStoragePool
       parameters:
       - $ref: '#/components/parameters/PoolID'
       requestBody:
@@ -2150,7 +2156,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/StoragePool'
-        description: Storage pool payload
+        description: StoragePool payload.
         required: true
       responses:
         "200":
@@ -2158,7 +2164,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/StoragePool'
-          description: Updated storage pool.
+          description: Returns the storage pool object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -2169,12 +2175,14 @@ paths:
           $ref: '#/components/responses/NotFound'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - pool
-  /pool/{poolId}/volumes:
+  /pool/{ poolId }/volumes:
     get:
-      description: Returns the IDs of the storage volumes existing in the pool.
-      operationId: GetPoolVolumes
+      description: Returns the IDs of storage volume objects.
+      operationId: ListStoragePoolVolumes
       parameters:
       - $ref: '#/components/parameters/PoolID'
       responses:
@@ -2188,16 +2196,18 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         "403":
           $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
       tags:
       - pool
       - volume
     parameters:
     - $ref: '#/components/parameters/PoolID'
-  /pool/{poolId}/template:
+  /pool/{ poolId }/template:
     parameters:
     - $ref: '#/components/parameters/PoolID'
     post:
-      description: Creates a new volume template.
+      description: Creates a new image template.
       operationId: CreateTemplate
       parameters:
       - $ref: '#/components/parameters/PoolID'
@@ -2206,7 +2216,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Template'
-        description: Template payload
+        description: Template payload.
         required: true
       responses:
         "201":
@@ -2214,7 +2224,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Template'
-          description: Returns the newly created volume template.
+          description: Returns the newly created image template object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -2227,24 +2237,24 @@ paths:
           $ref: '#/components/responses/Conflict'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - pool
       - template
-  /pool/{poolId}/template/{templateId}/default:
+  /pool/{ poolId }/template/{ templateId }/default:
     parameters:
     - $ref: '#/components/parameters/PoolID'
     - $ref: '#/components/parameters/TemplateID'
-    put:
-      description: Set a storage pool default volume template.
-      operationId: UpdatePoolDefaultTemplate
+    post:
+      description: Performs a storage pool setting of default template.
+      operationId: UpdateStoragePoolDefaultTemplate
       parameters:
       - $ref: '#/components/parameters/PoolID'
       - $ref: '#/components/parameters/TemplateID'
       responses:
         "200":
-          description: Template has been set as default one.
-        "400":
-          $ref: '#/components/responses/BadRequest'
+          description: The storage pool setting of default template is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -2256,11 +2266,10 @@ paths:
       tags:
       - pool
       - template
-  /pool/{poolId}/templates:
+  /pool/{ poolId }/templates:
     get:
-      description: Returns the IDs of the volume templates existing in the storage
-        pool.
-      operationId: GetPoolTemplates
+      description: Returns the IDs of image template objects.
+      operationId: ListStoragePoolTemplates
       parameters:
       - $ref: '#/components/parameters/PoolID'
       responses:
@@ -2269,7 +2278,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of volume template IDs.
+          description: Returns an array of image template IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -2278,7 +2287,7 @@ paths:
           $ref: '#/components/responses/NotFound'
       tags:
       - pool
-      - templates
+      - template
     parameters:
     - $ref: '#/components/parameters/PoolID'
   /subnet:
@@ -4323,6 +4332,7 @@ components:
       - endpoint
       - name
     StoragePool:
+      description: A storage pool.
       example:
         ceph_secret_uuid: ceph_secret_uuid
         cost:
