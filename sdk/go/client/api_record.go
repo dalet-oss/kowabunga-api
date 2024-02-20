@@ -31,7 +31,7 @@ type ApiCreateProjectDnsRecordRequest struct {
 	dnsRecord *DnsRecord
 }
 
-// DNS record payload
+// DnsRecord payload.
 func (r ApiCreateProjectDnsRecordRequest) DnsRecord(dnsRecord DnsRecord) ApiCreateProjectDnsRecordRequest {
 	r.dnsRecord = &dnsRecord
 	return r
@@ -44,10 +44,10 @@ func (r ApiCreateProjectDnsRecordRequest) Execute() (*DnsRecord, *http.Response,
 /*
 CreateProjectDnsRecord Method for CreateProjectDnsRecord
 
-Creates a new DNS record in specified project.
+Creates a new DNS record.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId The ID of the network adapter.
+ @param projectId The ID of the project.
  @return ApiCreateProjectDnsRecordRequest
 */
 func (a *RecordAPIService) CreateProjectDnsRecord(ctx context.Context, projectId string) ApiCreateProjectDnsRecordRequest {
@@ -73,7 +73,7 @@ func (a *RecordAPIService) CreateProjectDnsRecordExecute(r ApiCreateProjectDnsRe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{projectId}/record"
+	localVarPath := localBasePath + "/project/{ projectId }/record"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -209,6 +209,17 @@ func (a *RecordAPIService) CreateProjectDnsRecordExecute(r ApiCreateProjectDnsRe
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v ApiErrorUnprocessableEntity
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 507 {
+			var v ApiErrorInsufficientStorage
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -406,27 +417,27 @@ func (a *RecordAPIService) DeleteDnsRecordExecute(r ApiDeleteDnsRecordRequest) (
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetProjectDnsRecordsRequest struct {
+type ApiListProjectDnsRecordsRequest struct {
 	ctx context.Context
 	ApiService *RecordAPIService
 	projectId string
 }
 
-func (r ApiGetProjectDnsRecordsRequest) Execute() ([]string, *http.Response, error) {
-	return r.ApiService.GetProjectDnsRecordsExecute(r)
+func (r ApiListProjectDnsRecordsRequest) Execute() ([]string, *http.Response, error) {
+	return r.ApiService.ListProjectDnsRecordsExecute(r)
 }
 
 /*
-GetProjectDnsRecords Method for GetProjectDnsRecords
+ListProjectDnsRecords Method for ListProjectDnsRecords
 
-Returns the IDs of the DNS records existing in the project.
+Returns the IDs of DNS record objects.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId The ID of the network adapter.
- @return ApiGetProjectDnsRecordsRequest
+ @param projectId The ID of the project.
+ @return ApiListProjectDnsRecordsRequest
 */
-func (a *RecordAPIService) GetProjectDnsRecords(ctx context.Context, projectId string) ApiGetProjectDnsRecordsRequest {
-	return ApiGetProjectDnsRecordsRequest{
+func (a *RecordAPIService) ListProjectDnsRecords(ctx context.Context, projectId string) ApiListProjectDnsRecordsRequest {
+	return ApiListProjectDnsRecordsRequest{
 		ApiService: a,
 		ctx: ctx,
 		projectId: projectId,
@@ -435,7 +446,7 @@ func (a *RecordAPIService) GetProjectDnsRecords(ctx context.Context, projectId s
 
 // Execute executes the request
 //  @return []string
-func (a *RecordAPIService) GetProjectDnsRecordsExecute(r ApiGetProjectDnsRecordsRequest) ([]string, *http.Response, error) {
+func (a *RecordAPIService) ListProjectDnsRecordsExecute(r ApiListProjectDnsRecordsRequest) ([]string, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -443,12 +454,12 @@ func (a *RecordAPIService) GetProjectDnsRecordsExecute(r ApiGetProjectDnsRecords
 		localVarReturnValue  []string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecordAPIService.GetProjectDnsRecords")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecordAPIService.ListProjectDnsRecords")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{projectId}/records"
+	localVarPath := localBasePath + "/project/{ projectId}/records"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

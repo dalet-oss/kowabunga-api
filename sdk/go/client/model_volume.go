@@ -20,7 +20,7 @@ import (
 // checks if the Volume type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Volume{}
 
-// Volume struct for Volume
+// Volume A storage volume.
 type Volume struct {
 	// The storage volume ID (auto-generated).
 	Id *string `json:"id,omitempty"`
@@ -28,12 +28,12 @@ type Volume struct {
 	Name string `json:"name"`
 	// The storage volume description.
 	Description *string `json:"description,omitempty"`
-	// The type of storage volume.
+	// The storage volume type.
 	Type string `json:"type"`
-	// The storage volume size in bytes.
+	// The storage volume size (in bytes).
 	Size int32 `json:"size"`
-	// Is the storage volume allowed to grow (filesystem dependant) ?
-	Resizable *bool `json:"resizable,omitempty"`
+	// Is the storage volume allowed to grow (filesystem dependant) ?.
+	Resizeable *bool `json:"resizeable,omitempty"`
 }
 
 type _Volume Volume
@@ -47,8 +47,8 @@ func NewVolume(name string, type_ string, size int32) *Volume {
 	this.Name = name
 	this.Type = type_
 	this.Size = size
-	var resizable bool = false
-	this.Resizable = &resizable
+	var resizeable bool = false
+	this.Resizeable = &resizeable
 	return &this
 }
 
@@ -57,8 +57,8 @@ func NewVolume(name string, type_ string, size int32) *Volume {
 // but it doesn't guarantee that properties required by API are set
 func NewVolumeWithDefaults() *Volume {
 	this := Volume{}
-	var resizable bool = false
-	this.Resizable = &resizable
+	var resizeable bool = false
+	this.Resizeable = &resizeable
 	return &this
 }
 
@@ -198,36 +198,36 @@ func (o *Volume) SetSize(v int32) {
 	o.Size = v
 }
 
-// GetResizable returns the Resizable field value if set, zero value otherwise.
-func (o *Volume) GetResizable() bool {
-	if o == nil || IsNil(o.Resizable) {
+// GetResizeable returns the Resizeable field value if set, zero value otherwise.
+func (o *Volume) GetResizeable() bool {
+	if o == nil || IsNil(o.Resizeable) {
 		var ret bool
 		return ret
 	}
-	return *o.Resizable
+	return *o.Resizeable
 }
 
-// GetResizableOk returns a tuple with the Resizable field value if set, nil otherwise
+// GetResizeableOk returns a tuple with the Resizeable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Volume) GetResizableOk() (*bool, bool) {
-	if o == nil || IsNil(o.Resizable) {
+func (o *Volume) GetResizeableOk() (*bool, bool) {
+	if o == nil || IsNil(o.Resizeable) {
 		return nil, false
 	}
-	return o.Resizable, true
+	return o.Resizeable, true
 }
 
-// HasResizable returns a boolean if a field has been set.
-func (o *Volume) HasResizable() bool {
-	if o != nil && !IsNil(o.Resizable) {
+// HasResizeable returns a boolean if a field has been set.
+func (o *Volume) HasResizeable() bool {
+	if o != nil && !IsNil(o.Resizeable) {
 		return true
 	}
 
 	return false
 }
 
-// SetResizable gets a reference to the given bool and assigns it to the Resizable field.
-func (o *Volume) SetResizable(v bool) {
-	o.Resizable = &v
+// SetResizeable gets a reference to the given bool and assigns it to the Resizeable field.
+func (o *Volume) SetResizeable(v bool) {
+	o.Resizeable = &v
 }
 
 func (o Volume) MarshalJSON() ([]byte, error) {
@@ -249,8 +249,8 @@ func (o Volume) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["type"] = o.Type
 	toSerialize["size"] = o.Size
-	if !IsNil(o.Resizable) {
-		toSerialize["resizable"] = o.Resizable
+	if !IsNil(o.Resizeable) {
+		toSerialize["resizeable"] = o.Resizeable
 	}
 	return toSerialize, nil
 }

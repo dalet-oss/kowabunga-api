@@ -14,6 +14,9 @@ import { ZoneSubnet } from './zoneSubnet';
 import { ProjectResources } from './projectResources';
 
 
+/**
+ * A Kowabunga project corresponds to a single tenant, isolated set of resources.
+ */
 export interface Project { 
     /**
      * The project ID (auto-generated).
@@ -28,27 +31,27 @@ export interface Project {
      */
     description?: string;
     /**
-     * The project\'s owner name.
+     * Owner\'s name.
      */
     owner: string;
     /**
-     * The project associated email address, used to receive notifications.
+     * Associated email address, used to receive notifications.
      */
     email: string;
     /**
-     * The project associated internal domain name (e.g. myproject.acme.com).
+     * Internal domain name (e.g. myproject.acme.com).
      */
     domain?: string;
     /**
-     * The project default root password, set at cloud-init instance bootstrap phase. Will be randomly auto-generated at each instance creation if unspecified.
+     * Default root password, set at cloud-init instance bootstrap phase. Will be randomly auto-generated at each instance creation if unspecified.
      */
     root_password?: string;
     /**
-     * The project default service user name, created at cloud-init instance bootstrap phase. Will use Kowabunga\'s default configuration one if unspecified.
+     * Default service user name, created at cloud-init instance bootstrap phase. Will use Kowabunga\'s default configuration one if unspecified.
      */
     bootstrap_user?: string;
     /**
-     * The project default public SSH key, to be associated to bootstrap user. Will use Kowabunga\'s default configuration one if unspecified.
+     * Default public SSH key, to be associated to bootstrap user. Will use Kowabunga\'s default configuration one if unspecified.
      */
     bootstrap_pubkey?: string;
     /**
@@ -56,11 +59,11 @@ export interface Project {
      */
     tags?: Array<string>;
     /**
-     * A list of metadata to be associated to the project
+     * A list of metadata to be associated to the project.
      */
     metadatas?: Array<Metadata>;
     /**
-     * The global project resource quotas (0 for unlimited)
+     * The global project resource quotas (0 for unlimited).
      */
     quotas?: ProjectResources;
     /**

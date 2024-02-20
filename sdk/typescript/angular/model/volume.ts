@@ -11,6 +11,9 @@
  */
 
 
+/**
+ * A storage volume.
+ */
 export interface Volume { 
     /**
      * The storage volume ID (auto-generated).
@@ -25,17 +28,17 @@ export interface Volume {
      */
     description?: string;
     /**
-     * The type of storage volume.
+     * The storage volume type.
      */
     type: Volume.TypeEnum;
     /**
-     * The storage volume size in bytes.
+     * The storage volume size (in bytes).
      */
     size: number;
     /**
-     * Is the storage volume allowed to grow (filesystem dependant) ?
+     * Is the storage volume allowed to grow (filesystem dependant) ?.
      */
-    resizable?: boolean;
+    resizeable?: boolean;
 }
 export namespace Volume {
     export type TypeEnum = 'os' | 'iso' | 'raw';

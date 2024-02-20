@@ -13,7 +13,7 @@ package server
 
 
 
-// Cost - A key/value metadata.
+// Cost - A resource cost.
 type Cost struct {
 
 	// The unit price information.

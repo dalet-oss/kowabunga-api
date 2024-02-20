@@ -53,52 +53,52 @@ func (c *ZoneAPIController) Routes() Routes {
 	return Routes{
 		"CreateHost": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/zone/{zoneId}/host",
+			"/api/v1/zone/{ zoneId }/host",
 			c.CreateHost,
 		},
 		"CreateNetGW": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/zone/{zoneId}/netgw",
+			"/api/v1/zone/{ zoneId }/netgw",
 			c.CreateNetGW,
-		},
-		"CreateNfsStorage": Route{
-			strings.ToUpper("Post"),
-			"/api/v1/zone/{zoneId}/nfs",
-			c.CreateNfsStorage,
-		},
-		"CreatePool": Route{
-			strings.ToUpper("Post"),
-			"/api/v1/zone/{zoneId}/pool",
-			c.CreatePool,
 		},
 		"CreateProjectZoneInstance": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/instance",
+			"/api/v1/project/{ projectId }/zone/{ zoneId }/instance",
 			c.CreateProjectZoneInstance,
 		},
-		"CreateProjectZoneKce": Route{
+		"CreateProjectZoneKCE": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/kce",
-			c.CreateProjectZoneKce,
+			"/api/v1/project/{ projectId }/zone/{ zoneId }/kce",
+			c.CreateProjectZoneKCE,
 		},
-		"CreateProjectZoneKfs": Route{
+		"CreateProjectZoneKFS": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/kfs",
-			c.CreateProjectZoneKfs,
+			"/api/v1/project/{ projectId }/zone/{ zoneId }/kfs",
+			c.CreateProjectZoneKFS,
 		},
-		"CreateProjectZoneKgw": Route{
+		"CreateProjectZoneKGW": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/kgw",
-			c.CreateProjectZoneKgw,
+			"/api/v1/project/{ projectId }/zone/{ zoneId }/kgw",
+			c.CreateProjectZoneKGW,
 		},
 		"CreateProjectZoneVolume": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/volume",
+			"/api/v1/project/{ projectId }/zone/{ zoneId }/volume",
 			c.CreateProjectZoneVolume,
+		},
+		"CreateStorageNFS": Route{
+			strings.ToUpper("Post"),
+			"/api/v1/zone/{ zoneId }/nfs",
+			c.CreateStorageNFS,
+		},
+		"CreateStoragePool": Route{
+			strings.ToUpper("Post"),
+			"/api/v1/zone/{ zoneId }/pool",
+			c.CreateStoragePool,
 		},
 		"CreateVNet": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/zone/{zoneId}/vnet",
+			"/api/v1/zone/{ zoneId }/vnet",
 			c.CreateVNet,
 		},
 		"CreateZone": Route{
@@ -108,88 +108,88 @@ func (c *ZoneAPIController) Routes() Routes {
 		},
 		"DeleteZone": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/zone/{zoneId}",
+			"/api/v1/zone/{ zoneId }",
 			c.DeleteZone,
 		},
-		"GetAllZones": Route{
+		"ListProjectZoneInstances": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/zone",
-			c.GetAllZones,
+			"/api/v1/project/{ projectId }/zone/{ zoneId }/instances",
+			c.ListProjectZoneInstances,
 		},
-		"GetProjectZoneInstances": Route{
+		"ListProjectZoneKCEs": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/instances",
-			c.GetProjectZoneInstances,
+			"/api/v1/project/{ projectId }/zone/{ zoneId }/kces",
+			c.ListProjectZoneKCEs,
 		},
-		"GetProjectZoneKCEs": Route{
+		"ListProjectZoneKFSs": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/kces",
-			c.GetProjectZoneKCEs,
+			"/api/v1/project/{ projectId }/zone/{ zoneId }/kfs",
+			c.ListProjectZoneKFSs,
 		},
-		"GetProjectZoneKGWs": Route{
+		"ListProjectZoneKGWs": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/kgws",
-			c.GetProjectZoneKGWs,
+			"/api/v1/project/{ projectId }/zone/{ zoneId }/kgws",
+			c.ListProjectZoneKGWs,
 		},
-		"GetProjectZoneKfs": Route{
+		"ListProjectZoneVolumes": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/kfs",
-			c.GetProjectZoneKfs,
-		},
-		"GetProjectZoneVolumes": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/volumes",
-			c.GetProjectZoneVolumes,
-		},
-		"GetZone": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/zone/{zoneId}",
-			c.GetZone,
-		},
-		"GetZoneHosts": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/zone/{zoneId}/hosts",
-			c.GetZoneHosts,
-		},
-		"GetZoneNetGWs": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/zone/{zoneId}/netgws",
-			c.GetZoneNetGWs,
-		},
-		"GetZoneNfsStorages": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/zone/{zoneId}/nfs",
-			c.GetZoneNfsStorages,
-		},
-		"GetZonePools": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/zone/{zoneId}/pools",
-			c.GetZonePools,
-		},
-		"GetZoneVNets": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/zone/{zoneId}/vnets",
-			c.GetZoneVNets,
+			"/api/v1/project/{ projectId }/zone/{ zoneId }/volumes",
+			c.ListProjectZoneVolumes,
 		},
 		"ListRegionZones": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/region/{ regionId }/zones",
 			c.ListRegionZones,
 		},
+		"ListZoneHosts": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/zone/{zoneId}/hosts",
+			c.ListZoneHosts,
+		},
+		"ListZoneNetGWs": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/zone/{ zoneId }/netgws",
+			c.ListZoneNetGWs,
+		},
+		"ListZoneStorageNFSs": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/zone/{ zoneId }/nfs",
+			c.ListZoneStorageNFSs,
+		},
+		"ListZoneStoragePools": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/zone/{ zoneId }/pools",
+			c.ListZoneStoragePools,
+		},
+		"ListZoneVNets": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/zone/{ zoneId }/vnets",
+			c.ListZoneVNets,
+		},
+		"ListZones": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/zone",
+			c.ListZones,
+		},
+		"ReadZone": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/zone/{ zoneId }",
+			c.ReadZone,
+		},
+		"SetZoneDefaultStorageNFS": Route{
+			strings.ToUpper("Patch"),
+			"/api/v1/zone/{ zoneId }/nfs/{ nfsId }/default",
+			c.SetZoneDefaultStorageNFS,
+		},
+		"SetZoneDefaultStoragePool": Route{
+			strings.ToUpper("Patch"),
+			"/api/v1/zone/{ zoneId }/pool/{ poolId }/default",
+			c.SetZoneDefaultStoragePool,
+		},
 		"UpdateZone": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/zone/{zoneId}",
+			"/api/v1/zone/{ zoneId }",
 			c.UpdateZone,
-		},
-		"UpdateZoneDefaultNfsStorage": Route{
-			strings.ToUpper("Put"),
-			"/api/v1/zone/{zoneId}/nfs/{nfsId}/default",
-			c.UpdateZoneDefaultNfsStorage,
-		},
-		"UpdateZoneDefaultPool": Route{
-			strings.ToUpper("Put"),
-			"/api/v1/zone/{zoneId}/pool/{poolId}/default",
-			c.UpdateZoneDefaultPool,
 		},
 	}
 }
@@ -260,84 +260,6 @@ func (c *ZoneAPIController) CreateNetGW(w http.ResponseWriter, r *http.Request) 
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// CreateNfsStorage - 
-func (c *ZoneAPIController) CreateNfsStorage(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	storageNfsParam := StorageNfs{}
-	d := json.NewDecoder(r.Body)
-	d.DisallowUnknownFields()
-	if err := d.Decode(&storageNfsParam); err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	if err := AssertStorageNfsRequired(storageNfsParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	if err := AssertStorageNfsConstraints(storageNfsParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	result, err := c.service.CreateNfsStorage(r.Context(), zoneIdParam, storageNfsParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// CreatePool - 
-func (c *ZoneAPIController) CreatePool(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	query, err := parseQuery(r.URL.RawQuery)
-	if err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	storagePoolParam := StoragePool{}
-	d := json.NewDecoder(r.Body)
-	d.DisallowUnknownFields()
-	if err := d.Decode(&storagePoolParam); err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	if err := AssertStoragePoolRequired(storagePoolParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	if err := AssertStoragePoolConstraints(storagePoolParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	var hostIdParam string
-	if query.Has("hostId") {
-		param := query.Get("hostId")
-
-		hostIdParam = param
-	} else {
-	}
-	result, err := c.service.CreatePool(r.Context(), zoneIdParam, storagePoolParam, hostIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
 // CreateProjectZoneInstance - 
 func (c *ZoneAPIController) CreateProjectZoneInstance(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -395,8 +317,8 @@ func (c *ZoneAPIController) CreateProjectZoneInstance(w http.ResponseWriter, r *
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// CreateProjectZoneKce - 
-func (c *ZoneAPIController) CreateProjectZoneKce(w http.ResponseWriter, r *http.Request) {
+// CreateProjectZoneKCE - 
+func (c *ZoneAPIController) CreateProjectZoneKCE(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	query, err := parseQuery(r.URL.RawQuery)
 	if err != nil {
@@ -463,7 +385,7 @@ func (c *ZoneAPIController) CreateProjectZoneKce(w http.ResponseWriter, r *http.
 		notifyParam = param
 	} else {
 	}
-	result, err := c.service.CreateProjectZoneKce(r.Context(), projectIdParam, zoneIdParam, kceParam, poolIdParam, templateIdParam, publicParam, notifyParam)
+	result, err := c.service.CreateProjectZoneKCE(r.Context(), projectIdParam, zoneIdParam, kceParam, poolIdParam, templateIdParam, publicParam, notifyParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -473,8 +395,8 @@ func (c *ZoneAPIController) CreateProjectZoneKce(w http.ResponseWriter, r *http.
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// CreateProjectZoneKfs - 
-func (c *ZoneAPIController) CreateProjectZoneKfs(w http.ResponseWriter, r *http.Request) {
+// CreateProjectZoneKFS - 
+func (c *ZoneAPIController) CreateProjectZoneKFS(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	query, err := parseQuery(r.URL.RawQuery)
 	if err != nil {
@@ -527,7 +449,7 @@ func (c *ZoneAPIController) CreateProjectZoneKfs(w http.ResponseWriter, r *http.
 		notifyParam = param
 	} else {
 	}
-	result, err := c.service.CreateProjectZoneKfs(r.Context(), projectIdParam, zoneIdParam, kfsParam, nfsIdParam, notifyParam)
+	result, err := c.service.CreateProjectZoneKFS(r.Context(), projectIdParam, zoneIdParam, kfsParam, nfsIdParam, notifyParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -537,8 +459,8 @@ func (c *ZoneAPIController) CreateProjectZoneKfs(w http.ResponseWriter, r *http.
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// CreateProjectZoneKgw - 
-func (c *ZoneAPIController) CreateProjectZoneKgw(w http.ResponseWriter, r *http.Request) {
+// CreateProjectZoneKGW - 
+func (c *ZoneAPIController) CreateProjectZoneKGW(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	projectIdParam := params["projectId"]
 	if projectIdParam == "" {
@@ -565,7 +487,7 @@ func (c *ZoneAPIController) CreateProjectZoneKgw(w http.ResponseWriter, r *http.
 		c.errorHandler(w, r, err, nil)
 		return
 	}
-	result, err := c.service.CreateProjectZoneKgw(r.Context(), projectIdParam, zoneIdParam, kgwParam)
+	result, err := c.service.CreateProjectZoneKGW(r.Context(), projectIdParam, zoneIdParam, kgwParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -623,6 +545,84 @@ func (c *ZoneAPIController) CreateProjectZoneVolume(w http.ResponseWriter, r *ht
 	} else {
 	}
 	result, err := c.service.CreateProjectZoneVolume(r.Context(), projectIdParam, zoneIdParam, volumeParam, poolIdParam, templateIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// CreateStorageNFS - 
+func (c *ZoneAPIController) CreateStorageNFS(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	zoneIdParam := params["zoneId"]
+	if zoneIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
+		return
+	}
+	storageNfsParam := StorageNfs{}
+	d := json.NewDecoder(r.Body)
+	d.DisallowUnknownFields()
+	if err := d.Decode(&storageNfsParam); err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	if err := AssertStorageNfsRequired(storageNfsParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	if err := AssertStorageNfsConstraints(storageNfsParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	result, err := c.service.CreateStorageNFS(r.Context(), zoneIdParam, storageNfsParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// CreateStoragePool - 
+func (c *ZoneAPIController) CreateStoragePool(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	query, err := parseQuery(r.URL.RawQuery)
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	zoneIdParam := params["zoneId"]
+	if zoneIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
+		return
+	}
+	storagePoolParam := StoragePool{}
+	d := json.NewDecoder(r.Body)
+	d.DisallowUnknownFields()
+	if err := d.Decode(&storagePoolParam); err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	if err := AssertStoragePoolRequired(storagePoolParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	if err := AssertStoragePoolConstraints(storagePoolParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	var hostIdParam string
+	if query.Has("hostId") {
+		param := query.Get("hostId")
+
+		hostIdParam = param
+	} else {
+	}
+	result, err := c.service.CreateStoragePool(r.Context(), zoneIdParam, storagePoolParam, hostIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -716,20 +716,8 @@ func (c *ZoneAPIController) DeleteZone(w http.ResponseWriter, r *http.Request) {
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetAllZones - 
-func (c *ZoneAPIController) GetAllZones(w http.ResponseWriter, r *http.Request) {
-	result, err := c.service.GetAllZones(r.Context())
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetProjectZoneInstances - 
-func (c *ZoneAPIController) GetProjectZoneInstances(w http.ResponseWriter, r *http.Request) {
+// ListProjectZoneInstances - 
+func (c *ZoneAPIController) ListProjectZoneInstances(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	projectIdParam := params["projectId"]
 	if projectIdParam == "" {
@@ -741,7 +729,7 @@ func (c *ZoneAPIController) GetProjectZoneInstances(w http.ResponseWriter, r *ht
 		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
 		return
 	}
-	result, err := c.service.GetProjectZoneInstances(r.Context(), projectIdParam, zoneIdParam)
+	result, err := c.service.ListProjectZoneInstances(r.Context(), projectIdParam, zoneIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -751,8 +739,8 @@ func (c *ZoneAPIController) GetProjectZoneInstances(w http.ResponseWriter, r *ht
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetProjectZoneKCEs - 
-func (c *ZoneAPIController) GetProjectZoneKCEs(w http.ResponseWriter, r *http.Request) {
+// ListProjectZoneKCEs - 
+func (c *ZoneAPIController) ListProjectZoneKCEs(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	projectIdParam := params["projectId"]
 	if projectIdParam == "" {
@@ -764,7 +752,7 @@ func (c *ZoneAPIController) GetProjectZoneKCEs(w http.ResponseWriter, r *http.Re
 		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
 		return
 	}
-	result, err := c.service.GetProjectZoneKCEs(r.Context(), projectIdParam, zoneIdParam)
+	result, err := c.service.ListProjectZoneKCEs(r.Context(), projectIdParam, zoneIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -774,31 +762,8 @@ func (c *ZoneAPIController) GetProjectZoneKCEs(w http.ResponseWriter, r *http.Re
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetProjectZoneKGWs - 
-func (c *ZoneAPIController) GetProjectZoneKGWs(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	projectIdParam := params["projectId"]
-	if projectIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
-		return
-	}
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	result, err := c.service.GetProjectZoneKGWs(r.Context(), projectIdParam, zoneIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetProjectZoneKfs - 
-func (c *ZoneAPIController) GetProjectZoneKfs(w http.ResponseWriter, r *http.Request) {
+// ListProjectZoneKFSs - 
+func (c *ZoneAPIController) ListProjectZoneKFSs(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	query, err := parseQuery(r.URL.RawQuery)
 	if err != nil {
@@ -836,7 +801,7 @@ func (c *ZoneAPIController) GetProjectZoneKfs(w http.ResponseWriter, r *http.Req
 		notifyParam = param
 	} else {
 	}
-	result, err := c.service.GetProjectZoneKfs(r.Context(), projectIdParam, zoneIdParam, nfsIdParam, notifyParam)
+	result, err := c.service.ListProjectZoneKFSs(r.Context(), projectIdParam, zoneIdParam, nfsIdParam, notifyParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -846,8 +811,8 @@ func (c *ZoneAPIController) GetProjectZoneKfs(w http.ResponseWriter, r *http.Req
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetProjectZoneVolumes - 
-func (c *ZoneAPIController) GetProjectZoneVolumes(w http.ResponseWriter, r *http.Request) {
+// ListProjectZoneKGWs - 
+func (c *ZoneAPIController) ListProjectZoneKGWs(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	projectIdParam := params["projectId"]
 	if projectIdParam == "" {
@@ -859,7 +824,7 @@ func (c *ZoneAPIController) GetProjectZoneVolumes(w http.ResponseWriter, r *http
 		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
 		return
 	}
-	result, err := c.service.GetProjectZoneVolumes(r.Context(), projectIdParam, zoneIdParam)
+	result, err := c.service.ListProjectZoneKGWs(r.Context(), projectIdParam, zoneIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -869,105 +834,20 @@ func (c *ZoneAPIController) GetProjectZoneVolumes(w http.ResponseWriter, r *http
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetZone - 
-func (c *ZoneAPIController) GetZone(w http.ResponseWriter, r *http.Request) {
+// ListProjectZoneVolumes - 
+func (c *ZoneAPIController) ListProjectZoneVolumes(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
+	projectIdParam := params["projectId"]
+	if projectIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
+		return
+	}
 	zoneIdParam := params["zoneId"]
 	if zoneIdParam == "" {
 		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
 		return
 	}
-	result, err := c.service.GetZone(r.Context(), zoneIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetZoneHosts - 
-func (c *ZoneAPIController) GetZoneHosts(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	result, err := c.service.GetZoneHosts(r.Context(), zoneIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetZoneNetGWs - 
-func (c *ZoneAPIController) GetZoneNetGWs(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	result, err := c.service.GetZoneNetGWs(r.Context(), zoneIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetZoneNfsStorages - 
-func (c *ZoneAPIController) GetZoneNfsStorages(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	result, err := c.service.GetZoneNfsStorages(r.Context(), zoneIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetZonePools - 
-func (c *ZoneAPIController) GetZonePools(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	result, err := c.service.GetZonePools(r.Context(), zoneIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetZoneVNets - 
-func (c *ZoneAPIController) GetZoneVNets(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	result, err := c.service.GetZoneVNets(r.Context(), zoneIdParam)
+	result, err := c.service.ListProjectZoneVolumes(r.Context(), projectIdParam, zoneIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -986,6 +866,172 @@ func (c *ZoneAPIController) ListRegionZones(w http.ResponseWriter, r *http.Reque
 		return
 	}
 	result, err := c.service.ListRegionZones(r.Context(), regionIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListZoneHosts - 
+func (c *ZoneAPIController) ListZoneHosts(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	zoneIdParam := params["zoneId"]
+	if zoneIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
+		return
+	}
+	result, err := c.service.ListZoneHosts(r.Context(), zoneIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListZoneNetGWs - 
+func (c *ZoneAPIController) ListZoneNetGWs(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	zoneIdParam := params["zoneId"]
+	if zoneIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
+		return
+	}
+	result, err := c.service.ListZoneNetGWs(r.Context(), zoneIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListZoneStorageNFSs - 
+func (c *ZoneAPIController) ListZoneStorageNFSs(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	zoneIdParam := params["zoneId"]
+	if zoneIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
+		return
+	}
+	result, err := c.service.ListZoneStorageNFSs(r.Context(), zoneIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListZoneStoragePools - 
+func (c *ZoneAPIController) ListZoneStoragePools(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	zoneIdParam := params["zoneId"]
+	if zoneIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
+		return
+	}
+	result, err := c.service.ListZoneStoragePools(r.Context(), zoneIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListZoneVNets - 
+func (c *ZoneAPIController) ListZoneVNets(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	zoneIdParam := params["zoneId"]
+	if zoneIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
+		return
+	}
+	result, err := c.service.ListZoneVNets(r.Context(), zoneIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListZones - 
+func (c *ZoneAPIController) ListZones(w http.ResponseWriter, r *http.Request) {
+	result, err := c.service.ListZones(r.Context())
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ReadZone - 
+func (c *ZoneAPIController) ReadZone(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	zoneIdParam := params["zoneId"]
+	if zoneIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
+		return
+	}
+	result, err := c.service.ReadZone(r.Context(), zoneIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// SetZoneDefaultStorageNFS - 
+func (c *ZoneAPIController) SetZoneDefaultStorageNFS(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	zoneIdParam := params["zoneId"]
+	if zoneIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
+		return
+	}
+	nfsIdParam := params["nfsId"]
+	if nfsIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"nfsId"}, nil)
+		return
+	}
+	result, err := c.service.SetZoneDefaultStorageNFS(r.Context(), zoneIdParam, nfsIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// SetZoneDefaultStoragePool - 
+func (c *ZoneAPIController) SetZoneDefaultStoragePool(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	zoneIdParam := params["zoneId"]
+	if zoneIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
+		return
+	}
+	poolIdParam := params["poolId"]
+	if poolIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"poolId"}, nil)
+		return
+	}
+	result, err := c.service.SetZoneDefaultStoragePool(r.Context(), zoneIdParam, poolIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -1019,52 +1065,6 @@ func (c *ZoneAPIController) UpdateZone(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	result, err := c.service.UpdateZone(r.Context(), zoneIdParam, zoneParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// UpdateZoneDefaultNfsStorage - 
-func (c *ZoneAPIController) UpdateZoneDefaultNfsStorage(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	nfsIdParam := params["nfsId"]
-	if nfsIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"nfsId"}, nil)
-		return
-	}
-	result, err := c.service.UpdateZoneDefaultNfsStorage(r.Context(), zoneIdParam, nfsIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// UpdateZoneDefaultPool - 
-func (c *ZoneAPIController) UpdateZoneDefaultPool(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	poolIdParam := params["poolId"]
-	if poolIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"poolId"}, nil)
-		return
-	}
-	result, err := c.service.UpdateZoneDefaultPool(r.Context(), zoneIdParam, poolIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

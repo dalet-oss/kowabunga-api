@@ -53,7 +53,7 @@ func (c *NetgwAPIController) Routes() Routes {
 	return Routes{
 		"CreateNetGW": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/zone/{zoneId}/netgw",
+			"/api/v1/zone/{ zoneId }/netgw",
 			c.CreateNetGW,
 		},
 		"DeleteNetGW": Route{
@@ -61,15 +61,15 @@ func (c *NetgwAPIController) Routes() Routes {
 			"/api/v1/netgw/{ netgwId }",
 			c.DeleteNetGW,
 		},
-		"GetZoneNetGWs": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/zone/{zoneId}/netgws",
-			c.GetZoneNetGWs,
-		},
 		"ListNetGWs": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/netgw",
 			c.ListNetGWs,
+		},
+		"ListZoneNetGWs": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/zone/{ zoneId }/netgws",
+			c.ListZoneNetGWs,
 		},
 		"ReadNetGW": Route{
 			strings.ToUpper("Get"),
@@ -135,15 +135,9 @@ func (c *NetgwAPIController) DeleteNetGW(w http.ResponseWriter, r *http.Request)
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetZoneNetGWs - 
-func (c *NetgwAPIController) GetZoneNetGWs(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	result, err := c.service.GetZoneNetGWs(r.Context(), zoneIdParam)
+// ListNetGWs - 
+func (c *NetgwAPIController) ListNetGWs(w http.ResponseWriter, r *http.Request) {
+	result, err := c.service.ListNetGWs(r.Context())
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -153,9 +147,15 @@ func (c *NetgwAPIController) GetZoneNetGWs(w http.ResponseWriter, r *http.Reques
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// ListNetGWs - 
-func (c *NetgwAPIController) ListNetGWs(w http.ResponseWriter, r *http.Request) {
-	result, err := c.service.ListNetGWs(r.Context())
+// ListZoneNetGWs - 
+func (c *NetgwAPIController) ListZoneNetGWs(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	zoneIdParam := params["zoneId"]
+	if zoneIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
+		return
+	}
+	result, err := c.service.ListZoneNetGWs(r.Context(), zoneIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

@@ -53,48 +53,48 @@ func (c *VnetAPIController) Routes() Routes {
 	return Routes{
 		"CreateSubnet": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/vnet/{vnetId}/subnet",
+			"/api/v1/vnet/{ vnetId }/subnet",
 			c.CreateSubnet,
 		},
 		"CreateVNet": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/zone/{zoneId}/vnet",
+			"/api/v1/zone/{ zoneId }/vnet",
 			c.CreateVNet,
 		},
 		"DeleteVNet": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/vnet/{vnetId}",
+			"/api/v1/vnet/{ vnetId }",
 			c.DeleteVNet,
 		},
-		"GetAllVNets": Route{
+		"ListVNetSubnets": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/vnet/{ vnetId }/subnets",
+			c.ListVNetSubnets,
+		},
+		"ListVNets": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/vnet",
-			c.GetAllVNets,
+			c.ListVNets,
 		},
-		"GetVNet": Route{
+		"ListZoneVNets": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/vnet/{vnetId}",
-			c.GetVNet,
+			"/api/v1/zone/{ zoneId }/vnets",
+			c.ListZoneVNets,
 		},
-		"GetVNetSubnets": Route{
+		"ReadVNet": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/vnet/{vnetId}/subnets",
-			c.GetVNetSubnets,
+			"/api/v1/vnet/{ vnetId }",
+			c.ReadVNet,
 		},
-		"GetZoneVNets": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/zone/{zoneId}/vnets",
-			c.GetZoneVNets,
+		"SetVNetDefaultSubnet": Route{
+			strings.ToUpper("Patch"),
+			"/api/v1/vnet/{ vnetId }/subnet/{ subnetId }/default",
+			c.SetVNetDefaultSubnet,
 		},
 		"UpdateVNet": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/vnet/{vnetId}",
+			"/api/v1/vnet/{ vnetId }",
 			c.UpdateVNet,
-		},
-		"UpdateVNetDefaultSubnet": Route{
-			strings.ToUpper("Put"),
-			"/api/v1/vnet/{vnetId}/subnet/{subnetId}/default",
-			c.UpdateVNetDefaultSubnet,
 		},
 	}
 }
@@ -183,27 +183,15 @@ func (c *VnetAPIController) DeleteVNet(w http.ResponseWriter, r *http.Request) {
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetAllVNets - 
-func (c *VnetAPIController) GetAllVNets(w http.ResponseWriter, r *http.Request) {
-	result, err := c.service.GetAllVNets(r.Context())
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetVNet - 
-func (c *VnetAPIController) GetVNet(w http.ResponseWriter, r *http.Request) {
+// ListVNetSubnets - 
+func (c *VnetAPIController) ListVNetSubnets(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	vnetIdParam := params["vnetId"]
 	if vnetIdParam == "" {
 		c.errorHandler(w, r, &RequiredError{"vnetId"}, nil)
 		return
 	}
-	result, err := c.service.GetVNet(r.Context(), vnetIdParam)
+	result, err := c.service.ListVNetSubnets(r.Context(), vnetIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -213,15 +201,9 @@ func (c *VnetAPIController) GetVNet(w http.ResponseWriter, r *http.Request) {
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetVNetSubnets - 
-func (c *VnetAPIController) GetVNetSubnets(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	vnetIdParam := params["vnetId"]
-	if vnetIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"vnetId"}, nil)
-		return
-	}
-	result, err := c.service.GetVNetSubnets(r.Context(), vnetIdParam)
+// ListVNets - 
+func (c *VnetAPIController) ListVNets(w http.ResponseWriter, r *http.Request) {
+	result, err := c.service.ListVNets(r.Context())
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -231,15 +213,56 @@ func (c *VnetAPIController) GetVNetSubnets(w http.ResponseWriter, r *http.Reques
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetZoneVNets - 
-func (c *VnetAPIController) GetZoneVNets(w http.ResponseWriter, r *http.Request) {
+// ListZoneVNets - 
+func (c *VnetAPIController) ListZoneVNets(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	zoneIdParam := params["zoneId"]
 	if zoneIdParam == "" {
 		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
 		return
 	}
-	result, err := c.service.GetZoneVNets(r.Context(), zoneIdParam)
+	result, err := c.service.ListZoneVNets(r.Context(), zoneIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ReadVNet - 
+func (c *VnetAPIController) ReadVNet(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	vnetIdParam := params["vnetId"]
+	if vnetIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"vnetId"}, nil)
+		return
+	}
+	result, err := c.service.ReadVNet(r.Context(), vnetIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// SetVNetDefaultSubnet - 
+func (c *VnetAPIController) SetVNetDefaultSubnet(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	vnetIdParam := params["vnetId"]
+	if vnetIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"vnetId"}, nil)
+		return
+	}
+	subnetIdParam := params["subnetId"]
+	if subnetIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"subnetId"}, nil)
+		return
+	}
+	result, err := c.service.SetVNetDefaultSubnet(r.Context(), vnetIdParam, subnetIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -273,29 +296,6 @@ func (c *VnetAPIController) UpdateVNet(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	result, err := c.service.UpdateVNet(r.Context(), vnetIdParam, vNetParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// UpdateVNetDefaultSubnet - 
-func (c *VnetAPIController) UpdateVNetDefaultSubnet(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	vnetIdParam := params["vnetId"]
-	if vnetIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"vnetId"}, nil)
-		return
-	}
-	subnetIdParam := params["subnetId"]
-	if subnetIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"subnetId"}, nil)
-		return
-	}
-	result, err := c.service.UpdateVNetDefaultSubnet(r.Context(), vnetIdParam, subnetIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

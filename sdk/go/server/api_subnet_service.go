@@ -85,6 +85,9 @@ func (s *SubnetAPIService) CreateSubnet(ctx context.Context, vnetId string, subn
 	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
 	// return Response(422, ApiErrorUnprocessableEntity{}), nil
 
+	// TODO: Uncomment the next line to return response Response(507, ApiErrorInsufficientStorage{}) or use other options such as http.Ok ...
+	// return Response(507, ApiErrorInsufficientStorage{}), nil
+
 	return Response(http.StatusNotImplemented, nil), errors.New("CreateSubnet method not implemented")
 }
 
@@ -112,26 +115,6 @@ func (s *SubnetAPIService) DeleteSubnet(ctx context.Context, subnetId string) (I
 	// return Response(422, ApiErrorUnprocessableEntity{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("DeleteSubnet method not implemented")
-}
-
-// GetVNetSubnets - 
-func (s *SubnetAPIService) GetVNetSubnets(ctx context.Context, vnetId string) (ImplResponse, error) {
-	// TODO - update GetVNetSubnets with the required logic for this service method.
-	// Add api_subnet_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetVNetSubnets method not implemented")
 }
 
 // ListSubnetAdapters - 
@@ -171,6 +154,26 @@ func (s *SubnetAPIService) ListSubnets(ctx context.Context) (ImplResponse, error
 	return Response(http.StatusNotImplemented, nil), errors.New("ListSubnets method not implemented")
 }
 
+// ListVNetSubnets - 
+func (s *SubnetAPIService) ListVNetSubnets(ctx context.Context, vnetId string) (ImplResponse, error) {
+	// TODO - update ListVNetSubnets with the required logic for this service method.
+	// Add api_subnet_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
+	// return Response(200, []string{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ListVNetSubnets method not implemented")
+}
+
 // ReadSubnet - 
 func (s *SubnetAPIService) ReadSubnet(ctx context.Context, subnetId string) (ImplResponse, error) {
 	// TODO - update ReadSubnet with the required logic for this service method.
@@ -189,6 +192,29 @@ func (s *SubnetAPIService) ReadSubnet(ctx context.Context, subnetId string) (Imp
 	// return Response(404, ApiErrorNotFound{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("ReadSubnet method not implemented")
+}
+
+// SetVNetDefaultSubnet - 
+func (s *SubnetAPIService) SetVNetDefaultSubnet(ctx context.Context, vnetId string, subnetId string) (ImplResponse, error) {
+	// TODO - update SetVNetDefaultSubnet with the required logic for this service method.
+	// Add api_subnet_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, {}) or use other options such as http.Ok ...
+	// return Response(200, nil),nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
+	// return Response(422, ApiErrorUnprocessableEntity{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("SetVNetDefaultSubnet method not implemented")
 }
 
 // UpdateSubnet - 
@@ -218,27 +244,4 @@ func (s *SubnetAPIService) UpdateSubnet(ctx context.Context, subnetId string, su
 	// return Response(507, ApiErrorInsufficientStorage{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("UpdateSubnet method not implemented")
-}
-
-// UpdateVNetDefaultSubnet - 
-func (s *SubnetAPIService) UpdateVNetDefaultSubnet(ctx context.Context, vnetId string, subnetId string) (ImplResponse, error) {
-	// TODO - update UpdateVNetDefaultSubnet with the required logic for this service method.
-	// Add api_subnet_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, {}) or use other options such as http.Ok ...
-	// return Response(200, nil),nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
-	// return Response(422, ApiErrorUnprocessableEntity{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("UpdateVNetDefaultSubnet method not implemented")
 }

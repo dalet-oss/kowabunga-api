@@ -53,18 +53,13 @@ func (c *HostAPIController) Routes() Routes {
 	return Routes{
 		"CreateHost": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/zone/{zoneId}/host",
+			"/api/v1/zone/{ zoneId }/host",
 			c.CreateHost,
 		},
 		"DeleteHost": Route{
 			strings.ToUpper("Delete"),
 			"/api/v1/host/{ hostId }",
 			c.DeleteHost,
-		},
-		"GetZoneHosts": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/zone/{zoneId}/hosts",
-			c.GetZoneHosts,
 		},
 		"ListHostInstances": Route{
 			strings.ToUpper("Get"),
@@ -75,6 +70,11 @@ func (c *HostAPIController) Routes() Routes {
 			strings.ToUpper("Get"),
 			"/api/v1/host",
 			c.ListHosts,
+		},
+		"ListZoneHosts": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/zone/{zoneId}/hosts",
+			c.ListZoneHosts,
 		},
 		"ReadHost": Route{
 			strings.ToUpper("Get"),
@@ -145,24 +145,6 @@ func (c *HostAPIController) DeleteHost(w http.ResponseWriter, r *http.Request) {
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetZoneHosts - 
-func (c *HostAPIController) GetZoneHosts(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	result, err := c.service.GetZoneHosts(r.Context(), zoneIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
 // ListHostInstances - 
 func (c *HostAPIController) ListHostInstances(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -184,6 +166,24 @@ func (c *HostAPIController) ListHostInstances(w http.ResponseWriter, r *http.Req
 // ListHosts - 
 func (c *HostAPIController) ListHosts(w http.ResponseWriter, r *http.Request) {
 	result, err := c.service.ListHosts(r.Context())
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListZoneHosts - 
+func (c *HostAPIController) ListZoneHosts(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	zoneIdParam := params["zoneId"]
+	if zoneIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
+		return
+	}
+	result, err := c.service.ListZoneHosts(r.Context(), zoneIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

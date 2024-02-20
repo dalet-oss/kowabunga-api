@@ -18,15 +18,15 @@ import (
 // checks if the ProjectResources type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ProjectResources{}
 
-// ProjectResources The global project resource quotas/usage (0 for unlimited).
+// ProjectResources A global project resource quotas/usage (0 for unlimited).
 type ProjectResources struct {
-	// the maximum total number of vCPUs allowed to be consumed by sum of all instances.
+	// The maximum total number of vCPUs allowed to be consumed by sum of all instances.
 	Vcpus *int32 `json:"vcpus,omitempty"`
-	// the maximum total memory (in bytes) allowed to be consumed by sum of all instances.
+	// The maximum total memory (in bytes) allowed to be consumed by sum of all instances.
 	Memory *int32 `json:"memory,omitempty"`
-	// the maximum total disk capacity allowed to be consumed by sum of all instances.
+	// The maximum total disk capacity allowed to be consumed by sum of all instances.
 	Storage *int32 `json:"storage,omitempty"`
-	// the maximum number of instances allowed to be spawned.
+	// The maximum number of instances allowed to be spawned.
 	Instances *int32 `json:"instances,omitempty"`
 }
 

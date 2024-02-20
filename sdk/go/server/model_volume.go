@@ -13,6 +13,7 @@ package server
 
 
 
+// Volume - A storage volume.
 type Volume struct {
 
 	// The storage volume ID (auto-generated).
@@ -24,14 +25,14 @@ type Volume struct {
 	// The storage volume description.
 	Description string `json:"description,omitempty"`
 
-	// The type of storage volume.
+	// The storage volume type.
 	Type string `json:"type"`
 
-	// The storage volume size in bytes.
+	// The storage volume size (in bytes).
 	Size int32 `json:"size"`
 
-	// Is the storage volume allowed to grow (filesystem dependant) ?
-	Resizable bool `json:"resizable,omitempty"`
+	// Is the storage volume allowed to grow (filesystem dependant) ?.
+	Resizeable bool `json:"resizeable,omitempty"`
 }
 
 // AssertVolumeRequired checks if the required fields are not zero-ed

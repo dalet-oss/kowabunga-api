@@ -11,17 +11,20 @@
  */
 
 
+/**
+ * A availability zone.
+ */
 export interface Zone { 
     /**
-     * The zone ID (auto-generated).
+     * The availability zone ID (auto-generated).
      */
     id?: string;
     /**
-     * The zone name.
+     * The availability zone name.
      */
     name: string;
     /**
-     * The zone description.
+     * The availability zone description.
      */
     description?: string;
 }

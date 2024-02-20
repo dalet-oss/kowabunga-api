@@ -34,9 +34,9 @@ type AdapterAPIRouter interface {
 type HostAPIRouter interface { 
 	CreateHost(http.ResponseWriter, *http.Request)
 	DeleteHost(http.ResponseWriter, *http.Request)
-	GetZoneHosts(http.ResponseWriter, *http.Request)
 	ListHostInstances(http.ResponseWriter, *http.Request)
 	ListHosts(http.ResponseWriter, *http.Request)
+	ListZoneHosts(http.ResponseWriter, *http.Request)
 	ReadHost(http.ResponseWriter, *http.Request)
 	ReadHostCaps(http.ResponseWriter, *http.Request)
 	UpdateHost(http.ResponseWriter, *http.Request)
@@ -47,9 +47,9 @@ type HostAPIRouter interface {
 type InstanceAPIRouter interface { 
 	CreateProjectZoneInstance(http.ResponseWriter, *http.Request)
 	DeleteInstance(http.ResponseWriter, *http.Request)
-	GetProjectZoneInstances(http.ResponseWriter, *http.Request)
 	ListHostInstances(http.ResponseWriter, *http.Request)
 	ListInstances(http.ResponseWriter, *http.Request)
+	ListProjectZoneInstances(http.ResponseWriter, *http.Request)
 	ReadInstance(http.ResponseWriter, *http.Request)
 	ReadInstanceRemoteConnection(http.ResponseWriter, *http.Request)
 	ReadInstanceState(http.ResponseWriter, *http.Request)
@@ -66,10 +66,10 @@ type InstanceAPIRouter interface {
 // The KceAPIRouter implementation should parse necessary information from the http request,
 // pass the data to a KceAPIServicer to perform the required actions, then write the service results to the http response.
 type KceAPIRouter interface { 
-	CreateProjectZoneKce(http.ResponseWriter, *http.Request)
+	CreateProjectZoneKCE(http.ResponseWriter, *http.Request)
 	DeleteKCE(http.ResponseWriter, *http.Request)
-	GetProjectZoneKCEs(http.ResponseWriter, *http.Request)
 	ListKCEs(http.ResponseWriter, *http.Request)
+	ListProjectZoneKCEs(http.ResponseWriter, *http.Request)
 	ReadKCE(http.ResponseWriter, *http.Request)
 	ReadKCEState(http.ResponseWriter, *http.Request)
 	RebootKCE(http.ResponseWriter, *http.Request)
@@ -85,10 +85,10 @@ type KceAPIRouter interface {
 // The KfsAPIRouter implementation should parse necessary information from the http request,
 // pass the data to a KfsAPIServicer to perform the required actions, then write the service results to the http response.
 type KfsAPIRouter interface { 
-	CreateProjectZoneKfs(http.ResponseWriter, *http.Request)
+	CreateProjectZoneKFS(http.ResponseWriter, *http.Request)
 	DeleteKFS(http.ResponseWriter, *http.Request)
-	GetProjectZoneKfs(http.ResponseWriter, *http.Request)
 	ListKFSs(http.ResponseWriter, *http.Request)
+	ListProjectZoneKFSs(http.ResponseWriter, *http.Request)
 	ListStorageNFSKFSs(http.ResponseWriter, *http.Request)
 	ReadKFS(http.ResponseWriter, *http.Request)
 	UpdateKFS(http.ResponseWriter, *http.Request)
@@ -97,10 +97,10 @@ type KfsAPIRouter interface {
 // The KgwAPIRouter implementation should parse necessary information from the http request,
 // pass the data to a KgwAPIServicer to perform the required actions, then write the service results to the http response.
 type KgwAPIRouter interface { 
-	CreateProjectZoneKgw(http.ResponseWriter, *http.Request)
+	CreateProjectZoneKGW(http.ResponseWriter, *http.Request)
 	DeleteKGW(http.ResponseWriter, *http.Request)
-	GetProjectZoneKGWs(http.ResponseWriter, *http.Request)
 	ListKGWs(http.ResponseWriter, *http.Request)
+	ListProjectZoneKGWs(http.ResponseWriter, *http.Request)
 	ReadKGW(http.ResponseWriter, *http.Request)
 	UpdateKGW(http.ResponseWriter, *http.Request)
 }
@@ -110,8 +110,8 @@ type KgwAPIRouter interface {
 type NetgwAPIRouter interface { 
 	CreateNetGW(http.ResponseWriter, *http.Request)
 	DeleteNetGW(http.ResponseWriter, *http.Request)
-	GetZoneNetGWs(http.ResponseWriter, *http.Request)
 	ListNetGWs(http.ResponseWriter, *http.Request)
+	ListZoneNetGWs(http.ResponseWriter, *http.Request)
 	ReadNetGW(http.ResponseWriter, *http.Request)
 	UpdateNetGW(http.ResponseWriter, *http.Request)
 }
@@ -119,30 +119,30 @@ type NetgwAPIRouter interface {
 // The NfsAPIRouter implementation should parse necessary information from the http request,
 // pass the data to a NfsAPIServicer to perform the required actions, then write the service results to the http response.
 type NfsAPIRouter interface { 
-	CreateNfsStorage(http.ResponseWriter, *http.Request)
+	CreateStorageNFS(http.ResponseWriter, *http.Request)
 	DeleteStorageNFS(http.ResponseWriter, *http.Request)
-	GetZoneNfsStorages(http.ResponseWriter, *http.Request)
 	ListStorageNFSKFSs(http.ResponseWriter, *http.Request)
 	ListStorageNFSs(http.ResponseWriter, *http.Request)
+	ListZoneStorageNFSs(http.ResponseWriter, *http.Request)
 	ReadStorageNFS(http.ResponseWriter, *http.Request)
+	SetZoneDefaultStorageNFS(http.ResponseWriter, *http.Request)
 	UpdateStorageNFS(http.ResponseWriter, *http.Request)
-	UpdateZoneDefaultNfsStorage(http.ResponseWriter, *http.Request)
 }
 // PoolAPIRouter defines the required methods for binding the api requests to a responses for the PoolAPI
 // The PoolAPIRouter implementation should parse necessary information from the http request,
 // pass the data to a PoolAPIServicer to perform the required actions, then write the service results to the http response.
 type PoolAPIRouter interface { 
-	CreatePool(http.ResponseWriter, *http.Request)
+	CreateStoragePool(http.ResponseWriter, *http.Request)
 	CreateTemplate(http.ResponseWriter, *http.Request)
 	DeleteStoragePool(http.ResponseWriter, *http.Request)
-	GetZonePools(http.ResponseWriter, *http.Request)
 	ListStoragePoolTemplates(http.ResponseWriter, *http.Request)
 	ListStoragePoolVolumes(http.ResponseWriter, *http.Request)
 	ListStoragePools(http.ResponseWriter, *http.Request)
+	ListZoneStoragePools(http.ResponseWriter, *http.Request)
 	ReadStoragePool(http.ResponseWriter, *http.Request)
 	SetStoragePoolDefaultTemplate(http.ResponseWriter, *http.Request)
+	SetZoneDefaultStoragePool(http.ResponseWriter, *http.Request)
 	UpdateStoragePool(http.ResponseWriter, *http.Request)
-	UpdateZoneDefaultPool(http.ResponseWriter, *http.Request)
 }
 // ProjectAPIRouter defines the required methods for binding the api requests to a responses for the ProjectAPI
 // The ProjectAPIRouter implementation should parse necessary information from the http request,
@@ -151,21 +151,21 @@ type ProjectAPIRouter interface {
 	CreateProject(http.ResponseWriter, *http.Request)
 	CreateProjectDnsRecord(http.ResponseWriter, *http.Request)
 	CreateProjectZoneInstance(http.ResponseWriter, *http.Request)
-	CreateProjectZoneKce(http.ResponseWriter, *http.Request)
-	CreateProjectZoneKfs(http.ResponseWriter, *http.Request)
-	CreateProjectZoneKgw(http.ResponseWriter, *http.Request)
+	CreateProjectZoneKCE(http.ResponseWriter, *http.Request)
+	CreateProjectZoneKFS(http.ResponseWriter, *http.Request)
+	CreateProjectZoneKGW(http.ResponseWriter, *http.Request)
 	CreateProjectZoneVolume(http.ResponseWriter, *http.Request)
 	DeleteProject(http.ResponseWriter, *http.Request)
-	GetAllProjects(http.ResponseWriter, *http.Request)
-	GetProject(http.ResponseWriter, *http.Request)
-	GetProjectCost(http.ResponseWriter, *http.Request)
-	GetProjectDnsRecords(http.ResponseWriter, *http.Request)
-	GetProjectUsage(http.ResponseWriter, *http.Request)
-	GetProjectZoneInstances(http.ResponseWriter, *http.Request)
-	GetProjectZoneKCEs(http.ResponseWriter, *http.Request)
-	GetProjectZoneKGWs(http.ResponseWriter, *http.Request)
-	GetProjectZoneKfs(http.ResponseWriter, *http.Request)
-	GetProjectZoneVolumes(http.ResponseWriter, *http.Request)
+	ListProjectDnsRecords(http.ResponseWriter, *http.Request)
+	ListProjectZoneInstances(http.ResponseWriter, *http.Request)
+	ListProjectZoneKCEs(http.ResponseWriter, *http.Request)
+	ListProjectZoneKFSs(http.ResponseWriter, *http.Request)
+	ListProjectZoneKGWs(http.ResponseWriter, *http.Request)
+	ListProjectZoneVolumes(http.ResponseWriter, *http.Request)
+	ListProjects(http.ResponseWriter, *http.Request)
+	ReadProject(http.ResponseWriter, *http.Request)
+	ReadProjectCost(http.ResponseWriter, *http.Request)
+	ReadProjectUsage(http.ResponseWriter, *http.Request)
 	UpdateProject(http.ResponseWriter, *http.Request)
 }
 // RecordAPIRouter defines the required methods for binding the api requests to a responses for the RecordAPI
@@ -174,7 +174,7 @@ type ProjectAPIRouter interface {
 type RecordAPIRouter interface { 
 	CreateProjectDnsRecord(http.ResponseWriter, *http.Request)
 	DeleteDnsRecord(http.ResponseWriter, *http.Request)
-	GetProjectDnsRecords(http.ResponseWriter, *http.Request)
+	ListProjectDnsRecords(http.ResponseWriter, *http.Request)
 	ReadDnsRecord(http.ResponseWriter, *http.Request)
 	UpdateDnsRecord(http.ResponseWriter, *http.Request)
 }
@@ -197,12 +197,12 @@ type SubnetAPIRouter interface {
 	CreateAdapter(http.ResponseWriter, *http.Request)
 	CreateSubnet(http.ResponseWriter, *http.Request)
 	DeleteSubnet(http.ResponseWriter, *http.Request)
-	GetVNetSubnets(http.ResponseWriter, *http.Request)
 	ListSubnetAdapters(http.ResponseWriter, *http.Request)
 	ListSubnets(http.ResponseWriter, *http.Request)
+	ListVNetSubnets(http.ResponseWriter, *http.Request)
 	ReadSubnet(http.ResponseWriter, *http.Request)
+	SetVNetDefaultSubnet(http.ResponseWriter, *http.Request)
 	UpdateSubnet(http.ResponseWriter, *http.Request)
-	UpdateVNetDefaultSubnet(http.ResponseWriter, *http.Request)
 }
 // TemplateAPIRouter defines the required methods for binding the api requests to a responses for the TemplateAPI
 // The TemplateAPIRouter implementation should parse necessary information from the http request,
@@ -223,12 +223,12 @@ type VnetAPIRouter interface {
 	CreateSubnet(http.ResponseWriter, *http.Request)
 	CreateVNet(http.ResponseWriter, *http.Request)
 	DeleteVNet(http.ResponseWriter, *http.Request)
-	GetAllVNets(http.ResponseWriter, *http.Request)
-	GetVNet(http.ResponseWriter, *http.Request)
-	GetVNetSubnets(http.ResponseWriter, *http.Request)
-	GetZoneVNets(http.ResponseWriter, *http.Request)
+	ListVNetSubnets(http.ResponseWriter, *http.Request)
+	ListVNets(http.ResponseWriter, *http.Request)
+	ListZoneVNets(http.ResponseWriter, *http.Request)
+	ReadVNet(http.ResponseWriter, *http.Request)
+	SetVNetDefaultSubnet(http.ResponseWriter, *http.Request)
 	UpdateVNet(http.ResponseWriter, *http.Request)
-	UpdateVNetDefaultSubnet(http.ResponseWriter, *http.Request)
 }
 // VolumeAPIRouter defines the required methods for binding the api requests to a responses for the VolumeAPI
 // The VolumeAPIRouter implementation should parse necessary information from the http request,
@@ -236,10 +236,10 @@ type VnetAPIRouter interface {
 type VolumeAPIRouter interface { 
 	CreateProjectZoneVolume(http.ResponseWriter, *http.Request)
 	DeleteVolume(http.ResponseWriter, *http.Request)
-	GetAllVolumes(http.ResponseWriter, *http.Request)
-	GetProjectZoneVolumes(http.ResponseWriter, *http.Request)
-	GetVolume(http.ResponseWriter, *http.Request)
+	ListProjectZoneVolumes(http.ResponseWriter, *http.Request)
 	ListStoragePoolVolumes(http.ResponseWriter, *http.Request)
+	ListVolumes(http.ResponseWriter, *http.Request)
+	ReadVolume(http.ResponseWriter, *http.Request)
 	UpdateVolume(http.ResponseWriter, *http.Request)
 }
 // ZoneAPIRouter defines the required methods for binding the api requests to a responses for the ZoneAPI
@@ -248,32 +248,32 @@ type VolumeAPIRouter interface {
 type ZoneAPIRouter interface { 
 	CreateHost(http.ResponseWriter, *http.Request)
 	CreateNetGW(http.ResponseWriter, *http.Request)
-	CreateNfsStorage(http.ResponseWriter, *http.Request)
-	CreatePool(http.ResponseWriter, *http.Request)
 	CreateProjectZoneInstance(http.ResponseWriter, *http.Request)
-	CreateProjectZoneKce(http.ResponseWriter, *http.Request)
-	CreateProjectZoneKfs(http.ResponseWriter, *http.Request)
-	CreateProjectZoneKgw(http.ResponseWriter, *http.Request)
+	CreateProjectZoneKCE(http.ResponseWriter, *http.Request)
+	CreateProjectZoneKFS(http.ResponseWriter, *http.Request)
+	CreateProjectZoneKGW(http.ResponseWriter, *http.Request)
 	CreateProjectZoneVolume(http.ResponseWriter, *http.Request)
+	CreateStorageNFS(http.ResponseWriter, *http.Request)
+	CreateStoragePool(http.ResponseWriter, *http.Request)
 	CreateVNet(http.ResponseWriter, *http.Request)
 	CreateZone(http.ResponseWriter, *http.Request)
 	DeleteZone(http.ResponseWriter, *http.Request)
-	GetAllZones(http.ResponseWriter, *http.Request)
-	GetProjectZoneInstances(http.ResponseWriter, *http.Request)
-	GetProjectZoneKCEs(http.ResponseWriter, *http.Request)
-	GetProjectZoneKGWs(http.ResponseWriter, *http.Request)
-	GetProjectZoneKfs(http.ResponseWriter, *http.Request)
-	GetProjectZoneVolumes(http.ResponseWriter, *http.Request)
-	GetZone(http.ResponseWriter, *http.Request)
-	GetZoneHosts(http.ResponseWriter, *http.Request)
-	GetZoneNetGWs(http.ResponseWriter, *http.Request)
-	GetZoneNfsStorages(http.ResponseWriter, *http.Request)
-	GetZonePools(http.ResponseWriter, *http.Request)
-	GetZoneVNets(http.ResponseWriter, *http.Request)
+	ListProjectZoneInstances(http.ResponseWriter, *http.Request)
+	ListProjectZoneKCEs(http.ResponseWriter, *http.Request)
+	ListProjectZoneKFSs(http.ResponseWriter, *http.Request)
+	ListProjectZoneKGWs(http.ResponseWriter, *http.Request)
+	ListProjectZoneVolumes(http.ResponseWriter, *http.Request)
 	ListRegionZones(http.ResponseWriter, *http.Request)
+	ListZoneHosts(http.ResponseWriter, *http.Request)
+	ListZoneNetGWs(http.ResponseWriter, *http.Request)
+	ListZoneStorageNFSs(http.ResponseWriter, *http.Request)
+	ListZoneStoragePools(http.ResponseWriter, *http.Request)
+	ListZoneVNets(http.ResponseWriter, *http.Request)
+	ListZones(http.ResponseWriter, *http.Request)
+	ReadZone(http.ResponseWriter, *http.Request)
+	SetZoneDefaultStorageNFS(http.ResponseWriter, *http.Request)
+	SetZoneDefaultStoragePool(http.ResponseWriter, *http.Request)
 	UpdateZone(http.ResponseWriter, *http.Request)
-	UpdateZoneDefaultNfsStorage(http.ResponseWriter, *http.Request)
-	UpdateZoneDefaultPool(http.ResponseWriter, *http.Request)
 }
 
 
@@ -298,9 +298,9 @@ type AdapterAPIServicer interface {
 type HostAPIServicer interface { 
 	CreateHost(context.Context, string, Host) (ImplResponse, error)
 	DeleteHost(context.Context, string) (ImplResponse, error)
-	GetZoneHosts(context.Context, string) (ImplResponse, error)
 	ListHostInstances(context.Context, string) (ImplResponse, error)
 	ListHosts(context.Context) (ImplResponse, error)
+	ListZoneHosts(context.Context, string) (ImplResponse, error)
 	ReadHost(context.Context, string) (ImplResponse, error)
 	ReadHostCaps(context.Context, string) (ImplResponse, error)
 	UpdateHost(context.Context, string, Host) (ImplResponse, error)
@@ -314,9 +314,9 @@ type HostAPIServicer interface {
 type InstanceAPIServicer interface { 
 	CreateProjectZoneInstance(context.Context, string, string, Instance, bool) (ImplResponse, error)
 	DeleteInstance(context.Context, string) (ImplResponse, error)
-	GetProjectZoneInstances(context.Context, string, string) (ImplResponse, error)
 	ListHostInstances(context.Context, string) (ImplResponse, error)
 	ListInstances(context.Context) (ImplResponse, error)
+	ListProjectZoneInstances(context.Context, string, string) (ImplResponse, error)
 	ReadInstance(context.Context, string) (ImplResponse, error)
 	ReadInstanceRemoteConnection(context.Context, string) (ImplResponse, error)
 	ReadInstanceState(context.Context, string) (ImplResponse, error)
@@ -336,10 +336,10 @@ type InstanceAPIServicer interface {
 // while the service implementation can be ignored with the .openapi-generator-ignore file
 // and updated with the logic required for the API.
 type KceAPIServicer interface { 
-	CreateProjectZoneKce(context.Context, string, string, Kce, string, string, string, bool) (ImplResponse, error)
+	CreateProjectZoneKCE(context.Context, string, string, Kce, string, string, string, bool) (ImplResponse, error)
 	DeleteKCE(context.Context, string) (ImplResponse, error)
-	GetProjectZoneKCEs(context.Context, string, string) (ImplResponse, error)
 	ListKCEs(context.Context) (ImplResponse, error)
+	ListProjectZoneKCEs(context.Context, string, string) (ImplResponse, error)
 	ReadKCE(context.Context, string) (ImplResponse, error)
 	ReadKCEState(context.Context, string) (ImplResponse, error)
 	RebootKCE(context.Context, string) (ImplResponse, error)
@@ -358,10 +358,10 @@ type KceAPIServicer interface {
 // while the service implementation can be ignored with the .openapi-generator-ignore file
 // and updated with the logic required for the API.
 type KfsAPIServicer interface { 
-	CreateProjectZoneKfs(context.Context, string, string, Kfs, string, bool) (ImplResponse, error)
+	CreateProjectZoneKFS(context.Context, string, string, Kfs, string, bool) (ImplResponse, error)
 	DeleteKFS(context.Context, string) (ImplResponse, error)
-	GetProjectZoneKfs(context.Context, string, string, string, bool) (ImplResponse, error)
 	ListKFSs(context.Context) (ImplResponse, error)
+	ListProjectZoneKFSs(context.Context, string, string, string, bool) (ImplResponse, error)
 	ListStorageNFSKFSs(context.Context, string) (ImplResponse, error)
 	ReadKFS(context.Context, string) (ImplResponse, error)
 	UpdateKFS(context.Context, string, Kfs) (ImplResponse, error)
@@ -373,10 +373,10 @@ type KfsAPIServicer interface {
 // while the service implementation can be ignored with the .openapi-generator-ignore file
 // and updated with the logic required for the API.
 type KgwAPIServicer interface { 
-	CreateProjectZoneKgw(context.Context, string, string, Kgw) (ImplResponse, error)
+	CreateProjectZoneKGW(context.Context, string, string, Kgw) (ImplResponse, error)
 	DeleteKGW(context.Context, string) (ImplResponse, error)
-	GetProjectZoneKGWs(context.Context, string, string) (ImplResponse, error)
 	ListKGWs(context.Context) (ImplResponse, error)
+	ListProjectZoneKGWs(context.Context, string, string) (ImplResponse, error)
 	ReadKGW(context.Context, string) (ImplResponse, error)
 	UpdateKGW(context.Context, string, Kgw) (ImplResponse, error)
 }
@@ -389,8 +389,8 @@ type KgwAPIServicer interface {
 type NetgwAPIServicer interface { 
 	CreateNetGW(context.Context, string, NetGw) (ImplResponse, error)
 	DeleteNetGW(context.Context, string) (ImplResponse, error)
-	GetZoneNetGWs(context.Context, string) (ImplResponse, error)
 	ListNetGWs(context.Context) (ImplResponse, error)
+	ListZoneNetGWs(context.Context, string) (ImplResponse, error)
 	ReadNetGW(context.Context, string) (ImplResponse, error)
 	UpdateNetGW(context.Context, string, NetGw) (ImplResponse, error)
 }
@@ -401,14 +401,14 @@ type NetgwAPIServicer interface {
 // while the service implementation can be ignored with the .openapi-generator-ignore file
 // and updated with the logic required for the API.
 type NfsAPIServicer interface { 
-	CreateNfsStorage(context.Context, string, StorageNfs) (ImplResponse, error)
+	CreateStorageNFS(context.Context, string, StorageNfs) (ImplResponse, error)
 	DeleteStorageNFS(context.Context, string) (ImplResponse, error)
-	GetZoneNfsStorages(context.Context, string) (ImplResponse, error)
 	ListStorageNFSKFSs(context.Context, string) (ImplResponse, error)
 	ListStorageNFSs(context.Context) (ImplResponse, error)
+	ListZoneStorageNFSs(context.Context, string) (ImplResponse, error)
 	ReadStorageNFS(context.Context, string) (ImplResponse, error)
+	SetZoneDefaultStorageNFS(context.Context, string, string) (ImplResponse, error)
 	UpdateStorageNFS(context.Context, string, StorageNfs) (ImplResponse, error)
-	UpdateZoneDefaultNfsStorage(context.Context, string, string) (ImplResponse, error)
 }
 
 
@@ -417,17 +417,17 @@ type NfsAPIServicer interface {
 // while the service implementation can be ignored with the .openapi-generator-ignore file
 // and updated with the logic required for the API.
 type PoolAPIServicer interface { 
-	CreatePool(context.Context, string, StoragePool, string) (ImplResponse, error)
+	CreateStoragePool(context.Context, string, StoragePool, string) (ImplResponse, error)
 	CreateTemplate(context.Context, string, Template) (ImplResponse, error)
 	DeleteStoragePool(context.Context, string) (ImplResponse, error)
-	GetZonePools(context.Context, string) (ImplResponse, error)
 	ListStoragePoolTemplates(context.Context, string) (ImplResponse, error)
 	ListStoragePoolVolumes(context.Context, string) (ImplResponse, error)
 	ListStoragePools(context.Context) (ImplResponse, error)
+	ListZoneStoragePools(context.Context, string) (ImplResponse, error)
 	ReadStoragePool(context.Context, string) (ImplResponse, error)
 	SetStoragePoolDefaultTemplate(context.Context, string, string) (ImplResponse, error)
+	SetZoneDefaultStoragePool(context.Context, string, string) (ImplResponse, error)
 	UpdateStoragePool(context.Context, string, StoragePool) (ImplResponse, error)
-	UpdateZoneDefaultPool(context.Context, string, string) (ImplResponse, error)
 }
 
 
@@ -439,21 +439,21 @@ type ProjectAPIServicer interface {
 	CreateProject(context.Context, Project, int32, bool) (ImplResponse, error)
 	CreateProjectDnsRecord(context.Context, string, DnsRecord) (ImplResponse, error)
 	CreateProjectZoneInstance(context.Context, string, string, Instance, bool) (ImplResponse, error)
-	CreateProjectZoneKce(context.Context, string, string, Kce, string, string, string, bool) (ImplResponse, error)
-	CreateProjectZoneKfs(context.Context, string, string, Kfs, string, bool) (ImplResponse, error)
-	CreateProjectZoneKgw(context.Context, string, string, Kgw) (ImplResponse, error)
+	CreateProjectZoneKCE(context.Context, string, string, Kce, string, string, string, bool) (ImplResponse, error)
+	CreateProjectZoneKFS(context.Context, string, string, Kfs, string, bool) (ImplResponse, error)
+	CreateProjectZoneKGW(context.Context, string, string, Kgw) (ImplResponse, error)
 	CreateProjectZoneVolume(context.Context, string, string, Volume, string, string) (ImplResponse, error)
 	DeleteProject(context.Context, string) (ImplResponse, error)
-	GetAllProjects(context.Context) (ImplResponse, error)
-	GetProject(context.Context, string) (ImplResponse, error)
-	GetProjectCost(context.Context, string) (ImplResponse, error)
-	GetProjectDnsRecords(context.Context, string) (ImplResponse, error)
-	GetProjectUsage(context.Context, string) (ImplResponse, error)
-	GetProjectZoneInstances(context.Context, string, string) (ImplResponse, error)
-	GetProjectZoneKCEs(context.Context, string, string) (ImplResponse, error)
-	GetProjectZoneKGWs(context.Context, string, string) (ImplResponse, error)
-	GetProjectZoneKfs(context.Context, string, string, string, bool) (ImplResponse, error)
-	GetProjectZoneVolumes(context.Context, string, string) (ImplResponse, error)
+	ListProjectDnsRecords(context.Context, string) (ImplResponse, error)
+	ListProjectZoneInstances(context.Context, string, string) (ImplResponse, error)
+	ListProjectZoneKCEs(context.Context, string, string) (ImplResponse, error)
+	ListProjectZoneKFSs(context.Context, string, string, string, bool) (ImplResponse, error)
+	ListProjectZoneKGWs(context.Context, string, string) (ImplResponse, error)
+	ListProjectZoneVolumes(context.Context, string, string) (ImplResponse, error)
+	ListProjects(context.Context, int32, bool) (ImplResponse, error)
+	ReadProject(context.Context, string) (ImplResponse, error)
+	ReadProjectCost(context.Context, string) (ImplResponse, error)
+	ReadProjectUsage(context.Context, string) (ImplResponse, error)
 	UpdateProject(context.Context, string, Project) (ImplResponse, error)
 }
 
@@ -465,7 +465,7 @@ type ProjectAPIServicer interface {
 type RecordAPIServicer interface { 
 	CreateProjectDnsRecord(context.Context, string, DnsRecord) (ImplResponse, error)
 	DeleteDnsRecord(context.Context, string) (ImplResponse, error)
-	GetProjectDnsRecords(context.Context, string) (ImplResponse, error)
+	ListProjectDnsRecords(context.Context, string) (ImplResponse, error)
 	ReadDnsRecord(context.Context, string) (ImplResponse, error)
 	UpdateDnsRecord(context.Context, string, DnsRecord) (ImplResponse, error)
 }
@@ -494,12 +494,12 @@ type SubnetAPIServicer interface {
 	CreateAdapter(context.Context, string, Adapter, bool) (ImplResponse, error)
 	CreateSubnet(context.Context, string, Subnet) (ImplResponse, error)
 	DeleteSubnet(context.Context, string) (ImplResponse, error)
-	GetVNetSubnets(context.Context, string) (ImplResponse, error)
 	ListSubnetAdapters(context.Context, string) (ImplResponse, error)
 	ListSubnets(context.Context) (ImplResponse, error)
+	ListVNetSubnets(context.Context, string) (ImplResponse, error)
 	ReadSubnet(context.Context, string) (ImplResponse, error)
+	SetVNetDefaultSubnet(context.Context, string, string) (ImplResponse, error)
 	UpdateSubnet(context.Context, string, Subnet) (ImplResponse, error)
-	UpdateVNetDefaultSubnet(context.Context, string, string) (ImplResponse, error)
 }
 
 
@@ -526,12 +526,12 @@ type VnetAPIServicer interface {
 	CreateSubnet(context.Context, string, Subnet) (ImplResponse, error)
 	CreateVNet(context.Context, string, VNet) (ImplResponse, error)
 	DeleteVNet(context.Context, string) (ImplResponse, error)
-	GetAllVNets(context.Context) (ImplResponse, error)
-	GetVNet(context.Context, string) (ImplResponse, error)
-	GetVNetSubnets(context.Context, string) (ImplResponse, error)
-	GetZoneVNets(context.Context, string) (ImplResponse, error)
+	ListVNetSubnets(context.Context, string) (ImplResponse, error)
+	ListVNets(context.Context) (ImplResponse, error)
+	ListZoneVNets(context.Context, string) (ImplResponse, error)
+	ReadVNet(context.Context, string) (ImplResponse, error)
+	SetVNetDefaultSubnet(context.Context, string, string) (ImplResponse, error)
 	UpdateVNet(context.Context, string, VNet) (ImplResponse, error)
-	UpdateVNetDefaultSubnet(context.Context, string, string) (ImplResponse, error)
 }
 
 
@@ -542,10 +542,10 @@ type VnetAPIServicer interface {
 type VolumeAPIServicer interface { 
 	CreateProjectZoneVolume(context.Context, string, string, Volume, string, string) (ImplResponse, error)
 	DeleteVolume(context.Context, string) (ImplResponse, error)
-	GetAllVolumes(context.Context) (ImplResponse, error)
-	GetProjectZoneVolumes(context.Context, string, string) (ImplResponse, error)
-	GetVolume(context.Context, string) (ImplResponse, error)
+	ListProjectZoneVolumes(context.Context, string, string) (ImplResponse, error)
 	ListStoragePoolVolumes(context.Context, string) (ImplResponse, error)
+	ListVolumes(context.Context) (ImplResponse, error)
+	ReadVolume(context.Context, string) (ImplResponse, error)
 	UpdateVolume(context.Context, string, Volume) (ImplResponse, error)
 }
 
@@ -557,30 +557,30 @@ type VolumeAPIServicer interface {
 type ZoneAPIServicer interface { 
 	CreateHost(context.Context, string, Host) (ImplResponse, error)
 	CreateNetGW(context.Context, string, NetGw) (ImplResponse, error)
-	CreateNfsStorage(context.Context, string, StorageNfs) (ImplResponse, error)
-	CreatePool(context.Context, string, StoragePool, string) (ImplResponse, error)
 	CreateProjectZoneInstance(context.Context, string, string, Instance, bool) (ImplResponse, error)
-	CreateProjectZoneKce(context.Context, string, string, Kce, string, string, string, bool) (ImplResponse, error)
-	CreateProjectZoneKfs(context.Context, string, string, Kfs, string, bool) (ImplResponse, error)
-	CreateProjectZoneKgw(context.Context, string, string, Kgw) (ImplResponse, error)
+	CreateProjectZoneKCE(context.Context, string, string, Kce, string, string, string, bool) (ImplResponse, error)
+	CreateProjectZoneKFS(context.Context, string, string, Kfs, string, bool) (ImplResponse, error)
+	CreateProjectZoneKGW(context.Context, string, string, Kgw) (ImplResponse, error)
 	CreateProjectZoneVolume(context.Context, string, string, Volume, string, string) (ImplResponse, error)
+	CreateStorageNFS(context.Context, string, StorageNfs) (ImplResponse, error)
+	CreateStoragePool(context.Context, string, StoragePool, string) (ImplResponse, error)
 	CreateVNet(context.Context, string, VNet) (ImplResponse, error)
 	CreateZone(context.Context, string, Zone) (ImplResponse, error)
 	DeleteZone(context.Context, string) (ImplResponse, error)
-	GetAllZones(context.Context) (ImplResponse, error)
-	GetProjectZoneInstances(context.Context, string, string) (ImplResponse, error)
-	GetProjectZoneKCEs(context.Context, string, string) (ImplResponse, error)
-	GetProjectZoneKGWs(context.Context, string, string) (ImplResponse, error)
-	GetProjectZoneKfs(context.Context, string, string, string, bool) (ImplResponse, error)
-	GetProjectZoneVolumes(context.Context, string, string) (ImplResponse, error)
-	GetZone(context.Context, string) (ImplResponse, error)
-	GetZoneHosts(context.Context, string) (ImplResponse, error)
-	GetZoneNetGWs(context.Context, string) (ImplResponse, error)
-	GetZoneNfsStorages(context.Context, string) (ImplResponse, error)
-	GetZonePools(context.Context, string) (ImplResponse, error)
-	GetZoneVNets(context.Context, string) (ImplResponse, error)
+	ListProjectZoneInstances(context.Context, string, string) (ImplResponse, error)
+	ListProjectZoneKCEs(context.Context, string, string) (ImplResponse, error)
+	ListProjectZoneKFSs(context.Context, string, string, string, bool) (ImplResponse, error)
+	ListProjectZoneKGWs(context.Context, string, string) (ImplResponse, error)
+	ListProjectZoneVolumes(context.Context, string, string) (ImplResponse, error)
 	ListRegionZones(context.Context, string) (ImplResponse, error)
+	ListZoneHosts(context.Context, string) (ImplResponse, error)
+	ListZoneNetGWs(context.Context, string) (ImplResponse, error)
+	ListZoneStorageNFSs(context.Context, string) (ImplResponse, error)
+	ListZoneStoragePools(context.Context, string) (ImplResponse, error)
+	ListZoneVNets(context.Context, string) (ImplResponse, error)
+	ListZones(context.Context) (ImplResponse, error)
+	ReadZone(context.Context, string) (ImplResponse, error)
+	SetZoneDefaultStorageNFS(context.Context, string, string) (ImplResponse, error)
+	SetZoneDefaultStoragePool(context.Context, string, string) (ImplResponse, error)
 	UpdateZone(context.Context, string, Zone) (ImplResponse, error)
-	UpdateZoneDefaultNfsStorage(context.Context, string, string) (ImplResponse, error)
-	UpdateZoneDefaultPool(context.Context, string, string) (ImplResponse, error)
 }

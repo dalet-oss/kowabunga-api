@@ -37,9 +37,6 @@ type Host struct {
 	// The host libvirt's TLS configuration.
 	Tls HostTls `json:"tls,omitempty"`
 
-	// Global cost associated to the host (deprecated, will be removed).
-	Cost Cost `json:"cost,omitempty"`
-
 	// Cost associated to the host's CPU resources.
 	CpuCost Cost `json:"cpu_cost,omitempty"`
 

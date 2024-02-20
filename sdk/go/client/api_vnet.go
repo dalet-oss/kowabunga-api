@@ -31,7 +31,7 @@ type ApiCreateSubnetRequest struct {
 	subnet *Subnet
 }
 
-// Subnet payload
+// Subnet payload.
 func (r ApiCreateSubnetRequest) Subnet(subnet Subnet) ApiCreateSubnetRequest {
 	r.subnet = &subnet
 	return r
@@ -44,7 +44,7 @@ func (r ApiCreateSubnetRequest) Execute() (*Subnet, *http.Response, error) {
 /*
 CreateSubnet Method for CreateSubnet
 
-Creates a new subnet.
+Creates a new network subnet.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param vnetId The ID of the virtual network.
@@ -73,7 +73,7 @@ func (a *VnetAPIService) CreateSubnetExecute(r ApiCreateSubnetRequest) (*Subnet,
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/vnet/{vnetId}/subnet"
+	localVarPath := localBasePath + "/vnet/{ vnetId }/subnet"
 	localVarPath = strings.Replace(localVarPath, "{"+"vnetId"+"}", url.PathEscape(parameterValueToString(r.vnetId, "vnetId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -216,6 +216,17 @@ func (a *VnetAPIService) CreateSubnetExecute(r ApiCreateSubnetRequest) (*Subnet,
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 507 {
+			var v ApiErrorInsufficientStorage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -239,7 +250,7 @@ type ApiCreateVNetRequest struct {
 	vNet *VNet
 }
 
-// VNet payload
+// VNet payload.
 func (r ApiCreateVNetRequest) VNet(vNet VNet) ApiCreateVNetRequest {
 	r.vNet = &vNet
 	return r
@@ -255,7 +266,7 @@ CreateVNet Method for CreateVNet
 Creates a new virtual network.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param zoneId The ID of the zone.
+ @param zoneId The ID of the availability zone.
  @return ApiCreateVNetRequest
 */
 func (a *VnetAPIService) CreateVNet(ctx context.Context, zoneId string) ApiCreateVNetRequest {
@@ -281,7 +292,7 @@ func (a *VnetAPIService) CreateVNetExecute(r ApiCreateVNetRequest) (*VNet, *http
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{zoneId}/vnet"
+	localVarPath := localBasePath + "/zone/{ zoneId }/vnet"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -424,6 +435,17 @@ func (a *VnetAPIService) CreateVNetExecute(r ApiCreateVNetRequest) (*VNet, *http
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 507 {
+			var v ApiErrorInsufficientStorage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -480,7 +502,7 @@ func (a *VnetAPIService) DeleteVNetExecute(r ApiDeleteVNetRequest) (*http.Respon
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/vnet/{vnetId}"
+	localVarPath := localBasePath + "/vnet/{ vnetId }"
 	localVarPath = strings.Replace(localVarPath, "{"+"vnetId"+"}", url.PathEscape(parameterValueToString(r.vnetId, "vnetId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -614,33 +636,36 @@ func (a *VnetAPIService) DeleteVNetExecute(r ApiDeleteVNetRequest) (*http.Respon
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetAllVNetsRequest struct {
+type ApiListVNetSubnetsRequest struct {
 	ctx context.Context
 	ApiService *VnetAPIService
+	vnetId string
 }
 
-func (r ApiGetAllVNetsRequest) Execute() ([]string, *http.Response, error) {
-	return r.ApiService.GetAllVNetsExecute(r)
+func (r ApiListVNetSubnetsRequest) Execute() ([]string, *http.Response, error) {
+	return r.ApiService.ListVNetSubnetsExecute(r)
 }
 
 /*
-GetAllVNets Method for GetAllVNets
+ListVNetSubnets Method for ListVNetSubnets
 
-Returns the IDs of virtual networks.
+Returns the IDs of network subnet objects.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAllVNetsRequest
+ @param vnetId The ID of the virtual network.
+ @return ApiListVNetSubnetsRequest
 */
-func (a *VnetAPIService) GetAllVNets(ctx context.Context) ApiGetAllVNetsRequest {
-	return ApiGetAllVNetsRequest{
+func (a *VnetAPIService) ListVNetSubnets(ctx context.Context, vnetId string) ApiListVNetSubnetsRequest {
+	return ApiListVNetSubnetsRequest{
 		ApiService: a,
 		ctx: ctx,
+		vnetId: vnetId,
 	}
 }
 
 // Execute executes the request
 //  @return []string
-func (a *VnetAPIService) GetAllVNetsExecute(r ApiGetAllVNetsRequest) ([]string, *http.Response, error) {
+func (a *VnetAPIService) ListVNetSubnetsExecute(r ApiListVNetSubnetsRequest) ([]string, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -648,7 +673,167 @@ func (a *VnetAPIService) GetAllVNetsExecute(r ApiGetAllVNetsRequest) ([]string, 
 		localVarReturnValue  []string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnetAPIService.GetAllVNets")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnetAPIService.ListVNetSubnets")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/vnet/{ vnetId }/subnets"
+	localVarPath = strings.Replace(localVarPath, "{"+"vnetId"+"}", url.PathEscape(parameterValueToString(r.vnetId, "vnetId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["TokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-token"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiErrorUnauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiErrorForbidden
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiErrorNotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListVNetsRequest struct {
+	ctx context.Context
+	ApiService *VnetAPIService
+}
+
+func (r ApiListVNetsRequest) Execute() ([]string, *http.Response, error) {
+	return r.ApiService.ListVNetsExecute(r)
+}
+
+/*
+ListVNets Method for ListVNets
+
+Returns the IDs of virtual network objects.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiListVNetsRequest
+*/
+func (a *VnetAPIService) ListVNets(ctx context.Context) ApiListVNetsRequest {
+	return ApiListVNetsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return []string
+func (a *VnetAPIService) ListVNetsExecute(r ApiListVNetsRequest) ([]string, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []string
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnetAPIService.ListVNets")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -762,353 +947,27 @@ func (a *VnetAPIService) GetAllVNetsExecute(r ApiGetAllVNetsRequest) ([]string, 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetVNetRequest struct {
-	ctx context.Context
-	ApiService *VnetAPIService
-	vnetId string
-}
-
-func (r ApiGetVNetRequest) Execute() (*VNet, *http.Response, error) {
-	return r.ApiService.GetVNetExecute(r)
-}
-
-/*
-GetVNet Method for GetVNet
-
-Returns a description of the virtual network
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param vnetId The ID of the virtual network.
- @return ApiGetVNetRequest
-*/
-func (a *VnetAPIService) GetVNet(ctx context.Context, vnetId string) ApiGetVNetRequest {
-	return ApiGetVNetRequest{
-		ApiService: a,
-		ctx: ctx,
-		vnetId: vnetId,
-	}
-}
-
-// Execute executes the request
-//  @return VNet
-func (a *VnetAPIService) GetVNetExecute(r ApiGetVNetRequest) (*VNet, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *VNet
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnetAPIService.GetVNet")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/vnet/{vnetId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"vnetId"+"}", url.PathEscape(parameterValueToString(r.vnetId, "vnetId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["TokenAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["x-token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-API-Key"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ApiErrorUnauthorized
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v ApiErrorForbidden
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ApiErrorNotFound
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetVNetSubnetsRequest struct {
-	ctx context.Context
-	ApiService *VnetAPIService
-	vnetId string
-}
-
-func (r ApiGetVNetSubnetsRequest) Execute() ([]string, *http.Response, error) {
-	return r.ApiService.GetVNetSubnetsExecute(r)
-}
-
-/*
-GetVNetSubnets Method for GetVNetSubnets
-
-Returns the IDs of the subnets existing in the virtual network.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param vnetId The ID of the virtual network.
- @return ApiGetVNetSubnetsRequest
-*/
-func (a *VnetAPIService) GetVNetSubnets(ctx context.Context, vnetId string) ApiGetVNetSubnetsRequest {
-	return ApiGetVNetSubnetsRequest{
-		ApiService: a,
-		ctx: ctx,
-		vnetId: vnetId,
-	}
-}
-
-// Execute executes the request
-//  @return []string
-func (a *VnetAPIService) GetVNetSubnetsExecute(r ApiGetVNetSubnetsRequest) ([]string, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []string
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnetAPIService.GetVNetSubnets")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/vnet/{vnetId}/subnets"
-	localVarPath = strings.Replace(localVarPath, "{"+"vnetId"+"}", url.PathEscape(parameterValueToString(r.vnetId, "vnetId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["TokenAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["x-token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-API-Key"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ApiErrorUnauthorized
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v ApiErrorForbidden
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ApiErrorNotFound
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetZoneVNetsRequest struct {
+type ApiListZoneVNetsRequest struct {
 	ctx context.Context
 	ApiService *VnetAPIService
 	zoneId string
 }
 
-func (r ApiGetZoneVNetsRequest) Execute() ([]string, *http.Response, error) {
-	return r.ApiService.GetZoneVNetsExecute(r)
+func (r ApiListZoneVNetsRequest) Execute() ([]string, *http.Response, error) {
+	return r.ApiService.ListZoneVNetsExecute(r)
 }
 
 /*
-GetZoneVNets Method for GetZoneVNets
+ListZoneVNets Method for ListZoneVNets
 
-Returns the IDs of the virtual networks existing in the zone.
+Returns the IDs of virtual network objects.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param zoneId The ID of the zone.
- @return ApiGetZoneVNetsRequest
+ @param zoneId The ID of the availability zone.
+ @return ApiListZoneVNetsRequest
 */
-func (a *VnetAPIService) GetZoneVNets(ctx context.Context, zoneId string) ApiGetZoneVNetsRequest {
-	return ApiGetZoneVNetsRequest{
+func (a *VnetAPIService) ListZoneVNets(ctx context.Context, zoneId string) ApiListZoneVNetsRequest {
+	return ApiListZoneVNetsRequest{
 		ApiService: a,
 		ctx: ctx,
 		zoneId: zoneId,
@@ -1117,7 +976,7 @@ func (a *VnetAPIService) GetZoneVNets(ctx context.Context, zoneId string) ApiGet
 
 // Execute executes the request
 //  @return []string
-func (a *VnetAPIService) GetZoneVNetsExecute(r ApiGetZoneVNetsRequest) ([]string, *http.Response, error) {
+func (a *VnetAPIService) ListZoneVNetsExecute(r ApiListZoneVNetsRequest) ([]string, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1125,12 +984,12 @@ func (a *VnetAPIService) GetZoneVNetsExecute(r ApiGetZoneVNetsRequest) ([]string
 		localVarReturnValue  []string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnetAPIService.GetZoneVNets")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnetAPIService.ListZoneVNets")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{zoneId}/vnets"
+	localVarPath := localBasePath + "/zone/{ zoneId }/vnets"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1251,34 +1110,27 @@ func (a *VnetAPIService) GetZoneVNetsExecute(r ApiGetZoneVNetsRequest) ([]string
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateVNetRequest struct {
+type ApiReadVNetRequest struct {
 	ctx context.Context
 	ApiService *VnetAPIService
 	vnetId string
-	vNet *VNet
 }
 
-// VNet payload
-func (r ApiUpdateVNetRequest) VNet(vNet VNet) ApiUpdateVNetRequest {
-	r.vNet = &vNet
-	return r
-}
-
-func (r ApiUpdateVNetRequest) Execute() (*VNet, *http.Response, error) {
-	return r.ApiService.UpdateVNetExecute(r)
+func (r ApiReadVNetRequest) Execute() (*VNet, *http.Response, error) {
+	return r.ApiService.ReadVNetExecute(r)
 }
 
 /*
-UpdateVNet Method for UpdateVNet
+ReadVNet Method for ReadVNet
 
-Updates a virtual network configuration.
+Returns a virtual network.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param vnetId The ID of the virtual network.
- @return ApiUpdateVNetRequest
+ @return ApiReadVNetRequest
 */
-func (a *VnetAPIService) UpdateVNet(ctx context.Context, vnetId string) ApiUpdateVNetRequest {
-	return ApiUpdateVNetRequest{
+func (a *VnetAPIService) ReadVNet(ctx context.Context, vnetId string) ApiReadVNetRequest {
+	return ApiReadVNetRequest{
 		ApiService: a,
 		ctx: ctx,
 		vnetId: vnetId,
@@ -1287,31 +1139,28 @@ func (a *VnetAPIService) UpdateVNet(ctx context.Context, vnetId string) ApiUpdat
 
 // Execute executes the request
 //  @return VNet
-func (a *VnetAPIService) UpdateVNetExecute(r ApiUpdateVNetRequest) (*VNet, *http.Response, error) {
+func (a *VnetAPIService) ReadVNetExecute(r ApiReadVNetRequest) (*VNet, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  *VNet
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnetAPIService.UpdateVNet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnetAPIService.ReadVNet")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/vnet/{vnetId}"
+	localVarPath := localBasePath + "/vnet/{ vnetId }"
 	localVarPath = strings.Replace(localVarPath, "{"+"vnetId"+"}", url.PathEscape(parameterValueToString(r.vnetId, "vnetId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.vNet == nil {
-		return localVarReturnValue, nil, reportError("vNet is required and must be specified")
-	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1327,8 +1176,6 @@ func (a *VnetAPIService) UpdateVNetExecute(r ApiUpdateVNetRequest) (*VNet, *http
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.vNet
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1379,17 +1226,6 @@ func (a *VnetAPIService) UpdateVNetExecute(r ApiUpdateVNetRequest) (*VNet, *http
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ApiErrorBadRequest
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v ApiErrorUnauthorized
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1421,17 +1257,6 @@ func (a *VnetAPIService) UpdateVNetExecute(r ApiUpdateVNetRequest) (*VNet, *http
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v ApiErrorUnprocessableEntity
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1448,29 +1273,29 @@ func (a *VnetAPIService) UpdateVNetExecute(r ApiUpdateVNetRequest) (*VNet, *http
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateVNetDefaultSubnetRequest struct {
+type ApiSetVNetDefaultSubnetRequest struct {
 	ctx context.Context
 	ApiService *VnetAPIService
 	vnetId string
 	subnetId string
 }
 
-func (r ApiUpdateVNetDefaultSubnetRequest) Execute() (*http.Response, error) {
-	return r.ApiService.UpdateVNetDefaultSubnetExecute(r)
+func (r ApiSetVNetDefaultSubnetRequest) Execute() (*http.Response, error) {
+	return r.ApiService.SetVNetDefaultSubnetExecute(r)
 }
 
 /*
-UpdateVNetDefaultSubnet Method for UpdateVNetDefaultSubnet
+SetVNetDefaultSubnet Method for SetVNetDefaultSubnet
 
-Set a virtual network default subnet.
+Performs a virtual network setting of default network subnet.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param vnetId The ID of the virtual network.
  @param subnetId The ID of the network subnet.
- @return ApiUpdateVNetDefaultSubnetRequest
+ @return ApiSetVNetDefaultSubnetRequest
 */
-func (a *VnetAPIService) UpdateVNetDefaultSubnet(ctx context.Context, vnetId string, subnetId string) ApiUpdateVNetDefaultSubnetRequest {
-	return ApiUpdateVNetDefaultSubnetRequest{
+func (a *VnetAPIService) SetVNetDefaultSubnet(ctx context.Context, vnetId string, subnetId string) ApiSetVNetDefaultSubnetRequest {
+	return ApiSetVNetDefaultSubnetRequest{
 		ApiService: a,
 		ctx: ctx,
 		vnetId: vnetId,
@@ -1479,19 +1304,19 @@ func (a *VnetAPIService) UpdateVNetDefaultSubnet(ctx context.Context, vnetId str
 }
 
 // Execute executes the request
-func (a *VnetAPIService) UpdateVNetDefaultSubnetExecute(r ApiUpdateVNetDefaultSubnetRequest) (*http.Response, error) {
+func (a *VnetAPIService) SetVNetDefaultSubnetExecute(r ApiSetVNetDefaultSubnetRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnetAPIService.UpdateVNetDefaultSubnet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnetAPIService.SetVNetDefaultSubnet")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/vnet/{vnetId}/subnet/{subnetId}/default"
+	localVarPath := localBasePath + "/vnet/{ vnetId }/subnet/{ subnetId }/default"
 	localVarPath = strings.Replace(localVarPath, "{"+"vnetId"+"}", url.PathEscape(parameterValueToString(r.vnetId, "vnetId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"subnetId"+"}", url.PathEscape(parameterValueToString(r.subnetId, "subnetId")), -1)
 
@@ -1613,4 +1438,212 @@ func (a *VnetAPIService) UpdateVNetDefaultSubnetExecute(r ApiUpdateVNetDefaultSu
 	}
 
 	return localVarHTTPResponse, nil
+}
+
+type ApiUpdateVNetRequest struct {
+	ctx context.Context
+	ApiService *VnetAPIService
+	vnetId string
+	vNet *VNet
+}
+
+// VNet payload.
+func (r ApiUpdateVNetRequest) VNet(vNet VNet) ApiUpdateVNetRequest {
+	r.vNet = &vNet
+	return r
+}
+
+func (r ApiUpdateVNetRequest) Execute() (*VNet, *http.Response, error) {
+	return r.ApiService.UpdateVNetExecute(r)
+}
+
+/*
+UpdateVNet Method for UpdateVNet
+
+Updates a virtual network configuration.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param vnetId The ID of the virtual network.
+ @return ApiUpdateVNetRequest
+*/
+func (a *VnetAPIService) UpdateVNet(ctx context.Context, vnetId string) ApiUpdateVNetRequest {
+	return ApiUpdateVNetRequest{
+		ApiService: a,
+		ctx: ctx,
+		vnetId: vnetId,
+	}
+}
+
+// Execute executes the request
+//  @return VNet
+func (a *VnetAPIService) UpdateVNetExecute(r ApiUpdateVNetRequest) (*VNet, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *VNet
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnetAPIService.UpdateVNet")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/vnet/{ vnetId }"
+	localVarPath = strings.Replace(localVarPath, "{"+"vnetId"+"}", url.PathEscape(parameterValueToString(r.vnetId, "vnetId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.vNet == nil {
+		return localVarReturnValue, nil, reportError("vNet is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.vNet
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["TokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-token"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiErrorBadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiErrorUnauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiErrorForbidden
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiErrorNotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v ApiErrorUnprocessableEntity
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 507 {
+			var v ApiErrorInsufficientStorage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

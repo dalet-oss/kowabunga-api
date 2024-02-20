@@ -53,7 +53,7 @@ func (c *RecordAPIController) Routes() Routes {
 	return Routes{
 		"CreateProjectDnsRecord": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{projectId}/record",
+			"/api/v1/project/{ projectId }/record",
 			c.CreateProjectDnsRecord,
 		},
 		"DeleteDnsRecord": Route{
@@ -61,10 +61,10 @@ func (c *RecordAPIController) Routes() Routes {
 			"/api/v1/record/{ recordId }",
 			c.DeleteDnsRecord,
 		},
-		"GetProjectDnsRecords": Route{
+		"ListProjectDnsRecords": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{projectId}/records",
-			c.GetProjectDnsRecords,
+			"/api/v1/project/{ projectId}/records",
+			c.ListProjectDnsRecords,
 		},
 		"ReadDnsRecord": Route{
 			strings.ToUpper("Get"),
@@ -130,15 +130,15 @@ func (c *RecordAPIController) DeleteDnsRecord(w http.ResponseWriter, r *http.Req
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetProjectDnsRecords - 
-func (c *RecordAPIController) GetProjectDnsRecords(w http.ResponseWriter, r *http.Request) {
+// ListProjectDnsRecords - 
+func (c *RecordAPIController) ListProjectDnsRecords(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	projectIdParam := params["projectId"]
 	if projectIdParam == "" {
 		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
 		return
 	}
-	result, err := c.service.GetProjectDnsRecords(r.Context(), projectIdParam)
+	result, err := c.service.ListProjectDnsRecords(r.Context(), projectIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

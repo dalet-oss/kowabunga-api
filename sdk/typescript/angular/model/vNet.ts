@@ -11,6 +11,9 @@
  */
 
 
+/**
+ * A virtual network.
+ */
 export interface VNet { 
     /**
      * The virtual network ID (auto-generated).
@@ -33,7 +36,7 @@ export interface VNet {
      */
     _interface: string;
     /**
-     * Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?
+     * Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?.
      */
     _private?: boolean;
 }

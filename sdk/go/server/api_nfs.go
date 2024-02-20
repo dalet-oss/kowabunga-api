@@ -51,20 +51,15 @@ func NewNfsAPIController(s NfsAPIServicer, opts ...NfsAPIOption) Router {
 // Routes returns all the api routes for the NfsAPIController
 func (c *NfsAPIController) Routes() Routes {
 	return Routes{
-		"CreateNfsStorage": Route{
+		"CreateStorageNFS": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/zone/{zoneId}/nfs",
-			c.CreateNfsStorage,
+			"/api/v1/zone/{ zoneId }/nfs",
+			c.CreateStorageNFS,
 		},
 		"DeleteStorageNFS": Route{
 			strings.ToUpper("Delete"),
 			"/api/v1/nfs/{ nfsId }",
 			c.DeleteStorageNFS,
-		},
-		"GetZoneNfsStorages": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/zone/{zoneId}/nfs",
-			c.GetZoneNfsStorages,
 		},
 		"ListStorageNFSKFSs": Route{
 			strings.ToUpper("Get"),
@@ -76,26 +71,31 @@ func (c *NfsAPIController) Routes() Routes {
 			"/api/v1/nfs",
 			c.ListStorageNFSs,
 		},
+		"ListZoneStorageNFSs": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/zone/{ zoneId }/nfs",
+			c.ListZoneStorageNFSs,
+		},
 		"ReadStorageNFS": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/nfs/{ nfsId }",
 			c.ReadStorageNFS,
+		},
+		"SetZoneDefaultStorageNFS": Route{
+			strings.ToUpper("Patch"),
+			"/api/v1/zone/{ zoneId }/nfs/{ nfsId }/default",
+			c.SetZoneDefaultStorageNFS,
 		},
 		"UpdateStorageNFS": Route{
 			strings.ToUpper("Put"),
 			"/api/v1/nfs/{ nfsId }",
 			c.UpdateStorageNFS,
 		},
-		"UpdateZoneDefaultNfsStorage": Route{
-			strings.ToUpper("Put"),
-			"/api/v1/zone/{zoneId}/nfs/{nfsId}/default",
-			c.UpdateZoneDefaultNfsStorage,
-		},
 	}
 }
 
-// CreateNfsStorage - 
-func (c *NfsAPIController) CreateNfsStorage(w http.ResponseWriter, r *http.Request) {
+// CreateStorageNFS - 
+func (c *NfsAPIController) CreateStorageNFS(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	zoneIdParam := params["zoneId"]
 	if zoneIdParam == "" {
@@ -117,7 +117,7 @@ func (c *NfsAPIController) CreateNfsStorage(w http.ResponseWriter, r *http.Reque
 		c.errorHandler(w, r, err, nil)
 		return
 	}
-	result, err := c.service.CreateNfsStorage(r.Context(), zoneIdParam, storageNfsParam)
+	result, err := c.service.CreateStorageNFS(r.Context(), zoneIdParam, storageNfsParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -136,24 +136,6 @@ func (c *NfsAPIController) DeleteStorageNFS(w http.ResponseWriter, r *http.Reque
 		return
 	}
 	result, err := c.service.DeleteStorageNFS(r.Context(), nfsIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// GetZoneNfsStorages - 
-func (c *NfsAPIController) GetZoneNfsStorages(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	result, err := c.service.GetZoneNfsStorages(r.Context(), zoneIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -193,6 +175,24 @@ func (c *NfsAPIController) ListStorageNFSs(w http.ResponseWriter, r *http.Reques
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
+// ListZoneStorageNFSs - 
+func (c *NfsAPIController) ListZoneStorageNFSs(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	zoneIdParam := params["zoneId"]
+	if zoneIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
+		return
+	}
+	result, err := c.service.ListZoneStorageNFSs(r.Context(), zoneIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
 // ReadStorageNFS - 
 func (c *NfsAPIController) ReadStorageNFS(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -202,6 +202,29 @@ func (c *NfsAPIController) ReadStorageNFS(w http.ResponseWriter, r *http.Request
 		return
 	}
 	result, err := c.service.ReadStorageNFS(r.Context(), nfsIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// SetZoneDefaultStorageNFS - 
+func (c *NfsAPIController) SetZoneDefaultStorageNFS(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	zoneIdParam := params["zoneId"]
+	if zoneIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
+		return
+	}
+	nfsIdParam := params["nfsId"]
+	if nfsIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"nfsId"}, nil)
+		return
+	}
+	result, err := c.service.SetZoneDefaultStorageNFS(r.Context(), zoneIdParam, nfsIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -235,29 +258,6 @@ func (c *NfsAPIController) UpdateStorageNFS(w http.ResponseWriter, r *http.Reque
 		return
 	}
 	result, err := c.service.UpdateStorageNFS(r.Context(), nfsIdParam, storageNfsParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// UpdateZoneDefaultNfsStorage - 
-func (c *NfsAPIController) UpdateZoneDefaultNfsStorage(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	nfsIdParam := params["nfsId"]
-	if nfsIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"nfsId"}, nil)
-		return
-	}
-	result, err := c.service.UpdateZoneDefaultNfsStorage(r.Context(), zoneIdParam, nfsIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

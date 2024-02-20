@@ -24,7 +24,7 @@ import (
 // KfsAPIService KfsAPI service
 type KfsAPIService service
 
-type ApiCreateProjectZoneKfsRequest struct {
+type ApiCreateProjectZoneKFSRequest struct {
 	ctx context.Context
 	ApiService *KfsAPIService
 	projectId string
@@ -34,40 +34,40 @@ type ApiCreateProjectZoneKfsRequest struct {
 	notify *bool
 }
 
-// KFS payload
-func (r ApiCreateProjectZoneKfsRequest) KFS(kFS KFS) ApiCreateProjectZoneKfsRequest {
+// KFS payload.
+func (r ApiCreateProjectZoneKFSRequest) KFS(kFS KFS) ApiCreateProjectZoneKFSRequest {
 	r.kFS = &kFS
 	return r
 }
 
 // NFS storage ID (optional, zone&#39;s default if unspecified).
-func (r ApiCreateProjectZoneKfsRequest) NfsId(nfsId string) ApiCreateProjectZoneKfsRequest {
+func (r ApiCreateProjectZoneKFSRequest) NfsId(nfsId string) ApiCreateProjectZoneKFSRequest {
 	r.nfsId = &nfsId
 	return r
 }
 
 // Whether or not to send a notification email at resource creation.
-func (r ApiCreateProjectZoneKfsRequest) Notify(notify bool) ApiCreateProjectZoneKfsRequest {
+func (r ApiCreateProjectZoneKFSRequest) Notify(notify bool) ApiCreateProjectZoneKFSRequest {
 	r.notify = &notify
 	return r
 }
 
-func (r ApiCreateProjectZoneKfsRequest) Execute() (*KFS, *http.Response, error) {
-	return r.ApiService.CreateProjectZoneKfsExecute(r)
+func (r ApiCreateProjectZoneKFSRequest) Execute() (*KFS, *http.Response, error) {
+	return r.ApiService.CreateProjectZoneKFSExecute(r)
 }
 
 /*
-CreateProjectZoneKfs Method for CreateProjectZoneKfs
+CreateProjectZoneKFS Method for CreateProjectZoneKFS
 
-Creates a new KFS storage volume in specified zone.
+Creates a new KFS (Kowabunga File System).
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId The ID of the network adapter.
- @param zoneId The ID of the zone.
- @return ApiCreateProjectZoneKfsRequest
+ @param projectId The ID of the project.
+ @param zoneId The ID of the availability zone.
+ @return ApiCreateProjectZoneKFSRequest
 */
-func (a *KfsAPIService) CreateProjectZoneKfs(ctx context.Context, projectId string, zoneId string) ApiCreateProjectZoneKfsRequest {
-	return ApiCreateProjectZoneKfsRequest{
+func (a *KfsAPIService) CreateProjectZoneKFS(ctx context.Context, projectId string, zoneId string) ApiCreateProjectZoneKFSRequest {
+	return ApiCreateProjectZoneKFSRequest{
 		ApiService: a,
 		ctx: ctx,
 		projectId: projectId,
@@ -77,7 +77,7 @@ func (a *KfsAPIService) CreateProjectZoneKfs(ctx context.Context, projectId stri
 
 // Execute executes the request
 //  @return KFS
-func (a *KfsAPIService) CreateProjectZoneKfsExecute(r ApiCreateProjectZoneKfsRequest) (*KFS, *http.Response, error) {
+func (a *KfsAPIService) CreateProjectZoneKFSExecute(r ApiCreateProjectZoneKFSRequest) (*KFS, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -85,12 +85,12 @@ func (a *KfsAPIService) CreateProjectZoneKfsExecute(r ApiCreateProjectZoneKfsReq
 		localVarReturnValue  *KFS
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KfsAPIService.CreateProjectZoneKfs")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KfsAPIService.CreateProjectZoneKFS")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/kfs"
+	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/kfs"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
@@ -233,6 +233,17 @@ func (a *KfsAPIService) CreateProjectZoneKfsExecute(r ApiCreateProjectZoneKfsReq
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v ApiErrorUnprocessableEntity
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 507 {
+			var v ApiErrorInsufficientStorage
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -430,193 +441,6 @@ func (a *KfsAPIService) DeleteKFSExecute(r ApiDeleteKFSRequest) (*http.Response,
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetProjectZoneKfsRequest struct {
-	ctx context.Context
-	ApiService *KfsAPIService
-	projectId string
-	zoneId string
-	nfsId *string
-	notify *bool
-}
-
-// NFS storage ID (optional, zone&#39;s default if unspecified).
-func (r ApiGetProjectZoneKfsRequest) NfsId(nfsId string) ApiGetProjectZoneKfsRequest {
-	r.nfsId = &nfsId
-	return r
-}
-
-// Whether or not to send a notification email at resource creation.
-func (r ApiGetProjectZoneKfsRequest) Notify(notify bool) ApiGetProjectZoneKfsRequest {
-	r.notify = &notify
-	return r
-}
-
-func (r ApiGetProjectZoneKfsRequest) Execute() ([]string, *http.Response, error) {
-	return r.ApiService.GetProjectZoneKfsExecute(r)
-}
-
-/*
-GetProjectZoneKfs Method for GetProjectZoneKfs
-
-Returns the IDs of the KFS storage volumes existing in the project in the specified zone.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param projectId The ID of the network adapter.
- @param zoneId The ID of the zone.
- @return ApiGetProjectZoneKfsRequest
-*/
-func (a *KfsAPIService) GetProjectZoneKfs(ctx context.Context, projectId string, zoneId string) ApiGetProjectZoneKfsRequest {
-	return ApiGetProjectZoneKfsRequest{
-		ApiService: a,
-		ctx: ctx,
-		projectId: projectId,
-		zoneId: zoneId,
-	}
-}
-
-// Execute executes the request
-//  @return []string
-func (a *KfsAPIService) GetProjectZoneKfsExecute(r ApiGetProjectZoneKfsRequest) ([]string, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []string
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KfsAPIService.GetProjectZoneKfs")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/kfs"
-	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.nfsId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "nfsId", r.nfsId, "")
-	}
-	if r.notify != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "notify", r.notify, "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["TokenAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["x-token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-API-Key"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ApiErrorUnauthorized
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v ApiErrorForbidden
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ApiErrorNotFound
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiListKFSsRequest struct {
 	ctx context.Context
 	ApiService *KfsAPIService
@@ -742,6 +566,193 @@ func (a *KfsAPIService) ListKFSsExecute(r ApiListKFSsRequest) ([]string, *http.R
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v ApiErrorForbidden
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListProjectZoneKFSsRequest struct {
+	ctx context.Context
+	ApiService *KfsAPIService
+	projectId string
+	zoneId string
+	nfsId *string
+	notify *bool
+}
+
+// NFS storage ID (optional, zone&#39;s default if unspecified).
+func (r ApiListProjectZoneKFSsRequest) NfsId(nfsId string) ApiListProjectZoneKFSsRequest {
+	r.nfsId = &nfsId
+	return r
+}
+
+// Whether or not to send a notification email at resource creation.
+func (r ApiListProjectZoneKFSsRequest) Notify(notify bool) ApiListProjectZoneKFSsRequest {
+	r.notify = &notify
+	return r
+}
+
+func (r ApiListProjectZoneKFSsRequest) Execute() ([]string, *http.Response, error) {
+	return r.ApiService.ListProjectZoneKFSsExecute(r)
+}
+
+/*
+ListProjectZoneKFSs Method for ListProjectZoneKFSs
+
+Returns the IDs of KFS (Kowabunga File System) objects.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param projectId The ID of the project.
+ @param zoneId The ID of the availability zone.
+ @return ApiListProjectZoneKFSsRequest
+*/
+func (a *KfsAPIService) ListProjectZoneKFSs(ctx context.Context, projectId string, zoneId string) ApiListProjectZoneKFSsRequest {
+	return ApiListProjectZoneKFSsRequest{
+		ApiService: a,
+		ctx: ctx,
+		projectId: projectId,
+		zoneId: zoneId,
+	}
+}
+
+// Execute executes the request
+//  @return []string
+func (a *KfsAPIService) ListProjectZoneKFSsExecute(r ApiListProjectZoneKFSsRequest) ([]string, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []string
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KfsAPIService.ListProjectZoneKFSs")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/kfs"
+	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.nfsId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "nfsId", r.nfsId, "")
+	}
+	if r.notify != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "notify", r.notify, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["TokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["x-token"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-API-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiErrorUnauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiErrorForbidden
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiErrorNotFound
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

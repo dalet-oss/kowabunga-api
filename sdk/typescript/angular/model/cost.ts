@@ -12,7 +12,7 @@
 
 
 /**
- * A key/value metadata.
+ * A resource cost.
  */
 export interface Cost { 
     /**

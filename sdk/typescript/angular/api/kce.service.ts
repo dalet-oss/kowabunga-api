@@ -108,10 +108,10 @@ export class KceService {
     }
 
     /**
-     * Creates a new KCE virtual machine in specified zone.
-     * @param projectId The ID of the network adapter.
-     * @param zoneId The ID of the zone.
-     * @param kCE KCE payload
+     * Creates a new KCE (Kowabunga Compute Engine).
+     * @param projectId The ID of the project.
+     * @param zoneId The ID of the availability zone.
+     * @param kCE KCE payload.
      * @param poolId Storage pool ID (optional, zone\&#39;s default if unspecified).
      * @param templateId Template to clone the storage volume from (optional, zone\&#39;s default if unspecified).
      * @param _public Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).
@@ -119,18 +119,18 @@ export class KceService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createProjectZoneKce(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: string, notify?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<KCE>;
-    public createProjectZoneKce(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: string, notify?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<KCE>>;
-    public createProjectZoneKce(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: string, notify?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<KCE>>;
-    public createProjectZoneKce(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: string, notify?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public createProjectZoneKCE(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: string, notify?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<KCE>;
+    public createProjectZoneKCE(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: string, notify?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<KCE>>;
+    public createProjectZoneKCE(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: string, notify?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<KCE>>;
+    public createProjectZoneKCE(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: string, notify?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (projectId === null || projectId === undefined) {
-            throw new Error('Required parameter projectId was null or undefined when calling createProjectZoneKce.');
+            throw new Error('Required parameter projectId was null or undefined when calling createProjectZoneKCE.');
         }
         if (zoneId === null || zoneId === undefined) {
-            throw new Error('Required parameter zoneId was null or undefined when calling createProjectZoneKce.');
+            throw new Error('Required parameter zoneId was null or undefined when calling createProjectZoneKCE.');
         }
         if (kCE === null || kCE === undefined) {
-            throw new Error('Required parameter kCE was null or undefined when calling createProjectZoneKce.');
+            throw new Error('Required parameter kCE was null or undefined when calling createProjectZoneKCE.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -210,7 +210,7 @@ export class KceService {
             }
         }
 
-        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kce`;
+        let localVarPath = `/project//zone//kce`;
         return this.httpClient.request<KCE>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -303,87 +303,6 @@ export class KceService {
     }
 
     /**
-     * Returns the IDs of the KCE virtual machines existing in the project in the specified zone.
-     * @param projectId The ID of the network adapter.
-     * @param zoneId The ID of the zone.
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getProjectZoneKCEs(projectId: string, zoneId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
-    public getProjectZoneKCEs(projectId: string, zoneId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
-    public getProjectZoneKCEs(projectId: string, zoneId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
-    public getProjectZoneKCEs(projectId: string, zoneId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        if (projectId === null || projectId === undefined) {
-            throw new Error('Required parameter projectId was null or undefined when calling getProjectZoneKCEs.');
-        }
-        if (zoneId === null || zoneId === undefined) {
-            throw new Error('Required parameter zoneId was null or undefined when calling getProjectZoneKCEs.');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarCredential: string | undefined;
-        // authentication (TokenAuth) required
-        localVarCredential = this.configuration.lookupCredential('TokenAuth');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('x-token', localVarCredential);
-        }
-
-        // authentication (ApiKeyAuth) required
-        localVarCredential = this.configuration.lookupCredential('ApiKeyAuth');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('X-API-Key', localVarCredential);
-        }
-
-        // authentication (BearerAuth) required
-        localVarCredential = this.configuration.lookupCredential('BearerAuth');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
-        }
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kces`;
-        return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Returns the IDs of KCE (Kowabunga Compute Engine) objects.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -444,6 +363,87 @@ export class KceService {
         }
 
         let localVarPath = `/kce`;
+        return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Returns the IDs of KCE (Kowabunga Compute Engine) objects.
+     * @param projectId The ID of the project.
+     * @param zoneId The ID of the availability zone.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public listProjectZoneKCEs(projectId: string, zoneId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
+    public listProjectZoneKCEs(projectId: string, zoneId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
+    public listProjectZoneKCEs(projectId: string, zoneId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
+    public listProjectZoneKCEs(projectId: string, zoneId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (projectId === null || projectId === undefined) {
+            throw new Error('Required parameter projectId was null or undefined when calling listProjectZoneKCEs.');
+        }
+        if (zoneId === null || zoneId === undefined) {
+            throw new Error('Required parameter zoneId was null or undefined when calling listProjectZoneKCEs.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (TokenAuth) required
+        localVarCredential = this.configuration.lookupCredential('TokenAuth');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('x-token', localVarCredential);
+        }
+
+        // authentication (ApiKeyAuth) required
+        localVarCredential = this.configuration.lookupCredential('ApiKeyAuth');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('X-API-Key', localVarCredential);
+        }
+
+        // authentication (BearerAuth) required
+        localVarCredential = this.configuration.lookupCredential('BearerAuth');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/project//zone//kces`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

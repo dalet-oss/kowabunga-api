@@ -85,26 +85,9 @@ func (s *VolumeAPIService) DeleteVolume(ctx context.Context, volumeId string) (I
 	return Response(http.StatusNotImplemented, nil), errors.New("DeleteVolume method not implemented")
 }
 
-// GetAllVolumes - 
-func (s *VolumeAPIService) GetAllVolumes(ctx context.Context) (ImplResponse, error) {
-	// TODO - update GetAllVolumes with the required logic for this service method.
-	// Add api_volume_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetAllVolumes method not implemented")
-}
-
-// GetProjectZoneVolumes - 
-func (s *VolumeAPIService) GetProjectZoneVolumes(ctx context.Context, projectId string, zoneId string) (ImplResponse, error) {
-	// TODO - update GetProjectZoneVolumes with the required logic for this service method.
+// ListProjectZoneVolumes - 
+func (s *VolumeAPIService) ListProjectZoneVolumes(ctx context.Context, projectId string, zoneId string) (ImplResponse, error) {
+	// TODO - update ListProjectZoneVolumes with the required logic for this service method.
 	// Add api_volume_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
 	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
@@ -119,27 +102,7 @@ func (s *VolumeAPIService) GetProjectZoneVolumes(ctx context.Context, projectId 
 	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
 	// return Response(404, ApiErrorNotFound{}), nil
 
-	return Response(http.StatusNotImplemented, nil), errors.New("GetProjectZoneVolumes method not implemented")
-}
-
-// GetVolume - 
-func (s *VolumeAPIService) GetVolume(ctx context.Context, volumeId string) (ImplResponse, error) {
-	// TODO - update GetVolume with the required logic for this service method.
-	// Add api_volume_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, Volume{}) or use other options such as http.Ok ...
-	// return Response(200, Volume{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetVolume method not implemented")
+	return Response(http.StatusNotImplemented, nil), errors.New("ListProjectZoneVolumes method not implemented")
 }
 
 // ListStoragePoolVolumes - 
@@ -160,6 +123,43 @@ func (s *VolumeAPIService) ListStoragePoolVolumes(ctx context.Context, poolId st
 	// return Response(404, ApiErrorNotFound{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("ListStoragePoolVolumes method not implemented")
+}
+
+// ListVolumes - 
+func (s *VolumeAPIService) ListVolumes(ctx context.Context) (ImplResponse, error) {
+	// TODO - update ListVolumes with the required logic for this service method.
+	// Add api_volume_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
+	// return Response(200, []string{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ListVolumes method not implemented")
+}
+
+// ReadVolume - 
+func (s *VolumeAPIService) ReadVolume(ctx context.Context, volumeId string) (ImplResponse, error) {
+	// TODO - update ReadVolume with the required logic for this service method.
+	// Add api_volume_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, Volume{}) or use other options such as http.Ok ...
+	// return Response(200, Volume{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ReadVolume method not implemented")
 }
 
 // UpdateVolume - 

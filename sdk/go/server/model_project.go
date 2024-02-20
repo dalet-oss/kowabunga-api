@@ -13,6 +13,7 @@ package server
 
 
 
+// Project - A Kowabunga project corresponds to a single tenant, isolated set of resources.
 type Project struct {
 
 	// The project ID (auto-generated).
@@ -24,31 +25,31 @@ type Project struct {
 	// The project description.
 	Description string `json:"description,omitempty"`
 
-	// The project's owner name.
+	// Owner's name.
 	Owner string `json:"owner"`
 
-	// The project associated email address, used to receive notifications.
+	// Associated email address, used to receive notifications.
 	Email string `json:"email"`
 
-	// The project associated internal domain name (e.g. myproject.acme.com).
+	// Internal domain name (e.g. myproject.acme.com).
 	Domain string `json:"domain,omitempty"`
 
-	// The project default root password, set at cloud-init instance bootstrap phase. Will be randomly auto-generated at each instance creation if unspecified.
+	// Default root password, set at cloud-init instance bootstrap phase. Will be randomly auto-generated at each instance creation if unspecified.
 	RootPassword string `json:"root_password,omitempty"`
 
-	// The project default service user name, created at cloud-init instance bootstrap phase. Will use Kowabunga's default configuration one if unspecified.
+	// Default service user name, created at cloud-init instance bootstrap phase. Will use Kowabunga's default configuration one if unspecified.
 	BootstrapUser string `json:"bootstrap_user,omitempty"`
 
-	// The project default public SSH key, to be associated to bootstrap user. Will use Kowabunga's default configuration one if unspecified.
+	// Default public SSH key, to be associated to bootstrap user. Will use Kowabunga's default configuration one if unspecified.
 	BootstrapPubkey string `json:"bootstrap_pubkey,omitempty"`
 
 	// A list of tags to be associated to the project.
 	Tags []string `json:"tags,omitempty"`
 
-	// A list of metadata to be associated to the project
+	// A list of metadata to be associated to the project.
 	Metadatas []Metadata `json:"metadatas,omitempty"`
 
-	// The global project resource quotas (0 for unlimited)
+	// The global project resource quotas (0 for unlimited).
 	Quotas ProjectResources `json:"quotas,omitempty"`
 
 	// The assigned project VPC private subnets IDs (read-only).

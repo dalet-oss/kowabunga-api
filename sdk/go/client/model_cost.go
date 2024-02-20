@@ -20,7 +20,7 @@ import (
 // checks if the Cost type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Cost{}
 
-// Cost A key/value metadata.
+// Cost A resource cost.
 type Cost struct {
 	// The unit price information.
 	Price int32 `json:"price"`

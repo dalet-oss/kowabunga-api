@@ -46,10 +46,6 @@ export interface Host {
      */
     tls?: HostTLS;
     /**
-     * Global cost associated to the host (deprecated, will be removed).
-     */
-    cost?: Cost;
-    /**
      * Cost associated to the host\'s CPU resources.
      */
     cpu_cost?: Cost;

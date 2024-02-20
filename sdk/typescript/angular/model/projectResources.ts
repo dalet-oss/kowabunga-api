@@ -12,23 +12,23 @@
 
 
 /**
- * The global project resource quotas/usage (0 for unlimited).
+ * A global project resource quotas/usage (0 for unlimited).
  */
 export interface ProjectResources { 
     /**
-     * the maximum total number of vCPUs allowed to be consumed by sum of all instances.
+     * The maximum total number of vCPUs allowed to be consumed by sum of all instances.
      */
     vcpus?: number;
     /**
-     * the maximum total memory (in bytes) allowed to be consumed by sum of all instances.
+     * The maximum total memory (in bytes) allowed to be consumed by sum of all instances.
      */
     memory?: number;
     /**
-     * the maximum total disk capacity allowed to be consumed by sum of all instances.
+     * The maximum total disk capacity allowed to be consumed by sum of all instances.
      */
     storage?: number;
     /**
-     * the maximum number of instances allowed to be spawned.
+     * The maximum number of instances allowed to be spawned.
      */
     instances?: number;
 }

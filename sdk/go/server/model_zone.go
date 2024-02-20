@@ -13,15 +13,16 @@ package server
 
 
 
+// Zone - A availability zone.
 type Zone struct {
 
-	// The zone ID (auto-generated).
+	// The availability zone ID (auto-generated).
 	Id string `json:"id,omitempty"`
 
-	// The zone name.
+	// The availability zone name.
 	Name string `json:"name"`
 
-	// The zone description.
+	// The availability zone description.
 	Description string `json:"description,omitempty"`
 }
 

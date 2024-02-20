@@ -53,6 +53,9 @@ func (s *HostAPIService) CreateHost(ctx context.Context, zoneId string, host Hos
 	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
 	// return Response(422, ApiErrorUnprocessableEntity{}), nil
 
+	// TODO: Uncomment the next line to return response Response(507, ApiErrorInsufficientStorage{}) or use other options such as http.Ok ...
+	// return Response(507, ApiErrorInsufficientStorage{}), nil
+
 	return Response(http.StatusNotImplemented, nil), errors.New("CreateHost method not implemented")
 }
 
@@ -80,26 +83,6 @@ func (s *HostAPIService) DeleteHost(ctx context.Context, hostId string) (ImplRes
 	// return Response(422, ApiErrorUnprocessableEntity{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("DeleteHost method not implemented")
-}
-
-// GetZoneHosts - 
-func (s *HostAPIService) GetZoneHosts(ctx context.Context, zoneId string) (ImplResponse, error) {
-	// TODO - update GetZoneHosts with the required logic for this service method.
-	// Add api_host_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetZoneHosts method not implemented")
 }
 
 // ListHostInstances - 
@@ -137,6 +120,26 @@ func (s *HostAPIService) ListHosts(ctx context.Context) (ImplResponse, error) {
 	// return Response(403, ApiErrorForbidden{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("ListHosts method not implemented")
+}
+
+// ListZoneHosts - 
+func (s *HostAPIService) ListZoneHosts(ctx context.Context, zoneId string) (ImplResponse, error) {
+	// TODO - update ListZoneHosts with the required logic for this service method.
+	// Add api_host_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
+	// return Response(200, []string{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ListZoneHosts method not implemented")
 }
 
 // ReadHost - 

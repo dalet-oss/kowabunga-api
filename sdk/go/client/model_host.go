@@ -36,8 +36,6 @@ type Host struct {
 	Port *int32 `json:"port,omitempty"`
 	// The host libvirt's TLS configuration.
 	Tls HostTLS `json:"tls,omitempty"`
-	// Global cost associated to the host (deprecated, will be removed).
-	Cost Cost `json:"cost,omitempty"`
 	// Cost associated to the host's CPU resources.
 	CpuCost Cost `json:"cpu_cost,omitempty"`
 	// Cost associated to the host's memoery resources.
@@ -278,38 +276,6 @@ func (o *Host) SetTls(v HostTLS) {
 	o.Tls = v
 }
 
-// GetCost returns the Cost field value if set, zero value otherwise.
-func (o *Host) GetCost() Cost {
-	if o == nil || IsNil(o.Cost) {
-		var ret Cost
-		return ret
-	}
-	return o.Cost
-}
-
-// GetCostOk returns a tuple with the Cost field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Host) GetCostOk() (Cost, bool) {
-	if o == nil || IsNil(o.Cost) {
-		return Cost{}, false
-	}
-	return o.Cost, true
-}
-
-// HasCost returns a boolean if a field has been set.
-func (o *Host) HasCost() bool {
-	if o != nil && !IsNil(o.Cost) {
-		return true
-	}
-
-	return false
-}
-
-// SetCost gets a reference to the given Cost and assigns it to the Cost field.
-func (o *Host) SetCost(v Cost) {
-	o.Cost = v
-}
-
 // GetCpuCost returns the CpuCost field value if set, zero value otherwise.
 func (o *Host) GetCpuCost() Cost {
 	if o == nil || IsNil(o.CpuCost) {
@@ -462,9 +428,6 @@ func (o Host) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Tls) {
 		toSerialize["tls"] = o.Tls
-	}
-	if !IsNil(o.Cost) {
-		toSerialize["cost"] = o.Cost
 	}
 	if !IsNil(o.CpuCost) {
 		toSerialize["cpu_cost"] = o.CpuCost

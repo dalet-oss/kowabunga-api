@@ -106,9 +106,9 @@ export class RecordService {
     }
 
     /**
-     * Creates a new DNS record in specified project.
-     * @param projectId The ID of the network adapter.
-     * @param dnsRecord DNS record payload
+     * Creates a new DNS record.
+     * @param projectId The ID of the project.
+     * @param dnsRecord DnsRecord payload.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -182,7 +182,7 @@ export class RecordService {
             }
         }
 
-        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/record`;
+        let localVarPath = `/project//record`;
         return this.httpClient.request<DnsRecord>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -274,17 +274,17 @@ export class RecordService {
     }
 
     /**
-     * Returns the IDs of the DNS records existing in the project.
-     * @param projectId The ID of the network adapter.
+     * Returns the IDs of DNS record objects.
+     * @param projectId The ID of the project.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getProjectDnsRecords(projectId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
-    public getProjectDnsRecords(projectId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
-    public getProjectDnsRecords(projectId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
-    public getProjectDnsRecords(projectId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public listProjectDnsRecords(projectId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
+    public listProjectDnsRecords(projectId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
+    public listProjectDnsRecords(projectId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
+    public listProjectDnsRecords(projectId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (projectId === null || projectId === undefined) {
-            throw new Error('Required parameter projectId was null or undefined when calling getProjectDnsRecords.');
+            throw new Error('Required parameter projectId was null or undefined when calling listProjectDnsRecords.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -337,7 +337,7 @@ export class RecordService {
             }
         }
 
-        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/records`;
+        let localVarPath = `/project//records`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

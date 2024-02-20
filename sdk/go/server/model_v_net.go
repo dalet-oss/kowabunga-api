@@ -13,6 +13,7 @@ package server
 
 
 
+// VNet - A virtual network.
 type VNet struct {
 
 	// The virtual network ID (auto-generated).
@@ -30,7 +31,7 @@ type VNet struct {
 	// The libvirt's bridge network interface (brX).
 	Interface string `json:"interface"`
 
-	// Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?
+	// Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?.
 	Private bool `json:"private,omitempty"`
 }
 

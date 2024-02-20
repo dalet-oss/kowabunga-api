@@ -27,9 +27,9 @@ func NewKfsAPIService() KfsAPIServicer {
 	return &KfsAPIService{}
 }
 
-// CreateProjectZoneKfs - 
-func (s *KfsAPIService) CreateProjectZoneKfs(ctx context.Context, projectId string, zoneId string, kfs Kfs, nfsId string, notify bool) (ImplResponse, error) {
-	// TODO - update CreateProjectZoneKfs with the required logic for this service method.
+// CreateProjectZoneKFS - 
+func (s *KfsAPIService) CreateProjectZoneKFS(ctx context.Context, projectId string, zoneId string, kfs Kfs, nfsId string, notify bool) (ImplResponse, error) {
+	// TODO - update CreateProjectZoneKFS with the required logic for this service method.
 	// Add api_kfs_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
 	// TODO: Uncomment the next line to return response Response(201, Kfs{}) or use other options such as http.Ok ...
@@ -53,7 +53,10 @@ func (s *KfsAPIService) CreateProjectZoneKfs(ctx context.Context, projectId stri
 	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
 	// return Response(422, ApiErrorUnprocessableEntity{}), nil
 
-	return Response(http.StatusNotImplemented, nil), errors.New("CreateProjectZoneKfs method not implemented")
+	// TODO: Uncomment the next line to return response Response(507, ApiErrorInsufficientStorage{}) or use other options such as http.Ok ...
+	// return Response(507, ApiErrorInsufficientStorage{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("CreateProjectZoneKFS method not implemented")
 }
 
 // DeleteKFS - 
@@ -82,26 +85,6 @@ func (s *KfsAPIService) DeleteKFS(ctx context.Context, kfsId string) (ImplRespon
 	return Response(http.StatusNotImplemented, nil), errors.New("DeleteKFS method not implemented")
 }
 
-// GetProjectZoneKfs - 
-func (s *KfsAPIService) GetProjectZoneKfs(ctx context.Context, projectId string, zoneId string, nfsId string, notify bool) (ImplResponse, error) {
-	// TODO - update GetProjectZoneKfs with the required logic for this service method.
-	// Add api_kfs_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("GetProjectZoneKfs method not implemented")
-}
-
 // ListKFSs - 
 func (s *KfsAPIService) ListKFSs(ctx context.Context) (ImplResponse, error) {
 	// TODO - update ListKFSs with the required logic for this service method.
@@ -117,6 +100,26 @@ func (s *KfsAPIService) ListKFSs(ctx context.Context) (ImplResponse, error) {
 	// return Response(403, ApiErrorForbidden{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("ListKFSs method not implemented")
+}
+
+// ListProjectZoneKFSs - 
+func (s *KfsAPIService) ListProjectZoneKFSs(ctx context.Context, projectId string, zoneId string, nfsId string, notify bool) (ImplResponse, error) {
+	// TODO - update ListProjectZoneKFSs with the required logic for this service method.
+	// Add api_kfs_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
+	// return Response(200, []string{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ListProjectZoneKFSs method not implemented")
 }
 
 // ListStorageNFSKFSs - 

@@ -51,25 +51,25 @@ func NewKfsAPIController(s KfsAPIServicer, opts ...KfsAPIOption) Router {
 // Routes returns all the api routes for the KfsAPIController
 func (c *KfsAPIController) Routes() Routes {
 	return Routes{
-		"CreateProjectZoneKfs": Route{
+		"CreateProjectZoneKFS": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/kfs",
-			c.CreateProjectZoneKfs,
+			"/api/v1/project/{ projectId }/zone/{ zoneId }/kfs",
+			c.CreateProjectZoneKFS,
 		},
 		"DeleteKFS": Route{
 			strings.ToUpper("Delete"),
 			"/api/v1/kfs/{ kfsId }",
 			c.DeleteKFS,
 		},
-		"GetProjectZoneKfs": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/kfs",
-			c.GetProjectZoneKfs,
-		},
 		"ListKFSs": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/kfs",
 			c.ListKFSs,
+		},
+		"ListProjectZoneKFSs": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/project/{ projectId }/zone/{ zoneId }/kfs",
+			c.ListProjectZoneKFSs,
 		},
 		"ListStorageNFSKFSs": Route{
 			strings.ToUpper("Get"),
@@ -89,8 +89,8 @@ func (c *KfsAPIController) Routes() Routes {
 	}
 }
 
-// CreateProjectZoneKfs - 
-func (c *KfsAPIController) CreateProjectZoneKfs(w http.ResponseWriter, r *http.Request) {
+// CreateProjectZoneKFS - 
+func (c *KfsAPIController) CreateProjectZoneKFS(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	query, err := parseQuery(r.URL.RawQuery)
 	if err != nil {
@@ -143,7 +143,7 @@ func (c *KfsAPIController) CreateProjectZoneKfs(w http.ResponseWriter, r *http.R
 		notifyParam = param
 	} else {
 	}
-	result, err := c.service.CreateProjectZoneKfs(r.Context(), projectIdParam, zoneIdParam, kfsParam, nfsIdParam, notifyParam)
+	result, err := c.service.CreateProjectZoneKFS(r.Context(), projectIdParam, zoneIdParam, kfsParam, nfsIdParam, notifyParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -171,8 +171,20 @@ func (c *KfsAPIController) DeleteKFS(w http.ResponseWriter, r *http.Request) {
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// GetProjectZoneKfs - 
-func (c *KfsAPIController) GetProjectZoneKfs(w http.ResponseWriter, r *http.Request) {
+// ListKFSs - 
+func (c *KfsAPIController) ListKFSs(w http.ResponseWriter, r *http.Request) {
+	result, err := c.service.ListKFSs(r.Context())
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListProjectZoneKFSs - 
+func (c *KfsAPIController) ListProjectZoneKFSs(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	query, err := parseQuery(r.URL.RawQuery)
 	if err != nil {
@@ -210,19 +222,7 @@ func (c *KfsAPIController) GetProjectZoneKfs(w http.ResponseWriter, r *http.Requ
 		notifyParam = param
 	} else {
 	}
-	result, err := c.service.GetProjectZoneKfs(r.Context(), projectIdParam, zoneIdParam, nfsIdParam, notifyParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// ListKFSs - 
-func (c *KfsAPIController) ListKFSs(w http.ResponseWriter, r *http.Request) {
-	result, err := c.service.ListKFSs(r.Context())
+	result, err := c.service.ListProjectZoneKFSs(r.Context(), projectIdParam, zoneIdParam, nfsIdParam, notifyParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

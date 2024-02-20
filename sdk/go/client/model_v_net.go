@@ -20,7 +20,7 @@ import (
 // checks if the VNet type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VNet{}
 
-// VNet struct for VNet
+// VNet A virtual network.
 type VNet struct {
 	// The virtual network ID (auto-generated).
 	Id *string `json:"id,omitempty"`
@@ -32,7 +32,7 @@ type VNet struct {
 	Vlan int32 `json:"vlan"`
 	// The libvirt's bridge network interface (brX).
 	Interface string `json:"interface"`
-	// Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?
+	// Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?.
 	Private *bool `json:"private,omitempty"`
 }
 
