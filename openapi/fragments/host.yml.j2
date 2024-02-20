@@ -12,7 +12,6 @@ components:
 {{ oas.StringProperty('address', "The host libvirt's IPv4 address") }}
 {{ oas.IntProperty('port', "The host libvirt's port") }}
 {{ oas.ObjectProperty('tls', "The host libvirt's TLS configuration", resources.host_tls.schema) }}
-{{ oas.ObjectProperty('cost', 'Global cost associated to the host (deprecated, will be removed)', resources.cost.schema) }}
 {{ oas.ObjectProperty('cpu_cost', "Cost associated to the host's CPU resources", resources.cost.schema) }}
 {{ oas.ObjectProperty('memory_cost', "Cost associated to the host's memoery resources", resources.cost.schema) }}
 {{ oas.IntProperty('overcommit_cpu_ratio', 'The host CPU resource over-commit ratio. Overcommitting CPU resources for VMs means allocating more virtual CPUs (vCPUs) to the virtual machines (VMs) than the physical cores available on the host. This can help optimize the utilization of the host CPU and increase the density of VMs per host', default=3) }}

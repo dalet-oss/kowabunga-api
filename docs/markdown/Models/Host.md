@@ -10,7 +10,6 @@
 | **address** | **String** | The host libvirt&#39;s IPv4 address. | [default to null] |
 | **port** | **Integer** | The host libvirt&#39;s port. | [optional] [default to null] |
 | **tls** | [**HostTLS**](.md) | The host libvirt&#39;s TLS configuration. | [optional] [default to null] |
-| **cost** | [**Cost**](.md) | Global cost associated to the host (deprecated, will be removed). | [optional] [default to null] |
 | **cpu\_cost** | [**Cost**](.md) | Cost associated to the host&#39;s CPU resources. | [optional] [default to null] |
 | **memory\_cost** | [**Cost**](.md) | Cost associated to the host&#39;s memoery resources. | [optional] [default to null] |
 | **overcommit\_cpu\_ratio** | **Integer** | The host CPU resource over-commit ratio. Overcommitting CPU resources for VMs means allocating more virtual CPUs (vCPUs) to the virtual machines (VMs) than the physical cores available on the host. This can help optimize the utilization of the host CPU and increase the density of VMs per host. | [optional] [default to 3] |

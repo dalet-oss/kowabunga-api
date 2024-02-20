@@ -3796,9 +3796,6 @@ components:
           price: 6
           currency: currency
         address: address
-        cost:
-          price: 6
-          currency: currency
         port: 0
         name: name
         description: description
@@ -3836,8 +3833,6 @@ components:
           type: integer
         tls:
           $ref: '#/components/schemas/HostTLS'
-        cost:
-          $ref: '#/components/schemas/Cost'
         cpu_cost:
           $ref: '#/components/schemas/Cost'
         memory_cost:
