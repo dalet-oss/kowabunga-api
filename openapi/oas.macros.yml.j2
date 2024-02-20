@@ -172,6 +172,10 @@
 {{ QueryParam(key, name, desc, 'string') }}
 {% endmacro %}
 
+{% macro IntQueryParam(key, name, desc) %}
+{{ QueryParam(key, name, desc, 'integer') }}
+{% endmacro %}
+
 {% macro Tags(tgs) %}
       tags:
 {% for t in tgs %}
