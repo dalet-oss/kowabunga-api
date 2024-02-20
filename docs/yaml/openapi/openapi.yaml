@@ -2248,7 +2248,7 @@ paths:
     - $ref: '#/components/parameters/TemplateID'
     patch:
       description: Performs a storage pool setting of default template.
-      operationId: UpdateStoragePoolDefaultTemplate
+      operationId: SetStoragePoolDefaultTemplate
       parameters:
       - $ref: '#/components/parameters/PoolID'
       - $ref: '#/components/parameters/TemplateID'

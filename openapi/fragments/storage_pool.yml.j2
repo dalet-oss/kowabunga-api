@@ -31,7 +31,7 @@ paths:
 
   /pool/{ {{ resources.pool.paramId }} }/template/{ {{ resources.template.paramId }} }/default:
 {{ oas.Parameters([resources.pool.paramSchema, resources.template.paramSchema]) }}
-{{ oas.Patch('Update' + resources.pool.schema + 'Default' + resources.template.schema, resources.pool.desc, 'setting of default template', [resources.pool.tag, resources.template.tag]) }}
+{{ oas.Patch('Set' + resources.pool.schema + 'Default' + resources.template.schema, resources.pool.desc, 'setting of default template', [resources.pool.tag, resources.template.tag]) }}
 
   /pool/{ {{ resources.pool.paramId }} }/templates:
 {{ oas.Parameters([resources.pool.paramSchema]) }}

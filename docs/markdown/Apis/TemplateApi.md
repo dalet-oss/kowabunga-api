@@ -9,7 +9,7 @@ All URIs are relative to */api/v1*
 | [**getAllTemplates**](TemplateApi.md#getAllTemplates) | **GET** /template |  |
 | [**getTemplate**](TemplateApi.md#getTemplate) | **GET** /template/{templateId} |  |
 | [**listStoragePoolTemplates**](TemplateApi.md#listStoragePoolTemplates) | **GET** /pool/{ poolId }/templates |  |
-| [**updateStoragePoolDefaultTemplate**](TemplateApi.md#updateStoragePoolDefaultTemplate) | **PATCH** /pool/{ poolId }/template/{ templateId }/default |  |
+| [**setStoragePoolDefaultTemplate**](TemplateApi.md#setStoragePoolDefaultTemplate) | **PATCH** /pool/{ poolId }/template/{ templateId }/default |  |
 | [**updateTemplate**](TemplateApi.md#updateTemplate) | **PUT** /template/{templateId} |  |
 
 
@@ -146,9 +146,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="updateStoragePoolDefaultTemplate"></a>
-# **updateStoragePoolDefaultTemplate**
-> updateStoragePoolDefaultTemplate(poolId, templateId)
+<a name="setStoragePoolDefaultTemplate"></a>
+# **setStoragePoolDefaultTemplate**
+> setStoragePoolDefaultTemplate(poolId, templateId)
 
 
 

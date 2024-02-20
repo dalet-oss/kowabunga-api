@@ -12,8 +12,8 @@ All URIs are relative to */api/v1*
 | [**listStoragePoolVolumes**](PoolApi.md#listStoragePoolVolumes) | **GET** /pool/{ poolId }/volumes |  |
 | [**listStoragePools**](PoolApi.md#listStoragePools) | **GET** /pool |  |
 | [**readStoragePool**](PoolApi.md#readStoragePool) | **GET** /pool/{ poolId } |  |
+| [**setStoragePoolDefaultTemplate**](PoolApi.md#setStoragePoolDefaultTemplate) | **PATCH** /pool/{ poolId }/template/{ templateId }/default |  |
 | [**updateStoragePool**](PoolApi.md#updateStoragePool) | **PUT** /pool/{ poolId } |  |
-| [**updateStoragePoolDefaultTemplate**](PoolApi.md#updateStoragePoolDefaultTemplate) | **PATCH** /pool/{ poolId }/template/{ templateId }/default |  |
 | [**updateZoneDefaultPool**](PoolApi.md#updateZoneDefaultPool) | **PUT** /zone/{zoneId}/pool/{poolId}/default |  |
 
 
@@ -233,6 +233,34 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+<a name="setStoragePoolDefaultTemplate"></a>
+# **setStoragePoolDefaultTemplate**
+> setStoragePoolDefaultTemplate(poolId, templateId)
+
+
+
+    Performs a storage pool setting of default template.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **poolId** | **String**| The ID of the storage pool. | [default to null] |
+| **templateId** | **String**| The ID of the volume template. | [default to null] |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 <a name="updateStoragePool"></a>
 # **updateStoragePool**
 > StoragePool updateStoragePool(poolId, StoragePool)
@@ -259,34 +287,6 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
-
-<a name="updateStoragePoolDefaultTemplate"></a>
-# **updateStoragePoolDefaultTemplate**
-> updateStoragePoolDefaultTemplate(poolId, templateId)
-
-
-
-    Performs a storage pool setting of default template.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **poolId** | **String**| The ID of the storage pool. | [default to null] |
-| **templateId** | **String**| The ID of the volume template. | [default to null] |
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
 - **Accept**: application/json
 
 <a name="updateZoneDefaultPool"></a>
