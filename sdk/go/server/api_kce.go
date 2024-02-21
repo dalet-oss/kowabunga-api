@@ -51,11 +51,6 @@ func NewKceAPIController(s KceAPIServicer, opts ...KceAPIOption) Router {
 // Routes returns all the api routes for the KceAPIController
 func (c *KceAPIController) Routes() Routes {
 	return Routes{
-		"CreateProjectZoneKCE": Route{
-			strings.ToUpper("Post"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/kce",
-			c.CreateProjectZoneKCE,
-		},
 		"DeleteKCE": Route{
 			strings.ToUpper("Delete"),
 			"/api/v1/kce/{kceId}",
@@ -65,11 +60,6 @@ func (c *KceAPIController) Routes() Routes {
 			strings.ToUpper("Get"),
 			"/api/v1/kce",
 			c.ListKCEs,
-		},
-		"ListProjectZoneKCEs": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/kces",
-			c.ListProjectZoneKCEs,
 		},
 		"ReadKCE": Route{
 			strings.ToUpper("Get"),
@@ -124,84 +114,6 @@ func (c *KceAPIController) Routes() Routes {
 	}
 }
 
-// CreateProjectZoneKCE - 
-func (c *KceAPIController) CreateProjectZoneKCE(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	query, err := parseQuery(r.URL.RawQuery)
-	if err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	projectIdParam := params["projectId"]
-	if projectIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
-		return
-	}
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	kceParam := Kce{}
-	d := json.NewDecoder(r.Body)
-	d.DisallowUnknownFields()
-	if err := d.Decode(&kceParam); err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	if err := AssertKceRequired(kceParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	if err := AssertKceConstraints(kceParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	var poolIdParam string
-	if query.Has("poolId") {
-		param := query.Get("poolId")
-
-		poolIdParam = param
-	} else {
-	}
-	var templateIdParam string
-	if query.Has("templateId") {
-		param := query.Get("templateId")
-
-		templateIdParam = param
-	} else {
-	}
-	var publicParam string
-	if query.Has("public") {
-		param := query.Get("public")
-
-		publicParam = param
-	} else {
-	}
-	var notifyParam bool
-	if query.Has("notify") {
-		param, err := parseBoolParameter(
-			query.Get("notify"),
-			WithParse[bool](parseBool),
-		)
-		if err != nil {
-			c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-			return
-		}
-
-		notifyParam = param
-	} else {
-	}
-	result, err := c.service.CreateProjectZoneKCE(r.Context(), projectIdParam, zoneIdParam, kceParam, poolIdParam, templateIdParam, publicParam, notifyParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
 // DeleteKCE - 
 func (c *KceAPIController) DeleteKCE(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -223,29 +135,6 @@ func (c *KceAPIController) DeleteKCE(w http.ResponseWriter, r *http.Request) {
 // ListKCEs - 
 func (c *KceAPIController) ListKCEs(w http.ResponseWriter, r *http.Request) {
 	result, err := c.service.ListKCEs(r.Context())
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// ListProjectZoneKCEs - 
-func (c *KceAPIController) ListProjectZoneKCEs(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	projectIdParam := params["projectId"]
-	if projectIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
-		return
-	}
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	result, err := c.service.ListProjectZoneKCEs(r.Context(), projectIdParam, zoneIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

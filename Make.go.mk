@@ -16,6 +16,7 @@ go-sdk-server: get-openapi-generator ; $(info $(M) [OpenAPIv3] generate Golang S
 	$Q $(OPENAPI_GENERATOR) generate \
 	  -g $(SDK_GO_SERVER_GENERATOR) \
 	  --package-name $(SDK_GO_SERVER_NAME) \
+	  --openapi-normalizer KEEP_ONLY_FIRST_TAG_IN_OPERATION=true \
 	  -p outputAsLibrary=true \
 	  -p sourceFolder=$(SDK_GO_SERVER_NAME) \
 	  -i $(OPENAPI_DEFINITION) \

@@ -27,38 +27,6 @@ func NewInstanceAPIService() InstanceAPIServicer {
 	return &InstanceAPIService{}
 }
 
-// CreateProjectZoneInstance - 
-func (s *InstanceAPIService) CreateProjectZoneInstance(ctx context.Context, projectId string, zoneId string, instance Instance, notify bool) (ImplResponse, error) {
-	// TODO - update CreateProjectZoneInstance with the required logic for this service method.
-	// Add api_instance_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(201, Instance{}) or use other options such as http.Ok ...
-	// return Response(201, Instance{}), nil
-
-	// TODO: Uncomment the next line to return response Response(400, ApiErrorBadRequest{}) or use other options such as http.Ok ...
-	// return Response(400, ApiErrorBadRequest{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	// TODO: Uncomment the next line to return response Response(409, ApiErrorConflict{}) or use other options such as http.Ok ...
-	// return Response(409, ApiErrorConflict{}), nil
-
-	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
-	// return Response(422, ApiErrorUnprocessableEntity{}), nil
-
-	// TODO: Uncomment the next line to return response Response(507, ApiErrorInsufficientStorage{}) or use other options such as http.Ok ...
-	// return Response(507, ApiErrorInsufficientStorage{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("CreateProjectZoneInstance method not implemented")
-}
-
 // DeleteInstance - 
 func (s *InstanceAPIService) DeleteInstance(ctx context.Context, instanceId string) (ImplResponse, error) {
 	// TODO - update DeleteInstance with the required logic for this service method.
@@ -85,26 +53,6 @@ func (s *InstanceAPIService) DeleteInstance(ctx context.Context, instanceId stri
 	return Response(http.StatusNotImplemented, nil), errors.New("DeleteInstance method not implemented")
 }
 
-// ListHostInstances - 
-func (s *InstanceAPIService) ListHostInstances(ctx context.Context, hostId string) (ImplResponse, error) {
-	// TODO - update ListHostInstances with the required logic for this service method.
-	// Add api_instance_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("ListHostInstances method not implemented")
-}
-
 // ListInstances - 
 func (s *InstanceAPIService) ListInstances(ctx context.Context) (ImplResponse, error) {
 	// TODO - update ListInstances with the required logic for this service method.
@@ -120,26 +68,6 @@ func (s *InstanceAPIService) ListInstances(ctx context.Context) (ImplResponse, e
 	// return Response(403, ApiErrorForbidden{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("ListInstances method not implemented")
-}
-
-// ListProjectZoneInstances - 
-func (s *InstanceAPIService) ListProjectZoneInstances(ctx context.Context, projectId string, zoneId string) (ImplResponse, error) {
-	// TODO - update ListProjectZoneInstances with the required logic for this service method.
-	// Add api_instance_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("ListProjectZoneInstances method not implemented")
 }
 
 // ReadInstance - 

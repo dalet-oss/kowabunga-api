@@ -51,11 +51,6 @@ func NewHostAPIController(s HostAPIServicer, opts ...HostAPIOption) Router {
 // Routes returns all the api routes for the HostAPIController
 func (c *HostAPIController) Routes() Routes {
 	return Routes{
-		"CreateHost": Route{
-			strings.ToUpper("Post"),
-			"/api/v1/zone/{zoneId}/host",
-			c.CreateHost,
-		},
 		"DeleteHost": Route{
 			strings.ToUpper("Delete"),
 			"/api/v1/host/{hostId}",
@@ -70,11 +65,6 @@ func (c *HostAPIController) Routes() Routes {
 			strings.ToUpper("Get"),
 			"/api/v1/host",
 			c.ListHosts,
-		},
-		"ListZoneHosts": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/zone/{zoneId}/hosts",
-			c.ListZoneHosts,
 		},
 		"ReadHost": Route{
 			strings.ToUpper("Get"),
@@ -92,39 +82,6 @@ func (c *HostAPIController) Routes() Routes {
 			c.UpdateHost,
 		},
 	}
-}
-
-// CreateHost - 
-func (c *HostAPIController) CreateHost(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	hostParam := Host{}
-	d := json.NewDecoder(r.Body)
-	d.DisallowUnknownFields()
-	if err := d.Decode(&hostParam); err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	if err := AssertHostRequired(hostParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	if err := AssertHostConstraints(hostParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	result, err := c.service.CreateHost(r.Context(), zoneIdParam, hostParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
 // DeleteHost - 
@@ -166,24 +123,6 @@ func (c *HostAPIController) ListHostInstances(w http.ResponseWriter, r *http.Req
 // ListHosts - 
 func (c *HostAPIController) ListHosts(w http.ResponseWriter, r *http.Request) {
 	result, err := c.service.ListHosts(r.Context())
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// ListZoneHosts - 
-func (c *HostAPIController) ListZoneHosts(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	result, err := c.service.ListZoneHosts(r.Context(), zoneIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

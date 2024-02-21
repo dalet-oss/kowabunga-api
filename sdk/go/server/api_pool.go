@@ -51,11 +51,6 @@ func NewPoolAPIController(s PoolAPIServicer, opts ...PoolAPIOption) Router {
 // Routes returns all the api routes for the PoolAPIController
 func (c *PoolAPIController) Routes() Routes {
 	return Routes{
-		"CreateStoragePool": Route{
-			strings.ToUpper("Post"),
-			"/api/v1/zone/{zoneId}/pool",
-			c.CreateStoragePool,
-		},
 		"CreateTemplate": Route{
 			strings.ToUpper("Post"),
 			"/api/v1/pool/{poolId}/template",
@@ -81,11 +76,6 @@ func (c *PoolAPIController) Routes() Routes {
 			"/api/v1/pool",
 			c.ListStoragePools,
 		},
-		"ListZoneStoragePools": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/zone/{zoneId}/pools",
-			c.ListZoneStoragePools,
-		},
 		"ReadStoragePool": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/pool/{poolId}",
@@ -96,62 +86,12 @@ func (c *PoolAPIController) Routes() Routes {
 			"/api/v1/pool/{poolId}/template/{templateId}/default",
 			c.SetStoragePoolDefaultTemplate,
 		},
-		"SetZoneDefaultStoragePool": Route{
-			strings.ToUpper("Patch"),
-			"/api/v1/zone/{zoneId}/pool/{poolId}/default",
-			c.SetZoneDefaultStoragePool,
-		},
 		"UpdateStoragePool": Route{
 			strings.ToUpper("Put"),
 			"/api/v1/pool/{poolId}",
 			c.UpdateStoragePool,
 		},
 	}
-}
-
-// CreateStoragePool - 
-func (c *PoolAPIController) CreateStoragePool(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	query, err := parseQuery(r.URL.RawQuery)
-	if err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	storagePoolParam := StoragePool{}
-	d := json.NewDecoder(r.Body)
-	d.DisallowUnknownFields()
-	if err := d.Decode(&storagePoolParam); err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	if err := AssertStoragePoolRequired(storagePoolParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	if err := AssertStoragePoolConstraints(storagePoolParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	var hostIdParam string
-	if query.Has("hostId") {
-		param := query.Get("hostId")
-
-		hostIdParam = param
-	} else {
-	}
-	result, err := c.service.CreateStoragePool(r.Context(), zoneIdParam, storagePoolParam, hostIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
 // CreateTemplate - 
@@ -253,24 +193,6 @@ func (c *PoolAPIController) ListStoragePools(w http.ResponseWriter, r *http.Requ
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// ListZoneStoragePools - 
-func (c *PoolAPIController) ListZoneStoragePools(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	result, err := c.service.ListZoneStoragePools(r.Context(), zoneIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
 // ReadStoragePool - 
 func (c *PoolAPIController) ReadStoragePool(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -303,29 +225,6 @@ func (c *PoolAPIController) SetStoragePoolDefaultTemplate(w http.ResponseWriter,
 		return
 	}
 	result, err := c.service.SetStoragePoolDefaultTemplate(r.Context(), poolIdParam, templateIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// SetZoneDefaultStoragePool - 
-func (c *PoolAPIController) SetZoneDefaultStoragePool(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	poolIdParam := params["poolId"]
-	if poolIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"poolId"}, nil)
-		return
-	}
-	result, err := c.service.SetZoneDefaultStoragePool(r.Context(), zoneIdParam, poolIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

@@ -27,38 +27,6 @@ func NewRecordAPIService() RecordAPIServicer {
 	return &RecordAPIService{}
 }
 
-// CreateProjectDnsRecord - 
-func (s *RecordAPIService) CreateProjectDnsRecord(ctx context.Context, projectId string, dnsRecord DnsRecord) (ImplResponse, error) {
-	// TODO - update CreateProjectDnsRecord with the required logic for this service method.
-	// Add api_record_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(201, DnsRecord{}) or use other options such as http.Ok ...
-	// return Response(201, DnsRecord{}), nil
-
-	// TODO: Uncomment the next line to return response Response(400, ApiErrorBadRequest{}) or use other options such as http.Ok ...
-	// return Response(400, ApiErrorBadRequest{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	// TODO: Uncomment the next line to return response Response(409, ApiErrorConflict{}) or use other options such as http.Ok ...
-	// return Response(409, ApiErrorConflict{}), nil
-
-	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
-	// return Response(422, ApiErrorUnprocessableEntity{}), nil
-
-	// TODO: Uncomment the next line to return response Response(507, ApiErrorInsufficientStorage{}) or use other options such as http.Ok ...
-	// return Response(507, ApiErrorInsufficientStorage{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("CreateProjectDnsRecord method not implemented")
-}
-
 // DeleteDnsRecord - 
 func (s *RecordAPIService) DeleteDnsRecord(ctx context.Context, recordId string) (ImplResponse, error) {
 	// TODO - update DeleteDnsRecord with the required logic for this service method.
@@ -83,26 +51,6 @@ func (s *RecordAPIService) DeleteDnsRecord(ctx context.Context, recordId string)
 	// return Response(422, ApiErrorUnprocessableEntity{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("DeleteDnsRecord method not implemented")
-}
-
-// ListProjectDnsRecords - 
-func (s *RecordAPIService) ListProjectDnsRecords(ctx context.Context, projectId string) (ImplResponse, error) {
-	// TODO - update ListProjectDnsRecords with the required logic for this service method.
-	// Add api_record_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("ListProjectDnsRecords method not implemented")
 }
 
 // ReadDnsRecord - 

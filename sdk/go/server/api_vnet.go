@@ -56,11 +56,6 @@ func (c *VnetAPIController) Routes() Routes {
 			"/api/v1/vnet/{vnetId}/subnet",
 			c.CreateSubnet,
 		},
-		"CreateVNet": Route{
-			strings.ToUpper("Post"),
-			"/api/v1/zone/{zoneId}/vnet",
-			c.CreateVNet,
-		},
 		"DeleteVNet": Route{
 			strings.ToUpper("Delete"),
 			"/api/v1/vnet/{vnetId}",
@@ -75,11 +70,6 @@ func (c *VnetAPIController) Routes() Routes {
 			strings.ToUpper("Get"),
 			"/api/v1/vnet",
 			c.ListVNets,
-		},
-		"ListZoneVNets": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/zone/{zoneId}/vnets",
-			c.ListZoneVNets,
 		},
 		"ReadVNet": Route{
 			strings.ToUpper("Get"),
@@ -132,39 +122,6 @@ func (c *VnetAPIController) CreateSubnet(w http.ResponseWriter, r *http.Request)
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// CreateVNet - 
-func (c *VnetAPIController) CreateVNet(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	vNetParam := VNet{}
-	d := json.NewDecoder(r.Body)
-	d.DisallowUnknownFields()
-	if err := d.Decode(&vNetParam); err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	if err := AssertVNetRequired(vNetParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	if err := AssertVNetConstraints(vNetParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	result, err := c.service.CreateVNet(r.Context(), zoneIdParam, vNetParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
 // DeleteVNet - 
 func (c *VnetAPIController) DeleteVNet(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -204,24 +161,6 @@ func (c *VnetAPIController) ListVNetSubnets(w http.ResponseWriter, r *http.Reque
 // ListVNets - 
 func (c *VnetAPIController) ListVNets(w http.ResponseWriter, r *http.Request) {
 	result, err := c.service.ListVNets(r.Context())
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// ListZoneVNets - 
-func (c *VnetAPIController) ListZoneVNets(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	result, err := c.service.ListZoneVNets(r.Context(), zoneIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

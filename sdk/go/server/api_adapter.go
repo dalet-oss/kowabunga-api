@@ -51,11 +51,6 @@ func NewAdapterAPIController(s AdapterAPIServicer, opts ...AdapterAPIOption) Rou
 // Routes returns all the api routes for the AdapterAPIController
 func (c *AdapterAPIController) Routes() Routes {
 	return Routes{
-		"CreateAdapter": Route{
-			strings.ToUpper("Post"),
-			"/api/v1/subnet/{subnetId}/adapter",
-			c.CreateAdapter,
-		},
 		"DeleteAdapter": Route{
 			strings.ToUpper("Delete"),
 			"/api/v1/adapter/{adapterId}",
@@ -65,11 +60,6 @@ func (c *AdapterAPIController) Routes() Routes {
 			strings.ToUpper("Get"),
 			"/api/v1/adapter",
 			c.ListAdapters,
-		},
-		"ListSubnetAdapters": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/subnet/{subnetId}/adapters",
-			c.ListSubnetAdapters,
 		},
 		"ReadAdapter": Route{
 			strings.ToUpper("Get"),
@@ -82,58 +72,6 @@ func (c *AdapterAPIController) Routes() Routes {
 			c.UpdateAdapter,
 		},
 	}
-}
-
-// CreateAdapter - 
-func (c *AdapterAPIController) CreateAdapter(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	query, err := parseQuery(r.URL.RawQuery)
-	if err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	subnetIdParam := params["subnetId"]
-	if subnetIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"subnetId"}, nil)
-		return
-	}
-	adapterParam := Adapter{}
-	d := json.NewDecoder(r.Body)
-	d.DisallowUnknownFields()
-	if err := d.Decode(&adapterParam); err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	if err := AssertAdapterRequired(adapterParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	if err := AssertAdapterConstraints(adapterParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	var assignIPParam bool
-	if query.Has("assignIP") {
-		param, err := parseBoolParameter(
-			query.Get("assignIP"),
-			WithParse[bool](parseBool),
-		)
-		if err != nil {
-			c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-			return
-		}
-
-		assignIPParam = param
-	} else {
-	}
-	result, err := c.service.CreateAdapter(r.Context(), subnetIdParam, adapterParam, assignIPParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
 // DeleteAdapter - 
@@ -157,24 +95,6 @@ func (c *AdapterAPIController) DeleteAdapter(w http.ResponseWriter, r *http.Requ
 // ListAdapters - 
 func (c *AdapterAPIController) ListAdapters(w http.ResponseWriter, r *http.Request) {
 	result, err := c.service.ListAdapters(r.Context())
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// ListSubnetAdapters - 
-func (c *AdapterAPIController) ListSubnetAdapters(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	subnetIdParam := params["subnetId"]
-	if subnetIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"subnetId"}, nil)
-		return
-	}
-	result, err := c.service.ListSubnetAdapters(r.Context(), subnetIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

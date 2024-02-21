@@ -27,38 +27,6 @@ func NewVolumeAPIService() VolumeAPIServicer {
 	return &VolumeAPIService{}
 }
 
-// CreateProjectZoneVolume - 
-func (s *VolumeAPIService) CreateProjectZoneVolume(ctx context.Context, projectId string, zoneId string, volume Volume, poolId string, templateId string) (ImplResponse, error) {
-	// TODO - update CreateProjectZoneVolume with the required logic for this service method.
-	// Add api_volume_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(201, Volume{}) or use other options such as http.Ok ...
-	// return Response(201, Volume{}), nil
-
-	// TODO: Uncomment the next line to return response Response(400, ApiErrorBadRequest{}) or use other options such as http.Ok ...
-	// return Response(400, ApiErrorBadRequest{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	// TODO: Uncomment the next line to return response Response(409, ApiErrorConflict{}) or use other options such as http.Ok ...
-	// return Response(409, ApiErrorConflict{}), nil
-
-	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
-	// return Response(422, ApiErrorUnprocessableEntity{}), nil
-
-	// TODO: Uncomment the next line to return response Response(507, ApiErrorInsufficientStorage{}) or use other options such as http.Ok ...
-	// return Response(507, ApiErrorInsufficientStorage{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("CreateProjectZoneVolume method not implemented")
-}
-
 // DeleteVolume - 
 func (s *VolumeAPIService) DeleteVolume(ctx context.Context, volumeId string) (ImplResponse, error) {
 	// TODO - update DeleteVolume with the required logic for this service method.
@@ -83,46 +51,6 @@ func (s *VolumeAPIService) DeleteVolume(ctx context.Context, volumeId string) (I
 	// return Response(422, ApiErrorUnprocessableEntity{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("DeleteVolume method not implemented")
-}
-
-// ListProjectZoneVolumes - 
-func (s *VolumeAPIService) ListProjectZoneVolumes(ctx context.Context, projectId string, zoneId string) (ImplResponse, error) {
-	// TODO - update ListProjectZoneVolumes with the required logic for this service method.
-	// Add api_volume_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("ListProjectZoneVolumes method not implemented")
-}
-
-// ListStoragePoolVolumes - 
-func (s *VolumeAPIService) ListStoragePoolVolumes(ctx context.Context, poolId string) (ImplResponse, error) {
-	// TODO - update ListStoragePoolVolumes with the required logic for this service method.
-	// Add api_volume_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("ListStoragePoolVolumes method not implemented")
 }
 
 // ListVolumes - 

@@ -51,25 +51,10 @@ func NewVolumeAPIController(s VolumeAPIServicer, opts ...VolumeAPIOption) Router
 // Routes returns all the api routes for the VolumeAPIController
 func (c *VolumeAPIController) Routes() Routes {
 	return Routes{
-		"CreateProjectZoneVolume": Route{
-			strings.ToUpper("Post"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/volume",
-			c.CreateProjectZoneVolume,
-		},
 		"DeleteVolume": Route{
 			strings.ToUpper("Delete"),
 			"/api/v1/volume/{volumeId}",
 			c.DeleteVolume,
-		},
-		"ListProjectZoneVolumes": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/volumes",
-			c.ListProjectZoneVolumes,
-		},
-		"ListStoragePoolVolumes": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/pool/{poolId}/volumes",
-			c.ListStoragePoolVolumes,
 		},
 		"ListVolumes": Route{
 			strings.ToUpper("Get"),
@@ -89,63 +74,6 @@ func (c *VolumeAPIController) Routes() Routes {
 	}
 }
 
-// CreateProjectZoneVolume - 
-func (c *VolumeAPIController) CreateProjectZoneVolume(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	query, err := parseQuery(r.URL.RawQuery)
-	if err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	projectIdParam := params["projectId"]
-	if projectIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
-		return
-	}
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	volumeParam := Volume{}
-	d := json.NewDecoder(r.Body)
-	d.DisallowUnknownFields()
-	if err := d.Decode(&volumeParam); err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	if err := AssertVolumeRequired(volumeParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	if err := AssertVolumeConstraints(volumeParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	var poolIdParam string
-	if query.Has("poolId") {
-		param := query.Get("poolId")
-
-		poolIdParam = param
-	} else {
-	}
-	var templateIdParam string
-	if query.Has("templateId") {
-		param := query.Get("templateId")
-
-		templateIdParam = param
-	} else {
-	}
-	result, err := c.service.CreateProjectZoneVolume(r.Context(), projectIdParam, zoneIdParam, volumeParam, poolIdParam, templateIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
 // DeleteVolume - 
 func (c *VolumeAPIController) DeleteVolume(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -155,47 +83,6 @@ func (c *VolumeAPIController) DeleteVolume(w http.ResponseWriter, r *http.Reques
 		return
 	}
 	result, err := c.service.DeleteVolume(r.Context(), volumeIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// ListProjectZoneVolumes - 
-func (c *VolumeAPIController) ListProjectZoneVolumes(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	projectIdParam := params["projectId"]
-	if projectIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
-		return
-	}
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	result, err := c.service.ListProjectZoneVolumes(r.Context(), projectIdParam, zoneIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// ListStoragePoolVolumes - 
-func (c *VolumeAPIController) ListStoragePoolVolumes(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	poolIdParam := params["poolId"]
-	if poolIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"poolId"}, nil)
-		return
-	}
-	result, err := c.service.ListStoragePoolVolumes(r.Context(), poolIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

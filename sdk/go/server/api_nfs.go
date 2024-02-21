@@ -51,11 +51,6 @@ func NewNfsAPIController(s NfsAPIServicer, opts ...NfsAPIOption) Router {
 // Routes returns all the api routes for the NfsAPIController
 func (c *NfsAPIController) Routes() Routes {
 	return Routes{
-		"CreateStorageNFS": Route{
-			strings.ToUpper("Post"),
-			"/api/v1/zone/{zoneId}/nfs",
-			c.CreateStorageNFS,
-		},
 		"DeleteStorageNFS": Route{
 			strings.ToUpper("Delete"),
 			"/api/v1/nfs/{nfsId}",
@@ -71,20 +66,10 @@ func (c *NfsAPIController) Routes() Routes {
 			"/api/v1/nfs",
 			c.ListStorageNFSs,
 		},
-		"ListZoneStorageNFSs": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/zone/{zoneId}/nfs",
-			c.ListZoneStorageNFSs,
-		},
 		"ReadStorageNFS": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/nfs/{nfsId}",
 			c.ReadStorageNFS,
-		},
-		"SetZoneDefaultStorageNFS": Route{
-			strings.ToUpper("Patch"),
-			"/api/v1/zone/{zoneId}/nfs/{nfsId}/default",
-			c.SetZoneDefaultStorageNFS,
 		},
 		"UpdateStorageNFS": Route{
 			strings.ToUpper("Put"),
@@ -92,39 +77,6 @@ func (c *NfsAPIController) Routes() Routes {
 			c.UpdateStorageNFS,
 		},
 	}
-}
-
-// CreateStorageNFS - 
-func (c *NfsAPIController) CreateStorageNFS(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	storageNfsParam := StorageNfs{}
-	d := json.NewDecoder(r.Body)
-	d.DisallowUnknownFields()
-	if err := d.Decode(&storageNfsParam); err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	if err := AssertStorageNfsRequired(storageNfsParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	if err := AssertStorageNfsConstraints(storageNfsParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	result, err := c.service.CreateStorageNFS(r.Context(), zoneIdParam, storageNfsParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
 // DeleteStorageNFS - 
@@ -175,24 +127,6 @@ func (c *NfsAPIController) ListStorageNFSs(w http.ResponseWriter, r *http.Reques
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// ListZoneStorageNFSs - 
-func (c *NfsAPIController) ListZoneStorageNFSs(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	result, err := c.service.ListZoneStorageNFSs(r.Context(), zoneIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
 // ReadStorageNFS - 
 func (c *NfsAPIController) ReadStorageNFS(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -202,29 +136,6 @@ func (c *NfsAPIController) ReadStorageNFS(w http.ResponseWriter, r *http.Request
 		return
 	}
 	result, err := c.service.ReadStorageNFS(r.Context(), nfsIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// SetZoneDefaultStorageNFS - 
-func (c *NfsAPIController) SetZoneDefaultStorageNFS(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	nfsIdParam := params["nfsId"]
-	if nfsIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"nfsId"}, nil)
-		return
-	}
-	result, err := c.service.SetZoneDefaultStorageNFS(r.Context(), zoneIdParam, nfsIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

@@ -51,20 +51,10 @@ func NewRecordAPIController(s RecordAPIServicer, opts ...RecordAPIOption) Router
 // Routes returns all the api routes for the RecordAPIController
 func (c *RecordAPIController) Routes() Routes {
 	return Routes{
-		"CreateProjectDnsRecord": Route{
-			strings.ToUpper("Post"),
-			"/api/v1/project/{projectId}/record",
-			c.CreateProjectDnsRecord,
-		},
 		"DeleteDnsRecord": Route{
 			strings.ToUpper("Delete"),
 			"/api/v1/record/{recordId}",
 			c.DeleteDnsRecord,
-		},
-		"ListProjectDnsRecords": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/project/{projectId}/records",
-			c.ListProjectDnsRecords,
 		},
 		"ReadDnsRecord": Route{
 			strings.ToUpper("Get"),
@@ -79,39 +69,6 @@ func (c *RecordAPIController) Routes() Routes {
 	}
 }
 
-// CreateProjectDnsRecord - 
-func (c *RecordAPIController) CreateProjectDnsRecord(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	projectIdParam := params["projectId"]
-	if projectIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
-		return
-	}
-	dnsRecordParam := DnsRecord{}
-	d := json.NewDecoder(r.Body)
-	d.DisallowUnknownFields()
-	if err := d.Decode(&dnsRecordParam); err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	if err := AssertDnsRecordRequired(dnsRecordParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	if err := AssertDnsRecordConstraints(dnsRecordParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	result, err := c.service.CreateProjectDnsRecord(r.Context(), projectIdParam, dnsRecordParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
 // DeleteDnsRecord - 
 func (c *RecordAPIController) DeleteDnsRecord(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -121,24 +78,6 @@ func (c *RecordAPIController) DeleteDnsRecord(w http.ResponseWriter, r *http.Req
 		return
 	}
 	result, err := c.service.DeleteDnsRecord(r.Context(), recordIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// ListProjectDnsRecords - 
-func (c *RecordAPIController) ListProjectDnsRecords(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	projectIdParam := params["projectId"]
-	if projectIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
-		return
-	}
-	result, err := c.service.ListProjectDnsRecords(r.Context(), projectIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

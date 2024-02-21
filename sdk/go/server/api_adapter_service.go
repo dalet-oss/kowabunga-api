@@ -27,38 +27,6 @@ func NewAdapterAPIService() AdapterAPIServicer {
 	return &AdapterAPIService{}
 }
 
-// CreateAdapter - 
-func (s *AdapterAPIService) CreateAdapter(ctx context.Context, subnetId string, adapter Adapter, assignIP bool) (ImplResponse, error) {
-	// TODO - update CreateAdapter with the required logic for this service method.
-	// Add api_adapter_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(201, Adapter{}) or use other options such as http.Ok ...
-	// return Response(201, Adapter{}), nil
-
-	// TODO: Uncomment the next line to return response Response(400, ApiErrorBadRequest{}) or use other options such as http.Ok ...
-	// return Response(400, ApiErrorBadRequest{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	// TODO: Uncomment the next line to return response Response(409, ApiErrorConflict{}) or use other options such as http.Ok ...
-	// return Response(409, ApiErrorConflict{}), nil
-
-	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
-	// return Response(422, ApiErrorUnprocessableEntity{}), nil
-
-	// TODO: Uncomment the next line to return response Response(507, ApiErrorInsufficientStorage{}) or use other options such as http.Ok ...
-	// return Response(507, ApiErrorInsufficientStorage{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("CreateAdapter method not implemented")
-}
-
 // DeleteAdapter - 
 func (s *AdapterAPIService) DeleteAdapter(ctx context.Context, adapterId string) (ImplResponse, error) {
 	// TODO - update DeleteAdapter with the required logic for this service method.
@@ -100,26 +68,6 @@ func (s *AdapterAPIService) ListAdapters(ctx context.Context) (ImplResponse, err
 	// return Response(403, ApiErrorForbidden{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("ListAdapters method not implemented")
-}
-
-// ListSubnetAdapters - 
-func (s *AdapterAPIService) ListSubnetAdapters(ctx context.Context, subnetId string) (ImplResponse, error) {
-	// TODO - update ListSubnetAdapters with the required logic for this service method.
-	// Add api_adapter_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("ListSubnetAdapters method not implemented")
 }
 
 // ReadAdapter - 

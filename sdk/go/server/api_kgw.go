@@ -51,11 +51,6 @@ func NewKgwAPIController(s KgwAPIServicer, opts ...KgwAPIOption) Router {
 // Routes returns all the api routes for the KgwAPIController
 func (c *KgwAPIController) Routes() Routes {
 	return Routes{
-		"CreateProjectZoneKGW": Route{
-			strings.ToUpper("Post"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/kgw",
-			c.CreateProjectZoneKGW,
-		},
 		"DeleteKGW": Route{
 			strings.ToUpper("Delete"),
 			"/api/v1/kgw/kgwId}",
@@ -65,11 +60,6 @@ func (c *KgwAPIController) Routes() Routes {
 			strings.ToUpper("Get"),
 			"/api/v1/kgw",
 			c.ListKGWs,
-		},
-		"ListProjectZoneKGWs": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/kgws",
-			c.ListProjectZoneKGWs,
 		},
 		"ReadKGW": Route{
 			strings.ToUpper("Get"),
@@ -82,44 +72,6 @@ func (c *KgwAPIController) Routes() Routes {
 			c.UpdateKGW,
 		},
 	}
-}
-
-// CreateProjectZoneKGW - 
-func (c *KgwAPIController) CreateProjectZoneKGW(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	projectIdParam := params["projectId"]
-	if projectIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
-		return
-	}
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	kgwParam := Kgw{}
-	d := json.NewDecoder(r.Body)
-	d.DisallowUnknownFields()
-	if err := d.Decode(&kgwParam); err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	if err := AssertKgwRequired(kgwParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	if err := AssertKgwConstraints(kgwParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	result, err := c.service.CreateProjectZoneKGW(r.Context(), projectIdParam, zoneIdParam, kgwParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
 // DeleteKGW - 
@@ -143,29 +95,6 @@ func (c *KgwAPIController) DeleteKGW(w http.ResponseWriter, r *http.Request) {
 // ListKGWs - 
 func (c *KgwAPIController) ListKGWs(w http.ResponseWriter, r *http.Request) {
 	result, err := c.service.ListKGWs(r.Context())
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// ListProjectZoneKGWs - 
-func (c *KgwAPIController) ListProjectZoneKGWs(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	projectIdParam := params["projectId"]
-	if projectIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
-		return
-	}
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	result, err := c.service.ListProjectZoneKGWs(r.Context(), projectIdParam, zoneIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

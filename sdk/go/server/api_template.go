@@ -51,20 +51,10 @@ func NewTemplateAPIController(s TemplateAPIServicer, opts ...TemplateAPIOption) 
 // Routes returns all the api routes for the TemplateAPIController
 func (c *TemplateAPIController) Routes() Routes {
 	return Routes{
-		"CreateTemplate": Route{
-			strings.ToUpper("Post"),
-			"/api/v1/pool/{poolId}/template",
-			c.CreateTemplate,
-		},
 		"DeleteTemplate": Route{
 			strings.ToUpper("Delete"),
 			"/api/v1/template/{templateId}",
 			c.DeleteTemplate,
-		},
-		"ListStoragePoolTemplates": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/pool/{poolId}/templates",
-			c.ListStoragePoolTemplates,
 		},
 		"ListTemplates": Route{
 			strings.ToUpper("Get"),
@@ -76,50 +66,12 @@ func (c *TemplateAPIController) Routes() Routes {
 			"/api/v1/template/{templateId}",
 			c.ReadTemplate,
 		},
-		"SetStoragePoolDefaultTemplate": Route{
-			strings.ToUpper("Patch"),
-			"/api/v1/pool/{poolId}/template/{templateId}/default",
-			c.SetStoragePoolDefaultTemplate,
-		},
 		"UpdateTemplate": Route{
 			strings.ToUpper("Put"),
 			"/api/v1/template/{templateId}",
 			c.UpdateTemplate,
 		},
 	}
-}
-
-// CreateTemplate - 
-func (c *TemplateAPIController) CreateTemplate(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	poolIdParam := params["poolId"]
-	if poolIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"poolId"}, nil)
-		return
-	}
-	templateParam := Template{}
-	d := json.NewDecoder(r.Body)
-	d.DisallowUnknownFields()
-	if err := d.Decode(&templateParam); err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	if err := AssertTemplateRequired(templateParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	if err := AssertTemplateConstraints(templateParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	result, err := c.service.CreateTemplate(r.Context(), poolIdParam, templateParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
 // DeleteTemplate - 
@@ -131,24 +83,6 @@ func (c *TemplateAPIController) DeleteTemplate(w http.ResponseWriter, r *http.Re
 		return
 	}
 	result, err := c.service.DeleteTemplate(r.Context(), templateIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// ListStoragePoolTemplates - 
-func (c *TemplateAPIController) ListStoragePoolTemplates(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	poolIdParam := params["poolId"]
-	if poolIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"poolId"}, nil)
-		return
-	}
-	result, err := c.service.ListStoragePoolTemplates(r.Context(), poolIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -179,29 +113,6 @@ func (c *TemplateAPIController) ReadTemplate(w http.ResponseWriter, r *http.Requ
 		return
 	}
 	result, err := c.service.ReadTemplate(r.Context(), templateIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// SetStoragePoolDefaultTemplate - 
-func (c *TemplateAPIController) SetStoragePoolDefaultTemplate(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	poolIdParam := params["poolId"]
-	if poolIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"poolId"}, nil)
-		return
-	}
-	templateIdParam := params["templateId"]
-	if templateIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"templateId"}, nil)
-		return
-	}
-	result, err := c.service.SetStoragePoolDefaultTemplate(r.Context(), poolIdParam, templateIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

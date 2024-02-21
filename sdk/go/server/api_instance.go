@@ -51,30 +51,15 @@ func NewInstanceAPIController(s InstanceAPIServicer, opts ...InstanceAPIOption) 
 // Routes returns all the api routes for the InstanceAPIController
 func (c *InstanceAPIController) Routes() Routes {
 	return Routes{
-		"CreateProjectZoneInstance": Route{
-			strings.ToUpper("Post"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/instance",
-			c.CreateProjectZoneInstance,
-		},
 		"DeleteInstance": Route{
 			strings.ToUpper("Delete"),
 			"/api/v1/instance/{instanceId}",
 			c.DeleteInstance,
 		},
-		"ListHostInstances": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/host/{hostId}/instances",
-			c.ListHostInstances,
-		},
 		"ListInstances": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/instance",
 			c.ListInstances,
-		},
-		"ListProjectZoneInstances": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/instances",
-			c.ListProjectZoneInstances,
 		},
 		"ReadInstance": Route{
 			strings.ToUpper("Get"),
@@ -134,63 +119,6 @@ func (c *InstanceAPIController) Routes() Routes {
 	}
 }
 
-// CreateProjectZoneInstance - 
-func (c *InstanceAPIController) CreateProjectZoneInstance(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	query, err := parseQuery(r.URL.RawQuery)
-	if err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	projectIdParam := params["projectId"]
-	if projectIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
-		return
-	}
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	instanceParam := Instance{}
-	d := json.NewDecoder(r.Body)
-	d.DisallowUnknownFields()
-	if err := d.Decode(&instanceParam); err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	if err := AssertInstanceRequired(instanceParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	if err := AssertInstanceConstraints(instanceParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	var notifyParam bool
-	if query.Has("notify") {
-		param, err := parseBoolParameter(
-			query.Get("notify"),
-			WithParse[bool](parseBool),
-		)
-		if err != nil {
-			c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-			return
-		}
-
-		notifyParam = param
-	} else {
-	}
-	result, err := c.service.CreateProjectZoneInstance(r.Context(), projectIdParam, zoneIdParam, instanceParam, notifyParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
 // DeleteInstance - 
 func (c *InstanceAPIController) DeleteInstance(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -209,50 +137,9 @@ func (c *InstanceAPIController) DeleteInstance(w http.ResponseWriter, r *http.Re
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// ListHostInstances - 
-func (c *InstanceAPIController) ListHostInstances(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	hostIdParam := params["hostId"]
-	if hostIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"hostId"}, nil)
-		return
-	}
-	result, err := c.service.ListHostInstances(r.Context(), hostIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
 // ListInstances - 
 func (c *InstanceAPIController) ListInstances(w http.ResponseWriter, r *http.Request) {
 	result, err := c.service.ListInstances(r.Context())
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// ListProjectZoneInstances - 
-func (c *InstanceAPIController) ListProjectZoneInstances(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	projectIdParam := params["projectId"]
-	if projectIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
-		return
-	}
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	result, err := c.service.ListProjectZoneInstances(r.Context(), projectIdParam, zoneIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
