@@ -1961,7 +1961,7 @@ paths:
       tags:
       - region
       - zone
-  /region/{ regionId }/zones:
+  /region/{regionId}/zones:
     get:
       description: Returns the IDs of availability zone objects.
       operationId: ListRegionZones

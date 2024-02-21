@@ -68,7 +68,7 @@ func (c *RegionAPIController) Routes() Routes {
 		},
 		"ListRegionZones": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/region/{ regionId }/zones",
+			"/api/v1/region/{regionId}/zones",
 			c.ListRegionZones,
 		},
 		"ListRegions": Route{

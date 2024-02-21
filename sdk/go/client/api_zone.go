@@ -3624,7 +3624,7 @@ func (a *ZoneAPIService) ListRegionZonesExecute(r ApiListRegionZonesRequest) ([]
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/region/{ regionId }/zones"
+	localVarPath := localBasePath + "/region/{regionId}/zones"
 	localVarPath = strings.Replace(localVarPath, "{"+"regionId"+"}", url.PathEscape(parameterValueToString(r.regionId, "regionId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

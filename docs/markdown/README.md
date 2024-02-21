@@ -116,7 +116,7 @@ All URIs are relative to */api/v1*
 | *RegionApi* | [**createRegion**](Apis/RegionApi.md#createregion) | **POST** /region | Creates a new region. |
 *RegionApi* | [**createZone**](Apis/RegionApi.md#createzone) | **POST** /region/{ regionId }/zone | Creates a new availability zone. |
 *RegionApi* | [**deleteRegion**](Apis/RegionApi.md#deleteregion) | **DELETE** /region/{ regionId } | Deletes an existing region. |
-*RegionApi* | [**listRegionZones**](Apis/RegionApi.md#listregionzones) | **GET** /region/{ regionId }/zones | Returns the IDs of availability zone objects. |
+*RegionApi* | [**listRegionZones**](Apis/RegionApi.md#listregionzones) | **GET** /region/{regionId}/zones | Returns the IDs of availability zone objects. |
 *RegionApi* | [**listRegions**](Apis/RegionApi.md#listregions) | **GET** /region | Returns the IDs of region objects. |
 *RegionApi* | [**readRegion**](Apis/RegionApi.md#readregion) | **GET** /region/{ regionId } | Returns a region. |
 *RegionApi* | [**updateRegion**](Apis/RegionApi.md#updateregion) | **PUT** /region/{ regionId } | Updates a region configuration. |
@@ -169,7 +169,7 @@ All URIs are relative to */api/v1*
 *ZoneApi* | [**listProjectZoneKFSs**](Apis/ZoneApi.md#listprojectzonekfss) | **GET** /project/{ projectId }/zone/{ zoneId }/kfs | Returns the IDs of KFS (Kowabunga File System) objects. |
 *ZoneApi* | [**listProjectZoneKGWs**](Apis/ZoneApi.md#listprojectzonekgws) | **GET** /project/{ projectId }/zone/{ zoneId }/kgws | Returns the IDs of KGW (Kowabunga Network Gateway) objects. |
 *ZoneApi* | [**listProjectZoneVolumes**](Apis/ZoneApi.md#listprojectzonevolumes) | **GET** /project/{ projectId }/zone/{ zoneId }/volumes | Returns the IDs of storage volume objects. |
-*ZoneApi* | [**listRegionZones**](Apis/ZoneApi.md#listregionzones) | **GET** /region/{ regionId }/zones | Returns the IDs of availability zone objects. |
+*ZoneApi* | [**listRegionZones**](Apis/ZoneApi.md#listregionzones) | **GET** /region/{regionId}/zones | Returns the IDs of availability zone objects. |
 *ZoneApi* | [**listZoneHosts**](Apis/ZoneApi.md#listzonehosts) | **GET** /zone/{zoneId}/hosts | Returns the IDs of computing host objects. |
 *ZoneApi* | [**listZoneNetGWs**](Apis/ZoneApi.md#listzonenetgws) | **GET** /zone/{ zoneId }/netgws | Returns the IDs of Iris network gateway objects. |
 *ZoneApi* | [**listZoneStorageNFSs**](Apis/ZoneApi.md#listzonestoragenfss) | **GET** /zone/{ zoneId }/nfs | Returns the IDs of NFS storage objects. |

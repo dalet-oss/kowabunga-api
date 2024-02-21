@@ -21,7 +21,7 @@ All URIs are relative to */api/v1*
 | [**listProjectZoneKFSs**](ZoneApi.md#listProjectZoneKFSs) | **GET** /project/{ projectId }/zone/{ zoneId }/kfs |  |
 | [**listProjectZoneKGWs**](ZoneApi.md#listProjectZoneKGWs) | **GET** /project/{ projectId }/zone/{ zoneId }/kgws |  |
 | [**listProjectZoneVolumes**](ZoneApi.md#listProjectZoneVolumes) | **GET** /project/{ projectId }/zone/{ zoneId }/volumes |  |
-| [**listRegionZones**](ZoneApi.md#listRegionZones) | **GET** /region/{ regionId }/zones |  |
+| [**listRegionZones**](ZoneApi.md#listRegionZones) | **GET** /region/{regionId}/zones |  |
 | [**listZoneHosts**](ZoneApi.md#listZoneHosts) | **GET** /zone/{zoneId}/hosts |  |
 | [**listZoneNetGWs**](ZoneApi.md#listZoneNetGWs) | **GET** /zone/{ zoneId }/netgws |  |
 | [**listZoneStorageNFSs**](ZoneApi.md#listZoneStorageNFSs) | **GET** /zone/{ zoneId }/nfs |  |

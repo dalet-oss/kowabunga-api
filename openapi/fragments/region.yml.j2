@@ -18,6 +18,6 @@ paths:
 {{ oas.Parameters([resources.region.paramSchema]) }}
 {{ oas.Create('Create' + resources.zone.schema, resources.zone.schema, resources.zone.desc, [resources.region.tag, resources.zone.tag]) }}
 
-  /region/{ {{ resources.region.paramId }} }/zones:
+  /region/{{ '{' + resources.region.paramId + '}' }}/zones:
 {{ oas.Parameters([resources.region.paramSchema]) }}
 {{ oas.GetAll('ListRegionZones', resources.zone.desc, [resources.region.tag, resources.zone.tag], True) }}
