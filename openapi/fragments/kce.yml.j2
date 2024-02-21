@@ -17,37 +17,37 @@ paths:
   /kce:
 {{ oas.List(resources.kce, [resources.kce.tag]) }}
 
-  /kce/{ {{ resources.kce.paramId }} }:
+  /kce/{{ '{' + resources.kce.paramId + '}' }}:
 {{ oas.RUD(resources.kce, [resources.kce.tag], [resources.kce.paramSchema]) }}
 
-  /kce/{ {{ resources.kce.paramId }} }/state:
+  /kce/{{ '{' + resources.kce.paramId + '}' }}/state:
 {{ oas.Parameters([resources.kce.paramSchema]) }}
 {{ oas.Read('ReadKCEState', resources.instance_state.schema, resources.instance_state.desc, [resources.kce.tag]) }}
 
-  /kce/{ {{ resources.kce.paramId }} }/reboot:
+  /kce/{{ '{' + resources.kce.paramId + '}' }}/reboot:
 {{ oas.Parameters([resources.kce.paramSchema]) }}
 {{ oas.Patch('RebootKCE', resources.kce.desc, 'software reboot', [resources.kce.tag]) }}
 
-  /kce/{ {{ resources.kce.paramId }} }/reset:
+  /kce/{{ '{' + resources.kce.paramId + '}' }}/reset:
 {{ oas.Parameters([resources.kce.paramSchema]) }}
 {{ oas.Patch('ResetKCE', resources.kce.desc, 'hardware reset', [resources.kce.tag]) }}
 
-  /kce/{ {{ resources.kce.paramId }} }/suspend:
+  /kce/{{ '{' + resources.kce.paramId + '}' }}/suspend:
 {{ oas.Parameters([resources.kce.paramSchema]) }}
 {{ oas.Patch('SuspendKCE', resources.kce.desc, 'software PM suspend', [resources.kce.tag]) }}
 
-  /kce/{ {{ resources.kce.paramId }} }/resume:
+  /kce/{{ '{' + resources.kce.paramId + '}' }}/resume:
 {{ oas.Parameters([resources.kce.paramSchema]) }}
 {{ oas.Patch('ResumeKCE', resources.kce.desc, 'software PM resume', [resources.kce.tag]) }}
 
-  /kce/{ {{ resources.kce.paramId }} }/start:
+  /kce/{{ '{' + resources.kce.paramId + '}' }}/start:
 {{ oas.Parameters([resources.kce.paramSchema]) }}
 {{ oas.Patch('StartKCE', resources.kce.desc, 'hardware boot-up', [resources.kce.tag]) }}
 
-  /kce/{ {{ resources.kce.paramId }} }/stop:
+  /kce/{{ '{' + resources.kce.paramId + '}' }}/stop:
 {{ oas.Parameters([resources.kce.paramSchema]) }}
 {{ oas.Patch('StopKCE', resources.kce.desc, 'hardware stop', [resources.kce.tag]) }}
 
-  /kce/{ {{ resources.kce.paramId }} }/shutdown:
+  /kce/{{ '{' + resources.kce.paramId + '}' }}/shutdown:
 {{ oas.Parameters([resources.kce.paramSchema]) }}
 {{ oas.Patch('ShutdownKCE', resources.kce.desc, 'software shutdown', [resources.kce.tag]) }}

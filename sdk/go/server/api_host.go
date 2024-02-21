@@ -53,17 +53,17 @@ func (c *HostAPIController) Routes() Routes {
 	return Routes{
 		"CreateHost": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/zone/{ zoneId }/host",
+			"/api/v1/zone/{zoneId}/host",
 			c.CreateHost,
 		},
 		"DeleteHost": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/host/{ hostId }",
+			"/api/v1/host/{hostId}",
 			c.DeleteHost,
 		},
 		"ListHostInstances": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/host/{ hostId }/instances",
+			"/api/v1/host/{hostId}/instances",
 			c.ListHostInstances,
 		},
 		"ListHosts": Route{
@@ -78,17 +78,17 @@ func (c *HostAPIController) Routes() Routes {
 		},
 		"ReadHost": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/host/{ hostId }",
+			"/api/v1/host/{hostId}",
 			c.ReadHost,
 		},
 		"ReadHostCaps": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/host/{ hostId }/caps",
+			"/api/v1/host/{hostId}/caps",
 			c.ReadHostCaps,
 		},
 		"UpdateHost": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/host/{ hostId }",
+			"/api/v1/host/{hostId}",
 			c.UpdateHost,
 		},
 	}

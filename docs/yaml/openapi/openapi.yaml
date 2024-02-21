@@ -69,7 +69,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
       tags:
       - adapter
-  /adapter/{ adapterId }:
+  /adapter/{adapterId}:
     delete:
       description: Deletes an existing network adapter.
       operationId: DeleteAdapter
@@ -145,7 +145,7 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - adapter
-  /record/{ recordId }:
+  /record/{recordId}:
     delete:
       description: Deletes an existing DNS record.
       operationId: DeleteDnsRecord
@@ -238,7 +238,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
       tags:
       - host
-  /host/{ hostId }:
+  /host/{hostId}:
     delete:
       description: Deletes an existing computing host.
       operationId: DeleteHost
@@ -314,7 +314,7 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - host
-  /host/{ hostId }/caps:
+  /host/{hostId}/caps:
     get:
       description: Returns a computing host capability.
       operationId: ReadHostCaps
@@ -337,7 +337,7 @@ paths:
       - host
     parameters:
     - $ref: '#/components/parameters/HostID'
-  /host/{ hostId }/instances:
+  /host/{hostId}/instances:
     get:
       description: Returns the IDs of virtual machine instance objects.
       operationId: ListHostInstances
@@ -378,7 +378,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
       tags:
       - instance
-  /instance/{ instanceId }:
+  /instance/{instanceId}:
     delete:
       description: Deletes an existing virtual machine instance.
       operationId: DeleteInstance
@@ -454,7 +454,7 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - instance
-  /instance/{ instanceId }/state:
+  /instance/{instanceId}/state:
     get:
       description: Returns a virtual machine instance state.
       operationId: ReadInstanceState
@@ -477,7 +477,7 @@ paths:
       - instance
     parameters:
     - $ref: '#/components/parameters/InstanceID'
-  /instance/{ instanceId }/reboot:
+  /instance/{instanceId}/reboot:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
     patch:
@@ -498,7 +498,7 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - instance
-  /instance/{ instanceId }/reset:
+  /instance/{instanceId}/reset:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
     patch:
@@ -519,7 +519,7 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - instance
-  /instance/{ instanceId }/suspend:
+  /instance/{instanceId}/suspend:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
     patch:
@@ -540,7 +540,7 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - instance
-  /instance/{ instanceId }/resume:
+  /instance/{instanceId}/resume:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
     patch:
@@ -561,7 +561,7 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - instance
-  /instance/{ instanceId }/start:
+  /instance/{instanceId}/start:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
     patch:
@@ -582,7 +582,7 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - instance
-  /instance/{ instanceId }/stop:
+  /instance/{instanceId}/stop:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
     patch:
@@ -603,7 +603,7 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - instance
-  /instance/{ instanceId }/shutdown:
+  /instance/{instanceId}/shutdown:
     parameters:
     - $ref: '#/components/parameters/InstanceID'
     patch:
@@ -624,7 +624,7 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - instance
-  /instance/{ instanceId }/connect:
+  /instance/{instanceId}/connect:
     get:
       description: Returns a virtual machine instance remote access characteristics.
       operationId: ReadInstanceRemoteConnection
@@ -665,7 +665,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
       tags:
       - kce
-  /kce/{ kceId }:
+  /kce/{kceId}:
     delete:
       description: Deletes an existing KCE (Kowabunga Compute Engine).
       operationId: DeleteKCE
@@ -741,7 +741,7 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - kce
-  /kce/{ kceId }/state:
+  /kce/{kceId}/state:
     get:
       description: Returns a virtual machine instance state.
       operationId: ReadKCEState
@@ -764,7 +764,7 @@ paths:
       - kce
     parameters:
     - $ref: '#/components/parameters/KceID'
-  /kce/{ kceId }/reboot:
+  /kce/{kceId}/reboot:
     parameters:
     - $ref: '#/components/parameters/KceID'
     patch:
@@ -785,7 +785,7 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - kce
-  /kce/{ kceId }/reset:
+  /kce/{kceId}/reset:
     parameters:
     - $ref: '#/components/parameters/KceID'
     patch:
@@ -806,7 +806,7 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - kce
-  /kce/{ kceId }/suspend:
+  /kce/{kceId}/suspend:
     parameters:
     - $ref: '#/components/parameters/KceID'
     patch:
@@ -827,7 +827,7 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - kce
-  /kce/{ kceId }/resume:
+  /kce/{kceId}/resume:
     parameters:
     - $ref: '#/components/parameters/KceID'
     patch:
@@ -848,7 +848,7 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - kce
-  /kce/{ kceId }/start:
+  /kce/{kceId}/start:
     parameters:
     - $ref: '#/components/parameters/KceID'
     patch:
@@ -869,7 +869,7 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - kce
-  /kce/{ kceId }/stop:
+  /kce/{kceId}/stop:
     parameters:
     - $ref: '#/components/parameters/KceID'
     patch:
@@ -890,7 +890,7 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
       - kce
-  /kce/{ kceId }/shutdown:
+  /kce/{kceId}/shutdown:
     parameters:
     - $ref: '#/components/parameters/KceID'
     patch:
@@ -928,7 +928,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
       tags:
       - kfs
-  /kfs/{ kfsId }:
+  /kfs/{kfsId}:
     delete:
       description: Deletes an existing KFS (Kowabunga File System).
       operationId: DeleteKFS
@@ -1021,7 +1021,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
       tags:
       - kgw
-  /kgw/kgwId }:
+  /kgw/kgwId}:
     delete:
       description: Deletes an existing KGW (Kowabunga Network Gateway).
       operationId: DeleteKGW
@@ -1114,7 +1114,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
       tags:
       - netgw
-  /netgw/{ netgwId }:
+  /netgw/{netgwId}:
     delete:
       description: Deletes an existing Iris network gateway.
       operationId: DeleteNetGW
@@ -1249,7 +1249,7 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - project
-  /project/{ projectId }:
+  /project/{projectId}:
     delete:
       description: Deletes an existing project.
       operationId: DeleteProject
@@ -1325,7 +1325,7 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - project
-  /project/{ projectId }/cost:
+  /project/{projectId}/cost:
     get:
       description: Returns a resource cost.
       operationId: ReadProjectCost
@@ -1348,7 +1348,7 @@ paths:
       - project
     parameters:
     - $ref: '#/components/parameters/ProjectID'
-  /project/{ projectId }/usage:
+  /project/{projectId}/usage:
     get:
       description: Returns a global project resource quotas/usage (0 for unlimited).
       operationId: ReadProjectUsage
@@ -1372,7 +1372,7 @@ paths:
       - project
     parameters:
     - $ref: '#/components/parameters/ProjectID'
-  /project/{ projectId }/record:
+  /project/{projectId}/record:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     post:
@@ -1411,7 +1411,7 @@ paths:
       tags:
       - project
       - record
-  /project/{ projectId}/records:
+  /project/{projectId}/records:
     get:
       description: Returns the IDs of DNS record objects.
       operationId: ListProjectDnsRecords
@@ -1435,7 +1435,7 @@ paths:
       - record
     parameters:
     - $ref: '#/components/parameters/ProjectID'
-  /project/{ projectId }/zone/{ zoneId }/volume:
+  /project/{projectId}/zone/{zoneId}/volume:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/ZoneID'
@@ -1481,7 +1481,7 @@ paths:
       - project
       - zone
       - volume
-  /project/{ projectId }/zone/{ zoneId }/volumes:
+  /project/{projectId}/zone/{zoneId}/volumes:
     get:
       description: Returns the IDs of storage volume objects.
       operationId: ListProjectZoneVolumes
@@ -1508,7 +1508,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/ZoneID'
-  /project/{ projectId }/zone/{ zoneId }/instance:
+  /project/{projectId}/zone/{zoneId}/instance:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/ZoneID'
@@ -1552,7 +1552,7 @@ paths:
       - project
       - zone
       - instance
-  /project/{ projectId }/zone/{ zoneId }/instances:
+  /project/{projectId}/zone/{zoneId}/instances:
     get:
       description: Returns the IDs of virtual machine instance objects.
       operationId: ListProjectZoneInstances
@@ -1579,7 +1579,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/ZoneID'
-  /project/{ projectId }/zone/{ zoneId }/kce:
+  /project/{projectId}/zone/{zoneId}/kce:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/ZoneID'
@@ -1629,7 +1629,7 @@ paths:
       - project
       - zone
       - kce
-  /project/{ projectId }/zone/{ zoneId }/kces:
+  /project/{projectId}/zone/{zoneId}/kces:
     get:
       description: Returns the IDs of KCE (Kowabunga Compute Engine) objects.
       operationId: ListProjectZoneKCEs
@@ -1656,7 +1656,7 @@ paths:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/ZoneID'
-  /project/{ projectId }/zone/{ zoneId }/kfs:
+  /project/{projectId}/zone/{zoneId}/kfs:
     get:
       description: Returns the IDs of KFS (Kowabunga File System) objects.
       operationId: ListProjectZoneKFSs
@@ -1727,7 +1727,7 @@ paths:
       - project
       - zone
       - kfs
-  /project/{ projectId }/zone/{ zoneId }/kgw:
+  /project/{projectId}/zone/{zoneId}/kgw:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/ZoneID'
@@ -1769,7 +1769,7 @@ paths:
       - project
       - zone
       - kgw
-  /project/{ projectId }/zone/{ zoneId }/kgws:
+  /project/{projectId}/zone/{zoneId}/kgws:
     get:
       description: Returns the IDs of KGW (Kowabunga Network Gateway) objects.
       operationId: ListProjectZoneKGWs
@@ -1846,7 +1846,7 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - region
-  /region/{ regionId }:
+  /region/{regionId}:
     delete:
       description: Deletes an existing region.
       operationId: DeleteRegion
@@ -1922,7 +1922,7 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - region
-  /region/{ regionId }/zone:
+  /region/{regionId}/zone:
     parameters:
     - $ref: '#/components/parameters/RegionID'
     post:
@@ -2002,7 +2002,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
       tags:
       - nfs
-  /nfs/{ nfsId }:
+  /nfs/{nfsId}:
     delete:
       description: Deletes an existing NFS storage.
       operationId: DeleteStorageNFS
@@ -2078,7 +2078,7 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - nfs
-  /nfs/{ nfsId }/kfs:
+  /nfs/{nfsId}/kfs:
     get:
       description: Returns the IDs of KFS (Kowabunga File System) objects.
       operationId: ListStorageNFSKFSs
@@ -2119,7 +2119,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
       tags:
       - pool
-  /pool/{ poolId }:
+  /pool/{poolId}:
     delete:
       description: Deletes an existing storage pool.
       operationId: DeleteStoragePool
@@ -2195,7 +2195,7 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - pool
-  /pool/{ poolId }/volumes:
+  /pool/{poolId}/volumes:
     get:
       description: Returns the IDs of storage volume objects.
       operationId: ListStoragePoolVolumes
@@ -2219,7 +2219,7 @@ paths:
       - volume
     parameters:
     - $ref: '#/components/parameters/PoolID'
-  /pool/{ poolId }/template:
+  /pool/{poolId}/template:
     parameters:
     - $ref: '#/components/parameters/PoolID'
     post:
@@ -2258,7 +2258,7 @@ paths:
       tags:
       - pool
       - template
-  /pool/{ poolId }/template/{ templateId }/default:
+  /pool/{poolId}/template/{templateId}/default:
     parameters:
     - $ref: '#/components/parameters/PoolID'
     - $ref: '#/components/parameters/TemplateID'
@@ -2282,7 +2282,7 @@ paths:
       tags:
       - pool
       - template
-  /pool/{ poolId }/templates:
+  /pool/{poolId}/templates:
     get:
       description: Returns the IDs of image template objects.
       operationId: ListStoragePoolTemplates
@@ -2323,7 +2323,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
       tags:
       - subnet
-  /subnet/{ subnetId }:
+  /subnet/{subnetId}:
     delete:
       description: Deletes an existing network subnet.
       operationId: DeleteSubnet
@@ -2399,7 +2399,7 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - subnet
-  /subnet/{ subnetId }/adapter:
+  /subnet/{subnetId}/adapter:
     parameters:
     - $ref: '#/components/parameters/SubnetID'
     - $ref: '#/components/parameters/OptionalQueryAssignIP'
@@ -2440,7 +2440,7 @@ paths:
       tags:
       - subnet
       - adapter
-  /subnet/{ subnetId }/adapters:
+  /subnet/{subnetId}/adapters:
     get:
       description: Returns the IDs of network adapter objects.
       operationId: ListSubnetAdapters
@@ -2481,7 +2481,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
       tags:
       - template
-  /template/{ templateId }:
+  /template/{templateId}:
     delete:
       description: Deletes an existing image template.
       operationId: DeleteTemplate
@@ -2574,7 +2574,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
       tags:
       - vnet
-  /vnet/{ vnetId }:
+  /vnet/{vnetId}:
     delete:
       description: Deletes an existing virtual network.
       operationId: DeleteVNet
@@ -2650,7 +2650,7 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - vnet
-  /vnet/{ vnetId }/subnet:
+  /vnet/{vnetId}/subnet:
     parameters:
     - $ref: '#/components/parameters/VnetID'
     post:
@@ -2689,7 +2689,7 @@ paths:
       tags:
       - vnet
       - subnet
-  /vnet/{ vnetId }/subnet/{ subnetId }/default:
+  /vnet/{vnetId}/subnet/{subnetId}/default:
     parameters:
     - $ref: '#/components/parameters/VnetID'
     - $ref: '#/components/parameters/SubnetID'
@@ -2713,7 +2713,7 @@ paths:
       tags:
       - vnet
       - subnet
-  /vnet/{ vnetId }/subnets:
+  /vnet/{vnetId}/subnets:
     get:
       description: Returns the IDs of network subnet objects.
       operationId: ListVNetSubnets
@@ -2754,7 +2754,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
       tags:
       - volume
-  /volume/{ volumeId }:
+  /volume/{volumeId}:
     delete:
       description: Deletes an existing storage volume.
       operationId: DeleteVolume
@@ -2847,7 +2847,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
       tags:
       - zone
-  /zone/{ zoneId }:
+  /zone/{zoneId}:
     delete:
       description: Deletes an existing availability zone.
       operationId: DeleteZone
@@ -2923,7 +2923,7 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - zone
-  /zone/{ zoneId }/netgw:
+  /zone/{zoneId}/netgw:
     parameters:
     - $ref: '#/components/parameters/ZoneID'
     post:
@@ -2962,7 +2962,7 @@ paths:
       tags:
       - zone
       - netgw
-  /zone/{ zoneId }/netgws:
+  /zone/{zoneId}/netgws:
     get:
       description: Returns the IDs of Iris network gateway objects.
       operationId: ListZoneNetGWs
@@ -2986,7 +2986,7 @@ paths:
       - netgw
     parameters:
     - $ref: '#/components/parameters/ZoneID'
-  /zone/{ zoneId }/host:
+  /zone/{zoneId}/host:
     parameters:
     - $ref: '#/components/parameters/ZoneID'
     post:
@@ -3049,7 +3049,7 @@ paths:
       - host
     parameters:
     - $ref: '#/components/parameters/ZoneID'
-  /zone/{ zoneId }/pool:
+  /zone/{zoneId}/pool:
     parameters:
     - $ref: '#/components/parameters/ZoneID'
     - $ref: '#/components/parameters/OptionalQueryHostID'
@@ -3090,7 +3090,7 @@ paths:
       tags:
       - zone
       - pool
-  /zone/{ zoneId }/pool/{ poolId }/default:
+  /zone/{zoneId}/pool/{poolId}/default:
     parameters:
     - $ref: '#/components/parameters/ZoneID'
     - $ref: '#/components/parameters/PoolID'
@@ -3114,7 +3114,7 @@ paths:
       tags:
       - zone
       - pool
-  /zone/{ zoneId }/pools:
+  /zone/{zoneId}/pools:
     get:
       description: Returns the IDs of storage pool objects.
       operationId: ListZoneStoragePools
@@ -3138,7 +3138,7 @@ paths:
       - pool
     parameters:
     - $ref: '#/components/parameters/ZoneID'
-  /zone/{ zoneId }/nfs:
+  /zone/{zoneId}/nfs:
     get:
       description: Returns the IDs of NFS storage objects.
       operationId: ListZoneStorageNFSs
@@ -3198,7 +3198,7 @@ paths:
       tags:
       - zone
       - nfs
-  /zone/{ zoneId }/nfs/{ nfsId }/default:
+  /zone/{zoneId}/nfs/{nfsId}/default:
     parameters:
     - $ref: '#/components/parameters/ZoneID'
     - $ref: '#/components/parameters/NfsID'
@@ -3222,7 +3222,7 @@ paths:
       tags:
       - zone
       - nfs
-  /zone/{ zoneId }/vnet:
+  /zone/{zoneId}/vnet:
     parameters:
     - $ref: '#/components/parameters/ZoneID'
     post:
@@ -3261,7 +3261,7 @@ paths:
       tags:
       - zone
       - vnet
-  /zone/{ zoneId }/vnets:
+  /zone/{zoneId}/vnets:
     get:
       description: Returns the IDs of virtual network objects.
       operationId: ListZoneVNets

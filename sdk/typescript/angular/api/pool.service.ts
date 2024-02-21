@@ -191,7 +191,7 @@ export class PoolService {
             }
         }
 
-        let localVarPath = `/zone//pool`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/pool`;
         return this.httpClient.request<StoragePool>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -283,7 +283,7 @@ export class PoolService {
             }
         }
 
-        let localVarPath = `/pool//template`;
+        let localVarPath = `/pool/${this.configuration.encodeParam({name: "poolId", value: poolId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/template`;
         return this.httpClient.request<Template>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -361,7 +361,7 @@ export class PoolService {
             }
         }
 
-        let localVarPath = `/pool/`;
+        let localVarPath = `/pool/${this.configuration.encodeParam({name: "poolId", value: poolId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -438,7 +438,7 @@ export class PoolService {
             }
         }
 
-        let localVarPath = `/pool//templates`;
+        let localVarPath = `/pool/${this.configuration.encodeParam({name: "poolId", value: poolId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/templates`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -515,7 +515,7 @@ export class PoolService {
             }
         }
 
-        let localVarPath = `/pool//volumes`;
+        let localVarPath = `/pool/${this.configuration.encodeParam({name: "poolId", value: poolId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/volumes`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -665,7 +665,7 @@ export class PoolService {
             }
         }
 
-        let localVarPath = `/zone//pools`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/pools`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -742,7 +742,7 @@ export class PoolService {
             }
         }
 
-        let localVarPath = `/pool/`;
+        let localVarPath = `/pool/${this.configuration.encodeParam({name: "poolId", value: poolId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<StoragePool>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -823,7 +823,7 @@ export class PoolService {
             }
         }
 
-        let localVarPath = `/pool//template//default`;
+        let localVarPath = `/pool/${this.configuration.encodeParam({name: "poolId", value: poolId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/template/${this.configuration.encodeParam({name: "templateId", value: templateId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/default`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -904,7 +904,7 @@ export class PoolService {
             }
         }
 
-        let localVarPath = `/zone//pool//default`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/pool/${this.configuration.encodeParam({name: "poolId", value: poolId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/default`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -994,7 +994,7 @@ export class PoolService {
             }
         }
 
-        let localVarPath = `/pool/`;
+        let localVarPath = `/pool/${this.configuration.encodeParam({name: "poolId", value: poolId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<StoragePool>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

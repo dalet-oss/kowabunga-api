@@ -73,7 +73,7 @@ func (a *NfsAPIService) CreateStorageNFSExecute(r ApiCreateStorageNFSRequest) (*
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }/nfs"
+	localVarPath := localBasePath + "/zone/{zoneId}/nfs"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -283,7 +283,7 @@ func (a *NfsAPIService) DeleteStorageNFSExecute(r ApiDeleteStorageNFSRequest) (*
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/nfs/{ nfsId }"
+	localVarPath := localBasePath + "/nfs/{nfsId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"nfsId"+"}", url.PathEscape(parameterValueToString(r.nfsId, "nfsId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -459,7 +459,7 @@ func (a *NfsAPIService) ListStorageNFSKFSsExecute(r ApiListStorageNFSKFSsRequest
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/nfs/{ nfsId }/kfs"
+	localVarPath := localBasePath + "/nfs/{nfsId}/kfs"
 	localVarPath = strings.Replace(localVarPath, "{"+"nfsId"+"}", url.PathEscape(parameterValueToString(r.nfsId, "nfsId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -770,7 +770,7 @@ func (a *NfsAPIService) ListZoneStorageNFSsExecute(r ApiListZoneStorageNFSsReque
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }/nfs"
+	localVarPath := localBasePath + "/zone/{zoneId}/nfs"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -933,7 +933,7 @@ func (a *NfsAPIService) ReadStorageNFSExecute(r ApiReadStorageNFSRequest) (*Stor
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/nfs/{ nfsId }"
+	localVarPath := localBasePath + "/nfs/{nfsId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"nfsId"+"}", url.PathEscape(parameterValueToString(r.nfsId, "nfsId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1097,7 +1097,7 @@ func (a *NfsAPIService) SetZoneDefaultStorageNFSExecute(r ApiSetZoneDefaultStora
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }/nfs/{ nfsId }/default"
+	localVarPath := localBasePath + "/zone/{zoneId}/nfs/{nfsId}/default"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"nfsId"+"}", url.PathEscape(parameterValueToString(r.nfsId, "nfsId")), -1)
 
@@ -1270,7 +1270,7 @@ func (a *NfsAPIService) UpdateStorageNFSExecute(r ApiUpdateStorageNFSRequest) (*
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/nfs/{ nfsId }"
+	localVarPath := localBasePath + "/nfs/{nfsId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"nfsId"+"}", url.PathEscape(parameterValueToString(r.nfsId, "nfsId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

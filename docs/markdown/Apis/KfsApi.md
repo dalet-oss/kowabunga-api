@@ -4,13 +4,13 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createProjectZoneKFS**](KfsApi.md#createProjectZoneKFS) | **POST** /project/{ projectId }/zone/{ zoneId }/kfs |  |
-| [**deleteKFS**](KfsApi.md#deleteKFS) | **DELETE** /kfs/{ kfsId } |  |
+| [**createProjectZoneKFS**](KfsApi.md#createProjectZoneKFS) | **POST** /project/{projectId}/zone/{zoneId}/kfs |  |
+| [**deleteKFS**](KfsApi.md#deleteKFS) | **DELETE** /kfs/{kfsId} |  |
 | [**listKFSs**](KfsApi.md#listKFSs) | **GET** /kfs |  |
-| [**listProjectZoneKFSs**](KfsApi.md#listProjectZoneKFSs) | **GET** /project/{ projectId }/zone/{ zoneId }/kfs |  |
-| [**listStorageNFSKFSs**](KfsApi.md#listStorageNFSKFSs) | **GET** /nfs/{ nfsId }/kfs |  |
-| [**readKFS**](KfsApi.md#readKFS) | **GET** /kfs/{ kfsId } |  |
-| [**updateKFS**](KfsApi.md#updateKFS) | **PUT** /kfs/{ kfsId } |  |
+| [**listProjectZoneKFSs**](KfsApi.md#listProjectZoneKFSs) | **GET** /project/{projectId}/zone/{zoneId}/kfs |  |
+| [**listStorageNFSKFSs**](KfsApi.md#listStorageNFSKFSs) | **GET** /nfs/{nfsId}/kfs |  |
+| [**readKFS**](KfsApi.md#readKFS) | **GET** /kfs/{kfsId} |  |
+| [**updateKFS**](KfsApi.md#updateKFS) | **PUT** /kfs/{kfsId} |  |
 
 
 <a name="createProjectZoneKFS"></a>

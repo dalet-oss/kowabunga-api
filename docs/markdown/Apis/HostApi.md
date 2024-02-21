@@ -4,14 +4,14 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createHost**](HostApi.md#createHost) | **POST** /zone/{ zoneId }/host |  |
-| [**deleteHost**](HostApi.md#deleteHost) | **DELETE** /host/{ hostId } |  |
-| [**listHostInstances**](HostApi.md#listHostInstances) | **GET** /host/{ hostId }/instances |  |
+| [**createHost**](HostApi.md#createHost) | **POST** /zone/{zoneId}/host |  |
+| [**deleteHost**](HostApi.md#deleteHost) | **DELETE** /host/{hostId} |  |
+| [**listHostInstances**](HostApi.md#listHostInstances) | **GET** /host/{hostId}/instances |  |
 | [**listHosts**](HostApi.md#listHosts) | **GET** /host |  |
 | [**listZoneHosts**](HostApi.md#listZoneHosts) | **GET** /zone/{zoneId}/hosts |  |
-| [**readHost**](HostApi.md#readHost) | **GET** /host/{ hostId } |  |
-| [**readHostCaps**](HostApi.md#readHostCaps) | **GET** /host/{ hostId }/caps |  |
-| [**updateHost**](HostApi.md#updateHost) | **PUT** /host/{ hostId } |  |
+| [**readHost**](HostApi.md#readHost) | **GET** /host/{hostId} |  |
+| [**readHostCaps**](HostApi.md#readHostCaps) | **GET** /host/{hostId}/caps |  |
+| [**updateHost**](HostApi.md#updateHost) | **PUT** /host/{hostId} |  |
 
 
 <a name="createHost"></a>

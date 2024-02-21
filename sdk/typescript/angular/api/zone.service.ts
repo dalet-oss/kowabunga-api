@@ -202,7 +202,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/zone//host`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/host`;
         return this.httpClient.request<Host>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -293,7 +293,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/zone//netgw`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/netgw`;
         return this.httpClient.request<NetGW>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -395,7 +395,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/project//zone//instance`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/instance`;
         return this.httpClient.request<Instance>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -513,7 +513,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/project//zone//kce`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kce`;
         return this.httpClient.request<KCE>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -621,7 +621,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/project//zone//kfs`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kfs`;
         return this.httpClient.request<KFS>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -717,7 +717,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/project//zone//kgw`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kgw`;
         return this.httpClient.request<KGW>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -824,7 +824,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/project//zone//volume`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/volume`;
         return this.httpClient.request<Volume>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -916,7 +916,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/zone//nfs`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/nfs`;
         return this.httpClient.request<StorageNFS>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -1014,7 +1014,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/zone//pool`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/pool`;
         return this.httpClient.request<StoragePool>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -1106,7 +1106,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/zone//vnet`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/vnet`;
         return this.httpClient.request<VNet>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -1197,7 +1197,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/region//zone`;
+        let localVarPath = `/region/${this.configuration.encodeParam({name: "regionId", value: regionId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone`;
         return this.httpClient.request<Zone>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -1275,7 +1275,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/zone/`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -1356,7 +1356,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/project//zone//instances`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/instances`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -1437,7 +1437,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/project//zone//kces`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kces`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -1530,7 +1530,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/project//zone//kfs`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kfs`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -1612,7 +1612,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/project//zone//kgws`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kgws`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -1693,7 +1693,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/project//zone//volumes`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/volumes`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -1924,7 +1924,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/zone//netgws`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/netgws`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -2001,7 +2001,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/zone//nfs`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/nfs`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -2078,7 +2078,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/zone//pools`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/pools`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -2155,7 +2155,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/zone//vnets`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/vnets`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -2305,7 +2305,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/zone/`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<Zone>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -2386,7 +2386,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/zone//nfs//default`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/nfs/${this.configuration.encodeParam({name: "nfsId", value: nfsId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/default`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -2467,7 +2467,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/zone//pool//default`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/pool/${this.configuration.encodeParam({name: "poolId", value: poolId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/default`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -2557,7 +2557,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/zone/`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<Zone>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

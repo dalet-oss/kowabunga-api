@@ -73,7 +73,7 @@ func (a *HostAPIService) CreateHostExecute(r ApiCreateHostRequest) (*Host, *http
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }/host"
+	localVarPath := localBasePath + "/zone/{zoneId}/host"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -283,7 +283,7 @@ func (a *HostAPIService) DeleteHostExecute(r ApiDeleteHostRequest) (*http.Respon
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/host/{ hostId }"
+	localVarPath := localBasePath + "/host/{hostId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"hostId"+"}", url.PathEscape(parameterValueToString(r.hostId, "hostId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -459,7 +459,7 @@ func (a *HostAPIService) ListHostInstancesExecute(r ApiListHostInstancesRequest)
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/host/{ hostId }/instances"
+	localVarPath := localBasePath + "/host/{hostId}/instances"
 	localVarPath = strings.Replace(localVarPath, "{"+"hostId"+"}", url.PathEscape(parameterValueToString(r.hostId, "hostId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -933,7 +933,7 @@ func (a *HostAPIService) ReadHostExecute(r ApiReadHostRequest) (*Host, *http.Res
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/host/{ hostId }"
+	localVarPath := localBasePath + "/host/{hostId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"hostId"+"}", url.PathEscape(parameterValueToString(r.hostId, "hostId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1096,7 +1096,7 @@ func (a *HostAPIService) ReadHostCapsExecute(r ApiReadHostCapsRequest) (*HostCap
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/host/{ hostId }/caps"
+	localVarPath := localBasePath + "/host/{hostId}/caps"
 	localVarPath = strings.Replace(localVarPath, "{"+"hostId"+"}", url.PathEscape(parameterValueToString(r.hostId, "hostId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1266,7 +1266,7 @@ func (a *HostAPIService) UpdateHostExecute(r ApiUpdateHostRequest) (*Host, *http
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/host/{ hostId }"
+	localVarPath := localBasePath + "/host/{hostId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"hostId"+"}", url.PathEscape(parameterValueToString(r.hostId, "hostId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

@@ -53,87 +53,87 @@ func (c *ZoneAPIController) Routes() Routes {
 	return Routes{
 		"CreateHost": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/zone/{ zoneId }/host",
+			"/api/v1/zone/{zoneId}/host",
 			c.CreateHost,
 		},
 		"CreateNetGW": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/zone/{ zoneId }/netgw",
+			"/api/v1/zone/{zoneId}/netgw",
 			c.CreateNetGW,
 		},
 		"CreateProjectZoneInstance": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/instance",
+			"/api/v1/project/{projectId}/zone/{zoneId}/instance",
 			c.CreateProjectZoneInstance,
 		},
 		"CreateProjectZoneKCE": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/kce",
+			"/api/v1/project/{projectId}/zone/{zoneId}/kce",
 			c.CreateProjectZoneKCE,
 		},
 		"CreateProjectZoneKFS": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/kfs",
+			"/api/v1/project/{projectId}/zone/{zoneId}/kfs",
 			c.CreateProjectZoneKFS,
 		},
 		"CreateProjectZoneKGW": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/kgw",
+			"/api/v1/project/{projectId}/zone/{zoneId}/kgw",
 			c.CreateProjectZoneKGW,
 		},
 		"CreateProjectZoneVolume": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/volume",
+			"/api/v1/project/{projectId}/zone/{zoneId}/volume",
 			c.CreateProjectZoneVolume,
 		},
 		"CreateStorageNFS": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/zone/{ zoneId }/nfs",
+			"/api/v1/zone/{zoneId}/nfs",
 			c.CreateStorageNFS,
 		},
 		"CreateStoragePool": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/zone/{ zoneId }/pool",
+			"/api/v1/zone/{zoneId}/pool",
 			c.CreateStoragePool,
 		},
 		"CreateVNet": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/zone/{ zoneId }/vnet",
+			"/api/v1/zone/{zoneId}/vnet",
 			c.CreateVNet,
 		},
 		"CreateZone": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/region/{ regionId }/zone",
+			"/api/v1/region/{regionId}/zone",
 			c.CreateZone,
 		},
 		"DeleteZone": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/zone/{ zoneId }",
+			"/api/v1/zone/{zoneId}",
 			c.DeleteZone,
 		},
 		"ListProjectZoneInstances": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/instances",
+			"/api/v1/project/{projectId}/zone/{zoneId}/instances",
 			c.ListProjectZoneInstances,
 		},
 		"ListProjectZoneKCEs": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/kces",
+			"/api/v1/project/{projectId}/zone/{zoneId}/kces",
 			c.ListProjectZoneKCEs,
 		},
 		"ListProjectZoneKFSs": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/kfs",
+			"/api/v1/project/{projectId}/zone/{zoneId}/kfs",
 			c.ListProjectZoneKFSs,
 		},
 		"ListProjectZoneKGWs": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/kgws",
+			"/api/v1/project/{projectId}/zone/{zoneId}/kgws",
 			c.ListProjectZoneKGWs,
 		},
 		"ListProjectZoneVolumes": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/volumes",
+			"/api/v1/project/{projectId}/zone/{zoneId}/volumes",
 			c.ListProjectZoneVolumes,
 		},
 		"ListRegionZones": Route{
@@ -148,22 +148,22 @@ func (c *ZoneAPIController) Routes() Routes {
 		},
 		"ListZoneNetGWs": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/zone/{ zoneId }/netgws",
+			"/api/v1/zone/{zoneId}/netgws",
 			c.ListZoneNetGWs,
 		},
 		"ListZoneStorageNFSs": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/zone/{ zoneId }/nfs",
+			"/api/v1/zone/{zoneId}/nfs",
 			c.ListZoneStorageNFSs,
 		},
 		"ListZoneStoragePools": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/zone/{ zoneId }/pools",
+			"/api/v1/zone/{zoneId}/pools",
 			c.ListZoneStoragePools,
 		},
 		"ListZoneVNets": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/zone/{ zoneId }/vnets",
+			"/api/v1/zone/{zoneId}/vnets",
 			c.ListZoneVNets,
 		},
 		"ListZones": Route{
@@ -173,22 +173,22 @@ func (c *ZoneAPIController) Routes() Routes {
 		},
 		"ReadZone": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/zone/{ zoneId }",
+			"/api/v1/zone/{zoneId}",
 			c.ReadZone,
 		},
 		"SetZoneDefaultStorageNFS": Route{
 			strings.ToUpper("Patch"),
-			"/api/v1/zone/{ zoneId }/nfs/{ nfsId }/default",
+			"/api/v1/zone/{zoneId}/nfs/{nfsId}/default",
 			c.SetZoneDefaultStorageNFS,
 		},
 		"SetZoneDefaultStoragePool": Route{
 			strings.ToUpper("Patch"),
-			"/api/v1/zone/{ zoneId }/pool/{ poolId }/default",
+			"/api/v1/zone/{zoneId}/pool/{poolId}/default",
 			c.SetZoneDefaultStoragePool,
 		},
 		"UpdateZone": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/zone/{ zoneId }",
+			"/api/v1/zone/{zoneId}",
 			c.UpdateZone,
 		},
 	}

@@ -4,14 +4,14 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createStorageNFS**](NfsApi.md#createStorageNFS) | **POST** /zone/{ zoneId }/nfs |  |
-| [**deleteStorageNFS**](NfsApi.md#deleteStorageNFS) | **DELETE** /nfs/{ nfsId } |  |
-| [**listStorageNFSKFSs**](NfsApi.md#listStorageNFSKFSs) | **GET** /nfs/{ nfsId }/kfs |  |
+| [**createStorageNFS**](NfsApi.md#createStorageNFS) | **POST** /zone/{zoneId}/nfs |  |
+| [**deleteStorageNFS**](NfsApi.md#deleteStorageNFS) | **DELETE** /nfs/{nfsId} |  |
+| [**listStorageNFSKFSs**](NfsApi.md#listStorageNFSKFSs) | **GET** /nfs/{nfsId}/kfs |  |
 | [**listStorageNFSs**](NfsApi.md#listStorageNFSs) | **GET** /nfs |  |
-| [**listZoneStorageNFSs**](NfsApi.md#listZoneStorageNFSs) | **GET** /zone/{ zoneId }/nfs |  |
-| [**readStorageNFS**](NfsApi.md#readStorageNFS) | **GET** /nfs/{ nfsId } |  |
-| [**setZoneDefaultStorageNFS**](NfsApi.md#setZoneDefaultStorageNFS) | **PATCH** /zone/{ zoneId }/nfs/{ nfsId }/default |  |
-| [**updateStorageNFS**](NfsApi.md#updateStorageNFS) | **PUT** /nfs/{ nfsId } |  |
+| [**listZoneStorageNFSs**](NfsApi.md#listZoneStorageNFSs) | **GET** /zone/{zoneId}/nfs |  |
+| [**readStorageNFS**](NfsApi.md#readStorageNFS) | **GET** /nfs/{nfsId} |  |
+| [**setZoneDefaultStorageNFS**](NfsApi.md#setZoneDefaultStorageNFS) | **PATCH** /zone/{zoneId}/nfs/{nfsId}/default |  |
+| [**updateStorageNFS**](NfsApi.md#updateStorageNFS) | **PUT** /nfs/{nfsId} |  |
 
 
 <a name="createStorageNFS"></a>

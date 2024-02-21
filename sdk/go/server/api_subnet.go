@@ -53,22 +53,22 @@ func (c *SubnetAPIController) Routes() Routes {
 	return Routes{
 		"CreateAdapter": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/subnet/{ subnetId }/adapter",
+			"/api/v1/subnet/{subnetId}/adapter",
 			c.CreateAdapter,
 		},
 		"CreateSubnet": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/vnet/{ vnetId }/subnet",
+			"/api/v1/vnet/{vnetId}/subnet",
 			c.CreateSubnet,
 		},
 		"DeleteSubnet": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/subnet/{ subnetId }",
+			"/api/v1/subnet/{subnetId}",
 			c.DeleteSubnet,
 		},
 		"ListSubnetAdapters": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/subnet/{ subnetId }/adapters",
+			"/api/v1/subnet/{subnetId}/adapters",
 			c.ListSubnetAdapters,
 		},
 		"ListSubnets": Route{
@@ -78,22 +78,22 @@ func (c *SubnetAPIController) Routes() Routes {
 		},
 		"ListVNetSubnets": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/vnet/{ vnetId }/subnets",
+			"/api/v1/vnet/{vnetId}/subnets",
 			c.ListVNetSubnets,
 		},
 		"ReadSubnet": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/subnet/{ subnetId }",
+			"/api/v1/subnet/{subnetId}",
 			c.ReadSubnet,
 		},
 		"SetVNetDefaultSubnet": Route{
 			strings.ToUpper("Patch"),
-			"/api/v1/vnet/{ vnetId }/subnet/{ subnetId }/default",
+			"/api/v1/vnet/{vnetId}/subnet/{subnetId}/default",
 			c.SetVNetDefaultSubnet,
 		},
 		"UpdateSubnet": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/subnet/{ subnetId }",
+			"/api/v1/subnet/{subnetId}",
 			c.UpdateSubnet,
 		},
 	}

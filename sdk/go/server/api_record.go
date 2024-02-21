@@ -53,27 +53,27 @@ func (c *RecordAPIController) Routes() Routes {
 	return Routes{
 		"CreateProjectDnsRecord": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{ projectId }/record",
+			"/api/v1/project/{projectId}/record",
 			c.CreateProjectDnsRecord,
 		},
 		"DeleteDnsRecord": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/record/{ recordId }",
+			"/api/v1/record/{recordId}",
 			c.DeleteDnsRecord,
 		},
 		"ListProjectDnsRecords": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{ projectId}/records",
+			"/api/v1/project/{projectId}/records",
 			c.ListProjectDnsRecords,
 		},
 		"ReadDnsRecord": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/record/{ recordId }",
+			"/api/v1/record/{recordId}",
 			c.ReadDnsRecord,
 		},
 		"UpdateDnsRecord": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/record/{ recordId }",
+			"/api/v1/record/{recordId}",
 			c.UpdateDnsRecord,
 		},
 	}

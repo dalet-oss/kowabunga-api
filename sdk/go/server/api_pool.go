@@ -53,27 +53,27 @@ func (c *PoolAPIController) Routes() Routes {
 	return Routes{
 		"CreateStoragePool": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/zone/{ zoneId }/pool",
+			"/api/v1/zone/{zoneId}/pool",
 			c.CreateStoragePool,
 		},
 		"CreateTemplate": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/pool/{ poolId }/template",
+			"/api/v1/pool/{poolId}/template",
 			c.CreateTemplate,
 		},
 		"DeleteStoragePool": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/pool/{ poolId }",
+			"/api/v1/pool/{poolId}",
 			c.DeleteStoragePool,
 		},
 		"ListStoragePoolTemplates": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/pool/{ poolId }/templates",
+			"/api/v1/pool/{poolId}/templates",
 			c.ListStoragePoolTemplates,
 		},
 		"ListStoragePoolVolumes": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/pool/{ poolId }/volumes",
+			"/api/v1/pool/{poolId}/volumes",
 			c.ListStoragePoolVolumes,
 		},
 		"ListStoragePools": Route{
@@ -83,27 +83,27 @@ func (c *PoolAPIController) Routes() Routes {
 		},
 		"ListZoneStoragePools": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/zone/{ zoneId }/pools",
+			"/api/v1/zone/{zoneId}/pools",
 			c.ListZoneStoragePools,
 		},
 		"ReadStoragePool": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/pool/{ poolId }",
+			"/api/v1/pool/{poolId}",
 			c.ReadStoragePool,
 		},
 		"SetStoragePoolDefaultTemplate": Route{
 			strings.ToUpper("Patch"),
-			"/api/v1/pool/{ poolId }/template/{ templateId }/default",
+			"/api/v1/pool/{poolId}/template/{templateId}/default",
 			c.SetStoragePoolDefaultTemplate,
 		},
 		"SetZoneDefaultStoragePool": Route{
 			strings.ToUpper("Patch"),
-			"/api/v1/zone/{ zoneId }/pool/{ poolId }/default",
+			"/api/v1/zone/{zoneId}/pool/{poolId}/default",
 			c.SetZoneDefaultStoragePool,
 		},
 		"UpdateStoragePool": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/pool/{ poolId }",
+			"/api/v1/pool/{poolId}",
 			c.UpdateStoragePool,
 		},
 	}

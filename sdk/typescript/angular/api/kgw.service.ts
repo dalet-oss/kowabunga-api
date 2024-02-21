@@ -186,7 +186,7 @@ export class KgwService {
             }
         }
 
-        let localVarPath = `/project//zone//kgw`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kgw`;
         return this.httpClient.request<KGW>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -264,7 +264,7 @@ export class KgwService {
             }
         }
 
-        let localVarPath = `/kgw/kgwId `;
+        let localVarPath = `/kgw/kgwId`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -418,7 +418,7 @@ export class KgwService {
             }
         }
 
-        let localVarPath = `/project//zone//kgws`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kgws`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -495,7 +495,7 @@ export class KgwService {
             }
         }
 
-        let localVarPath = `/kgw/kgwId `;
+        let localVarPath = `/kgw/kgwId`;
         return this.httpClient.request<KGW>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -585,7 +585,7 @@ export class KgwService {
             }
         }
 
-        let localVarPath = `/kgw/kgwId `;
+        let localVarPath = `/kgw/kgwId`;
         return this.httpClient.request<KGW>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

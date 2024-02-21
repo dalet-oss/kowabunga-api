@@ -14,5 +14,5 @@ paths:
   /volume:
 {{ oas.List(resources.volume, [resources.volume.tag]) }}
 
-  /volume/{ {{ resources.volume.paramId }} }:
+  /volume/{{ '{' + resources.volume.paramId + '}' }}:
 {{ oas.RUD(resources.volume, [resources.volume.tag], [resources.volume.paramSchema]) }}

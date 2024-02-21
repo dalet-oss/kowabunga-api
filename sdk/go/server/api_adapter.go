@@ -53,12 +53,12 @@ func (c *AdapterAPIController) Routes() Routes {
 	return Routes{
 		"CreateAdapter": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/subnet/{ subnetId }/adapter",
+			"/api/v1/subnet/{subnetId}/adapter",
 			c.CreateAdapter,
 		},
 		"DeleteAdapter": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/adapter/{ adapterId }",
+			"/api/v1/adapter/{adapterId}",
 			c.DeleteAdapter,
 		},
 		"ListAdapters": Route{
@@ -68,17 +68,17 @@ func (c *AdapterAPIController) Routes() Routes {
 		},
 		"ListSubnetAdapters": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/subnet/{ subnetId }/adapters",
+			"/api/v1/subnet/{subnetId}/adapters",
 			c.ListSubnetAdapters,
 		},
 		"ReadAdapter": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/adapter/{ adapterId }",
+			"/api/v1/adapter/{adapterId}",
 			c.ReadAdapter,
 		},
 		"UpdateAdapter": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/adapter/{ adapterId }",
+			"/api/v1/adapter/{adapterId}",
 			c.UpdateAdapter,
 		},
 	}

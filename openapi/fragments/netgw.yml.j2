@@ -14,5 +14,5 @@ paths:
   /netgw:
 {{ oas.List(resources.netgw, [resources.netgw.tag]) }}
 
-  /netgw/{ {{ resources.netgw.paramId }} }:
+  /netgw/{{ '{' + resources.netgw.paramId + '}' }}:
 {{ oas.RUD(resources.netgw, [resources.netgw.tag], [resources.netgw.paramSchema]) }}

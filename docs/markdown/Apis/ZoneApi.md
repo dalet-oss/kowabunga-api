@@ -4,34 +4,34 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createHost**](ZoneApi.md#createHost) | **POST** /zone/{ zoneId }/host |  |
-| [**createNetGW**](ZoneApi.md#createNetGW) | **POST** /zone/{ zoneId }/netgw |  |
-| [**createProjectZoneInstance**](ZoneApi.md#createProjectZoneInstance) | **POST** /project/{ projectId }/zone/{ zoneId }/instance |  |
-| [**createProjectZoneKCE**](ZoneApi.md#createProjectZoneKCE) | **POST** /project/{ projectId }/zone/{ zoneId }/kce |  |
-| [**createProjectZoneKFS**](ZoneApi.md#createProjectZoneKFS) | **POST** /project/{ projectId }/zone/{ zoneId }/kfs |  |
-| [**createProjectZoneKGW**](ZoneApi.md#createProjectZoneKGW) | **POST** /project/{ projectId }/zone/{ zoneId }/kgw |  |
-| [**createProjectZoneVolume**](ZoneApi.md#createProjectZoneVolume) | **POST** /project/{ projectId }/zone/{ zoneId }/volume |  |
-| [**createStorageNFS**](ZoneApi.md#createStorageNFS) | **POST** /zone/{ zoneId }/nfs |  |
-| [**createStoragePool**](ZoneApi.md#createStoragePool) | **POST** /zone/{ zoneId }/pool |  |
-| [**createVNet**](ZoneApi.md#createVNet) | **POST** /zone/{ zoneId }/vnet |  |
-| [**createZone**](ZoneApi.md#createZone) | **POST** /region/{ regionId }/zone |  |
-| [**deleteZone**](ZoneApi.md#deleteZone) | **DELETE** /zone/{ zoneId } |  |
-| [**listProjectZoneInstances**](ZoneApi.md#listProjectZoneInstances) | **GET** /project/{ projectId }/zone/{ zoneId }/instances |  |
-| [**listProjectZoneKCEs**](ZoneApi.md#listProjectZoneKCEs) | **GET** /project/{ projectId }/zone/{ zoneId }/kces |  |
-| [**listProjectZoneKFSs**](ZoneApi.md#listProjectZoneKFSs) | **GET** /project/{ projectId }/zone/{ zoneId }/kfs |  |
-| [**listProjectZoneKGWs**](ZoneApi.md#listProjectZoneKGWs) | **GET** /project/{ projectId }/zone/{ zoneId }/kgws |  |
-| [**listProjectZoneVolumes**](ZoneApi.md#listProjectZoneVolumes) | **GET** /project/{ projectId }/zone/{ zoneId }/volumes |  |
+| [**createHost**](ZoneApi.md#createHost) | **POST** /zone/{zoneId}/host |  |
+| [**createNetGW**](ZoneApi.md#createNetGW) | **POST** /zone/{zoneId}/netgw |  |
+| [**createProjectZoneInstance**](ZoneApi.md#createProjectZoneInstance) | **POST** /project/{projectId}/zone/{zoneId}/instance |  |
+| [**createProjectZoneKCE**](ZoneApi.md#createProjectZoneKCE) | **POST** /project/{projectId}/zone/{zoneId}/kce |  |
+| [**createProjectZoneKFS**](ZoneApi.md#createProjectZoneKFS) | **POST** /project/{projectId}/zone/{zoneId}/kfs |  |
+| [**createProjectZoneKGW**](ZoneApi.md#createProjectZoneKGW) | **POST** /project/{projectId}/zone/{zoneId}/kgw |  |
+| [**createProjectZoneVolume**](ZoneApi.md#createProjectZoneVolume) | **POST** /project/{projectId}/zone/{zoneId}/volume |  |
+| [**createStorageNFS**](ZoneApi.md#createStorageNFS) | **POST** /zone/{zoneId}/nfs |  |
+| [**createStoragePool**](ZoneApi.md#createStoragePool) | **POST** /zone/{zoneId}/pool |  |
+| [**createVNet**](ZoneApi.md#createVNet) | **POST** /zone/{zoneId}/vnet |  |
+| [**createZone**](ZoneApi.md#createZone) | **POST** /region/{regionId}/zone |  |
+| [**deleteZone**](ZoneApi.md#deleteZone) | **DELETE** /zone/{zoneId} |  |
+| [**listProjectZoneInstances**](ZoneApi.md#listProjectZoneInstances) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
+| [**listProjectZoneKCEs**](ZoneApi.md#listProjectZoneKCEs) | **GET** /project/{projectId}/zone/{zoneId}/kces |  |
+| [**listProjectZoneKFSs**](ZoneApi.md#listProjectZoneKFSs) | **GET** /project/{projectId}/zone/{zoneId}/kfs |  |
+| [**listProjectZoneKGWs**](ZoneApi.md#listProjectZoneKGWs) | **GET** /project/{projectId}/zone/{zoneId}/kgws |  |
+| [**listProjectZoneVolumes**](ZoneApi.md#listProjectZoneVolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes |  |
 | [**listRegionZones**](ZoneApi.md#listRegionZones) | **GET** /region/{regionId}/zones |  |
 | [**listZoneHosts**](ZoneApi.md#listZoneHosts) | **GET** /zone/{zoneId}/hosts |  |
-| [**listZoneNetGWs**](ZoneApi.md#listZoneNetGWs) | **GET** /zone/{ zoneId }/netgws |  |
-| [**listZoneStorageNFSs**](ZoneApi.md#listZoneStorageNFSs) | **GET** /zone/{ zoneId }/nfs |  |
-| [**listZoneStoragePools**](ZoneApi.md#listZoneStoragePools) | **GET** /zone/{ zoneId }/pools |  |
-| [**listZoneVNets**](ZoneApi.md#listZoneVNets) | **GET** /zone/{ zoneId }/vnets |  |
+| [**listZoneNetGWs**](ZoneApi.md#listZoneNetGWs) | **GET** /zone/{zoneId}/netgws |  |
+| [**listZoneStorageNFSs**](ZoneApi.md#listZoneStorageNFSs) | **GET** /zone/{zoneId}/nfs |  |
+| [**listZoneStoragePools**](ZoneApi.md#listZoneStoragePools) | **GET** /zone/{zoneId}/pools |  |
+| [**listZoneVNets**](ZoneApi.md#listZoneVNets) | **GET** /zone/{zoneId}/vnets |  |
 | [**listZones**](ZoneApi.md#listZones) | **GET** /zone |  |
-| [**readZone**](ZoneApi.md#readZone) | **GET** /zone/{ zoneId } |  |
-| [**setZoneDefaultStorageNFS**](ZoneApi.md#setZoneDefaultStorageNFS) | **PATCH** /zone/{ zoneId }/nfs/{ nfsId }/default |  |
-| [**setZoneDefaultStoragePool**](ZoneApi.md#setZoneDefaultStoragePool) | **PATCH** /zone/{ zoneId }/pool/{ poolId }/default |  |
-| [**updateZone**](ZoneApi.md#updateZone) | **PUT** /zone/{ zoneId } |  |
+| [**readZone**](ZoneApi.md#readZone) | **GET** /zone/{zoneId} |  |
+| [**setZoneDefaultStorageNFS**](ZoneApi.md#setZoneDefaultStorageNFS) | **PATCH** /zone/{zoneId}/nfs/{nfsId}/default |  |
+| [**setZoneDefaultStoragePool**](ZoneApi.md#setZoneDefaultStoragePool) | **PATCH** /zone/{zoneId}/pool/{poolId}/default |  |
+| [**updateZone**](ZoneApi.md#updateZone) | **PUT** /zone/{zoneId} |  |
 
 
 <a name="createHost"></a>

@@ -27,58 +27,58 @@ paths:
   /project:
 {{ oas.LC(resources.project, [resources.project.tag], ['OptionalQuery' + resources.subnet.paramSubnetSizeSchema, 'OptionalQueryNotify']) }}
 
-  /project/{ {{ resources.project.paramId }} }:
+  /project/{{ '{' + resources.project.paramId + '}' }}:
 {{ oas.RUD(resources.project, [resources.project.tag], [resources.project.paramSchema]) }}
 
-  /project/{ {{ resources.project.paramId }} }/cost:
+  /project/{{ '{' + resources.project.paramId + '}' }}/cost:
 {{ oas.Parameters([resources.project.paramSchema]) }}
 {{ oas.Read('Read' + resources.project.schema + resources.cost.schema, resources.cost.schema, resources.cost.desc, [resources.project.tag]) }}
 
-  /project/{ {{ resources.project.paramId }} }/usage:
+  /project/{{ '{' + resources.project.paramId + '}' }}/usage:
 {{ oas.Parameters([resources.project.paramSchema]) }}
 {{ oas.Read('Read' + resources.project.schema + 'Usage', resources.project_resources.schema, resources.project_resources.desc, [resources.project.tag]) }}
 
-  /project/{ {{ resources.project.paramId }} }/record:
+  /project/{{ '{' + resources.project.paramId + '}' }}/record:
 {{ oas.Parameters([resources.project.paramSchema]) }}
 {{ oas.Create('Create' + resources.project.schema + resources.record.schema, resources.record.schema, resources.record.desc, [resources.project.tag, resources.record.tag]) }}
 
-  /project/{ {{ resources.project.paramId }}}/records:
+  /project/{{ '{' + resources.project.paramId }}}/records:
 {{ oas.Parameters([resources.project.paramSchema]) }}
 {{ oas.GetAll('List' + resources.project.schema + resources.record.schema + 's', resources.record.desc, [resources.project.tag, resources.record.tag], True) }}
 
-  /project/{ {{ resources.project.paramId }} }/zone/{ {{ resources.zone.paramId }} }/volume:
+  /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/volume:
 {{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema, 'OptionalQuery' + resources.pool.paramSchema, 'OptionalQuery' + resources.template.paramSchema]) }}
 {{ oas.Create('Create' + resources.project.schema + resources.zone.schema + resources.volume.schema, resources.volume.schema, resources.volume.desc, [resources.project.tag, resources.zone.tag, resources.volume.tag]) }}
 
-  /project/{ {{ resources.project.paramId }} }/zone/{ {{ resources.zone.paramId }} }/volumes:
+  /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/volumes:
 {{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema]) }}
 {{ oas.GetAll('List' + resources.project.schema + resources.zone.schema + resources.volume.schema + 's', resources.volume.desc, [resources.project.tag, resources.zone.tag, resources.volume.tag], True) }}
 
-  /project/{ {{ resources.project.paramId }} }/zone/{ {{ resources.zone.paramId }} }/instance:
+  /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/instance:
 {{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema, 'OptionalQueryNotify']) }}
 {{ oas.Create('Create' + resources.project.schema + resources.zone.schema + resources.instance.schema, resources.instance.schema, resources.instance.desc, [resources.project.tag, resources.zone.tag, resources.instance.tag]) }}
 
-  /project/{ {{ resources.project.paramId }} }/zone/{ {{ resources.zone.paramId }} }/instances:
+  /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/instances:
 {{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema]) }}
 {{ oas.GetAll('List' + resources.project.schema + resources.zone.schema + resources.instance.schema + 's', resources.instance.desc, [resources.project.tag, resources.zone.tag, resources.instance.tag], True) }}
 
-  /project/{ {{ resources.project.paramId }} }/zone/{ {{ resources.zone.paramId }} }/kce:
+  /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/kce:
 {{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema, 'OptionalQuery' + resources.pool.paramSchema, 'OptionalQuery' + resources.template.paramSchema, 'OptionalQuery' + resources.kce.paramPublicSchema, 'OptionalQueryNotify']) }}
 {{ oas.Create('Create' + resources.project.schema + resources.zone.schema + resources.kce.schema, resources.kce.schema, resources.kce.desc, [resources.project.tag, resources.zone.tag, resources.kce.tag]) }}
 
-  /project/{ {{ resources.project.paramId }} }/zone/{ {{ resources.zone.paramId }} }/kces:
+  /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/kces:
 {{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema]) }}
 {{ oas.GetAll('List' + resources.project.schema + resources.zone.schema + resources.kce.schema + 's', resources.kce.desc, [resources.project.tag, resources.zone.tag, resources.kce.tag], True) }}
 
-  /project/{ {{ resources.project.paramId }} }/zone/{ {{ resources.zone.paramId }} }/kfs:
+  /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/kfs:
 {{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema, 'OptionalQuery' + resources.nfs.paramSchema, 'OptionalQueryNotify']) }}
 {{ oas.GetAll('List' + resources.project.schema + resources.zone.schema + resources.kfs.schema + 's', resources.kfs.desc, [resources.project.tag, resources.zone.tag, resources.kfs.tag], True) }}
 {{ oas.Create('Create' + resources.project.schema + resources.zone.schema + resources.kfs.schema, resources.kfs.schema, resources.kfs.desc, [resources.project.tag, resources.zone.tag, resources.kfs.tag]) }}
 
-  /project/{ {{ resources.project.paramId }} }/zone/{ {{ resources.zone.paramId }} }/kgw:
+  /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/kgw:
 {{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema]) }}
 {{ oas.Create('Create' + resources.project.schema + resources.zone.schema + resources.kgw.schema, resources.kgw.schema, resources.kgw.desc, [resources.project.tag, resources.zone.tag, resources.kgw.tag]) }}
 
-  /project/{ {{ resources.project.paramId }} }/zone/{ {{ resources.zone.paramId }} }/kgws:
+  /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/kgws:
 {{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema]) }}
 {{ oas.GetAll('List' + resources.project.schema + resources.zone.schema + resources.kgw.schema + 's', resources.kgw.desc, [resources.project.tag, resources.zone.tag, resources.kgw.tag], True) }}

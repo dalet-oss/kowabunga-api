@@ -182,7 +182,7 @@ export class TemplateService {
             }
         }
 
-        let localVarPath = `/pool//template`;
+        let localVarPath = `/pool/${this.configuration.encodeParam({name: "poolId", value: poolId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/template`;
         return this.httpClient.request<Template>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -260,7 +260,7 @@ export class TemplateService {
             }
         }
 
-        let localVarPath = `/template/`;
+        let localVarPath = `/template/${this.configuration.encodeParam({name: "templateId", value: templateId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -337,7 +337,7 @@ export class TemplateService {
             }
         }
 
-        let localVarPath = `/pool//templates`;
+        let localVarPath = `/pool/${this.configuration.encodeParam({name: "poolId", value: poolId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/templates`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -487,7 +487,7 @@ export class TemplateService {
             }
         }
 
-        let localVarPath = `/template/`;
+        let localVarPath = `/template/${this.configuration.encodeParam({name: "templateId", value: templateId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<Template>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -568,7 +568,7 @@ export class TemplateService {
             }
         }
 
-        let localVarPath = `/pool//template//default`;
+        let localVarPath = `/pool/${this.configuration.encodeParam({name: "poolId", value: poolId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/template/${this.configuration.encodeParam({name: "templateId", value: templateId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/default`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -658,7 +658,7 @@ export class TemplateService {
             }
         }
 
-        let localVarPath = `/template/`;
+        let localVarPath = `/template/${this.configuration.encodeParam({name: "templateId", value: templateId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<Template>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

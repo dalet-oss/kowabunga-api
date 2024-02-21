@@ -53,12 +53,12 @@ func (c *KfsAPIController) Routes() Routes {
 	return Routes{
 		"CreateProjectZoneKFS": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/kfs",
+			"/api/v1/project/{projectId}/zone/{zoneId}/kfs",
 			c.CreateProjectZoneKFS,
 		},
 		"DeleteKFS": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/kfs/{ kfsId }",
+			"/api/v1/kfs/{kfsId}",
 			c.DeleteKFS,
 		},
 		"ListKFSs": Route{
@@ -68,22 +68,22 @@ func (c *KfsAPIController) Routes() Routes {
 		},
 		"ListProjectZoneKFSs": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/kfs",
+			"/api/v1/project/{projectId}/zone/{zoneId}/kfs",
 			c.ListProjectZoneKFSs,
 		},
 		"ListStorageNFSKFSs": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/nfs/{ nfsId }/kfs",
+			"/api/v1/nfs/{nfsId}/kfs",
 			c.ListStorageNFSKFSs,
 		},
 		"ReadKFS": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/kfs/{ kfsId }",
+			"/api/v1/kfs/{kfsId}",
 			c.ReadKFS,
 		},
 		"UpdateKFS": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/kfs/{ kfsId }",
+			"/api/v1/kfs/{kfsId}",
 			c.UpdateKFS,
 		},
 	}

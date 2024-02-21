@@ -53,17 +53,17 @@ func (c *NfsAPIController) Routes() Routes {
 	return Routes{
 		"CreateStorageNFS": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/zone/{ zoneId }/nfs",
+			"/api/v1/zone/{zoneId}/nfs",
 			c.CreateStorageNFS,
 		},
 		"DeleteStorageNFS": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/nfs/{ nfsId }",
+			"/api/v1/nfs/{nfsId}",
 			c.DeleteStorageNFS,
 		},
 		"ListStorageNFSKFSs": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/nfs/{ nfsId }/kfs",
+			"/api/v1/nfs/{nfsId}/kfs",
 			c.ListStorageNFSKFSs,
 		},
 		"ListStorageNFSs": Route{
@@ -73,22 +73,22 @@ func (c *NfsAPIController) Routes() Routes {
 		},
 		"ListZoneStorageNFSs": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/zone/{ zoneId }/nfs",
+			"/api/v1/zone/{zoneId}/nfs",
 			c.ListZoneStorageNFSs,
 		},
 		"ReadStorageNFS": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/nfs/{ nfsId }",
+			"/api/v1/nfs/{nfsId}",
 			c.ReadStorageNFS,
 		},
 		"SetZoneDefaultStorageNFS": Route{
 			strings.ToUpper("Patch"),
-			"/api/v1/zone/{ zoneId }/nfs/{ nfsId }/default",
+			"/api/v1/zone/{zoneId}/nfs/{nfsId}/default",
 			c.SetZoneDefaultStorageNFS,
 		},
 		"UpdateStorageNFS": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/nfs/{ nfsId }",
+			"/api/v1/nfs/{nfsId}",
 			c.UpdateStorageNFS,
 		},
 	}

@@ -191,7 +191,7 @@ export class SubnetService {
             }
         }
 
-        let localVarPath = `/subnet//adapter`;
+        let localVarPath = `/subnet/${this.configuration.encodeParam({name: "subnetId", value: subnetId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/adapter`;
         return this.httpClient.request<Adapter>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -283,7 +283,7 @@ export class SubnetService {
             }
         }
 
-        let localVarPath = `/vnet//subnet`;
+        let localVarPath = `/vnet/${this.configuration.encodeParam({name: "vnetId", value: vnetId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/subnet`;
         return this.httpClient.request<Subnet>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -361,7 +361,7 @@ export class SubnetService {
             }
         }
 
-        let localVarPath = `/subnet/`;
+        let localVarPath = `/subnet/${this.configuration.encodeParam({name: "subnetId", value: subnetId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -438,7 +438,7 @@ export class SubnetService {
             }
         }
 
-        let localVarPath = `/subnet//adapters`;
+        let localVarPath = `/subnet/${this.configuration.encodeParam({name: "subnetId", value: subnetId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/adapters`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -588,7 +588,7 @@ export class SubnetService {
             }
         }
 
-        let localVarPath = `/vnet//subnets`;
+        let localVarPath = `/vnet/${this.configuration.encodeParam({name: "vnetId", value: vnetId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/subnets`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -665,7 +665,7 @@ export class SubnetService {
             }
         }
 
-        let localVarPath = `/subnet/`;
+        let localVarPath = `/subnet/${this.configuration.encodeParam({name: "subnetId", value: subnetId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<Subnet>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -746,7 +746,7 @@ export class SubnetService {
             }
         }
 
-        let localVarPath = `/vnet//subnet//default`;
+        let localVarPath = `/vnet/${this.configuration.encodeParam({name: "vnetId", value: vnetId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/subnet/${this.configuration.encodeParam({name: "subnetId", value: subnetId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/default`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -836,7 +836,7 @@ export class SubnetService {
             }
         }
 
-        let localVarPath = `/subnet/`;
+        let localVarPath = `/subnet/${this.configuration.encodeParam({name: "subnetId", value: subnetId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<Subnet>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

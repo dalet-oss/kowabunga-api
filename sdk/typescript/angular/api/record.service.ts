@@ -182,7 +182,7 @@ export class RecordService {
             }
         }
 
-        let localVarPath = `/project//record`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/record`;
         return this.httpClient.request<DnsRecord>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -260,7 +260,7 @@ export class RecordService {
             }
         }
 
-        let localVarPath = `/record/`;
+        let localVarPath = `/record/${this.configuration.encodeParam({name: "recordId", value: recordId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -337,7 +337,7 @@ export class RecordService {
             }
         }
 
-        let localVarPath = `/project//records`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/records`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -414,7 +414,7 @@ export class RecordService {
             }
         }
 
-        let localVarPath = `/record/`;
+        let localVarPath = `/record/${this.configuration.encodeParam({name: "recordId", value: recordId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<DnsRecord>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -504,7 +504,7 @@ export class RecordService {
             }
         }
 
-        let localVarPath = `/record/`;
+        let localVarPath = `/record/${this.configuration.encodeParam({name: "recordId", value: recordId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<DnsRecord>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

@@ -210,7 +210,7 @@ export class KceService {
             }
         }
 
-        let localVarPath = `/project//zone//kce`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kce`;
         return this.httpClient.request<KCE>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -289,7 +289,7 @@ export class KceService {
             }
         }
 
-        let localVarPath = `/kce/`;
+        let localVarPath = `/kce/${this.configuration.encodeParam({name: "kceId", value: kceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -443,7 +443,7 @@ export class KceService {
             }
         }
 
-        let localVarPath = `/project//zone//kces`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kces`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -520,7 +520,7 @@ export class KceService {
             }
         }
 
-        let localVarPath = `/kce/`;
+        let localVarPath = `/kce/${this.configuration.encodeParam({name: "kceId", value: kceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<KCE>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -597,7 +597,7 @@ export class KceService {
             }
         }
 
-        let localVarPath = `/kce//state`;
+        let localVarPath = `/kce/${this.configuration.encodeParam({name: "kceId", value: kceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/state`;
         return this.httpClient.request<InstanceState>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -674,7 +674,7 @@ export class KceService {
             }
         }
 
-        let localVarPath = `/kce//reboot`;
+        let localVarPath = `/kce/${this.configuration.encodeParam({name: "kceId", value: kceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/reboot`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -751,7 +751,7 @@ export class KceService {
             }
         }
 
-        let localVarPath = `/kce//reset`;
+        let localVarPath = `/kce/${this.configuration.encodeParam({name: "kceId", value: kceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/reset`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -828,7 +828,7 @@ export class KceService {
             }
         }
 
-        let localVarPath = `/kce//resume`;
+        let localVarPath = `/kce/${this.configuration.encodeParam({name: "kceId", value: kceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/resume`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -905,7 +905,7 @@ export class KceService {
             }
         }
 
-        let localVarPath = `/kce//shutdown`;
+        let localVarPath = `/kce/${this.configuration.encodeParam({name: "kceId", value: kceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/shutdown`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -982,7 +982,7 @@ export class KceService {
             }
         }
 
-        let localVarPath = `/kce//start`;
+        let localVarPath = `/kce/${this.configuration.encodeParam({name: "kceId", value: kceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/start`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -1059,7 +1059,7 @@ export class KceService {
             }
         }
 
-        let localVarPath = `/kce//stop`;
+        let localVarPath = `/kce/${this.configuration.encodeParam({name: "kceId", value: kceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/stop`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -1136,7 +1136,7 @@ export class KceService {
             }
         }
 
-        let localVarPath = `/kce//suspend`;
+        let localVarPath = `/kce/${this.configuration.encodeParam({name: "kceId", value: kceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/suspend`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -1226,7 +1226,7 @@ export class KceService {
             }
         }
 
-        let localVarPath = `/kce/`;
+        let localVarPath = `/kce/${this.configuration.encodeParam({name: "kceId", value: kceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<KCE>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

@@ -53,12 +53,12 @@ func (c *KceAPIController) Routes() Routes {
 	return Routes{
 		"CreateProjectZoneKCE": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/kce",
+			"/api/v1/project/{projectId}/zone/{zoneId}/kce",
 			c.CreateProjectZoneKCE,
 		},
 		"DeleteKCE": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/kce/{ kceId }",
+			"/api/v1/kce/{kceId}",
 			c.DeleteKCE,
 		},
 		"ListKCEs": Route{
@@ -68,57 +68,57 @@ func (c *KceAPIController) Routes() Routes {
 		},
 		"ListProjectZoneKCEs": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/kces",
+			"/api/v1/project/{projectId}/zone/{zoneId}/kces",
 			c.ListProjectZoneKCEs,
 		},
 		"ReadKCE": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/kce/{ kceId }",
+			"/api/v1/kce/{kceId}",
 			c.ReadKCE,
 		},
 		"ReadKCEState": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/kce/{ kceId }/state",
+			"/api/v1/kce/{kceId}/state",
 			c.ReadKCEState,
 		},
 		"RebootKCE": Route{
 			strings.ToUpper("Patch"),
-			"/api/v1/kce/{ kceId }/reboot",
+			"/api/v1/kce/{kceId}/reboot",
 			c.RebootKCE,
 		},
 		"ResetKCE": Route{
 			strings.ToUpper("Patch"),
-			"/api/v1/kce/{ kceId }/reset",
+			"/api/v1/kce/{kceId}/reset",
 			c.ResetKCE,
 		},
 		"ResumeKCE": Route{
 			strings.ToUpper("Patch"),
-			"/api/v1/kce/{ kceId }/resume",
+			"/api/v1/kce/{kceId}/resume",
 			c.ResumeKCE,
 		},
 		"ShutdownKCE": Route{
 			strings.ToUpper("Patch"),
-			"/api/v1/kce/{ kceId }/shutdown",
+			"/api/v1/kce/{kceId}/shutdown",
 			c.ShutdownKCE,
 		},
 		"StartKCE": Route{
 			strings.ToUpper("Patch"),
-			"/api/v1/kce/{ kceId }/start",
+			"/api/v1/kce/{kceId}/start",
 			c.StartKCE,
 		},
 		"StopKCE": Route{
 			strings.ToUpper("Patch"),
-			"/api/v1/kce/{ kceId }/stop",
+			"/api/v1/kce/{kceId}/stop",
 			c.StopKCE,
 		},
 		"SuspendKCE": Route{
 			strings.ToUpper("Patch"),
-			"/api/v1/kce/{ kceId }/suspend",
+			"/api/v1/kce/{kceId}/suspend",
 			c.SuspendKCE,
 		},
 		"UpdateKCE": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/kce/{ kceId }",
+			"/api/v1/kce/{kceId}",
 			c.UpdateKCE,
 		},
 	}

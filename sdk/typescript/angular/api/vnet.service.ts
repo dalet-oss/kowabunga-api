@@ -184,7 +184,7 @@ export class VnetService {
             }
         }
 
-        let localVarPath = `/vnet//subnet`;
+        let localVarPath = `/vnet/${this.configuration.encodeParam({name: "vnetId", value: vnetId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/subnet`;
         return this.httpClient.request<Subnet>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -275,7 +275,7 @@ export class VnetService {
             }
         }
 
-        let localVarPath = `/zone//vnet`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/vnet`;
         return this.httpClient.request<VNet>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -353,7 +353,7 @@ export class VnetService {
             }
         }
 
-        let localVarPath = `/vnet/`;
+        let localVarPath = `/vnet/${this.configuration.encodeParam({name: "vnetId", value: vnetId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -430,7 +430,7 @@ export class VnetService {
             }
         }
 
-        let localVarPath = `/vnet//subnets`;
+        let localVarPath = `/vnet/${this.configuration.encodeParam({name: "vnetId", value: vnetId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/subnets`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -580,7 +580,7 @@ export class VnetService {
             }
         }
 
-        let localVarPath = `/zone//vnets`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/vnets`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -657,7 +657,7 @@ export class VnetService {
             }
         }
 
-        let localVarPath = `/vnet/`;
+        let localVarPath = `/vnet/${this.configuration.encodeParam({name: "vnetId", value: vnetId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<VNet>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -738,7 +738,7 @@ export class VnetService {
             }
         }
 
-        let localVarPath = `/vnet//subnet//default`;
+        let localVarPath = `/vnet/${this.configuration.encodeParam({name: "vnetId", value: vnetId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/subnet/${this.configuration.encodeParam({name: "subnetId", value: subnetId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/default`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -828,7 +828,7 @@ export class VnetService {
             }
         }
 
-        let localVarPath = `/vnet/`;
+        let localVarPath = `/vnet/${this.configuration.encodeParam({name: "vnetId", value: vnetId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<VNet>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

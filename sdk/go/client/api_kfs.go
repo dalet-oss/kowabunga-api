@@ -90,7 +90,7 @@ func (a *KfsAPIService) CreateProjectZoneKFSExecute(r ApiCreateProjectZoneKFSReq
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/kfs"
+	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/kfs"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
@@ -307,7 +307,7 @@ func (a *KfsAPIService) DeleteKFSExecute(r ApiDeleteKFSRequest) (*http.Response,
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kfs/{ kfsId }"
+	localVarPath := localBasePath + "/kfs/{kfsId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"kfsId"+"}", url.PathEscape(parameterValueToString(r.kfsId, "kfsId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -648,7 +648,7 @@ func (a *KfsAPIService) ListProjectZoneKFSsExecute(r ApiListProjectZoneKFSsReque
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/kfs"
+	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/kfs"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
@@ -818,7 +818,7 @@ func (a *KfsAPIService) ListStorageNFSKFSsExecute(r ApiListStorageNFSKFSsRequest
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/nfs/{ nfsId }/kfs"
+	localVarPath := localBasePath + "/nfs/{nfsId}/kfs"
 	localVarPath = strings.Replace(localVarPath, "{"+"nfsId"+"}", url.PathEscape(parameterValueToString(r.nfsId, "nfsId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -981,7 +981,7 @@ func (a *KfsAPIService) ReadKFSExecute(r ApiReadKFSRequest) (*KFS, *http.Respons
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kfs/{ kfsId }"
+	localVarPath := localBasePath + "/kfs/{kfsId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"kfsId"+"}", url.PathEscape(parameterValueToString(r.kfsId, "kfsId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1151,7 +1151,7 @@ func (a *KfsAPIService) UpdateKFSExecute(r ApiUpdateKFSRequest) (*KFS, *http.Res
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kfs/{ kfsId }"
+	localVarPath := localBasePath + "/kfs/{kfsId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"kfsId"+"}", url.PathEscape(parameterValueToString(r.kfsId, "kfsId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

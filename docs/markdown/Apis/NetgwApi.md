@@ -4,12 +4,12 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createNetGW**](NetgwApi.md#createNetGW) | **POST** /zone/{ zoneId }/netgw |  |
-| [**deleteNetGW**](NetgwApi.md#deleteNetGW) | **DELETE** /netgw/{ netgwId } |  |
+| [**createNetGW**](NetgwApi.md#createNetGW) | **POST** /zone/{zoneId}/netgw |  |
+| [**deleteNetGW**](NetgwApi.md#deleteNetGW) | **DELETE** /netgw/{netgwId} |  |
 | [**listNetGWs**](NetgwApi.md#listNetGWs) | **GET** /netgw |  |
-| [**listZoneNetGWs**](NetgwApi.md#listZoneNetGWs) | **GET** /zone/{ zoneId }/netgws |  |
-| [**readNetGW**](NetgwApi.md#readNetGW) | **GET** /netgw/{ netgwId } |  |
-| [**updateNetGW**](NetgwApi.md#updateNetGW) | **PUT** /netgw/{ netgwId } |  |
+| [**listZoneNetGWs**](NetgwApi.md#listZoneNetGWs) | **GET** /zone/{zoneId}/netgws |  |
+| [**readNetGW**](NetgwApi.md#readNetGW) | **GET** /netgw/{netgwId} |  |
+| [**updateNetGW**](NetgwApi.md#updateNetGW) | **PUT** /netgw/{netgwId} |  |
 
 
 <a name="createNetGW"></a>

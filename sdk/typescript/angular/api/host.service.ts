@@ -184,7 +184,7 @@ export class HostService {
             }
         }
 
-        let localVarPath = `/zone//host`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/host`;
         return this.httpClient.request<Host>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -262,7 +262,7 @@ export class HostService {
             }
         }
 
-        let localVarPath = `/host/`;
+        let localVarPath = `/host/${this.configuration.encodeParam({name: "hostId", value: hostId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -339,7 +339,7 @@ export class HostService {
             }
         }
 
-        let localVarPath = `/host//instances`;
+        let localVarPath = `/host/${this.configuration.encodeParam({name: "hostId", value: hostId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/instances`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -566,7 +566,7 @@ export class HostService {
             }
         }
 
-        let localVarPath = `/host/`;
+        let localVarPath = `/host/${this.configuration.encodeParam({name: "hostId", value: hostId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<Host>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -643,7 +643,7 @@ export class HostService {
             }
         }
 
-        let localVarPath = `/host//caps`;
+        let localVarPath = `/host/${this.configuration.encodeParam({name: "hostId", value: hostId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/caps`;
         return this.httpClient.request<HostCaps>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -733,7 +733,7 @@ export class HostService {
             }
         }
 
-        let localVarPath = `/host/`;
+        let localVarPath = `/host/${this.configuration.encodeParam({name: "hostId", value: hostId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<Host>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

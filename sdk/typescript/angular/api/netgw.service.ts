@@ -182,7 +182,7 @@ export class NetgwService {
             }
         }
 
-        let localVarPath = `/zone//netgw`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/netgw`;
         return this.httpClient.request<NetGW>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -260,7 +260,7 @@ export class NetgwService {
             }
         }
 
-        let localVarPath = `/netgw/`;
+        let localVarPath = `/netgw/${this.configuration.encodeParam({name: "netgwId", value: netgwId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -410,7 +410,7 @@ export class NetgwService {
             }
         }
 
-        let localVarPath = `/zone//netgws`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/netgws`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -487,7 +487,7 @@ export class NetgwService {
             }
         }
 
-        let localVarPath = `/netgw/`;
+        let localVarPath = `/netgw/${this.configuration.encodeParam({name: "netgwId", value: netgwId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<NetGW>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -577,7 +577,7 @@ export class NetgwService {
             }
         }
 
-        let localVarPath = `/netgw/`;
+        let localVarPath = `/netgw/${this.configuration.encodeParam({name: "netgwId", value: netgwId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<NetGW>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

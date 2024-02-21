@@ -4,17 +4,17 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createStoragePool**](PoolApi.md#createStoragePool) | **POST** /zone/{ zoneId }/pool |  |
-| [**createTemplate**](PoolApi.md#createTemplate) | **POST** /pool/{ poolId }/template |  |
-| [**deleteStoragePool**](PoolApi.md#deleteStoragePool) | **DELETE** /pool/{ poolId } |  |
-| [**listStoragePoolTemplates**](PoolApi.md#listStoragePoolTemplates) | **GET** /pool/{ poolId }/templates |  |
-| [**listStoragePoolVolumes**](PoolApi.md#listStoragePoolVolumes) | **GET** /pool/{ poolId }/volumes |  |
+| [**createStoragePool**](PoolApi.md#createStoragePool) | **POST** /zone/{zoneId}/pool |  |
+| [**createTemplate**](PoolApi.md#createTemplate) | **POST** /pool/{poolId}/template |  |
+| [**deleteStoragePool**](PoolApi.md#deleteStoragePool) | **DELETE** /pool/{poolId} |  |
+| [**listStoragePoolTemplates**](PoolApi.md#listStoragePoolTemplates) | **GET** /pool/{poolId}/templates |  |
+| [**listStoragePoolVolumes**](PoolApi.md#listStoragePoolVolumes) | **GET** /pool/{poolId}/volumes |  |
 | [**listStoragePools**](PoolApi.md#listStoragePools) | **GET** /pool |  |
-| [**listZoneStoragePools**](PoolApi.md#listZoneStoragePools) | **GET** /zone/{ zoneId }/pools |  |
-| [**readStoragePool**](PoolApi.md#readStoragePool) | **GET** /pool/{ poolId } |  |
-| [**setStoragePoolDefaultTemplate**](PoolApi.md#setStoragePoolDefaultTemplate) | **PATCH** /pool/{ poolId }/template/{ templateId }/default |  |
-| [**setZoneDefaultStoragePool**](PoolApi.md#setZoneDefaultStoragePool) | **PATCH** /zone/{ zoneId }/pool/{ poolId }/default |  |
-| [**updateStoragePool**](PoolApi.md#updateStoragePool) | **PUT** /pool/{ poolId } |  |
+| [**listZoneStoragePools**](PoolApi.md#listZoneStoragePools) | **GET** /zone/{zoneId}/pools |  |
+| [**readStoragePool**](PoolApi.md#readStoragePool) | **GET** /pool/{poolId} |  |
+| [**setStoragePoolDefaultTemplate**](PoolApi.md#setStoragePoolDefaultTemplate) | **PATCH** /pool/{poolId}/template/{templateId}/default |  |
+| [**setZoneDefaultStoragePool**](PoolApi.md#setZoneDefaultStoragePool) | **PATCH** /zone/{zoneId}/pool/{poolId}/default |  |
+| [**updateStoragePool**](PoolApi.md#updateStoragePool) | **PUT** /pool/{poolId} |  |
 
 
 <a name="createStoragePool"></a>

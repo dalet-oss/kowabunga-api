@@ -11,10 +11,10 @@ paths:
   /region:
 {{ oas.LC(resources.region, [resources.region.tag]) }}
 
-  /region/{ {{ resources.region.paramId }} }:
+  /region/{{ '{' + resources.region.paramId + '}' }}:
 {{ oas.RUD(resources.region, [resources.region.tag], [resources.region.paramSchema]) }}
 
-  /region/{ {{ resources.region.paramId }} }/zone:
+  /region/{{ '{' + resources.region.paramId + '}' }}/zone:
 {{ oas.Parameters([resources.region.paramSchema]) }}
 {{ oas.Create('Create' + resources.zone.schema, resources.zone.schema, resources.zone.desc, [resources.region.tag, resources.zone.tag]) }}
 

@@ -10,5 +10,5 @@ components:
 {{ oas.PathParamID(resources.record) }}
 
 paths:
-  /record/{ {{ resources.record.paramId }} }:
+  /record/{{ '{' + resources.record.paramId + '}' }}:
 {{ oas.RUD(resources.record, [resources.record.tag], [resources.record.paramSchema]) }}

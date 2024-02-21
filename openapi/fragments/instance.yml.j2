@@ -22,41 +22,41 @@ paths:
   /instance:
 {{ oas.List(resources.instance, [resources.instance.tag]) }}
 
-  /instance/{ {{ resources.instance.paramId }} }:
+  /instance/{{ '{' + resources.instance.paramId + '}' }}:
 {{ oas.RUD(resources.instance, [resources.instance.tag], [resources.instance.paramSchema]) }}
 
-  /instance/{ {{ resources.instance.paramId }} }/state:
+  /instance/{{ '{' + resources.instance.paramId + '}' }}/state:
 {{ oas.Parameters([resources.instance.paramSchema]) }}
 {{ oas.Read('ReadInstanceState', resources.instance_state.schema, resources.instance_state.desc, [resources.instance.tag]) }}
 
-  /instance/{ {{ resources.instance.paramId }} }/reboot:
+  /instance/{{ '{' + resources.instance.paramId + '}' }}/reboot:
 {{ oas.Parameters([resources.instance.paramSchema]) }}
 {{ oas.Patch('RebootInstance', resources.instance.desc, 'software reboot', [resources.instance.tag]) }}
 
-  /instance/{ {{ resources.instance.paramId }} }/reset:
+  /instance/{{ '{' + resources.instance.paramId + '}' }}/reset:
 {{ oas.Parameters([resources.instance.paramSchema]) }}
 {{ oas.Patch('ResetInstance', resources.instance.desc, 'hardware reset', [resources.instance.tag]) }}
 
-  /instance/{ {{ resources.instance.paramId }} }/suspend:
+  /instance/{{ '{' + resources.instance.paramId + '}' }}/suspend:
 {{ oas.Parameters([resources.instance.paramSchema]) }}
 {{ oas.Patch('SuspendInstance', resources.instance.desc, 'software PM suspend', [resources.instance.tag]) }}
 
-  /instance/{ {{ resources.instance.paramId }} }/resume:
+  /instance/{{ '{' + resources.instance.paramId + '}' }}/resume:
 {{ oas.Parameters([resources.instance.paramSchema]) }}
 {{ oas.Patch('ResumeInstance', resources.instance.desc, 'software PM resume', [resources.instance.tag]) }}
 
-  /instance/{ {{ resources.instance.paramId }} }/start:
+  /instance/{{ '{' + resources.instance.paramId + '}' }}/start:
 {{ oas.Parameters([resources.instance.paramSchema]) }}
 {{ oas.Patch('StartInstance', resources.instance.desc, 'hardware boot-up', [resources.instance.tag]) }}
 
-  /instance/{ {{ resources.instance.paramId }} }/stop:
+  /instance/{{ '{' + resources.instance.paramId + '}' }}/stop:
 {{ oas.Parameters([resources.instance.paramSchema]) }}
 {{ oas.Patch('StopInstance', resources.instance.desc, 'hardware stop', [resources.instance.tag]) }}
 
-  /instance/{ {{ resources.instance.paramId }} }/shutdown:
+  /instance/{{ '{' + resources.instance.paramId + '}' }}/shutdown:
 {{ oas.Parameters([resources.instance.paramSchema]) }}
 {{ oas.Patch('ShutdownInstance', resources.instance.desc, 'software shutdown', [resources.instance.tag]) }}
 
-  /instance/{ {{ resources.instance.paramId }} }/connect:
+  /instance/{{ '{' + resources.instance.paramId + '}' }}/connect:
 {{ oas.Parameters([resources.instance.paramSchema]) }}
 {{ oas.Read('ReadInstanceRemoteConnection', resources.instance_ra.schema, resources.instance_ra.desc, [resources.instance.tag]) }}

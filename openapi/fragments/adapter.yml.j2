@@ -14,5 +14,5 @@ paths:
   /adapter:
 {{ oas.List(resources.adapter, [resources.adapter.tag]) }}
 
-  /adapter/{ {{ resources.adapter.paramId }} }:
+  /adapter/{{ '{' + resources.adapter.paramId + '}' }}:
 {{ oas.RUD(resources.adapter, [resources.adapter.tag], [resources.adapter.paramSchema]) }}

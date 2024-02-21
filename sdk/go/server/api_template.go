@@ -53,17 +53,17 @@ func (c *TemplateAPIController) Routes() Routes {
 	return Routes{
 		"CreateTemplate": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/pool/{ poolId }/template",
+			"/api/v1/pool/{poolId}/template",
 			c.CreateTemplate,
 		},
 		"DeleteTemplate": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/template/{ templateId }",
+			"/api/v1/template/{templateId}",
 			c.DeleteTemplate,
 		},
 		"ListStoragePoolTemplates": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/pool/{ poolId }/templates",
+			"/api/v1/pool/{poolId}/templates",
 			c.ListStoragePoolTemplates,
 		},
 		"ListTemplates": Route{
@@ -73,17 +73,17 @@ func (c *TemplateAPIController) Routes() Routes {
 		},
 		"ReadTemplate": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/template/{ templateId }",
+			"/api/v1/template/{templateId}",
 			c.ReadTemplate,
 		},
 		"SetStoragePoolDefaultTemplate": Route{
 			strings.ToUpper("Patch"),
-			"/api/v1/pool/{ poolId }/template/{ templateId }/default",
+			"/api/v1/pool/{poolId}/template/{templateId}/default",
 			c.SetStoragePoolDefaultTemplate,
 		},
 		"UpdateTemplate": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/template/{ templateId }",
+			"/api/v1/template/{templateId}",
 			c.UpdateTemplate,
 		},
 	}

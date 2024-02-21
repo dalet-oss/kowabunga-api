@@ -80,7 +80,7 @@ func (a *SubnetAPIService) CreateAdapterExecute(r ApiCreateAdapterRequest) (*Ada
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/subnet/{ subnetId }/adapter"
+	localVarPath := localBasePath + "/subnet/{subnetId}/adapter"
 	localVarPath = strings.Replace(localVarPath, "{"+"subnetId"+"}", url.PathEscape(parameterValueToString(r.subnetId, "subnetId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -302,7 +302,7 @@ func (a *SubnetAPIService) CreateSubnetExecute(r ApiCreateSubnetRequest) (*Subne
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/vnet/{ vnetId }/subnet"
+	localVarPath := localBasePath + "/vnet/{vnetId}/subnet"
 	localVarPath = strings.Replace(localVarPath, "{"+"vnetId"+"}", url.PathEscape(parameterValueToString(r.vnetId, "vnetId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -512,7 +512,7 @@ func (a *SubnetAPIService) DeleteSubnetExecute(r ApiDeleteSubnetRequest) (*http.
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/subnet/{ subnetId }"
+	localVarPath := localBasePath + "/subnet/{subnetId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"subnetId"+"}", url.PathEscape(parameterValueToString(r.subnetId, "subnetId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -688,7 +688,7 @@ func (a *SubnetAPIService) ListSubnetAdaptersExecute(r ApiListSubnetAdaptersRequ
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/subnet/{ subnetId }/adapters"
+	localVarPath := localBasePath + "/subnet/{subnetId}/adapters"
 	localVarPath = strings.Replace(localVarPath, "{"+"subnetId"+"}", url.PathEscape(parameterValueToString(r.subnetId, "subnetId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -999,7 +999,7 @@ func (a *SubnetAPIService) ListVNetSubnetsExecute(r ApiListVNetSubnetsRequest) (
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/vnet/{ vnetId }/subnets"
+	localVarPath := localBasePath + "/vnet/{vnetId}/subnets"
 	localVarPath = strings.Replace(localVarPath, "{"+"vnetId"+"}", url.PathEscape(parameterValueToString(r.vnetId, "vnetId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1162,7 +1162,7 @@ func (a *SubnetAPIService) ReadSubnetExecute(r ApiReadSubnetRequest) (*Subnet, *
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/subnet/{ subnetId }"
+	localVarPath := localBasePath + "/subnet/{subnetId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"subnetId"+"}", url.PathEscape(parameterValueToString(r.subnetId, "subnetId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1326,7 +1326,7 @@ func (a *SubnetAPIService) SetVNetDefaultSubnetExecute(r ApiSetVNetDefaultSubnet
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/vnet/{ vnetId }/subnet/{ subnetId }/default"
+	localVarPath := localBasePath + "/vnet/{vnetId}/subnet/{subnetId}/default"
 	localVarPath = strings.Replace(localVarPath, "{"+"vnetId"+"}", url.PathEscape(parameterValueToString(r.vnetId, "vnetId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"subnetId"+"}", url.PathEscape(parameterValueToString(r.subnetId, "subnetId")), -1)
 
@@ -1499,7 +1499,7 @@ func (a *SubnetAPIService) UpdateSubnetExecute(r ApiUpdateSubnetRequest) (*Subne
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/subnet/{ subnetId }"
+	localVarPath := localBasePath + "/subnet/{subnetId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"subnetId"+"}", url.PathEscape(parameterValueToString(r.subnetId, "subnetId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

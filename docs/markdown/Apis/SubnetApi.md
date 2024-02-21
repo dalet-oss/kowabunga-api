@@ -4,15 +4,15 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createAdapter**](SubnetApi.md#createAdapter) | **POST** /subnet/{ subnetId }/adapter |  |
-| [**createSubnet**](SubnetApi.md#createSubnet) | **POST** /vnet/{ vnetId }/subnet |  |
-| [**deleteSubnet**](SubnetApi.md#deleteSubnet) | **DELETE** /subnet/{ subnetId } |  |
-| [**listSubnetAdapters**](SubnetApi.md#listSubnetAdapters) | **GET** /subnet/{ subnetId }/adapters |  |
+| [**createAdapter**](SubnetApi.md#createAdapter) | **POST** /subnet/{subnetId}/adapter |  |
+| [**createSubnet**](SubnetApi.md#createSubnet) | **POST** /vnet/{vnetId}/subnet |  |
+| [**deleteSubnet**](SubnetApi.md#deleteSubnet) | **DELETE** /subnet/{subnetId} |  |
+| [**listSubnetAdapters**](SubnetApi.md#listSubnetAdapters) | **GET** /subnet/{subnetId}/adapters |  |
 | [**listSubnets**](SubnetApi.md#listSubnets) | **GET** /subnet |  |
-| [**listVNetSubnets**](SubnetApi.md#listVNetSubnets) | **GET** /vnet/{ vnetId }/subnets |  |
-| [**readSubnet**](SubnetApi.md#readSubnet) | **GET** /subnet/{ subnetId } |  |
-| [**setVNetDefaultSubnet**](SubnetApi.md#setVNetDefaultSubnet) | **PATCH** /vnet/{ vnetId }/subnet/{ subnetId }/default |  |
-| [**updateSubnet**](SubnetApi.md#updateSubnet) | **PUT** /subnet/{ subnetId } |  |
+| [**listVNetSubnets**](SubnetApi.md#listVNetSubnets) | **GET** /vnet/{vnetId}/subnets |  |
+| [**readSubnet**](SubnetApi.md#readSubnet) | **GET** /subnet/{subnetId} |  |
+| [**setVNetDefaultSubnet**](SubnetApi.md#setVNetDefaultSubnet) | **PATCH** /vnet/{vnetId}/subnet/{subnetId}/default |  |
+| [**updateSubnet**](SubnetApi.md#updateSubnet) | **PUT** /subnet/{subnetId} |  |
 
 
 <a name="createAdapter"></a>

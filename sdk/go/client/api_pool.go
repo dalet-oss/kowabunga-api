@@ -80,7 +80,7 @@ func (a *PoolAPIService) CreateStoragePoolExecute(r ApiCreateStoragePoolRequest)
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }/pool"
+	localVarPath := localBasePath + "/zone/{zoneId}/pool"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -302,7 +302,7 @@ func (a *PoolAPIService) CreateTemplateExecute(r ApiCreateTemplateRequest) (*Tem
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/pool/{ poolId }/template"
+	localVarPath := localBasePath + "/pool/{poolId}/template"
 	localVarPath = strings.Replace(localVarPath, "{"+"poolId"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -512,7 +512,7 @@ func (a *PoolAPIService) DeleteStoragePoolExecute(r ApiDeleteStoragePoolRequest)
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/pool/{ poolId }"
+	localVarPath := localBasePath + "/pool/{poolId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"poolId"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -688,7 +688,7 @@ func (a *PoolAPIService) ListStoragePoolTemplatesExecute(r ApiListStoragePoolTem
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/pool/{ poolId }/templates"
+	localVarPath := localBasePath + "/pool/{poolId}/templates"
 	localVarPath = strings.Replace(localVarPath, "{"+"poolId"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -851,7 +851,7 @@ func (a *PoolAPIService) ListStoragePoolVolumesExecute(r ApiListStoragePoolVolum
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/pool/{ poolId }/volumes"
+	localVarPath := localBasePath + "/pool/{poolId}/volumes"
 	localVarPath = strings.Replace(localVarPath, "{"+"poolId"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1162,7 +1162,7 @@ func (a *PoolAPIService) ListZoneStoragePoolsExecute(r ApiListZoneStoragePoolsRe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }/pools"
+	localVarPath := localBasePath + "/zone/{zoneId}/pools"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1325,7 +1325,7 @@ func (a *PoolAPIService) ReadStoragePoolExecute(r ApiReadStoragePoolRequest) (*S
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/pool/{ poolId }"
+	localVarPath := localBasePath + "/pool/{poolId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"poolId"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1489,7 +1489,7 @@ func (a *PoolAPIService) SetStoragePoolDefaultTemplateExecute(r ApiSetStoragePoo
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/pool/{ poolId }/template/{ templateId }/default"
+	localVarPath := localBasePath + "/pool/{poolId}/template/{templateId}/default"
 	localVarPath = strings.Replace(localVarPath, "{"+"poolId"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"templateId"+"}", url.PathEscape(parameterValueToString(r.templateId, "templateId")), -1)
 
@@ -1656,7 +1656,7 @@ func (a *PoolAPIService) SetZoneDefaultStoragePoolExecute(r ApiSetZoneDefaultSto
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }/pool/{ poolId }/default"
+	localVarPath := localBasePath + "/zone/{zoneId}/pool/{poolId}/default"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"poolId"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
 
@@ -1829,7 +1829,7 @@ func (a *PoolAPIService) UpdateStoragePoolExecute(r ApiUpdateStoragePoolRequest)
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/pool/{ poolId }"
+	localVarPath := localBasePath + "/pool/{poolId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"poolId"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

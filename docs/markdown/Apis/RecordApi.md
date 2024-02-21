@@ -4,11 +4,11 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createProjectDnsRecord**](RecordApi.md#createProjectDnsRecord) | **POST** /project/{ projectId }/record |  |
-| [**deleteDnsRecord**](RecordApi.md#deleteDnsRecord) | **DELETE** /record/{ recordId } |  |
-| [**listProjectDnsRecords**](RecordApi.md#listProjectDnsRecords) | **GET** /project/{ projectId}/records |  |
-| [**readDnsRecord**](RecordApi.md#readDnsRecord) | **GET** /record/{ recordId } |  |
-| [**updateDnsRecord**](RecordApi.md#updateDnsRecord) | **PUT** /record/{ recordId } |  |
+| [**createProjectDnsRecord**](RecordApi.md#createProjectDnsRecord) | **POST** /project/{projectId}/record |  |
+| [**deleteDnsRecord**](RecordApi.md#deleteDnsRecord) | **DELETE** /record/{recordId} |  |
+| [**listProjectDnsRecords**](RecordApi.md#listProjectDnsRecords) | **GET** /project/{projectId}/records |  |
+| [**readDnsRecord**](RecordApi.md#readDnsRecord) | **GET** /record/{recordId} |  |
+| [**updateDnsRecord**](RecordApi.md#updateDnsRecord) | **PUT** /record/{recordId} |  |
 
 
 <a name="createProjectDnsRecord"></a>

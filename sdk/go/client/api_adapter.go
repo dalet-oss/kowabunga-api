@@ -80,7 +80,7 @@ func (a *AdapterAPIService) CreateAdapterExecute(r ApiCreateAdapterRequest) (*Ad
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/subnet/{ subnetId }/adapter"
+	localVarPath := localBasePath + "/subnet/{subnetId}/adapter"
 	localVarPath = strings.Replace(localVarPath, "{"+"subnetId"+"}", url.PathEscape(parameterValueToString(r.subnetId, "subnetId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -293,7 +293,7 @@ func (a *AdapterAPIService) DeleteAdapterExecute(r ApiDeleteAdapterRequest) (*ht
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/adapter/{ adapterId }"
+	localVarPath := localBasePath + "/adapter/{adapterId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"adapterId"+"}", url.PathEscape(parameterValueToString(r.adapterId, "adapterId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -617,7 +617,7 @@ func (a *AdapterAPIService) ListSubnetAdaptersExecute(r ApiListSubnetAdaptersReq
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/subnet/{ subnetId }/adapters"
+	localVarPath := localBasePath + "/subnet/{subnetId}/adapters"
 	localVarPath = strings.Replace(localVarPath, "{"+"subnetId"+"}", url.PathEscape(parameterValueToString(r.subnetId, "subnetId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -780,7 +780,7 @@ func (a *AdapterAPIService) ReadAdapterExecute(r ApiReadAdapterRequest) (*Adapte
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/adapter/{ adapterId }"
+	localVarPath := localBasePath + "/adapter/{adapterId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"adapterId"+"}", url.PathEscape(parameterValueToString(r.adapterId, "adapterId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -950,7 +950,7 @@ func (a *AdapterAPIService) UpdateAdapterExecute(r ApiUpdateAdapterRequest) (*Ad
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/adapter/{ adapterId }"
+	localVarPath := localBasePath + "/adapter/{adapterId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"adapterId"+"}", url.PathEscape(parameterValueToString(r.adapterId, "adapterId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

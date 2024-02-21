@@ -5,12 +5,12 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createRegion**](RegionApi.md#createRegion) | **POST** /region |  |
-| [**createZone**](RegionApi.md#createZone) | **POST** /region/{ regionId }/zone |  |
-| [**deleteRegion**](RegionApi.md#deleteRegion) | **DELETE** /region/{ regionId } |  |
+| [**createZone**](RegionApi.md#createZone) | **POST** /region/{regionId}/zone |  |
+| [**deleteRegion**](RegionApi.md#deleteRegion) | **DELETE** /region/{regionId} |  |
 | [**listRegionZones**](RegionApi.md#listRegionZones) | **GET** /region/{regionId}/zones |  |
 | [**listRegions**](RegionApi.md#listRegions) | **GET** /region |  |
-| [**readRegion**](RegionApi.md#readRegion) | **GET** /region/{ regionId } |  |
-| [**updateRegion**](RegionApi.md#updateRegion) | **PUT** /region/{ regionId } |  |
+| [**readRegion**](RegionApi.md#readRegion) | **GET** /region/{regionId} |  |
+| [**updateRegion**](RegionApi.md#updateRegion) | **PUT** /region/{regionId} |  |
 
 
 <a name="createRegion"></a>

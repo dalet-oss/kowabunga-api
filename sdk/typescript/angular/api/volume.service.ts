@@ -198,7 +198,7 @@ export class VolumeService {
             }
         }
 
-        let localVarPath = `/project//zone//volume`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/volume`;
         return this.httpClient.request<Volume>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -277,7 +277,7 @@ export class VolumeService {
             }
         }
 
-        let localVarPath = `/volume/`;
+        let localVarPath = `/volume/${this.configuration.encodeParam({name: "volumeId", value: volumeId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -358,7 +358,7 @@ export class VolumeService {
             }
         }
 
-        let localVarPath = `/project//zone//volumes`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/volumes`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -435,7 +435,7 @@ export class VolumeService {
             }
         }
 
-        let localVarPath = `/pool//volumes`;
+        let localVarPath = `/pool/${this.configuration.encodeParam({name: "poolId", value: poolId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/volumes`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -585,7 +585,7 @@ export class VolumeService {
             }
         }
 
-        let localVarPath = `/volume/`;
+        let localVarPath = `/volume/${this.configuration.encodeParam({name: "volumeId", value: volumeId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<Volume>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -675,7 +675,7 @@ export class VolumeService {
             }
         }
 
-        let localVarPath = `/volume/`;
+        let localVarPath = `/volume/${this.configuration.encodeParam({name: "volumeId", value: volumeId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<Volume>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

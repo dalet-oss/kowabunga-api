@@ -53,17 +53,17 @@ func (c *InstanceAPIController) Routes() Routes {
 	return Routes{
 		"CreateProjectZoneInstance": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/instance",
+			"/api/v1/project/{projectId}/zone/{zoneId}/instance",
 			c.CreateProjectZoneInstance,
 		},
 		"DeleteInstance": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/instance/{ instanceId }",
+			"/api/v1/instance/{instanceId}",
 			c.DeleteInstance,
 		},
 		"ListHostInstances": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/host/{ hostId }/instances",
+			"/api/v1/host/{hostId}/instances",
 			c.ListHostInstances,
 		},
 		"ListInstances": Route{
@@ -73,62 +73,62 @@ func (c *InstanceAPIController) Routes() Routes {
 		},
 		"ListProjectZoneInstances": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/instances",
+			"/api/v1/project/{projectId}/zone/{zoneId}/instances",
 			c.ListProjectZoneInstances,
 		},
 		"ReadInstance": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/instance/{ instanceId }",
+			"/api/v1/instance/{instanceId}",
 			c.ReadInstance,
 		},
 		"ReadInstanceRemoteConnection": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/instance/{ instanceId }/connect",
+			"/api/v1/instance/{instanceId}/connect",
 			c.ReadInstanceRemoteConnection,
 		},
 		"ReadInstanceState": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/instance/{ instanceId }/state",
+			"/api/v1/instance/{instanceId}/state",
 			c.ReadInstanceState,
 		},
 		"RebootInstance": Route{
 			strings.ToUpper("Patch"),
-			"/api/v1/instance/{ instanceId }/reboot",
+			"/api/v1/instance/{instanceId}/reboot",
 			c.RebootInstance,
 		},
 		"ResetInstance": Route{
 			strings.ToUpper("Patch"),
-			"/api/v1/instance/{ instanceId }/reset",
+			"/api/v1/instance/{instanceId}/reset",
 			c.ResetInstance,
 		},
 		"ResumeInstance": Route{
 			strings.ToUpper("Patch"),
-			"/api/v1/instance/{ instanceId }/resume",
+			"/api/v1/instance/{instanceId}/resume",
 			c.ResumeInstance,
 		},
 		"ShutdownInstance": Route{
 			strings.ToUpper("Patch"),
-			"/api/v1/instance/{ instanceId }/shutdown",
+			"/api/v1/instance/{instanceId}/shutdown",
 			c.ShutdownInstance,
 		},
 		"StartInstance": Route{
 			strings.ToUpper("Patch"),
-			"/api/v1/instance/{ instanceId }/start",
+			"/api/v1/instance/{instanceId}/start",
 			c.StartInstance,
 		},
 		"StopInstance": Route{
 			strings.ToUpper("Patch"),
-			"/api/v1/instance/{ instanceId }/stop",
+			"/api/v1/instance/{instanceId}/stop",
 			c.StopInstance,
 		},
 		"SuspendInstance": Route{
 			strings.ToUpper("Patch"),
-			"/api/v1/instance/{ instanceId }/suspend",
+			"/api/v1/instance/{instanceId}/suspend",
 			c.SuspendInstance,
 		},
 		"UpdateInstance": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/instance/{ instanceId }",
+			"/api/v1/instance/{instanceId}",
 			c.UpdateInstance,
 		},
 	}

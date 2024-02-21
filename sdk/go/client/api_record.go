@@ -73,7 +73,7 @@ func (a *RecordAPIService) CreateProjectDnsRecordExecute(r ApiCreateProjectDnsRe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId }/record"
+	localVarPath := localBasePath + "/project/{projectId}/record"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -283,7 +283,7 @@ func (a *RecordAPIService) DeleteDnsRecordExecute(r ApiDeleteDnsRecordRequest) (
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/record/{ recordId }"
+	localVarPath := localBasePath + "/record/{recordId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"recordId"+"}", url.PathEscape(parameterValueToString(r.recordId, "recordId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -459,7 +459,7 @@ func (a *RecordAPIService) ListProjectDnsRecordsExecute(r ApiListProjectDnsRecor
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId}/records"
+	localVarPath := localBasePath + "/project/{projectId}/records"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -622,7 +622,7 @@ func (a *RecordAPIService) ReadDnsRecordExecute(r ApiReadDnsRecordRequest) (*Dns
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/record/{ recordId }"
+	localVarPath := localBasePath + "/record/{recordId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"recordId"+"}", url.PathEscape(parameterValueToString(r.recordId, "recordId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -792,7 +792,7 @@ func (a *RecordAPIService) UpdateDnsRecordExecute(r ApiUpdateDnsRecordRequest) (
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/record/{ recordId }"
+	localVarPath := localBasePath + "/record/{recordId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"recordId"+"}", url.PathEscape(parameterValueToString(r.recordId, "recordId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

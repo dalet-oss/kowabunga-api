@@ -53,12 +53,12 @@ func (c *KgwAPIController) Routes() Routes {
 	return Routes{
 		"CreateProjectZoneKGW": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/kgw",
+			"/api/v1/project/{projectId}/zone/{zoneId}/kgw",
 			c.CreateProjectZoneKGW,
 		},
 		"DeleteKGW": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/kgw/kgwId }",
+			"/api/v1/kgw/kgwId}",
 			c.DeleteKGW,
 		},
 		"ListKGWs": Route{
@@ -68,17 +68,17 @@ func (c *KgwAPIController) Routes() Routes {
 		},
 		"ListProjectZoneKGWs": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/kgws",
+			"/api/v1/project/{projectId}/zone/{zoneId}/kgws",
 			c.ListProjectZoneKGWs,
 		},
 		"ReadKGW": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/kgw/kgwId }",
+			"/api/v1/kgw/kgwId}",
 			c.ReadKGW,
 		},
 		"UpdateKGW": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/kgw/kgwId }",
+			"/api/v1/kgw/kgwId}",
 			c.UpdateKGW,
 		},
 	}

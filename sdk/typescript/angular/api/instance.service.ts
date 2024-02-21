@@ -197,7 +197,7 @@ export class InstanceService {
             }
         }
 
-        let localVarPath = `/project//zone//instance`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/instance`;
         return this.httpClient.request<Instance>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -276,7 +276,7 @@ export class InstanceService {
             }
         }
 
-        let localVarPath = `/instance/`;
+        let localVarPath = `/instance/${this.configuration.encodeParam({name: "instanceId", value: instanceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -353,7 +353,7 @@ export class InstanceService {
             }
         }
 
-        let localVarPath = `/host//instances`;
+        let localVarPath = `/host/${this.configuration.encodeParam({name: "hostId", value: hostId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/instances`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -507,7 +507,7 @@ export class InstanceService {
             }
         }
 
-        let localVarPath = `/project//zone//instances`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/instances`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -584,7 +584,7 @@ export class InstanceService {
             }
         }
 
-        let localVarPath = `/instance/`;
+        let localVarPath = `/instance/${this.configuration.encodeParam({name: "instanceId", value: instanceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<Instance>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -661,7 +661,7 @@ export class InstanceService {
             }
         }
 
-        let localVarPath = `/instance//connect`;
+        let localVarPath = `/instance/${this.configuration.encodeParam({name: "instanceId", value: instanceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/connect`;
         return this.httpClient.request<InstanceRemoteAccess>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -738,7 +738,7 @@ export class InstanceService {
             }
         }
 
-        let localVarPath = `/instance//state`;
+        let localVarPath = `/instance/${this.configuration.encodeParam({name: "instanceId", value: instanceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/state`;
         return this.httpClient.request<InstanceState>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -815,7 +815,7 @@ export class InstanceService {
             }
         }
 
-        let localVarPath = `/instance//reboot`;
+        let localVarPath = `/instance/${this.configuration.encodeParam({name: "instanceId", value: instanceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/reboot`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -892,7 +892,7 @@ export class InstanceService {
             }
         }
 
-        let localVarPath = `/instance//reset`;
+        let localVarPath = `/instance/${this.configuration.encodeParam({name: "instanceId", value: instanceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/reset`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -969,7 +969,7 @@ export class InstanceService {
             }
         }
 
-        let localVarPath = `/instance//resume`;
+        let localVarPath = `/instance/${this.configuration.encodeParam({name: "instanceId", value: instanceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/resume`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -1046,7 +1046,7 @@ export class InstanceService {
             }
         }
 
-        let localVarPath = `/instance//shutdown`;
+        let localVarPath = `/instance/${this.configuration.encodeParam({name: "instanceId", value: instanceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/shutdown`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -1123,7 +1123,7 @@ export class InstanceService {
             }
         }
 
-        let localVarPath = `/instance//start`;
+        let localVarPath = `/instance/${this.configuration.encodeParam({name: "instanceId", value: instanceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/start`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -1200,7 +1200,7 @@ export class InstanceService {
             }
         }
 
-        let localVarPath = `/instance//stop`;
+        let localVarPath = `/instance/${this.configuration.encodeParam({name: "instanceId", value: instanceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/stop`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -1277,7 +1277,7 @@ export class InstanceService {
             }
         }
 
-        let localVarPath = `/instance//suspend`;
+        let localVarPath = `/instance/${this.configuration.encodeParam({name: "instanceId", value: instanceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/suspend`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -1367,7 +1367,7 @@ export class InstanceService {
             }
         }
 
-        let localVarPath = `/instance/`;
+        let localVarPath = `/instance/${this.configuration.encodeParam({name: "instanceId", value: instanceId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<Instance>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

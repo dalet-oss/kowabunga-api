@@ -189,7 +189,7 @@ export class AdapterService {
             }
         }
 
-        let localVarPath = `/subnet//adapter`;
+        let localVarPath = `/subnet/${this.configuration.encodeParam({name: "subnetId", value: subnetId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/adapter`;
         return this.httpClient.request<Adapter>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -268,7 +268,7 @@ export class AdapterService {
             }
         }
 
-        let localVarPath = `/adapter/`;
+        let localVarPath = `/adapter/${this.configuration.encodeParam({name: "adapterId", value: adapterId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -418,7 +418,7 @@ export class AdapterService {
             }
         }
 
-        let localVarPath = `/subnet//adapters`;
+        let localVarPath = `/subnet/${this.configuration.encodeParam({name: "subnetId", value: subnetId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/adapters`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -495,7 +495,7 @@ export class AdapterService {
             }
         }
 
-        let localVarPath = `/adapter/`;
+        let localVarPath = `/adapter/${this.configuration.encodeParam({name: "adapterId", value: adapterId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<Adapter>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -585,7 +585,7 @@ export class AdapterService {
             }
         }
 
-        let localVarPath = `/adapter/`;
+        let localVarPath = `/adapter/${this.configuration.encodeParam({name: "adapterId", value: adapterId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<Adapter>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

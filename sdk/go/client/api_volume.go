@@ -90,7 +90,7 @@ func (a *VolumeAPIService) CreateProjectZoneVolumeExecute(r ApiCreateProjectZone
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/volume"
+	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/volume"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
@@ -307,7 +307,7 @@ func (a *VolumeAPIService) DeleteVolumeExecute(r ApiDeleteVolumeRequest) (*http.
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/volume/{ volumeId }"
+	localVarPath := localBasePath + "/volume/{volumeId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"volumeId"+"}", url.PathEscape(parameterValueToString(r.volumeId, "volumeId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -486,7 +486,7 @@ func (a *VolumeAPIService) ListProjectZoneVolumesExecute(r ApiListProjectZoneVol
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/volumes"
+	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/volumes"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
@@ -650,7 +650,7 @@ func (a *VolumeAPIService) ListStoragePoolVolumesExecute(r ApiListStoragePoolVol
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/pool/{ poolId }/volumes"
+	localVarPath := localBasePath + "/pool/{poolId}/volumes"
 	localVarPath = strings.Replace(localVarPath, "{"+"poolId"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -961,7 +961,7 @@ func (a *VolumeAPIService) ReadVolumeExecute(r ApiReadVolumeRequest) (*Volume, *
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/volume/{ volumeId }"
+	localVarPath := localBasePath + "/volume/{volumeId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"volumeId"+"}", url.PathEscape(parameterValueToString(r.volumeId, "volumeId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1131,7 +1131,7 @@ func (a *VolumeAPIService) UpdateVolumeExecute(r ApiUpdateVolumeRequest) (*Volum
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/volume/{ volumeId }"
+	localVarPath := localBasePath + "/volume/{volumeId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"volumeId"+"}", url.PathEscape(parameterValueToString(r.volumeId, "volumeId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

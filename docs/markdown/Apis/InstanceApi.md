@@ -4,22 +4,22 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createProjectZoneInstance**](InstanceApi.md#createProjectZoneInstance) | **POST** /project/{ projectId }/zone/{ zoneId }/instance |  |
-| [**deleteInstance**](InstanceApi.md#deleteInstance) | **DELETE** /instance/{ instanceId } |  |
-| [**listHostInstances**](InstanceApi.md#listHostInstances) | **GET** /host/{ hostId }/instances |  |
+| [**createProjectZoneInstance**](InstanceApi.md#createProjectZoneInstance) | **POST** /project/{projectId}/zone/{zoneId}/instance |  |
+| [**deleteInstance**](InstanceApi.md#deleteInstance) | **DELETE** /instance/{instanceId} |  |
+| [**listHostInstances**](InstanceApi.md#listHostInstances) | **GET** /host/{hostId}/instances |  |
 | [**listInstances**](InstanceApi.md#listInstances) | **GET** /instance |  |
-| [**listProjectZoneInstances**](InstanceApi.md#listProjectZoneInstances) | **GET** /project/{ projectId }/zone/{ zoneId }/instances |  |
-| [**readInstance**](InstanceApi.md#readInstance) | **GET** /instance/{ instanceId } |  |
-| [**readInstanceRemoteConnection**](InstanceApi.md#readInstanceRemoteConnection) | **GET** /instance/{ instanceId }/connect |  |
-| [**readInstanceState**](InstanceApi.md#readInstanceState) | **GET** /instance/{ instanceId }/state |  |
-| [**rebootInstance**](InstanceApi.md#rebootInstance) | **PATCH** /instance/{ instanceId }/reboot |  |
-| [**resetInstance**](InstanceApi.md#resetInstance) | **PATCH** /instance/{ instanceId }/reset |  |
-| [**resumeInstance**](InstanceApi.md#resumeInstance) | **PATCH** /instance/{ instanceId }/resume |  |
-| [**shutdownInstance**](InstanceApi.md#shutdownInstance) | **PATCH** /instance/{ instanceId }/shutdown |  |
-| [**startInstance**](InstanceApi.md#startInstance) | **PATCH** /instance/{ instanceId }/start |  |
-| [**stopInstance**](InstanceApi.md#stopInstance) | **PATCH** /instance/{ instanceId }/stop |  |
-| [**suspendInstance**](InstanceApi.md#suspendInstance) | **PATCH** /instance/{ instanceId }/suspend |  |
-| [**updateInstance**](InstanceApi.md#updateInstance) | **PUT** /instance/{ instanceId } |  |
+| [**listProjectZoneInstances**](InstanceApi.md#listProjectZoneInstances) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
+| [**readInstance**](InstanceApi.md#readInstance) | **GET** /instance/{instanceId} |  |
+| [**readInstanceRemoteConnection**](InstanceApi.md#readInstanceRemoteConnection) | **GET** /instance/{instanceId}/connect |  |
+| [**readInstanceState**](InstanceApi.md#readInstanceState) | **GET** /instance/{instanceId}/state |  |
+| [**rebootInstance**](InstanceApi.md#rebootInstance) | **PATCH** /instance/{instanceId}/reboot |  |
+| [**resetInstance**](InstanceApi.md#resetInstance) | **PATCH** /instance/{instanceId}/reset |  |
+| [**resumeInstance**](InstanceApi.md#resumeInstance) | **PATCH** /instance/{instanceId}/resume |  |
+| [**shutdownInstance**](InstanceApi.md#shutdownInstance) | **PATCH** /instance/{instanceId}/shutdown |  |
+| [**startInstance**](InstanceApi.md#startInstance) | **PATCH** /instance/{instanceId}/start |  |
+| [**stopInstance**](InstanceApi.md#stopInstance) | **PATCH** /instance/{instanceId}/stop |  |
+| [**suspendInstance**](InstanceApi.md#suspendInstance) | **PATCH** /instance/{instanceId}/suspend |  |
+| [**updateInstance**](InstanceApi.md#updateInstance) | **PUT** /instance/{instanceId} |  |
 
 
 <a name="createProjectZoneInstance"></a>

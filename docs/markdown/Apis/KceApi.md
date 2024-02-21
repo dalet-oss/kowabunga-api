@@ -4,20 +4,20 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createProjectZoneKCE**](KceApi.md#createProjectZoneKCE) | **POST** /project/{ projectId }/zone/{ zoneId }/kce |  |
-| [**deleteKCE**](KceApi.md#deleteKCE) | **DELETE** /kce/{ kceId } |  |
+| [**createProjectZoneKCE**](KceApi.md#createProjectZoneKCE) | **POST** /project/{projectId}/zone/{zoneId}/kce |  |
+| [**deleteKCE**](KceApi.md#deleteKCE) | **DELETE** /kce/{kceId} |  |
 | [**listKCEs**](KceApi.md#listKCEs) | **GET** /kce |  |
-| [**listProjectZoneKCEs**](KceApi.md#listProjectZoneKCEs) | **GET** /project/{ projectId }/zone/{ zoneId }/kces |  |
-| [**readKCE**](KceApi.md#readKCE) | **GET** /kce/{ kceId } |  |
-| [**readKCEState**](KceApi.md#readKCEState) | **GET** /kce/{ kceId }/state |  |
-| [**rebootKCE**](KceApi.md#rebootKCE) | **PATCH** /kce/{ kceId }/reboot |  |
-| [**resetKCE**](KceApi.md#resetKCE) | **PATCH** /kce/{ kceId }/reset |  |
-| [**resumeKCE**](KceApi.md#resumeKCE) | **PATCH** /kce/{ kceId }/resume |  |
-| [**shutdownKCE**](KceApi.md#shutdownKCE) | **PATCH** /kce/{ kceId }/shutdown |  |
-| [**startKCE**](KceApi.md#startKCE) | **PATCH** /kce/{ kceId }/start |  |
-| [**stopKCE**](KceApi.md#stopKCE) | **PATCH** /kce/{ kceId }/stop |  |
-| [**suspendKCE**](KceApi.md#suspendKCE) | **PATCH** /kce/{ kceId }/suspend |  |
-| [**updateKCE**](KceApi.md#updateKCE) | **PUT** /kce/{ kceId } |  |
+| [**listProjectZoneKCEs**](KceApi.md#listProjectZoneKCEs) | **GET** /project/{projectId}/zone/{zoneId}/kces |  |
+| [**readKCE**](KceApi.md#readKCE) | **GET** /kce/{kceId} |  |
+| [**readKCEState**](KceApi.md#readKCEState) | **GET** /kce/{kceId}/state |  |
+| [**rebootKCE**](KceApi.md#rebootKCE) | **PATCH** /kce/{kceId}/reboot |  |
+| [**resetKCE**](KceApi.md#resetKCE) | **PATCH** /kce/{kceId}/reset |  |
+| [**resumeKCE**](KceApi.md#resumeKCE) | **PATCH** /kce/{kceId}/resume |  |
+| [**shutdownKCE**](KceApi.md#shutdownKCE) | **PATCH** /kce/{kceId}/shutdown |  |
+| [**startKCE**](KceApi.md#startKCE) | **PATCH** /kce/{kceId}/start |  |
+| [**stopKCE**](KceApi.md#stopKCE) | **PATCH** /kce/{kceId}/stop |  |
+| [**suspendKCE**](KceApi.md#suspendKCE) | **PATCH** /kce/{kceId}/suspend |  |
+| [**updateKCE**](KceApi.md#updateKCE) | **PUT** /kce/{kceId} |  |
 
 
 <a name="createProjectZoneKCE"></a>

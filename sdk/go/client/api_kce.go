@@ -104,7 +104,7 @@ func (a *KceAPIService) CreateProjectZoneKCEExecute(r ApiCreateProjectZoneKCEReq
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/kce"
+	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/kce"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
@@ -327,7 +327,7 @@ func (a *KceAPIService) DeleteKCEExecute(r ApiDeleteKCERequest) (*http.Response,
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kce/{ kceId }"
+	localVarPath := localBasePath + "/kce/{kceId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -654,7 +654,7 @@ func (a *KceAPIService) ListProjectZoneKCEsExecute(r ApiListProjectZoneKCEsReque
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/kces"
+	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/kces"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
@@ -818,7 +818,7 @@ func (a *KceAPIService) ReadKCEExecute(r ApiReadKCERequest) (*KCE, *http.Respons
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kce/{ kceId }"
+	localVarPath := localBasePath + "/kce/{kceId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -981,7 +981,7 @@ func (a *KceAPIService) ReadKCEStateExecute(r ApiReadKCEStateRequest) (*Instance
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kce/{ kceId }/state"
+	localVarPath := localBasePath + "/kce/{kceId}/state"
 	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1142,7 +1142,7 @@ func (a *KceAPIService) RebootKCEExecute(r ApiRebootKCERequest) (*http.Response,
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kce/{ kceId }/reboot"
+	localVarPath := localBasePath + "/kce/{kceId}/reboot"
 	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1305,7 +1305,7 @@ func (a *KceAPIService) ResetKCEExecute(r ApiResetKCERequest) (*http.Response, e
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kce/{ kceId }/reset"
+	localVarPath := localBasePath + "/kce/{kceId}/reset"
 	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1468,7 +1468,7 @@ func (a *KceAPIService) ResumeKCEExecute(r ApiResumeKCERequest) (*http.Response,
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kce/{ kceId }/resume"
+	localVarPath := localBasePath + "/kce/{kceId}/resume"
 	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1631,7 +1631,7 @@ func (a *KceAPIService) ShutdownKCEExecute(r ApiShutdownKCERequest) (*http.Respo
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kce/{ kceId }/shutdown"
+	localVarPath := localBasePath + "/kce/{kceId}/shutdown"
 	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1794,7 +1794,7 @@ func (a *KceAPIService) StartKCEExecute(r ApiStartKCERequest) (*http.Response, e
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kce/{ kceId }/start"
+	localVarPath := localBasePath + "/kce/{kceId}/start"
 	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1957,7 +1957,7 @@ func (a *KceAPIService) StopKCEExecute(r ApiStopKCERequest) (*http.Response, err
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kce/{ kceId }/stop"
+	localVarPath := localBasePath + "/kce/{kceId}/stop"
 	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -2120,7 +2120,7 @@ func (a *KceAPIService) SuspendKCEExecute(r ApiSuspendKCERequest) (*http.Respons
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kce/{ kceId }/suspend"
+	localVarPath := localBasePath + "/kce/{kceId}/suspend"
 	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -2292,7 +2292,7 @@ func (a *KceAPIService) UpdateKCEExecute(r ApiUpdateKCERequest) (*KCE, *http.Res
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kce/{ kceId }"
+	localVarPath := localBasePath + "/kce/{kceId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"kceId"+"}", url.PathEscape(parameterValueToString(r.kceId, "kceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

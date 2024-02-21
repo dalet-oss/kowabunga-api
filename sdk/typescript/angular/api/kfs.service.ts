@@ -198,7 +198,7 @@ export class KfsService {
             }
         }
 
-        let localVarPath = `/project//zone//kfs`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kfs`;
         return this.httpClient.request<KFS>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -277,7 +277,7 @@ export class KfsService {
             }
         }
 
-        let localVarPath = `/kfs/`;
+        let localVarPath = `/kfs/${this.configuration.encodeParam({name: "kfsId", value: kfsId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -443,7 +443,7 @@ export class KfsService {
             }
         }
 
-        let localVarPath = `/project//zone//kfs`;
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kfs`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -521,7 +521,7 @@ export class KfsService {
             }
         }
 
-        let localVarPath = `/nfs//kfs`;
+        let localVarPath = `/nfs/${this.configuration.encodeParam({name: "nfsId", value: nfsId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kfs`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -598,7 +598,7 @@ export class KfsService {
             }
         }
 
-        let localVarPath = `/kfs/`;
+        let localVarPath = `/kfs/${this.configuration.encodeParam({name: "kfsId", value: kfsId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<KFS>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -688,7 +688,7 @@ export class KfsService {
             }
         }
 
-        let localVarPath = `/kfs/`;
+        let localVarPath = `/kfs/${this.configuration.encodeParam({name: "kfsId", value: kfsId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<KFS>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

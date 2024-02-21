@@ -4,13 +4,13 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createTemplate**](TemplateApi.md#createTemplate) | **POST** /pool/{ poolId }/template |  |
-| [**deleteTemplate**](TemplateApi.md#deleteTemplate) | **DELETE** /template/{ templateId } |  |
-| [**listStoragePoolTemplates**](TemplateApi.md#listStoragePoolTemplates) | **GET** /pool/{ poolId }/templates |  |
+| [**createTemplate**](TemplateApi.md#createTemplate) | **POST** /pool/{poolId}/template |  |
+| [**deleteTemplate**](TemplateApi.md#deleteTemplate) | **DELETE** /template/{templateId} |  |
+| [**listStoragePoolTemplates**](TemplateApi.md#listStoragePoolTemplates) | **GET** /pool/{poolId}/templates |  |
 | [**listTemplates**](TemplateApi.md#listTemplates) | **GET** /template |  |
-| [**readTemplate**](TemplateApi.md#readTemplate) | **GET** /template/{ templateId } |  |
-| [**setStoragePoolDefaultTemplate**](TemplateApi.md#setStoragePoolDefaultTemplate) | **PATCH** /pool/{ poolId }/template/{ templateId }/default |  |
-| [**updateTemplate**](TemplateApi.md#updateTemplate) | **PUT** /template/{ templateId } |  |
+| [**readTemplate**](TemplateApi.md#readTemplate) | **GET** /template/{templateId} |  |
+| [**setStoragePoolDefaultTemplate**](TemplateApi.md#setStoragePoolDefaultTemplate) | **PATCH** /pool/{poolId}/template/{templateId}/default |  |
+| [**updateTemplate**](TemplateApi.md#updateTemplate) | **PUT** /template/{templateId} |  |
 
 
 <a name="createTemplate"></a>

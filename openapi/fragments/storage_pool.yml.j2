@@ -18,21 +18,21 @@ paths:
   /pool:
 {{ oas.List(resources.pool, [resources.pool.tag]) }}
 
-  /pool/{ {{ resources.pool.paramId }} }:
+  /pool/{{ '{' + resources.pool.paramId + '}' }}:
 {{ oas.RUD(resources.pool, [resources.pool.tag], [resources.pool.paramSchema]) }}
 
-  /pool/{ {{ resources.pool.paramId }} }/volumes:
+  /pool/{{ '{' + resources.pool.paramId + '}' }}/volumes:
 {{ oas.Parameters([resources.pool.paramSchema]) }}
 {{ oas.GetAll('List' + resources.pool.schema + 'Volumes', resources.volume.desc, [resources.pool.tag, resources.volume.tag], True) }}
 
-  /pool/{ {{ resources.pool.paramId }} }/template:
+  /pool/{{ '{' + resources.pool.paramId + '}' }}/template:
 {{ oas.Parameters([resources.pool.paramSchema]) }}
 {{ oas.Create('Create' + resources.template.schema, resources.template.schema, resources.template.desc, [resources.pool.tag, resources.template.tag]) }}
 
-  /pool/{ {{ resources.pool.paramId }} }/template/{ {{ resources.template.paramId }} }/default:
+  /pool/{{ '{' + resources.pool.paramId + '}' }}/template/{{ '{' + resources.template.paramId + '}' }}/default:
 {{ oas.Parameters([resources.pool.paramSchema, resources.template.paramSchema]) }}
 {{ oas.Patch('Set' + resources.pool.schema + 'Default' + resources.template.schema, resources.pool.desc, 'setting of default template', [resources.pool.tag, resources.template.tag]) }}
 
-  /pool/{ {{ resources.pool.paramId }} }/templates:
+  /pool/{{ '{' + resources.pool.paramId + '}' }}/templates:
 {{ oas.Parameters([resources.pool.paramSchema]) }}
 {{ oas.GetAll('List' + resources.pool.schema + 'Templates', resources.template.desc, [resources.pool.tag, resources.template.tag], True) }}

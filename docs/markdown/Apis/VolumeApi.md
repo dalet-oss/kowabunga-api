@@ -4,13 +4,13 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createProjectZoneVolume**](VolumeApi.md#createProjectZoneVolume) | **POST** /project/{ projectId }/zone/{ zoneId }/volume |  |
-| [**deleteVolume**](VolumeApi.md#deleteVolume) | **DELETE** /volume/{ volumeId } |  |
-| [**listProjectZoneVolumes**](VolumeApi.md#listProjectZoneVolumes) | **GET** /project/{ projectId }/zone/{ zoneId }/volumes |  |
-| [**listStoragePoolVolumes**](VolumeApi.md#listStoragePoolVolumes) | **GET** /pool/{ poolId }/volumes |  |
+| [**createProjectZoneVolume**](VolumeApi.md#createProjectZoneVolume) | **POST** /project/{projectId}/zone/{zoneId}/volume |  |
+| [**deleteVolume**](VolumeApi.md#deleteVolume) | **DELETE** /volume/{volumeId} |  |
+| [**listProjectZoneVolumes**](VolumeApi.md#listProjectZoneVolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes |  |
+| [**listStoragePoolVolumes**](VolumeApi.md#listStoragePoolVolumes) | **GET** /pool/{poolId}/volumes |  |
 | [**listVolumes**](VolumeApi.md#listVolumes) | **GET** /volume |  |
-| [**readVolume**](VolumeApi.md#readVolume) | **GET** /volume/{ volumeId } |  |
-| [**updateVolume**](VolumeApi.md#updateVolume) | **PUT** /volume/{ volumeId } |  |
+| [**readVolume**](VolumeApi.md#readVolume) | **GET** /volume/{volumeId} |  |
+| [**updateVolume**](VolumeApi.md#updateVolume) | **PUT** /volume/{volumeId} |  |
 
 
 <a name="createProjectZoneVolume"></a>

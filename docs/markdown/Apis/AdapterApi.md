@@ -4,12 +4,12 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createAdapter**](AdapterApi.md#createAdapter) | **POST** /subnet/{ subnetId }/adapter |  |
-| [**deleteAdapter**](AdapterApi.md#deleteAdapter) | **DELETE** /adapter/{ adapterId } |  |
+| [**createAdapter**](AdapterApi.md#createAdapter) | **POST** /subnet/{subnetId}/adapter |  |
+| [**deleteAdapter**](AdapterApi.md#deleteAdapter) | **DELETE** /adapter/{adapterId} |  |
 | [**listAdapters**](AdapterApi.md#listAdapters) | **GET** /adapter |  |
-| [**listSubnetAdapters**](AdapterApi.md#listSubnetAdapters) | **GET** /subnet/{ subnetId }/adapters |  |
-| [**readAdapter**](AdapterApi.md#readAdapter) | **GET** /adapter/{ adapterId } |  |
-| [**updateAdapter**](AdapterApi.md#updateAdapter) | **PUT** /adapter/{ adapterId } |  |
+| [**listSubnetAdapters**](AdapterApi.md#listSubnetAdapters) | **GET** /subnet/{subnetId}/adapters |  |
+| [**readAdapter**](AdapterApi.md#readAdapter) | **GET** /adapter/{adapterId} |  |
+| [**updateAdapter**](AdapterApi.md#updateAdapter) | **PUT** /adapter/{adapterId} |  |
 
 
 <a name="createAdapter"></a>

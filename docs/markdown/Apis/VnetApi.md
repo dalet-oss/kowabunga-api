@@ -4,15 +4,15 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createSubnet**](VnetApi.md#createSubnet) | **POST** /vnet/{ vnetId }/subnet |  |
-| [**createVNet**](VnetApi.md#createVNet) | **POST** /zone/{ zoneId }/vnet |  |
-| [**deleteVNet**](VnetApi.md#deleteVNet) | **DELETE** /vnet/{ vnetId } |  |
-| [**listVNetSubnets**](VnetApi.md#listVNetSubnets) | **GET** /vnet/{ vnetId }/subnets |  |
+| [**createSubnet**](VnetApi.md#createSubnet) | **POST** /vnet/{vnetId}/subnet |  |
+| [**createVNet**](VnetApi.md#createVNet) | **POST** /zone/{zoneId}/vnet |  |
+| [**deleteVNet**](VnetApi.md#deleteVNet) | **DELETE** /vnet/{vnetId} |  |
+| [**listVNetSubnets**](VnetApi.md#listVNetSubnets) | **GET** /vnet/{vnetId}/subnets |  |
 | [**listVNets**](VnetApi.md#listVNets) | **GET** /vnet |  |
-| [**listZoneVNets**](VnetApi.md#listZoneVNets) | **GET** /zone/{ zoneId }/vnets |  |
-| [**readVNet**](VnetApi.md#readVNet) | **GET** /vnet/{ vnetId } |  |
-| [**setVNetDefaultSubnet**](VnetApi.md#setVNetDefaultSubnet) | **PATCH** /vnet/{ vnetId }/subnet/{ subnetId }/default |  |
-| [**updateVNet**](VnetApi.md#updateVNet) | **PUT** /vnet/{ vnetId } |  |
+| [**listZoneVNets**](VnetApi.md#listZoneVNets) | **GET** /zone/{zoneId}/vnets |  |
+| [**readVNet**](VnetApi.md#readVNet) | **GET** /vnet/{vnetId} |  |
+| [**setVNetDefaultSubnet**](VnetApi.md#setVNetDefaultSubnet) | **PATCH** /vnet/{vnetId}/subnet/{subnetId}/default |  |
+| [**updateVNet**](VnetApi.md#updateVNet) | **PUT** /vnet/{vnetId} |  |
 
 
 <a name="createSubnet"></a>

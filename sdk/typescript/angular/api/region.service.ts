@@ -271,7 +271,7 @@ export class RegionService {
             }
         }
 
-        let localVarPath = `/region//zone`;
+        let localVarPath = `/region/${this.configuration.encodeParam({name: "regionId", value: regionId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone`;
         return this.httpClient.request<Zone>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -349,7 +349,7 @@ export class RegionService {
             }
         }
 
-        let localVarPath = `/region/`;
+        let localVarPath = `/region/${this.configuration.encodeParam({name: "regionId", value: regionId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -576,7 +576,7 @@ export class RegionService {
             }
         }
 
-        let localVarPath = `/region/`;
+        let localVarPath = `/region/${this.configuration.encodeParam({name: "regionId", value: regionId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<Region>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -666,7 +666,7 @@ export class RegionService {
             }
         }
 
-        let localVarPath = `/region/`;
+        let localVarPath = `/region/${this.configuration.encodeParam({name: "regionId", value: regionId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<Region>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

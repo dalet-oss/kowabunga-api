@@ -73,7 +73,7 @@ func (a *ZoneAPIService) CreateHostExecute(r ApiCreateHostRequest) (*Host, *http
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }/host"
+	localVarPath := localBasePath + "/zone/{zoneId}/host"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -292,7 +292,7 @@ func (a *ZoneAPIService) CreateNetGWExecute(r ApiCreateNetGWRequest) (*NetGW, *h
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }/netgw"
+	localVarPath := localBasePath + "/zone/{zoneId}/netgw"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -521,7 +521,7 @@ func (a *ZoneAPIService) CreateProjectZoneInstanceExecute(r ApiCreateProjectZone
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/instance"
+	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/instance"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
@@ -775,7 +775,7 @@ func (a *ZoneAPIService) CreateProjectZoneKCEExecute(r ApiCreateProjectZoneKCERe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/kce"
+	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/kce"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
@@ -1024,7 +1024,7 @@ func (a *ZoneAPIService) CreateProjectZoneKFSExecute(r ApiCreateProjectZoneKFSRe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/kfs"
+	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/kfs"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
@@ -1253,7 +1253,7 @@ func (a *ZoneAPIService) CreateProjectZoneKGWExecute(r ApiCreateProjectZoneKGWRe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/kgw"
+	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/kgw"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
@@ -1490,7 +1490,7 @@ func (a *ZoneAPIService) CreateProjectZoneVolumeExecute(r ApiCreateProjectZoneVo
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/volume"
+	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/volume"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
@@ -1716,7 +1716,7 @@ func (a *ZoneAPIService) CreateStorageNFSExecute(r ApiCreateStorageNFSRequest) (
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }/nfs"
+	localVarPath := localBasePath + "/zone/{zoneId}/nfs"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1942,7 +1942,7 @@ func (a *ZoneAPIService) CreateStoragePoolExecute(r ApiCreateStoragePoolRequest)
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }/pool"
+	localVarPath := localBasePath + "/zone/{zoneId}/pool"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -2164,7 +2164,7 @@ func (a *ZoneAPIService) CreateVNetExecute(r ApiCreateVNetRequest) (*VNet, *http
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }/vnet"
+	localVarPath := localBasePath + "/zone/{zoneId}/vnet"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -2383,7 +2383,7 @@ func (a *ZoneAPIService) CreateZoneExecute(r ApiCreateZoneRequest) (*Zone, *http
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/region/{ regionId }/zone"
+	localVarPath := localBasePath + "/region/{regionId}/zone"
 	localVarPath = strings.Replace(localVarPath, "{"+"regionId"+"}", url.PathEscape(parameterValueToString(r.regionId, "regionId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -2593,7 +2593,7 @@ func (a *ZoneAPIService) DeleteZoneExecute(r ApiDeleteZoneRequest) (*http.Respon
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }"
+	localVarPath := localBasePath + "/zone/{zoneId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -2772,7 +2772,7 @@ func (a *ZoneAPIService) ListProjectZoneInstancesExecute(r ApiListProjectZoneIns
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/instances"
+	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/instances"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
@@ -2939,7 +2939,7 @@ func (a *ZoneAPIService) ListProjectZoneKCEsExecute(r ApiListProjectZoneKCEsRequ
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/kces"
+	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/kces"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
@@ -3120,7 +3120,7 @@ func (a *ZoneAPIService) ListProjectZoneKFSsExecute(r ApiListProjectZoneKFSsRequ
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/kfs"
+	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/kfs"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
@@ -3293,7 +3293,7 @@ func (a *ZoneAPIService) ListProjectZoneKGWsExecute(r ApiListProjectZoneKGWsRequ
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/kgws"
+	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/kgws"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
@@ -3460,7 +3460,7 @@ func (a *ZoneAPIService) ListProjectZoneVolumesExecute(r ApiListProjectZoneVolum
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/volumes"
+	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/volumes"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
@@ -3950,7 +3950,7 @@ func (a *ZoneAPIService) ListZoneNetGWsExecute(r ApiListZoneNetGWsRequest) ([]st
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }/netgws"
+	localVarPath := localBasePath + "/zone/{zoneId}/netgws"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -4113,7 +4113,7 @@ func (a *ZoneAPIService) ListZoneStorageNFSsExecute(r ApiListZoneStorageNFSsRequ
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }/nfs"
+	localVarPath := localBasePath + "/zone/{zoneId}/nfs"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -4276,7 +4276,7 @@ func (a *ZoneAPIService) ListZoneStoragePoolsExecute(r ApiListZoneStoragePoolsRe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }/pools"
+	localVarPath := localBasePath + "/zone/{zoneId}/pools"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -4439,7 +4439,7 @@ func (a *ZoneAPIService) ListZoneVNetsExecute(r ApiListZoneVNetsRequest) ([]stri
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }/vnets"
+	localVarPath := localBasePath + "/zone/{zoneId}/vnets"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -4750,7 +4750,7 @@ func (a *ZoneAPIService) ReadZoneExecute(r ApiReadZoneRequest) (*Zone, *http.Res
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }"
+	localVarPath := localBasePath + "/zone/{zoneId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -4914,7 +4914,7 @@ func (a *ZoneAPIService) SetZoneDefaultStorageNFSExecute(r ApiSetZoneDefaultStor
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }/nfs/{ nfsId }/default"
+	localVarPath := localBasePath + "/zone/{zoneId}/nfs/{nfsId}/default"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"nfsId"+"}", url.PathEscape(parameterValueToString(r.nfsId, "nfsId")), -1)
 
@@ -5081,7 +5081,7 @@ func (a *ZoneAPIService) SetZoneDefaultStoragePoolExecute(r ApiSetZoneDefaultSto
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }/pool/{ poolId }/default"
+	localVarPath := localBasePath + "/zone/{zoneId}/pool/{poolId}/default"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"poolId"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
 
@@ -5254,7 +5254,7 @@ func (a *ZoneAPIService) UpdateZoneExecute(r ApiUpdateZoneRequest) (*Zone, *http
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }"
+	localVarPath := localBasePath + "/zone/{zoneId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

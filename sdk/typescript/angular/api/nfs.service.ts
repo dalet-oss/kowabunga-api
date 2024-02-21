@@ -182,7 +182,7 @@ export class NfsService {
             }
         }
 
-        let localVarPath = `/zone//nfs`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/nfs`;
         return this.httpClient.request<StorageNFS>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -260,7 +260,7 @@ export class NfsService {
             }
         }
 
-        let localVarPath = `/nfs/`;
+        let localVarPath = `/nfs/${this.configuration.encodeParam({name: "nfsId", value: nfsId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -337,7 +337,7 @@ export class NfsService {
             }
         }
 
-        let localVarPath = `/nfs//kfs`;
+        let localVarPath = `/nfs/${this.configuration.encodeParam({name: "nfsId", value: nfsId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kfs`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -487,7 +487,7 @@ export class NfsService {
             }
         }
 
-        let localVarPath = `/zone//nfs`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/nfs`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -564,7 +564,7 @@ export class NfsService {
             }
         }
 
-        let localVarPath = `/nfs/`;
+        let localVarPath = `/nfs/${this.configuration.encodeParam({name: "nfsId", value: nfsId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<StorageNFS>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -645,7 +645,7 @@ export class NfsService {
             }
         }
 
-        let localVarPath = `/zone//nfs//default`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/nfs/${this.configuration.encodeParam({name: "nfsId", value: nfsId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/default`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -735,7 +735,7 @@ export class NfsService {
             }
         }
 
-        let localVarPath = `/nfs/`;
+        let localVarPath = `/nfs/${this.configuration.encodeParam({name: "nfsId", value: nfsId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<StorageNFS>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

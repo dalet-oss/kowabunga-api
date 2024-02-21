@@ -53,22 +53,22 @@ func (c *VolumeAPIController) Routes() Routes {
 	return Routes{
 		"CreateProjectZoneVolume": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/volume",
+			"/api/v1/project/{projectId}/zone/{zoneId}/volume",
 			c.CreateProjectZoneVolume,
 		},
 		"DeleteVolume": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/volume/{ volumeId }",
+			"/api/v1/volume/{volumeId}",
 			c.DeleteVolume,
 		},
 		"ListProjectZoneVolumes": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/volumes",
+			"/api/v1/project/{projectId}/zone/{zoneId}/volumes",
 			c.ListProjectZoneVolumes,
 		},
 		"ListStoragePoolVolumes": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/pool/{ poolId }/volumes",
+			"/api/v1/pool/{poolId}/volumes",
 			c.ListStoragePoolVolumes,
 		},
 		"ListVolumes": Route{
@@ -78,12 +78,12 @@ func (c *VolumeAPIController) Routes() Routes {
 		},
 		"ReadVolume": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/volume/{ volumeId }",
+			"/api/v1/volume/{volumeId}",
 			c.ReadVolume,
 		},
 		"UpdateVolume": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/volume/{ volumeId }",
+			"/api/v1/volume/{volumeId}",
 			c.UpdateVolume,
 		},
 	}

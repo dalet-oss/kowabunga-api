@@ -76,7 +76,7 @@ func (a *KgwAPIService) CreateProjectZoneKGWExecute(r ApiCreateProjectZoneKGWReq
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/kgw"
+	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/kgw"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
@@ -287,7 +287,7 @@ func (a *KgwAPIService) DeleteKGWExecute(r ApiDeleteKGWRequest) (*http.Response,
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kgw/kgwId }"
+	localVarPath := localBasePath + "/kgw/kgwId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"kgwId"+"}", url.PathEscape(parameterValueToString(r.kgwId, "kgwId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -614,7 +614,7 @@ func (a *KgwAPIService) ListProjectZoneKGWsExecute(r ApiListProjectZoneKGWsReque
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/kgws"
+	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/kgws"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
@@ -778,7 +778,7 @@ func (a *KgwAPIService) ReadKGWExecute(r ApiReadKGWRequest) (*KGW, *http.Respons
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kgw/kgwId }"
+	localVarPath := localBasePath + "/kgw/kgwId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"kgwId"+"}", url.PathEscape(parameterValueToString(r.kgwId, "kgwId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -948,7 +948,7 @@ func (a *KgwAPIService) UpdateKGWExecute(r ApiUpdateKGWRequest) (*KGW, *http.Res
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/kgw/kgwId }"
+	localVarPath := localBasePath + "/kgw/kgwId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"kgwId"+"}", url.PathEscape(parameterValueToString(r.kgwId, "kgwId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

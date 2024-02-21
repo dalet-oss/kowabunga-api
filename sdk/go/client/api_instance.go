@@ -83,7 +83,7 @@ func (a *InstanceAPIService) CreateProjectZoneInstanceExecute(r ApiCreateProject
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/instance"
+	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/instance"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
@@ -297,7 +297,7 @@ func (a *InstanceAPIService) DeleteInstanceExecute(r ApiDeleteInstanceRequest) (
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/instance/{ instanceId }"
+	localVarPath := localBasePath + "/instance/{instanceId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -473,7 +473,7 @@ func (a *InstanceAPIService) ListHostInstancesExecute(r ApiListHostInstancesRequ
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/host/{ hostId }/instances"
+	localVarPath := localBasePath + "/host/{hostId}/instances"
 	localVarPath = strings.Replace(localVarPath, "{"+"hostId"+"}", url.PathEscape(parameterValueToString(r.hostId, "hostId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -787,7 +787,7 @@ func (a *InstanceAPIService) ListProjectZoneInstancesExecute(r ApiListProjectZon
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/project/{ projectId }/zone/{ zoneId }/instances"
+	localVarPath := localBasePath + "/project/{projectId}/zone/{zoneId}/instances"
 	localVarPath = strings.Replace(localVarPath, "{"+"projectId"+"}", url.PathEscape(parameterValueToString(r.projectId, "projectId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
@@ -951,7 +951,7 @@ func (a *InstanceAPIService) ReadInstanceExecute(r ApiReadInstanceRequest) (*Ins
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/instance/{ instanceId }"
+	localVarPath := localBasePath + "/instance/{instanceId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1114,7 +1114,7 @@ func (a *InstanceAPIService) ReadInstanceRemoteConnectionExecute(r ApiReadInstan
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/instance/{ instanceId }/connect"
+	localVarPath := localBasePath + "/instance/{instanceId}/connect"
 	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1277,7 +1277,7 @@ func (a *InstanceAPIService) ReadInstanceStateExecute(r ApiReadInstanceStateRequ
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/instance/{ instanceId }/state"
+	localVarPath := localBasePath + "/instance/{instanceId}/state"
 	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1438,7 +1438,7 @@ func (a *InstanceAPIService) RebootInstanceExecute(r ApiRebootInstanceRequest) (
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/instance/{ instanceId }/reboot"
+	localVarPath := localBasePath + "/instance/{instanceId}/reboot"
 	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1601,7 +1601,7 @@ func (a *InstanceAPIService) ResetInstanceExecute(r ApiResetInstanceRequest) (*h
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/instance/{ instanceId }/reset"
+	localVarPath := localBasePath + "/instance/{instanceId}/reset"
 	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1764,7 +1764,7 @@ func (a *InstanceAPIService) ResumeInstanceExecute(r ApiResumeInstanceRequest) (
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/instance/{ instanceId }/resume"
+	localVarPath := localBasePath + "/instance/{instanceId}/resume"
 	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1927,7 +1927,7 @@ func (a *InstanceAPIService) ShutdownInstanceExecute(r ApiShutdownInstanceReques
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/instance/{ instanceId }/shutdown"
+	localVarPath := localBasePath + "/instance/{instanceId}/shutdown"
 	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -2090,7 +2090,7 @@ func (a *InstanceAPIService) StartInstanceExecute(r ApiStartInstanceRequest) (*h
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/instance/{ instanceId }/start"
+	localVarPath := localBasePath + "/instance/{instanceId}/start"
 	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -2253,7 +2253,7 @@ func (a *InstanceAPIService) StopInstanceExecute(r ApiStopInstanceRequest) (*htt
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/instance/{ instanceId }/stop"
+	localVarPath := localBasePath + "/instance/{instanceId}/stop"
 	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -2416,7 +2416,7 @@ func (a *InstanceAPIService) SuspendInstanceExecute(r ApiSuspendInstanceRequest)
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/instance/{ instanceId }/suspend"
+	localVarPath := localBasePath + "/instance/{instanceId}/suspend"
 	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -2588,7 +2588,7 @@ func (a *InstanceAPIService) UpdateInstanceExecute(r ApiUpdateInstanceRequest) (
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/instance/{ instanceId }"
+	localVarPath := localBasePath + "/instance/{instanceId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

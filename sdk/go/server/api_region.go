@@ -58,12 +58,12 @@ func (c *RegionAPIController) Routes() Routes {
 		},
 		"CreateZone": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/region/{ regionId }/zone",
+			"/api/v1/region/{regionId}/zone",
 			c.CreateZone,
 		},
 		"DeleteRegion": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/region/{ regionId }",
+			"/api/v1/region/{regionId}",
 			c.DeleteRegion,
 		},
 		"ListRegionZones": Route{
@@ -78,12 +78,12 @@ func (c *RegionAPIController) Routes() Routes {
 		},
 		"ReadRegion": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/region/{ regionId }",
+			"/api/v1/region/{regionId}",
 			c.ReadRegion,
 		},
 		"UpdateRegion": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/region/{ regionId }",
+			"/api/v1/region/{regionId}",
 			c.UpdateRegion,
 		},
 	}

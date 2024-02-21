@@ -58,67 +58,67 @@ func (c *ProjectAPIController) Routes() Routes {
 		},
 		"CreateProjectDnsRecord": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{ projectId }/record",
+			"/api/v1/project/{projectId}/record",
 			c.CreateProjectDnsRecord,
 		},
 		"CreateProjectZoneInstance": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/instance",
+			"/api/v1/project/{projectId}/zone/{zoneId}/instance",
 			c.CreateProjectZoneInstance,
 		},
 		"CreateProjectZoneKCE": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/kce",
+			"/api/v1/project/{projectId}/zone/{zoneId}/kce",
 			c.CreateProjectZoneKCE,
 		},
 		"CreateProjectZoneKFS": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/kfs",
+			"/api/v1/project/{projectId}/zone/{zoneId}/kfs",
 			c.CreateProjectZoneKFS,
 		},
 		"CreateProjectZoneKGW": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/kgw",
+			"/api/v1/project/{projectId}/zone/{zoneId}/kgw",
 			c.CreateProjectZoneKGW,
 		},
 		"CreateProjectZoneVolume": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/volume",
+			"/api/v1/project/{projectId}/zone/{zoneId}/volume",
 			c.CreateProjectZoneVolume,
 		},
 		"DeleteProject": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/project/{ projectId }",
+			"/api/v1/project/{projectId}",
 			c.DeleteProject,
 		},
 		"ListProjectDnsRecords": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{ projectId}/records",
+			"/api/v1/project/{projectId}/records",
 			c.ListProjectDnsRecords,
 		},
 		"ListProjectZoneInstances": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/instances",
+			"/api/v1/project/{projectId}/zone/{zoneId}/instances",
 			c.ListProjectZoneInstances,
 		},
 		"ListProjectZoneKCEs": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/kces",
+			"/api/v1/project/{projectId}/zone/{zoneId}/kces",
 			c.ListProjectZoneKCEs,
 		},
 		"ListProjectZoneKFSs": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/kfs",
+			"/api/v1/project/{projectId}/zone/{zoneId}/kfs",
 			c.ListProjectZoneKFSs,
 		},
 		"ListProjectZoneKGWs": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/kgws",
+			"/api/v1/project/{projectId}/zone/{zoneId}/kgws",
 			c.ListProjectZoneKGWs,
 		},
 		"ListProjectZoneVolumes": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{ projectId }/zone/{ zoneId }/volumes",
+			"/api/v1/project/{projectId}/zone/{zoneId}/volumes",
 			c.ListProjectZoneVolumes,
 		},
 		"ListProjects": Route{
@@ -128,22 +128,22 @@ func (c *ProjectAPIController) Routes() Routes {
 		},
 		"ReadProject": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{ projectId }",
+			"/api/v1/project/{projectId}",
 			c.ReadProject,
 		},
 		"ReadProjectCost": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{ projectId }/cost",
+			"/api/v1/project/{projectId}/cost",
 			c.ReadProjectCost,
 		},
 		"ReadProjectUsage": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{ projectId }/usage",
+			"/api/v1/project/{projectId}/usage",
 			c.ReadProjectUsage,
 		},
 		"UpdateProject": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/project/{ projectId }",
+			"/api/v1/project/{projectId}",
 			c.UpdateProject,
 		},
 	}

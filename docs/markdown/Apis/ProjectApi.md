@@ -5,24 +5,24 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createProject**](ProjectApi.md#createProject) | **POST** /project |  |
-| [**createProjectDnsRecord**](ProjectApi.md#createProjectDnsRecord) | **POST** /project/{ projectId }/record |  |
-| [**createProjectZoneInstance**](ProjectApi.md#createProjectZoneInstance) | **POST** /project/{ projectId }/zone/{ zoneId }/instance |  |
-| [**createProjectZoneKCE**](ProjectApi.md#createProjectZoneKCE) | **POST** /project/{ projectId }/zone/{ zoneId }/kce |  |
-| [**createProjectZoneKFS**](ProjectApi.md#createProjectZoneKFS) | **POST** /project/{ projectId }/zone/{ zoneId }/kfs |  |
-| [**createProjectZoneKGW**](ProjectApi.md#createProjectZoneKGW) | **POST** /project/{ projectId }/zone/{ zoneId }/kgw |  |
-| [**createProjectZoneVolume**](ProjectApi.md#createProjectZoneVolume) | **POST** /project/{ projectId }/zone/{ zoneId }/volume |  |
-| [**deleteProject**](ProjectApi.md#deleteProject) | **DELETE** /project/{ projectId } |  |
-| [**listProjectDnsRecords**](ProjectApi.md#listProjectDnsRecords) | **GET** /project/{ projectId}/records |  |
-| [**listProjectZoneInstances**](ProjectApi.md#listProjectZoneInstances) | **GET** /project/{ projectId }/zone/{ zoneId }/instances |  |
-| [**listProjectZoneKCEs**](ProjectApi.md#listProjectZoneKCEs) | **GET** /project/{ projectId }/zone/{ zoneId }/kces |  |
-| [**listProjectZoneKFSs**](ProjectApi.md#listProjectZoneKFSs) | **GET** /project/{ projectId }/zone/{ zoneId }/kfs |  |
-| [**listProjectZoneKGWs**](ProjectApi.md#listProjectZoneKGWs) | **GET** /project/{ projectId }/zone/{ zoneId }/kgws |  |
-| [**listProjectZoneVolumes**](ProjectApi.md#listProjectZoneVolumes) | **GET** /project/{ projectId }/zone/{ zoneId }/volumes |  |
+| [**createProjectDnsRecord**](ProjectApi.md#createProjectDnsRecord) | **POST** /project/{projectId}/record |  |
+| [**createProjectZoneInstance**](ProjectApi.md#createProjectZoneInstance) | **POST** /project/{projectId}/zone/{zoneId}/instance |  |
+| [**createProjectZoneKCE**](ProjectApi.md#createProjectZoneKCE) | **POST** /project/{projectId}/zone/{zoneId}/kce |  |
+| [**createProjectZoneKFS**](ProjectApi.md#createProjectZoneKFS) | **POST** /project/{projectId}/zone/{zoneId}/kfs |  |
+| [**createProjectZoneKGW**](ProjectApi.md#createProjectZoneKGW) | **POST** /project/{projectId}/zone/{zoneId}/kgw |  |
+| [**createProjectZoneVolume**](ProjectApi.md#createProjectZoneVolume) | **POST** /project/{projectId}/zone/{zoneId}/volume |  |
+| [**deleteProject**](ProjectApi.md#deleteProject) | **DELETE** /project/{projectId} |  |
+| [**listProjectDnsRecords**](ProjectApi.md#listProjectDnsRecords) | **GET** /project/{projectId}/records |  |
+| [**listProjectZoneInstances**](ProjectApi.md#listProjectZoneInstances) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
+| [**listProjectZoneKCEs**](ProjectApi.md#listProjectZoneKCEs) | **GET** /project/{projectId}/zone/{zoneId}/kces |  |
+| [**listProjectZoneKFSs**](ProjectApi.md#listProjectZoneKFSs) | **GET** /project/{projectId}/zone/{zoneId}/kfs |  |
+| [**listProjectZoneKGWs**](ProjectApi.md#listProjectZoneKGWs) | **GET** /project/{projectId}/zone/{zoneId}/kgws |  |
+| [**listProjectZoneVolumes**](ProjectApi.md#listProjectZoneVolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes |  |
 | [**listProjects**](ProjectApi.md#listProjects) | **GET** /project |  |
-| [**readProject**](ProjectApi.md#readProject) | **GET** /project/{ projectId } |  |
-| [**readProjectCost**](ProjectApi.md#readProjectCost) | **GET** /project/{ projectId }/cost |  |
-| [**readProjectUsage**](ProjectApi.md#readProjectUsage) | **GET** /project/{ projectId }/usage |  |
-| [**updateProject**](ProjectApi.md#updateProject) | **PUT** /project/{ projectId } |  |
+| [**readProject**](ProjectApi.md#readProject) | **GET** /project/{projectId} |  |
+| [**readProjectCost**](ProjectApi.md#readProjectCost) | **GET** /project/{projectId}/cost |  |
+| [**readProjectUsage**](ProjectApi.md#readProjectUsage) | **GET** /project/{projectId}/usage |  |
+| [**updateProject**](ProjectApi.md#updateProject) | **PUT** /project/{projectId} |  |
 
 
 <a name="createProject"></a>

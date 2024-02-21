@@ -73,7 +73,7 @@ func (a *TemplateAPIService) CreateTemplateExecute(r ApiCreateTemplateRequest) (
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/pool/{ poolId }/template"
+	localVarPath := localBasePath + "/pool/{poolId}/template"
 	localVarPath = strings.Replace(localVarPath, "{"+"poolId"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -283,7 +283,7 @@ func (a *TemplateAPIService) DeleteTemplateExecute(r ApiDeleteTemplateRequest) (
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/template/{ templateId }"
+	localVarPath := localBasePath + "/template/{templateId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"templateId"+"}", url.PathEscape(parameterValueToString(r.templateId, "templateId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -459,7 +459,7 @@ func (a *TemplateAPIService) ListStoragePoolTemplatesExecute(r ApiListStoragePoo
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/pool/{ poolId }/templates"
+	localVarPath := localBasePath + "/pool/{poolId}/templates"
 	localVarPath = strings.Replace(localVarPath, "{"+"poolId"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -770,7 +770,7 @@ func (a *TemplateAPIService) ReadTemplateExecute(r ApiReadTemplateRequest) (*Tem
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/template/{ templateId }"
+	localVarPath := localBasePath + "/template/{templateId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"templateId"+"}", url.PathEscape(parameterValueToString(r.templateId, "templateId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -934,7 +934,7 @@ func (a *TemplateAPIService) SetStoragePoolDefaultTemplateExecute(r ApiSetStorag
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/pool/{ poolId }/template/{ templateId }/default"
+	localVarPath := localBasePath + "/pool/{poolId}/template/{templateId}/default"
 	localVarPath = strings.Replace(localVarPath, "{"+"poolId"+"}", url.PathEscape(parameterValueToString(r.poolId, "poolId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"templateId"+"}", url.PathEscape(parameterValueToString(r.templateId, "templateId")), -1)
 
@@ -1107,7 +1107,7 @@ func (a *TemplateAPIService) UpdateTemplateExecute(r ApiUpdateTemplateRequest) (
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/template/{ templateId }"
+	localVarPath := localBasePath + "/template/{templateId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"templateId"+"}", url.PathEscape(parameterValueToString(r.templateId, "templateId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

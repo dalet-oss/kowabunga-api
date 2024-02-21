@@ -288,7 +288,7 @@ func (a *RegionAPIService) CreateZoneExecute(r ApiCreateZoneRequest) (*Zone, *ht
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/region/{ regionId }/zone"
+	localVarPath := localBasePath + "/region/{regionId}/zone"
 	localVarPath = strings.Replace(localVarPath, "{"+"regionId"+"}", url.PathEscape(parameterValueToString(r.regionId, "regionId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -498,7 +498,7 @@ func (a *RegionAPIService) DeleteRegionExecute(r ApiDeleteRegionRequest) (*http.
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/region/{ regionId }"
+	localVarPath := localBasePath + "/region/{regionId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"regionId"+"}", url.PathEscape(parameterValueToString(r.regionId, "regionId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -985,7 +985,7 @@ func (a *RegionAPIService) ReadRegionExecute(r ApiReadRegionRequest) (*Region, *
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/region/{ regionId }"
+	localVarPath := localBasePath + "/region/{regionId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"regionId"+"}", url.PathEscape(parameterValueToString(r.regionId, "regionId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1155,7 +1155,7 @@ func (a *RegionAPIService) UpdateRegionExecute(r ApiUpdateRegionRequest) (*Regio
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/region/{ regionId }"
+	localVarPath := localBasePath + "/region/{regionId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"regionId"+"}", url.PathEscape(parameterValueToString(r.regionId, "regionId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

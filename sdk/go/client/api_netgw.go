@@ -73,7 +73,7 @@ func (a *NetgwAPIService) CreateNetGWExecute(r ApiCreateNetGWRequest) (*NetGW, *
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }/netgw"
+	localVarPath := localBasePath + "/zone/{zoneId}/netgw"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -283,7 +283,7 @@ func (a *NetgwAPIService) DeleteNetGWExecute(r ApiDeleteNetGWRequest) (*http.Res
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/netgw/{ netgwId }"
+	localVarPath := localBasePath + "/netgw/{netgwId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"netgwId"+"}", url.PathEscape(parameterValueToString(r.netgwId, "netgwId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -607,7 +607,7 @@ func (a *NetgwAPIService) ListZoneNetGWsExecute(r ApiListZoneNetGWsRequest) ([]s
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{ zoneId }/netgws"
+	localVarPath := localBasePath + "/zone/{zoneId}/netgws"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -770,7 +770,7 @@ func (a *NetgwAPIService) ReadNetGWExecute(r ApiReadNetGWRequest) (*NetGW, *http
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/netgw/{ netgwId }"
+	localVarPath := localBasePath + "/netgw/{netgwId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"netgwId"+"}", url.PathEscape(parameterValueToString(r.netgwId, "netgwId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -940,7 +940,7 @@ func (a *NetgwAPIService) UpdateNetGWExecute(r ApiUpdateNetGWRequest) (*NetGW, *
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/netgw/{ netgwId }"
+	localVarPath := localBasePath + "/netgw/{netgwId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"netgwId"+"}", url.PathEscape(parameterValueToString(r.netgwId, "netgwId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

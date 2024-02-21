@@ -11,18 +11,18 @@ paths:
   /zone:
 {{ oas.List(resources.zone, [resources.zone.tag]) }}
 
-  /zone/{ {{ resources.zone.paramId }} }:
+  /zone/{{ '{' + resources.zone.paramId + '}' }}:
 {{ oas.RUD(resources.zone, [resources.zone.tag], [resources.zone.paramSchema]) }}
 
-  /zone/{ {{ resources.zone.paramId }} }/netgw:
+  /zone/{{ '{' + resources.zone.paramId + '}' }}/netgw:
 {{ oas.Parameters([resources.zone.paramSchema]) }}
 {{ oas.Create('Create' + resources.netgw.schema, resources.netgw.schema, resources.netgw.desc, [resources.zone.tag, resources.netgw.tag]) }}
 
-  /zone/{ {{ resources.zone.paramId }} }/netgws:
+  /zone/{{ '{' + resources.zone.paramId + '}' }}/netgws:
 {{ oas.Parameters([resources.zone.paramSchema]) }}
 {{ oas.GetAll('List' + resources.zone.schema + resources.netgw.schema + 's', resources.netgw.desc, [resources.zone.tag, resources.netgw.tag], True) }}
 
-  /zone/{ {{ resources.zone.paramId }} }/host:
+  /zone/{{ '{' + resources.zone.paramId + '}' }}/host:
 {{ oas.Parameters([resources.zone.paramSchema]) }}
 {{ oas.Create('Create' + resources.host.schema, resources.host.schema, resources.host.desc, [resources.zone.tag, resources.host.tag]) }}
 
@@ -30,31 +30,31 @@ paths:
 {{ oas.Parameters([resources.zone.paramSchema]) }}
 {{ oas.GetAll('List' + resources.zone.schema + resources.host.schema + 's', resources.host.desc, [resources.zone.tag, resources.host.tag], True) }}
 
-  /zone/{ {{ resources.zone.paramId }} }/pool:
+  /zone/{{ '{' + resources.zone.paramId + '}' }}/pool:
 {{ oas.Parameters([resources.zone.paramSchema, 'OptionalQuery' + resources.host.paramSchema]) }}
 {{ oas.Create('Create' + resources.pool.schema, resources.pool.schema, resources.pool.desc, [resources.zone.tag, resources.pool.tag]) }}
 
-  /zone/{ {{ resources.zone.paramId }} }/pool/{ {{ resources.pool.paramId }} }/default:
+  /zone/{{ '{' + resources.zone.paramId + '}' }}/pool/{{ '{' + resources.pool.paramId + '}' }}/default:
 {{ oas.Parameters([resources.zone.paramSchema, resources.pool.paramSchema]) }}
 {{ oas.Patch('Set' + resources.zone.schema + 'Default' + resources.pool.schema, resources.zone.desc, 'setting of default ' + resources.pool.desc, [resources.zone.tag, resources.pool.tag]) }}
 
-  /zone/{ {{ resources.zone.paramId }} }/pools:
+  /zone/{{ '{' + resources.zone.paramId + '}' }}/pools:
 {{ oas.Parameters([resources.zone.paramSchema]) }}
 {{ oas.GetAll('List' + resources.zone.schema + resources.pool.schema + 's', resources.pool.desc, [resources.zone.tag, resources.pool.tag], True) }}
 
-  /zone/{ {{ resources.zone.paramId }} }/nfs:
+  /zone/{{ '{' + resources.zone.paramId + '}' }}/nfs:
 {{ oas.Parameters([resources.zone.paramSchema]) }}
 {{ oas.GetAll('List' + resources.zone.schema + resources.nfs.schema + 's', resources.nfs.desc, [resources.zone.tag, resources.nfs.tag], True) }}
 {{ oas.Create('Create' + resources.nfs.schema, resources.nfs.schema, resources.nfs.desc, [resources.zone.tag, resources.nfs.tag]) }}
 
-  /zone/{ {{ resources.zone.paramId }} }/nfs/{ {{ resources.nfs.paramId }} }/default:
+  /zone/{{ '{' + resources.zone.paramId + '}' }}/nfs/{{ '{' + resources.nfs.paramId + '}' }}/default:
 {{ oas.Parameters([resources.zone.paramSchema, resources.nfs.paramSchema]) }}
 {{ oas.Patch('Set' + resources.zone.schema + 'Default' + resources.nfs.schema, resources.zone.desc, 'setting of default ' + resources.nfs.desc, [resources.zone.tag, resources.nfs.tag]) }}
 
-  /zone/{ {{ resources.zone.paramId }} }/vnet:
+  /zone/{{ '{' + resources.zone.paramId + '}' }}/vnet:
 {{ oas.Parameters([resources.zone.paramSchema]) }}
 {{ oas.Create('Create' + resources.vnet.schema, resources.vnet.schema, resources.vnet.desc, [resources.zone.tag, resources.vnet.tag]) }}
 
-  /zone/{ {{ resources.zone.paramId }} }/vnets:
+  /zone/{{ '{' + resources.zone.paramId + '}' }}/vnets:
 {{ oas.Parameters([resources.zone.paramSchema]) }}
 {{ oas.GetAll('List' + resources.zone.schema + resources.vnet.schema + 's', resources.vnet.desc, [resources.zone.tag, resources.vnet.tag], True) }}

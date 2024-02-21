@@ -19,5 +19,5 @@ paths:
   /kgw:
 {{ oas.List(resources.kgw, [resources.kgw.tag]) }}
 
-  /kgw/{{ resources.kgw.paramId }} }:
+  /kgw/{{ resources.kgw.paramId + '}' }}:
 {{ oas.RUD(resources.kgw, [resources.kgw.tag], [resources.kgw.paramSchema]) }}

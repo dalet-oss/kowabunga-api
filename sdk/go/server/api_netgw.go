@@ -53,12 +53,12 @@ func (c *NetgwAPIController) Routes() Routes {
 	return Routes{
 		"CreateNetGW": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/zone/{ zoneId }/netgw",
+			"/api/v1/zone/{zoneId}/netgw",
 			c.CreateNetGW,
 		},
 		"DeleteNetGW": Route{
 			strings.ToUpper("Delete"),
-			"/api/v1/netgw/{ netgwId }",
+			"/api/v1/netgw/{netgwId}",
 			c.DeleteNetGW,
 		},
 		"ListNetGWs": Route{
@@ -68,17 +68,17 @@ func (c *NetgwAPIController) Routes() Routes {
 		},
 		"ListZoneNetGWs": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/zone/{ zoneId }/netgws",
+			"/api/v1/zone/{zoneId}/netgws",
 			c.ListZoneNetGWs,
 		},
 		"ReadNetGW": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/netgw/{ netgwId }",
+			"/api/v1/netgw/{netgwId}",
 			c.ReadNetGW,
 		},
 		"UpdateNetGW": Route{
 			strings.ToUpper("Put"),
-			"/api/v1/netgw/{ netgwId }",
+			"/api/v1/netgw/{netgwId}",
 			c.UpdateNetGW,
 		},
 	}
