@@ -32,6 +32,7 @@ go-sdk-client: get-openapi-generator ; $(info $(M) [OpenAPIv3] generate Golang S
 	$Q $(OPENAPI_GENERATOR) generate \
 	  -g $(SDK_GO_CLIENT_GENERATOR) \
 	  --package-name $(SDK_GO_CLIENT_NAME) \
+	  --openapi-normalizer KEEP_ONLY_FIRST_TAG_IN_OPERATION=true \
 	  -p withGoMod=false \
 	  -i $(OPENAPI_DEFINITION) \
 	  -o $(SDK_GO_CLIENT_DIR) \

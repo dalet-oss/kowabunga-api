@@ -27,6 +27,7 @@ typescript-sdk-client-angular: get-openapi-generator ; $(info $(M) [OpenAPIv3] g
 	$Q $(OPENAPI_GENERATOR) generate \
 	  -g typescript-angular \
 	  --package-name $(SDK_ANGULAR_CLIENT_NAME) \
+	  --openapi-normalizer KEEP_ONLY_FIRST_TAG_IN_OPERATION=true \
 	  -i $(OPENAPI_DEFINITION) \
 	  -o $(SDK_ANGULAR_DIR) \
 	  --additional-properties=ngVersion=$(SDK_ANGULAR_VERSION) \
