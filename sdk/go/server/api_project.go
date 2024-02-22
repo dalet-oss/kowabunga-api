@@ -346,9 +346,16 @@ func (c *ProjectAPIController) CreateProjectZoneKCE(w http.ResponseWriter, r *ht
 		templateIdParam = param
 	} else {
 	}
-	var publicParam string
+	var publicParam bool
 	if query.Has("public") {
-		param := query.Get("public")
+		param, err := parseBoolParameter(
+			query.Get("public"),
+			WithParse[bool](parseBool),
+		)
+		if err != nil {
+			c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+			return
+		}
 
 		publicParam = param
 	} else {

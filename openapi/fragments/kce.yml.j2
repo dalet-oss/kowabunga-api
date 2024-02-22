@@ -11,7 +11,7 @@ components:
 
   parameters:
 {{ oas.PathParamID(resources.kce) }}
-{{ oas.StringQueryParam(resources.kce.paramPublicSchema, resources.kce.paramPublicId, 'Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false)') }}
+{{ oas.BoolQueryParam(resources.kce.paramPublicSchema, resources.kce.paramPublicId, 'Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false)') }}
 
 paths:
   /kce:

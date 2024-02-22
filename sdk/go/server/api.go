@@ -370,7 +370,7 @@ type ProjectAPIServicer interface {
 	CreateProject(context.Context, Project, int32, bool) (ImplResponse, error)
 	CreateProjectDnsRecord(context.Context, string, DnsRecord) (ImplResponse, error)
 	CreateProjectZoneInstance(context.Context, string, string, Instance, bool) (ImplResponse, error)
-	CreateProjectZoneKCE(context.Context, string, string, Kce, string, string, string, bool) (ImplResponse, error)
+	CreateProjectZoneKCE(context.Context, string, string, Kce, string, string, bool, bool) (ImplResponse, error)
 	CreateProjectZoneKFS(context.Context, string, string, Kfs, string, bool) (ImplResponse, error)
 	CreateProjectZoneKGW(context.Context, string, string, Kgw) (ImplResponse, error)
 	CreateProjectZoneVolume(context.Context, string, string, Volume, string, string) (ImplResponse, error)

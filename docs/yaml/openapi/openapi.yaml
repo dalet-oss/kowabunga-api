@@ -3359,7 +3359,7 @@ components:
       name: public
       required: false
       schema:
-        type: string
+        type: boolean
       style: form
     KfsID:
       description: The ID of the KFS (Kowabunga File System).

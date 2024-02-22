@@ -32,7 +32,7 @@ type ApiCreateProjectZoneKCERequest struct {
 	kCE *KCE
 	poolId *string
 	templateId *string
-	public *string
+	public *bool
 	notify *bool
 }
 
@@ -55,7 +55,7 @@ func (r ApiCreateProjectZoneKCERequest) TemplateId(templateId string) ApiCreateP
 }
 
 // Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).
-func (r ApiCreateProjectZoneKCERequest) Public(public string) ApiCreateProjectZoneKCERequest {
+func (r ApiCreateProjectZoneKCERequest) Public(public bool) ApiCreateProjectZoneKCERequest {
 	r.public = &public
 	return r
 }
