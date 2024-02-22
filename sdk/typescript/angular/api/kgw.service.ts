@@ -264,7 +264,7 @@ export class KgwService {
             }
         }
 
-        let localVarPath = `/kgw/kgwId`;
+        let localVarPath = `/kgw/${this.configuration.encodeParam({name: "kgwId", value: kgwId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -495,7 +495,7 @@ export class KgwService {
             }
         }
 
-        let localVarPath = `/kgw/kgwId`;
+        let localVarPath = `/kgw/${this.configuration.encodeParam({name: "kgwId", value: kgwId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<KGW>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -585,7 +585,7 @@ export class KgwService {
             }
         }
 
-        let localVarPath = `/kgw/kgwId`;
+        let localVarPath = `/kgw/${this.configuration.encodeParam({name: "kgwId", value: kgwId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
         return this.httpClient.request<KGW>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

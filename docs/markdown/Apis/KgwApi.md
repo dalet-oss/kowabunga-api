@@ -5,11 +5,11 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createProjectZoneKGW**](KgwApi.md#createProjectZoneKGW) | **POST** /project/{projectId}/zone/{zoneId}/kgw |  |
-| [**deleteKGW**](KgwApi.md#deleteKGW) | **DELETE** /kgw/kgwId} |  |
+| [**deleteKGW**](KgwApi.md#deleteKGW) | **DELETE** /kgw/{kgwId} |  |
 | [**listKGWs**](KgwApi.md#listKGWs) | **GET** /kgw |  |
 | [**listProjectZoneKGWs**](KgwApi.md#listProjectZoneKGWs) | **GET** /project/{projectId}/zone/{zoneId}/kgws |  |
-| [**readKGW**](KgwApi.md#readKGW) | **GET** /kgw/kgwId} |  |
-| [**updateKGW**](KgwApi.md#updateKGW) | **PUT** /kgw/kgwId} |  |
+| [**readKGW**](KgwApi.md#readKGW) | **GET** /kgw/{kgwId} |  |
+| [**updateKGW**](KgwApi.md#updateKGW) | **PUT** /kgw/{kgwId} |  |
 
 
 <a name="createProjectZoneKGW"></a>

@@ -1021,7 +1021,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
       tags:
       - kgw
-  /kgw/kgwId}:
+  /kgw/{kgwId}:
     delete:
       description: Deletes an existing KGW (Kowabunga Network Gateway).
       operationId: DeleteKGW

@@ -59,11 +59,11 @@ All URIs are relative to */api/v1*
 *KfsApi* | [**readKFS**](Apis/KfsApi.md#readkfs) | **GET** /kfs/{kfsId} | Returns a KFS (Kowabunga File System). |
 *KfsApi* | [**updateKFS**](Apis/KfsApi.md#updatekfs) | **PUT** /kfs/{kfsId} | Updates a KFS (Kowabunga File System) configuration. |
 | *KgwApi* | [**createProjectZoneKGW**](Apis/KgwApi.md#createprojectzonekgw) | **POST** /project/{projectId}/zone/{zoneId}/kgw | Creates a new KGW (Kowabunga Network Gateway). |
-*KgwApi* | [**deleteKGW**](Apis/KgwApi.md#deletekgw) | **DELETE** /kgw/kgwId} | Deletes an existing KGW (Kowabunga Network Gateway). |
+*KgwApi* | [**deleteKGW**](Apis/KgwApi.md#deletekgw) | **DELETE** /kgw/{kgwId} | Deletes an existing KGW (Kowabunga Network Gateway). |
 *KgwApi* | [**listKGWs**](Apis/KgwApi.md#listkgws) | **GET** /kgw | Returns the IDs of KGW (Kowabunga Network Gateway) objects. |
 *KgwApi* | [**listProjectZoneKGWs**](Apis/KgwApi.md#listprojectzonekgws) | **GET** /project/{projectId}/zone/{zoneId}/kgws | Returns the IDs of KGW (Kowabunga Network Gateway) objects. |
-*KgwApi* | [**readKGW**](Apis/KgwApi.md#readkgw) | **GET** /kgw/kgwId} | Returns a KGW (Kowabunga Network Gateway). |
-*KgwApi* | [**updateKGW**](Apis/KgwApi.md#updatekgw) | **PUT** /kgw/kgwId} | Updates a KGW (Kowabunga Network Gateway) configuration. |
+*KgwApi* | [**readKGW**](Apis/KgwApi.md#readkgw) | **GET** /kgw/{kgwId} | Returns a KGW (Kowabunga Network Gateway). |
+*KgwApi* | [**updateKGW**](Apis/KgwApi.md#updatekgw) | **PUT** /kgw/{kgwId} | Updates a KGW (Kowabunga Network Gateway) configuration. |
 | *NetgwApi* | [**createNetGW**](Apis/NetgwApi.md#createnetgw) | **POST** /zone/{zoneId}/netgw | Creates a new Iris network gateway. |
 *NetgwApi* | [**deleteNetGW**](Apis/NetgwApi.md#deletenetgw) | **DELETE** /netgw/{netgwId} | Deletes an existing Iris network gateway. |
 *NetgwApi* | [**listNetGWs**](Apis/NetgwApi.md#listnetgws) | **GET** /netgw | Returns the IDs of Iris network gateway objects. |
