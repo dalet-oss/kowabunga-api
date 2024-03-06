@@ -26,6 +26,17 @@ type AdapterAPIRouter interface {
 	ReadAdapter(http.ResponseWriter, *http.Request)
 	UpdateAdapter(http.ResponseWriter, *http.Request)
 }
+// AgentAPIRouter defines the required methods for binding the api requests to a responses for the AgentAPI
+// The AgentAPIRouter implementation should parse necessary information from the http request,
+// pass the data to a AgentAPIServicer to perform the required actions, then write the service results to the http response.
+type AgentAPIRouter interface { 
+	CreateAgent(http.ResponseWriter, *http.Request)
+	DeleteAgent(http.ResponseWriter, *http.Request)
+	ListAgents(http.ResponseWriter, *http.Request)
+	ReadAgent(http.ResponseWriter, *http.Request)
+	SetApiToken(http.ResponseWriter, *http.Request)
+	UpdateAgent(http.ResponseWriter, *http.Request)
+}
 // HostAPIRouter defines the required methods for binding the api requests to a responses for the HostAPI
 // The HostAPIRouter implementation should parse necessary information from the http request,
 // pass the data to a HostAPIServicer to perform the required actions, then write the service results to the http response.
@@ -186,6 +197,15 @@ type TemplateAPIRouter interface {
 	ReadTemplate(http.ResponseWriter, *http.Request)
 	UpdateTemplate(http.ResponseWriter, *http.Request)
 }
+// TokenAPIRouter defines the required methods for binding the api requests to a responses for the TokenAPI
+// The TokenAPIRouter implementation should parse necessary information from the http request,
+// pass the data to a TokenAPIServicer to perform the required actions, then write the service results to the http response.
+type TokenAPIRouter interface { 
+	DeleteApiToken(http.ResponseWriter, *http.Request)
+	ListApiTokens(http.ResponseWriter, *http.Request)
+	ReadApiToken(http.ResponseWriter, *http.Request)
+	UpdateApiToken(http.ResponseWriter, *http.Request)
+}
 // VnetAPIRouter defines the required methods for binding the api requests to a responses for the VnetAPI
 // The VnetAPIRouter implementation should parse necessary information from the http request,
 // pass the data to a VnetAPIServicer to perform the required actions, then write the service results to the http response.
@@ -239,6 +259,20 @@ type AdapterAPIServicer interface {
 	ListAdapters(context.Context) (ImplResponse, error)
 	ReadAdapter(context.Context, string) (ImplResponse, error)
 	UpdateAdapter(context.Context, string, Adapter) (ImplResponse, error)
+}
+
+
+// AgentAPIServicer defines the api actions for the AgentAPI service
+// This interface intended to stay up to date with the openapi yaml used to generate it,
+// while the service implementation can be ignored with the .openapi-generator-ignore file
+// and updated with the logic required for the API.
+type AgentAPIServicer interface { 
+	CreateAgent(context.Context, Agent) (ImplResponse, error)
+	DeleteAgent(context.Context, string) (ImplResponse, error)
+	ListAgents(context.Context) (ImplResponse, error)
+	ReadAgent(context.Context, string) (ImplResponse, error)
+	SetApiToken(context.Context, string, bool, string) (ImplResponse, error)
+	UpdateAgent(context.Context, string, Agent) (ImplResponse, error)
 }
 
 
@@ -438,6 +472,18 @@ type TemplateAPIServicer interface {
 	ListTemplates(context.Context) (ImplResponse, error)
 	ReadTemplate(context.Context, string) (ImplResponse, error)
 	UpdateTemplate(context.Context, string, Template) (ImplResponse, error)
+}
+
+
+// TokenAPIServicer defines the api actions for the TokenAPI service
+// This interface intended to stay up to date with the openapi yaml used to generate it,
+// while the service implementation can be ignored with the .openapi-generator-ignore file
+// and updated with the logic required for the API.
+type TokenAPIServicer interface { 
+	DeleteApiToken(context.Context, string) (ImplResponse, error)
+	ListApiTokens(context.Context) (ImplResponse, error)
+	ReadApiToken(context.Context, string) (ImplResponse, error)
+	UpdateApiToken(context.Context, string, ApiToken) (ImplResponse, error)
 }
 
 

@@ -1,4 +1,5 @@
 export * from './adapter';
+export * from './agent';
 export * from './apiErrorBadRequest';
 export * from './apiErrorConflict';
 export * from './apiErrorForbidden';
@@ -6,6 +7,7 @@ export * from './apiErrorInsufficientStorage';
 export * from './apiErrorNotFound';
 export * from './apiErrorUnauthorized';
 export * from './apiErrorUnprocessableEntity';
+export * from './apiToken';
 export * from './cost';
 export * from './dnsRecord';
 export * from './host';

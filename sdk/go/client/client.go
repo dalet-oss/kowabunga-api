@@ -52,6 +52,8 @@ type APIClient struct {
 
 	AdapterAPI *AdapterAPIService
 
+	AgentAPI *AgentAPIService
+
 	HostAPI *HostAPIService
 
 	InstanceAPI *InstanceAPIService
@@ -78,6 +80,8 @@ type APIClient struct {
 
 	TemplateAPI *TemplateAPIService
 
+	TokenAPI *TokenAPIService
+
 	VnetAPI *VnetAPIService
 
 	VolumeAPI *VolumeAPIService
@@ -102,6 +106,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.AdapterAPI = (*AdapterAPIService)(&c.common)
+	c.AgentAPI = (*AgentAPIService)(&c.common)
 	c.HostAPI = (*HostAPIService)(&c.common)
 	c.InstanceAPI = (*InstanceAPIService)(&c.common)
 	c.KceAPI = (*KceAPIService)(&c.common)
@@ -115,6 +120,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.RegionAPI = (*RegionAPIService)(&c.common)
 	c.SubnetAPI = (*SubnetAPIService)(&c.common)
 	c.TemplateAPI = (*TemplateAPIService)(&c.common)
+	c.TokenAPI = (*TokenAPIService)(&c.common)
 	c.VnetAPI = (*VnetAPIService)(&c.common)
 	c.VolumeAPI = (*VolumeAPIService)(&c.common)
 	c.ZoneAPI = (*ZoneAPIService)(&c.common)

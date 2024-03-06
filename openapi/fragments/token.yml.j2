@@ -1,0 +1,20 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
+components:
+  schemas:
+{{ oas.SchemaBaseResource(resources.token, ['name', 'expire']) }}
+{{ oas.BoolProperty('expire', 'Does the API token expires at some stage ?', default=False) }}
+{{ oas.DateProperty('expiration_date', 'Expiration date of the token (YYYY-MM-DD format)') }}
+{{ oas.StringProperty('api_key', 'The generated API key (read-only)') }}
+
+  parameters:
+{{ oas.PathParamID(resources.token) }}
+{{ oas.BoolQueryParam('Expire', 'expire', 'Whether or not the token should expire') }}
+{{ oas.DateQueryParam('ExpirationDate', 'expiration_date', "Token's expiration date (YYYY-MM-DD format)") }}
+
+paths:
+  /token:
+{{ oas.List(resources.token, [resources.token.tag]) }}
+
+  /token/{{ '{' + resources.token.paramId + '}' }}:
+{{ oas.RUD(resources.token, [resources.token.tag], [resources.token.paramSchema]) }}

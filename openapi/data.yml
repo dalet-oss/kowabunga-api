@@ -5,6 +5,12 @@ resources:
     schema: Adapter
     paramId: adapterId
     paramSchema: AdapterID
+  agent:
+    tag: agent
+    desc: Kowabunga remote agent
+    schema: Agent
+    paramId: agentId
+    paramSchema: AgentID
   cost:
     desc: resource cost
     schema: Cost
@@ -117,6 +123,13 @@ resources:
     paramAssignIpSchema: AssignIP
     paramSubnetSizeId: subnetSize
     paramSubnetSizeSchema: SubnetSize
+  token:
+    tag: token
+    desc: server-to-server authentication security token
+    extended_desc: Kowabunga authentication security token consists of an API key granting access to resources
+    schema: ApiToken
+    paramId: tokenId
+    paramSchema: TokenID
   template:
     tag: template
     desc: image template

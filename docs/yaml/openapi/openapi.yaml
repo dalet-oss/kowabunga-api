@@ -19,6 +19,8 @@ security:
 tags:
 - description: Everything about network adapter
   name: adapter
+- description: Everything about Kowabunga remote agent
+  name: agent
 - description: Everything about DNS record
   name: record
 - description: Everything about computing host
@@ -43,6 +45,8 @@ tags:
   name: pool
 - description: Everything about network subnet
   name: subnet
+- description: Everything about server-to-server authentication security token
+  name: token
 - description: Everything about image template
   name: template
 - description: Everything about virtual network
@@ -145,6 +149,163 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - adapter
+  /agent:
+    get:
+      description: Returns the IDs of Kowabunga remote agent objects.
+      operationId: ListAgents
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of Kowabunga remote agent IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - agent
+    post:
+      description: Creates a new Kowabunga remote agent.
+      operationId: CreateAgent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Agent'
+        description: Agent payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+          description: Returns the newly created Kowabunga remote agent object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - agent
+  /agent/{agentId}:
+    delete:
+      description: Deletes an existing Kowabunga remote agent.
+      operationId: DeleteAgent
+      parameters:
+      - $ref: '#/components/parameters/AgentID'
+      responses:
+        "200":
+          description: The Kowabunga remote agent has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - agent
+    get:
+      description: Returns a Kowabunga remote agent.
+      operationId: ReadAgent
+      parameters:
+      - $ref: '#/components/parameters/AgentID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+          description: Returns the Kowabunga remote agent object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - agent
+    parameters:
+    - $ref: '#/components/parameters/AgentID'
+    put:
+      description: Updates a Kowabunga remote agent configuration.
+      operationId: UpdateAgent
+      parameters:
+      - $ref: '#/components/parameters/AgentID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Agent'
+        description: Agent payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+          description: Returns the Kowabunga remote agent object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - agent
+  /agent/{agentId}/token:
+    parameters:
+    - $ref: '#/components/parameters/AgentID'
+    - $ref: '#/components/parameters/OptionalQueryExpire'
+    - $ref: '#/components/parameters/OptionalQueryExpirationDate'
+    patch:
+      description: Performs a Kowabunga remote agent setting of API token (will replace
+        any existing one).
+      operationId: SetApiToken
+      parameters:
+      - $ref: '#/components/parameters/AgentID'
+      - $ref: '#/components/parameters/OptionalQueryExpire'
+      - $ref: '#/components/parameters/OptionalQueryExpirationDate'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiToken'
+          description: Returns the Kowabunga remote agent object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - agent
+      - token
   /record/{recordId}:
     delete:
       description: Deletes an existing DNS record.
@@ -2557,6 +2718,104 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - template
+  /token:
+    get:
+      description: Returns the IDs of server-to-server authentication security token
+        objects.
+      operationId: ListApiTokens
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of server-to-server authentication security
+            token IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - token
+  /token/{tokenId}:
+    delete:
+      description: Deletes an existing server-to-server authentication security token.
+      operationId: DeleteApiToken
+      parameters:
+      - $ref: '#/components/parameters/TokenID'
+      responses:
+        "200":
+          description: The server-to-server authentication security token has been
+            successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - token
+    get:
+      description: Returns a server-to-server authentication security token.
+      operationId: ReadApiToken
+      parameters:
+      - $ref: '#/components/parameters/TokenID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiToken'
+          description: Returns the server-to-server authentication security token
+            object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - token
+    parameters:
+    - $ref: '#/components/parameters/TokenID'
+    put:
+      description: Updates a server-to-server authentication security token configuration.
+      operationId: UpdateApiToken
+      parameters:
+      - $ref: '#/components/parameters/TokenID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiToken'
+        description: ApiToken payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiToken'
+          description: Returns the server-to-server authentication security token
+            object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - token
   /vnet:
     get:
       description: Returns the IDs of virtual network objects.
@@ -3296,6 +3555,15 @@ components:
       schema:
         type: string
       style: simple
+    AgentID:
+      description: The ID of the Kowabunga remote agent.
+      explode: false
+      in: path
+      name: agentId
+      required: true
+      schema:
+        type: string
+      style: simple
     RecordID:
       description: The ID of the DNS record.
       explode: false
@@ -3490,6 +3758,34 @@ components:
       schema:
         type: string
       style: form
+    TokenID:
+      description: The ID of the server-to-server authentication security token.
+      explode: false
+      in: path
+      name: tokenId
+      required: true
+      schema:
+        type: string
+      style: simple
+    OptionalQueryExpire:
+      description: Whether or not the token should expire.
+      explode: true
+      in: query
+      name: expire
+      required: false
+      schema:
+        type: boolean
+      style: form
+    OptionalQueryExpirationDate:
+      description: Token's expiration date (YYYY-MM-DD format).
+      explode: true
+      in: query
+      name: expiration_date
+      required: false
+      schema:
+        format: date
+        type: string
+      style: form
     VnetID:
       description: The ID of the virtual network.
       explode: false
@@ -3601,6 +3897,33 @@ components:
           type: boolean
       required:
       - name
+    Agent:
+      description: A Kowabunga remote agent.
+      example:
+        name: name
+        description: description
+        id: id
+        type: KCA
+      properties:
+        id:
+          description: The Kowabunga remote agent ID (auto-generated).
+          type: string
+        name:
+          description: The Kowabunga remote agent name.
+          type: string
+        description:
+          description: The Kowabunga remote agent description.
+          type: string
+        type:
+          description: The Kowabunga agent type.
+          enum:
+          - KCA
+          - KSA
+          - KNA
+          type: string
+      required:
+      - name
+      - type
     Cost:
       description: A resource cost.
       example:
@@ -4545,6 +4868,40 @@ components:
           - windows
           type: string
       required:
+      - name
+    ApiToken:
+      description: A Kowabunga authentication security token consists of an API key
+        granting access to resources.
+      example:
+        api_key: api_key
+        expire: false
+        name: name
+        description: description
+        id: id
+        expiration_date: 2000-01-23
+      properties:
+        id:
+          description: The server-to-server authentication security token ID (auto-generated).
+          type: string
+        name:
+          description: The server-to-server authentication security token name.
+          type: string
+        description:
+          description: The server-to-server authentication security token description.
+          type: string
+        expire:
+          default: false
+          description: Does the API token expires at some stage ?.
+          type: boolean
+        expiration_date:
+          description: Expiration date of the token (YYYY-MM-DD format).
+          format: date
+          type: string
+        api_key:
+          description: The generated API key (read-only).
+          type: string
+      required:
+      - expire
       - name
     VNet:
       description: A virtual network.

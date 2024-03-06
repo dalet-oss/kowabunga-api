@@ -13,6 +13,12 @@ All URIs are relative to */api/v1*
 *AdapterApi* | [**listSubnetAdapters**](Apis/AdapterApi.md#listsubnetadapters) | **GET** /subnet/{subnetId}/adapters | Returns the IDs of network adapter objects. |
 *AdapterApi* | [**readAdapter**](Apis/AdapterApi.md#readadapter) | **GET** /adapter/{adapterId} | Returns a network adapter. |
 *AdapterApi* | [**updateAdapter**](Apis/AdapterApi.md#updateadapter) | **PUT** /adapter/{adapterId} | Updates a network adapter configuration. |
+| *AgentApi* | [**createAgent**](Apis/AgentApi.md#createagent) | **POST** /agent | Creates a new Kowabunga remote agent. |
+*AgentApi* | [**deleteAgent**](Apis/AgentApi.md#deleteagent) | **DELETE** /agent/{agentId} | Deletes an existing Kowabunga remote agent. |
+*AgentApi* | [**listAgents**](Apis/AgentApi.md#listagents) | **GET** /agent | Returns the IDs of Kowabunga remote agent objects. |
+*AgentApi* | [**readAgent**](Apis/AgentApi.md#readagent) | **GET** /agent/{agentId} | Returns a Kowabunga remote agent. |
+*AgentApi* | [**setApiToken**](Apis/AgentApi.md#setapitoken) | **PATCH** /agent/{agentId}/token | Performs a Kowabunga remote agent setting of API token (will replace any existing one). |
+*AgentApi* | [**updateAgent**](Apis/AgentApi.md#updateagent) | **PUT** /agent/{agentId} | Updates a Kowabunga remote agent configuration. |
 | *HostApi* | [**createHost**](Apis/HostApi.md#createhost) | **POST** /zone/{zoneId}/host | Creates a new computing host. |
 *HostApi* | [**deleteHost**](Apis/HostApi.md#deletehost) | **DELETE** /host/{hostId} | Deletes an existing computing host. |
 *HostApi* | [**listHostInstances**](Apis/HostApi.md#listhostinstances) | **GET** /host/{hostId}/instances | Returns the IDs of virtual machine instance objects. |
@@ -136,6 +142,11 @@ All URIs are relative to */api/v1*
 *TemplateApi* | [**readTemplate**](Apis/TemplateApi.md#readtemplate) | **GET** /template/{templateId} | Returns a image template. |
 *TemplateApi* | [**setStoragePoolDefaultTemplate**](Apis/TemplateApi.md#setstoragepooldefaulttemplate) | **PATCH** /pool/{poolId}/template/{templateId}/default | Performs a storage pool setting of default template. |
 *TemplateApi* | [**updateTemplate**](Apis/TemplateApi.md#updatetemplate) | **PUT** /template/{templateId} | Updates a image template configuration. |
+| *TokenApi* | [**deleteApiToken**](Apis/TokenApi.md#deleteapitoken) | **DELETE** /token/{tokenId} | Deletes an existing server-to-server authentication security token. |
+*TokenApi* | [**listApiTokens**](Apis/TokenApi.md#listapitokens) | **GET** /token | Returns the IDs of server-to-server authentication security token objects. |
+*TokenApi* | [**readApiToken**](Apis/TokenApi.md#readapitoken) | **GET** /token/{tokenId} | Returns a server-to-server authentication security token. |
+*TokenApi* | [**setApiToken**](Apis/TokenApi.md#setapitoken) | **PATCH** /agent/{agentId}/token | Performs a Kowabunga remote agent setting of API token (will replace any existing one). |
+*TokenApi* | [**updateApiToken**](Apis/TokenApi.md#updateapitoken) | **PUT** /token/{tokenId} | Updates a server-to-server authentication security token configuration. |
 | *VnetApi* | [**createSubnet**](Apis/VnetApi.md#createsubnet) | **POST** /vnet/{vnetId}/subnet | Creates a new network subnet. |
 *VnetApi* | [**createVNet**](Apis/VnetApi.md#createvnet) | **POST** /zone/{zoneId}/vnet | Creates a new virtual network. |
 *VnetApi* | [**deleteVNet**](Apis/VnetApi.md#deletevnet) | **DELETE** /vnet/{vnetId} | Deletes an existing virtual network. |
@@ -186,6 +197,7 @@ All URIs are relative to */api/v1*
 ## Documentation for Models
 
  - [Adapter](./Models/Adapter.md)
+ - [Agent](./Models/Agent.md)
  - [ApiErrorBadRequest](./Models/ApiErrorBadRequest.md)
  - [ApiErrorConflict](./Models/ApiErrorConflict.md)
  - [ApiErrorForbidden](./Models/ApiErrorForbidden.md)
@@ -193,6 +205,7 @@ All URIs are relative to */api/v1*
  - [ApiErrorNotFound](./Models/ApiErrorNotFound.md)
  - [ApiErrorUnauthorized](./Models/ApiErrorUnauthorized.md)
  - [ApiErrorUnprocessableEntity](./Models/ApiErrorUnprocessableEntity.md)
+ - [ApiToken](./Models/ApiToken.md)
  - [Cost](./Models/Cost.md)
  - [DnsRecord](./Models/DnsRecord.md)
  - [Host](./Models/Host.md)

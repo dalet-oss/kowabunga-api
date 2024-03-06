@@ -78,6 +78,14 @@
 {{ Property(name, 'string', desc, values, default) }}
 {% endmacro %}
 
+{% macro DateProperty(name, desc, values=[], default=None) %}
+{{ Property(name, 'string', desc, values, default, format='date') }}
+{% endmacro %}
+
+{% macro DateTimeProperty(name, desc, values=[], default=None) %}
+{{ Property(name, 'string', desc, values, default, format='date-time') }}
+{% endmacro %}
+
 {% macro BoolProperty(name, desc, values=[], default=None) %}
 {{ Property(name, 'boolean', desc, values, default) }}
 {% endmacro %}
@@ -163,13 +171,16 @@
 {{ StringPathParam(obj.paramSchema, obj.paramId, 'The ID of the ' + obj.desc) }}
 {% endmacro %}
 
-{% macro QueryParam(key, name, desc, t) %}
+{% macro QueryParam(key, name, desc, t, format=None) %}
     OptionalQuery{{ key }}:
       name: {{ name }}
       in: query
       description: {{ desc }}.
       schema:
         type: {{ t }}
+{% if format != None %}
+        format: {{ format }}
+{% endif %}
 {% endmacro %}
 
 {% macro BoolQueryParam(key, name, desc) %}
@@ -178,6 +189,14 @@
 
 {% macro StringQueryParam(key, name, desc) %}
 {{ QueryParam(key, name, desc, 'string') }}
+{% endmacro %}
+
+{% macro DateQueryParam(key, name, desc) %}
+{{ QueryParam(key, name, desc, 'string', format='date') }}
+{% endmacro %}
+
+{% macro DateTimeQueryParam(key, name, desc) %}
+{{ QueryParam(key, name, desc, 'string', format='date-time') }}
 {% endmacro %}
 
 {% macro IntQueryParam(key, name, desc) %}
@@ -346,13 +365,17 @@
 {{ ErrorsUpdate() }}
 {% endmacro %}
 
-{% macro Patch(opId, desc, action, tags) %}
+{% macro Patch(opId, desc, action, tags, schema=None) %}
     patch:
 {{ Tags(tags) }}
       description: Performs a {{ desc }} {{ action }}.
       operationId: {{ opId }}
       responses:
+{% if schema != None %}
+{{ GetOneResource(schema, desc) }}
+{% else %}
 {{ ResponseOk('The ' + desc + ' ' + action + ' is successful') }}
+{% endif %}
 {{ ErrorsPatch() }}
 {% endmacro %}
 
