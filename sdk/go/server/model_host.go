@@ -48,6 +48,9 @@ type Host struct {
 
 	// The host memory resource over-commit ratio. Memory overcommitment is a concept in computing that covers the assignment of more memory to virtual computing devices (or processes) than the physical machine they are hosted, or running on, actually has.
 	OvercommitMemoryRatio int64 `json:"overcommit_memory_ratio,omitempty"`
+
+	// a list of existing remote agents managing the host.
+	Agents []string `json:"agents"`
 }
 
 // AssertHostRequired checks if the required fields are not zero-ed
@@ -56,6 +59,7 @@ func AssertHostRequired(obj Host) error {
 		"name": obj.Name,
 		"protocol": obj.Protocol,
 		"address": obj.Address,
+		"agents": obj.Agents,
 	}
 	for name, el := range elements {
 		if isZero := IsZeroValue(el); isZero {

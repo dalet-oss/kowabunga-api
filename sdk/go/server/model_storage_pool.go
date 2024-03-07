@@ -42,6 +42,9 @@ type StoragePool struct {
 
 	// Cost associated to the storage pool.
 	Cost Cost `json:"cost,omitempty"`
+
+	// a list of existing remote agents managing the storage pool.
+	Agents []string `json:"agents"`
 }
 
 // AssertStoragePoolRequired checks if the required fields are not zero-ed
@@ -49,6 +52,7 @@ func AssertStoragePoolRequired(obj StoragePool) error {
 	elements := map[string]interface{}{
 		"name": obj.Name,
 		"pool": obj.Pool,
+		"agents": obj.Agents,
 	}
 	for name, el := range elements {
 		if isZero := IsZeroValue(el); isZero {

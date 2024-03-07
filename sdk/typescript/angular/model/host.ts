@@ -61,6 +61,10 @@ export interface Host {
      * The host memory resource over-commit ratio. Memory overcommitment is a concept in computing that covers the assignment of more memory to virtual computing devices (or processes) than the physical machine they are hosted, or running on, actually has.
      */
     overcommit_memory_ratio?: number;
+    /**
+     * a list of existing remote agents managing the host.
+     */
+    agents: Array<string>;
 }
 export namespace Host {
     export type ProtocolEnum = 'tcp' | 'tls';

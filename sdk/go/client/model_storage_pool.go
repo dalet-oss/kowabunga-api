@@ -40,6 +40,8 @@ type StoragePool struct {
 	CephSecretUuid *string `json:"ceph_secret_uuid,omitempty"`
 	// Cost associated to the storage pool.
 	Cost Cost `json:"cost,omitempty"`
+	// a list of existing remote agents managing the storage pool.
+	Agents []string `json:"agents"`
 }
 
 type _StoragePool StoragePool
@@ -48,7 +50,7 @@ type _StoragePool StoragePool
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStoragePool(name string, pool string) *StoragePool {
+func NewStoragePool(name string, pool string, agents []string) *StoragePool {
 	this := StoragePool{}
 	this.Name = name
 	var type_ string = "rbd"
@@ -58,6 +60,7 @@ func NewStoragePool(name string, pool string) *StoragePool {
 	this.CephAddress = &cephAddress
 	var cephPort int64 = 3300
 	this.CephPort = &cephPort
+	this.Agents = agents
 	return &this
 }
 
@@ -347,6 +350,30 @@ func (o *StoragePool) SetCost(v Cost) {
 	o.Cost = v
 }
 
+// GetAgents returns the Agents field value
+func (o *StoragePool) GetAgents() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.Agents
+}
+
+// GetAgentsOk returns a tuple with the Agents field value
+// and a boolean to check if the value has been set.
+func (o *StoragePool) GetAgentsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Agents, true
+}
+
+// SetAgents sets field value
+func (o *StoragePool) SetAgents(v []string) {
+	o.Agents = v
+}
+
 func (o StoragePool) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -380,6 +407,7 @@ func (o StoragePool) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Cost) {
 		toSerialize["cost"] = o.Cost
 	}
+	toSerialize["agents"] = o.Agents
 	return toSerialize, nil
 }
 
@@ -390,6 +418,7 @@ func (o *StoragePool) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"name",
 		"pool",
+		"agents",
 	}
 
 	allProperties := make(map[string]interface{})

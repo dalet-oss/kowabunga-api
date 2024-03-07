@@ -2,13 +2,14 @@
 
 components:
   schemas:
-{{ oas.SchemaBaseResource(resources.pool, ['name', 'pool']) }}
+{{ oas.SchemaBaseResource(resources.pool, ['name', 'pool', 'agents']) }}
 {{ oas.StringProperty('type', 'The ' + resources.pool.desc + ' type', values=['local', 'rbd'], default='rbd') }}
 {{ oas.StringProperty('pool', 'The libvirt pool name') }}
 {{ oas.StringProperty('ceph_address', 'The local Ceph Monitor(s) address or FQDN, empty for local pool type', default='localhost') }}
 {{ oas.IntProperty('ceph_port', 'The local Ceph Monitor(s) port (default 3300), empty for local pool type', default=3300) }}
 {{ oas.StringProperty('ceph_secret_uuid', 'The libvirt secret UUID for CephX authentication, empty for local pool type') }}
 {{ oas.ObjectProperty('cost', 'Cost associated to the storage pool', resources.cost.schema) }}
+{{ oas.StringArrayProperty('agents', 'a list of existing remote agents managing the storage pool') }}
 
   parameters:
 {{ oas.PathParamID(resources.pool) }}

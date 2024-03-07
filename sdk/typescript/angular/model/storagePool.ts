@@ -52,6 +52,10 @@ export interface StoragePool {
      * Cost associated to the storage pool.
      */
     cost?: Cost;
+    /**
+     * a list of existing remote agents managing the storage pool.
+     */
+    agents: Array<string>;
 }
 export namespace StoragePool {
     export type TypeEnum = 'local' | 'rbd';

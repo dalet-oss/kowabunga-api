@@ -7,7 +7,7 @@ components:
 {{ oas.StringProperty('cert', 'The TLS client public cert') }}
 {{ oas.StringProperty('ca', 'The TLS certificate of authority') }}
 
-{{ oas.SchemaBaseResource(resources.host, ['name', 'protocol', 'address']) }}
+{{ oas.SchemaBaseResource(resources.host, ['name', 'protocol', 'address', 'agents']) }}
 {{ oas.StringProperty('protocol', 'The protocol to use to issue libvirt connection', values=['tcp', 'tls']) }}
 {{ oas.StringProperty('address', "The host libvirt's IPv4 address") }}
 {{ oas.IntProperty('port', "The host libvirt's port") }}
@@ -16,6 +16,7 @@ components:
 {{ oas.ObjectProperty('memory_cost', "Cost associated to the host's memoery resources", resources.cost.schema) }}
 {{ oas.IntProperty('overcommit_cpu_ratio', 'The host CPU resource over-commit ratio. Overcommitting CPU resources for VMs means allocating more virtual CPUs (vCPUs) to the virtual machines (VMs) than the physical cores available on the host. This can help optimize the utilization of the host CPU and increase the density of VMs per host', default=3) }}
 {{ oas.IntProperty('overcommit_memory_ratio', 'The host memory resource over-commit ratio. Memory overcommitment is a concept in computing that covers the assignment of more memory to virtual computing devices (or processes) than the physical machine they are hosted, or running on, actually has', default=2) }}
+{{ oas.StringArrayProperty('agents', 'a list of existing remote agents managing the host') }}
 
 {{ oas.Schema(resources.host_caps, ['version', 'uuid', 'cpu', 'memory']) }}
 {{ oas.StringProperty('version', 'The ' + resources.host.desc + ' libvirt version') }}

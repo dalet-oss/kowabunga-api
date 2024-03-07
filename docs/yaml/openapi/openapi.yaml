@@ -4132,6 +4132,9 @@ components:
           currency: currency
         id: id
         overcommit_cpu_ratio: 1
+        agents:
+        - agents
+        - agents
       properties:
         id:
           description: The computing host ID (auto-generated).
@@ -4178,8 +4181,14 @@ components:
             \ they are hosted, or running on, actually has."
           format: int64
           type: integer
+        agents:
+          description: a list of existing remote agents managing the host.
+          items:
+            type: string
+          type: array
       required:
       - address
+      - agents
       - name
       - protocol
     HostCaps:
@@ -4714,6 +4723,9 @@ components:
         id: id
         type: rbd
         ceph_address: localhost
+        agents:
+        - agents
+        - agents
       properties:
         id:
           description: The storage pool ID (auto-generated).
@@ -4751,7 +4763,13 @@ components:
           type: string
         cost:
           $ref: '#/components/schemas/Cost'
+        agents:
+          description: a list of existing remote agents managing the storage pool.
+          items:
+            type: string
+          type: array
       required:
+      - agents
       - name
       - pool
     Subnet:

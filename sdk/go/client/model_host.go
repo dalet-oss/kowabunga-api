@@ -44,6 +44,8 @@ type Host struct {
 	OvercommitCpuRatio *int64 `json:"overcommit_cpu_ratio,omitempty"`
 	// The host memory resource over-commit ratio. Memory overcommitment is a concept in computing that covers the assignment of more memory to virtual computing devices (or processes) than the physical machine they are hosted, or running on, actually has.
 	OvercommitMemoryRatio *int64 `json:"overcommit_memory_ratio,omitempty"`
+	// a list of existing remote agents managing the host.
+	Agents []string `json:"agents"`
 }
 
 type _Host Host
@@ -52,7 +54,7 @@ type _Host Host
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHost(name string, protocol string, address string) *Host {
+func NewHost(name string, protocol string, address string, agents []string) *Host {
 	this := Host{}
 	this.Name = name
 	this.Protocol = protocol
@@ -61,6 +63,7 @@ func NewHost(name string, protocol string, address string) *Host {
 	this.OvercommitCpuRatio = &overcommitCpuRatio
 	var overcommitMemoryRatio int64 = 2
 	this.OvercommitMemoryRatio = &overcommitMemoryRatio
+	this.Agents = agents
 	return &this
 }
 
@@ -404,6 +407,30 @@ func (o *Host) SetOvercommitMemoryRatio(v int64) {
 	o.OvercommitMemoryRatio = &v
 }
 
+// GetAgents returns the Agents field value
+func (o *Host) GetAgents() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.Agents
+}
+
+// GetAgentsOk returns a tuple with the Agents field value
+// and a boolean to check if the value has been set.
+func (o *Host) GetAgentsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Agents, true
+}
+
+// SetAgents sets field value
+func (o *Host) SetAgents(v []string) {
+	o.Agents = v
+}
+
 func (o Host) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -441,6 +468,7 @@ func (o Host) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OvercommitMemoryRatio) {
 		toSerialize["overcommit_memory_ratio"] = o.OvercommitMemoryRatio
 	}
+	toSerialize["agents"] = o.Agents
 	return toSerialize, nil
 }
 
@@ -452,6 +480,7 @@ func (o *Host) UnmarshalJSON(data []byte) (err error) {
 		"name",
 		"protocol",
 		"address",
+		"agents",
 	}
 
 	allProperties := make(map[string]interface{})
