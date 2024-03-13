@@ -25,18 +25,6 @@ type Host struct {
 	// The computing host description.
 	Description string `json:"description,omitempty"`
 
-	// The protocol to use to issue libvirt connection.
-	Protocol string `json:"protocol"`
-
-	// The host libvirt's IPv4 address.
-	Address string `json:"address"`
-
-	// The host libvirt's port.
-	Port int64 `json:"port,omitempty"`
-
-	// The host libvirt's TLS configuration.
-	Tls HostTls `json:"tls,omitempty"`
-
 	// Cost associated to the host's CPU resources.
 	CpuCost Cost `json:"cpu_cost,omitempty"`
 
@@ -57,8 +45,6 @@ type Host struct {
 func AssertHostRequired(obj Host) error {
 	elements := map[string]interface{}{
 		"name": obj.Name,
-		"protocol": obj.Protocol,
-		"address": obj.Address,
 		"agents": obj.Agents,
 	}
 	for name, el := range elements {

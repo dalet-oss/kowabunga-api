@@ -9,7 +9,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { HostTLS } from './hostTLS';
 import { Cost } from './cost';
 
 
@@ -29,22 +28,6 @@ export interface Host {
      * The computing host description.
      */
     description?: string;
-    /**
-     * The protocol to use to issue libvirt connection.
-     */
-    protocol: Host.ProtocolEnum;
-    /**
-     * The host libvirt\'s IPv4 address.
-     */
-    address: string;
-    /**
-     * The host libvirt\'s port.
-     */
-    port?: number;
-    /**
-     * The host libvirt\'s TLS configuration.
-     */
-    tls?: HostTLS;
     /**
      * Cost associated to the host\'s CPU resources.
      */
@@ -66,12 +49,4 @@ export interface Host {
      */
     agents: Array<string>;
 }
-export namespace Host {
-    export type ProtocolEnum = 'tcp' | 'tls';
-    export const ProtocolEnum = {
-        Tcp: 'tcp' as ProtocolEnum,
-        Tls: 'tls' as ProtocolEnum
-    };
-}
-
 

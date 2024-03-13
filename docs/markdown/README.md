@@ -211,7 +211,6 @@ All URIs are relative to */api/v1*
  - [Host](./Models/Host.md)
  - [HostCPU](./Models/HostCPU.md)
  - [HostCaps](./Models/HostCaps.md)
- - [HostTLS](./Models/HostTLS.md)
  - [Instance](./Models/Instance.md)
  - [InstanceRemoteAccess](./Models/InstanceRemoteAccess.md)
  - [InstanceState](./Models/InstanceState.md)

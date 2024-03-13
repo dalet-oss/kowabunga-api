@@ -32,9 +32,6 @@ resources:
   host_cpu:
     desc: computing host CPU characteristics
     schema: HostCPU
-  host_tls:
-    desc: computing host TLS connection characteristics
-    schema: HostTLS
   instance:
     tag: instance
     desc: virtual machine instance

@@ -13,7 +13,6 @@ export * from './dnsRecord';
 export * from './host';
 export * from './hostCPU';
 export * from './hostCaps';
-export * from './hostTLS';
 export * from './instance';
 export * from './instanceRemoteAccess';
 export * from './instanceState';

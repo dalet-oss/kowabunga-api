@@ -16,12 +16,6 @@ package server
 // HostCaps - A computing host capability.
 type HostCaps struct {
 
-	// The computing host libvirt version.
-	Version string `json:"version"`
-
-	// The computing host domain UUID.
-	Uuid string `json:"uuid"`
-
 	// The computing host CPU characteristics.
 	Cpu HostCpu `json:"cpu"`
 
@@ -32,8 +26,6 @@ type HostCaps struct {
 // AssertHostCapsRequired checks if the required fields are not zero-ed
 func AssertHostCapsRequired(obj HostCaps) error {
 	elements := map[string]interface{}{
-		"version": obj.Version,
-		"uuid": obj.Uuid,
 		"cpu": obj.Cpu,
 		"memory": obj.Memory,
 	}

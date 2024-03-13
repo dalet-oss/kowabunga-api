@@ -22,10 +22,6 @@ var _ MappedNullable = &HostCaps{}
 
 // HostCaps A computing host capability.
 type HostCaps struct {
-	// The computing host libvirt version.
-	Version string `json:"version"`
-	// The computing host domain UUID.
-	Uuid string `json:"uuid"`
 	// The computing host CPU characteristics.
 	Cpu HostCPU `json:"cpu"`
 	// The computing host memory size (bytes).
@@ -38,10 +34,8 @@ type _HostCaps HostCaps
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHostCaps(version string, uuid string, cpu HostCPU, memory int64) *HostCaps {
+func NewHostCaps(cpu HostCPU, memory int64) *HostCaps {
 	this := HostCaps{}
-	this.Version = version
-	this.Uuid = uuid
 	this.Cpu = cpu
 	this.Memory = memory
 	return &this
@@ -53,54 +47,6 @@ func NewHostCaps(version string, uuid string, cpu HostCPU, memory int64) *HostCa
 func NewHostCapsWithDefaults() *HostCaps {
 	this := HostCaps{}
 	return &this
-}
-
-// GetVersion returns the Version field value
-func (o *HostCaps) GetVersion() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Version
-}
-
-// GetVersionOk returns a tuple with the Version field value
-// and a boolean to check if the value has been set.
-func (o *HostCaps) GetVersionOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Version, true
-}
-
-// SetVersion sets field value
-func (o *HostCaps) SetVersion(v string) {
-	o.Version = v
-}
-
-// GetUuid returns the Uuid field value
-func (o *HostCaps) GetUuid() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Uuid
-}
-
-// GetUuidOk returns a tuple with the Uuid field value
-// and a boolean to check if the value has been set.
-func (o *HostCaps) GetUuidOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Uuid, true
-}
-
-// SetUuid sets field value
-func (o *HostCaps) SetUuid(v string) {
-	o.Uuid = v
 }
 
 // GetCpu returns the Cpu field value
@@ -161,8 +107,6 @@ func (o HostCaps) MarshalJSON() ([]byte, error) {
 
 func (o HostCaps) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["version"] = o.Version
-	toSerialize["uuid"] = o.Uuid
 	toSerialize["cpu"] = o.Cpu
 	toSerialize["memory"] = o.Memory
 	return toSerialize, nil
@@ -173,8 +117,6 @@ func (o *HostCaps) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"version",
-		"uuid",
 		"cpu",
 		"memory",
 	}

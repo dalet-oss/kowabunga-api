@@ -3927,7 +3927,7 @@ components:
     Cost:
       description: A resource cost.
       example:
-        price: 6.0274563
+        price: 0.8008282
         currency: currency
       properties:
         price:
@@ -4091,47 +4091,20 @@ components:
       items:
         type: string
       type: array
-    HostTLS:
-      description: A computing host TLS connection characteristics.
-      example:
-        cert: cert
-        key: key
-        ca: ca
-      properties:
-        key:
-          description: The TLS client private key.
-          type: string
-        cert:
-          description: The TLS client public cert.
-          type: string
-        ca:
-          description: The TLS certificate of authority.
-          type: string
-      required:
-      - ca
-      - cert
-      - key
     Host:
       description: A computing host.
       example:
-        protocol: tcp
         memory_cost:
-          price: 6.0274563
+          price: 0.8008282
           currency: currency
-        address: address
-        port: 0
         name: name
         description: description
-        overcommit_memory_ratio: 5
-        tls:
-          cert: cert
-          key: key
-          ca: ca
+        overcommit_memory_ratio: 1
         cpu_cost:
-          price: 6.0274563
+          price: 0.8008282
           currency: currency
         id: id
-        overcommit_cpu_ratio: 1
+        overcommit_cpu_ratio: 6
         agents:
         - agents
         - agents
@@ -4145,21 +4118,6 @@ components:
         description:
           description: The computing host description.
           type: string
-        protocol:
-          description: The protocol to use to issue libvirt connection.
-          enum:
-          - tcp
-          - tls
-          type: string
-        address:
-          description: The host libvirt's IPv4 address.
-          type: string
-        port:
-          description: The host libvirt's port.
-          format: int64
-          type: integer
-        tls:
-          $ref: '#/components/schemas/HostTLS'
         cpu_cost:
           $ref: '#/components/schemas/Cost'
         memory_cost:
@@ -4187,10 +4145,8 @@ components:
             type: string
           type: array
       required:
-      - address
       - agents
       - name
-      - protocol
     HostCaps:
       description: A computing host capability.
       example:
@@ -4202,15 +4158,7 @@ components:
           model: model
           arch: arch
           sockets: 0
-        version: version
-        uuid: uuid
       properties:
-        version:
-          description: The computing host libvirt version.
-          type: string
-        uuid:
-          description: The computing host domain UUID.
-          type: string
         cpu:
           $ref: '#/components/schemas/HostCPU'
         memory:
@@ -4220,8 +4168,6 @@ components:
       required:
       - cpu
       - memory
-      - uuid
-      - version
     HostCPU:
       description: A computing host CPU characteristics.
       example:
@@ -4714,7 +4660,7 @@ components:
       example:
         ceph_secret_uuid: ceph_secret_uuid
         cost:
-          price: 6.0274563
+          price: 0.8008282
           currency: currency
         name: name
         pool: pool

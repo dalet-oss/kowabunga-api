@@ -17,14 +17,6 @@ import { HostCPU } from './hostCPU';
  */
 export interface HostCaps { 
     /**
-     * The computing host libvirt version.
-     */
-    version: string;
-    /**
-     * The computing host domain UUID.
-     */
-    uuid: string;
-    /**
      * The computing host CPU characteristics.
      */
     cpu: HostCPU;

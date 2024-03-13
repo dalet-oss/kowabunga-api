@@ -28,14 +28,6 @@ type Host struct {
 	Name string `json:"name"`
 	// The computing host description.
 	Description *string `json:"description,omitempty"`
-	// The protocol to use to issue libvirt connection.
-	Protocol string `json:"protocol"`
-	// The host libvirt's IPv4 address.
-	Address string `json:"address"`
-	// The host libvirt's port.
-	Port *int64 `json:"port,omitempty"`
-	// The host libvirt's TLS configuration.
-	Tls HostTLS `json:"tls,omitempty"`
 	// Cost associated to the host's CPU resources.
 	CpuCost Cost `json:"cpu_cost,omitempty"`
 	// Cost associated to the host's memoery resources.
@@ -54,11 +46,9 @@ type _Host Host
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHost(name string, protocol string, address string, agents []string) *Host {
+func NewHost(name string, agents []string) *Host {
 	this := Host{}
 	this.Name = name
-	this.Protocol = protocol
-	this.Address = address
 	var overcommitCpuRatio int64 = 3
 	this.OvercommitCpuRatio = &overcommitCpuRatio
 	var overcommitMemoryRatio int64 = 2
@@ -165,118 +155,6 @@ func (o *Host) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *Host) SetDescription(v string) {
 	o.Description = &v
-}
-
-// GetProtocol returns the Protocol field value
-func (o *Host) GetProtocol() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Protocol
-}
-
-// GetProtocolOk returns a tuple with the Protocol field value
-// and a boolean to check if the value has been set.
-func (o *Host) GetProtocolOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Protocol, true
-}
-
-// SetProtocol sets field value
-func (o *Host) SetProtocol(v string) {
-	o.Protocol = v
-}
-
-// GetAddress returns the Address field value
-func (o *Host) GetAddress() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Address
-}
-
-// GetAddressOk returns a tuple with the Address field value
-// and a boolean to check if the value has been set.
-func (o *Host) GetAddressOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Address, true
-}
-
-// SetAddress sets field value
-func (o *Host) SetAddress(v string) {
-	o.Address = v
-}
-
-// GetPort returns the Port field value if set, zero value otherwise.
-func (o *Host) GetPort() int64 {
-	if o == nil || IsNil(o.Port) {
-		var ret int64
-		return ret
-	}
-	return *o.Port
-}
-
-// GetPortOk returns a tuple with the Port field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Host) GetPortOk() (*int64, bool) {
-	if o == nil || IsNil(o.Port) {
-		return nil, false
-	}
-	return o.Port, true
-}
-
-// HasPort returns a boolean if a field has been set.
-func (o *Host) HasPort() bool {
-	if o != nil && !IsNil(o.Port) {
-		return true
-	}
-
-	return false
-}
-
-// SetPort gets a reference to the given int64 and assigns it to the Port field.
-func (o *Host) SetPort(v int64) {
-	o.Port = &v
-}
-
-// GetTls returns the Tls field value if set, zero value otherwise.
-func (o *Host) GetTls() HostTLS {
-	if o == nil || IsNil(o.Tls) {
-		var ret HostTLS
-		return ret
-	}
-	return o.Tls
-}
-
-// GetTlsOk returns a tuple with the Tls field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Host) GetTlsOk() (HostTLS, bool) {
-	if o == nil || IsNil(o.Tls) {
-		return HostTLS{}, false
-	}
-	return o.Tls, true
-}
-
-// HasTls returns a boolean if a field has been set.
-func (o *Host) HasTls() bool {
-	if o != nil && !IsNil(o.Tls) {
-		return true
-	}
-
-	return false
-}
-
-// SetTls gets a reference to the given HostTLS and assigns it to the Tls field.
-func (o *Host) SetTls(v HostTLS) {
-	o.Tls = v
 }
 
 // GetCpuCost returns the CpuCost field value if set, zero value otherwise.
@@ -448,14 +326,6 @@ func (o Host) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	toSerialize["protocol"] = o.Protocol
-	toSerialize["address"] = o.Address
-	if !IsNil(o.Port) {
-		toSerialize["port"] = o.Port
-	}
-	if !IsNil(o.Tls) {
-		toSerialize["tls"] = o.Tls
-	}
 	if !IsNil(o.CpuCost) {
 		toSerialize["cpu_cost"] = o.CpuCost
 	}
@@ -478,8 +348,6 @@ func (o *Host) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"name",
-		"protocol",
-		"address",
 		"agents",
 	}
 
