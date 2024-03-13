@@ -3311,13 +3311,11 @@ paths:
   /zone/{zoneId}/pool:
     parameters:
     - $ref: '#/components/parameters/ZoneID'
-    - $ref: '#/components/parameters/OptionalQueryHostID'
     post:
       description: Creates a new storage pool.
       operationId: CreateStoragePool
       parameters:
       - $ref: '#/components/parameters/ZoneID'
-      - $ref: '#/components/parameters/OptionalQueryHostID'
       requestBody:
         content:
           application/json:
@@ -3591,16 +3589,6 @@ components:
       schema:
         type: string
       style: simple
-    OptionalQueryHostID:
-      description: "The ID of the computing host (useless for RBD pools, mandatory\
-        \ for local ones)."
-      explode: true
-      in: query
-      name: hostId
-      required: false
-      schema:
-        type: string
-      style: form
     InstanceID:
       description: The ID of the virtual machine instance.
       explode: false
@@ -4667,7 +4655,6 @@ components:
         ceph_port: 0
         description: description
         id: id
-        type: rbd
         ceph_address: localhost
         agents:
         - agents
@@ -4682,30 +4669,20 @@ components:
         description:
           description: The storage pool description.
           type: string
-        type:
-          default: rbd
-          description: The storage pool type.
-          enum:
-          - local
-          - rbd
-          type: string
         pool:
-          description: The libvirt pool name.
+          description: Ceph pool name.
           type: string
         ceph_address:
           default: localhost
-          description: "The local Ceph Monitor(s) address or FQDN, empty for local\
-            \ pool type."
+          description: Ceph Monitor(s) address or FQDN.
           type: string
         ceph_port:
           default: 3300
-          description: "The local Ceph Monitor(s) port (default 3300), empty for local\
-            \ pool type."
+          description: Ceph Monitor(s) port (default 3300).
           format: int64
           type: integer
         ceph_secret_uuid:
-          description: "The libvirt secret UUID for CephX authentication, empty for\
-            \ local pool type."
+          description: The libvirt secret UUID for CephX authentication.
           type: string
         cost:
           $ref: '#/components/schemas/Cost'

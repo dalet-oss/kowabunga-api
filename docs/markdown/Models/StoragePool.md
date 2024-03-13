@@ -6,11 +6,10 @@
 | **id** | **String** | The storage pool ID (auto-generated). | [optional] [default to null] |
 | **name** | **String** | The storage pool name. | [default to null] |
 | **description** | **String** | The storage pool description. | [optional] [default to null] |
-| **type** | **String** | The storage pool type. | [optional] [default to rbd] |
-| **pool** | **String** | The libvirt pool name. | [default to null] |
-| **ceph\_address** | **String** | The local Ceph Monitor(s) address or FQDN, empty for local pool type. | [optional] [default to localhost] |
-| **ceph\_port** | **Long** | The local Ceph Monitor(s) port (default 3300), empty for local pool type. | [optional] [default to 3300] |
-| **ceph\_secret\_uuid** | **String** | The libvirt secret UUID for CephX authentication, empty for local pool type. | [optional] [default to null] |
+| **pool** | **String** | Ceph pool name. | [default to null] |
+| **ceph\_address** | **String** | Ceph Monitor(s) address or FQDN. | [optional] [default to localhost] |
+| **ceph\_port** | **Long** | Ceph Monitor(s) port (default 3300). | [optional] [default to 3300] |
+| **ceph\_secret\_uuid** | **String** | The libvirt secret UUID for CephX authentication. | [optional] [default to null] |
 | **cost** | [**Cost**](.md) | Cost associated to the storage pool. | [optional] [default to null] |
 | **agents** | **List** | a list of existing remote agents managing the storage pool. | [default to null] |
 

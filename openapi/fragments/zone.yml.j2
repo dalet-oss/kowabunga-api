@@ -31,7 +31,7 @@ paths:
 {{ oas.GetAll('List' + resources.zone.schema + resources.host.schema + 's', resources.host.desc, [resources.zone.tag, resources.host.tag], True) }}
 
   /zone/{{ '{' + resources.zone.paramId + '}' }}/pool:
-{{ oas.Parameters([resources.zone.paramSchema, 'OptionalQuery' + resources.host.paramSchema]) }}
+{{ oas.Parameters([resources.zone.paramSchema]) }}
 {{ oas.Create('Create' + resources.pool.schema, resources.pool.schema, resources.pool.desc, [resources.zone.tag, resources.pool.tag]) }}
 
   /zone/{{ '{' + resources.zone.paramId + '}' }}/pool/{{ '{' + resources.pool.paramId + '}' }}/default:

@@ -25,19 +25,16 @@ type StoragePool struct {
 	// The storage pool description.
 	Description string `json:"description,omitempty"`
 
-	// The storage pool type.
-	Type string `json:"type,omitempty"`
-
-	// The libvirt pool name.
+	// Ceph pool name.
 	Pool string `json:"pool"`
 
-	// The local Ceph Monitor(s) address or FQDN, empty for local pool type.
+	// Ceph Monitor(s) address or FQDN.
 	CephAddress string `json:"ceph_address,omitempty"`
 
-	// The local Ceph Monitor(s) port (default 3300), empty for local pool type.
+	// Ceph Monitor(s) port (default 3300).
 	CephPort int64 `json:"ceph_port,omitempty"`
 
-	// The libvirt secret UUID for CephX authentication, empty for local pool type.
+	// The libvirt secret UUID for CephX authentication.
 	CephSecretUuid string `json:"ceph_secret_uuid,omitempty"`
 
 	// Cost associated to the storage pool.

@@ -124,7 +124,7 @@ func (s *ZoneAPIService) CreateStorageNFS(ctx context.Context, zoneId string, st
 }
 
 // CreateStoragePool - 
-func (s *ZoneAPIService) CreateStoragePool(ctx context.Context, zoneId string, storagePool StoragePool, hostId string) (ImplResponse, error) {
+func (s *ZoneAPIService) CreateStoragePool(ctx context.Context, zoneId string, storagePool StoragePool) (ImplResponse, error) {
 	// TODO - update CreateStoragePool with the required logic for this service method.
 	// Add api_zone_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 

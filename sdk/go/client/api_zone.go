@@ -686,18 +686,11 @@ type ApiCreateStoragePoolRequest struct {
 	ApiService *ZoneAPIService
 	zoneId string
 	storagePool *StoragePool
-	hostId *string
 }
 
 // StoragePool payload.
 func (r ApiCreateStoragePoolRequest) StoragePool(storagePool StoragePool) ApiCreateStoragePoolRequest {
 	r.storagePool = &storagePool
-	return r
-}
-
-// The ID of the computing host (useless for RBD pools, mandatory for local ones).
-func (r ApiCreateStoragePoolRequest) HostId(hostId string) ApiCreateStoragePoolRequest {
-	r.hostId = &hostId
 	return r
 }
 
@@ -747,9 +740,6 @@ func (a *ZoneAPIService) CreateStoragePoolExecute(r ApiCreateStoragePoolRequest)
 		return localVarReturnValue, nil, reportError("storagePool is required and must be specified")
 	}
 
-	if r.hostId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "hostId", r.hostId, "")
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

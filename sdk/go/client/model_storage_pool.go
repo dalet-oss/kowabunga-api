@@ -28,15 +28,13 @@ type StoragePool struct {
 	Name string `json:"name"`
 	// The storage pool description.
 	Description *string `json:"description,omitempty"`
-	// The storage pool type.
-	Type *string `json:"type,omitempty"`
-	// The libvirt pool name.
+	// Ceph pool name.
 	Pool string `json:"pool"`
-	// The local Ceph Monitor(s) address or FQDN, empty for local pool type.
+	// Ceph Monitor(s) address or FQDN.
 	CephAddress *string `json:"ceph_address,omitempty"`
-	// The local Ceph Monitor(s) port (default 3300), empty for local pool type.
+	// Ceph Monitor(s) port (default 3300).
 	CephPort *int64 `json:"ceph_port,omitempty"`
-	// The libvirt secret UUID for CephX authentication, empty for local pool type.
+	// The libvirt secret UUID for CephX authentication.
 	CephSecretUuid *string `json:"ceph_secret_uuid,omitempty"`
 	// Cost associated to the storage pool.
 	Cost Cost `json:"cost,omitempty"`
@@ -53,8 +51,6 @@ type _StoragePool StoragePool
 func NewStoragePool(name string, pool string, agents []string) *StoragePool {
 	this := StoragePool{}
 	this.Name = name
-	var type_ string = "rbd"
-	this.Type = &type_
 	this.Pool = pool
 	var cephAddress string = "localhost"
 	this.CephAddress = &cephAddress
@@ -69,8 +65,6 @@ func NewStoragePool(name string, pool string, agents []string) *StoragePool {
 // but it doesn't guarantee that properties required by API are set
 func NewStoragePoolWithDefaults() *StoragePool {
 	this := StoragePool{}
-	var type_ string = "rbd"
-	this.Type = &type_
 	var cephAddress string = "localhost"
 	this.CephAddress = &cephAddress
 	var cephPort int64 = 3300
@@ -164,38 +158,6 @@ func (o *StoragePool) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *StoragePool) SetDescription(v string) {
 	o.Description = &v
-}
-
-// GetType returns the Type field value if set, zero value otherwise.
-func (o *StoragePool) GetType() string {
-	if o == nil || IsNil(o.Type) {
-		var ret string
-		return ret
-	}
-	return *o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *StoragePool) GetTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.Type) {
-		return nil, false
-	}
-	return o.Type, true
-}
-
-// HasType returns a boolean if a field has been set.
-func (o *StoragePool) HasType() bool {
-	if o != nil && !IsNil(o.Type) {
-		return true
-	}
-
-	return false
-}
-
-// SetType gets a reference to the given string and assigns it to the Type field.
-func (o *StoragePool) SetType(v string) {
-	o.Type = &v
 }
 
 // GetPool returns the Pool field value
@@ -390,9 +352,6 @@ func (o StoragePool) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
-	}
-	if !IsNil(o.Type) {
-		toSerialize["type"] = o.Type
 	}
 	toSerialize["pool"] = o.Pool
 	if !IsNil(o.CephAddress) {

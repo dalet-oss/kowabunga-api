@@ -392,25 +392,18 @@ export class ZoneService {
      * Creates a new storage pool.
      * @param zoneId The ID of the availability zone.
      * @param storagePool StoragePool payload.
-     * @param hostId The ID of the computing host (useless for RBD pools, mandatory for local ones).
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createStoragePool(zoneId: string, storagePool: StoragePool, hostId?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<StoragePool>;
-    public createStoragePool(zoneId: string, storagePool: StoragePool, hostId?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<StoragePool>>;
-    public createStoragePool(zoneId: string, storagePool: StoragePool, hostId?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<StoragePool>>;
-    public createStoragePool(zoneId: string, storagePool: StoragePool, hostId?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public createStoragePool(zoneId: string, storagePool: StoragePool, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<StoragePool>;
+    public createStoragePool(zoneId: string, storagePool: StoragePool, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<StoragePool>>;
+    public createStoragePool(zoneId: string, storagePool: StoragePool, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<StoragePool>>;
+    public createStoragePool(zoneId: string, storagePool: StoragePool, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (zoneId === null || zoneId === undefined) {
             throw new Error('Required parameter zoneId was null or undefined when calling createStoragePool.');
         }
         if (storagePool === null || storagePool === undefined) {
             throw new Error('Required parameter storagePool was null or undefined when calling createStoragePool.');
-        }
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (hostId !== undefined && hostId !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>hostId, 'hostId');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -477,7 +470,6 @@ export class ZoneService {
             {
                 context: localVarHttpContext,
                 body: storagePool,
-                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

@@ -274,7 +274,7 @@ All URIs are relative to */api/v1*
 
 <a name="createStoragePool"></a>
 # **createStoragePool**
-> StoragePool createStoragePool(zoneId, StoragePool, hostId)
+> StoragePool createStoragePool(zoneId, StoragePool)
 
 
 
@@ -286,7 +286,6 @@ All URIs are relative to */api/v1*
 |------------- | ------------- | ------------- | -------------|
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **StoragePool** | [**StoragePool**](../Models/StoragePool.md)| StoragePool payload. | |
-| **hostId** | **String**| The ID of the computing host (useless for RBD pools, mandatory for local ones). | [optional] [default to null] |
 
 ### Return type
 

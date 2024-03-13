@@ -236,11 +236,6 @@ func (c *ZoneAPIController) CreateStorageNFS(w http.ResponseWriter, r *http.Requ
 // CreateStoragePool - 
 func (c *ZoneAPIController) CreateStoragePool(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	query, err := parseQuery(r.URL.RawQuery)
-	if err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
 	zoneIdParam := params["zoneId"]
 	if zoneIdParam == "" {
 		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
@@ -261,14 +256,7 @@ func (c *ZoneAPIController) CreateStoragePool(w http.ResponseWriter, r *http.Req
 		c.errorHandler(w, r, err, nil)
 		return
 	}
-	var hostIdParam string
-	if query.Has("hostId") {
-		param := query.Get("hostId")
-
-		hostIdParam = param
-	} else {
-	}
-	result, err := c.service.CreateStoragePool(r.Context(), zoneIdParam, storagePoolParam, hostIdParam)
+	result, err := c.service.CreateStoragePool(r.Context(), zoneIdParam, storagePoolParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

@@ -522,7 +522,7 @@ type ZoneAPIServicer interface {
 	CreateHost(context.Context, string, Host) (ImplResponse, error)
 	CreateNetGW(context.Context, string, NetGw) (ImplResponse, error)
 	CreateStorageNFS(context.Context, string, StorageNfs) (ImplResponse, error)
-	CreateStoragePool(context.Context, string, StoragePool, string) (ImplResponse, error)
+	CreateStoragePool(context.Context, string, StoragePool) (ImplResponse, error)
 	CreateVNet(context.Context, string, VNet) (ImplResponse, error)
 	DeleteZone(context.Context, string) (ImplResponse, error)
 	ListZoneHosts(context.Context, string) (ImplResponse, error)

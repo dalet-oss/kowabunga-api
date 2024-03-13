@@ -23,7 +23,6 @@ components:
 
   parameters:
 {{ oas.PathParamID(resources.host) }}
-{{ oas.StringQueryParam(resources.host.paramSchema, resources.host.paramId, 'The ID of the computing host (useless for RBD pools, mandatory for local ones)') }}
 
 paths:
   /host:

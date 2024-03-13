@@ -29,23 +29,19 @@ export interface StoragePool {
      */
     description?: string;
     /**
-     * The storage pool type.
-     */
-    type?: StoragePool.TypeEnum;
-    /**
-     * The libvirt pool name.
+     * Ceph pool name.
      */
     pool: string;
     /**
-     * The local Ceph Monitor(s) address or FQDN, empty for local pool type.
+     * Ceph Monitor(s) address or FQDN.
      */
     ceph_address?: string;
     /**
-     * The local Ceph Monitor(s) port (default 3300), empty for local pool type.
+     * Ceph Monitor(s) port (default 3300).
      */
     ceph_port?: number;
     /**
-     * The libvirt secret UUID for CephX authentication, empty for local pool type.
+     * The libvirt secret UUID for CephX authentication.
      */
     ceph_secret_uuid?: string;
     /**
@@ -57,12 +53,4 @@ export interface StoragePool {
      */
     agents: Array<string>;
 }
-export namespace StoragePool {
-    export type TypeEnum = 'local' | 'rbd';
-    export const TypeEnum = {
-        Local: 'local' as TypeEnum,
-        Rbd: 'rbd' as TypeEnum
-    };
-}
-
 
