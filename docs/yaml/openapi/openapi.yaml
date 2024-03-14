@@ -4441,12 +4441,12 @@ components:
     NetGW:
       description: A Iris network gateway.
       example:
-        address: address
-        port: 0
         name: name
         description: description
         id: id
-        token: token
+        agents:
+        - agents
+        - agents
       properties:
         id:
           description: The Iris network gateway ID (auto-generated).
@@ -4457,21 +4457,13 @@ components:
         description:
           description: The Iris network gateway description.
           type: string
-        address:
-          description: The Iris network gateway IPv4 address.
-          type: string
-        port:
-          default: 8080
-          description: The Iris network gateway service port (default to 8080).
-          format: int64
-          type: integer
-        token:
-          description: The Iris network gateway admin API token.
-          type: string
+        agents:
+          description: a list of existing remote agents managing the network gateway.
+          items:
+            type: string
+          type: array
       required:
-      - address
       - name
-      - token
     Project:
       description: "A Kowabunga project corresponds to a single tenant, isolated set\
         \ of resources."

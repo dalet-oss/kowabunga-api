@@ -28,16 +28,8 @@ export interface NetGW {
      */
     description?: string;
     /**
-     * The Iris network gateway IPv4 address.
+     * a list of existing remote agents managing the network gateway.
      */
-    address: string;
-    /**
-     * The Iris network gateway service port (default to 8080).
-     */
-    port?: number;
-    /**
-     * The Iris network gateway admin API token.
-     */
-    token: string;
+    agents?: Array<string>;
 }
 

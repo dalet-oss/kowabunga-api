@@ -2,10 +2,8 @@
 
 components:
   schemas:
-{{ oas.SchemaBaseResource(resources.netgw, ['name', 'address', 'token']) }}
-{{ oas.StringProperty('address', 'The ' + resources.netgw.desc + ' IPv4 address') }}
-{{ oas.IntProperty('port', 'The ' + resources.netgw.desc + ' service port (default to 8080)', default=8080) }}
-{{ oas.StringProperty('token', 'The ' + resources.netgw.desc + ' admin API token') }}
+{{ oas.SchemaBaseResource(resources.netgw, ['name']) }}
+{{ oas.StringArrayProperty('agents', 'a list of existing remote agents managing the network gateway') }}
 
   parameters:
 {{ oas.PathParamID(resources.netgw) }}

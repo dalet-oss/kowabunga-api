@@ -28,12 +28,8 @@ type NetGW struct {
 	Name string `json:"name"`
 	// The Iris network gateway description.
 	Description *string `json:"description,omitempty"`
-	// The Iris network gateway IPv4 address.
-	Address string `json:"address"`
-	// The Iris network gateway service port (default to 8080).
-	Port *int64 `json:"port,omitempty"`
-	// The Iris network gateway admin API token.
-	Token string `json:"token"`
+	// a list of existing remote agents managing the network gateway.
+	Agents []string `json:"agents,omitempty"`
 }
 
 type _NetGW NetGW
@@ -42,13 +38,9 @@ type _NetGW NetGW
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNetGW(name string, address string, token string) *NetGW {
+func NewNetGW(name string) *NetGW {
 	this := NetGW{}
 	this.Name = name
-	this.Address = address
-	var port int64 = 8080
-	this.Port = &port
-	this.Token = token
 	return &this
 }
 
@@ -57,8 +49,6 @@ func NewNetGW(name string, address string, token string) *NetGW {
 // but it doesn't guarantee that properties required by API are set
 func NewNetGWWithDefaults() *NetGW {
 	this := NetGW{}
-	var port int64 = 8080
-	this.Port = &port
 	return &this
 }
 
@@ -150,84 +140,36 @@ func (o *NetGW) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetAddress returns the Address field value
-func (o *NetGW) GetAddress() string {
-	if o == nil {
-		var ret string
+// GetAgents returns the Agents field value if set, zero value otherwise.
+func (o *NetGW) GetAgents() []string {
+	if o == nil || IsNil(o.Agents) {
+		var ret []string
 		return ret
 	}
-
-	return o.Address
+	return o.Agents
 }
 
-// GetAddressOk returns a tuple with the Address field value
+// GetAgentsOk returns a tuple with the Agents field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetGW) GetAddressOk() (*string, bool) {
-	if o == nil {
+func (o *NetGW) GetAgentsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Agents) {
 		return nil, false
 	}
-	return &o.Address, true
+	return o.Agents, true
 }
 
-// SetAddress sets field value
-func (o *NetGW) SetAddress(v string) {
-	o.Address = v
-}
-
-// GetPort returns the Port field value if set, zero value otherwise.
-func (o *NetGW) GetPort() int64 {
-	if o == nil || IsNil(o.Port) {
-		var ret int64
-		return ret
-	}
-	return *o.Port
-}
-
-// GetPortOk returns a tuple with the Port field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *NetGW) GetPortOk() (*int64, bool) {
-	if o == nil || IsNil(o.Port) {
-		return nil, false
-	}
-	return o.Port, true
-}
-
-// HasPort returns a boolean if a field has been set.
-func (o *NetGW) HasPort() bool {
-	if o != nil && !IsNil(o.Port) {
+// HasAgents returns a boolean if a field has been set.
+func (o *NetGW) HasAgents() bool {
+	if o != nil && !IsNil(o.Agents) {
 		return true
 	}
 
 	return false
 }
 
-// SetPort gets a reference to the given int64 and assigns it to the Port field.
-func (o *NetGW) SetPort(v int64) {
-	o.Port = &v
-}
-
-// GetToken returns the Token field value
-func (o *NetGW) GetToken() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Token
-}
-
-// GetTokenOk returns a tuple with the Token field value
-// and a boolean to check if the value has been set.
-func (o *NetGW) GetTokenOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Token, true
-}
-
-// SetToken sets field value
-func (o *NetGW) SetToken(v string) {
-	o.Token = v
+// SetAgents gets a reference to the given []string and assigns it to the Agents field.
+func (o *NetGW) SetAgents(v []string) {
+	o.Agents = v
 }
 
 func (o NetGW) MarshalJSON() ([]byte, error) {
@@ -247,11 +189,9 @@ func (o NetGW) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	toSerialize["address"] = o.Address
-	if !IsNil(o.Port) {
-		toSerialize["port"] = o.Port
+	if !IsNil(o.Agents) {
+		toSerialize["agents"] = o.Agents
 	}
-	toSerialize["token"] = o.Token
 	return toSerialize, nil
 }
 
@@ -261,8 +201,6 @@ func (o *NetGW) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"name",
-		"address",
-		"token",
 	}
 
 	allProperties := make(map[string]interface{})

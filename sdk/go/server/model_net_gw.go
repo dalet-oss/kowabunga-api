@@ -25,22 +25,14 @@ type NetGw struct {
 	// The Iris network gateway description.
 	Description string `json:"description,omitempty"`
 
-	// The Iris network gateway IPv4 address.
-	Address string `json:"address"`
-
-	// The Iris network gateway service port (default to 8080).
-	Port int64 `json:"port,omitempty"`
-
-	// The Iris network gateway admin API token.
-	Token string `json:"token"`
+	// a list of existing remote agents managing the network gateway.
+	Agents []string `json:"agents,omitempty"`
 }
 
 // AssertNetGwRequired checks if the required fields are not zero-ed
 func AssertNetGwRequired(obj NetGw) error {
 	elements := map[string]interface{}{
 		"name": obj.Name,
-		"address": obj.Address,
-		"token": obj.Token,
 	}
 	for name, el := range elements {
 		if isZero := IsZeroValue(el); isZero {
