@@ -101,20 +101,6 @@ func (a *RegionAPIService) CreateRegionExecute(r ApiCreateRegionRequest) (*Regio
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["TokenAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["x-token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["ApiKeyAuth"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -320,20 +306,6 @@ func (a *RegionAPIService) CreateZoneExecute(r ApiCreateZoneRequest) (*Zone, *ht
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["TokenAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["x-token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["ApiKeyAuth"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -525,20 +497,6 @@ func (a *RegionAPIService) DeleteRegionExecute(r ApiDeleteRegionRequest) (*http.
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["TokenAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["x-token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["ApiKeyAuth"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -701,20 +659,6 @@ func (a *RegionAPIService) ListRegionZonesExecute(r ApiListRegionZonesRequest) (
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["TokenAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["x-token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["ApiKeyAuth"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -860,20 +804,6 @@ func (a *RegionAPIService) ListRegionsExecute(r ApiListRegionsRequest) ([]string
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["TokenAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["x-token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["ApiKeyAuth"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -1008,20 +938,6 @@ func (a *RegionAPIService) ReadRegionExecute(r ApiReadRegionRequest) (*Region, *
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["TokenAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["x-token"] = key
-			}
-		}
 	}
 	if r.ctx != nil {
 		// API Key Authentication
@@ -1184,20 +1100,6 @@ func (a *RegionAPIService) UpdateRegionExecute(r ApiUpdateRegionRequest) (*Regio
 	}
 	// body params
 	localVarPostBody = r.region
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["TokenAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["x-token"] = key
-			}
-		}
-	}
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

@@ -106,17 +106,6 @@ export class Configuration {
                     : this.accessToken;
             };
         }
-
-        // init default TokenAuth credential
-        if (!this.credentials['TokenAuth']) {
-            this.credentials['TokenAuth'] = () => {
-                if (this.apiKeys === null || this.apiKeys === undefined) {
-                    return undefined;
-                } else {
-                    return this.apiKeys['TokenAuth'] || this.apiKeys['x-token'];
-                }
-            };
-        }
     }
 
     /**

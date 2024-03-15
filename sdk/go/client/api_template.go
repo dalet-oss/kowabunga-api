@@ -91,20 +91,6 @@ func (a *TemplateAPIService) DeleteTemplateExecute(r ApiDeleteTemplateRequest) (
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["TokenAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["x-token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["ApiKeyAuth"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -263,20 +249,6 @@ func (a *TemplateAPIService) ListTemplatesExecute(r ApiListTemplatesRequest) ([]
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["TokenAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["x-token"] = key
-			}
-		}
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
 			if apiKey, ok := auth["ApiKeyAuth"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
@@ -411,20 +383,6 @@ func (a *TemplateAPIService) ReadTemplateExecute(r ApiReadTemplateRequest) (*Tem
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["TokenAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["x-token"] = key
-			}
-		}
 	}
 	if r.ctx != nil {
 		// API Key Authentication
@@ -587,20 +545,6 @@ func (a *TemplateAPIService) UpdateTemplateExecute(r ApiUpdateTemplateRequest) (
 	}
 	// body params
 	localVarPostBody = r.template
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["TokenAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["x-token"] = key
-			}
-		}
-	}
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

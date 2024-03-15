@@ -32,7 +32,7 @@ All URIs are relative to */api/v1*
 
 ### Authorization
 
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -59,7 +59,7 @@ null (empty response body)
 
 ### Authorization
 
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -83,7 +83,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -110,7 +110,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -139,7 +139,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
@@ -167,7 +167,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[TokenAuth](../README.md#TokenAuth), [ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 

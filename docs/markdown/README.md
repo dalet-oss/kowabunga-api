@@ -249,10 +249,3 @@ All URIs are relative to */api/v1*
 
 - **Type**: HTTP Bearer Token authentication
 
-<a name="TokenAuth"></a>
-### TokenAuth
-
-- **Type**: API key
-- **API key parameter name**: x-token
-- **Location**: HTTP header
-

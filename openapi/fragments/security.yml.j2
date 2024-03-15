@@ -1,7 +1,6 @@
 security:
   - ApiKeyAuth: []
   - BearerAuth: []
-  - TokenAuth: [] # TODO: deprecated, removed when migrated
 
 components:
   securitySchemes:
@@ -13,8 +12,3 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
-    TokenAuth:
-      type: apiKey
-      description: API key to authorize machine-to-machine requests.
-      name: x-token
-      in: header

@@ -122,12 +122,6 @@ export class KgwService {
         let localVarHeaders = this.defaultHeaders;
 
         let localVarCredential: string | undefined;
-        // authentication (TokenAuth) required
-        localVarCredential = this.configuration.lookupCredential('TokenAuth');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('x-token', localVarCredential);
-        }
-
         // authentication (ApiKeyAuth) required
         localVarCredential = this.configuration.lookupCredential('ApiKeyAuth');
         if (localVarCredential) {
@@ -195,12 +189,6 @@ export class KgwService {
         let localVarHeaders = this.defaultHeaders;
 
         let localVarCredential: string | undefined;
-        // authentication (TokenAuth) required
-        localVarCredential = this.configuration.lookupCredential('TokenAuth');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('x-token', localVarCredential);
-        }
-
         // authentication (ApiKeyAuth) required
         localVarCredential = this.configuration.lookupCredential('ApiKeyAuth');
         if (localVarCredential) {
@@ -272,12 +260,6 @@ export class KgwService {
         let localVarHeaders = this.defaultHeaders;
 
         let localVarCredential: string | undefined;
-        // authentication (TokenAuth) required
-        localVarCredential = this.configuration.lookupCredential('TokenAuth');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('x-token', localVarCredential);
-        }
-
         // authentication (ApiKeyAuth) required
         localVarCredential = this.configuration.lookupCredential('ApiKeyAuth');
         if (localVarCredential) {
@@ -353,12 +335,6 @@ export class KgwService {
         let localVarHeaders = this.defaultHeaders;
 
         let localVarCredential: string | undefined;
-        // authentication (TokenAuth) required
-        localVarCredential = this.configuration.lookupCredential('TokenAuth');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('x-token', localVarCredential);
-        }
-
         // authentication (ApiKeyAuth) required
         localVarCredential = this.configuration.lookupCredential('ApiKeyAuth');
         if (localVarCredential) {

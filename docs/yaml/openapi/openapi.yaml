@@ -15,7 +15,6 @@ servers:
 security:
 - ApiKeyAuth: []
 - BearerAuth: []
-- TokenAuth: []
 tags:
 - description: Everything about network adapter
   name: adapter
@@ -4937,8 +4936,3 @@ components:
     BearerAuth:
       scheme: bearer
       type: http
-    TokenAuth:
-      description: API key to authorize machine-to-machine requests.
-      in: header
-      name: x-token
-      type: apiKey
