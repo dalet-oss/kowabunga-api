@@ -4855,7 +4855,6 @@ components:
       description: A storage volume.
       example:
         size: 0
-        resizable: false
         name: name
         description: description
         id: id
@@ -4881,11 +4880,6 @@ components:
           description: The storage volume size (in bytes).
           format: int64
           type: integer
-        resizable:
-          default: false
-          description: Is the storage volume allowed to grow (filesystem dependant)
-            ?.
-          type: boolean
       required:
       - name
       - size

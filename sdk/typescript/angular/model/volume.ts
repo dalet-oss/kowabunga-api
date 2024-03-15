@@ -35,10 +35,6 @@ export interface Volume {
      * The storage volume size (in bytes).
      */
     size: number;
-    /**
-     * Is the storage volume allowed to grow (filesystem dependant) ?.
-     */
-    resizable?: boolean;
 }
 export namespace Volume {
     export type TypeEnum = 'os' | 'iso' | 'raw';

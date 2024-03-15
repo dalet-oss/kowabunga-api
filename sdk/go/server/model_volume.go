@@ -30,9 +30,6 @@ type Volume struct {
 
 	// The storage volume size (in bytes).
 	Size int64 `json:"size"`
-
-	// Is the storage volume allowed to grow (filesystem dependant) ?.
-	Resizable bool `json:"resizable,omitempty"`
 }
 
 // AssertVolumeRequired checks if the required fields are not zero-ed

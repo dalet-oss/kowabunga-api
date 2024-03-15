@@ -32,8 +32,6 @@ type Volume struct {
 	Type string `json:"type"`
 	// The storage volume size (in bytes).
 	Size int64 `json:"size"`
-	// Is the storage volume allowed to grow (filesystem dependant) ?.
-	Resizable *bool `json:"resizable,omitempty"`
 }
 
 type _Volume Volume
@@ -47,8 +45,6 @@ func NewVolume(name string, type_ string, size int64) *Volume {
 	this.Name = name
 	this.Type = type_
 	this.Size = size
-	var resizable bool = false
-	this.Resizable = &resizable
 	return &this
 }
 
@@ -57,8 +53,6 @@ func NewVolume(name string, type_ string, size int64) *Volume {
 // but it doesn't guarantee that properties required by API are set
 func NewVolumeWithDefaults() *Volume {
 	this := Volume{}
-	var resizable bool = false
-	this.Resizable = &resizable
 	return &this
 }
 
@@ -198,38 +192,6 @@ func (o *Volume) SetSize(v int64) {
 	o.Size = v
 }
 
-// GetResizable returns the Resizable field value if set, zero value otherwise.
-func (o *Volume) GetResizable() bool {
-	if o == nil || IsNil(o.Resizable) {
-		var ret bool
-		return ret
-	}
-	return *o.Resizable
-}
-
-// GetResizableOk returns a tuple with the Resizable field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Volume) GetResizableOk() (*bool, bool) {
-	if o == nil || IsNil(o.Resizable) {
-		return nil, false
-	}
-	return o.Resizable, true
-}
-
-// HasResizable returns a boolean if a field has been set.
-func (o *Volume) HasResizable() bool {
-	if o != nil && !IsNil(o.Resizable) {
-		return true
-	}
-
-	return false
-}
-
-// SetResizable gets a reference to the given bool and assigns it to the Resizable field.
-func (o *Volume) SetResizable(v bool) {
-	o.Resizable = &v
-}
-
 func (o Volume) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -249,9 +211,6 @@ func (o Volume) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["type"] = o.Type
 	toSerialize["size"] = o.Size
-	if !IsNil(o.Resizable) {
-		toSerialize["resizable"] = o.Resizable
-	}
 	return toSerialize, nil
 }
 
