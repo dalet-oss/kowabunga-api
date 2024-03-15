@@ -4754,7 +4754,6 @@ components:
         name: name
         description: description
         id: id
-        type: os
       properties:
         id:
           description: The image template ID (auto-generated).
@@ -4764,13 +4763,6 @@ components:
           type: string
         description:
           description: The image template description.
-          type: string
-        type:
-          default: os
-          description: The image template volume type.
-          enum:
-          - os
-          - raw
           type: string
         os:
           default: linux

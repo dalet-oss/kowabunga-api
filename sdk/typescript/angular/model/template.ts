@@ -28,20 +28,11 @@ export interface Template {
      */
     description?: string;
     /**
-     * The image template volume type.
-     */
-    type?: Template.TypeEnum;
-    /**
      * Type of operating system if OS kind (useful to determine cloud-init parameters for instance).
      */
     os?: Template.OsEnum;
 }
 export namespace Template {
-    export type TypeEnum = 'os' | 'raw';
-    export const TypeEnum = {
-        Os: 'os' as TypeEnum,
-        Raw: 'raw' as TypeEnum
-    };
     export type OsEnum = 'linux' | 'windows';
     export const OsEnum = {
         Linux: 'linux' as OsEnum,

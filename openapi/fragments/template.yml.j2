@@ -3,7 +3,6 @@
 components:
   schemas:
 {{ oas.SchemaBaseResource(resources.template, ['name']) }}
-{{ oas.StringProperty('type', 'The ' + resources.template.desc + ' volume type', values=['os', 'raw'], default='os') }}
 {{ oas.StringProperty('os', 'Type of operating system if OS kind (useful to determine cloud-init parameters for instance)', values=['linux', 'windows'], default='linux') }}
 
   parameters:

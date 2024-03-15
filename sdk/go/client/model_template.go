@@ -28,8 +28,6 @@ type Template struct {
 	Name string `json:"name"`
 	// The image template description.
 	Description *string `json:"description,omitempty"`
-	// The image template volume type.
-	Type *string `json:"type,omitempty"`
 	// Type of operating system if OS kind (useful to determine cloud-init parameters for instance).
 	Os *string `json:"os,omitempty"`
 }
@@ -43,8 +41,6 @@ type _Template Template
 func NewTemplate(name string) *Template {
 	this := Template{}
 	this.Name = name
-	var type_ string = "os"
-	this.Type = &type_
 	var os string = "linux"
 	this.Os = &os
 	return &this
@@ -55,8 +51,6 @@ func NewTemplate(name string) *Template {
 // but it doesn't guarantee that properties required by API are set
 func NewTemplateWithDefaults() *Template {
 	this := Template{}
-	var type_ string = "os"
-	this.Type = &type_
 	var os string = "linux"
 	this.Os = &os
 	return &this
@@ -150,38 +144,6 @@ func (o *Template) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetType returns the Type field value if set, zero value otherwise.
-func (o *Template) GetType() string {
-	if o == nil || IsNil(o.Type) {
-		var ret string
-		return ret
-	}
-	return *o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Template) GetTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.Type) {
-		return nil, false
-	}
-	return o.Type, true
-}
-
-// HasType returns a boolean if a field has been set.
-func (o *Template) HasType() bool {
-	if o != nil && !IsNil(o.Type) {
-		return true
-	}
-
-	return false
-}
-
-// SetType gets a reference to the given string and assigns it to the Type field.
-func (o *Template) SetType(v string) {
-	o.Type = &v
-}
-
 // GetOs returns the Os field value if set, zero value otherwise.
 func (o *Template) GetOs() string {
 	if o == nil || IsNil(o.Os) {
@@ -230,9 +192,6 @@ func (o Template) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
-	}
-	if !IsNil(o.Type) {
-		toSerialize["type"] = o.Type
 	}
 	if !IsNil(o.Os) {
 		toSerialize["os"] = o.Os

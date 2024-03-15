@@ -25,9 +25,6 @@ type Template struct {
 	// The image template description.
 	Description string `json:"description,omitempty"`
 
-	// The image template volume type.
-	Type string `json:"type,omitempty"`
-
 	// Type of operating system if OS kind (useful to determine cloud-init parameters for instance).
 	Os string `json:"os,omitempty"`
 }
