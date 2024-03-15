@@ -27,12 +27,16 @@ type Template struct {
 
 	// Type of operating system if OS kind (useful to determine cloud-init parameters for instance).
 	Os string `json:"os,omitempty"`
+
+	// HTTP(s) source URL of the KVM-ready OS image.
+	Source string `json:"source"`
 }
 
 // AssertTemplateRequired checks if the required fields are not zero-ed
 func AssertTemplateRequired(obj Template) error {
 	elements := map[string]interface{}{
 		"name": obj.Name,
+		"source": obj.Source,
 	}
 	for name, el := range elements {
 		if isZero := IsZeroValue(el); isZero {

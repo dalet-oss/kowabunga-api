@@ -30,6 +30,8 @@ type Template struct {
 	Description *string `json:"description,omitempty"`
 	// Type of operating system if OS kind (useful to determine cloud-init parameters for instance).
 	Os *string `json:"os,omitempty"`
+	// HTTP(s) source URL of the KVM-ready OS image.
+	Source string `json:"source"`
 }
 
 type _Template Template
@@ -38,11 +40,12 @@ type _Template Template
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTemplate(name string) *Template {
+func NewTemplate(name string, source string) *Template {
 	this := Template{}
 	this.Name = name
 	var os string = "linux"
 	this.Os = &os
+	this.Source = source
 	return &this
 }
 
@@ -176,6 +179,30 @@ func (o *Template) SetOs(v string) {
 	o.Os = &v
 }
 
+// GetSource returns the Source field value
+func (o *Template) GetSource() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Source
+}
+
+// GetSourceOk returns a tuple with the Source field value
+// and a boolean to check if the value has been set.
+func (o *Template) GetSourceOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Source, true
+}
+
+// SetSource sets field value
+func (o *Template) SetSource(v string) {
+	o.Source = v
+}
+
 func (o Template) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -196,6 +223,7 @@ func (o Template) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Os) {
 		toSerialize["os"] = o.Os
 	}
+	toSerialize["source"] = o.Source
 	return toSerialize, nil
 }
 
@@ -205,6 +233,7 @@ func (o *Template) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"name",
+		"source",
 	}
 
 	allProperties := make(map[string]interface{})

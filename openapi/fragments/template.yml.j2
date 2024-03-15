@@ -2,8 +2,9 @@
 
 components:
   schemas:
-{{ oas.SchemaBaseResource(resources.template, ['name']) }}
+{{ oas.SchemaBaseResource(resources.template, ['name', 'source']) }}
 {{ oas.StringProperty('os', 'Type of operating system if OS kind (useful to determine cloud-init parameters for instance)', values=['linux', 'windows'], default='linux') }}
+{{ oas.StringProperty('source', 'HTTP(s) source URL of the KVM-ready OS image') }}
 
   parameters:
 {{ oas.PathParamID(resources.template) }}

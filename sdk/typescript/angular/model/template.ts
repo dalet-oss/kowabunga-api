@@ -31,6 +31,10 @@ export interface Template {
      * Type of operating system if OS kind (useful to determine cloud-init parameters for instance).
      */
     os?: Template.OsEnum;
+    /**
+     * HTTP(s) source URL of the KVM-ready OS image.
+     */
+    source: string;
 }
 export namespace Template {
     export type OsEnum = 'linux' | 'windows';

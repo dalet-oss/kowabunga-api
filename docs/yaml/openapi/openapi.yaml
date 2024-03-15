@@ -4754,6 +4754,7 @@ components:
         name: name
         description: description
         id: id
+        source: source
       properties:
         id:
           description: The image template ID (auto-generated).
@@ -4772,8 +4773,12 @@ components:
           - linux
           - windows
           type: string
+        source:
+          description: HTTP(s) source URL of the KVM-ready OS image.
+          type: string
       required:
       - name
+      - source
     ApiToken:
       description: A Kowabunga authentication security token consists of an API key
         granting access to resources.
