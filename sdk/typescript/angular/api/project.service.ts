@@ -125,14 +125,13 @@ export class ProjectService {
      * Creates a new project.
      * @param project Project payload.
      * @param subnetSize The minimum VPC subnet size to be affected to the project. WARNING, this cannot be changed later.
-     * @param notify Whether or not to send a notification email at resource creation.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createProject(project: Project, subnetSize?: number, notify?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Project>;
-    public createProject(project: Project, subnetSize?: number, notify?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Project>>;
-    public createProject(project: Project, subnetSize?: number, notify?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Project>>;
-    public createProject(project: Project, subnetSize?: number, notify?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public createProject(project: Project, subnetSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Project>;
+    public createProject(project: Project, subnetSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Project>>;
+    public createProject(project: Project, subnetSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Project>>;
+    public createProject(project: Project, subnetSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (project === null || project === undefined) {
             throw new Error('Required parameter project was null or undefined when calling createProject.');
         }
@@ -141,10 +140,6 @@ export class ProjectService {
         if (subnetSize !== undefined && subnetSize !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>subnetSize, 'subnetSize');
-        }
-        if (notify !== undefined && notify !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>notify, 'notify');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -305,14 +300,13 @@ export class ProjectService {
      * @param projectId The ID of the project.
      * @param zoneId The ID of the availability zone.
      * @param instance Instance payload.
-     * @param notify Whether or not to send a notification email at resource creation.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createProjectZoneInstance(projectId: string, zoneId: string, instance: Instance, notify?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Instance>;
-    public createProjectZoneInstance(projectId: string, zoneId: string, instance: Instance, notify?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Instance>>;
-    public createProjectZoneInstance(projectId: string, zoneId: string, instance: Instance, notify?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Instance>>;
-    public createProjectZoneInstance(projectId: string, zoneId: string, instance: Instance, notify?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public createProjectZoneInstance(projectId: string, zoneId: string, instance: Instance, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Instance>;
+    public createProjectZoneInstance(projectId: string, zoneId: string, instance: Instance, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Instance>>;
+    public createProjectZoneInstance(projectId: string, zoneId: string, instance: Instance, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Instance>>;
+    public createProjectZoneInstance(projectId: string, zoneId: string, instance: Instance, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (projectId === null || projectId === undefined) {
             throw new Error('Required parameter projectId was null or undefined when calling createProjectZoneInstance.');
         }
@@ -321,12 +315,6 @@ export class ProjectService {
         }
         if (instance === null || instance === undefined) {
             throw new Error('Required parameter instance was null or undefined when calling createProjectZoneInstance.');
-        }
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (notify !== undefined && notify !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>notify, 'notify');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -387,7 +375,6 @@ export class ProjectService {
             {
                 context: localVarHttpContext,
                 body: instance,
-                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -405,14 +392,13 @@ export class ProjectService {
      * @param poolId Storage pool ID (optional, zone\&#39;s default if unspecified).
      * @param templateId Template to clone the storage volume from (optional, zone\&#39;s default if unspecified).
      * @param _public Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).
-     * @param notify Whether or not to send a notification email at resource creation.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createProjectZoneKCE(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: boolean, notify?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<KCE>;
-    public createProjectZoneKCE(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: boolean, notify?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<KCE>>;
-    public createProjectZoneKCE(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: boolean, notify?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<KCE>>;
-    public createProjectZoneKCE(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: boolean, notify?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public createProjectZoneKCE(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<KCE>;
+    public createProjectZoneKCE(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<KCE>>;
+    public createProjectZoneKCE(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<KCE>>;
+    public createProjectZoneKCE(projectId: string, zoneId: string, kCE: KCE, poolId?: string, templateId?: string, _public?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (projectId === null || projectId === undefined) {
             throw new Error('Required parameter projectId was null or undefined when calling createProjectZoneKCE.');
         }
@@ -435,10 +421,6 @@ export class ProjectService {
         if (_public !== undefined && _public !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>_public, 'public');
-        }
-        if (notify !== undefined && notify !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>notify, 'notify');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -515,14 +497,13 @@ export class ProjectService {
      * @param zoneId The ID of the availability zone.
      * @param kFS KFS payload.
      * @param nfsId NFS storage ID (optional, zone\&#39;s default if unspecified).
-     * @param notify Whether or not to send a notification email at resource creation.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createProjectZoneKFS(projectId: string, zoneId: string, kFS: KFS, nfsId?: string, notify?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<KFS>;
-    public createProjectZoneKFS(projectId: string, zoneId: string, kFS: KFS, nfsId?: string, notify?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<KFS>>;
-    public createProjectZoneKFS(projectId: string, zoneId: string, kFS: KFS, nfsId?: string, notify?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<KFS>>;
-    public createProjectZoneKFS(projectId: string, zoneId: string, kFS: KFS, nfsId?: string, notify?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public createProjectZoneKFS(projectId: string, zoneId: string, kFS: KFS, nfsId?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<KFS>;
+    public createProjectZoneKFS(projectId: string, zoneId: string, kFS: KFS, nfsId?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<KFS>>;
+    public createProjectZoneKFS(projectId: string, zoneId: string, kFS: KFS, nfsId?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<KFS>>;
+    public createProjectZoneKFS(projectId: string, zoneId: string, kFS: KFS, nfsId?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (projectId === null || projectId === undefined) {
             throw new Error('Required parameter projectId was null or undefined when calling createProjectZoneKFS.');
         }
@@ -537,10 +518,6 @@ export class ProjectService {
         if (nfsId !== undefined && nfsId !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>nfsId, 'nfsId');
-        }
-        if (notify !== undefined && notify !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>notify, 'notify');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1099,14 +1076,13 @@ export class ProjectService {
      * @param projectId The ID of the project.
      * @param zoneId The ID of the availability zone.
      * @param nfsId NFS storage ID (optional, zone\&#39;s default if unspecified).
-     * @param notify Whether or not to send a notification email at resource creation.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public listProjectZoneKFSs(projectId: string, zoneId: string, nfsId?: string, notify?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
-    public listProjectZoneKFSs(projectId: string, zoneId: string, nfsId?: string, notify?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
-    public listProjectZoneKFSs(projectId: string, zoneId: string, nfsId?: string, notify?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
-    public listProjectZoneKFSs(projectId: string, zoneId: string, nfsId?: string, notify?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public listProjectZoneKFSs(projectId: string, zoneId: string, nfsId?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
+    public listProjectZoneKFSs(projectId: string, zoneId: string, nfsId?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
+    public listProjectZoneKFSs(projectId: string, zoneId: string, nfsId?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
+    public listProjectZoneKFSs(projectId: string, zoneId: string, nfsId?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (projectId === null || projectId === undefined) {
             throw new Error('Required parameter projectId was null or undefined when calling listProjectZoneKFSs.');
         }
@@ -1118,10 +1094,6 @@ export class ProjectService {
         if (nfsId !== undefined && nfsId !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>nfsId, 'nfsId');
-        }
-        if (notify !== undefined && notify !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>notify, 'notify');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1335,23 +1307,18 @@ export class ProjectService {
     /**
      * Returns the IDs of project objects.
      * @param subnetSize The minimum VPC subnet size to be affected to the project. WARNING, this cannot be changed later.
-     * @param notify Whether or not to send a notification email at resource creation.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public listProjects(subnetSize?: number, notify?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
-    public listProjects(subnetSize?: number, notify?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
-    public listProjects(subnetSize?: number, notify?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
-    public listProjects(subnetSize?: number, notify?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public listProjects(subnetSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
+    public listProjects(subnetSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
+    public listProjects(subnetSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
+    public listProjects(subnetSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (subnetSize !== undefined && subnetSize !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>subnetSize, 'subnetSize');
-        }
-        if (notify !== undefined && notify !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>notify, 'notify');
         }
 
         let localVarHeaders = this.defaultHeaders;

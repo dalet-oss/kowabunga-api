@@ -29,7 +29,6 @@ type ApiCreateProjectRequest struct {
 	ApiService *ProjectAPIService
 	project *Project
 	subnetSize *int32
-	notify *bool
 }
 
 // Project payload.
@@ -41,12 +40,6 @@ func (r ApiCreateProjectRequest) Project(project Project) ApiCreateProjectReques
 // The minimum VPC subnet size to be affected to the project. WARNING, this cannot be changed later.
 func (r ApiCreateProjectRequest) SubnetSize(subnetSize int32) ApiCreateProjectRequest {
 	r.subnetSize = &subnetSize
-	return r
-}
-
-// Whether or not to send a notification email at resource creation.
-func (r ApiCreateProjectRequest) Notify(notify bool) ApiCreateProjectRequest {
-	r.notify = &notify
 	return r
 }
 
@@ -95,9 +88,6 @@ func (a *ProjectAPIService) CreateProjectExecute(r ApiCreateProjectRequest) (*Pr
 
 	if r.subnetSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "subnetSize", r.subnetSize, "")
-	}
-	if r.notify != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "notify", r.notify, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -456,18 +446,11 @@ type ApiCreateProjectZoneInstanceRequest struct {
 	projectId string
 	zoneId string
 	instance *Instance
-	notify *bool
 }
 
 // Instance payload.
 func (r ApiCreateProjectZoneInstanceRequest) Instance(instance Instance) ApiCreateProjectZoneInstanceRequest {
 	r.instance = &instance
-	return r
-}
-
-// Whether or not to send a notification email at resource creation.
-func (r ApiCreateProjectZoneInstanceRequest) Notify(notify bool) ApiCreateProjectZoneInstanceRequest {
-	r.notify = &notify
 	return r
 }
 
@@ -520,9 +503,6 @@ func (a *ProjectAPIService) CreateProjectZoneInstanceExecute(r ApiCreateProjectZ
 		return localVarReturnValue, nil, reportError("instance is required and must be specified")
 	}
 
-	if r.notify != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "notify", r.notify, "")
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -678,7 +658,6 @@ type ApiCreateProjectZoneKCERequest struct {
 	poolId *string
 	templateId *string
 	public *bool
-	notify *bool
 }
 
 // KCE payload.
@@ -702,12 +681,6 @@ func (r ApiCreateProjectZoneKCERequest) TemplateId(templateId string) ApiCreateP
 // Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).
 func (r ApiCreateProjectZoneKCERequest) Public(public bool) ApiCreateProjectZoneKCERequest {
 	r.public = &public
-	return r
-}
-
-// Whether or not to send a notification email at resource creation.
-func (r ApiCreateProjectZoneKCERequest) Notify(notify bool) ApiCreateProjectZoneKCERequest {
-	r.notify = &notify
 	return r
 }
 
@@ -768,9 +741,6 @@ func (a *ProjectAPIService) CreateProjectZoneKCEExecute(r ApiCreateProjectZoneKC
 	}
 	if r.public != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "public", r.public, "")
-	}
-	if r.notify != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "notify", r.notify, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -925,7 +895,6 @@ type ApiCreateProjectZoneKFSRequest struct {
 	zoneId string
 	kFS *KFS
 	nfsId *string
-	notify *bool
 }
 
 // KFS payload.
@@ -937,12 +906,6 @@ func (r ApiCreateProjectZoneKFSRequest) KFS(kFS KFS) ApiCreateProjectZoneKFSRequ
 // NFS storage ID (optional, zone&#39;s default if unspecified).
 func (r ApiCreateProjectZoneKFSRequest) NfsId(nfsId string) ApiCreateProjectZoneKFSRequest {
 	r.nfsId = &nfsId
-	return r
-}
-
-// Whether or not to send a notification email at resource creation.
-func (r ApiCreateProjectZoneKFSRequest) Notify(notify bool) ApiCreateProjectZoneKFSRequest {
-	r.notify = &notify
 	return r
 }
 
@@ -997,9 +960,6 @@ func (a *ProjectAPIService) CreateProjectZoneKFSExecute(r ApiCreateProjectZoneKF
 
 	if r.nfsId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "nfsId", r.nfsId, "")
-	}
-	if r.notify != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "notify", r.notify, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -2206,18 +2166,11 @@ type ApiListProjectZoneKFSsRequest struct {
 	projectId string
 	zoneId string
 	nfsId *string
-	notify *bool
 }
 
 // NFS storage ID (optional, zone&#39;s default if unspecified).
 func (r ApiListProjectZoneKFSsRequest) NfsId(nfsId string) ApiListProjectZoneKFSsRequest {
 	r.nfsId = &nfsId
-	return r
-}
-
-// Whether or not to send a notification email at resource creation.
-func (r ApiListProjectZoneKFSsRequest) Notify(notify bool) ApiListProjectZoneKFSsRequest {
-	r.notify = &notify
 	return r
 }
 
@@ -2269,9 +2222,6 @@ func (a *ProjectAPIService) ListProjectZoneKFSsExecute(r ApiListProjectZoneKFSsR
 
 	if r.nfsId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "nfsId", r.nfsId, "")
-	}
-	if r.notify != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "notify", r.notify, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2683,18 +2633,11 @@ type ApiListProjectsRequest struct {
 	ctx context.Context
 	ApiService *ProjectAPIService
 	subnetSize *int32
-	notify *bool
 }
 
 // The minimum VPC subnet size to be affected to the project. WARNING, this cannot be changed later.
 func (r ApiListProjectsRequest) SubnetSize(subnetSize int32) ApiListProjectsRequest {
 	r.subnetSize = &subnetSize
-	return r
-}
-
-// Whether or not to send a notification email at resource creation.
-func (r ApiListProjectsRequest) Notify(notify bool) ApiListProjectsRequest {
-	r.notify = &notify
 	return r
 }
 
@@ -2740,9 +2683,6 @@ func (a *ProjectAPIService) ListProjectsExecute(r ApiListProjectsRequest) ([]str
 
 	if r.subnetSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "subnetSize", r.subnetSize, "")
-	}
-	if r.notify != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "notify", r.notify, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

@@ -1356,7 +1356,6 @@ paths:
       operationId: ListProjects
       parameters:
       - $ref: '#/components/parameters/OptionalQuerySubnetSize'
-      - $ref: '#/components/parameters/OptionalQueryNotify'
       responses:
         "200":
           content:
@@ -1372,13 +1371,11 @@ paths:
       - project
     parameters:
     - $ref: '#/components/parameters/OptionalQuerySubnetSize'
-    - $ref: '#/components/parameters/OptionalQueryNotify'
     post:
       description: Creates a new project.
       operationId: CreateProject
       parameters:
       - $ref: '#/components/parameters/OptionalQuerySubnetSize'
-      - $ref: '#/components/parameters/OptionalQueryNotify'
       requestBody:
         content:
           application/json:
@@ -1672,14 +1669,12 @@ paths:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/ZoneID'
-    - $ref: '#/components/parameters/OptionalQueryNotify'
     post:
       description: Creates a new virtual machine instance.
       operationId: CreateProjectZoneInstance
       parameters:
       - $ref: '#/components/parameters/ProjectID'
       - $ref: '#/components/parameters/ZoneID'
-      - $ref: '#/components/parameters/OptionalQueryNotify'
       requestBody:
         content:
           application/json:
@@ -1746,7 +1741,6 @@ paths:
     - $ref: '#/components/parameters/OptionalQueryPoolID'
     - $ref: '#/components/parameters/OptionalQueryTemplateID'
     - $ref: '#/components/parameters/OptionalQueryKcePublic'
-    - $ref: '#/components/parameters/OptionalQueryNotify'
     post:
       description: Creates a new KCE (Kowabunga Compute Engine).
       operationId: CreateProjectZoneKCE
@@ -1756,7 +1750,6 @@ paths:
       - $ref: '#/components/parameters/OptionalQueryPoolID'
       - $ref: '#/components/parameters/OptionalQueryTemplateID'
       - $ref: '#/components/parameters/OptionalQueryKcePublic'
-      - $ref: '#/components/parameters/OptionalQueryNotify'
       requestBody:
         content:
           application/json:
@@ -1824,7 +1817,6 @@ paths:
       - $ref: '#/components/parameters/ProjectID'
       - $ref: '#/components/parameters/ZoneID'
       - $ref: '#/components/parameters/OptionalQueryNfsID'
-      - $ref: '#/components/parameters/OptionalQueryNotify'
       responses:
         "200":
           content:
@@ -1846,7 +1838,6 @@ paths:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/ZoneID'
     - $ref: '#/components/parameters/OptionalQueryNfsID'
-    - $ref: '#/components/parameters/OptionalQueryNotify'
     post:
       description: Creates a new KFS (Kowabunga File System).
       operationId: CreateProjectZoneKFS
@@ -1854,7 +1845,6 @@ paths:
       - $ref: '#/components/parameters/ProjectID'
       - $ref: '#/components/parameters/ZoneID'
       - $ref: '#/components/parameters/OptionalQueryNfsID'
-      - $ref: '#/components/parameters/OptionalQueryNotify'
       requestBody:
         content:
           application/json:
@@ -3570,15 +3560,6 @@ components:
       schema:
         type: string
       style: simple
-    OptionalQueryNotify:
-      description: Whether or not to send a notification email at resource creation.
-      explode: true
-      in: query
-      name: notify
-      required: false
-      schema:
-        type: boolean
-      style: form
     HostID:
       description: The ID of the computing host.
       explode: false

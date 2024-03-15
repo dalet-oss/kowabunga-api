@@ -185,21 +185,7 @@ func (c *ProjectAPIController) CreateProject(w http.ResponseWriter, r *http.Requ
 		subnetSizeParam = param
 	} else {
 	}
-	var notifyParam bool
-	if query.Has("notify") {
-		param, err := parseBoolParameter(
-			query.Get("notify"),
-			WithParse[bool](parseBool),
-		)
-		if err != nil {
-			c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-			return
-		}
-
-		notifyParam = param
-	} else {
-	}
-	result, err := c.service.CreateProject(r.Context(), projectParam, subnetSizeParam, notifyParam)
+	result, err := c.service.CreateProject(r.Context(), projectParam, subnetSizeParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -245,11 +231,6 @@ func (c *ProjectAPIController) CreateProjectDnsRecord(w http.ResponseWriter, r *
 // CreateProjectZoneInstance - 
 func (c *ProjectAPIController) CreateProjectZoneInstance(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	query, err := parseQuery(r.URL.RawQuery)
-	if err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
 	projectIdParam := params["projectId"]
 	if projectIdParam == "" {
 		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
@@ -275,21 +256,7 @@ func (c *ProjectAPIController) CreateProjectZoneInstance(w http.ResponseWriter, 
 		c.errorHandler(w, r, err, nil)
 		return
 	}
-	var notifyParam bool
-	if query.Has("notify") {
-		param, err := parseBoolParameter(
-			query.Get("notify"),
-			WithParse[bool](parseBool),
-		)
-		if err != nil {
-			c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-			return
-		}
-
-		notifyParam = param
-	} else {
-	}
-	result, err := c.service.CreateProjectZoneInstance(r.Context(), projectIdParam, zoneIdParam, instanceParam, notifyParam)
+	result, err := c.service.CreateProjectZoneInstance(r.Context(), projectIdParam, zoneIdParam, instanceParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -360,21 +327,7 @@ func (c *ProjectAPIController) CreateProjectZoneKCE(w http.ResponseWriter, r *ht
 		publicParam = param
 	} else {
 	}
-	var notifyParam bool
-	if query.Has("notify") {
-		param, err := parseBoolParameter(
-			query.Get("notify"),
-			WithParse[bool](parseBool),
-		)
-		if err != nil {
-			c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-			return
-		}
-
-		notifyParam = param
-	} else {
-	}
-	result, err := c.service.CreateProjectZoneKCE(r.Context(), projectIdParam, zoneIdParam, kceParam, poolIdParam, templateIdParam, publicParam, notifyParam)
+	result, err := c.service.CreateProjectZoneKCE(r.Context(), projectIdParam, zoneIdParam, kceParam, poolIdParam, templateIdParam, publicParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -424,21 +377,7 @@ func (c *ProjectAPIController) CreateProjectZoneKFS(w http.ResponseWriter, r *ht
 		nfsIdParam = param
 	} else {
 	}
-	var notifyParam bool
-	if query.Has("notify") {
-		param, err := parseBoolParameter(
-			query.Get("notify"),
-			WithParse[bool](parseBool),
-		)
-		if err != nil {
-			c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-			return
-		}
-
-		notifyParam = param
-	} else {
-	}
-	result, err := c.service.CreateProjectZoneKFS(r.Context(), projectIdParam, zoneIdParam, kfsParam, nfsIdParam, notifyParam)
+	result, err := c.service.CreateProjectZoneKFS(r.Context(), projectIdParam, zoneIdParam, kfsParam, nfsIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -650,21 +589,7 @@ func (c *ProjectAPIController) ListProjectZoneKFSs(w http.ResponseWriter, r *htt
 		nfsIdParam = param
 	} else {
 	}
-	var notifyParam bool
-	if query.Has("notify") {
-		param, err := parseBoolParameter(
-			query.Get("notify"),
-			WithParse[bool](parseBool),
-		)
-		if err != nil {
-			c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-			return
-		}
-
-		notifyParam = param
-	} else {
-	}
-	result, err := c.service.ListProjectZoneKFSs(r.Context(), projectIdParam, zoneIdParam, nfsIdParam, notifyParam)
+	result, err := c.service.ListProjectZoneKFSs(r.Context(), projectIdParam, zoneIdParam, nfsIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -741,21 +666,7 @@ func (c *ProjectAPIController) ListProjects(w http.ResponseWriter, r *http.Reque
 		subnetSizeParam = param
 	} else {
 	}
-	var notifyParam bool
-	if query.Has("notify") {
-		param, err := parseBoolParameter(
-			query.Get("notify"),
-			WithParse[bool](parseBool),
-		)
-		if err != nil {
-			c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-			return
-		}
-
-		notifyParam = param
-	} else {
-	}
-	result, err := c.service.ListProjects(r.Context(), subnetSizeParam, notifyParam)
+	result, err := c.service.ListProjects(r.Context(), subnetSizeParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

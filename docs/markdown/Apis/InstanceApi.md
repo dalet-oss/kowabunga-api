@@ -24,7 +24,7 @@ All URIs are relative to */api/v1*
 
 <a name="createProjectZoneInstance"></a>
 # **createProjectZoneInstance**
-> Instance createProjectZoneInstance(projectId, zoneId, Instance, notify)
+> Instance createProjectZoneInstance(projectId, zoneId, Instance)
 
 
 
@@ -37,7 +37,6 @@ All URIs are relative to */api/v1*
 | **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **Instance** | [**Instance**](../Models/Instance.md)| Instance payload. | |
-| **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 
 ### Return type
 

@@ -15,7 +15,7 @@ All URIs are relative to */api/v1*
 
 <a name="createProjectZoneKFS"></a>
 # **createProjectZoneKFS**
-> KFS createProjectZoneKFS(projectId, zoneId, KFS, nfsId, notify)
+> KFS createProjectZoneKFS(projectId, zoneId, KFS, nfsId)
 
 
 
@@ -29,7 +29,6 @@ All URIs are relative to */api/v1*
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **KFS** | [**KFS**](../Models/KFS.md)| KFS payload. | |
 | **nfsId** | **String**| NFS storage ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
-| **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 
 ### Return type
 
@@ -97,7 +96,7 @@ This endpoint does not need any parameter.
 
 <a name="listProjectZoneKFSs"></a>
 # **listProjectZoneKFSs**
-> List listProjectZoneKFSs(projectId, zoneId, nfsId, notify)
+> List listProjectZoneKFSs(projectId, zoneId, nfsId)
 
 
 
@@ -110,7 +109,6 @@ This endpoint does not need any parameter.
 | **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **nfsId** | **String**| NFS storage ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
-| **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 
 ### Return type
 

@@ -28,7 +28,7 @@ func NewProjectAPIService() ProjectAPIServicer {
 }
 
 // CreateProject - 
-func (s *ProjectAPIService) CreateProject(ctx context.Context, project Project, subnetSize int32, notify bool) (ImplResponse, error) {
+func (s *ProjectAPIService) CreateProject(ctx context.Context, project Project, subnetSize int32) (ImplResponse, error) {
 	// TODO - update CreateProject with the required logic for this service method.
 	// Add api_project_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
@@ -92,7 +92,7 @@ func (s *ProjectAPIService) CreateProjectDnsRecord(ctx context.Context, projectI
 }
 
 // CreateProjectZoneInstance - 
-func (s *ProjectAPIService) CreateProjectZoneInstance(ctx context.Context, projectId string, zoneId string, instance Instance, notify bool) (ImplResponse, error) {
+func (s *ProjectAPIService) CreateProjectZoneInstance(ctx context.Context, projectId string, zoneId string, instance Instance) (ImplResponse, error) {
 	// TODO - update CreateProjectZoneInstance with the required logic for this service method.
 	// Add api_project_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
@@ -124,7 +124,7 @@ func (s *ProjectAPIService) CreateProjectZoneInstance(ctx context.Context, proje
 }
 
 // CreateProjectZoneKCE - 
-func (s *ProjectAPIService) CreateProjectZoneKCE(ctx context.Context, projectId string, zoneId string, kce Kce, poolId string, templateId string, public bool, notify bool) (ImplResponse, error) {
+func (s *ProjectAPIService) CreateProjectZoneKCE(ctx context.Context, projectId string, zoneId string, kce Kce, poolId string, templateId string, public bool) (ImplResponse, error) {
 	// TODO - update CreateProjectZoneKCE with the required logic for this service method.
 	// Add api_project_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
@@ -156,7 +156,7 @@ func (s *ProjectAPIService) CreateProjectZoneKCE(ctx context.Context, projectId 
 }
 
 // CreateProjectZoneKFS - 
-func (s *ProjectAPIService) CreateProjectZoneKFS(ctx context.Context, projectId string, zoneId string, kfs Kfs, nfsId string, notify bool) (ImplResponse, error) {
+func (s *ProjectAPIService) CreateProjectZoneKFS(ctx context.Context, projectId string, zoneId string, kfs Kfs, nfsId string) (ImplResponse, error) {
 	// TODO - update CreateProjectZoneKFS with the required logic for this service method.
 	// Add api_project_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
@@ -338,7 +338,7 @@ func (s *ProjectAPIService) ListProjectZoneKCEs(ctx context.Context, projectId s
 }
 
 // ListProjectZoneKFSs - 
-func (s *ProjectAPIService) ListProjectZoneKFSs(ctx context.Context, projectId string, zoneId string, nfsId string, notify bool) (ImplResponse, error) {
+func (s *ProjectAPIService) ListProjectZoneKFSs(ctx context.Context, projectId string, zoneId string, nfsId string) (ImplResponse, error) {
 	// TODO - update ListProjectZoneKFSs with the required logic for this service method.
 	// Add api_project_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
@@ -398,7 +398,7 @@ func (s *ProjectAPIService) ListProjectZoneVolumes(ctx context.Context, projectI
 }
 
 // ListProjects - 
-func (s *ProjectAPIService) ListProjects(ctx context.Context, subnetSize int32, notify bool) (ImplResponse, error) {
+func (s *ProjectAPIService) ListProjects(ctx context.Context, subnetSize int32) (ImplResponse, error) {
 	// TODO - update ListProjects with the required logic for this service method.
 	// Add api_project_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 

@@ -25,7 +25,7 @@ components:
 
 paths:
   /project:
-{{ oas.LC(resources.project, [resources.project.tag], ['OptionalQuery' + resources.subnet.paramSubnetSizeSchema, 'OptionalQueryNotify']) }}
+{{ oas.LC(resources.project, [resources.project.tag], ['OptionalQuery' + resources.subnet.paramSubnetSizeSchema]) }}
 
   /project/{{ '{' + resources.project.paramId + '}' }}:
 {{ oas.RUD(resources.project, [resources.project.tag], [resources.project.paramSchema]) }}
@@ -55,7 +55,7 @@ paths:
 {{ oas.GetAll('List' + resources.project.schema + resources.zone.schema + resources.volume.schema + 's', resources.volume.desc, [resources.project.tag, resources.zone.tag, resources.volume.tag], True) }}
 
   /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/instance:
-{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema, 'OptionalQueryNotify']) }}
+{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema]) }}
 {{ oas.Create('Create' + resources.project.schema + resources.zone.schema + resources.instance.schema, resources.instance.schema, resources.instance.desc, [resources.project.tag, resources.zone.tag, resources.instance.tag]) }}
 
   /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/instances:
@@ -63,7 +63,7 @@ paths:
 {{ oas.GetAll('List' + resources.project.schema + resources.zone.schema + resources.instance.schema + 's', resources.instance.desc, [resources.project.tag, resources.zone.tag, resources.instance.tag], True) }}
 
   /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/kce:
-{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema, 'OptionalQuery' + resources.pool.paramSchema, 'OptionalQuery' + resources.template.paramSchema, 'OptionalQuery' + resources.kce.paramPublicSchema, 'OptionalQueryNotify']) }}
+{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema, 'OptionalQuery' + resources.pool.paramSchema, 'OptionalQuery' + resources.template.paramSchema, 'OptionalQuery' + resources.kce.paramPublicSchema]) }}
 {{ oas.Create('Create' + resources.project.schema + resources.zone.schema + resources.kce.schema, resources.kce.schema, resources.kce.desc, [resources.project.tag, resources.zone.tag, resources.kce.tag]) }}
 
   /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/kces:
@@ -71,7 +71,7 @@ paths:
 {{ oas.GetAll('List' + resources.project.schema + resources.zone.schema + resources.kce.schema + 's', resources.kce.desc, [resources.project.tag, resources.zone.tag, resources.kce.tag], True) }}
 
   /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/kfs:
-{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema, 'OptionalQuery' + resources.nfs.paramSchema, 'OptionalQueryNotify']) }}
+{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema, 'OptionalQuery' + resources.nfs.paramSchema]) }}
 {{ oas.GetAll('List' + resources.project.schema + resources.zone.schema + resources.kfs.schema + 's', resources.kfs.desc, [resources.project.tag, resources.zone.tag, resources.kfs.tag], True) }}
 {{ oas.Create('Create' + resources.project.schema + resources.zone.schema + resources.kfs.schema, resources.kfs.schema, resources.kfs.desc, [resources.project.tag, resources.zone.tag, resources.kfs.tag]) }}
 

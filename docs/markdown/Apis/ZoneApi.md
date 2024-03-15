@@ -92,7 +92,7 @@ All URIs are relative to */api/v1*
 
 <a name="createProjectZoneInstance"></a>
 # **createProjectZoneInstance**
-> Instance createProjectZoneInstance(projectId, zoneId, Instance, notify)
+> Instance createProjectZoneInstance(projectId, zoneId, Instance)
 
 
 
@@ -105,7 +105,6 @@ All URIs are relative to */api/v1*
 | **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **Instance** | [**Instance**](../Models/Instance.md)| Instance payload. | |
-| **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 
 ### Return type
 
@@ -122,7 +121,7 @@ All URIs are relative to */api/v1*
 
 <a name="createProjectZoneKCE"></a>
 # **createProjectZoneKCE**
-> KCE createProjectZoneKCE(projectId, zoneId, KCE, poolId, templateId, public, notify)
+> KCE createProjectZoneKCE(projectId, zoneId, KCE, poolId, templateId, public)
 
 
 
@@ -138,7 +137,6 @@ All URIs are relative to */api/v1*
 | **poolId** | **String**| Storage pool ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **templateId** | **String**| Template to clone the storage volume from (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
 | **public** | **Boolean**| Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false). | [optional] [default to null] |
-| **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 
 ### Return type
 
@@ -155,7 +153,7 @@ All URIs are relative to */api/v1*
 
 <a name="createProjectZoneKFS"></a>
 # **createProjectZoneKFS**
-> KFS createProjectZoneKFS(projectId, zoneId, KFS, nfsId, notify)
+> KFS createProjectZoneKFS(projectId, zoneId, KFS, nfsId)
 
 
 
@@ -169,7 +167,6 @@ All URIs are relative to */api/v1*
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **KFS** | [**KFS**](../Models/KFS.md)| KFS payload. | |
 | **nfsId** | **String**| NFS storage ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
-| **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 
 ### Return type
 
@@ -441,7 +438,7 @@ null (empty response body)
 
 <a name="listProjectZoneKFSs"></a>
 # **listProjectZoneKFSs**
-> List listProjectZoneKFSs(projectId, zoneId, nfsId, notify)
+> List listProjectZoneKFSs(projectId, zoneId, nfsId)
 
 
 
@@ -454,7 +451,6 @@ null (empty response body)
 | **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **nfsId** | **String**| NFS storage ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
-| **notify** | **Boolean**| Whether or not to send a notification email at resource creation. | [optional] [default to null] |
 
 ### Return type
 
