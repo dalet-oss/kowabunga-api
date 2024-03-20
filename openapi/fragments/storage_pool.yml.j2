@@ -12,7 +12,7 @@ components:
 
   parameters:
 {{ oas.PathParamID(resources.pool) }}
-{{ oas.StringQueryParam(resources.pool.paramSchema, resources.pool.paramId, "Storage pool ID (optional, zone's default if unspecified)") }}
+{{ oas.StringQueryParam(resources.pool.paramSchema, resources.pool.paramId, "Storage pool ID (optional, region's default if unspecified)") }}
 
 paths:
   /pool:

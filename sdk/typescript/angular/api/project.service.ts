@@ -389,8 +389,8 @@ export class ProjectService {
      * @param projectId The ID of the project.
      * @param zoneId The ID of the availability zone.
      * @param kCE KCE payload.
-     * @param poolId Storage pool ID (optional, zone\&#39;s default if unspecified).
-     * @param templateId Template to clone the storage volume from (optional, zone\&#39;s default if unspecified).
+     * @param poolId Storage pool ID (optional, region\&#39;s default if unspecified).
+     * @param templateId Template to clone the storage volume from (optional, region\&#39;s default if unspecified).
      * @param _public Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false).
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -496,7 +496,7 @@ export class ProjectService {
      * @param projectId The ID of the project.
      * @param zoneId The ID of the availability zone.
      * @param kFS KFS payload.
-     * @param nfsId NFS storage ID (optional, zone\&#39;s default if unspecified).
+     * @param nfsId NFS storage ID (optional, region\&#39;s default if unspecified).
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -682,8 +682,8 @@ export class ProjectService {
      * @param projectId The ID of the project.
      * @param zoneId The ID of the availability zone.
      * @param volume Volume payload.
-     * @param poolId Storage pool ID (optional, zone\&#39;s default if unspecified).
-     * @param templateId Template to clone the storage volume from (optional, zone\&#39;s default if unspecified).
+     * @param poolId Storage pool ID (optional, region\&#39;s default if unspecified).
+     * @param templateId Template to clone the storage volume from (optional, region\&#39;s default if unspecified).
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -1075,7 +1075,7 @@ export class ProjectService {
      * Returns the IDs of KFS (Kowabunga File System) objects.
      * @param projectId The ID of the project.
      * @param zoneId The ID of the availability zone.
-     * @param nfsId NFS storage ID (optional, zone\&#39;s default if unspecified).
+     * @param nfsId NFS storage ID (optional, region\&#39;s default if unspecified).
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */

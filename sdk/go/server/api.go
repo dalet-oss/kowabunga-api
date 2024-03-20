@@ -170,11 +170,17 @@ type RecordAPIRouter interface {
 // pass the data to a RegionAPIServicer to perform the required actions, then write the service results to the http response.
 type RegionAPIRouter interface { 
 	CreateRegion(http.ResponseWriter, *http.Request)
+	CreateStorageNFS(http.ResponseWriter, *http.Request)
+	CreateStoragePool(http.ResponseWriter, *http.Request)
 	CreateZone(http.ResponseWriter, *http.Request)
 	DeleteRegion(http.ResponseWriter, *http.Request)
+	ListRegionStorageNFSs(http.ResponseWriter, *http.Request)
+	ListRegionStoragePools(http.ResponseWriter, *http.Request)
 	ListRegionZones(http.ResponseWriter, *http.Request)
 	ListRegions(http.ResponseWriter, *http.Request)
 	ReadRegion(http.ResponseWriter, *http.Request)
+	SetRegionDefaultStorageNFS(http.ResponseWriter, *http.Request)
+	SetRegionDefaultStoragePool(http.ResponseWriter, *http.Request)
 	UpdateRegion(http.ResponseWriter, *http.Request)
 }
 // SubnetAPIRouter defines the required methods for binding the api requests to a responses for the SubnetAPI
@@ -233,19 +239,13 @@ type VolumeAPIRouter interface {
 type ZoneAPIRouter interface { 
 	CreateHost(http.ResponseWriter, *http.Request)
 	CreateNetGW(http.ResponseWriter, *http.Request)
-	CreateStorageNFS(http.ResponseWriter, *http.Request)
-	CreateStoragePool(http.ResponseWriter, *http.Request)
 	CreateVNet(http.ResponseWriter, *http.Request)
 	DeleteZone(http.ResponseWriter, *http.Request)
 	ListZoneHosts(http.ResponseWriter, *http.Request)
 	ListZoneNetGWs(http.ResponseWriter, *http.Request)
-	ListZoneStorageNFSs(http.ResponseWriter, *http.Request)
-	ListZoneStoragePools(http.ResponseWriter, *http.Request)
 	ListZoneVNets(http.ResponseWriter, *http.Request)
 	ListZones(http.ResponseWriter, *http.Request)
 	ReadZone(http.ResponseWriter, *http.Request)
-	SetZoneDefaultStorageNFS(http.ResponseWriter, *http.Request)
-	SetZoneDefaultStoragePool(http.ResponseWriter, *http.Request)
 	UpdateZone(http.ResponseWriter, *http.Request)
 }
 
@@ -440,11 +440,17 @@ type RecordAPIServicer interface {
 // and updated with the logic required for the API.
 type RegionAPIServicer interface { 
 	CreateRegion(context.Context, Region) (ImplResponse, error)
+	CreateStorageNFS(context.Context, string, StorageNfs) (ImplResponse, error)
+	CreateStoragePool(context.Context, string, StoragePool) (ImplResponse, error)
 	CreateZone(context.Context, string, Zone) (ImplResponse, error)
 	DeleteRegion(context.Context, string) (ImplResponse, error)
+	ListRegionStorageNFSs(context.Context, string) (ImplResponse, error)
+	ListRegionStoragePools(context.Context, string) (ImplResponse, error)
 	ListRegionZones(context.Context, string) (ImplResponse, error)
 	ListRegions(context.Context) (ImplResponse, error)
 	ReadRegion(context.Context, string) (ImplResponse, error)
+	SetRegionDefaultStorageNFS(context.Context, string, string) (ImplResponse, error)
+	SetRegionDefaultStoragePool(context.Context, string, string) (ImplResponse, error)
 	UpdateRegion(context.Context, string, Region) (ImplResponse, error)
 }
 
@@ -521,18 +527,12 @@ type VolumeAPIServicer interface {
 type ZoneAPIServicer interface { 
 	CreateHost(context.Context, string, Host) (ImplResponse, error)
 	CreateNetGW(context.Context, string, NetGw) (ImplResponse, error)
-	CreateStorageNFS(context.Context, string, StorageNfs) (ImplResponse, error)
-	CreateStoragePool(context.Context, string, StoragePool) (ImplResponse, error)
 	CreateVNet(context.Context, string, VNet) (ImplResponse, error)
 	DeleteZone(context.Context, string) (ImplResponse, error)
 	ListZoneHosts(context.Context, string) (ImplResponse, error)
 	ListZoneNetGWs(context.Context, string) (ImplResponse, error)
-	ListZoneStorageNFSs(context.Context, string) (ImplResponse, error)
-	ListZoneStoragePools(context.Context, string) (ImplResponse, error)
 	ListZoneVNets(context.Context, string) (ImplResponse, error)
 	ListZones(context.Context) (ImplResponse, error)
 	ReadZone(context.Context, string) (ImplResponse, error)
-	SetZoneDefaultStorageNFS(context.Context, string, string) (ImplResponse, error)
-	SetZoneDefaultStoragePool(context.Context, string, string) (ImplResponse, error)
 	UpdateZone(context.Context, string, Zone) (ImplResponse, error)
 }

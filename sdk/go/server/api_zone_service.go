@@ -91,70 +91,6 @@ func (s *ZoneAPIService) CreateNetGW(ctx context.Context, zoneId string, netGw N
 	return Response(http.StatusNotImplemented, nil), errors.New("CreateNetGW method not implemented")
 }
 
-// CreateStorageNFS - 
-func (s *ZoneAPIService) CreateStorageNFS(ctx context.Context, zoneId string, storageNfs StorageNfs) (ImplResponse, error) {
-	// TODO - update CreateStorageNFS with the required logic for this service method.
-	// Add api_zone_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(201, StorageNfs{}) or use other options such as http.Ok ...
-	// return Response(201, StorageNfs{}), nil
-
-	// TODO: Uncomment the next line to return response Response(400, ApiErrorBadRequest{}) or use other options such as http.Ok ...
-	// return Response(400, ApiErrorBadRequest{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	// TODO: Uncomment the next line to return response Response(409, ApiErrorConflict{}) or use other options such as http.Ok ...
-	// return Response(409, ApiErrorConflict{}), nil
-
-	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
-	// return Response(422, ApiErrorUnprocessableEntity{}), nil
-
-	// TODO: Uncomment the next line to return response Response(507, ApiErrorInsufficientStorage{}) or use other options such as http.Ok ...
-	// return Response(507, ApiErrorInsufficientStorage{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("CreateStorageNFS method not implemented")
-}
-
-// CreateStoragePool - 
-func (s *ZoneAPIService) CreateStoragePool(ctx context.Context, zoneId string, storagePool StoragePool) (ImplResponse, error) {
-	// TODO - update CreateStoragePool with the required logic for this service method.
-	// Add api_zone_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(201, StoragePool{}) or use other options such as http.Ok ...
-	// return Response(201, StoragePool{}), nil
-
-	// TODO: Uncomment the next line to return response Response(400, ApiErrorBadRequest{}) or use other options such as http.Ok ...
-	// return Response(400, ApiErrorBadRequest{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	// TODO: Uncomment the next line to return response Response(409, ApiErrorConflict{}) or use other options such as http.Ok ...
-	// return Response(409, ApiErrorConflict{}), nil
-
-	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
-	// return Response(422, ApiErrorUnprocessableEntity{}), nil
-
-	// TODO: Uncomment the next line to return response Response(507, ApiErrorInsufficientStorage{}) or use other options such as http.Ok ...
-	// return Response(507, ApiErrorInsufficientStorage{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("CreateStoragePool method not implemented")
-}
-
 // CreateVNet - 
 func (s *ZoneAPIService) CreateVNet(ctx context.Context, zoneId string, vNet VNet) (ImplResponse, error) {
 	// TODO - update CreateVNet with the required logic for this service method.
@@ -253,46 +189,6 @@ func (s *ZoneAPIService) ListZoneNetGWs(ctx context.Context, zoneId string) (Imp
 	return Response(http.StatusNotImplemented, nil), errors.New("ListZoneNetGWs method not implemented")
 }
 
-// ListZoneStorageNFSs - 
-func (s *ZoneAPIService) ListZoneStorageNFSs(ctx context.Context, zoneId string) (ImplResponse, error) {
-	// TODO - update ListZoneStorageNFSs with the required logic for this service method.
-	// Add api_zone_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("ListZoneStorageNFSs method not implemented")
-}
-
-// ListZoneStoragePools - 
-func (s *ZoneAPIService) ListZoneStoragePools(ctx context.Context, zoneId string) (ImplResponse, error) {
-	// TODO - update ListZoneStoragePools with the required logic for this service method.
-	// Add api_zone_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
-	// return Response(200, []string{}), nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("ListZoneStoragePools method not implemented")
-}
-
 // ListZoneVNets - 
 func (s *ZoneAPIService) ListZoneVNets(ctx context.Context, zoneId string) (ImplResponse, error) {
 	// TODO - update ListZoneVNets with the required logic for this service method.
@@ -348,52 +244,6 @@ func (s *ZoneAPIService) ReadZone(ctx context.Context, zoneId string) (ImplRespo
 	// return Response(404, ApiErrorNotFound{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("ReadZone method not implemented")
-}
-
-// SetZoneDefaultStorageNFS - 
-func (s *ZoneAPIService) SetZoneDefaultStorageNFS(ctx context.Context, zoneId string, nfsId string) (ImplResponse, error) {
-	// TODO - update SetZoneDefaultStorageNFS with the required logic for this service method.
-	// Add api_zone_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, {}) or use other options such as http.Ok ...
-	// return Response(200, nil),nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
-	// return Response(422, ApiErrorUnprocessableEntity{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("SetZoneDefaultStorageNFS method not implemented")
-}
-
-// SetZoneDefaultStoragePool - 
-func (s *ZoneAPIService) SetZoneDefaultStoragePool(ctx context.Context, zoneId string, poolId string) (ImplResponse, error) {
-	// TODO - update SetZoneDefaultStoragePool with the required logic for this service method.
-	// Add api_zone_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	// TODO: Uncomment the next line to return response Response(200, {}) or use other options such as http.Ok ...
-	// return Response(200, nil),nil
-
-	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
-	// return Response(401, ApiErrorUnauthorized{}), nil
-
-	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
-	// return Response(403, ApiErrorForbidden{}), nil
-
-	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
-	// return Response(404, ApiErrorNotFound{}), nil
-
-	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
-	// return Response(422, ApiErrorUnprocessableEntity{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("SetZoneDefaultStoragePool method not implemented")
 }
 
 // UpdateZone - 

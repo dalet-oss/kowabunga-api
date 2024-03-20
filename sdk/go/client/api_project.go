@@ -666,13 +666,13 @@ func (r ApiCreateProjectZoneKCERequest) KCE(kCE KCE) ApiCreateProjectZoneKCERequ
 	return r
 }
 
-// Storage pool ID (optional, zone&#39;s default if unspecified).
+// Storage pool ID (optional, region&#39;s default if unspecified).
 func (r ApiCreateProjectZoneKCERequest) PoolId(poolId string) ApiCreateProjectZoneKCERequest {
 	r.poolId = &poolId
 	return r
 }
 
-// Template to clone the storage volume from (optional, zone&#39;s default if unspecified).
+// Template to clone the storage volume from (optional, region&#39;s default if unspecified).
 func (r ApiCreateProjectZoneKCERequest) TemplateId(templateId string) ApiCreateProjectZoneKCERequest {
 	r.templateId = &templateId
 	return r
@@ -903,7 +903,7 @@ func (r ApiCreateProjectZoneKFSRequest) KFS(kFS KFS) ApiCreateProjectZoneKFSRequ
 	return r
 }
 
-// NFS storage ID (optional, zone&#39;s default if unspecified).
+// NFS storage ID (optional, region&#39;s default if unspecified).
 func (r ApiCreateProjectZoneKFSRequest) NfsId(nfsId string) ApiCreateProjectZoneKFSRequest {
 	r.nfsId = &nfsId
 	return r
@@ -1332,13 +1332,13 @@ func (r ApiCreateProjectZoneVolumeRequest) Volume(volume Volume) ApiCreateProjec
 	return r
 }
 
-// Storage pool ID (optional, zone&#39;s default if unspecified).
+// Storage pool ID (optional, region&#39;s default if unspecified).
 func (r ApiCreateProjectZoneVolumeRequest) PoolId(poolId string) ApiCreateProjectZoneVolumeRequest {
 	r.poolId = &poolId
 	return r
 }
 
-// Template to clone the storage volume from (optional, zone&#39;s default if unspecified).
+// Template to clone the storage volume from (optional, region&#39;s default if unspecified).
 func (r ApiCreateProjectZoneVolumeRequest) TemplateId(templateId string) ApiCreateProjectZoneVolumeRequest {
 	r.templateId = &templateId
 	return r
@@ -2168,7 +2168,7 @@ type ApiListProjectZoneKFSsRequest struct {
 	nfsId *string
 }
 
-// NFS storage ID (optional, zone&#39;s default if unspecified).
+// NFS storage ID (optional, region&#39;s default if unspecified).
 func (r ApiListProjectZoneKFSsRequest) NfsId(nfsId string) ApiListProjectZoneKFSsRequest {
 	r.nfsId = &nfsId
 	return r

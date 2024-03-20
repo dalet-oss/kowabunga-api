@@ -56,6 +56,16 @@ func (c *RegionAPIController) Routes() Routes {
 			"/api/v1/region",
 			c.CreateRegion,
 		},
+		"CreateStorageNFS": Route{
+			strings.ToUpper("Post"),
+			"/api/v1/region/{regionId}/nfs",
+			c.CreateStorageNFS,
+		},
+		"CreateStoragePool": Route{
+			strings.ToUpper("Post"),
+			"/api/v1/region/{regionId}/pool",
+			c.CreateStoragePool,
+		},
 		"CreateZone": Route{
 			strings.ToUpper("Post"),
 			"/api/v1/region/{regionId}/zone",
@@ -65,6 +75,16 @@ func (c *RegionAPIController) Routes() Routes {
 			strings.ToUpper("Delete"),
 			"/api/v1/region/{regionId}",
 			c.DeleteRegion,
+		},
+		"ListRegionStorageNFSs": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/region/{regionId}/nfs",
+			c.ListRegionStorageNFSs,
+		},
+		"ListRegionStoragePools": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/region/{regionId}/pools",
+			c.ListRegionStoragePools,
 		},
 		"ListRegionZones": Route{
 			strings.ToUpper("Get"),
@@ -80,6 +100,16 @@ func (c *RegionAPIController) Routes() Routes {
 			strings.ToUpper("Get"),
 			"/api/v1/region/{regionId}",
 			c.ReadRegion,
+		},
+		"SetRegionDefaultStorageNFS": Route{
+			strings.ToUpper("Patch"),
+			"/api/v1/region/{regionId}/nfs/{nfsId}/default",
+			c.SetRegionDefaultStorageNFS,
+		},
+		"SetRegionDefaultStoragePool": Route{
+			strings.ToUpper("Patch"),
+			"/api/v1/region/{regionId}/pool/{poolId}/default",
+			c.SetRegionDefaultStoragePool,
 		},
 		"UpdateRegion": Route{
 			strings.ToUpper("Put"),
@@ -107,6 +137,72 @@ func (c *RegionAPIController) CreateRegion(w http.ResponseWriter, r *http.Reques
 		return
 	}
 	result, err := c.service.CreateRegion(r.Context(), regionParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// CreateStorageNFS - 
+func (c *RegionAPIController) CreateStorageNFS(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	regionIdParam := params["regionId"]
+	if regionIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
+		return
+	}
+	storageNfsParam := StorageNfs{}
+	d := json.NewDecoder(r.Body)
+	d.DisallowUnknownFields()
+	if err := d.Decode(&storageNfsParam); err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	if err := AssertStorageNfsRequired(storageNfsParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	if err := AssertStorageNfsConstraints(storageNfsParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	result, err := c.service.CreateStorageNFS(r.Context(), regionIdParam, storageNfsParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// CreateStoragePool - 
+func (c *RegionAPIController) CreateStoragePool(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	regionIdParam := params["regionId"]
+	if regionIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
+		return
+	}
+	storagePoolParam := StoragePool{}
+	d := json.NewDecoder(r.Body)
+	d.DisallowUnknownFields()
+	if err := d.Decode(&storagePoolParam); err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	if err := AssertStoragePoolRequired(storagePoolParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	if err := AssertStoragePoolConstraints(storagePoolParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	result, err := c.service.CreateStoragePool(r.Context(), regionIdParam, storagePoolParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -167,6 +263,42 @@ func (c *RegionAPIController) DeleteRegion(w http.ResponseWriter, r *http.Reques
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
+// ListRegionStorageNFSs - 
+func (c *RegionAPIController) ListRegionStorageNFSs(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	regionIdParam := params["regionId"]
+	if regionIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
+		return
+	}
+	result, err := c.service.ListRegionStorageNFSs(r.Context(), regionIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListRegionStoragePools - 
+func (c *RegionAPIController) ListRegionStoragePools(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	regionIdParam := params["regionId"]
+	if regionIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
+		return
+	}
+	result, err := c.service.ListRegionStoragePools(r.Context(), regionIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
 // ListRegionZones - 
 func (c *RegionAPIController) ListRegionZones(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -206,6 +338,52 @@ func (c *RegionAPIController) ReadRegion(w http.ResponseWriter, r *http.Request)
 		return
 	}
 	result, err := c.service.ReadRegion(r.Context(), regionIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// SetRegionDefaultStorageNFS - 
+func (c *RegionAPIController) SetRegionDefaultStorageNFS(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	regionIdParam := params["regionId"]
+	if regionIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
+		return
+	}
+	nfsIdParam := params["nfsId"]
+	if nfsIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"nfsId"}, nil)
+		return
+	}
+	result, err := c.service.SetRegionDefaultStorageNFS(r.Context(), regionIdParam, nfsIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// SetRegionDefaultStoragePool - 
+func (c *RegionAPIController) SetRegionDefaultStoragePool(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	regionIdParam := params["regionId"]
+	if regionIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
+		return
+	}
+	poolIdParam := params["poolId"]
+	if poolIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"poolId"}, nil)
+		return
+	}
+	result, err := c.service.SetRegionDefaultStoragePool(r.Context(), regionIdParam, poolIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

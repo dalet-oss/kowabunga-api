@@ -4,19 +4,19 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createStorageNFS**](NfsApi.md#createStorageNFS) | **POST** /zone/{zoneId}/nfs |  |
+| [**createStorageNFS**](NfsApi.md#createStorageNFS) | **POST** /region/{regionId}/nfs |  |
 | [**deleteStorageNFS**](NfsApi.md#deleteStorageNFS) | **DELETE** /nfs/{nfsId} |  |
+| [**listRegionStorageNFSs**](NfsApi.md#listRegionStorageNFSs) | **GET** /region/{regionId}/nfs |  |
 | [**listStorageNFSKFSs**](NfsApi.md#listStorageNFSKFSs) | **GET** /nfs/{nfsId}/kfs |  |
 | [**listStorageNFSs**](NfsApi.md#listStorageNFSs) | **GET** /nfs |  |
-| [**listZoneStorageNFSs**](NfsApi.md#listZoneStorageNFSs) | **GET** /zone/{zoneId}/nfs |  |
 | [**readStorageNFS**](NfsApi.md#readStorageNFS) | **GET** /nfs/{nfsId} |  |
-| [**setZoneDefaultStorageNFS**](NfsApi.md#setZoneDefaultStorageNFS) | **PATCH** /zone/{zoneId}/nfs/{nfsId}/default |  |
+| [**setRegionDefaultStorageNFS**](NfsApi.md#setRegionDefaultStorageNFS) | **PATCH** /region/{regionId}/nfs/{nfsId}/default |  |
 | [**updateStorageNFS**](NfsApi.md#updateStorageNFS) | **PUT** /nfs/{nfsId} |  |
 
 
 <a name="createStorageNFS"></a>
 # **createStorageNFS**
-> StorageNFS createStorageNFS(zoneId, StorageNFS)
+> StorageNFS createStorageNFS(regionId, StorageNFS)
 
 
 
@@ -26,7 +26,7 @@ All URIs are relative to */api/v1*
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **regionId** | **String**| The ID of the region. | [default to null] |
 | **StorageNFS** | [**StorageNFS**](../Models/StorageNFS.md)| StorageNFS payload. | |
 
 ### Return type
@@ -59,6 +59,33 @@ All URIs are relative to */api/v1*
 ### Return type
 
 null (empty response body)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listRegionStorageNFSs"></a>
+# **listRegionStorageNFSs**
+> List listRegionStorageNFSs(regionId)
+
+
+
+    Returns the IDs of NFS storage objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **regionId** | **String**| The ID of the region. | [default to null] |
+
+### Return type
+
+**List**
 
 ### Authorization
 
@@ -120,33 +147,6 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listZoneStorageNFSs"></a>
-# **listZoneStorageNFSs**
-> List listZoneStorageNFSs(zoneId)
-
-
-
-    Returns the IDs of NFS storage objects.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
 <a name="readStorageNFS"></a>
 # **readStorageNFS**
 > StorageNFS readStorageNFS(nfsId)
@@ -174,19 +174,19 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="setZoneDefaultStorageNFS"></a>
-# **setZoneDefaultStorageNFS**
-> setZoneDefaultStorageNFS(zoneId, nfsId)
+<a name="setRegionDefaultStorageNFS"></a>
+# **setRegionDefaultStorageNFS**
+> setRegionDefaultStorageNFS(regionId, nfsId)
 
 
 
-    Performs a availability zone setting of default NFS storage.
+    Performs a region setting of default NFS storage.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **regionId** | **String**| The ID of the region. | [default to null] |
 | **nfsId** | **String**| The ID of the NFS storage. | [default to null] |
 
 ### Return type

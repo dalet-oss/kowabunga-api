@@ -11,8 +11,6 @@ All URIs are relative to */api/v1*
 | [**createProjectZoneKFS**](ZoneApi.md#createProjectZoneKFS) | **POST** /project/{projectId}/zone/{zoneId}/kfs |  |
 | [**createProjectZoneKGW**](ZoneApi.md#createProjectZoneKGW) | **POST** /project/{projectId}/zone/{zoneId}/kgw |  |
 | [**createProjectZoneVolume**](ZoneApi.md#createProjectZoneVolume) | **POST** /project/{projectId}/zone/{zoneId}/volume |  |
-| [**createStorageNFS**](ZoneApi.md#createStorageNFS) | **POST** /zone/{zoneId}/nfs |  |
-| [**createStoragePool**](ZoneApi.md#createStoragePool) | **POST** /zone/{zoneId}/pool |  |
 | [**createVNet**](ZoneApi.md#createVNet) | **POST** /zone/{zoneId}/vnet |  |
 | [**createZone**](ZoneApi.md#createZone) | **POST** /region/{regionId}/zone |  |
 | [**deleteZone**](ZoneApi.md#deleteZone) | **DELETE** /zone/{zoneId} |  |
@@ -24,13 +22,9 @@ All URIs are relative to */api/v1*
 | [**listRegionZones**](ZoneApi.md#listRegionZones) | **GET** /region/{regionId}/zones |  |
 | [**listZoneHosts**](ZoneApi.md#listZoneHosts) | **GET** /zone/{zoneId}/hosts |  |
 | [**listZoneNetGWs**](ZoneApi.md#listZoneNetGWs) | **GET** /zone/{zoneId}/netgws |  |
-| [**listZoneStorageNFSs**](ZoneApi.md#listZoneStorageNFSs) | **GET** /zone/{zoneId}/nfs |  |
-| [**listZoneStoragePools**](ZoneApi.md#listZoneStoragePools) | **GET** /zone/{zoneId}/pools |  |
 | [**listZoneVNets**](ZoneApi.md#listZoneVNets) | **GET** /zone/{zoneId}/vnets |  |
 | [**listZones**](ZoneApi.md#listZones) | **GET** /zone |  |
 | [**readZone**](ZoneApi.md#readZone) | **GET** /zone/{zoneId} |  |
-| [**setZoneDefaultStorageNFS**](ZoneApi.md#setZoneDefaultStorageNFS) | **PATCH** /zone/{zoneId}/nfs/{nfsId}/default |  |
-| [**setZoneDefaultStoragePool**](ZoneApi.md#setZoneDefaultStoragePool) | **PATCH** /zone/{zoneId}/pool/{poolId}/default |  |
 | [**updateZone**](ZoneApi.md#updateZone) | **PUT** /zone/{zoneId} |  |
 
 
@@ -134,8 +128,8 @@ All URIs are relative to */api/v1*
 | **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **KCE** | [**KCE**](../Models/KCE.md)| KCE payload. | |
-| **poolId** | **String**| Storage pool ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
-| **templateId** | **String**| Template to clone the storage volume from (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
+| **poolId** | **String**| Storage pool ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
+| **templateId** | **String**| Template to clone the storage volume from (optional, region&#39;s default if unspecified). | [optional] [default to null] |
 | **public** | **Boolean**| Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false). | [optional] [default to null] |
 
 ### Return type
@@ -166,7 +160,7 @@ All URIs are relative to */api/v1*
 | **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **KFS** | [**KFS**](../Models/KFS.md)| KFS payload. | |
-| **nfsId** | **String**| NFS storage ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
+| **nfsId** | **String**| NFS storage ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
 
 ### Return type
 
@@ -225,68 +219,12 @@ All URIs are relative to */api/v1*
 | **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
 | **Volume** | [**Volume**](../Models/Volume.md)| Volume payload. | |
-| **poolId** | **String**| Storage pool ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
-| **templateId** | **String**| Template to clone the storage volume from (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
+| **poolId** | **String**| Storage pool ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
+| **templateId** | **String**| Template to clone the storage volume from (optional, region&#39;s default if unspecified). | [optional] [default to null] |
 
 ### Return type
 
 [**Volume**](../Models/Volume.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-<a name="createStorageNFS"></a>
-# **createStorageNFS**
-> StorageNFS createStorageNFS(zoneId, StorageNFS)
-
-
-
-    Creates a new NFS storage.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **StorageNFS** | [**StorageNFS**](../Models/StorageNFS.md)| StorageNFS payload. | |
-
-### Return type
-
-[**StorageNFS**](../Models/StorageNFS.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-<a name="createStoragePool"></a>
-# **createStoragePool**
-> StoragePool createStoragePool(zoneId, StoragePool)
-
-
-
-    Creates a new storage pool.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **StoragePool** | [**StoragePool**](../Models/StoragePool.md)| StoragePool payload. | |
-
-### Return type
-
-[**StoragePool**](../Models/StoragePool.md)
 
 ### Authorization
 
@@ -450,7 +388,7 @@ null (empty response body)
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **nfsId** | **String**| NFS storage ID (optional, zone&#39;s default if unspecified). | [optional] [default to null] |
+| **nfsId** | **String**| NFS storage ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
 
 ### Return type
 
@@ -602,60 +540,6 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listZoneStorageNFSs"></a>
-# **listZoneStorageNFSs**
-> List listZoneStorageNFSs(zoneId)
-
-
-
-    Returns the IDs of NFS storage objects.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="listZoneStoragePools"></a>
-# **listZoneStoragePools**
-> List listZoneStoragePools(zoneId)
-
-
-
-    Returns the IDs of storage pool objects.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
 <a name="listZoneVNets"></a>
 # **listZoneVNets**
 > List listZoneVNets(zoneId)
@@ -724,62 +608,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**Zone**](../Models/Zone.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="setZoneDefaultStorageNFS"></a>
-# **setZoneDefaultStorageNFS**
-> setZoneDefaultStorageNFS(zoneId, nfsId)
-
-
-
-    Performs a availability zone setting of default NFS storage.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **nfsId** | **String**| The ID of the NFS storage. | [default to null] |
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="setZoneDefaultStoragePool"></a>
-# **setZoneDefaultStoragePool**
-> setZoneDefaultStoragePool(zoneId, poolId)
-
-
-
-    Performs a availability zone setting of default storage pool.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **poolId** | **String**| The ID of the storage pool. | [default to null] |
-
-### Return type
-
-null (empty response body)
 
 ### Authorization
 

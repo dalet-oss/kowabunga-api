@@ -8,7 +8,7 @@ components:
 
   parameters:
 {{ oas.PathParamID(resources.template) }}
-{{ oas.StringQueryParam(resources.template.paramSchema, resources.template.paramId, "Template to clone the storage volume from (optional, zone's default if unspecified)") }}
+{{ oas.StringQueryParam(resources.template.paramSchema, resources.template.paramId, "Template to clone the storage volume from (optional, region's default if unspecified)") }}
 
 paths:
   /template:

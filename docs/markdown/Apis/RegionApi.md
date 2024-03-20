@@ -5,11 +5,17 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createRegion**](RegionApi.md#createRegion) | **POST** /region |  |
+| [**createStorageNFS**](RegionApi.md#createStorageNFS) | **POST** /region/{regionId}/nfs |  |
+| [**createStoragePool**](RegionApi.md#createStoragePool) | **POST** /region/{regionId}/pool |  |
 | [**createZone**](RegionApi.md#createZone) | **POST** /region/{regionId}/zone |  |
 | [**deleteRegion**](RegionApi.md#deleteRegion) | **DELETE** /region/{regionId} |  |
+| [**listRegionStorageNFSs**](RegionApi.md#listRegionStorageNFSs) | **GET** /region/{regionId}/nfs |  |
+| [**listRegionStoragePools**](RegionApi.md#listRegionStoragePools) | **GET** /region/{regionId}/pools |  |
 | [**listRegionZones**](RegionApi.md#listRegionZones) | **GET** /region/{regionId}/zones |  |
 | [**listRegions**](RegionApi.md#listRegions) | **GET** /region |  |
 | [**readRegion**](RegionApi.md#readRegion) | **GET** /region/{regionId} |  |
+| [**setRegionDefaultStorageNFS**](RegionApi.md#setRegionDefaultStorageNFS) | **PATCH** /region/{regionId}/nfs/{nfsId}/default |  |
+| [**setRegionDefaultStoragePool**](RegionApi.md#setRegionDefaultStoragePool) | **PATCH** /region/{regionId}/pool/{poolId}/default |  |
 | [**updateRegion**](RegionApi.md#updateRegion) | **PUT** /region/{regionId} |  |
 
 
@@ -30,6 +36,62 @@ All URIs are relative to */api/v1*
 ### Return type
 
 [**Region**](../Models/Region.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+<a name="createStorageNFS"></a>
+# **createStorageNFS**
+> StorageNFS createStorageNFS(regionId, StorageNFS)
+
+
+
+    Creates a new NFS storage.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **regionId** | **String**| The ID of the region. | [default to null] |
+| **StorageNFS** | [**StorageNFS**](../Models/StorageNFS.md)| StorageNFS payload. | |
+
+### Return type
+
+[**StorageNFS**](../Models/StorageNFS.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+<a name="createStoragePool"></a>
+# **createStoragePool**
+> StoragePool createStoragePool(regionId, StoragePool)
+
+
+
+    Creates a new storage pool.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **regionId** | **String**| The ID of the region. | [default to null] |
+| **StoragePool** | [**StoragePool**](../Models/StoragePool.md)| StoragePool payload. | |
+
+### Return type
+
+[**StoragePool**](../Models/StoragePool.md)
 
 ### Authorization
 
@@ -85,6 +147,60 @@ All URIs are relative to */api/v1*
 ### Return type
 
 null (empty response body)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listRegionStorageNFSs"></a>
+# **listRegionStorageNFSs**
+> List listRegionStorageNFSs(regionId)
+
+
+
+    Returns the IDs of NFS storage objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **regionId** | **String**| The ID of the region. | [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listRegionStoragePools"></a>
+# **listRegionStoragePools**
+> List listRegionStoragePools(regionId)
+
+
+
+    Returns the IDs of storage pool objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **regionId** | **String**| The ID of the region. | [default to null] |
+
+### Return type
+
+**List**
 
 ### Authorization
 
@@ -163,6 +279,62 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**Region**](../Models/Region.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="setRegionDefaultStorageNFS"></a>
+# **setRegionDefaultStorageNFS**
+> setRegionDefaultStorageNFS(regionId, nfsId)
+
+
+
+    Performs a region setting of default NFS storage.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **regionId** | **String**| The ID of the region. | [default to null] |
+| **nfsId** | **String**| The ID of the NFS storage. | [default to null] |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="setRegionDefaultStoragePool"></a>
+# **setRegionDefaultStoragePool**
+> setRegionDefaultStoragePool(regionId, poolId)
+
+
+
+    Performs a region setting of default storage pool.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **regionId** | **String**| The ID of the region. | [default to null] |
+| **poolId** | **String**| The ID of the storage pool. | [default to null] |
+
+### Return type
+
+null (empty response body)
 
 ### Authorization
 
