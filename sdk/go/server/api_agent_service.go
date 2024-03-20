@@ -122,9 +122,9 @@ func (s *AgentAPIService) ReadAgent(ctx context.Context, agentId string) (ImplRe
 	return Response(http.StatusNotImplemented, nil), errors.New("ReadAgent method not implemented")
 }
 
-// SetApiToken - 
-func (s *AgentAPIService) SetApiToken(ctx context.Context, agentId string, expire bool, expirationDate string) (ImplResponse, error) {
-	// TODO - update SetApiToken with the required logic for this service method.
+// SetAgentApiToken - 
+func (s *AgentAPIService) SetAgentApiToken(ctx context.Context, agentId string, expire bool, expirationDate string) (ImplResponse, error) {
+	// TODO - update SetAgentApiToken with the required logic for this service method.
 	// Add api_agent_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
 	// TODO: Uncomment the next line to return response Response(200, ApiToken{}) or use other options such as http.Ok ...
@@ -142,7 +142,7 @@ func (s *AgentAPIService) SetApiToken(ctx context.Context, agentId string, expir
 	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
 	// return Response(422, ApiErrorUnprocessableEntity{}), nil
 
-	return Response(http.StatusNotImplemented, nil), errors.New("SetApiToken method not implemented")
+	return Response(http.StatusNotImplemented, nil), errors.New("SetAgentApiToken method not implemented")
 }
 
 // UpdateAgent - 

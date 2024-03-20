@@ -30,6 +30,7 @@ export * from './storageNFS';
 export * from './storagePool';
 export * from './subnet';
 export * from './template';
+export * from './user';
 export * from './vNet';
 export * from './volume';
 export * from './zone';

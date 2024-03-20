@@ -668,7 +668,7 @@ func (a *AgentAPIService) ReadAgentExecute(r ApiReadAgentRequest) (*Agent, *http
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSetApiTokenRequest struct {
+type ApiSetAgentApiTokenRequest struct {
 	ctx context.Context
 	ApiService *AgentAPIService
 	agentId string
@@ -677,32 +677,32 @@ type ApiSetApiTokenRequest struct {
 }
 
 // Whether or not the token should expire.
-func (r ApiSetApiTokenRequest) Expire(expire bool) ApiSetApiTokenRequest {
+func (r ApiSetAgentApiTokenRequest) Expire(expire bool) ApiSetAgentApiTokenRequest {
 	r.expire = &expire
 	return r
 }
 
 // Token&#39;s expiration date (YYYY-MM-DD format).
-func (r ApiSetApiTokenRequest) ExpirationDate(expirationDate string) ApiSetApiTokenRequest {
+func (r ApiSetAgentApiTokenRequest) ExpirationDate(expirationDate string) ApiSetAgentApiTokenRequest {
 	r.expirationDate = &expirationDate
 	return r
 }
 
-func (r ApiSetApiTokenRequest) Execute() (*ApiToken, *http.Response, error) {
-	return r.ApiService.SetApiTokenExecute(r)
+func (r ApiSetAgentApiTokenRequest) Execute() (*ApiToken, *http.Response, error) {
+	return r.ApiService.SetAgentApiTokenExecute(r)
 }
 
 /*
-SetApiToken Method for SetApiToken
+SetAgentApiToken Method for SetAgentApiToken
 
 Performs a Kowabunga remote agent setting of API token (will replace any existing one).
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param agentId The ID of the Kowabunga remote agent.
- @return ApiSetApiTokenRequest
+ @return ApiSetAgentApiTokenRequest
 */
-func (a *AgentAPIService) SetApiToken(ctx context.Context, agentId string) ApiSetApiTokenRequest {
-	return ApiSetApiTokenRequest{
+func (a *AgentAPIService) SetAgentApiToken(ctx context.Context, agentId string) ApiSetAgentApiTokenRequest {
+	return ApiSetAgentApiTokenRequest{
 		ApiService: a,
 		ctx: ctx,
 		agentId: agentId,
@@ -711,7 +711,7 @@ func (a *AgentAPIService) SetApiToken(ctx context.Context, agentId string) ApiSe
 
 // Execute executes the request
 //  @return ApiToken
-func (a *AgentAPIService) SetApiTokenExecute(r ApiSetApiTokenRequest) (*ApiToken, *http.Response, error) {
+func (a *AgentAPIService) SetAgentApiTokenExecute(r ApiSetAgentApiTokenRequest) (*ApiToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -719,7 +719,7 @@ func (a *AgentAPIService) SetApiTokenExecute(r ApiSetApiTokenRequest) (*ApiToken
 		localVarReturnValue  *ApiToken
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentAPIService.SetApiToken")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentAPIService.SetAgentApiToken")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

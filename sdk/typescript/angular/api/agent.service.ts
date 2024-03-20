@@ -405,12 +405,12 @@ export class AgentService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public setApiToken(agentId: string, expire?: boolean, expirationDate?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<ApiToken>;
-    public setApiToken(agentId: string, expire?: boolean, expirationDate?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<ApiToken>>;
-    public setApiToken(agentId: string, expire?: boolean, expirationDate?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<ApiToken>>;
-    public setApiToken(agentId: string, expire?: boolean, expirationDate?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public setAgentApiToken(agentId: string, expire?: boolean, expirationDate?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<ApiToken>;
+    public setAgentApiToken(agentId: string, expire?: boolean, expirationDate?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<ApiToken>>;
+    public setAgentApiToken(agentId: string, expire?: boolean, expirationDate?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<ApiToken>>;
+    public setAgentApiToken(agentId: string, expire?: boolean, expirationDate?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (agentId === null || agentId === undefined) {
-            throw new Error('Required parameter agentId was null or undefined when calling setApiToken.');
+            throw new Error('Required parameter agentId was null or undefined when calling setAgentApiToken.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

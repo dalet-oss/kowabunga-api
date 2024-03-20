@@ -48,6 +48,8 @@ tags:
   name: token
 - description: Everything about image template
   name: template
+- description: Everything about Kowabunga user
+  name: user
 - description: Everything about virtual network
   name: vnet
 - description: Everything about storage volume
@@ -282,7 +284,7 @@ paths:
     patch:
       description: Performs a Kowabunga remote agent setting of API token (will replace
         any existing one).
-      operationId: SetApiToken
+      operationId: SetAgentApiToken
       parameters:
       - $ref: '#/components/parameters/AgentID'
       - $ref: '#/components/parameters/OptionalQueryExpire'
@@ -2976,6 +2978,163 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - token
+  /user:
+    get:
+      description: Returns the IDs of Kowabunga user objects.
+      operationId: ListUsers
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of Kowabunga user IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - user
+    post:
+      description: Creates a new Kowabunga user.
+      operationId: CreateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        description: User payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Returns the newly created Kowabunga user object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - user
+  /user/{userId}:
+    delete:
+      description: Deletes an existing Kowabunga user.
+      operationId: DeleteUser
+      parameters:
+      - $ref: '#/components/parameters/UserID'
+      responses:
+        "200":
+          description: The Kowabunga user has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - user
+    get:
+      description: Returns a Kowabunga user.
+      operationId: ReadUser
+      parameters:
+      - $ref: '#/components/parameters/UserID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Returns the Kowabunga user object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - user
+    parameters:
+    - $ref: '#/components/parameters/UserID'
+    put:
+      description: Updates a Kowabunga user configuration.
+      operationId: UpdateUser
+      parameters:
+      - $ref: '#/components/parameters/UserID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        description: User payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Returns the Kowabunga user object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - user
+  /user/{userId}/token:
+    parameters:
+    - $ref: '#/components/parameters/UserID'
+    - $ref: '#/components/parameters/OptionalQueryExpire'
+    - $ref: '#/components/parameters/OptionalQueryExpirationDate'
+    patch:
+      description: Performs a Kowabunga user setting of API token (will replace any
+        existing one).
+      operationId: SetUserApiToken
+      parameters:
+      - $ref: '#/components/parameters/UserID'
+      - $ref: '#/components/parameters/OptionalQueryExpire'
+      - $ref: '#/components/parameters/OptionalQueryExpirationDate'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiToken'
+          description: Returns the Kowabunga user object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - user
+      - token
   /vnet:
     get:
       description: Returns the IDs of virtual network objects.
@@ -3754,6 +3913,15 @@ components:
         format: date
         type: string
       style: form
+    UserID:
+      description: The ID of the Kowabunga user.
+      explode: false
+      in: path
+      name: userId
+      required: true
+      schema:
+        type: string
+      style: simple
     VnetID:
       description: The ID of the virtual network.
       explode: false
@@ -4813,6 +4981,48 @@ components:
       required:
       - expire
       - name
+    User:
+      description: A Kowabunga user.
+      example:
+        password: password
+        role: superAdmin
+        name: name
+        description: description
+        id: id
+        email: email
+        notifications: false
+      properties:
+        id:
+          description: The Kowabunga user ID (auto-generated).
+          type: string
+        name:
+          description: The Kowabunga user name.
+          type: string
+        description:
+          description: The Kowabunga user description.
+          type: string
+        email:
+          description: User email address.
+          type: string
+        password:
+          description: User password.
+          type: string
+        role:
+          description: The Kowabunga user role.
+          enum:
+          - superAdmin
+          - projectAdmin
+          - user
+          type: string
+        notifications:
+          default: false
+          description: Whether or not to receive email notifications on events.
+          type: boolean
+      required:
+      - email
+      - name
+      - password
+      - role
     VNet:
       description: A virtual network.
       example:

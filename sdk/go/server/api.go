@@ -34,7 +34,7 @@ type AgentAPIRouter interface {
 	DeleteAgent(http.ResponseWriter, *http.Request)
 	ListAgents(http.ResponseWriter, *http.Request)
 	ReadAgent(http.ResponseWriter, *http.Request)
-	SetApiToken(http.ResponseWriter, *http.Request)
+	SetAgentApiToken(http.ResponseWriter, *http.Request)
 	UpdateAgent(http.ResponseWriter, *http.Request)
 }
 // HostAPIRouter defines the required methods for binding the api requests to a responses for the HostAPI
@@ -212,6 +212,17 @@ type TokenAPIRouter interface {
 	ReadApiToken(http.ResponseWriter, *http.Request)
 	UpdateApiToken(http.ResponseWriter, *http.Request)
 }
+// UserAPIRouter defines the required methods for binding the api requests to a responses for the UserAPI
+// The UserAPIRouter implementation should parse necessary information from the http request,
+// pass the data to a UserAPIServicer to perform the required actions, then write the service results to the http response.
+type UserAPIRouter interface { 
+	CreateUser(http.ResponseWriter, *http.Request)
+	DeleteUser(http.ResponseWriter, *http.Request)
+	ListUsers(http.ResponseWriter, *http.Request)
+	ReadUser(http.ResponseWriter, *http.Request)
+	SetUserApiToken(http.ResponseWriter, *http.Request)
+	UpdateUser(http.ResponseWriter, *http.Request)
+}
 // VnetAPIRouter defines the required methods for binding the api requests to a responses for the VnetAPI
 // The VnetAPIRouter implementation should parse necessary information from the http request,
 // pass the data to a VnetAPIServicer to perform the required actions, then write the service results to the http response.
@@ -271,7 +282,7 @@ type AgentAPIServicer interface {
 	DeleteAgent(context.Context, string) (ImplResponse, error)
 	ListAgents(context.Context) (ImplResponse, error)
 	ReadAgent(context.Context, string) (ImplResponse, error)
-	SetApiToken(context.Context, string, bool, string) (ImplResponse, error)
+	SetAgentApiToken(context.Context, string, bool, string) (ImplResponse, error)
 	UpdateAgent(context.Context, string, Agent) (ImplResponse, error)
 }
 
@@ -490,6 +501,20 @@ type TokenAPIServicer interface {
 	ListApiTokens(context.Context) (ImplResponse, error)
 	ReadApiToken(context.Context, string) (ImplResponse, error)
 	UpdateApiToken(context.Context, string, ApiToken) (ImplResponse, error)
+}
+
+
+// UserAPIServicer defines the api actions for the UserAPI service
+// This interface intended to stay up to date with the openapi yaml used to generate it,
+// while the service implementation can be ignored with the .openapi-generator-ignore file
+// and updated with the logic required for the API.
+type UserAPIServicer interface { 
+	CreateUser(context.Context, User) (ImplResponse, error)
+	DeleteUser(context.Context, string) (ImplResponse, error)
+	ListUsers(context.Context) (ImplResponse, error)
+	ReadUser(context.Context, string) (ImplResponse, error)
+	SetUserApiToken(context.Context, string, bool, string) (ImplResponse, error)
+	UpdateUser(context.Context, string, User) (ImplResponse, error)
 }
 
 

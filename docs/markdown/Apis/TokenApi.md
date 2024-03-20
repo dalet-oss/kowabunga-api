@@ -7,7 +7,8 @@ All URIs are relative to */api/v1*
 | [**deleteApiToken**](TokenApi.md#deleteApiToken) | **DELETE** /token/{tokenId} |  |
 | [**listApiTokens**](TokenApi.md#listApiTokens) | **GET** /token |  |
 | [**readApiToken**](TokenApi.md#readApiToken) | **GET** /token/{tokenId} |  |
-| [**setApiToken**](TokenApi.md#setApiToken) | **PATCH** /agent/{agentId}/token |  |
+| [**setAgentApiToken**](TokenApi.md#setAgentApiToken) | **PATCH** /agent/{agentId}/token |  |
+| [**setUserApiToken**](TokenApi.md#setUserApiToken) | **PATCH** /user/{userId}/token |  |
 | [**updateApiToken**](TokenApi.md#updateApiToken) | **PUT** /token/{tokenId} |  |
 
 
@@ -89,9 +90,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="setApiToken"></a>
-# **setApiToken**
-> ApiToken setApiToken(agentId, expire, expiration\_date)
+<a name="setAgentApiToken"></a>
+# **setAgentApiToken**
+> ApiToken setAgentApiToken(agentId, expire, expiration\_date)
 
 
 
@@ -102,6 +103,35 @@ This endpoint does not need any parameter.
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **agentId** | **String**| The ID of the Kowabunga remote agent. | [default to null] |
+| **expire** | **Boolean**| Whether or not the token should expire. | [optional] [default to null] |
+| **expiration\_date** | **date**| Token&#39;s expiration date (YYYY-MM-DD format). | [optional] [default to null] |
+
+### Return type
+
+[**ApiToken**](../Models/ApiToken.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="setUserApiToken"></a>
+# **setUserApiToken**
+> ApiToken setUserApiToken(userId, expire, expiration\_date)
+
+
+
+    Performs a Kowabunga user setting of API token (will replace any existing one).
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**| The ID of the Kowabunga user. | [default to null] |
 | **expire** | **Boolean**| Whether or not the token should expire. | [optional] [default to null] |
 | **expiration\_date** | **date**| Token&#39;s expiration date (YYYY-MM-DD format). | [optional] [default to null] |
 

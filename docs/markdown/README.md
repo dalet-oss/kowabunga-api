@@ -17,7 +17,7 @@ All URIs are relative to */api/v1*
 *AgentApi* | [**deleteAgent**](Apis/AgentApi.md#deleteagent) | **DELETE** /agent/{agentId} | Deletes an existing Kowabunga remote agent. |
 *AgentApi* | [**listAgents**](Apis/AgentApi.md#listagents) | **GET** /agent | Returns the IDs of Kowabunga remote agent objects. |
 *AgentApi* | [**readAgent**](Apis/AgentApi.md#readagent) | **GET** /agent/{agentId} | Returns a Kowabunga remote agent. |
-*AgentApi* | [**setApiToken**](Apis/AgentApi.md#setapitoken) | **PATCH** /agent/{agentId}/token | Performs a Kowabunga remote agent setting of API token (will replace any existing one). |
+*AgentApi* | [**setAgentApiToken**](Apis/AgentApi.md#setagentapitoken) | **PATCH** /agent/{agentId}/token | Performs a Kowabunga remote agent setting of API token (will replace any existing one). |
 *AgentApi* | [**updateAgent**](Apis/AgentApi.md#updateagent) | **PUT** /agent/{agentId} | Updates a Kowabunga remote agent configuration. |
 | *HostApi* | [**createHost**](Apis/HostApi.md#createhost) | **POST** /zone/{zoneId}/host | Creates a new computing host. |
 *HostApi* | [**deleteHost**](Apis/HostApi.md#deletehost) | **DELETE** /host/{hostId} | Deletes an existing computing host. |
@@ -151,8 +151,15 @@ All URIs are relative to */api/v1*
 | *TokenApi* | [**deleteApiToken**](Apis/TokenApi.md#deleteapitoken) | **DELETE** /token/{tokenId} | Deletes an existing server-to-server authentication security token. |
 *TokenApi* | [**listApiTokens**](Apis/TokenApi.md#listapitokens) | **GET** /token | Returns the IDs of server-to-server authentication security token objects. |
 *TokenApi* | [**readApiToken**](Apis/TokenApi.md#readapitoken) | **GET** /token/{tokenId} | Returns a server-to-server authentication security token. |
-*TokenApi* | [**setApiToken**](Apis/TokenApi.md#setapitoken) | **PATCH** /agent/{agentId}/token | Performs a Kowabunga remote agent setting of API token (will replace any existing one). |
+*TokenApi* | [**setAgentApiToken**](Apis/TokenApi.md#setagentapitoken) | **PATCH** /agent/{agentId}/token | Performs a Kowabunga remote agent setting of API token (will replace any existing one). |
+*TokenApi* | [**setUserApiToken**](Apis/TokenApi.md#setuserapitoken) | **PATCH** /user/{userId}/token | Performs a Kowabunga user setting of API token (will replace any existing one). |
 *TokenApi* | [**updateApiToken**](Apis/TokenApi.md#updateapitoken) | **PUT** /token/{tokenId} | Updates a server-to-server authentication security token configuration. |
+| *UserApi* | [**createUser**](Apis/UserApi.md#createuser) | **POST** /user | Creates a new Kowabunga user. |
+*UserApi* | [**deleteUser**](Apis/UserApi.md#deleteuser) | **DELETE** /user/{userId} | Deletes an existing Kowabunga user. |
+*UserApi* | [**listUsers**](Apis/UserApi.md#listusers) | **GET** /user | Returns the IDs of Kowabunga user objects. |
+*UserApi* | [**readUser**](Apis/UserApi.md#readuser) | **GET** /user/{userId} | Returns a Kowabunga user. |
+*UserApi* | [**setUserApiToken**](Apis/UserApi.md#setuserapitoken) | **PATCH** /user/{userId}/token | Performs a Kowabunga user setting of API token (will replace any existing one). |
+*UserApi* | [**updateUser**](Apis/UserApi.md#updateuser) | **PUT** /user/{userId} | Updates a Kowabunga user configuration. |
 | *VnetApi* | [**createSubnet**](Apis/VnetApi.md#createsubnet) | **POST** /vnet/{vnetId}/subnet | Creates a new network subnet. |
 *VnetApi* | [**createVNet**](Apis/VnetApi.md#createvnet) | **POST** /zone/{zoneId}/vnet | Creates a new virtual network. |
 *VnetApi* | [**deleteVNet**](Apis/VnetApi.md#deletevnet) | **DELETE** /vnet/{vnetId} | Deletes an existing virtual network. |
@@ -228,6 +235,7 @@ All URIs are relative to */api/v1*
  - [StoragePool](./Models/StoragePool.md)
  - [Subnet](./Models/Subnet.md)
  - [Template](./Models/Template.md)
+ - [User](./Models/User.md)
  - [VNet](./Models/VNet.md)
  - [Volume](./Models/Volume.md)
  - [Zone](./Models/Zone.md)

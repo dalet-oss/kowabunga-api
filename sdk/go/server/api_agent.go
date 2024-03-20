@@ -71,10 +71,10 @@ func (c *AgentAPIController) Routes() Routes {
 			"/api/v1/agent/{agentId}",
 			c.ReadAgent,
 		},
-		"SetApiToken": Route{
+		"SetAgentApiToken": Route{
 			strings.ToUpper("Patch"),
 			"/api/v1/agent/{agentId}/token",
-			c.SetApiToken,
+			c.SetAgentApiToken,
 		},
 		"UpdateAgent": Route{
 			strings.ToUpper("Put"),
@@ -159,8 +159,8 @@ func (c *AgentAPIController) ReadAgent(w http.ResponseWriter, r *http.Request) {
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// SetApiToken - 
-func (c *AgentAPIController) SetApiToken(w http.ResponseWriter, r *http.Request) {
+// SetAgentApiToken - 
+func (c *AgentAPIController) SetAgentApiToken(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	query, err := parseQuery(r.URL.RawQuery)
 	if err != nil {
@@ -193,7 +193,7 @@ func (c *AgentAPIController) SetApiToken(w http.ResponseWriter, r *http.Request)
 		expirationDateParam = param
 	} else {
 	}
-	result, err := c.service.SetApiToken(r.Context(), agentIdParam, expireParam, expirationDateParam)
+	result, err := c.service.SetAgentApiToken(r.Context(), agentIdParam, expireParam, expirationDateParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

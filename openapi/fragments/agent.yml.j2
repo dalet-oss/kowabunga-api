@@ -17,4 +17,4 @@ paths:
 
   /agent/{{ '{' + resources.agent.paramId + '}' }}/token:
 {{ oas.Parameters([resources.agent.paramSchema, 'OptionalQueryExpire', 'OptionalQueryExpirationDate']) }}
-{{ oas.Patch('Set' + resources.token.schema, resources.agent.desc, 'setting of API token (will replace any existing one)', [resources.agent.tag, resources.token.tag], resources.token.schema) }}
+{{ oas.Patch('Set' + resources.agent.schema + resources.token.schema, resources.agent.desc, 'setting of API token (will replace any existing one)', [resources.agent.tag, resources.token.tag], resources.token.schema) }}

@@ -133,6 +133,12 @@ resources:
     schema: Template
     paramId: templateId
     paramSchema: TemplateID
+  user:
+    tag: user
+    desc: Kowabunga user
+    schema: User
+    paramId: userId
+    paramSchema: UserID
   vnet:
     tag: vnet
     desc: virtual network

@@ -82,6 +82,8 @@ type APIClient struct {
 
 	TokenAPI *TokenAPIService
 
+	UserAPI *UserAPIService
+
 	VnetAPI *VnetAPIService
 
 	VolumeAPI *VolumeAPIService
@@ -121,6 +123,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.SubnetAPI = (*SubnetAPIService)(&c.common)
 	c.TemplateAPI = (*TemplateAPIService)(&c.common)
 	c.TokenAPI = (*TokenAPIService)(&c.common)
+	c.UserAPI = (*UserAPIService)(&c.common)
 	c.VnetAPI = (*VnetAPIService)(&c.common)
 	c.VolumeAPI = (*VolumeAPIService)(&c.common)
 	c.ZoneAPI = (*ZoneAPIService)(&c.common)

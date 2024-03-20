@@ -8,7 +8,7 @@ All URIs are relative to */api/v1*
 | [**deleteAgent**](AgentApi.md#deleteAgent) | **DELETE** /agent/{agentId} |  |
 | [**listAgents**](AgentApi.md#listAgents) | **GET** /agent |  |
 | [**readAgent**](AgentApi.md#readAgent) | **GET** /agent/{agentId} |  |
-| [**setApiToken**](AgentApi.md#setApiToken) | **PATCH** /agent/{agentId}/token |  |
+| [**setAgentApiToken**](AgentApi.md#setAgentApiToken) | **PATCH** /agent/{agentId}/token |  |
 | [**updateAgent**](AgentApi.md#updateAgent) | **PUT** /agent/{agentId} |  |
 
 
@@ -117,9 +117,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="setApiToken"></a>
-# **setApiToken**
-> ApiToken setApiToken(agentId, expire, expiration\_date)
+<a name="setAgentApiToken"></a>
+# **setAgentApiToken**
+> ApiToken setAgentApiToken(agentId, expire, expiration\_date)
 
 
 
