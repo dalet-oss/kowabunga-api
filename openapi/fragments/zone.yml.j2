@@ -26,7 +26,7 @@ paths:
 {{ oas.Parameters([resources.zone.paramSchema]) }}
 {{ oas.Create('Create' + resources.host.schema, resources.host.schema, resources.host.desc, [resources.zone.tag, resources.host.tag]) }}
 
-  /zone/{zoneId}/hosts:
+  /zone/{{ '{' + resources.zone.paramId + '}' }}/hosts:
 {{ oas.Parameters([resources.zone.paramSchema]) }}
 {{ oas.GetAll('List' + resources.zone.schema + resources.host.schema + 's', resources.host.desc, [resources.zone.tag, resources.host.tag], True) }}
 
