@@ -2978,6 +2978,41 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - token
+  /login:
+    post:
+      description: Creates a new Kowabunga user login credentials.
+      operationId: Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCredentials'
+        description: UserCredentials payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCredentials'
+          description: Returns the newly created Kowabunga user login credentials
+            object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - user
   /user:
     get:
       description: Returns the IDs of Kowabunga user objects.
@@ -5082,6 +5117,26 @@ components:
       - email
       - name
       - role
+    UserCredentials:
+      description: A Kowabunga user login credentials.
+      example:
+        password: password
+        jwt: jwt
+        email: email
+      properties:
+        email:
+          description: The user email address for login.
+          type: string
+        password:
+          description: The user password for login.
+          type: string
+        jwt:
+          description: The resulting server-generated JWT token for Bearer Authentication
+            (read-only).
+          type: string
+      required:
+      - email
+      - password
     VNet:
       description: A virtual network.
       example:
@@ -5175,5 +5230,6 @@ components:
       name: X-API-Key
       type: apiKey
     BearerAuth:
+      bearerFormat: JWT
       scheme: bearer
       type: http

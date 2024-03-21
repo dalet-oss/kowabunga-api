@@ -66,6 +66,11 @@ func (c *UserAPIController) Routes() Routes {
 			"/api/v1/user",
 			c.ListUsers,
 		},
+		"Login": Route{
+			strings.ToUpper("Post"),
+			"/api/v1/login",
+			c.Login,
+		},
 		"ReadUser": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/user/{userId}",
@@ -142,6 +147,33 @@ func (c *UserAPIController) DeleteUser(w http.ResponseWriter, r *http.Request) {
 // ListUsers - 
 func (c *UserAPIController) ListUsers(w http.ResponseWriter, r *http.Request) {
 	result, err := c.service.ListUsers(r.Context())
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// Login - 
+func (c *UserAPIController) Login(w http.ResponseWriter, r *http.Request) {
+	userCredentialsParam := UserCredentials{}
+	d := json.NewDecoder(r.Body)
+	d.DisallowUnknownFields()
+	if err := d.Decode(&userCredentialsParam); err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	if err := AssertUserCredentialsRequired(userCredentialsParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	if err := AssertUserCredentialsConstraints(userCredentialsParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	result, err := c.service.Login(r.Context(), userCredentialsParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

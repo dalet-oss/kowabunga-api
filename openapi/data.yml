@@ -142,6 +142,9 @@ resources:
     schema: User
     paramId: userId
     paramSchema: UserID
+  user_credentials:
+    desc: Kowabunga user login credentials
+    schema: UserCredentials
   vnet:
     tag: vnet
     desc: virtual network

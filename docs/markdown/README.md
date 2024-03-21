@@ -157,6 +157,7 @@ All URIs are relative to */api/v1*
 | *UserApi* | [**createUser**](Apis/UserApi.md#createuser) | **POST** /user | Creates a new Kowabunga user. |
 *UserApi* | [**deleteUser**](Apis/UserApi.md#deleteuser) | **DELETE** /user/{userId} | Deletes an existing Kowabunga user. |
 *UserApi* | [**listUsers**](Apis/UserApi.md#listusers) | **GET** /user | Returns the IDs of Kowabunga user objects. |
+*UserApi* | [**login**](Apis/UserApi.md#login) | **POST** /login | Creates a new Kowabunga user login credentials. |
 *UserApi* | [**readUser**](Apis/UserApi.md#readuser) | **GET** /user/{userId} | Returns a Kowabunga user. |
 *UserApi* | [**resetUserPassword**](Apis/UserApi.md#resetuserpassword) | **PATCH** /user/{userId}/resetPassword | Performs a Kowabunga user reset of password (server-side generated, will replace any existing one). |
 *UserApi* | [**setUserApiToken**](Apis/UserApi.md#setuserapitoken) | **PATCH** /user/{userId}/token | Performs a Kowabunga user setting of API token (will replace any existing one). |
@@ -239,6 +240,7 @@ All URIs are relative to */api/v1*
  - [Subnet](./Models/Subnet.md)
  - [Template](./Models/Template.md)
  - [User](./Models/User.md)
+ - [UserCredentials](./Models/UserCredentials.md)
  - [VNet](./Models/VNet.md)
  - [Volume](./Models/Volume.md)
  - [Zone](./Models/Zone.md)
@@ -258,5 +260,5 @@ All URIs are relative to */api/v1*
 <a name="BearerAuth"></a>
 ### BearerAuth
 
-- **Type**: HTTP Bearer Token authentication
+- **Type**: HTTP Bearer Token authentication (JWT)
 

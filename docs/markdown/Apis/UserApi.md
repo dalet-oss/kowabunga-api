@@ -7,6 +7,7 @@ All URIs are relative to */api/v1*
 | [**createUser**](UserApi.md#createUser) | **POST** /user |  |
 | [**deleteUser**](UserApi.md#deleteUser) | **DELETE** /user/{userId} |  |
 | [**listUsers**](UserApi.md#listUsers) | **GET** /user |  |
+| [**login**](UserApi.md#login) | **POST** /login |  |
 | [**readUser**](UserApi.md#readUser) | **GET** /user/{userId} |  |
 | [**resetUserPassword**](UserApi.md#resetUserPassword) | **PATCH** /user/{userId}/resetPassword |  |
 | [**setUserApiToken**](UserApi.md#setUserApiToken) | **PATCH** /user/{userId}/token |  |
@@ -90,6 +91,33 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="login"></a>
+# **login**
+> UserCredentials login(UserCredentials)
+
+
+
+    Creates a new Kowabunga user login credentials.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **UserCredentials** | [**UserCredentials**](../Models/UserCredentials.md)| UserCredentials payload. | |
+
+### Return type
+
+[**UserCredentials**](../Models/UserCredentials.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 <a name="readUser"></a>

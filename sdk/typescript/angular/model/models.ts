@@ -32,6 +32,7 @@ export * from './storagePool';
 export * from './subnet';
 export * from './template';
 export * from './user';
+export * from './userCredentials';
 export * from './vNet';
 export * from './volume';
 export * from './zone';

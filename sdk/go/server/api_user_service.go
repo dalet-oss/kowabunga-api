@@ -102,6 +102,38 @@ func (s *UserAPIService) ListUsers(ctx context.Context) (ImplResponse, error) {
 	return Response(http.StatusNotImplemented, nil), errors.New("ListUsers method not implemented")
 }
 
+// Login - 
+func (s *UserAPIService) Login(ctx context.Context, userCredentials UserCredentials) (ImplResponse, error) {
+	// TODO - update Login with the required logic for this service method.
+	// Add api_user_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(201, UserCredentials{}) or use other options such as http.Ok ...
+	// return Response(201, UserCredentials{}), nil
+
+	// TODO: Uncomment the next line to return response Response(400, ApiErrorBadRequest{}) or use other options such as http.Ok ...
+	// return Response(400, ApiErrorBadRequest{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	// TODO: Uncomment the next line to return response Response(409, ApiErrorConflict{}) or use other options such as http.Ok ...
+	// return Response(409, ApiErrorConflict{}), nil
+
+	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
+	// return Response(422, ApiErrorUnprocessableEntity{}), nil
+
+	// TODO: Uncomment the next line to return response Response(507, ApiErrorInsufficientStorage{}) or use other options such as http.Ok ...
+	// return Response(507, ApiErrorInsufficientStorage{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("Login method not implemented")
+}
+
 // ReadUser - 
 func (s *UserAPIService) ReadUser(ctx context.Context, userId string) (ImplResponse, error) {
 	// TODO - update ReadUser with the required logic for this service method.
