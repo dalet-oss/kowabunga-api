@@ -177,7 +177,7 @@ null (empty response body)
 
 <a name="setUserPassword"></a>
 # **setUserPassword**
-> Password setUserPassword(userId, Password)
+> setUserPassword(userId, Password)
 
 
 
@@ -192,7 +192,7 @@ null (empty response body)
 
 ### Return type
 
-[**Password**](../Models/Password.md)
+null (empty response body)
 
 ### Authorization
 

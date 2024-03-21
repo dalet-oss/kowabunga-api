@@ -3122,12 +3122,8 @@ paths:
         required: true
       responses:
         "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Password'
-          description: Returns the Kowabunga user password (will replace any existing
-            one) object.
+          description: The Kowabunga user password (will replace any existing one)
+            has been updated.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":

@@ -354,14 +354,18 @@
 {{ ErrorsGetOne() }}
 {% endmacro %}
 
-{% macro Update(opId, schema, desc, tags) %}
+{% macro Update(opId, schema, desc, tags, output=True) %}
     put:
 {{ Tags(tags) }}
       description: Updates a {{ desc }} configuration.
       operationId: {{ opId }}
 {{ Payload(schema) }}
       responses:
+{% if output %}
 {{ GetOneResource(schema, desc) }}
+{% else %}
+{{ ResponseOk('The ' + desc + ' has been updated' ) }}
+{% endif %}
 {{ ErrorsUpdate() }}
 {% endmacro %}
 

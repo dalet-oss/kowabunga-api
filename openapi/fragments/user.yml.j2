@@ -19,7 +19,7 @@ paths:
 
   /user/{{ '{' + resources.user.paramId + '}' }}/password:
 {{ oas.Parameters([resources.user.paramSchema]) }}
-{{ oas.Update('Set' + resources.user.schema + resources.password.schema, resources.password.schema, resources.user.desc + ' password (will replace any existing one)', [resources.user.tag]) }}
+{{ oas.Update('Set' + resources.user.schema + resources.password.schema, resources.password.schema, resources.user.desc + ' password (will replace any existing one)', [resources.user.tag], False) }}
 
   /user/{{ '{' + resources.user.paramId + '}' }}/resetPassword:
 {{ oas.Parameters([resources.user.paramSchema]) }}
