@@ -71,10 +71,20 @@ func (c *UserAPIController) Routes() Routes {
 			"/api/v1/user/{userId}",
 			c.ReadUser,
 		},
+		"ResetUserPassword": Route{
+			strings.ToUpper("Patch"),
+			"/api/v1/user/{userId}/resetPassword",
+			c.ResetUserPassword,
+		},
 		"SetUserApiToken": Route{
 			strings.ToUpper("Patch"),
 			"/api/v1/user/{userId}/token",
 			c.SetUserApiToken,
+		},
+		"SetUserPassword": Route{
+			strings.ToUpper("Put"),
+			"/api/v1/user/{userId}/password",
+			c.SetUserPassword,
 		},
 		"UpdateUser": Route{
 			strings.ToUpper("Put"),
@@ -159,6 +169,24 @@ func (c *UserAPIController) ReadUser(w http.ResponseWriter, r *http.Request) {
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
+// ResetUserPassword - 
+func (c *UserAPIController) ResetUserPassword(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	userIdParam := params["userId"]
+	if userIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"userId"}, nil)
+		return
+	}
+	result, err := c.service.ResetUserPassword(r.Context(), userIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
 // SetUserApiToken - 
 func (c *UserAPIController) SetUserApiToken(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -194,6 +222,39 @@ func (c *UserAPIController) SetUserApiToken(w http.ResponseWriter, r *http.Reque
 	} else {
 	}
 	result, err := c.service.SetUserApiToken(r.Context(), userIdParam, expireParam, expirationDateParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// SetUserPassword - 
+func (c *UserAPIController) SetUserPassword(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	userIdParam := params["userId"]
+	if userIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"userId"}, nil)
+		return
+	}
+	passwordParam := Password{}
+	d := json.NewDecoder(r.Body)
+	d.DisallowUnknownFields()
+	if err := d.Decode(&passwordParam); err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	if err := AssertPasswordRequired(passwordParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	if err := AssertPasswordConstraints(passwordParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	result, err := c.service.SetUserPassword(r.Context(), userIdParam, passwordParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

@@ -82,6 +82,9 @@ resources:
     schema: NetGW
     paramId: netgwId
     paramSchema: NetgwID
+  password:
+    desc: user plain-text password
+    schema: Password
   project:
     tag: project
     desc: project

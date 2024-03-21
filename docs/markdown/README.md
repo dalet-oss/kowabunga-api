@@ -158,7 +158,9 @@ All URIs are relative to */api/v1*
 *UserApi* | [**deleteUser**](Apis/UserApi.md#deleteuser) | **DELETE** /user/{userId} | Deletes an existing Kowabunga user. |
 *UserApi* | [**listUsers**](Apis/UserApi.md#listusers) | **GET** /user | Returns the IDs of Kowabunga user objects. |
 *UserApi* | [**readUser**](Apis/UserApi.md#readuser) | **GET** /user/{userId} | Returns a Kowabunga user. |
+*UserApi* | [**resetUserPassword**](Apis/UserApi.md#resetuserpassword) | **PATCH** /user/{userId}/resetPassword | Performs a Kowabunga user reset of password (server-side generated, will replace any existing one). |
 *UserApi* | [**setUserApiToken**](Apis/UserApi.md#setuserapitoken) | **PATCH** /user/{userId}/token | Performs a Kowabunga user setting of API token (will replace any existing one). |
+*UserApi* | [**setUserPassword**](Apis/UserApi.md#setuserpassword) | **PUT** /user/{userId}/password | Updates a Kowabunga user password (will replace any existing one) configuration. |
 *UserApi* | [**updateUser**](Apis/UserApi.md#updateuser) | **PUT** /user/{userId} | Updates a Kowabunga user configuration. |
 | *VnetApi* | [**createSubnet**](Apis/VnetApi.md#createsubnet) | **POST** /vnet/{vnetId}/subnet | Creates a new network subnet. |
 *VnetApi* | [**createVNet**](Apis/VnetApi.md#createvnet) | **POST** /zone/{zoneId}/vnet | Creates a new virtual network. |
@@ -228,6 +230,7 @@ All URIs are relative to */api/v1*
  - [KGWNat](./Models/KGWNat.md)
  - [Metadata](./Models/Metadata.md)
  - [NetGW](./Models/NetGW.md)
+ - [Password](./Models/Password.md)
  - [Project](./Models/Project.md)
  - [ProjectResources](./Models/ProjectResources.md)
  - [Region](./Models/Region.md)

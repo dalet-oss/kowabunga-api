@@ -23,6 +23,7 @@ export * from './kGW';
 export * from './kGWNat';
 export * from './metadata';
 export * from './netGW';
+export * from './password';
 export * from './project';
 export * from './projectResources';
 export * from './region';

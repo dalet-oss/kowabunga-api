@@ -3104,6 +3104,67 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - user
+  /user/{userId}/password:
+    parameters:
+    - $ref: '#/components/parameters/UserID'
+    put:
+      description: Updates a Kowabunga user password (will replace any existing one)
+        configuration.
+      operationId: SetUserPassword
+      parameters:
+      - $ref: '#/components/parameters/UserID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Password'
+        description: Password payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Password'
+          description: Returns the Kowabunga user password (will replace any existing
+            one) object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - user
+  /user/{userId}/resetPassword:
+    parameters:
+    - $ref: '#/components/parameters/UserID'
+    patch:
+      description: "Performs a Kowabunga user reset of password (server-side generated,\
+        \ will replace any existing one)."
+      operationId: ResetUserPassword
+      parameters:
+      - $ref: '#/components/parameters/UserID'
+      responses:
+        "200":
+          description: "The Kowabunga user reset of password (server-side generated,\
+            \ will replace any existing one) is successful."
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - user
   /user/{userId}/token:
     parameters:
     - $ref: '#/components/parameters/UserID'
@@ -3119,11 +3180,8 @@ paths:
       - $ref: '#/components/parameters/OptionalQueryExpirationDate'
       responses:
         "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiToken'
-          description: Returns the Kowabunga user object.
+          description: The Kowabunga user setting of API token (will replace any existing
+            one) is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -4227,6 +4285,16 @@ components:
       items:
         type: string
       type: array
+    Password:
+      description: A user plain-text password.
+      example:
+        value: value
+      properties:
+        value:
+          description: The plain-text password.
+          type: string
+      required:
+      - value
     Host:
       description: A computing host.
       example:
@@ -4984,7 +5052,6 @@ components:
     User:
       description: A Kowabunga user.
       example:
-        password: password
         role: superAdmin
         name: name
         description: description
@@ -5004,9 +5071,6 @@ components:
         email:
           description: User email address.
           type: string
-        password:
-          description: User password.
-          type: string
         role:
           description: The Kowabunga user role.
           enum:
@@ -5021,7 +5085,6 @@ components:
       required:
       - email
       - name
-      - password
       - role
     VNet:
       description: A virtual network.

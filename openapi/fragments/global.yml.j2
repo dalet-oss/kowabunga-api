@@ -3,3 +3,6 @@
 components:
   schemas:
 {{ oas.StringArraySchema('ObjectIds', 'list of resource IDs') }}
+
+{{ oas.Schema(resources.password, ['value']) }}
+{{ oas.StringProperty('value', 'The plain-text password') }}

@@ -28,9 +28,6 @@ type User struct {
 	// User email address.
 	Email string `json:"email"`
 
-	// User password.
-	Password string `json:"password"`
-
 	// The Kowabunga user role.
 	Role string `json:"role"`
 
@@ -43,7 +40,6 @@ func AssertUserRequired(obj User) error {
 	elements := map[string]interface{}{
 		"name": obj.Name,
 		"email": obj.Email,
-		"password": obj.Password,
 		"role": obj.Role,
 	}
 	for name, el := range elements {

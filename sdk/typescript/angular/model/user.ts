@@ -32,10 +32,6 @@ export interface User {
      */
     email: string;
     /**
-     * User password.
-     */
-    password: string;
-    /**
      * The Kowabunga user role.
      */
     role: User.RoleEnum;

@@ -8,7 +8,9 @@ All URIs are relative to */api/v1*
 | [**deleteUser**](UserApi.md#deleteUser) | **DELETE** /user/{userId} |  |
 | [**listUsers**](UserApi.md#listUsers) | **GET** /user |  |
 | [**readUser**](UserApi.md#readUser) | **GET** /user/{userId} |  |
+| [**resetUserPassword**](UserApi.md#resetUserPassword) | **PATCH** /user/{userId}/resetPassword |  |
 | [**setUserApiToken**](UserApi.md#setUserApiToken) | **PATCH** /user/{userId}/token |  |
+| [**setUserPassword**](UserApi.md#setUserPassword) | **PUT** /user/{userId}/password |  |
 | [**updateUser**](UserApi.md#updateUser) | **PUT** /user/{userId} |  |
 
 
@@ -117,9 +119,36 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+<a name="resetUserPassword"></a>
+# **resetUserPassword**
+> resetUserPassword(userId)
+
+
+
+    Performs a Kowabunga user reset of password (server-side generated, will replace any existing one).
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**| The ID of the Kowabunga user. | [default to null] |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 <a name="setUserApiToken"></a>
 # **setUserApiToken**
-> ApiToken setUserApiToken(userId, expire, expiration\_date)
+> setUserApiToken(userId, expire, expiration\_date)
 
 
 
@@ -135,7 +164,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ApiToken**](../Models/ApiToken.md)
+null (empty response body)
 
 ### Authorization
 
@@ -144,6 +173,34 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="setUserPassword"></a>
+# **setUserPassword**
+> Password setUserPassword(userId, Password)
+
+
+
+    Updates a Kowabunga user password (will replace any existing one) configuration.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**| The ID of the Kowabunga user. | [default to null] |
+| **Password** | [**Password**](../Models/Password.md)| Password payload. | |
+
+### Return type
+
+[**Password**](../Models/Password.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 <a name="updateUser"></a>

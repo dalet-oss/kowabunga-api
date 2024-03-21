@@ -220,7 +220,9 @@ type UserAPIRouter interface {
 	DeleteUser(http.ResponseWriter, *http.Request)
 	ListUsers(http.ResponseWriter, *http.Request)
 	ReadUser(http.ResponseWriter, *http.Request)
+	ResetUserPassword(http.ResponseWriter, *http.Request)
 	SetUserApiToken(http.ResponseWriter, *http.Request)
+	SetUserPassword(http.ResponseWriter, *http.Request)
 	UpdateUser(http.ResponseWriter, *http.Request)
 }
 // VnetAPIRouter defines the required methods for binding the api requests to a responses for the VnetAPI
@@ -513,7 +515,9 @@ type UserAPIServicer interface {
 	DeleteUser(context.Context, string) (ImplResponse, error)
 	ListUsers(context.Context) (ImplResponse, error)
 	ReadUser(context.Context, string) (ImplResponse, error)
+	ResetUserPassword(context.Context, string) (ImplResponse, error)
 	SetUserApiToken(context.Context, string, bool, string) (ImplResponse, error)
+	SetUserPassword(context.Context, string, Password) (ImplResponse, error)
 	UpdateUser(context.Context, string, User) (ImplResponse, error)
 }
 

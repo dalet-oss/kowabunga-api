@@ -121,7 +121,7 @@ This endpoint does not need any parameter.
 
 <a name="setUserApiToken"></a>
 # **setUserApiToken**
-> ApiToken setUserApiToken(userId, expire, expiration\_date)
+> setUserApiToken(userId, expire, expiration\_date)
 
 
 
@@ -137,7 +137,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ApiToken**](../Models/ApiToken.md)
+null (empty response body)
 
 ### Authorization
 

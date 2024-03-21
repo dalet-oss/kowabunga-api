@@ -7,7 +7,6 @@
 | **name** | **String** | The Kowabunga user name. | [default to null] |
 | **description** | **String** | The Kowabunga user description. | [optional] [default to null] |
 | **email** | **String** | User email address. | [default to null] |
-| **password** | **String** | User password. | [default to null] |
 | **role** | **String** | The Kowabunga user role. | [default to null] |
 | **notifications** | **Boolean** | Whether or not to receive email notifications on events. | [optional] [default to false] |
 

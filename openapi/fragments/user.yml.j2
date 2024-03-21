@@ -2,9 +2,8 @@
 
 components:
   schemas:
-{{ oas.SchemaBaseResource(resources.user, ['name', 'email', 'password', 'role']) }}
+{{ oas.SchemaBaseResource(resources.user, ['name', 'email', 'role']) }}
 {{ oas.StringProperty('email', 'User email address') }}
-{{ oas.StringProperty('password', 'User password') }}
 {{ oas.StringProperty('role', 'The Kowabunga user role', values=['superAdmin', 'projectAdmin', 'user']) }}
 {{ oas.BoolProperty('notifications', 'Whether or not to receive email notifications on events', default=False) }}
 
@@ -18,6 +17,14 @@ paths:
   /user/{{ '{' + resources.user.paramId + '}' }}:
 {{ oas.RUD(resources.user, [resources.user.tag], [resources.user.paramSchema]) }}
 
+  /user/{{ '{' + resources.user.paramId + '}' }}/password:
+{{ oas.Parameters([resources.user.paramSchema]) }}
+{{ oas.Update('Set' + resources.user.schema + resources.password.schema, resources.password.schema, resources.user.desc + ' password (will replace any existing one)', [resources.user.tag]) }}
+
+  /user/{{ '{' + resources.user.paramId + '}' }}/resetPassword:
+{{ oas.Parameters([resources.user.paramSchema]) }}
+{{ oas.Patch('Reset' + resources.user.schema + resources.password.schema, resources.user.desc, 'reset of password (server-side generated, will replace any existing one)', [resources.user.tag]) }}
+
   /user/{{ '{' + resources.user.paramId + '}' }}/token:
 {{ oas.Parameters([resources.user.paramSchema, 'OptionalQueryExpire', 'OptionalQueryExpirationDate']) }}
-{{ oas.Patch('Set' + resources.user.schema + resources.token.schema, resources.user.desc, 'setting of API token (will replace any existing one)', [resources.user.tag, resources.token.tag], resources.token.schema) }}
+{{ oas.Patch('Set' + resources.user.schema + resources.token.schema, resources.user.desc, 'setting of API token (will replace any existing one)', [resources.user.tag, resources.token.tag]) }}

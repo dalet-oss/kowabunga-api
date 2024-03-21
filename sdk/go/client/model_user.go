@@ -30,8 +30,6 @@ type User struct {
 	Description *string `json:"description,omitempty"`
 	// User email address.
 	Email string `json:"email"`
-	// User password.
-	Password string `json:"password"`
 	// The Kowabunga user role.
 	Role string `json:"role"`
 	// Whether or not to receive email notifications on events.
@@ -44,11 +42,10 @@ type _User User
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUser(name string, email string, password string, role string) *User {
+func NewUser(name string, email string, role string) *User {
 	this := User{}
 	this.Name = name
 	this.Email = email
-	this.Password = password
 	this.Role = role
 	var notifications bool = false
 	this.Notifications = &notifications
@@ -177,30 +174,6 @@ func (o *User) SetEmail(v string) {
 	o.Email = v
 }
 
-// GetPassword returns the Password field value
-func (o *User) GetPassword() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Password
-}
-
-// GetPasswordOk returns a tuple with the Password field value
-// and a boolean to check if the value has been set.
-func (o *User) GetPasswordOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Password, true
-}
-
-// SetPassword sets field value
-func (o *User) SetPassword(v string) {
-	o.Password = v
-}
-
 // GetRole returns the Role field value
 func (o *User) GetRole() string {
 	if o == nil {
@@ -275,7 +248,6 @@ func (o User) ToMap() (map[string]interface{}, error) {
 		toSerialize["description"] = o.Description
 	}
 	toSerialize["email"] = o.Email
-	toSerialize["password"] = o.Password
 	toSerialize["role"] = o.Role
 	if !IsNil(o.Notifications) {
 		toSerialize["notifications"] = o.Notifications
@@ -290,7 +262,6 @@ func (o *User) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"name",
 		"email",
-		"password",
 		"role",
 	}
 
