@@ -10,6 +10,7 @@ export * from './apiErrorUnprocessableEntity';
 export * from './apiToken';
 export * from './cost';
 export * from './dnsRecord';
+export * from './group';
 export * from './host';
 export * from './hostCPU';
 export * from './hostCaps';

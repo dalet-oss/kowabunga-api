@@ -37,6 +37,16 @@ type AgentAPIRouter interface {
 	SetAgentApiToken(http.ResponseWriter, *http.Request)
 	UpdateAgent(http.ResponseWriter, *http.Request)
 }
+// GroupAPIRouter defines the required methods for binding the api requests to a responses for the GroupAPI
+// The GroupAPIRouter implementation should parse necessary information from the http request,
+// pass the data to a GroupAPIServicer to perform the required actions, then write the service results to the http response.
+type GroupAPIRouter interface { 
+	CreateGroup(http.ResponseWriter, *http.Request)
+	DeleteGroup(http.ResponseWriter, *http.Request)
+	ListGroups(http.ResponseWriter, *http.Request)
+	ReadGroup(http.ResponseWriter, *http.Request)
+	UpdateGroup(http.ResponseWriter, *http.Request)
+}
 // HostAPIRouter defines the required methods for binding the api requests to a responses for the HostAPI
 // The HostAPIRouter implementation should parse necessary information from the http request,
 // pass the data to a HostAPIServicer to perform the required actions, then write the service results to the http response.
@@ -287,6 +297,19 @@ type AgentAPIServicer interface {
 	ReadAgent(context.Context, string) (ImplResponse, error)
 	SetAgentApiToken(context.Context, string, bool, string) (ImplResponse, error)
 	UpdateAgent(context.Context, string, Agent) (ImplResponse, error)
+}
+
+
+// GroupAPIServicer defines the api actions for the GroupAPI service
+// This interface intended to stay up to date with the openapi yaml used to generate it,
+// while the service implementation can be ignored with the .openapi-generator-ignore file
+// and updated with the logic required for the API.
+type GroupAPIServicer interface { 
+	CreateGroup(context.Context, Group) (ImplResponse, error)
+	DeleteGroup(context.Context, string) (ImplResponse, error)
+	ListGroups(context.Context) (ImplResponse, error)
+	ReadGroup(context.Context, string) (ImplResponse, error)
+	UpdateGroup(context.Context, string, Group) (ImplResponse, error)
 }
 
 

@@ -19,6 +19,11 @@ All URIs are relative to */api/v1*
 *AgentApi* | [**readAgent**](Apis/AgentApi.md#readagent) | **GET** /agent/{agentId} | Returns a Kowabunga remote agent. |
 *AgentApi* | [**setAgentApiToken**](Apis/AgentApi.md#setagentapitoken) | **PATCH** /agent/{agentId}/token | Performs a Kowabunga remote agent setting of API token (will replace any existing one). |
 *AgentApi* | [**updateAgent**](Apis/AgentApi.md#updateagent) | **PUT** /agent/{agentId} | Updates a Kowabunga remote agent configuration. |
+| *GroupApi* | [**createGroup**](Apis/GroupApi.md#creategroup) | **POST** /group | Creates a new Kowabunga users group. |
+*GroupApi* | [**deleteGroup**](Apis/GroupApi.md#deletegroup) | **DELETE** /group/{groupId} | Deletes an existing Kowabunga users group. |
+*GroupApi* | [**listGroups**](Apis/GroupApi.md#listgroups) | **GET** /group | Returns the IDs of Kowabunga users group objects. |
+*GroupApi* | [**readGroup**](Apis/GroupApi.md#readgroup) | **GET** /group/{groupId} | Returns a Kowabunga users group. |
+*GroupApi* | [**updateGroup**](Apis/GroupApi.md#updategroup) | **PUT** /group/{groupId} | Updates a Kowabunga users group configuration. |
 | *HostApi* | [**createHost**](Apis/HostApi.md#createhost) | **POST** /zone/{zoneId}/host | Creates a new computing host. |
 *HostApi* | [**deleteHost**](Apis/HostApi.md#deletehost) | **DELETE** /host/{hostId} | Deletes an existing computing host. |
 *HostApi* | [**listHostInstances**](Apis/HostApi.md#listhostinstances) | **GET** /host/{hostId}/instances | Returns the IDs of virtual machine instance objects. |
@@ -218,6 +223,7 @@ All URIs are relative to */api/v1*
  - [ApiToken](./Models/ApiToken.md)
  - [Cost](./Models/Cost.md)
  - [DnsRecord](./Models/DnsRecord.md)
+ - [Group](./Models/Group.md)
  - [Host](./Models/Host.md)
  - [HostCPU](./Models/HostCPU.md)
  - [HostCaps](./Models/HostCaps.md)

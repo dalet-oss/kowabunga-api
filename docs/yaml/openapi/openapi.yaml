@@ -22,6 +22,8 @@ tags:
   name: agent
 - description: Everything about DNS record
   name: record
+- description: Everything about Kowabunga users group
+  name: group
 - description: Everything about computing host
   name: host
 - description: Everything about virtual machine instance
@@ -383,6 +385,132 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - record
+  /group:
+    get:
+      description: Returns the IDs of Kowabunga users group objects.
+      operationId: ListGroups
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of Kowabunga users group IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - group
+    post:
+      description: Creates a new Kowabunga users group.
+      operationId: CreateGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+        description: Group payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: Returns the newly created Kowabunga users group object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - group
+  /group/{groupId}:
+    delete:
+      description: Deletes an existing Kowabunga users group.
+      operationId: DeleteGroup
+      parameters:
+      - $ref: '#/components/parameters/GroupID'
+      responses:
+        "200":
+          description: The Kowabunga users group has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - group
+    get:
+      description: Returns a Kowabunga users group.
+      operationId: ReadGroup
+      parameters:
+      - $ref: '#/components/parameters/GroupID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: Returns the Kowabunga users group object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - group
+    parameters:
+    - $ref: '#/components/parameters/GroupID'
+    put:
+      description: Updates a Kowabunga users group configuration.
+      operationId: UpdateGroup
+      parameters:
+      - $ref: '#/components/parameters/GroupID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+        description: Group payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: Returns the Kowabunga users group object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - group
   /host:
     get:
       description: Returns the IDs of computing host objects.
@@ -3808,6 +3936,15 @@ components:
       schema:
         type: string
       style: simple
+    GroupID:
+      description: The ID of the Kowabunga users group.
+      explode: false
+      in: path
+      name: groupId
+      required: true
+      schema:
+        type: string
+      style: simple
     HostID:
       description: The ID of the computing host.
       explode: false
@@ -4326,6 +4463,33 @@ components:
           type: string
       required:
       - value
+    Group:
+      description: A Kowabunga users group.
+      example:
+        name: name
+        description: description
+        id: id
+        users:
+        - users
+        - users
+      properties:
+        id:
+          description: The Kowabunga users group ID (auto-generated).
+          type: string
+        name:
+          description: The Kowabunga users group name.
+          type: string
+        description:
+          description: The Kowabunga users group description.
+          type: string
+        users:
+          description: List of user IDs that are part of the group.
+          items:
+            type: string
+          type: array
+      required:
+      - name
+      - users
     Host:
       description: A computing host.
       example:

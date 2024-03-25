@@ -54,6 +54,8 @@ type APIClient struct {
 
 	AgentAPI *AgentAPIService
 
+	GroupAPI *GroupAPIService
+
 	HostAPI *HostAPIService
 
 	InstanceAPI *InstanceAPIService
@@ -109,6 +111,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	// API Services
 	c.AdapterAPI = (*AdapterAPIService)(&c.common)
 	c.AgentAPI = (*AgentAPIService)(&c.common)
+	c.GroupAPI = (*GroupAPIService)(&c.common)
 	c.HostAPI = (*HostAPIService)(&c.common)
 	c.InstanceAPI = (*InstanceAPIService)(&c.common)
 	c.KceAPI = (*KceAPIService)(&c.common)
