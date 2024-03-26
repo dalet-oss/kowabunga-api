@@ -5214,7 +5214,6 @@ components:
       description: A Kowabunga authentication security token consists of an API key
         granting access to resources.
       example:
-        api_key: api_key
         expire: false
         name: name
         description: description
@@ -5237,9 +5236,6 @@ components:
         expiration_date:
           description: Expiration date of the token (YYYY-MM-DD format).
           format: date
-          type: string
-        api_key:
-          description: The generated API key (read-only).
           type: string
       required:
       - expire

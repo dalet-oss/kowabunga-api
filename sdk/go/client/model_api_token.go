@@ -32,8 +32,6 @@ type ApiToken struct {
 	Expire bool `json:"expire"`
 	// Expiration date of the token (YYYY-MM-DD format).
 	ExpirationDate *string `json:"expiration_date,omitempty"`
-	// The generated API key (read-only).
-	ApiKey *string `json:"api_key,omitempty"`
 }
 
 type _ApiToken ApiToken
@@ -203,38 +201,6 @@ func (o *ApiToken) SetExpirationDate(v string) {
 	o.ExpirationDate = &v
 }
 
-// GetApiKey returns the ApiKey field value if set, zero value otherwise.
-func (o *ApiToken) GetApiKey() string {
-	if o == nil || IsNil(o.ApiKey) {
-		var ret string
-		return ret
-	}
-	return *o.ApiKey
-}
-
-// GetApiKeyOk returns a tuple with the ApiKey field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ApiToken) GetApiKeyOk() (*string, bool) {
-	if o == nil || IsNil(o.ApiKey) {
-		return nil, false
-	}
-	return o.ApiKey, true
-}
-
-// HasApiKey returns a boolean if a field has been set.
-func (o *ApiToken) HasApiKey() bool {
-	if o != nil && !IsNil(o.ApiKey) {
-		return true
-	}
-
-	return false
-}
-
-// SetApiKey gets a reference to the given string and assigns it to the ApiKey field.
-func (o *ApiToken) SetApiKey(v string) {
-	o.ApiKey = &v
-}
-
 func (o ApiToken) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -255,9 +221,6 @@ func (o ApiToken) ToMap() (map[string]interface{}, error) {
 	toSerialize["expire"] = o.Expire
 	if !IsNil(o.ExpirationDate) {
 		toSerialize["expiration_date"] = o.ExpirationDate
-	}
-	if !IsNil(o.ApiKey) {
-		toSerialize["api_key"] = o.ApiKey
 	}
 	return toSerialize, nil
 }

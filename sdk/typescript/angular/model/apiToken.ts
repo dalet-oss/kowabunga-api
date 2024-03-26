@@ -35,9 +35,5 @@ export interface ApiToken {
      * Expiration date of the token (YYYY-MM-DD format).
      */
     expiration_date?: string;
-    /**
-     * The generated API key (read-only).
-     */
-    api_key?: string;
 }
 

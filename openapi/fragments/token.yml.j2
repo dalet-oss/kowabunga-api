@@ -5,7 +5,6 @@ components:
 {{ oas.SchemaBaseResource(resources.token, ['name', 'expire']) }}
 {{ oas.BoolProperty('expire', 'Does the API token expires at some stage ?', default=False) }}
 {{ oas.DateProperty('expiration_date', 'Expiration date of the token (YYYY-MM-DD format)') }}
-{{ oas.StringProperty('api_key', 'The generated API key (read-only)') }}
 
   parameters:
 {{ oas.PathParamID(resources.token) }}

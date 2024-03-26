@@ -30,9 +30,6 @@ type ApiToken struct {
 
 	// Expiration date of the token (YYYY-MM-DD format).
 	ExpirationDate string `json:"expiration_date,omitempty"`
-
-	// The generated API key (read-only).
-	ApiKey string `json:"api_key,omitempty"`
 }
 
 // AssertApiTokenRequired checks if the required fields are not zero-ed
