@@ -28,10 +28,6 @@ type Project struct {
 	Name string `json:"name"`
 	// The project description.
 	Description *string `json:"description,omitempty"`
-	// Owner's name.
-	Owner string `json:"owner"`
-	// Associated email address, used to receive notifications.
-	Email string `json:"email"`
 	// Internal domain name (e.g. myproject.acme.com).
 	Domain *string `json:"domain,omitempty"`
 	// Default root password, set at cloud-init instance bootstrap phase. Will be randomly auto-generated at each instance creation if unspecified.
@@ -48,6 +44,8 @@ type Project struct {
 	Quotas ProjectResources `json:"quotas,omitempty"`
 	// The assigned project VPC private subnets IDs (read-only).
 	PrivateSubnets []ZoneSubnet `json:"private_subnets,omitempty"`
+	// A list of user groups allowed to administrate the project (i.e. capable of managing internal resources).
+	Groups []string `json:"groups"`
 }
 
 type _Project Project
@@ -56,11 +54,10 @@ type _Project Project
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProject(name string, owner string, email string) *Project {
+func NewProject(name string, groups []string) *Project {
 	this := Project{}
 	this.Name = name
-	this.Owner = owner
-	this.Email = email
+	this.Groups = groups
 	return &this
 }
 
@@ -158,54 +155,6 @@ func (o *Project) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *Project) SetDescription(v string) {
 	o.Description = &v
-}
-
-// GetOwner returns the Owner field value
-func (o *Project) GetOwner() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Owner
-}
-
-// GetOwnerOk returns a tuple with the Owner field value
-// and a boolean to check if the value has been set.
-func (o *Project) GetOwnerOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Owner, true
-}
-
-// SetOwner sets field value
-func (o *Project) SetOwner(v string) {
-	o.Owner = v
-}
-
-// GetEmail returns the Email field value
-func (o *Project) GetEmail() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Email
-}
-
-// GetEmailOk returns a tuple with the Email field value
-// and a boolean to check if the value has been set.
-func (o *Project) GetEmailOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Email, true
-}
-
-// SetEmail sets field value
-func (o *Project) SetEmail(v string) {
-	o.Email = v
 }
 
 // GetDomain returns the Domain field value if set, zero value otherwise.
@@ -464,6 +413,30 @@ func (o *Project) SetPrivateSubnets(v []ZoneSubnet) {
 	o.PrivateSubnets = v
 }
 
+// GetGroups returns the Groups field value
+func (o *Project) GetGroups() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.Groups
+}
+
+// GetGroupsOk returns a tuple with the Groups field value
+// and a boolean to check if the value has been set.
+func (o *Project) GetGroupsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Groups, true
+}
+
+// SetGroups sets field value
+func (o *Project) SetGroups(v []string) {
+	o.Groups = v
+}
+
 func (o Project) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -481,8 +454,6 @@ func (o Project) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	toSerialize["owner"] = o.Owner
-	toSerialize["email"] = o.Email
 	if !IsNil(o.Domain) {
 		toSerialize["domain"] = o.Domain
 	}
@@ -507,6 +478,7 @@ func (o Project) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PrivateSubnets) {
 		toSerialize["private_subnets"] = o.PrivateSubnets
 	}
+	toSerialize["groups"] = o.Groups
 	return toSerialize, nil
 }
 
@@ -516,8 +488,7 @@ func (o *Project) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"name",
-		"owner",
-		"email",
+		"groups",
 	}
 
 	allProperties := make(map[string]interface{})

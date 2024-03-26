@@ -4879,7 +4879,6 @@ components:
       description: "A Kowabunga project corresponds to a single tenant, isolated set\
         \ of resources."
       example:
-        owner: owner
         quotas:
           memory: 6
           instances: 5
@@ -4890,12 +4889,6 @@ components:
           key: key
         - value: value
           key: key
-        root_password: root_password
-        description: description
-        bootstrap_user: bootstrap_user
-        tags:
-        - tags
-        - tags
         bootstrap_pubkey: bootstrap_pubkey
         private_subnets:
         - value: value
@@ -4903,9 +4896,17 @@ components:
         - value: value
           key: key
         domain: domain
+        root_password: root_password
         name: name
+        description: description
+        groups:
+        - groups
+        - groups
         id: id
-        email: email
+        bootstrap_user: bootstrap_user
+        tags:
+        - tags
+        - tags
       properties:
         id:
           description: The project ID (auto-generated).
@@ -4915,12 +4916,6 @@ components:
           type: string
         description:
           description: The project description.
-          type: string
-        owner:
-          description: Owner's name.
-          type: string
-        email:
-          description: "Associated email address, used to receive notifications."
           type: string
         domain:
           description: Internal domain name (e.g. myproject.acme.com).
@@ -4955,10 +4950,15 @@ components:
           items:
             $ref: '#/components/schemas/ZoneSubnet'
           type: array
+        groups:
+          description: A list of user groups allowed to administrate the project (i.e.
+            capable of managing internal resources).
+          items:
+            type: string
+          type: array
       required:
-      - email
+      - groups
       - name
-      - owner
     ProjectResources:
       description: A global project resource quotas/usage (0 for unlimited).
       example:

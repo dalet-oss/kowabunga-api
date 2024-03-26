@@ -25,12 +25,6 @@ type Project struct {
 	// The project description.
 	Description string `json:"description,omitempty"`
 
-	// Owner's name.
-	Owner string `json:"owner"`
-
-	// Associated email address, used to receive notifications.
-	Email string `json:"email"`
-
 	// Internal domain name (e.g. myproject.acme.com).
 	Domain string `json:"domain,omitempty"`
 
@@ -54,14 +48,16 @@ type Project struct {
 
 	// The assigned project VPC private subnets IDs (read-only).
 	PrivateSubnets []ZoneSubnet `json:"private_subnets,omitempty"`
+
+	// A list of user groups allowed to administrate the project (i.e. capable of managing internal resources).
+	Groups []string `json:"groups"`
 }
 
 // AssertProjectRequired checks if the required fields are not zero-ed
 func AssertProjectRequired(obj Project) error {
 	elements := map[string]interface{}{
 		"name": obj.Name,
-		"owner": obj.Owner,
-		"email": obj.Email,
+		"groups": obj.Groups,
 	}
 	for name, el := range elements {
 		if isZero := IsZeroValue(el); isZero {

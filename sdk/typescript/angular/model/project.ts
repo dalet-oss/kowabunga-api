@@ -31,14 +31,6 @@ export interface Project {
      */
     description?: string;
     /**
-     * Owner\'s name.
-     */
-    owner: string;
-    /**
-     * Associated email address, used to receive notifications.
-     */
-    email: string;
-    /**
      * Internal domain name (e.g. myproject.acme.com).
      */
     domain?: string;
@@ -70,5 +62,9 @@ export interface Project {
      * The assigned project VPC private subnets IDs (read-only).
      */
     private_subnets?: Array<ZoneSubnet>;
+    /**
+     * A list of user groups allowed to administrate the project (i.e. capable of managing internal resources).
+     */
+    groups: Array<string>;
 }
 
