@@ -196,18 +196,25 @@ export class RegionService {
      * Creates a new NFS storage.
      * @param regionId The ID of the region.
      * @param storageNFS StorageNFS payload.
+     * @param poolId Storage pool ID (optional, region\&#39;s default if unspecified).
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createStorageNFS(regionId: string, storageNFS: StorageNFS, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<StorageNFS>;
-    public createStorageNFS(regionId: string, storageNFS: StorageNFS, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<StorageNFS>>;
-    public createStorageNFS(regionId: string, storageNFS: StorageNFS, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<StorageNFS>>;
-    public createStorageNFS(regionId: string, storageNFS: StorageNFS, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public createStorageNFS(regionId: string, storageNFS: StorageNFS, poolId?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<StorageNFS>;
+    public createStorageNFS(regionId: string, storageNFS: StorageNFS, poolId?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<StorageNFS>>;
+    public createStorageNFS(regionId: string, storageNFS: StorageNFS, poolId?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<StorageNFS>>;
+    public createStorageNFS(regionId: string, storageNFS: StorageNFS, poolId?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (regionId === null || regionId === undefined) {
             throw new Error('Required parameter regionId was null or undefined when calling createStorageNFS.');
         }
         if (storageNFS === null || storageNFS === undefined) {
             throw new Error('Required parameter storageNFS was null or undefined when calling createStorageNFS.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (poolId !== undefined && poolId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>poolId, 'poolId');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -268,6 +275,7 @@ export class RegionService {
             {
                 context: localVarHttpContext,
                 body: storageNFS,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -521,15 +529,22 @@ export class RegionService {
     /**
      * Returns the IDs of NFS storage objects.
      * @param regionId The ID of the region.
+     * @param poolId Storage pool ID (optional, region\&#39;s default if unspecified).
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public listRegionStorageNFSs(regionId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
-    public listRegionStorageNFSs(regionId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
-    public listRegionStorageNFSs(regionId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
-    public listRegionStorageNFSs(regionId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public listRegionStorageNFSs(regionId: string, poolId?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
+    public listRegionStorageNFSs(regionId: string, poolId?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
+    public listRegionStorageNFSs(regionId: string, poolId?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
+    public listRegionStorageNFSs(regionId: string, poolId?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (regionId === null || regionId === undefined) {
             throw new Error('Required parameter regionId was null or undefined when calling listRegionStorageNFSs.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (poolId !== undefined && poolId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>poolId, 'poolId');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -580,6 +595,7 @@ export class RegionService {
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

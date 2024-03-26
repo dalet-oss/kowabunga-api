@@ -2358,6 +2358,7 @@ paths:
       operationId: ListRegionStorageNFSs
       parameters:
       - $ref: '#/components/parameters/RegionID'
+      - $ref: '#/components/parameters/OptionalQueryPoolID'
       responses:
         "200":
           content:
@@ -2376,11 +2377,13 @@ paths:
       - nfs
     parameters:
     - $ref: '#/components/parameters/RegionID'
+    - $ref: '#/components/parameters/OptionalQueryPoolID'
     post:
       description: Creates a new NFS storage.
       operationId: CreateStorageNFS
       parameters:
       - $ref: '#/components/parameters/RegionID'
+      - $ref: '#/components/parameters/OptionalQueryPoolID'
       requestBody:
         content:
           application/json:

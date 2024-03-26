@@ -477,11 +477,11 @@ type RecordAPIServicer interface {
 // and updated with the logic required for the API.
 type RegionAPIServicer interface { 
 	CreateRegion(context.Context, Region) (ImplResponse, error)
-	CreateStorageNFS(context.Context, string, StorageNfs) (ImplResponse, error)
+	CreateStorageNFS(context.Context, string, StorageNfs, string) (ImplResponse, error)
 	CreateStoragePool(context.Context, string, StoragePool) (ImplResponse, error)
 	CreateZone(context.Context, string, Zone) (ImplResponse, error)
 	DeleteRegion(context.Context, string) (ImplResponse, error)
-	ListRegionStorageNFSs(context.Context, string) (ImplResponse, error)
+	ListRegionStorageNFSs(context.Context, string, string) (ImplResponse, error)
 	ListRegionStoragePools(context.Context, string) (ImplResponse, error)
 	ListRegionZones(context.Context, string) (ImplResponse, error)
 	ListRegions(context.Context) (ImplResponse, error)

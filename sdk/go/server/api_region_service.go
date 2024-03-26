@@ -60,7 +60,7 @@ func (s *RegionAPIService) CreateRegion(ctx context.Context, region Region) (Imp
 }
 
 // CreateStorageNFS - 
-func (s *RegionAPIService) CreateStorageNFS(ctx context.Context, regionId string, storageNfs StorageNfs) (ImplResponse, error) {
+func (s *RegionAPIService) CreateStorageNFS(ctx context.Context, regionId string, storageNfs StorageNfs, poolId string) (ImplResponse, error) {
 	// TODO - update CreateStorageNFS with the required logic for this service method.
 	// Add api_region_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
@@ -182,7 +182,7 @@ func (s *RegionAPIService) DeleteRegion(ctx context.Context, regionId string) (I
 }
 
 // ListRegionStorageNFSs - 
-func (s *RegionAPIService) ListRegionStorageNFSs(ctx context.Context, regionId string) (ImplResponse, error) {
+func (s *RegionAPIService) ListRegionStorageNFSs(ctx context.Context, regionId string, poolId string) (ImplResponse, error) {
 	// TODO - update ListRegionStorageNFSs with the required logic for this service method.
 	// Add api_region_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 

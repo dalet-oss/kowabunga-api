@@ -149,6 +149,11 @@ func (c *RegionAPIController) CreateRegion(w http.ResponseWriter, r *http.Reques
 // CreateStorageNFS - 
 func (c *RegionAPIController) CreateStorageNFS(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
+	query, err := parseQuery(r.URL.RawQuery)
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
 	regionIdParam := params["regionId"]
 	if regionIdParam == "" {
 		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
@@ -169,7 +174,14 @@ func (c *RegionAPIController) CreateStorageNFS(w http.ResponseWriter, r *http.Re
 		c.errorHandler(w, r, err, nil)
 		return
 	}
-	result, err := c.service.CreateStorageNFS(r.Context(), regionIdParam, storageNfsParam)
+	var poolIdParam string
+	if query.Has("poolId") {
+		param := query.Get("poolId")
+
+		poolIdParam = param
+	} else {
+	}
+	result, err := c.service.CreateStorageNFS(r.Context(), regionIdParam, storageNfsParam, poolIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -266,12 +278,24 @@ func (c *RegionAPIController) DeleteRegion(w http.ResponseWriter, r *http.Reques
 // ListRegionStorageNFSs - 
 func (c *RegionAPIController) ListRegionStorageNFSs(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
+	query, err := parseQuery(r.URL.RawQuery)
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
 	regionIdParam := params["regionId"]
 	if regionIdParam == "" {
 		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
 		return
 	}
-	result, err := c.service.ListRegionStorageNFSs(r.Context(), regionIdParam)
+	var poolIdParam string
+	if query.Has("poolId") {
+		param := query.Get("poolId")
+
+		poolIdParam = param
+	} else {
+	}
+	result, err := c.service.ListRegionStorageNFSs(r.Context(), regionIdParam, poolIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

@@ -48,7 +48,7 @@ All URIs are relative to */api/v1*
 
 <a name="createStorageNFS"></a>
 # **createStorageNFS**
-> StorageNFS createStorageNFS(regionId, StorageNFS)
+> StorageNFS createStorageNFS(regionId, StorageNFS, poolId)
 
 
 
@@ -60,6 +60,7 @@ All URIs are relative to */api/v1*
 |------------- | ------------- | ------------- | -------------|
 | **regionId** | **String**| The ID of the region. | [default to null] |
 | **StorageNFS** | [**StorageNFS**](../Models/StorageNFS.md)| StorageNFS payload. | |
+| **poolId** | **String**| Storage pool ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
 
 ### Return type
 
@@ -159,7 +160,7 @@ null (empty response body)
 
 <a name="listRegionStorageNFSs"></a>
 # **listRegionStorageNFSs**
-> List listRegionStorageNFSs(regionId)
+> List listRegionStorageNFSs(regionId, poolId)
 
 
 
@@ -170,6 +171,7 @@ null (empty response body)
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **regionId** | **String**| The ID of the region. | [default to null] |
+| **poolId** | **String**| Storage pool ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
 
 ### Return type
 

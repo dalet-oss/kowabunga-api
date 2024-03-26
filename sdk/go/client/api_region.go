@@ -230,11 +230,18 @@ type ApiCreateStorageNFSRequest struct {
 	ApiService *RegionAPIService
 	regionId string
 	storageNFS *StorageNFS
+	poolId *string
 }
 
 // StorageNFS payload.
 func (r ApiCreateStorageNFSRequest) StorageNFS(storageNFS StorageNFS) ApiCreateStorageNFSRequest {
 	r.storageNFS = &storageNFS
+	return r
+}
+
+// Storage pool ID (optional, region&#39;s default if unspecified).
+func (r ApiCreateStorageNFSRequest) PoolId(poolId string) ApiCreateStorageNFSRequest {
+	r.poolId = &poolId
 	return r
 }
 
@@ -284,6 +291,9 @@ func (a *RegionAPIService) CreateStorageNFSExecute(r ApiCreateStorageNFSRequest)
 		return localVarReturnValue, nil, reportError("storageNFS is required and must be specified")
 	}
 
+	if r.poolId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "poolId", r.poolId, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -1004,6 +1014,13 @@ type ApiListRegionStorageNFSsRequest struct {
 	ctx context.Context
 	ApiService *RegionAPIService
 	regionId string
+	poolId *string
+}
+
+// Storage pool ID (optional, region&#39;s default if unspecified).
+func (r ApiListRegionStorageNFSsRequest) PoolId(poolId string) ApiListRegionStorageNFSsRequest {
+	r.poolId = &poolId
+	return r
 }
 
 func (r ApiListRegionStorageNFSsRequest) Execute() ([]string, *http.Response, error) {
@@ -1049,6 +1066,9 @@ func (a *RegionAPIService) ListRegionStorageNFSsExecute(r ApiListRegionStorageNF
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.poolId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "poolId", r.poolId, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

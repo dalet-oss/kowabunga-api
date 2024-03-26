@@ -35,7 +35,7 @@ paths:
 {{ oas.GetAll('List' + resources.region.schema + resources.pool.schema + 's', resources.pool.desc, [resources.region.tag, resources.pool.tag], True) }}
 
   /region/{{ '{' + resources.region.paramId + '}' }}/nfs:
-{{ oas.Parameters([resources.region.paramSchema]) }}
+{{ oas.Parameters([resources.region.paramSchema, 'OptionalQuery' + resources.pool.paramSchema]) }}
 {{ oas.GetAll('List' + resources.region.schema + resources.nfs.schema + 's', resources.nfs.desc, [resources.region.tag, resources.nfs.tag], True) }}
 {{ oas.Create('Create' + resources.nfs.schema, resources.nfs.schema, resources.nfs.desc, [resources.region.tag, resources.nfs.tag]) }}
 
