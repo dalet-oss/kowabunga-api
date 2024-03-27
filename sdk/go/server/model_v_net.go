@@ -25,8 +25,8 @@ type VNet struct {
 	// The virtual network description.
 	Description string `json:"description,omitempty"`
 
-	// The VLAN identifier.
-	Vlan int64 `json:"vlan"`
+	// The VLAN identifier (0 if unspecified).
+	Vlan int64 `json:"vlan,omitempty"`
 
 	// The libvirt's bridge network interface (brX).
 	Interface string `json:"interface"`
@@ -39,7 +39,6 @@ type VNet struct {
 func AssertVNetRequired(obj VNet) error {
 	elements := map[string]interface{}{
 		"name": obj.Name,
-		"vlan": obj.Vlan,
 		"interface": obj.Interface,
 	}
 	for name, el := range elements {

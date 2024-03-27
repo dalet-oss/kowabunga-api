@@ -5330,7 +5330,7 @@ components:
           description: The virtual network description.
           type: string
         vlan:
-          description: The VLAN identifier.
+          description: The VLAN identifier (0 if unspecified).
           format: int64
           type: integer
         interface:
@@ -5344,7 +5344,6 @@ components:
       required:
       - interface
       - name
-      - vlan
     Volume:
       description: A storage volume.
       example:

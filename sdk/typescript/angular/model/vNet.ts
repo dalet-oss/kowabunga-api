@@ -28,9 +28,9 @@ export interface VNet {
      */
     description?: string;
     /**
-     * The VLAN identifier.
+     * The VLAN identifier (0 if unspecified).
      */
-    vlan: number;
+    vlan?: number;
     /**
      * The libvirt\'s bridge network interface (brX).
      */

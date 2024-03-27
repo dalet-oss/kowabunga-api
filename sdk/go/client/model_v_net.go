@@ -28,8 +28,8 @@ type VNet struct {
 	Name string `json:"name"`
 	// The virtual network description.
 	Description *string `json:"description,omitempty"`
-	// The VLAN identifier.
-	Vlan int64 `json:"vlan"`
+	// The VLAN identifier (0 if unspecified).
+	Vlan *int64 `json:"vlan,omitempty"`
 	// The libvirt's bridge network interface (brX).
 	Interface string `json:"interface"`
 	// Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?.
@@ -42,10 +42,9 @@ type _VNet VNet
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVNet(name string, vlan int64, interface_ string) *VNet {
+func NewVNet(name string, interface_ string) *VNet {
 	this := VNet{}
 	this.Name = name
-	this.Vlan = vlan
 	this.Interface = interface_
 	var private bool = true
 	this.Private = &private
@@ -150,28 +149,36 @@ func (o *VNet) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetVlan returns the Vlan field value
+// GetVlan returns the Vlan field value if set, zero value otherwise.
 func (o *VNet) GetVlan() int64 {
-	if o == nil {
+	if o == nil || IsNil(o.Vlan) {
 		var ret int64
 		return ret
 	}
-
-	return o.Vlan
+	return *o.Vlan
 }
 
-// GetVlanOk returns a tuple with the Vlan field value
+// GetVlanOk returns a tuple with the Vlan field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VNet) GetVlanOk() (*int64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Vlan) {
 		return nil, false
 	}
-	return &o.Vlan, true
+	return o.Vlan, true
 }
 
-// SetVlan sets field value
+// HasVlan returns a boolean if a field has been set.
+func (o *VNet) HasVlan() bool {
+	if o != nil && !IsNil(o.Vlan) {
+		return true
+	}
+
+	return false
+}
+
+// SetVlan gets a reference to the given int64 and assigns it to the Vlan field.
 func (o *VNet) SetVlan(v int64) {
-	o.Vlan = v
+	o.Vlan = &v
 }
 
 // GetInterface returns the Interface field value
@@ -247,7 +254,9 @@ func (o VNet) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	toSerialize["vlan"] = o.Vlan
+	if !IsNil(o.Vlan) {
+		toSerialize["vlan"] = o.Vlan
+	}
 	toSerialize["interface"] = o.Interface
 	if !IsNil(o.Private) {
 		toSerialize["private"] = o.Private
@@ -261,7 +270,6 @@ func (o *VNet) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"name",
-		"vlan",
 		"interface",
 	}
 

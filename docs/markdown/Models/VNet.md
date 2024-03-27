@@ -6,7 +6,7 @@
 | **id** | **String** | The virtual network ID (auto-generated). | [optional] [default to null] |
 | **name** | **String** | The virtual network name. | [default to null] |
 | **description** | **String** | The virtual network description. | [optional] [default to null] |
-| **vlan** | **Long** | The VLAN identifier. | [default to null] |
+| **vlan** | **Long** | The VLAN identifier (0 if unspecified). | [optional] [default to null] |
 | **interface** | **String** | The libvirt&#39;s bridge network interface (brX). | [default to null] |
 | **private** | **Boolean** | Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?. | [optional] [default to true] |
 
