@@ -26,6 +26,22 @@ paths:
 {{ oas.Parameters([resources.region.paramSchema]) }}
 {{ oas.Create('Create' + resources.pool.schema, resources.pool.schema, resources.pool.desc, [resources.region.tag, resources.pool.tag]) }}
 
+  /region/{{ '{' + resources.region.paramId + '}' }}/netgw:
+{{ oas.Parameters([resources.region.paramSchema]) }}
+{{ oas.Create('Create' + resources.netgw.schema, resources.netgw.schema, resources.netgw.desc, [resources.region.tag, resources.netgw.tag]) }}
+
+  /region/{{ '{' + resources.region.paramId + '}' }}/netgws:
+{{ oas.Parameters([resources.region.paramSchema]) }}
+{{ oas.GetAll('List' + resources.region.schema + resources.netgw.schema + 's', resources.netgw.desc, [resources.region.tag, resources.netgw.tag], True) }}
+
+  /region/{{ '{' + resources.region.paramId + '}' }}/vnet:
+{{ oas.Parameters([resources.region.paramSchema]) }}
+{{ oas.Create('Create' + resources.vnet.schema, resources.vnet.schema, resources.vnet.desc, [resources.region.tag, resources.vnet.tag]) }}
+
+  /region/{{ '{' + resources.region.paramId + '}' }}/vnets:
+{{ oas.Parameters([resources.region.paramSchema]) }}
+{{ oas.GetAll('List' + resources.region.schema + resources.vnet.schema + 's', resources.vnet.desc, [resources.region.tag, resources.vnet.tag], True) }}
+
   /region/{{ '{' + resources.region.paramId + '}' }}/pool/{{ '{' + resources.pool.paramId + '}' }}/default:
 {{ oas.Parameters([resources.region.paramSchema, resources.pool.paramSchema]) }}
 {{ oas.Patch('Set' + resources.region.schema + 'Default' + resources.pool.schema, resources.region.desc, 'setting of default ' + resources.pool.desc, [resources.region.tag, resources.pool.tag]) }}

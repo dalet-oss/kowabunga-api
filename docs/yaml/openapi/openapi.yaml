@@ -2304,6 +2304,132 @@ paths:
       tags:
       - region
       - pool
+  /region/{regionId}/netgw:
+    parameters:
+    - $ref: '#/components/parameters/RegionID'
+    post:
+      description: Creates a new Iris network gateway.
+      operationId: CreateNetGW
+      parameters:
+      - $ref: '#/components/parameters/RegionID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetGW'
+        description: NetGW payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetGW'
+          description: Returns the newly created Iris network gateway object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - region
+      - netgw
+  /region/{regionId}/netgws:
+    get:
+      description: Returns the IDs of Iris network gateway objects.
+      operationId: ListRegionNetGWs
+      parameters:
+      - $ref: '#/components/parameters/RegionID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of Iris network gateway IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - region
+      - netgw
+    parameters:
+    - $ref: '#/components/parameters/RegionID'
+  /region/{regionId}/vnet:
+    parameters:
+    - $ref: '#/components/parameters/RegionID'
+    post:
+      description: Creates a new virtual network.
+      operationId: CreateVNet
+      parameters:
+      - $ref: '#/components/parameters/RegionID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VNet'
+        description: VNet payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VNet'
+          description: Returns the newly created virtual network object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - region
+      - vnet
+  /region/{regionId}/vnets:
+    get:
+      description: Returns the IDs of virtual network objects.
+      operationId: ListRegionVNets
+      parameters:
+      - $ref: '#/components/parameters/RegionID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of virtual network IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - region
+      - vnet
+    parameters:
+    - $ref: '#/components/parameters/RegionID'
   /region/{regionId}/pool/{poolId}/default:
     parameters:
     - $ref: '#/components/parameters/RegionID'
@@ -3721,69 +3847,6 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - zone
-  /zone/{zoneId}/netgw:
-    parameters:
-    - $ref: '#/components/parameters/ZoneID'
-    post:
-      description: Creates a new Iris network gateway.
-      operationId: CreateNetGW
-      parameters:
-      - $ref: '#/components/parameters/ZoneID'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NetGW'
-        description: NetGW payload.
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NetGW'
-          description: Returns the newly created Iris network gateway object.
-        "400":
-          $ref: '#/components/responses/BadRequest'
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-        "409":
-          $ref: '#/components/responses/Conflict'
-        "422":
-          $ref: '#/components/responses/UnprocessableEntity'
-        "507":
-          $ref: '#/components/responses/InsufficientStorage'
-      tags:
-      - zone
-      - netgw
-  /zone/{zoneId}/netgws:
-    get:
-      description: Returns the IDs of Iris network gateway objects.
-      operationId: ListZoneNetGWs
-      parameters:
-      - $ref: '#/components/parameters/ZoneID'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of Iris network gateway IDs.
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-      tags:
-      - zone
-      - netgw
-    parameters:
-    - $ref: '#/components/parameters/ZoneID'
   /zone/{zoneId}/host:
     parameters:
     - $ref: '#/components/parameters/ZoneID'
@@ -3845,69 +3908,6 @@ paths:
       tags:
       - zone
       - host
-    parameters:
-    - $ref: '#/components/parameters/ZoneID'
-  /zone/{zoneId}/vnet:
-    parameters:
-    - $ref: '#/components/parameters/ZoneID'
-    post:
-      description: Creates a new virtual network.
-      operationId: CreateVNet
-      parameters:
-      - $ref: '#/components/parameters/ZoneID'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VNet'
-        description: VNet payload.
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VNet'
-          description: Returns the newly created virtual network object.
-        "400":
-          $ref: '#/components/responses/BadRequest'
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-        "409":
-          $ref: '#/components/responses/Conflict'
-        "422":
-          $ref: '#/components/responses/UnprocessableEntity'
-        "507":
-          $ref: '#/components/responses/InsufficientStorage'
-      tags:
-      - zone
-      - vnet
-  /zone/{zoneId}/vnets:
-    get:
-      description: Returns the IDs of virtual network objects.
-      operationId: ListZoneVNets
-      parameters:
-      - $ref: '#/components/parameters/ZoneID'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of virtual network IDs.
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-      tags:
-      - zone
-      - vnet
     parameters:
     - $ref: '#/components/parameters/ZoneID'
 components:

@@ -5,13 +5,11 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createHost**](ZoneApi.md#createHost) | **POST** /zone/{zoneId}/host |  |
-| [**createNetGW**](ZoneApi.md#createNetGW) | **POST** /zone/{zoneId}/netgw |  |
 | [**createProjectZoneInstance**](ZoneApi.md#createProjectZoneInstance) | **POST** /project/{projectId}/zone/{zoneId}/instance |  |
 | [**createProjectZoneKCE**](ZoneApi.md#createProjectZoneKCE) | **POST** /project/{projectId}/zone/{zoneId}/kce |  |
 | [**createProjectZoneKFS**](ZoneApi.md#createProjectZoneKFS) | **POST** /project/{projectId}/zone/{zoneId}/kfs |  |
 | [**createProjectZoneKGW**](ZoneApi.md#createProjectZoneKGW) | **POST** /project/{projectId}/zone/{zoneId}/kgw |  |
 | [**createProjectZoneVolume**](ZoneApi.md#createProjectZoneVolume) | **POST** /project/{projectId}/zone/{zoneId}/volume |  |
-| [**createVNet**](ZoneApi.md#createVNet) | **POST** /zone/{zoneId}/vnet |  |
 | [**createZone**](ZoneApi.md#createZone) | **POST** /region/{regionId}/zone |  |
 | [**deleteZone**](ZoneApi.md#deleteZone) | **DELETE** /zone/{zoneId} |  |
 | [**listProjectZoneInstances**](ZoneApi.md#listProjectZoneInstances) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
@@ -21,8 +19,6 @@ All URIs are relative to */api/v1*
 | [**listProjectZoneVolumes**](ZoneApi.md#listProjectZoneVolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes |  |
 | [**listRegionZones**](ZoneApi.md#listRegionZones) | **GET** /region/{regionId}/zones |  |
 | [**listZoneHosts**](ZoneApi.md#listZoneHosts) | **GET** /zone/{zoneId}/hosts |  |
-| [**listZoneNetGWs**](ZoneApi.md#listZoneNetGWs) | **GET** /zone/{zoneId}/netgws |  |
-| [**listZoneVNets**](ZoneApi.md#listZoneVNets) | **GET** /zone/{zoneId}/vnets |  |
 | [**listZones**](ZoneApi.md#listZones) | **GET** /zone |  |
 | [**readZone**](ZoneApi.md#readZone) | **GET** /zone/{zoneId} |  |
 | [**updateZone**](ZoneApi.md#updateZone) | **PUT** /zone/{zoneId} |  |
@@ -46,34 +42,6 @@ All URIs are relative to */api/v1*
 ### Return type
 
 [**Host**](../Models/Host.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-<a name="createNetGW"></a>
-# **createNetGW**
-> NetGW createNetGW(zoneId, NetGW)
-
-
-
-    Creates a new Iris network gateway.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **NetGW** | [**NetGW**](../Models/NetGW.md)| NetGW payload. | |
-
-### Return type
-
-[**NetGW**](../Models/NetGW.md)
 
 ### Authorization
 
@@ -225,34 +193,6 @@ All URIs are relative to */api/v1*
 ### Return type
 
 [**Volume**](../Models/Volume.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-<a name="createVNet"></a>
-# **createVNet**
-> VNet createVNet(zoneId, VNet)
-
-
-
-    Creates a new virtual network.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **VNet** | [**VNet**](../Models/VNet.md)| VNet payload. | |
-
-### Return type
-
-[**VNet**](../Models/VNet.md)
 
 ### Authorization
 
@@ -493,60 +433,6 @@ null (empty response body)
 
 
     Returns the IDs of computing host objects.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="listZoneNetGWs"></a>
-# **listZoneNetGWs**
-> List listZoneNetGWs(zoneId)
-
-
-
-    Returns the IDs of Iris network gateway objects.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="listZoneVNets"></a>
-# **listZoneVNets**
-> List listZoneVNets(zoneId)
-
-
-
-    Returns the IDs of virtual network objects.
 
 ### Parameters
 

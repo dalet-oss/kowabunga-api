@@ -75,10 +75,10 @@ All URIs are relative to */api/v1*
 *KgwApi* | [**listProjectZoneKGWs**](Apis/KgwApi.md#listprojectzonekgws) | **GET** /project/{projectId}/zone/{zoneId}/kgws | Returns the IDs of KGW (Kowabunga Network Gateway) objects. |
 *KgwApi* | [**readKGW**](Apis/KgwApi.md#readkgw) | **GET** /kgw/{kgwId} | Returns a KGW (Kowabunga Network Gateway). |
 *KgwApi* | [**updateKGW**](Apis/KgwApi.md#updatekgw) | **PUT** /kgw/{kgwId} | Updates a KGW (Kowabunga Network Gateway) configuration. |
-| *NetgwApi* | [**createNetGW**](Apis/NetgwApi.md#createnetgw) | **POST** /zone/{zoneId}/netgw | Creates a new Iris network gateway. |
+| *NetgwApi* | [**createNetGW**](Apis/NetgwApi.md#createnetgw) | **POST** /region/{regionId}/netgw | Creates a new Iris network gateway. |
 *NetgwApi* | [**deleteNetGW**](Apis/NetgwApi.md#deletenetgw) | **DELETE** /netgw/{netgwId} | Deletes an existing Iris network gateway. |
 *NetgwApi* | [**listNetGWs**](Apis/NetgwApi.md#listnetgws) | **GET** /netgw | Returns the IDs of Iris network gateway objects. |
-*NetgwApi* | [**listZoneNetGWs**](Apis/NetgwApi.md#listzonenetgws) | **GET** /zone/{zoneId}/netgws | Returns the IDs of Iris network gateway objects. |
+*NetgwApi* | [**listRegionNetGWs**](Apis/NetgwApi.md#listregionnetgws) | **GET** /region/{regionId}/netgws | Returns the IDs of Iris network gateway objects. |
 *NetgwApi* | [**readNetGW**](Apis/NetgwApi.md#readnetgw) | **GET** /netgw/{netgwId} | Returns a Iris network gateway. |
 *NetgwApi* | [**updateNetGW**](Apis/NetgwApi.md#updatenetgw) | **PUT** /netgw/{netgwId} | Updates a Iris network gateway configuration. |
 | *NfsApi* | [**createStorageNFS**](Apis/NfsApi.md#createstoragenfs) | **POST** /region/{regionId}/nfs | Creates a new NFS storage. |
@@ -124,13 +124,17 @@ All URIs are relative to */api/v1*
 *RecordApi* | [**listProjectDnsRecords**](Apis/RecordApi.md#listprojectdnsrecords) | **GET** /project/{projectId}/records | Returns the IDs of DNS record objects. |
 *RecordApi* | [**readDnsRecord**](Apis/RecordApi.md#readdnsrecord) | **GET** /record/{recordId} | Returns a DNS record. |
 *RecordApi* | [**updateDnsRecord**](Apis/RecordApi.md#updatednsrecord) | **PUT** /record/{recordId} | Updates a DNS record configuration. |
-| *RegionApi* | [**createRegion**](Apis/RegionApi.md#createregion) | **POST** /region | Creates a new region. |
+| *RegionApi* | [**createNetGW**](Apis/RegionApi.md#createnetgw) | **POST** /region/{regionId}/netgw | Creates a new Iris network gateway. |
+*RegionApi* | [**createRegion**](Apis/RegionApi.md#createregion) | **POST** /region | Creates a new region. |
 *RegionApi* | [**createStorageNFS**](Apis/RegionApi.md#createstoragenfs) | **POST** /region/{regionId}/nfs | Creates a new NFS storage. |
 *RegionApi* | [**createStoragePool**](Apis/RegionApi.md#createstoragepool) | **POST** /region/{regionId}/pool | Creates a new storage pool. |
+*RegionApi* | [**createVNet**](Apis/RegionApi.md#createvnet) | **POST** /region/{regionId}/vnet | Creates a new virtual network. |
 *RegionApi* | [**createZone**](Apis/RegionApi.md#createzone) | **POST** /region/{regionId}/zone | Creates a new availability zone. |
 *RegionApi* | [**deleteRegion**](Apis/RegionApi.md#deleteregion) | **DELETE** /region/{regionId} | Deletes an existing region. |
+*RegionApi* | [**listRegionNetGWs**](Apis/RegionApi.md#listregionnetgws) | **GET** /region/{regionId}/netgws | Returns the IDs of Iris network gateway objects. |
 *RegionApi* | [**listRegionStorageNFSs**](Apis/RegionApi.md#listregionstoragenfss) | **GET** /region/{regionId}/nfs | Returns the IDs of NFS storage objects. |
 *RegionApi* | [**listRegionStoragePools**](Apis/RegionApi.md#listregionstoragepools) | **GET** /region/{regionId}/pools | Returns the IDs of storage pool objects. |
+*RegionApi* | [**listRegionVNets**](Apis/RegionApi.md#listregionvnets) | **GET** /region/{regionId}/vnets | Returns the IDs of virtual network objects. |
 *RegionApi* | [**listRegionZones**](Apis/RegionApi.md#listregionzones) | **GET** /region/{regionId}/zones | Returns the IDs of availability zone objects. |
 *RegionApi* | [**listRegions**](Apis/RegionApi.md#listregions) | **GET** /region | Returns the IDs of region objects. |
 *RegionApi* | [**readRegion**](Apis/RegionApi.md#readregion) | **GET** /region/{regionId} | Returns a region. |
@@ -169,11 +173,11 @@ All URIs are relative to */api/v1*
 *UserApi* | [**setUserPassword**](Apis/UserApi.md#setuserpassword) | **PUT** /user/{userId}/password | Updates a Kowabunga user password (will replace any existing one) configuration. |
 *UserApi* | [**updateUser**](Apis/UserApi.md#updateuser) | **PUT** /user/{userId} | Updates a Kowabunga user configuration. |
 | *VnetApi* | [**createSubnet**](Apis/VnetApi.md#createsubnet) | **POST** /vnet/{vnetId}/subnet | Creates a new network subnet. |
-*VnetApi* | [**createVNet**](Apis/VnetApi.md#createvnet) | **POST** /zone/{zoneId}/vnet | Creates a new virtual network. |
+*VnetApi* | [**createVNet**](Apis/VnetApi.md#createvnet) | **POST** /region/{regionId}/vnet | Creates a new virtual network. |
 *VnetApi* | [**deleteVNet**](Apis/VnetApi.md#deletevnet) | **DELETE** /vnet/{vnetId} | Deletes an existing virtual network. |
+*VnetApi* | [**listRegionVNets**](Apis/VnetApi.md#listregionvnets) | **GET** /region/{regionId}/vnets | Returns the IDs of virtual network objects. |
 *VnetApi* | [**listVNetSubnets**](Apis/VnetApi.md#listvnetsubnets) | **GET** /vnet/{vnetId}/subnets | Returns the IDs of network subnet objects. |
 *VnetApi* | [**listVNets**](Apis/VnetApi.md#listvnets) | **GET** /vnet | Returns the IDs of virtual network objects. |
-*VnetApi* | [**listZoneVNets**](Apis/VnetApi.md#listzonevnets) | **GET** /zone/{zoneId}/vnets | Returns the IDs of virtual network objects. |
 *VnetApi* | [**readVNet**](Apis/VnetApi.md#readvnet) | **GET** /vnet/{vnetId} | Returns a virtual network. |
 *VnetApi* | [**setVNetDefaultSubnet**](Apis/VnetApi.md#setvnetdefaultsubnet) | **PATCH** /vnet/{vnetId}/subnet/{subnetId}/default | Performs a virtual network setting of default network subnet. |
 *VnetApi* | [**updateVNet**](Apis/VnetApi.md#updatevnet) | **PUT** /vnet/{vnetId} | Updates a virtual network configuration. |
@@ -185,13 +189,11 @@ All URIs are relative to */api/v1*
 *VolumeApi* | [**readVolume**](Apis/VolumeApi.md#readvolume) | **GET** /volume/{volumeId} | Returns a storage volume. |
 *VolumeApi* | [**updateVolume**](Apis/VolumeApi.md#updatevolume) | **PUT** /volume/{volumeId} | Updates a storage volume configuration. |
 | *ZoneApi* | [**createHost**](Apis/ZoneApi.md#createhost) | **POST** /zone/{zoneId}/host | Creates a new computing host. |
-*ZoneApi* | [**createNetGW**](Apis/ZoneApi.md#createnetgw) | **POST** /zone/{zoneId}/netgw | Creates a new Iris network gateway. |
 *ZoneApi* | [**createProjectZoneInstance**](Apis/ZoneApi.md#createprojectzoneinstance) | **POST** /project/{projectId}/zone/{zoneId}/instance | Creates a new virtual machine instance. |
 *ZoneApi* | [**createProjectZoneKCE**](Apis/ZoneApi.md#createprojectzonekce) | **POST** /project/{projectId}/zone/{zoneId}/kce | Creates a new KCE (Kowabunga Compute Engine). |
 *ZoneApi* | [**createProjectZoneKFS**](Apis/ZoneApi.md#createprojectzonekfs) | **POST** /project/{projectId}/zone/{zoneId}/kfs | Creates a new KFS (Kowabunga File System). |
 *ZoneApi* | [**createProjectZoneKGW**](Apis/ZoneApi.md#createprojectzonekgw) | **POST** /project/{projectId}/zone/{zoneId}/kgw | Creates a new KGW (Kowabunga Network Gateway). |
 *ZoneApi* | [**createProjectZoneVolume**](Apis/ZoneApi.md#createprojectzonevolume) | **POST** /project/{projectId}/zone/{zoneId}/volume | Creates a new storage volume. |
-*ZoneApi* | [**createVNet**](Apis/ZoneApi.md#createvnet) | **POST** /zone/{zoneId}/vnet | Creates a new virtual network. |
 *ZoneApi* | [**createZone**](Apis/ZoneApi.md#createzone) | **POST** /region/{regionId}/zone | Creates a new availability zone. |
 *ZoneApi* | [**deleteZone**](Apis/ZoneApi.md#deletezone) | **DELETE** /zone/{zoneId} | Deletes an existing availability zone. |
 *ZoneApi* | [**listProjectZoneInstances**](Apis/ZoneApi.md#listprojectzoneinstances) | **GET** /project/{projectId}/zone/{zoneId}/instances | Returns the IDs of virtual machine instance objects. |
@@ -201,8 +203,6 @@ All URIs are relative to */api/v1*
 *ZoneApi* | [**listProjectZoneVolumes**](Apis/ZoneApi.md#listprojectzonevolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes | Returns the IDs of storage volume objects. |
 *ZoneApi* | [**listRegionZones**](Apis/ZoneApi.md#listregionzones) | **GET** /region/{regionId}/zones | Returns the IDs of availability zone objects. |
 *ZoneApi* | [**listZoneHosts**](Apis/ZoneApi.md#listzonehosts) | **GET** /zone/{zoneId}/hosts | Returns the IDs of computing host objects. |
-*ZoneApi* | [**listZoneNetGWs**](Apis/ZoneApi.md#listzonenetgws) | **GET** /zone/{zoneId}/netgws | Returns the IDs of Iris network gateway objects. |
-*ZoneApi* | [**listZoneVNets**](Apis/ZoneApi.md#listzonevnets) | **GET** /zone/{zoneId}/vnets | Returns the IDs of virtual network objects. |
 *ZoneApi* | [**listZones**](Apis/ZoneApi.md#listzones) | **GET** /zone | Returns the IDs of availability zone objects. |
 *ZoneApi* | [**readZone**](Apis/ZoneApi.md#readzone) | **GET** /zone/{zoneId} | Returns a availability zone. |
 *ZoneApi* | [**updateZone**](Apis/ZoneApi.md#updatezone) | **PUT** /zone/{zoneId} | Updates a availability zone configuration. |

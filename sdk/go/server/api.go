@@ -179,13 +179,17 @@ type RecordAPIRouter interface {
 // The RegionAPIRouter implementation should parse necessary information from the http request,
 // pass the data to a RegionAPIServicer to perform the required actions, then write the service results to the http response.
 type RegionAPIRouter interface { 
+	CreateNetGW(http.ResponseWriter, *http.Request)
 	CreateRegion(http.ResponseWriter, *http.Request)
 	CreateStorageNFS(http.ResponseWriter, *http.Request)
 	CreateStoragePool(http.ResponseWriter, *http.Request)
+	CreateVNet(http.ResponseWriter, *http.Request)
 	CreateZone(http.ResponseWriter, *http.Request)
 	DeleteRegion(http.ResponseWriter, *http.Request)
+	ListRegionNetGWs(http.ResponseWriter, *http.Request)
 	ListRegionStorageNFSs(http.ResponseWriter, *http.Request)
 	ListRegionStoragePools(http.ResponseWriter, *http.Request)
+	ListRegionVNets(http.ResponseWriter, *http.Request)
 	ListRegionZones(http.ResponseWriter, *http.Request)
 	ListRegions(http.ResponseWriter, *http.Request)
 	ReadRegion(http.ResponseWriter, *http.Request)
@@ -262,12 +266,8 @@ type VolumeAPIRouter interface {
 // pass the data to a ZoneAPIServicer to perform the required actions, then write the service results to the http response.
 type ZoneAPIRouter interface { 
 	CreateHost(http.ResponseWriter, *http.Request)
-	CreateNetGW(http.ResponseWriter, *http.Request)
-	CreateVNet(http.ResponseWriter, *http.Request)
 	DeleteZone(http.ResponseWriter, *http.Request)
 	ListZoneHosts(http.ResponseWriter, *http.Request)
-	ListZoneNetGWs(http.ResponseWriter, *http.Request)
-	ListZoneVNets(http.ResponseWriter, *http.Request)
 	ListZones(http.ResponseWriter, *http.Request)
 	ReadZone(http.ResponseWriter, *http.Request)
 	UpdateZone(http.ResponseWriter, *http.Request)
@@ -476,13 +476,17 @@ type RecordAPIServicer interface {
 // while the service implementation can be ignored with the .openapi-generator-ignore file
 // and updated with the logic required for the API.
 type RegionAPIServicer interface { 
+	CreateNetGW(context.Context, string, NetGw) (ImplResponse, error)
 	CreateRegion(context.Context, Region) (ImplResponse, error)
 	CreateStorageNFS(context.Context, string, StorageNfs, string) (ImplResponse, error)
 	CreateStoragePool(context.Context, string, StoragePool) (ImplResponse, error)
+	CreateVNet(context.Context, string, VNet) (ImplResponse, error)
 	CreateZone(context.Context, string, Zone) (ImplResponse, error)
 	DeleteRegion(context.Context, string) (ImplResponse, error)
+	ListRegionNetGWs(context.Context, string) (ImplResponse, error)
 	ListRegionStorageNFSs(context.Context, string, string) (ImplResponse, error)
 	ListRegionStoragePools(context.Context, string) (ImplResponse, error)
+	ListRegionVNets(context.Context, string) (ImplResponse, error)
 	ListRegionZones(context.Context, string) (ImplResponse, error)
 	ListRegions(context.Context) (ImplResponse, error)
 	ReadRegion(context.Context, string) (ImplResponse, error)
@@ -580,12 +584,8 @@ type VolumeAPIServicer interface {
 // and updated with the logic required for the API.
 type ZoneAPIServicer interface { 
 	CreateHost(context.Context, string, Host) (ImplResponse, error)
-	CreateNetGW(context.Context, string, NetGw) (ImplResponse, error)
-	CreateVNet(context.Context, string, VNet) (ImplResponse, error)
 	DeleteZone(context.Context, string) (ImplResponse, error)
 	ListZoneHosts(context.Context, string) (ImplResponse, error)
-	ListZoneNetGWs(context.Context, string) (ImplResponse, error)
-	ListZoneVNets(context.Context, string) (ImplResponse, error)
 	ListZones(context.Context) (ImplResponse, error)
 	ReadZone(context.Context, string) (ImplResponse, error)
 	UpdateZone(context.Context, string, Zone) (ImplResponse, error)

@@ -14,14 +14,6 @@ paths:
   /zone/{{ '{' + resources.zone.paramId + '}' }}:
 {{ oas.RUD(resources.zone, [resources.zone.tag], [resources.zone.paramSchema]) }}
 
-  /zone/{{ '{' + resources.zone.paramId + '}' }}/netgw:
-{{ oas.Parameters([resources.zone.paramSchema]) }}
-{{ oas.Create('Create' + resources.netgw.schema, resources.netgw.schema, resources.netgw.desc, [resources.zone.tag, resources.netgw.tag]) }}
-
-  /zone/{{ '{' + resources.zone.paramId + '}' }}/netgws:
-{{ oas.Parameters([resources.zone.paramSchema]) }}
-{{ oas.GetAll('List' + resources.zone.schema + resources.netgw.schema + 's', resources.netgw.desc, [resources.zone.tag, resources.netgw.tag], True) }}
-
   /zone/{{ '{' + resources.zone.paramId + '}' }}/host:
 {{ oas.Parameters([resources.zone.paramSchema]) }}
 {{ oas.Create('Create' + resources.host.schema, resources.host.schema, resources.host.desc, [resources.zone.tag, resources.host.tag]) }}
@@ -29,11 +21,3 @@ paths:
   /zone/{{ '{' + resources.zone.paramId + '}' }}/hosts:
 {{ oas.Parameters([resources.zone.paramSchema]) }}
 {{ oas.GetAll('List' + resources.zone.schema + resources.host.schema + 's', resources.host.desc, [resources.zone.tag, resources.host.tag], True) }}
-
-  /zone/{{ '{' + resources.zone.paramId + '}' }}/vnet:
-{{ oas.Parameters([resources.zone.paramSchema]) }}
-{{ oas.Create('Create' + resources.vnet.schema, resources.vnet.schema, resources.vnet.desc, [resources.zone.tag, resources.vnet.tag]) }}
-
-  /zone/{{ '{' + resources.zone.paramId + '}' }}/vnets:
-{{ oas.Parameters([resources.zone.paramSchema]) }}
-{{ oas.GetAll('List' + resources.zone.schema + resources.vnet.schema + 's', resources.vnet.desc, [resources.zone.tag, resources.vnet.tag], True) }}

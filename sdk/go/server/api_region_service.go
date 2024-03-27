@@ -27,6 +27,38 @@ func NewRegionAPIService() RegionAPIServicer {
 	return &RegionAPIService{}
 }
 
+// CreateNetGW - 
+func (s *RegionAPIService) CreateNetGW(ctx context.Context, regionId string, netGw NetGw) (ImplResponse, error) {
+	// TODO - update CreateNetGW with the required logic for this service method.
+	// Add api_region_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(201, NetGw{}) or use other options such as http.Ok ...
+	// return Response(201, NetGw{}), nil
+
+	// TODO: Uncomment the next line to return response Response(400, ApiErrorBadRequest{}) or use other options such as http.Ok ...
+	// return Response(400, ApiErrorBadRequest{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	// TODO: Uncomment the next line to return response Response(409, ApiErrorConflict{}) or use other options such as http.Ok ...
+	// return Response(409, ApiErrorConflict{}), nil
+
+	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
+	// return Response(422, ApiErrorUnprocessableEntity{}), nil
+
+	// TODO: Uncomment the next line to return response Response(507, ApiErrorInsufficientStorage{}) or use other options such as http.Ok ...
+	// return Response(507, ApiErrorInsufficientStorage{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("CreateNetGW method not implemented")
+}
+
 // CreateRegion - 
 func (s *RegionAPIService) CreateRegion(ctx context.Context, region Region) (ImplResponse, error) {
 	// TODO - update CreateRegion with the required logic for this service method.
@@ -123,6 +155,38 @@ func (s *RegionAPIService) CreateStoragePool(ctx context.Context, regionId strin
 	return Response(http.StatusNotImplemented, nil), errors.New("CreateStoragePool method not implemented")
 }
 
+// CreateVNet - 
+func (s *RegionAPIService) CreateVNet(ctx context.Context, regionId string, vNet VNet) (ImplResponse, error) {
+	// TODO - update CreateVNet with the required logic for this service method.
+	// Add api_region_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(201, VNet{}) or use other options such as http.Ok ...
+	// return Response(201, VNet{}), nil
+
+	// TODO: Uncomment the next line to return response Response(400, ApiErrorBadRequest{}) or use other options such as http.Ok ...
+	// return Response(400, ApiErrorBadRequest{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	// TODO: Uncomment the next line to return response Response(409, ApiErrorConflict{}) or use other options such as http.Ok ...
+	// return Response(409, ApiErrorConflict{}), nil
+
+	// TODO: Uncomment the next line to return response Response(422, ApiErrorUnprocessableEntity{}) or use other options such as http.Ok ...
+	// return Response(422, ApiErrorUnprocessableEntity{}), nil
+
+	// TODO: Uncomment the next line to return response Response(507, ApiErrorInsufficientStorage{}) or use other options such as http.Ok ...
+	// return Response(507, ApiErrorInsufficientStorage{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("CreateVNet method not implemented")
+}
+
 // CreateZone - 
 func (s *RegionAPIService) CreateZone(ctx context.Context, regionId string, zone Zone) (ImplResponse, error) {
 	// TODO - update CreateZone with the required logic for this service method.
@@ -181,6 +245,26 @@ func (s *RegionAPIService) DeleteRegion(ctx context.Context, regionId string) (I
 	return Response(http.StatusNotImplemented, nil), errors.New("DeleteRegion method not implemented")
 }
 
+// ListRegionNetGWs - 
+func (s *RegionAPIService) ListRegionNetGWs(ctx context.Context, regionId string) (ImplResponse, error) {
+	// TODO - update ListRegionNetGWs with the required logic for this service method.
+	// Add api_region_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
+	// return Response(200, []string{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ListRegionNetGWs method not implemented")
+}
+
 // ListRegionStorageNFSs - 
 func (s *RegionAPIService) ListRegionStorageNFSs(ctx context.Context, regionId string, poolId string) (ImplResponse, error) {
 	// TODO - update ListRegionStorageNFSs with the required logic for this service method.
@@ -219,6 +303,26 @@ func (s *RegionAPIService) ListRegionStoragePools(ctx context.Context, regionId 
 	// return Response(404, ApiErrorNotFound{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("ListRegionStoragePools method not implemented")
+}
+
+// ListRegionVNets - 
+func (s *RegionAPIService) ListRegionVNets(ctx context.Context, regionId string) (ImplResponse, error) {
+	// TODO - update ListRegionVNets with the required logic for this service method.
+	// Add api_region_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
+
+	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
+	// return Response(200, []string{}), nil
+
+	// TODO: Uncomment the next line to return response Response(401, ApiErrorUnauthorized{}) or use other options such as http.Ok ...
+	// return Response(401, ApiErrorUnauthorized{}), nil
+
+	// TODO: Uncomment the next line to return response Response(403, ApiErrorForbidden{}) or use other options such as http.Ok ...
+	// return Response(403, ApiErrorForbidden{}), nil
+
+	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
+	// return Response(404, ApiErrorNotFound{}), nil
+
+	return Response(http.StatusNotImplemented, nil), errors.New("ListRegionVNets method not implemented")
 }
 
 // ListRegionZones - 

@@ -4,17 +4,17 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createNetGW**](NetgwApi.md#createNetGW) | **POST** /zone/{zoneId}/netgw |  |
+| [**createNetGW**](NetgwApi.md#createNetGW) | **POST** /region/{regionId}/netgw |  |
 | [**deleteNetGW**](NetgwApi.md#deleteNetGW) | **DELETE** /netgw/{netgwId} |  |
 | [**listNetGWs**](NetgwApi.md#listNetGWs) | **GET** /netgw |  |
-| [**listZoneNetGWs**](NetgwApi.md#listZoneNetGWs) | **GET** /zone/{zoneId}/netgws |  |
+| [**listRegionNetGWs**](NetgwApi.md#listRegionNetGWs) | **GET** /region/{regionId}/netgws |  |
 | [**readNetGW**](NetgwApi.md#readNetGW) | **GET** /netgw/{netgwId} |  |
 | [**updateNetGW**](NetgwApi.md#updateNetGW) | **PUT** /netgw/{netgwId} |  |
 
 
 <a name="createNetGW"></a>
 # **createNetGW**
-> NetGW createNetGW(zoneId, NetGW)
+> NetGW createNetGW(regionId, NetGW)
 
 
 
@@ -24,7 +24,7 @@ All URIs are relative to */api/v1*
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **regionId** | **String**| The ID of the region. | [default to null] |
 | **NetGW** | [**NetGW**](../Models/NetGW.md)| NetGW payload. | |
 
 ### Return type
@@ -91,9 +91,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listZoneNetGWs"></a>
-# **listZoneNetGWs**
-> List listZoneNetGWs(zoneId)
+<a name="listRegionNetGWs"></a>
+# **listRegionNetGWs**
+> List listRegionNetGWs(regionId)
 
 
 
@@ -103,7 +103,7 @@ This endpoint does not need any parameter.
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **regionId** | **String**| The ID of the region. | [default to null] |
 
 ### Return type
 

@@ -4,13 +4,17 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**createNetGW**](RegionApi.md#createNetGW) | **POST** /region/{regionId}/netgw |  |
 | [**createRegion**](RegionApi.md#createRegion) | **POST** /region |  |
 | [**createStorageNFS**](RegionApi.md#createStorageNFS) | **POST** /region/{regionId}/nfs |  |
 | [**createStoragePool**](RegionApi.md#createStoragePool) | **POST** /region/{regionId}/pool |  |
+| [**createVNet**](RegionApi.md#createVNet) | **POST** /region/{regionId}/vnet |  |
 | [**createZone**](RegionApi.md#createZone) | **POST** /region/{regionId}/zone |  |
 | [**deleteRegion**](RegionApi.md#deleteRegion) | **DELETE** /region/{regionId} |  |
+| [**listRegionNetGWs**](RegionApi.md#listRegionNetGWs) | **GET** /region/{regionId}/netgws |  |
 | [**listRegionStorageNFSs**](RegionApi.md#listRegionStorageNFSs) | **GET** /region/{regionId}/nfs |  |
 | [**listRegionStoragePools**](RegionApi.md#listRegionStoragePools) | **GET** /region/{regionId}/pools |  |
+| [**listRegionVNets**](RegionApi.md#listRegionVNets) | **GET** /region/{regionId}/vnets |  |
 | [**listRegionZones**](RegionApi.md#listRegionZones) | **GET** /region/{regionId}/zones |  |
 | [**listRegions**](RegionApi.md#listRegions) | **GET** /region |  |
 | [**readRegion**](RegionApi.md#readRegion) | **GET** /region/{regionId} |  |
@@ -18,6 +22,34 @@ All URIs are relative to */api/v1*
 | [**setRegionDefaultStoragePool**](RegionApi.md#setRegionDefaultStoragePool) | **PATCH** /region/{regionId}/pool/{poolId}/default |  |
 | [**updateRegion**](RegionApi.md#updateRegion) | **PUT** /region/{regionId} |  |
 
+
+<a name="createNetGW"></a>
+# **createNetGW**
+> NetGW createNetGW(regionId, NetGW)
+
+
+
+    Creates a new Iris network gateway.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **regionId** | **String**| The ID of the region. | [default to null] |
+| **NetGW** | [**NetGW**](../Models/NetGW.md)| NetGW payload. | |
+
+### Return type
+
+[**NetGW**](../Models/NetGW.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 <a name="createRegion"></a>
 # **createRegion**
@@ -103,6 +135,34 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
+<a name="createVNet"></a>
+# **createVNet**
+> VNet createVNet(regionId, VNet)
+
+
+
+    Creates a new virtual network.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **regionId** | **String**| The ID of the region. | [default to null] |
+| **VNet** | [**VNet**](../Models/VNet.md)| VNet payload. | |
+
+### Return type
+
+[**VNet**](../Models/VNet.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
 <a name="createZone"></a>
 # **createZone**
 > Zone createZone(regionId, Zone)
@@ -158,6 +218,33 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+<a name="listRegionNetGWs"></a>
+# **listRegionNetGWs**
+> List listRegionNetGWs(regionId)
+
+
+
+    Returns the IDs of Iris network gateway objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **regionId** | **String**| The ID of the region. | [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 <a name="listRegionStorageNFSs"></a>
 # **listRegionStorageNFSs**
 > List listRegionStorageNFSs(regionId, poolId)
@@ -193,6 +280,33 @@ null (empty response body)
 
 
     Returns the IDs of storage pool objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **regionId** | **String**| The ID of the region. | [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listRegionVNets"></a>
+# **listRegionVNets**
+> List listRegionVNets(regionId)
+
+
+
+    Returns the IDs of virtual network objects.
 
 ### Parameters
 

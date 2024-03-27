@@ -51,6 +51,11 @@ func NewRegionAPIController(s RegionAPIServicer, opts ...RegionAPIOption) Router
 // Routes returns all the api routes for the RegionAPIController
 func (c *RegionAPIController) Routes() Routes {
 	return Routes{
+		"CreateNetGW": Route{
+			strings.ToUpper("Post"),
+			"/api/v1/region/{regionId}/netgw",
+			c.CreateNetGW,
+		},
 		"CreateRegion": Route{
 			strings.ToUpper("Post"),
 			"/api/v1/region",
@@ -66,6 +71,11 @@ func (c *RegionAPIController) Routes() Routes {
 			"/api/v1/region/{regionId}/pool",
 			c.CreateStoragePool,
 		},
+		"CreateVNet": Route{
+			strings.ToUpper("Post"),
+			"/api/v1/region/{regionId}/vnet",
+			c.CreateVNet,
+		},
 		"CreateZone": Route{
 			strings.ToUpper("Post"),
 			"/api/v1/region/{regionId}/zone",
@@ -76,6 +86,11 @@ func (c *RegionAPIController) Routes() Routes {
 			"/api/v1/region/{regionId}",
 			c.DeleteRegion,
 		},
+		"ListRegionNetGWs": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/region/{regionId}/netgws",
+			c.ListRegionNetGWs,
+		},
 		"ListRegionStorageNFSs": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/region/{regionId}/nfs",
@@ -85,6 +100,11 @@ func (c *RegionAPIController) Routes() Routes {
 			strings.ToUpper("Get"),
 			"/api/v1/region/{regionId}/pools",
 			c.ListRegionStoragePools,
+		},
+		"ListRegionVNets": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/region/{regionId}/vnets",
+			c.ListRegionVNets,
 		},
 		"ListRegionZones": Route{
 			strings.ToUpper("Get"),
@@ -117,6 +137,39 @@ func (c *RegionAPIController) Routes() Routes {
 			c.UpdateRegion,
 		},
 	}
+}
+
+// CreateNetGW - 
+func (c *RegionAPIController) CreateNetGW(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	regionIdParam := params["regionId"]
+	if regionIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
+		return
+	}
+	netGwParam := NetGw{}
+	d := json.NewDecoder(r.Body)
+	d.DisallowUnknownFields()
+	if err := d.Decode(&netGwParam); err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	if err := AssertNetGwRequired(netGwParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	if err := AssertNetGwConstraints(netGwParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	result, err := c.service.CreateNetGW(r.Context(), regionIdParam, netGwParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
 // CreateRegion - 
@@ -224,6 +277,39 @@ func (c *RegionAPIController) CreateStoragePool(w http.ResponseWriter, r *http.R
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
+// CreateVNet - 
+func (c *RegionAPIController) CreateVNet(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	regionIdParam := params["regionId"]
+	if regionIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
+		return
+	}
+	vNetParam := VNet{}
+	d := json.NewDecoder(r.Body)
+	d.DisallowUnknownFields()
+	if err := d.Decode(&vNetParam); err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	if err := AssertVNetRequired(vNetParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	if err := AssertVNetConstraints(vNetParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	result, err := c.service.CreateVNet(r.Context(), regionIdParam, vNetParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
 // CreateZone - 
 func (c *RegionAPIController) CreateZone(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -275,6 +361,24 @@ func (c *RegionAPIController) DeleteRegion(w http.ResponseWriter, r *http.Reques
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
+// ListRegionNetGWs - 
+func (c *RegionAPIController) ListRegionNetGWs(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	regionIdParam := params["regionId"]
+	if regionIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
+		return
+	}
+	result, err := c.service.ListRegionNetGWs(r.Context(), regionIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
 // ListRegionStorageNFSs - 
 func (c *RegionAPIController) ListRegionStorageNFSs(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -314,6 +418,24 @@ func (c *RegionAPIController) ListRegionStoragePools(w http.ResponseWriter, r *h
 		return
 	}
 	result, err := c.service.ListRegionStoragePools(r.Context(), regionIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListRegionVNets - 
+func (c *RegionAPIController) ListRegionVNets(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	regionIdParam := params["regionId"]
+	if regionIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
+		return
+	}
+	result, err := c.service.ListRegionVNets(r.Context(), regionIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

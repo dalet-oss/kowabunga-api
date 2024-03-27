@@ -56,16 +56,6 @@ func (c *ZoneAPIController) Routes() Routes {
 			"/api/v1/zone/{zoneId}/host",
 			c.CreateHost,
 		},
-		"CreateNetGW": Route{
-			strings.ToUpper("Post"),
-			"/api/v1/zone/{zoneId}/netgw",
-			c.CreateNetGW,
-		},
-		"CreateVNet": Route{
-			strings.ToUpper("Post"),
-			"/api/v1/zone/{zoneId}/vnet",
-			c.CreateVNet,
-		},
 		"DeleteZone": Route{
 			strings.ToUpper("Delete"),
 			"/api/v1/zone/{zoneId}",
@@ -75,16 +65,6 @@ func (c *ZoneAPIController) Routes() Routes {
 			strings.ToUpper("Get"),
 			"/api/v1/zone/{zoneId}/hosts",
 			c.ListZoneHosts,
-		},
-		"ListZoneNetGWs": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/zone/{zoneId}/netgws",
-			c.ListZoneNetGWs,
-		},
-		"ListZoneVNets": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/zone/{zoneId}/vnets",
-			c.ListZoneVNets,
 		},
 		"ListZones": Route{
 			strings.ToUpper("Get"),
@@ -137,72 +117,6 @@ func (c *ZoneAPIController) CreateHost(w http.ResponseWriter, r *http.Request) {
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// CreateNetGW - 
-func (c *ZoneAPIController) CreateNetGW(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	netGwParam := NetGw{}
-	d := json.NewDecoder(r.Body)
-	d.DisallowUnknownFields()
-	if err := d.Decode(&netGwParam); err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	if err := AssertNetGwRequired(netGwParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	if err := AssertNetGwConstraints(netGwParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	result, err := c.service.CreateNetGW(r.Context(), zoneIdParam, netGwParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// CreateVNet - 
-func (c *ZoneAPIController) CreateVNet(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	vNetParam := VNet{}
-	d := json.NewDecoder(r.Body)
-	d.DisallowUnknownFields()
-	if err := d.Decode(&vNetParam); err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	if err := AssertVNetRequired(vNetParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	if err := AssertVNetConstraints(vNetParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	result, err := c.service.CreateVNet(r.Context(), zoneIdParam, vNetParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
 // DeleteZone - 
 func (c *ZoneAPIController) DeleteZone(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -230,42 +144,6 @@ func (c *ZoneAPIController) ListZoneHosts(w http.ResponseWriter, r *http.Request
 		return
 	}
 	result, err := c.service.ListZoneHosts(r.Context(), zoneIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// ListZoneNetGWs - 
-func (c *ZoneAPIController) ListZoneNetGWs(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	result, err := c.service.ListZoneNetGWs(r.Context(), zoneIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// ListZoneVNets - 
-func (c *ZoneAPIController) ListZoneVNets(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	zoneIdParam := params["zoneId"]
-	if zoneIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
-		return
-	}
-	result, err := c.service.ListZoneVNets(r.Context(), zoneIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
