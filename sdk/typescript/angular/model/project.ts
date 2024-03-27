@@ -9,8 +9,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { RegionSubnet } from './regionSubnet';
 import { Metadata } from './metadata';
-import { ZoneSubnet } from './zoneSubnet';
 import { ProjectResources } from './projectResources';
 
 
@@ -61,10 +61,14 @@ export interface Project {
     /**
      * The assigned project VPC private subnets IDs (read-only).
      */
-    private_subnets?: Array<ZoneSubnet>;
+    private_subnets?: Array<RegionSubnet>;
     /**
      * A list of user groups allowed to administrate the project (i.e. capable of managing internal resources).
      */
     groups: Array<string>;
+    /**
+     * A list of Kowabunga regions the project is managing resources from.
+     */
+    regions: Array<string>;
 }
 

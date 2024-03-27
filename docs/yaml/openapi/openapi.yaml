@@ -4887,11 +4887,23 @@ components:
           instances: 5
           storage: 1
           vcpus: 0
+        regions:
+        - regions
+        - regions
         metadatas:
         - value: value
           key: key
         - value: value
           key: key
+        root_password: root_password
+        description: description
+        groups:
+        - groups
+        - groups
+        bootstrap_user: bootstrap_user
+        tags:
+        - tags
+        - tags
         bootstrap_pubkey: bootstrap_pubkey
         private_subnets:
         - value: value
@@ -4899,17 +4911,8 @@ components:
         - value: value
           key: key
         domain: domain
-        root_password: root_password
         name: name
-        description: description
-        groups:
-        - groups
-        - groups
         id: id
-        bootstrap_user: bootstrap_user
-        tags:
-        - tags
-        - tags
       properties:
         id:
           description: The project ID (auto-generated).
@@ -4951,7 +4954,7 @@ components:
         private_subnets:
           description: The assigned project VPC private subnets IDs (read-only).
           items:
-            $ref: '#/components/schemas/ZoneSubnet'
+            $ref: '#/components/schemas/RegionSubnet'
           type: array
         groups:
           description: A list of user groups allowed to administrate the project (i.e.
@@ -4959,9 +4962,16 @@ components:
           items:
             type: string
           type: array
+        regions:
+          description: A list of Kowabunga regions the project is managing resources
+            from.
+          items:
+            type: string
+          type: array
       required:
       - groups
       - name
+      - regions
     ProjectResources:
       description: A global project resource quotas/usage (0 for unlimited).
       example:
@@ -5169,14 +5179,14 @@ components:
       required:
       - first
       - last
-    ZoneSubnet:
-      description: A zone/subnet map.
+    RegionSubnet:
+      description: A region/subnet map.
       example:
         value: value
         key: key
       properties:
         key:
-          description: The zone key.
+          description: The region key.
           type: string
         value:
           description: The subnet ID.

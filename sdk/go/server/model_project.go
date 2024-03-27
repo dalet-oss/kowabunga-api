@@ -47,10 +47,13 @@ type Project struct {
 	Quotas ProjectResources `json:"quotas,omitempty"`
 
 	// The assigned project VPC private subnets IDs (read-only).
-	PrivateSubnets []ZoneSubnet `json:"private_subnets,omitempty"`
+	PrivateSubnets []RegionSubnet `json:"private_subnets,omitempty"`
 
 	// A list of user groups allowed to administrate the project (i.e. capable of managing internal resources).
 	Groups []string `json:"groups"`
+
+	// A list of Kowabunga regions the project is managing resources from.
+	Regions []string `json:"regions"`
 }
 
 // AssertProjectRequired checks if the required fields are not zero-ed
@@ -58,6 +61,7 @@ func AssertProjectRequired(obj Project) error {
 	elements := map[string]interface{}{
 		"name": obj.Name,
 		"groups": obj.Groups,
+		"regions": obj.Regions,
 	}
 	for name, el := range elements {
 		if isZero := IsZeroValue(el); isZero {
@@ -71,7 +75,7 @@ func AssertProjectRequired(obj Project) error {
 		}
 	}
 	for _, el := range obj.PrivateSubnets {
-		if err := AssertZoneSubnetRequired(el); err != nil {
+		if err := AssertRegionSubnetRequired(el); err != nil {
 			return err
 		}
 	}

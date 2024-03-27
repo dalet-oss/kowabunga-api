@@ -13,8 +13,8 @@ components:
 {{ oas.StringProperty('first', "The range's first IP address") }}
 {{ oas.StringProperty('last', "The range's last IP address") }}
 
-{{ oas.Schema(resources.zone_subnet) }}
-{{ oas.StringProperty('key', 'The zone key') }}
+{{ oas.Schema(resources.region_subnet) }}
+{{ oas.StringProperty('key', 'The region key') }}
 {{ oas.StringProperty('value', 'The subnet ID') }}
 
   parameters:

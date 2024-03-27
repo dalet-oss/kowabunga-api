@@ -169,9 +169,9 @@ resources:
     schema: Zone
     paramId: zoneId
     paramSchema: ZoneID
-  zone_subnet:
-    desc: zone/subnet map
-    schema: ZoneSubnet
+  region_subnet:
+    desc: region/subnet map
+    schema: RegionSubnet
 
 errors:
   BadRequest:

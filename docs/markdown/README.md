@@ -241,6 +241,7 @@ All URIs are relative to */api/v1*
  - [Project](./Models/Project.md)
  - [ProjectResources](./Models/ProjectResources.md)
  - [Region](./Models/Region.md)
+ - [RegionSubnet](./Models/RegionSubnet.md)
  - [StorageNFS](./Models/StorageNFS.md)
  - [StoragePool](./Models/StoragePool.md)
  - [Subnet](./Models/Subnet.md)
@@ -250,7 +251,6 @@ All URIs are relative to */api/v1*
  - [VNet](./Models/VNet.md)
  - [Volume](./Models/Volume.md)
  - [Zone](./Models/Zone.md)
- - [ZoneSubnet](./Models/ZoneSubnet.md)
 
 
 <a name="documentation-for-authorization"></a>

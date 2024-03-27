@@ -43,9 +43,11 @@ type Project struct {
 	// The global project resource quotas (0 for unlimited).
 	Quotas ProjectResources `json:"quotas,omitempty"`
 	// The assigned project VPC private subnets IDs (read-only).
-	PrivateSubnets []ZoneSubnet `json:"private_subnets,omitempty"`
+	PrivateSubnets []RegionSubnet `json:"private_subnets,omitempty"`
 	// A list of user groups allowed to administrate the project (i.e. capable of managing internal resources).
 	Groups []string `json:"groups"`
+	// A list of Kowabunga regions the project is managing resources from.
+	Regions []string `json:"regions"`
 }
 
 type _Project Project
@@ -54,10 +56,11 @@ type _Project Project
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProject(name string, groups []string) *Project {
+func NewProject(name string, groups []string, regions []string) *Project {
 	this := Project{}
 	this.Name = name
 	this.Groups = groups
+	this.Regions = regions
 	return &this
 }
 
@@ -382,9 +385,9 @@ func (o *Project) SetQuotas(v ProjectResources) {
 }
 
 // GetPrivateSubnets returns the PrivateSubnets field value if set, zero value otherwise.
-func (o *Project) GetPrivateSubnets() []ZoneSubnet {
+func (o *Project) GetPrivateSubnets() []RegionSubnet {
 	if o == nil || IsNil(o.PrivateSubnets) {
-		var ret []ZoneSubnet
+		var ret []RegionSubnet
 		return ret
 	}
 	return o.PrivateSubnets
@@ -392,7 +395,7 @@ func (o *Project) GetPrivateSubnets() []ZoneSubnet {
 
 // GetPrivateSubnetsOk returns a tuple with the PrivateSubnets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Project) GetPrivateSubnetsOk() ([]ZoneSubnet, bool) {
+func (o *Project) GetPrivateSubnetsOk() ([]RegionSubnet, bool) {
 	if o == nil || IsNil(o.PrivateSubnets) {
 		return nil, false
 	}
@@ -408,8 +411,8 @@ func (o *Project) HasPrivateSubnets() bool {
 	return false
 }
 
-// SetPrivateSubnets gets a reference to the given []ZoneSubnet and assigns it to the PrivateSubnets field.
-func (o *Project) SetPrivateSubnets(v []ZoneSubnet) {
+// SetPrivateSubnets gets a reference to the given []RegionSubnet and assigns it to the PrivateSubnets field.
+func (o *Project) SetPrivateSubnets(v []RegionSubnet) {
 	o.PrivateSubnets = v
 }
 
@@ -435,6 +438,30 @@ func (o *Project) GetGroupsOk() ([]string, bool) {
 // SetGroups sets field value
 func (o *Project) SetGroups(v []string) {
 	o.Groups = v
+}
+
+// GetRegions returns the Regions field value
+func (o *Project) GetRegions() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.Regions
+}
+
+// GetRegionsOk returns a tuple with the Regions field value
+// and a boolean to check if the value has been set.
+func (o *Project) GetRegionsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Regions, true
+}
+
+// SetRegions sets field value
+func (o *Project) SetRegions(v []string) {
+	o.Regions = v
 }
 
 func (o Project) MarshalJSON() ([]byte, error) {
@@ -479,6 +506,7 @@ func (o Project) ToMap() (map[string]interface{}, error) {
 		toSerialize["private_subnets"] = o.PrivateSubnets
 	}
 	toSerialize["groups"] = o.Groups
+	toSerialize["regions"] = o.Regions
 	return toSerialize, nil
 }
 
@@ -489,6 +517,7 @@ func (o *Project) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"name",
 		"groups",
+		"regions",
 	}
 
 	allProperties := make(map[string]interface{})
