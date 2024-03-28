@@ -2007,16 +2007,16 @@ paths:
       - project
       - region
       - kfs
-  /project/{projectId}/zone/{zoneId}/kgw:
+  /project/{projectId}/region/{regionId}/kgw:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
-    - $ref: '#/components/parameters/ZoneID'
+    - $ref: '#/components/parameters/RegionID'
     post:
       description: Creates a new KGW (Kowabunga Network Gateway).
-      operationId: CreateProjectZoneKGW
+      operationId: CreateProjectRegionKGW
       parameters:
       - $ref: '#/components/parameters/ProjectID'
-      - $ref: '#/components/parameters/ZoneID'
+      - $ref: '#/components/parameters/RegionID'
       requestBody:
         content:
           application/json:
@@ -2047,15 +2047,15 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - project
-      - zone
+      - region
       - kgw
-  /project/{projectId}/zone/{zoneId}/kgws:
+  /project/{projectId}/region/{regionId}/kgws:
     get:
       description: Returns the IDs of KGW (Kowabunga Network Gateway) objects.
-      operationId: ListProjectZoneKGWs
+      operationId: ListProjectRegionKGWs
       parameters:
       - $ref: '#/components/parameters/ProjectID'
-      - $ref: '#/components/parameters/ZoneID'
+      - $ref: '#/components/parameters/RegionID'
       responses:
         "200":
           content:
@@ -2071,11 +2071,11 @@ paths:
           $ref: '#/components/responses/NotFound'
       tags:
       - project
-      - zone
+      - region
       - kgw
     parameters:
     - $ref: '#/components/parameters/ProjectID'
-    - $ref: '#/components/parameters/ZoneID'
+    - $ref: '#/components/parameters/RegionID'
   /region:
     get:
       description: Returns the IDs of region objects.

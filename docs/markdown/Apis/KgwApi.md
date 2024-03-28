@@ -4,17 +4,17 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createProjectZoneKGW**](KgwApi.md#createProjectZoneKGW) | **POST** /project/{projectId}/zone/{zoneId}/kgw |  |
+| [**createProjectRegionKGW**](KgwApi.md#createProjectRegionKGW) | **POST** /project/{projectId}/region/{regionId}/kgw |  |
 | [**deleteKGW**](KgwApi.md#deleteKGW) | **DELETE** /kgw/{kgwId} |  |
 | [**listKGWs**](KgwApi.md#listKGWs) | **GET** /kgw |  |
-| [**listProjectZoneKGWs**](KgwApi.md#listProjectZoneKGWs) | **GET** /project/{projectId}/zone/{zoneId}/kgws |  |
+| [**listProjectRegionKGWs**](KgwApi.md#listProjectRegionKGWs) | **GET** /project/{projectId}/region/{regionId}/kgws |  |
 | [**readKGW**](KgwApi.md#readKGW) | **GET** /kgw/{kgwId} |  |
 | [**updateKGW**](KgwApi.md#updateKGW) | **PUT** /kgw/{kgwId} |  |
 
 
-<a name="createProjectZoneKGW"></a>
-# **createProjectZoneKGW**
-> KGW createProjectZoneKGW(projectId, zoneId, KGW)
+<a name="createProjectRegionKGW"></a>
+# **createProjectRegionKGW**
+> KGW createProjectRegionKGW(projectId, regionId, KGW)
 
 
 
@@ -25,7 +25,7 @@ All URIs are relative to */api/v1*
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the project. | [default to null] |
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **regionId** | **String**| The ID of the region. | [default to null] |
 | **KGW** | [**KGW**](../Models/KGW.md)| KGW payload. | |
 
 ### Return type
@@ -92,9 +92,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectZoneKGWs"></a>
-# **listProjectZoneKGWs**
-> List listProjectZoneKGWs(projectId, zoneId)
+<a name="listProjectRegionKGWs"></a>
+# **listProjectRegionKGWs**
+> List listProjectRegionKGWs(projectId, regionId)
 
 
 
@@ -105,7 +105,7 @@ This endpoint does not need any parameter.
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the project. | [default to null] |
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **regionId** | **String**| The ID of the region. | [default to null] |
 
 ### Return type
 

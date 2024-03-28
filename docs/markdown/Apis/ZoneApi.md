@@ -7,13 +7,11 @@ All URIs are relative to */api/v1*
 | [**createHost**](ZoneApi.md#createHost) | **POST** /zone/{zoneId}/host |  |
 | [**createProjectZoneInstance**](ZoneApi.md#createProjectZoneInstance) | **POST** /project/{projectId}/zone/{zoneId}/instance |  |
 | [**createProjectZoneKCE**](ZoneApi.md#createProjectZoneKCE) | **POST** /project/{projectId}/zone/{zoneId}/kce |  |
-| [**createProjectZoneKGW**](ZoneApi.md#createProjectZoneKGW) | **POST** /project/{projectId}/zone/{zoneId}/kgw |  |
 | [**createProjectZoneVolume**](ZoneApi.md#createProjectZoneVolume) | **POST** /project/{projectId}/zone/{zoneId}/volume |  |
 | [**createZone**](ZoneApi.md#createZone) | **POST** /region/{regionId}/zone |  |
 | [**deleteZone**](ZoneApi.md#deleteZone) | **DELETE** /zone/{zoneId} |  |
 | [**listProjectZoneInstances**](ZoneApi.md#listProjectZoneInstances) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
 | [**listProjectZoneKCEs**](ZoneApi.md#listProjectZoneKCEs) | **GET** /project/{projectId}/zone/{zoneId}/kces |  |
-| [**listProjectZoneKGWs**](ZoneApi.md#listProjectZoneKGWs) | **GET** /project/{projectId}/zone/{zoneId}/kgws |  |
 | [**listProjectZoneVolumes**](ZoneApi.md#listProjectZoneVolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes |  |
 | [**listRegionZones**](ZoneApi.md#listRegionZones) | **GET** /region/{regionId}/zones |  |
 | [**listZoneHosts**](ZoneApi.md#listZoneHosts) | **GET** /zone/{zoneId}/hosts |  |
@@ -101,35 +99,6 @@ All URIs are relative to */api/v1*
 ### Return type
 
 [**KCE**](../Models/KCE.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-<a name="createProjectZoneKGW"></a>
-# **createProjectZoneKGW**
-> KGW createProjectZoneKGW(projectId, zoneId, KGW)
-
-
-
-    Creates a new KGW (Kowabunga Network Gateway).
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the project. | [default to null] |
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **KGW** | [**KGW**](../Models/KGW.md)| KGW payload. | |
-
-### Return type
-
-[**KGW**](../Models/KGW.md)
 
 ### Authorization
 
@@ -261,34 +230,6 @@ null (empty response body)
 
 
     Returns the IDs of KCE (Kowabunga Compute Engine) objects.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the project. | [default to null] |
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="listProjectZoneKGWs"></a>
-# **listProjectZoneKGWs**
-> List listProjectZoneKGWs(projectId, zoneId)
-
-
-
-    Returns the IDs of KGW (Kowabunga Network Gateway) objects.
 
 ### Parameters
 

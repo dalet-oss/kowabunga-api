@@ -6,6 +6,7 @@ All URIs are relative to */api/v1*
 |------------- | ------------- | -------------|
 | [**createNetGW**](RegionApi.md#createNetGW) | **POST** /region/{regionId}/netgw |  |
 | [**createProjectRegionKFS**](RegionApi.md#createProjectRegionKFS) | **POST** /project/{projectId}/region/{regionId}/kfs |  |
+| [**createProjectRegionKGW**](RegionApi.md#createProjectRegionKGW) | **POST** /project/{projectId}/region/{regionId}/kgw |  |
 | [**createRegion**](RegionApi.md#createRegion) | **POST** /region |  |
 | [**createStorageNFS**](RegionApi.md#createStorageNFS) | **POST** /region/{regionId}/nfs |  |
 | [**createStoragePool**](RegionApi.md#createStoragePool) | **POST** /region/{regionId}/pool |  |
@@ -13,6 +14,7 @@ All URIs are relative to */api/v1*
 | [**createZone**](RegionApi.md#createZone) | **POST** /region/{regionId}/zone |  |
 | [**deleteRegion**](RegionApi.md#deleteRegion) | **DELETE** /region/{regionId} |  |
 | [**listProjectRegionKFSs**](RegionApi.md#listProjectRegionKFSs) | **GET** /project/{projectId}/region/{regionId}/kfs |  |
+| [**listProjectRegionKGWs**](RegionApi.md#listProjectRegionKGWs) | **GET** /project/{projectId}/region/{regionId}/kgws |  |
 | [**listRegionNetGWs**](RegionApi.md#listRegionNetGWs) | **GET** /region/{regionId}/netgws |  |
 | [**listRegionStorageNFSs**](RegionApi.md#listRegionStorageNFSs) | **GET** /region/{regionId}/nfs |  |
 | [**listRegionStoragePools**](RegionApi.md#listRegionStoragePools) | **GET** /region/{regionId}/pools |  |
@@ -73,6 +75,35 @@ All URIs are relative to */api/v1*
 ### Return type
 
 [**KFS**](../Models/KFS.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+<a name="createProjectRegionKGW"></a>
+# **createProjectRegionKGW**
+> KGW createProjectRegionKGW(projectId, regionId, KGW)
+
+
+
+    Creates a new KGW (Kowabunga Network Gateway).
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
+| **regionId** | **String**| The ID of the region. | [default to null] |
+| **KGW** | [**KGW**](../Models/KGW.md)| KGW payload. | |
+
+### Return type
+
+[**KGW**](../Models/KGW.md)
 
 ### Authorization
 
@@ -265,6 +296,34 @@ null (empty response body)
 | **projectId** | **String**| The ID of the project. | [default to null] |
 | **regionId** | **String**| The ID of the region. | [default to null] |
 | **nfsId** | **String**| NFS storage ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listProjectRegionKGWs"></a>
+# **listProjectRegionKGWs**
+> List listProjectRegionKGWs(projectId, regionId)
+
+
+
+    Returns the IDs of KGW (Kowabunga Network Gateway) objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
+| **regionId** | **String**| The ID of the region. | [default to null] |
 
 ### Return type
 
