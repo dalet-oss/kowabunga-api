@@ -62,10 +62,10 @@ All URIs are relative to */api/v1*
 *KceApi* | [**stopKCE**](Apis/KceApi.md#stopkce) | **PATCH** /kce/{kceId}/stop | Performs a KCE (Kowabunga Compute Engine) hardware stop. |
 *KceApi* | [**suspendKCE**](Apis/KceApi.md#suspendkce) | **PATCH** /kce/{kceId}/suspend | Performs a KCE (Kowabunga Compute Engine) software PM suspend. |
 *KceApi* | [**updateKCE**](Apis/KceApi.md#updatekce) | **PUT** /kce/{kceId} | Updates a KCE (Kowabunga Compute Engine) configuration. |
-| *KfsApi* | [**createProjectZoneKFS**](Apis/KfsApi.md#createprojectzonekfs) | **POST** /project/{projectId}/zone/{zoneId}/kfs | Creates a new KFS (Kowabunga File System). |
+| *KfsApi* | [**createProjectRegionKFS**](Apis/KfsApi.md#createprojectregionkfs) | **POST** /project/{projectId}/region/{regionId}/kfs | Creates a new KFS (Kowabunga File System). |
 *KfsApi* | [**deleteKFS**](Apis/KfsApi.md#deletekfs) | **DELETE** /kfs/{kfsId} | Deletes an existing KFS (Kowabunga File System). |
 *KfsApi* | [**listKFSs**](Apis/KfsApi.md#listkfss) | **GET** /kfs | Returns the IDs of KFS (Kowabunga File System) objects. |
-*KfsApi* | [**listProjectZoneKFSs**](Apis/KfsApi.md#listprojectzonekfss) | **GET** /project/{projectId}/zone/{zoneId}/kfs | Returns the IDs of KFS (Kowabunga File System) objects. |
+*KfsApi* | [**listProjectRegionKFSs**](Apis/KfsApi.md#listprojectregionkfss) | **GET** /project/{projectId}/region/{regionId}/kfs | Returns the IDs of KFS (Kowabunga File System) objects. |
 *KfsApi* | [**listStorageNFSKFSs**](Apis/KfsApi.md#liststoragenfskfss) | **GET** /nfs/{nfsId}/kfs | Returns the IDs of KFS (Kowabunga File System) objects. |
 *KfsApi* | [**readKFS**](Apis/KfsApi.md#readkfs) | **GET** /kfs/{kfsId} | Returns a KFS (Kowabunga File System). |
 *KfsApi* | [**updateKFS**](Apis/KfsApi.md#updatekfs) | **PUT** /kfs/{kfsId} | Updates a KFS (Kowabunga File System) configuration. |
@@ -102,16 +102,16 @@ All URIs are relative to */api/v1*
 *PoolApi* | [**updateStoragePool**](Apis/PoolApi.md#updatestoragepool) | **PUT** /pool/{poolId} | Updates a storage pool configuration. |
 | *ProjectApi* | [**createProject**](Apis/ProjectApi.md#createproject) | **POST** /project | Creates a new project. |
 *ProjectApi* | [**createProjectDnsRecord**](Apis/ProjectApi.md#createprojectdnsrecord) | **POST** /project/{projectId}/record | Creates a new DNS record. |
+*ProjectApi* | [**createProjectRegionKFS**](Apis/ProjectApi.md#createprojectregionkfs) | **POST** /project/{projectId}/region/{regionId}/kfs | Creates a new KFS (Kowabunga File System). |
 *ProjectApi* | [**createProjectZoneInstance**](Apis/ProjectApi.md#createprojectzoneinstance) | **POST** /project/{projectId}/zone/{zoneId}/instance | Creates a new virtual machine instance. |
 *ProjectApi* | [**createProjectZoneKCE**](Apis/ProjectApi.md#createprojectzonekce) | **POST** /project/{projectId}/zone/{zoneId}/kce | Creates a new KCE (Kowabunga Compute Engine). |
-*ProjectApi* | [**createProjectZoneKFS**](Apis/ProjectApi.md#createprojectzonekfs) | **POST** /project/{projectId}/zone/{zoneId}/kfs | Creates a new KFS (Kowabunga File System). |
 *ProjectApi* | [**createProjectZoneKGW**](Apis/ProjectApi.md#createprojectzonekgw) | **POST** /project/{projectId}/zone/{zoneId}/kgw | Creates a new KGW (Kowabunga Network Gateway). |
 *ProjectApi* | [**createProjectZoneVolume**](Apis/ProjectApi.md#createprojectzonevolume) | **POST** /project/{projectId}/zone/{zoneId}/volume | Creates a new storage volume. |
 *ProjectApi* | [**deleteProject**](Apis/ProjectApi.md#deleteproject) | **DELETE** /project/{projectId} | Deletes an existing project. |
 *ProjectApi* | [**listProjectDnsRecords**](Apis/ProjectApi.md#listprojectdnsrecords) | **GET** /project/{projectId}/records | Returns the IDs of DNS record objects. |
+*ProjectApi* | [**listProjectRegionKFSs**](Apis/ProjectApi.md#listprojectregionkfss) | **GET** /project/{projectId}/region/{regionId}/kfs | Returns the IDs of KFS (Kowabunga File System) objects. |
 *ProjectApi* | [**listProjectZoneInstances**](Apis/ProjectApi.md#listprojectzoneinstances) | **GET** /project/{projectId}/zone/{zoneId}/instances | Returns the IDs of virtual machine instance objects. |
 *ProjectApi* | [**listProjectZoneKCEs**](Apis/ProjectApi.md#listprojectzonekces) | **GET** /project/{projectId}/zone/{zoneId}/kces | Returns the IDs of KCE (Kowabunga Compute Engine) objects. |
-*ProjectApi* | [**listProjectZoneKFSs**](Apis/ProjectApi.md#listprojectzonekfss) | **GET** /project/{projectId}/zone/{zoneId}/kfs | Returns the IDs of KFS (Kowabunga File System) objects. |
 *ProjectApi* | [**listProjectZoneKGWs**](Apis/ProjectApi.md#listprojectzonekgws) | **GET** /project/{projectId}/zone/{zoneId}/kgws | Returns the IDs of KGW (Kowabunga Network Gateway) objects. |
 *ProjectApi* | [**listProjectZoneVolumes**](Apis/ProjectApi.md#listprojectzonevolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes | Returns the IDs of storage volume objects. |
 *ProjectApi* | [**listProjects**](Apis/ProjectApi.md#listprojects) | **GET** /project | Returns the IDs of project objects. |
@@ -125,12 +125,14 @@ All URIs are relative to */api/v1*
 *RecordApi* | [**readDnsRecord**](Apis/RecordApi.md#readdnsrecord) | **GET** /record/{recordId} | Returns a DNS record. |
 *RecordApi* | [**updateDnsRecord**](Apis/RecordApi.md#updatednsrecord) | **PUT** /record/{recordId} | Updates a DNS record configuration. |
 | *RegionApi* | [**createNetGW**](Apis/RegionApi.md#createnetgw) | **POST** /region/{regionId}/netgw | Creates a new Iris network gateway. |
+*RegionApi* | [**createProjectRegionKFS**](Apis/RegionApi.md#createprojectregionkfs) | **POST** /project/{projectId}/region/{regionId}/kfs | Creates a new KFS (Kowabunga File System). |
 *RegionApi* | [**createRegion**](Apis/RegionApi.md#createregion) | **POST** /region | Creates a new region. |
 *RegionApi* | [**createStorageNFS**](Apis/RegionApi.md#createstoragenfs) | **POST** /region/{regionId}/nfs | Creates a new NFS storage. |
 *RegionApi* | [**createStoragePool**](Apis/RegionApi.md#createstoragepool) | **POST** /region/{regionId}/pool | Creates a new storage pool. |
 *RegionApi* | [**createVNet**](Apis/RegionApi.md#createvnet) | **POST** /region/{regionId}/vnet | Creates a new virtual network. |
 *RegionApi* | [**createZone**](Apis/RegionApi.md#createzone) | **POST** /region/{regionId}/zone | Creates a new availability zone. |
 *RegionApi* | [**deleteRegion**](Apis/RegionApi.md#deleteregion) | **DELETE** /region/{regionId} | Deletes an existing region. |
+*RegionApi* | [**listProjectRegionKFSs**](Apis/RegionApi.md#listprojectregionkfss) | **GET** /project/{projectId}/region/{regionId}/kfs | Returns the IDs of KFS (Kowabunga File System) objects. |
 *RegionApi* | [**listRegionNetGWs**](Apis/RegionApi.md#listregionnetgws) | **GET** /region/{regionId}/netgws | Returns the IDs of Iris network gateway objects. |
 *RegionApi* | [**listRegionStorageNFSs**](Apis/RegionApi.md#listregionstoragenfss) | **GET** /region/{regionId}/nfs | Returns the IDs of NFS storage objects. |
 *RegionApi* | [**listRegionStoragePools**](Apis/RegionApi.md#listregionstoragepools) | **GET** /region/{regionId}/pools | Returns the IDs of storage pool objects. |
@@ -191,14 +193,12 @@ All URIs are relative to */api/v1*
 | *ZoneApi* | [**createHost**](Apis/ZoneApi.md#createhost) | **POST** /zone/{zoneId}/host | Creates a new computing host. |
 *ZoneApi* | [**createProjectZoneInstance**](Apis/ZoneApi.md#createprojectzoneinstance) | **POST** /project/{projectId}/zone/{zoneId}/instance | Creates a new virtual machine instance. |
 *ZoneApi* | [**createProjectZoneKCE**](Apis/ZoneApi.md#createprojectzonekce) | **POST** /project/{projectId}/zone/{zoneId}/kce | Creates a new KCE (Kowabunga Compute Engine). |
-*ZoneApi* | [**createProjectZoneKFS**](Apis/ZoneApi.md#createprojectzonekfs) | **POST** /project/{projectId}/zone/{zoneId}/kfs | Creates a new KFS (Kowabunga File System). |
 *ZoneApi* | [**createProjectZoneKGW**](Apis/ZoneApi.md#createprojectzonekgw) | **POST** /project/{projectId}/zone/{zoneId}/kgw | Creates a new KGW (Kowabunga Network Gateway). |
 *ZoneApi* | [**createProjectZoneVolume**](Apis/ZoneApi.md#createprojectzonevolume) | **POST** /project/{projectId}/zone/{zoneId}/volume | Creates a new storage volume. |
 *ZoneApi* | [**createZone**](Apis/ZoneApi.md#createzone) | **POST** /region/{regionId}/zone | Creates a new availability zone. |
 *ZoneApi* | [**deleteZone**](Apis/ZoneApi.md#deletezone) | **DELETE** /zone/{zoneId} | Deletes an existing availability zone. |
 *ZoneApi* | [**listProjectZoneInstances**](Apis/ZoneApi.md#listprojectzoneinstances) | **GET** /project/{projectId}/zone/{zoneId}/instances | Returns the IDs of virtual machine instance objects. |
 *ZoneApi* | [**listProjectZoneKCEs**](Apis/ZoneApi.md#listprojectzonekces) | **GET** /project/{projectId}/zone/{zoneId}/kces | Returns the IDs of KCE (Kowabunga Compute Engine) objects. |
-*ZoneApi* | [**listProjectZoneKFSs**](Apis/ZoneApi.md#listprojectzonekfss) | **GET** /project/{projectId}/zone/{zoneId}/kfs | Returns the IDs of KFS (Kowabunga File System) objects. |
 *ZoneApi* | [**listProjectZoneKGWs**](Apis/ZoneApi.md#listprojectzonekgws) | **GET** /project/{projectId}/zone/{zoneId}/kgws | Returns the IDs of KGW (Kowabunga Network Gateway) objects. |
 *ZoneApi* | [**listProjectZoneVolumes**](Apis/ZoneApi.md#listprojectzonevolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes | Returns the IDs of storage volume objects. |
 *ZoneApi* | [**listRegionZones**](Apis/ZoneApi.md#listregionzones) | **GET** /region/{regionId}/zones | Returns the IDs of availability zone objects. |

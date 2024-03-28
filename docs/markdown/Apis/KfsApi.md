@@ -4,18 +4,18 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createProjectZoneKFS**](KfsApi.md#createProjectZoneKFS) | **POST** /project/{projectId}/zone/{zoneId}/kfs |  |
+| [**createProjectRegionKFS**](KfsApi.md#createProjectRegionKFS) | **POST** /project/{projectId}/region/{regionId}/kfs |  |
 | [**deleteKFS**](KfsApi.md#deleteKFS) | **DELETE** /kfs/{kfsId} |  |
 | [**listKFSs**](KfsApi.md#listKFSs) | **GET** /kfs |  |
-| [**listProjectZoneKFSs**](KfsApi.md#listProjectZoneKFSs) | **GET** /project/{projectId}/zone/{zoneId}/kfs |  |
+| [**listProjectRegionKFSs**](KfsApi.md#listProjectRegionKFSs) | **GET** /project/{projectId}/region/{regionId}/kfs |  |
 | [**listStorageNFSKFSs**](KfsApi.md#listStorageNFSKFSs) | **GET** /nfs/{nfsId}/kfs |  |
 | [**readKFS**](KfsApi.md#readKFS) | **GET** /kfs/{kfsId} |  |
 | [**updateKFS**](KfsApi.md#updateKFS) | **PUT** /kfs/{kfsId} |  |
 
 
-<a name="createProjectZoneKFS"></a>
-# **createProjectZoneKFS**
-> KFS createProjectZoneKFS(projectId, zoneId, KFS, nfsId)
+<a name="createProjectRegionKFS"></a>
+# **createProjectRegionKFS**
+> KFS createProjectRegionKFS(projectId, regionId, KFS, nfsId)
 
 
 
@@ -26,7 +26,7 @@ All URIs are relative to */api/v1*
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the project. | [default to null] |
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **regionId** | **String**| The ID of the region. | [default to null] |
 | **KFS** | [**KFS**](../Models/KFS.md)| KFS payload. | |
 | **nfsId** | **String**| NFS storage ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
 
@@ -94,9 +94,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectZoneKFSs"></a>
-# **listProjectZoneKFSs**
-> List listProjectZoneKFSs(projectId, zoneId, nfsId)
+<a name="listProjectRegionKFSs"></a>
+# **listProjectRegionKFSs**
+> List listProjectRegionKFSs(projectId, regionId, nfsId)
 
 
 
@@ -107,7 +107,7 @@ This endpoint does not need any parameter.
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the project. | [default to null] |
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **regionId** | **String**| The ID of the region. | [default to null] |
 | **nfsId** | **String**| NFS storage ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
 
 ### Return type

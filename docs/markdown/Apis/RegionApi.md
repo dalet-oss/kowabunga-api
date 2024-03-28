@@ -5,12 +5,14 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createNetGW**](RegionApi.md#createNetGW) | **POST** /region/{regionId}/netgw |  |
+| [**createProjectRegionKFS**](RegionApi.md#createProjectRegionKFS) | **POST** /project/{projectId}/region/{regionId}/kfs |  |
 | [**createRegion**](RegionApi.md#createRegion) | **POST** /region |  |
 | [**createStorageNFS**](RegionApi.md#createStorageNFS) | **POST** /region/{regionId}/nfs |  |
 | [**createStoragePool**](RegionApi.md#createStoragePool) | **POST** /region/{regionId}/pool |  |
 | [**createVNet**](RegionApi.md#createVNet) | **POST** /region/{regionId}/vnet |  |
 | [**createZone**](RegionApi.md#createZone) | **POST** /region/{regionId}/zone |  |
 | [**deleteRegion**](RegionApi.md#deleteRegion) | **DELETE** /region/{regionId} |  |
+| [**listProjectRegionKFSs**](RegionApi.md#listProjectRegionKFSs) | **GET** /project/{projectId}/region/{regionId}/kfs |  |
 | [**listRegionNetGWs**](RegionApi.md#listRegionNetGWs) | **GET** /region/{regionId}/netgws |  |
 | [**listRegionStorageNFSs**](RegionApi.md#listRegionStorageNFSs) | **GET** /region/{regionId}/nfs |  |
 | [**listRegionStoragePools**](RegionApi.md#listRegionStoragePools) | **GET** /region/{regionId}/pools |  |
@@ -41,6 +43,36 @@ All URIs are relative to */api/v1*
 ### Return type
 
 [**NetGW**](../Models/NetGW.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+<a name="createProjectRegionKFS"></a>
+# **createProjectRegionKFS**
+> KFS createProjectRegionKFS(projectId, regionId, KFS, nfsId)
+
+
+
+    Creates a new KFS (Kowabunga File System).
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
+| **regionId** | **String**| The ID of the region. | [default to null] |
+| **KFS** | [**KFS**](../Models/KFS.md)| KFS payload. | |
+| **nfsId** | **String**| NFS storage ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
+
+### Return type
+
+[**KFS**](../Models/KFS.md)
 
 ### Authorization
 
@@ -208,6 +240,35 @@ All URIs are relative to */api/v1*
 ### Return type
 
 null (empty response body)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listProjectRegionKFSs"></a>
+# **listProjectRegionKFSs**
+> List listProjectRegionKFSs(projectId, regionId, nfsId)
+
+
+
+    Returns the IDs of KFS (Kowabunga File System) objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
+| **regionId** | **String**| The ID of the region. | [default to null] |
+| **nfsId** | **String**| NFS storage ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
+
+### Return type
+
+**List**
 
 ### Authorization
 

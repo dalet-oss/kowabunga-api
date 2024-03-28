@@ -296,6 +296,103 @@ export class ProjectService {
     }
 
     /**
+     * Creates a new KFS (Kowabunga File System).
+     * @param projectId The ID of the project.
+     * @param regionId The ID of the region.
+     * @param kFS KFS payload.
+     * @param nfsId NFS storage ID (optional, region\&#39;s default if unspecified).
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public createProjectRegionKFS(projectId: string, regionId: string, kFS: KFS, nfsId?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<KFS>;
+    public createProjectRegionKFS(projectId: string, regionId: string, kFS: KFS, nfsId?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<KFS>>;
+    public createProjectRegionKFS(projectId: string, regionId: string, kFS: KFS, nfsId?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<KFS>>;
+    public createProjectRegionKFS(projectId: string, regionId: string, kFS: KFS, nfsId?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (projectId === null || projectId === undefined) {
+            throw new Error('Required parameter projectId was null or undefined when calling createProjectRegionKFS.');
+        }
+        if (regionId === null || regionId === undefined) {
+            throw new Error('Required parameter regionId was null or undefined when calling createProjectRegionKFS.');
+        }
+        if (kFS === null || kFS === undefined) {
+            throw new Error('Required parameter kFS was null or undefined when calling createProjectRegionKFS.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (nfsId !== undefined && nfsId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>nfsId, 'nfsId');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (ApiKeyAuth) required
+        localVarCredential = this.configuration.lookupCredential('ApiKeyAuth');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('X-API-Key', localVarCredential);
+        }
+
+        // authentication (BearerAuth) required
+        localVarCredential = this.configuration.lookupCredential('BearerAuth');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/region/${this.configuration.encodeParam({name: "regionId", value: regionId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kfs`;
+        return this.httpClient.request<KFS>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: kFS,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Creates a new virtual machine instance.
      * @param projectId The ID of the project.
      * @param zoneId The ID of the availability zone.
@@ -481,103 +578,6 @@ export class ProjectService {
             {
                 context: localVarHttpContext,
                 body: kCE,
-                params: localVarQueryParameters,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Creates a new KFS (Kowabunga File System).
-     * @param projectId The ID of the project.
-     * @param zoneId The ID of the availability zone.
-     * @param kFS KFS payload.
-     * @param nfsId NFS storage ID (optional, region\&#39;s default if unspecified).
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public createProjectZoneKFS(projectId: string, zoneId: string, kFS: KFS, nfsId?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<KFS>;
-    public createProjectZoneKFS(projectId: string, zoneId: string, kFS: KFS, nfsId?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<KFS>>;
-    public createProjectZoneKFS(projectId: string, zoneId: string, kFS: KFS, nfsId?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<KFS>>;
-    public createProjectZoneKFS(projectId: string, zoneId: string, kFS: KFS, nfsId?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        if (projectId === null || projectId === undefined) {
-            throw new Error('Required parameter projectId was null or undefined when calling createProjectZoneKFS.');
-        }
-        if (zoneId === null || zoneId === undefined) {
-            throw new Error('Required parameter zoneId was null or undefined when calling createProjectZoneKFS.');
-        }
-        if (kFS === null || kFS === undefined) {
-            throw new Error('Required parameter kFS was null or undefined when calling createProjectZoneKFS.');
-        }
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (nfsId !== undefined && nfsId !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>nfsId, 'nfsId');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarCredential: string | undefined;
-        // authentication (ApiKeyAuth) required
-        localVarCredential = this.configuration.lookupCredential('ApiKeyAuth');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('X-API-Key', localVarCredential);
-        }
-
-        // authentication (BearerAuth) required
-        localVarCredential = this.configuration.lookupCredential('BearerAuth');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
-        }
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
-        }
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kfs`;
-        return this.httpClient.request<KFS>('post', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                body: kFS,
                 params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
@@ -922,6 +922,89 @@ export class ProjectService {
     }
 
     /**
+     * Returns the IDs of KFS (Kowabunga File System) objects.
+     * @param projectId The ID of the project.
+     * @param regionId The ID of the region.
+     * @param nfsId NFS storage ID (optional, region\&#39;s default if unspecified).
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public listProjectRegionKFSs(projectId: string, regionId: string, nfsId?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
+    public listProjectRegionKFSs(projectId: string, regionId: string, nfsId?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
+    public listProjectRegionKFSs(projectId: string, regionId: string, nfsId?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
+    public listProjectRegionKFSs(projectId: string, regionId: string, nfsId?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (projectId === null || projectId === undefined) {
+            throw new Error('Required parameter projectId was null or undefined when calling listProjectRegionKFSs.');
+        }
+        if (regionId === null || regionId === undefined) {
+            throw new Error('Required parameter regionId was null or undefined when calling listProjectRegionKFSs.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (nfsId !== undefined && nfsId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>nfsId, 'nfsId');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (ApiKeyAuth) required
+        localVarCredential = this.configuration.lookupCredential('ApiKeyAuth');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('X-API-Key', localVarCredential);
+        }
+
+        // authentication (BearerAuth) required
+        localVarCredential = this.configuration.lookupCredential('BearerAuth');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/region/${this.configuration.encodeParam({name: "regionId", value: regionId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kfs`;
+        return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Returns the IDs of virtual machine instance objects.
      * @param projectId The ID of the project.
      * @param zoneId The ID of the availability zone.
@@ -1062,89 +1145,6 @@ export class ProjectService {
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Returns the IDs of KFS (Kowabunga File System) objects.
-     * @param projectId The ID of the project.
-     * @param zoneId The ID of the availability zone.
-     * @param nfsId NFS storage ID (optional, region\&#39;s default if unspecified).
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public listProjectZoneKFSs(projectId: string, zoneId: string, nfsId?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
-    public listProjectZoneKFSs(projectId: string, zoneId: string, nfsId?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
-    public listProjectZoneKFSs(projectId: string, zoneId: string, nfsId?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
-    public listProjectZoneKFSs(projectId: string, zoneId: string, nfsId?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        if (projectId === null || projectId === undefined) {
-            throw new Error('Required parameter projectId was null or undefined when calling listProjectZoneKFSs.');
-        }
-        if (zoneId === null || zoneId === undefined) {
-            throw new Error('Required parameter zoneId was null or undefined when calling listProjectZoneKFSs.');
-        }
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (nfsId !== undefined && nfsId !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>nfsId, 'nfsId');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarCredential: string | undefined;
-        // authentication (ApiKeyAuth) required
-        localVarCredential = this.configuration.lookupCredential('ApiKeyAuth');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('X-API-Key', localVarCredential);
-        }
-
-        // authentication (BearerAuth) required
-        localVarCredential = this.configuration.lookupCredential('BearerAuth');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('Authorization', 'Bearer ' + localVarCredential);
-        }
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/project/${this.configuration.encodeParam({name: "projectId", value: projectId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kfs`;
-        return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

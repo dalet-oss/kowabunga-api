@@ -7,14 +7,12 @@ All URIs are relative to */api/v1*
 | [**createHost**](ZoneApi.md#createHost) | **POST** /zone/{zoneId}/host |  |
 | [**createProjectZoneInstance**](ZoneApi.md#createProjectZoneInstance) | **POST** /project/{projectId}/zone/{zoneId}/instance |  |
 | [**createProjectZoneKCE**](ZoneApi.md#createProjectZoneKCE) | **POST** /project/{projectId}/zone/{zoneId}/kce |  |
-| [**createProjectZoneKFS**](ZoneApi.md#createProjectZoneKFS) | **POST** /project/{projectId}/zone/{zoneId}/kfs |  |
 | [**createProjectZoneKGW**](ZoneApi.md#createProjectZoneKGW) | **POST** /project/{projectId}/zone/{zoneId}/kgw |  |
 | [**createProjectZoneVolume**](ZoneApi.md#createProjectZoneVolume) | **POST** /project/{projectId}/zone/{zoneId}/volume |  |
 | [**createZone**](ZoneApi.md#createZone) | **POST** /region/{regionId}/zone |  |
 | [**deleteZone**](ZoneApi.md#deleteZone) | **DELETE** /zone/{zoneId} |  |
 | [**listProjectZoneInstances**](ZoneApi.md#listProjectZoneInstances) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
 | [**listProjectZoneKCEs**](ZoneApi.md#listProjectZoneKCEs) | **GET** /project/{projectId}/zone/{zoneId}/kces |  |
-| [**listProjectZoneKFSs**](ZoneApi.md#listProjectZoneKFSs) | **GET** /project/{projectId}/zone/{zoneId}/kfs |  |
 | [**listProjectZoneKGWs**](ZoneApi.md#listProjectZoneKGWs) | **GET** /project/{projectId}/zone/{zoneId}/kgws |  |
 | [**listProjectZoneVolumes**](ZoneApi.md#listProjectZoneVolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes |  |
 | [**listRegionZones**](ZoneApi.md#listRegionZones) | **GET** /region/{regionId}/zones |  |
@@ -103,36 +101,6 @@ All URIs are relative to */api/v1*
 ### Return type
 
 [**KCE**](../Models/KCE.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-<a name="createProjectZoneKFS"></a>
-# **createProjectZoneKFS**
-> KFS createProjectZoneKFS(projectId, zoneId, KFS, nfsId)
-
-
-
-    Creates a new KFS (Kowabunga File System).
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the project. | [default to null] |
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **KFS** | [**KFS**](../Models/KFS.md)| KFS payload. | |
-| **nfsId** | **String**| NFS storage ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
-
-### Return type
-
-[**KFS**](../Models/KFS.md)
 
 ### Authorization
 
@@ -300,35 +268,6 @@ null (empty response body)
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="listProjectZoneKFSs"></a>
-# **listProjectZoneKFSs**
-> List listProjectZoneKFSs(projectId, zoneId, nfsId)
-
-
-
-    Returns the IDs of KFS (Kowabunga File System) objects.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the project. | [default to null] |
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **nfsId** | **String**| NFS storage ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
 
 ### Return type
 

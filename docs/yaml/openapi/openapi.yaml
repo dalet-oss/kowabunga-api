@@ -1939,13 +1939,13 @@ paths:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/ZoneID'
-  /project/{projectId}/zone/{zoneId}/kfs:
+  /project/{projectId}/region/{regionId}/kfs:
     get:
       description: Returns the IDs of KFS (Kowabunga File System) objects.
-      operationId: ListProjectZoneKFSs
+      operationId: ListProjectRegionKFSs
       parameters:
       - $ref: '#/components/parameters/ProjectID'
-      - $ref: '#/components/parameters/ZoneID'
+      - $ref: '#/components/parameters/RegionID'
       - $ref: '#/components/parameters/OptionalQueryNfsID'
       responses:
         "200":
@@ -1962,18 +1962,18 @@ paths:
           $ref: '#/components/responses/NotFound'
       tags:
       - project
-      - zone
+      - region
       - kfs
     parameters:
     - $ref: '#/components/parameters/ProjectID'
-    - $ref: '#/components/parameters/ZoneID'
+    - $ref: '#/components/parameters/RegionID'
     - $ref: '#/components/parameters/OptionalQueryNfsID'
     post:
       description: Creates a new KFS (Kowabunga File System).
-      operationId: CreateProjectZoneKFS
+      operationId: CreateProjectRegionKFS
       parameters:
       - $ref: '#/components/parameters/ProjectID'
-      - $ref: '#/components/parameters/ZoneID'
+      - $ref: '#/components/parameters/RegionID'
       - $ref: '#/components/parameters/OptionalQueryNfsID'
       requestBody:
         content:
@@ -2005,7 +2005,7 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - project
-      - zone
+      - region
       - kfs
   /project/{projectId}/zone/{zoneId}/kgw:
     parameters:
