@@ -46,13 +46,13 @@ paths:
 {{ oas.Parameters([resources.project.paramSchema]) }}
 {{ oas.GetAll('List' + resources.project.schema + resources.record.schema + 's', resources.record.desc, [resources.project.tag, resources.record.tag], True) }}
 
-  /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/volume:
-{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema, 'OptionalQuery' + resources.pool.paramSchema, 'OptionalQuery' + resources.template.paramSchema]) }}
-{{ oas.Create('Create' + resources.project.schema + resources.zone.schema + resources.volume.schema, resources.volume.schema, resources.volume.desc, [resources.project.tag, resources.zone.tag, resources.volume.tag]) }}
+  /project/{{ '{' + resources.project.paramId + '}' }}/region/{{ '{' + resources.region.paramId + '}' }}/volume:
+{{ oas.Parameters([resources.project.paramSchema, resources.region.paramSchema, 'OptionalQuery' + resources.pool.paramSchema, 'OptionalQuery' + resources.template.paramSchema]) }}
+{{ oas.Create('Create' + resources.project.schema + resources.region.schema + resources.volume.schema, resources.volume.schema, resources.volume.desc, [resources.project.tag, resources.region.tag, resources.volume.tag]) }}
 
-  /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/volumes:
-{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema]) }}
-{{ oas.GetAll('List' + resources.project.schema + resources.zone.schema + resources.volume.schema + 's', resources.volume.desc, [resources.project.tag, resources.zone.tag, resources.volume.tag], True) }}
+  /project/{{ '{' + resources.project.paramId + '}' }}/region/{{ '{' + resources.region.paramId + '}' }}/volumes:
+{{ oas.Parameters([resources.project.paramSchema, resources.region.paramSchema]) }}
+{{ oas.GetAll('List' + resources.project.schema + resources.region.schema + resources.volume.schema + 's', resources.volume.desc, [resources.project.tag, resources.region.tag, resources.volume.tag], True) }}
 
   /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/instance:
 {{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema]) }}

@@ -1722,18 +1722,18 @@ paths:
       - record
     parameters:
     - $ref: '#/components/parameters/ProjectID'
-  /project/{projectId}/zone/{zoneId}/volume:
+  /project/{projectId}/region/{regionId}/volume:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
-    - $ref: '#/components/parameters/ZoneID'
+    - $ref: '#/components/parameters/RegionID'
     - $ref: '#/components/parameters/OptionalQueryPoolID'
     - $ref: '#/components/parameters/OptionalQueryTemplateID'
     post:
       description: Creates a new storage volume.
-      operationId: CreateProjectZoneVolume
+      operationId: CreateProjectRegionVolume
       parameters:
       - $ref: '#/components/parameters/ProjectID'
-      - $ref: '#/components/parameters/ZoneID'
+      - $ref: '#/components/parameters/RegionID'
       - $ref: '#/components/parameters/OptionalQueryPoolID'
       - $ref: '#/components/parameters/OptionalQueryTemplateID'
       requestBody:
@@ -1766,15 +1766,15 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - project
-      - zone
+      - region
       - volume
-  /project/{projectId}/zone/{zoneId}/volumes:
+  /project/{projectId}/region/{regionId}/volumes:
     get:
       description: Returns the IDs of storage volume objects.
-      operationId: ListProjectZoneVolumes
+      operationId: ListProjectRegionVolumes
       parameters:
       - $ref: '#/components/parameters/ProjectID'
-      - $ref: '#/components/parameters/ZoneID'
+      - $ref: '#/components/parameters/RegionID'
       responses:
         "200":
           content:
@@ -1790,11 +1790,11 @@ paths:
           $ref: '#/components/responses/NotFound'
       tags:
       - project
-      - zone
+      - region
       - volume
     parameters:
     - $ref: '#/components/parameters/ProjectID'
-    - $ref: '#/components/parameters/ZoneID'
+    - $ref: '#/components/parameters/RegionID'
   /project/{projectId}/zone/{zoneId}/instance:
     parameters:
     - $ref: '#/components/parameters/ProjectID'

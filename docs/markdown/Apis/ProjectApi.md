@@ -8,16 +8,16 @@ All URIs are relative to */api/v1*
 | [**createProjectDnsRecord**](ProjectApi.md#createProjectDnsRecord) | **POST** /project/{projectId}/record |  |
 | [**createProjectRegionKFS**](ProjectApi.md#createProjectRegionKFS) | **POST** /project/{projectId}/region/{regionId}/kfs |  |
 | [**createProjectRegionKGW**](ProjectApi.md#createProjectRegionKGW) | **POST** /project/{projectId}/region/{regionId}/kgw |  |
+| [**createProjectRegionVolume**](ProjectApi.md#createProjectRegionVolume) | **POST** /project/{projectId}/region/{regionId}/volume |  |
 | [**createProjectZoneInstance**](ProjectApi.md#createProjectZoneInstance) | **POST** /project/{projectId}/zone/{zoneId}/instance |  |
 | [**createProjectZoneKCE**](ProjectApi.md#createProjectZoneKCE) | **POST** /project/{projectId}/zone/{zoneId}/kce |  |
-| [**createProjectZoneVolume**](ProjectApi.md#createProjectZoneVolume) | **POST** /project/{projectId}/zone/{zoneId}/volume |  |
 | [**deleteProject**](ProjectApi.md#deleteProject) | **DELETE** /project/{projectId} |  |
 | [**listProjectDnsRecords**](ProjectApi.md#listProjectDnsRecords) | **GET** /project/{projectId}/records |  |
 | [**listProjectRegionKFSs**](ProjectApi.md#listProjectRegionKFSs) | **GET** /project/{projectId}/region/{regionId}/kfs |  |
 | [**listProjectRegionKGWs**](ProjectApi.md#listProjectRegionKGWs) | **GET** /project/{projectId}/region/{regionId}/kgws |  |
+| [**listProjectRegionVolumes**](ProjectApi.md#listProjectRegionVolumes) | **GET** /project/{projectId}/region/{regionId}/volumes |  |
 | [**listProjectZoneInstances**](ProjectApi.md#listProjectZoneInstances) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
 | [**listProjectZoneKCEs**](ProjectApi.md#listProjectZoneKCEs) | **GET** /project/{projectId}/zone/{zoneId}/kces |  |
-| [**listProjectZoneVolumes**](ProjectApi.md#listProjectZoneVolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes |  |
 | [**listProjects**](ProjectApi.md#listProjects) | **GET** /project |  |
 | [**readProject**](ProjectApi.md#readProject) | **GET** /project/{projectId} |  |
 | [**readProjectCost**](ProjectApi.md#readProjectCost) | **GET** /project/{projectId}/cost |  |
@@ -140,6 +140,37 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
+<a name="createProjectRegionVolume"></a>
+# **createProjectRegionVolume**
+> Volume createProjectRegionVolume(projectId, regionId, Volume, poolId, templateId)
+
+
+
+    Creates a new storage volume.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
+| **regionId** | **String**| The ID of the region. | [default to null] |
+| **Volume** | [**Volume**](../Models/Volume.md)| Volume payload. | |
+| **poolId** | **String**| Storage pool ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
+| **templateId** | **String**| Template to clone the storage volume from (optional, region&#39;s default if unspecified). | [optional] [default to null] |
+
+### Return type
+
+[**Volume**](../Models/Volume.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
 <a name="createProjectZoneInstance"></a>
 # **createProjectZoneInstance**
 > Instance createProjectZoneInstance(projectId, zoneId, Instance)
@@ -191,37 +222,6 @@ All URIs are relative to */api/v1*
 ### Return type
 
 [**KCE**](../Models/KCE.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-<a name="createProjectZoneVolume"></a>
-# **createProjectZoneVolume**
-> Volume createProjectZoneVolume(projectId, zoneId, Volume, poolId, templateId)
-
-
-
-    Creates a new storage volume.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the project. | [default to null] |
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **Volume** | [**Volume**](../Models/Volume.md)| Volume payload. | |
-| **poolId** | **String**| Storage pool ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
-| **templateId** | **String**| Template to clone the storage volume from (optional, region&#39;s default if unspecified). | [optional] [default to null] |
-
-### Return type
-
-[**Volume**](../Models/Volume.md)
 
 ### Authorization
 
@@ -343,6 +343,34 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+<a name="listProjectRegionVolumes"></a>
+# **listProjectRegionVolumes**
+> List listProjectRegionVolumes(projectId, regionId)
+
+
+
+    Returns the IDs of storage volume objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
+| **regionId** | **String**| The ID of the region. | [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 <a name="listProjectZoneInstances"></a>
 # **listProjectZoneInstances**
 > List listProjectZoneInstances(projectId, zoneId)
@@ -378,34 +406,6 @@ null (empty response body)
 
 
     Returns the IDs of KCE (Kowabunga Compute Engine) objects.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the project. | [default to null] |
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="listProjectZoneVolumes"></a>
-# **listProjectZoneVolumes**
-> List listProjectZoneVolumes(projectId, zoneId)
-
-
-
-    Returns the IDs of storage volume objects.
 
 ### Parameters
 

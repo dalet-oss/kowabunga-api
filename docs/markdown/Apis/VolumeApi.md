@@ -4,18 +4,18 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createProjectZoneVolume**](VolumeApi.md#createProjectZoneVolume) | **POST** /project/{projectId}/zone/{zoneId}/volume |  |
+| [**createProjectRegionVolume**](VolumeApi.md#createProjectRegionVolume) | **POST** /project/{projectId}/region/{regionId}/volume |  |
 | [**deleteVolume**](VolumeApi.md#deleteVolume) | **DELETE** /volume/{volumeId} |  |
-| [**listProjectZoneVolumes**](VolumeApi.md#listProjectZoneVolumes) | **GET** /project/{projectId}/zone/{zoneId}/volumes |  |
+| [**listProjectRegionVolumes**](VolumeApi.md#listProjectRegionVolumes) | **GET** /project/{projectId}/region/{regionId}/volumes |  |
 | [**listStoragePoolVolumes**](VolumeApi.md#listStoragePoolVolumes) | **GET** /pool/{poolId}/volumes |  |
 | [**listVolumes**](VolumeApi.md#listVolumes) | **GET** /volume |  |
 | [**readVolume**](VolumeApi.md#readVolume) | **GET** /volume/{volumeId} |  |
 | [**updateVolume**](VolumeApi.md#updateVolume) | **PUT** /volume/{volumeId} |  |
 
 
-<a name="createProjectZoneVolume"></a>
-# **createProjectZoneVolume**
-> Volume createProjectZoneVolume(projectId, zoneId, Volume, poolId, templateId)
+<a name="createProjectRegionVolume"></a>
+# **createProjectRegionVolume**
+> Volume createProjectRegionVolume(projectId, regionId, Volume, poolId, templateId)
 
 
 
@@ -26,7 +26,7 @@ All URIs are relative to */api/v1*
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the project. | [default to null] |
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **regionId** | **String**| The ID of the region. | [default to null] |
 | **Volume** | [**Volume**](../Models/Volume.md)| Volume payload. | |
 | **poolId** | **String**| Storage pool ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
 | **templateId** | **String**| Template to clone the storage volume from (optional, region&#39;s default if unspecified). | [optional] [default to null] |
@@ -71,9 +71,9 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectZoneVolumes"></a>
-# **listProjectZoneVolumes**
-> List listProjectZoneVolumes(projectId, zoneId)
+<a name="listProjectRegionVolumes"></a>
+# **listProjectRegionVolumes**
+> List listProjectRegionVolumes(projectId, regionId)
 
 
 
@@ -84,7 +84,7 @@ null (empty response body)
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the project. | [default to null] |
-| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **regionId** | **String**| The ID of the region. | [default to null] |
 
 ### Return type
 
