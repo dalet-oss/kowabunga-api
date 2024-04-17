@@ -5337,13 +5337,13 @@ components:
           description: The libvirt's bridge network interface (brX).
           type: string
         private:
-          default: true
           description: Is the virtual network adapter connected to private (LAN) or
             public (WAN) physical network ?.
           type: boolean
       required:
       - interface
       - name
+      - private
     Volume:
       description: A storage volume.
       example:

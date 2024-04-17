@@ -38,6 +38,6 @@ export interface VNet {
     /**
      * Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?.
      */
-    _private?: boolean;
+    _private: boolean;
 }
 

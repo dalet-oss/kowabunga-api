@@ -32,7 +32,7 @@ type VNet struct {
 	Interface string `json:"interface"`
 
 	// Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?.
-	Private bool `json:"private,omitempty"`
+	Private bool `json:"private"`
 }
 
 // AssertVNetRequired checks if the required fields are not zero-ed
@@ -40,6 +40,7 @@ func AssertVNetRequired(obj VNet) error {
 	elements := map[string]interface{}{
 		"name": obj.Name,
 		"interface": obj.Interface,
+		"private": obj.Private,
 	}
 	for name, el := range elements {
 		if isZero := IsZeroValue(el); isZero {
