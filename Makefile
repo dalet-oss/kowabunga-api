@@ -3,6 +3,7 @@
 BIN_DIR = bin
 DOCS_DIR = docs
 SDK_DIR = sdk
+PACKAGE_NAME = kowabunga
 
 include Make.api.mk
 include Make.go.mk

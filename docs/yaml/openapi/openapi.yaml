@@ -1,0 +1,5407 @@
+openapi: 3.1.0
+info:
+  contact:
+    email: csops@dalet.com
+    name: Dalet CS Ops
+    url: https://www.dalet.com/support/
+  description: Kvm Orchestrator With A BUNch of Goods Added
+  license:
+    name: AGPLv3
+    url: https://www.gnu.org/licenses/agpl-3.0.en.html
+  title: Kowabunga API documentation
+  version: 0.32.0
+servers:
+- url: /api/v1
+security:
+- ApiKeyAuth: []
+- BearerAuth: []
+tags:
+- description: Everything about network adapter
+  name: adapter
+- description: Everything about Kowabunga remote agent
+  name: agent
+- description: Everything about DNS record
+  name: record
+- description: Everything about Kowabunga users group
+  name: group
+- description: Everything about computing host
+  name: host
+- description: Everything about virtual machine instance
+  name: instance
+- description: Everything about KCE (Kowabunga Compute Engine)
+  name: kce
+- description: Everything about KFS (Kowabunga File System)
+  name: kfs
+- description: Everything about KGW (Kowabunga Network Gateway)
+  name: kgw
+- description: Everything about Iris network gateway
+  name: netgw
+- description: Everything about project
+  name: project
+- description: Everything about region
+  name: region
+- description: Everything about NFS storage
+  name: nfs
+- description: Everything about storage pool
+  name: pool
+- description: Everything about network subnet
+  name: subnet
+- description: Everything about server-to-server authentication security token
+  name: token
+- description: Everything about image template
+  name: template
+- description: Everything about Kowabunga user
+  name: user
+- description: Everything about virtual network
+  name: vnet
+- description: Everything about storage volume
+  name: volume
+- description: Everything about availability zone
+  name: zone
+paths:
+  /adapter:
+    get:
+      description: Returns the IDs of network adapter objects.
+      operationId: ListAdapters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of network adapter IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - adapter
+  /adapter/{adapterId}:
+    delete:
+      description: Deletes an existing network adapter.
+      operationId: DeleteAdapter
+      parameters:
+      - $ref: '#/components/parameters/AdapterID'
+      responses:
+        "200":
+          description: The network adapter has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - adapter
+    get:
+      description: Returns a network adapter.
+      operationId: ReadAdapter
+      parameters:
+      - $ref: '#/components/parameters/AdapterID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Adapter'
+          description: Returns the network adapter object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - adapter
+    parameters:
+    - $ref: '#/components/parameters/AdapterID'
+    put:
+      description: Updates a network adapter configuration.
+      operationId: UpdateAdapter
+      parameters:
+      - $ref: '#/components/parameters/AdapterID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Adapter'
+        description: Adapter payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Adapter'
+          description: Returns the network adapter object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - adapter
+  /agent:
+    get:
+      description: Returns the IDs of Kowabunga remote agent objects.
+      operationId: ListAgents
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of Kowabunga remote agent IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - agent
+    post:
+      description: Creates a new Kowabunga remote agent.
+      operationId: CreateAgent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Agent'
+        description: Agent payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+          description: Returns the newly created Kowabunga remote agent object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - agent
+  /agent/{agentId}:
+    delete:
+      description: Deletes an existing Kowabunga remote agent.
+      operationId: DeleteAgent
+      parameters:
+      - $ref: '#/components/parameters/AgentID'
+      responses:
+        "200":
+          description: The Kowabunga remote agent has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - agent
+    get:
+      description: Returns a Kowabunga remote agent.
+      operationId: ReadAgent
+      parameters:
+      - $ref: '#/components/parameters/AgentID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+          description: Returns the Kowabunga remote agent object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - agent
+    parameters:
+    - $ref: '#/components/parameters/AgentID'
+    put:
+      description: Updates a Kowabunga remote agent configuration.
+      operationId: UpdateAgent
+      parameters:
+      - $ref: '#/components/parameters/AgentID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Agent'
+        description: Agent payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+          description: Returns the Kowabunga remote agent object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - agent
+  /agent/{agentId}/token:
+    parameters:
+    - $ref: '#/components/parameters/AgentID'
+    - $ref: '#/components/parameters/OptionalQueryExpire'
+    - $ref: '#/components/parameters/OptionalQueryExpirationDate'
+    patch:
+      description: Performs a Kowabunga remote agent setting of API token (will replace
+        any existing one).
+      operationId: SetAgentApiToken
+      parameters:
+      - $ref: '#/components/parameters/AgentID'
+      - $ref: '#/components/parameters/OptionalQueryExpire'
+      - $ref: '#/components/parameters/OptionalQueryExpirationDate'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiToken'
+          description: Returns the Kowabunga remote agent object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - agent
+      - token
+  /record/{recordId}:
+    delete:
+      description: Deletes an existing DNS record.
+      operationId: DeleteDnsRecord
+      parameters:
+      - $ref: '#/components/parameters/RecordID'
+      responses:
+        "200":
+          description: The DNS record has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - record
+    get:
+      description: Returns a DNS record.
+      operationId: ReadDnsRecord
+      parameters:
+      - $ref: '#/components/parameters/RecordID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DnsRecord'
+          description: Returns the DNS record object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - record
+    parameters:
+    - $ref: '#/components/parameters/RecordID'
+    put:
+      description: Updates a DNS record configuration.
+      operationId: UpdateDnsRecord
+      parameters:
+      - $ref: '#/components/parameters/RecordID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DnsRecord'
+        description: DnsRecord payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DnsRecord'
+          description: Returns the DNS record object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - record
+  /group:
+    get:
+      description: Returns the IDs of Kowabunga users group objects.
+      operationId: ListGroups
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of Kowabunga users group IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - group
+    post:
+      description: Creates a new Kowabunga users group.
+      operationId: CreateGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+        description: Group payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: Returns the newly created Kowabunga users group object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - group
+  /group/{groupId}:
+    delete:
+      description: Deletes an existing Kowabunga users group.
+      operationId: DeleteGroup
+      parameters:
+      - $ref: '#/components/parameters/GroupID'
+      responses:
+        "200":
+          description: The Kowabunga users group has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - group
+    get:
+      description: Returns a Kowabunga users group.
+      operationId: ReadGroup
+      parameters:
+      - $ref: '#/components/parameters/GroupID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: Returns the Kowabunga users group object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - group
+    parameters:
+    - $ref: '#/components/parameters/GroupID'
+    put:
+      description: Updates a Kowabunga users group configuration.
+      operationId: UpdateGroup
+      parameters:
+      - $ref: '#/components/parameters/GroupID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+        description: Group payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: Returns the Kowabunga users group object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - group
+  /host:
+    get:
+      description: Returns the IDs of computing host objects.
+      operationId: ListHosts
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of computing host IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - host
+  /host/{hostId}:
+    delete:
+      description: Deletes an existing computing host.
+      operationId: DeleteHost
+      parameters:
+      - $ref: '#/components/parameters/HostID'
+      responses:
+        "200":
+          description: The computing host has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - host
+    get:
+      description: Returns a computing host.
+      operationId: ReadHost
+      parameters:
+      - $ref: '#/components/parameters/HostID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Host'
+          description: Returns the computing host object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - host
+    parameters:
+    - $ref: '#/components/parameters/HostID'
+    put:
+      description: Updates a computing host configuration.
+      operationId: UpdateHost
+      parameters:
+      - $ref: '#/components/parameters/HostID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Host'
+        description: Host payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Host'
+          description: Returns the computing host object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - host
+  /host/{hostId}/caps:
+    get:
+      description: Returns a computing host capability.
+      operationId: ReadHostCaps
+      parameters:
+      - $ref: '#/components/parameters/HostID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostCaps'
+          description: Returns the computing host capability object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - host
+    parameters:
+    - $ref: '#/components/parameters/HostID'
+  /host/{hostId}/instances:
+    get:
+      description: Returns the IDs of virtual machine instance objects.
+      operationId: ListHostInstances
+      parameters:
+      - $ref: '#/components/parameters/HostID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of virtual machine instance IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - host
+      - instance
+    parameters:
+    - $ref: '#/components/parameters/HostID'
+  /instance:
+    get:
+      description: Returns the IDs of virtual machine instance objects.
+      operationId: ListInstances
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of virtual machine instance IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - instance
+  /instance/{instanceId}:
+    delete:
+      description: Deletes an existing virtual machine instance.
+      operationId: DeleteInstance
+      parameters:
+      - $ref: '#/components/parameters/InstanceID'
+      responses:
+        "200":
+          description: The virtual machine instance has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - instance
+    get:
+      description: Returns a virtual machine instance.
+      operationId: ReadInstance
+      parameters:
+      - $ref: '#/components/parameters/InstanceID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Instance'
+          description: Returns the virtual machine instance object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - instance
+    parameters:
+    - $ref: '#/components/parameters/InstanceID'
+    put:
+      description: Updates a virtual machine instance configuration.
+      operationId: UpdateInstance
+      parameters:
+      - $ref: '#/components/parameters/InstanceID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Instance'
+        description: Instance payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Instance'
+          description: Returns the virtual machine instance object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - instance
+  /instance/{instanceId}/state:
+    get:
+      description: Returns a virtual machine instance state.
+      operationId: ReadInstanceState
+      parameters:
+      - $ref: '#/components/parameters/InstanceID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceState'
+          description: Returns the virtual machine instance state object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - instance
+    parameters:
+    - $ref: '#/components/parameters/InstanceID'
+  /instance/{instanceId}/reboot:
+    parameters:
+    - $ref: '#/components/parameters/InstanceID'
+    patch:
+      description: Performs a virtual machine instance software reboot.
+      operationId: RebootInstance
+      parameters:
+      - $ref: '#/components/parameters/InstanceID'
+      responses:
+        "200":
+          description: The virtual machine instance software reboot is successful.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - instance
+  /instance/{instanceId}/reset:
+    parameters:
+    - $ref: '#/components/parameters/InstanceID'
+    patch:
+      description: Performs a virtual machine instance hardware reset.
+      operationId: ResetInstance
+      parameters:
+      - $ref: '#/components/parameters/InstanceID'
+      responses:
+        "200":
+          description: The virtual machine instance hardware reset is successful.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - instance
+  /instance/{instanceId}/suspend:
+    parameters:
+    - $ref: '#/components/parameters/InstanceID'
+    patch:
+      description: Performs a virtual machine instance software PM suspend.
+      operationId: SuspendInstance
+      parameters:
+      - $ref: '#/components/parameters/InstanceID'
+      responses:
+        "200":
+          description: The virtual machine instance software PM suspend is successful.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - instance
+  /instance/{instanceId}/resume:
+    parameters:
+    - $ref: '#/components/parameters/InstanceID'
+    patch:
+      description: Performs a virtual machine instance software PM resume.
+      operationId: ResumeInstance
+      parameters:
+      - $ref: '#/components/parameters/InstanceID'
+      responses:
+        "200":
+          description: The virtual machine instance software PM resume is successful.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - instance
+  /instance/{instanceId}/start:
+    parameters:
+    - $ref: '#/components/parameters/InstanceID'
+    patch:
+      description: Performs a virtual machine instance hardware boot-up.
+      operationId: StartInstance
+      parameters:
+      - $ref: '#/components/parameters/InstanceID'
+      responses:
+        "200":
+          description: The virtual machine instance hardware boot-up is successful.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - instance
+  /instance/{instanceId}/stop:
+    parameters:
+    - $ref: '#/components/parameters/InstanceID'
+    patch:
+      description: Performs a virtual machine instance hardware stop.
+      operationId: StopInstance
+      parameters:
+      - $ref: '#/components/parameters/InstanceID'
+      responses:
+        "200":
+          description: The virtual machine instance hardware stop is successful.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - instance
+  /instance/{instanceId}/shutdown:
+    parameters:
+    - $ref: '#/components/parameters/InstanceID'
+    patch:
+      description: Performs a virtual machine instance software shutdown.
+      operationId: ShutdownInstance
+      parameters:
+      - $ref: '#/components/parameters/InstanceID'
+      responses:
+        "200":
+          description: The virtual machine instance software shutdown is successful.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - instance
+  /instance/{instanceId}/connect:
+    get:
+      description: Returns a virtual machine instance remote access characteristics.
+      operationId: ReadInstanceRemoteConnection
+      parameters:
+      - $ref: '#/components/parameters/InstanceID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceRemoteAccess'
+          description: Returns the virtual machine instance remote access characteristics
+            object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - instance
+    parameters:
+    - $ref: '#/components/parameters/InstanceID'
+  /kce:
+    get:
+      description: Returns the IDs of KCE (Kowabunga Compute Engine) objects.
+      operationId: ListKCEs
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of KCE (Kowabunga Compute Engine) IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - kce
+  /kce/{kceId}:
+    delete:
+      description: Deletes an existing KCE (Kowabunga Compute Engine).
+      operationId: DeleteKCE
+      parameters:
+      - $ref: '#/components/parameters/KceID'
+      responses:
+        "200":
+          description: The KCE (Kowabunga Compute Engine) has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - kce
+    get:
+      description: Returns a KCE (Kowabunga Compute Engine).
+      operationId: ReadKCE
+      parameters:
+      - $ref: '#/components/parameters/KceID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KCE'
+          description: Returns the KCE (Kowabunga Compute Engine) object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - kce
+    parameters:
+    - $ref: '#/components/parameters/KceID'
+    put:
+      description: Updates a KCE (Kowabunga Compute Engine) configuration.
+      operationId: UpdateKCE
+      parameters:
+      - $ref: '#/components/parameters/KceID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KCE'
+        description: KCE payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KCE'
+          description: Returns the KCE (Kowabunga Compute Engine) object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - kce
+  /kce/{kceId}/state:
+    get:
+      description: Returns a virtual machine instance state.
+      operationId: ReadKCEState
+      parameters:
+      - $ref: '#/components/parameters/KceID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceState'
+          description: Returns the virtual machine instance state object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - kce
+    parameters:
+    - $ref: '#/components/parameters/KceID'
+  /kce/{kceId}/reboot:
+    parameters:
+    - $ref: '#/components/parameters/KceID'
+    patch:
+      description: Performs a KCE (Kowabunga Compute Engine) software reboot.
+      operationId: RebootKCE
+      parameters:
+      - $ref: '#/components/parameters/KceID'
+      responses:
+        "200":
+          description: The KCE (Kowabunga Compute Engine) software reboot is successful.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - kce
+  /kce/{kceId}/reset:
+    parameters:
+    - $ref: '#/components/parameters/KceID'
+    patch:
+      description: Performs a KCE (Kowabunga Compute Engine) hardware reset.
+      operationId: ResetKCE
+      parameters:
+      - $ref: '#/components/parameters/KceID'
+      responses:
+        "200":
+          description: The KCE (Kowabunga Compute Engine) hardware reset is successful.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - kce
+  /kce/{kceId}/suspend:
+    parameters:
+    - $ref: '#/components/parameters/KceID'
+    patch:
+      description: Performs a KCE (Kowabunga Compute Engine) software PM suspend.
+      operationId: SuspendKCE
+      parameters:
+      - $ref: '#/components/parameters/KceID'
+      responses:
+        "200":
+          description: The KCE (Kowabunga Compute Engine) software PM suspend is successful.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - kce
+  /kce/{kceId}/resume:
+    parameters:
+    - $ref: '#/components/parameters/KceID'
+    patch:
+      description: Performs a KCE (Kowabunga Compute Engine) software PM resume.
+      operationId: ResumeKCE
+      parameters:
+      - $ref: '#/components/parameters/KceID'
+      responses:
+        "200":
+          description: The KCE (Kowabunga Compute Engine) software PM resume is successful.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - kce
+  /kce/{kceId}/start:
+    parameters:
+    - $ref: '#/components/parameters/KceID'
+    patch:
+      description: Performs a KCE (Kowabunga Compute Engine) hardware boot-up.
+      operationId: StartKCE
+      parameters:
+      - $ref: '#/components/parameters/KceID'
+      responses:
+        "200":
+          description: The KCE (Kowabunga Compute Engine) hardware boot-up is successful.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - kce
+  /kce/{kceId}/stop:
+    parameters:
+    - $ref: '#/components/parameters/KceID'
+    patch:
+      description: Performs a KCE (Kowabunga Compute Engine) hardware stop.
+      operationId: StopKCE
+      parameters:
+      - $ref: '#/components/parameters/KceID'
+      responses:
+        "200":
+          description: The KCE (Kowabunga Compute Engine) hardware stop is successful.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - kce
+  /kce/{kceId}/shutdown:
+    parameters:
+    - $ref: '#/components/parameters/KceID'
+    patch:
+      description: Performs a KCE (Kowabunga Compute Engine) software shutdown.
+      operationId: ShutdownKCE
+      parameters:
+      - $ref: '#/components/parameters/KceID'
+      responses:
+        "200":
+          description: The KCE (Kowabunga Compute Engine) software shutdown is successful.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - kce
+  /kfs:
+    get:
+      description: Returns the IDs of KFS (Kowabunga File System) objects.
+      operationId: ListKFSs
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of KFS (Kowabunga File System) IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - kfs
+  /kfs/{kfsId}:
+    delete:
+      description: Deletes an existing KFS (Kowabunga File System).
+      operationId: DeleteKFS
+      parameters:
+      - $ref: '#/components/parameters/KfsID'
+      responses:
+        "200":
+          description: The KFS (Kowabunga File System) has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - kfs
+    get:
+      description: Returns a KFS (Kowabunga File System).
+      operationId: ReadKFS
+      parameters:
+      - $ref: '#/components/parameters/KfsID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KFS'
+          description: Returns the KFS (Kowabunga File System) object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - kfs
+    parameters:
+    - $ref: '#/components/parameters/KfsID'
+    put:
+      description: Updates a KFS (Kowabunga File System) configuration.
+      operationId: UpdateKFS
+      parameters:
+      - $ref: '#/components/parameters/KfsID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KFS'
+        description: KFS payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KFS'
+          description: Returns the KFS (Kowabunga File System) object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - kfs
+  /kgw:
+    get:
+      description: Returns the IDs of KGW (Kowabunga Network Gateway) objects.
+      operationId: ListKGWs
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of KGW (Kowabunga Network Gateway) IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - kgw
+  /kgw/{kgwId}:
+    delete:
+      description: Deletes an existing KGW (Kowabunga Network Gateway).
+      operationId: DeleteKGW
+      parameters:
+      - $ref: '#/components/parameters/KgwID'
+      responses:
+        "200":
+          description: The KGW (Kowabunga Network Gateway) has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - kgw
+    get:
+      description: Returns a KGW (Kowabunga Network Gateway).
+      operationId: ReadKGW
+      parameters:
+      - $ref: '#/components/parameters/KgwID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KGW'
+          description: Returns the KGW (Kowabunga Network Gateway) object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - kgw
+    parameters:
+    - $ref: '#/components/parameters/KgwID'
+    put:
+      description: Updates a KGW (Kowabunga Network Gateway) configuration.
+      operationId: UpdateKGW
+      parameters:
+      - $ref: '#/components/parameters/KgwID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KGW'
+        description: KGW payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KGW'
+          description: Returns the KGW (Kowabunga Network Gateway) object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - kgw
+  /netgw:
+    get:
+      description: Returns the IDs of Iris network gateway objects.
+      operationId: ListNetGWs
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of Iris network gateway IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - netgw
+  /netgw/{netgwId}:
+    delete:
+      description: Deletes an existing Iris network gateway.
+      operationId: DeleteNetGW
+      parameters:
+      - $ref: '#/components/parameters/NetgwID'
+      responses:
+        "200":
+          description: The Iris network gateway has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - netgw
+    get:
+      description: Returns a Iris network gateway.
+      operationId: ReadNetGW
+      parameters:
+      - $ref: '#/components/parameters/NetgwID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetGW'
+          description: Returns the Iris network gateway object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - netgw
+    parameters:
+    - $ref: '#/components/parameters/NetgwID'
+    put:
+      description: Updates a Iris network gateway configuration.
+      operationId: UpdateNetGW
+      parameters:
+      - $ref: '#/components/parameters/NetgwID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetGW'
+        description: NetGW payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetGW'
+          description: Returns the Iris network gateway object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - netgw
+  /project:
+    get:
+      description: Returns the IDs of project objects.
+      operationId: ListProjects
+      parameters:
+      - $ref: '#/components/parameters/OptionalQuerySubnetSize'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of project IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - project
+    parameters:
+    - $ref: '#/components/parameters/OptionalQuerySubnetSize'
+    post:
+      description: Creates a new project.
+      operationId: CreateProject
+      parameters:
+      - $ref: '#/components/parameters/OptionalQuerySubnetSize'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+        description: Project payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: Returns the newly created project object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - project
+  /project/{projectId}:
+    delete:
+      description: Deletes an existing project.
+      operationId: DeleteProject
+      parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      responses:
+        "200":
+          description: The project has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - project
+    get:
+      description: Returns a project.
+      operationId: ReadProject
+      parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: Returns the project object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - project
+    parameters:
+    - $ref: '#/components/parameters/ProjectID'
+    put:
+      description: Updates a project configuration.
+      operationId: UpdateProject
+      parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+        description: Project payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: Returns the project object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - project
+  /project/{projectId}/cost:
+    get:
+      description: Returns a resource cost.
+      operationId: ReadProjectCost
+      parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cost'
+          description: Returns the resource cost object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - project
+    parameters:
+    - $ref: '#/components/parameters/ProjectID'
+  /project/{projectId}/usage:
+    get:
+      description: Returns a global project resource quotas/usage (0 for unlimited).
+      operationId: ReadProjectUsage
+      parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResources'
+          description: Returns the global project resource quotas/usage (0 for unlimited)
+            object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - project
+    parameters:
+    - $ref: '#/components/parameters/ProjectID'
+  /project/{projectId}/record:
+    parameters:
+    - $ref: '#/components/parameters/ProjectID'
+    post:
+      description: Creates a new DNS record.
+      operationId: CreateProjectDnsRecord
+      parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DnsRecord'
+        description: DnsRecord payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DnsRecord'
+          description: Returns the newly created DNS record object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - project
+      - record
+  /project/{projectId}/records:
+    get:
+      description: Returns the IDs of DNS record objects.
+      operationId: ListProjectDnsRecords
+      parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of DNS record IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - project
+      - record
+    parameters:
+    - $ref: '#/components/parameters/ProjectID'
+  /project/{projectId}/region/{regionId}/volume:
+    parameters:
+    - $ref: '#/components/parameters/ProjectID'
+    - $ref: '#/components/parameters/RegionID'
+    - $ref: '#/components/parameters/OptionalQueryPoolID'
+    - $ref: '#/components/parameters/OptionalQueryTemplateID'
+    post:
+      description: Creates a new storage volume.
+      operationId: CreateProjectRegionVolume
+      parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/RegionID'
+      - $ref: '#/components/parameters/OptionalQueryPoolID'
+      - $ref: '#/components/parameters/OptionalQueryTemplateID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Volume'
+        description: Volume payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Volume'
+          description: Returns the newly created storage volume object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - project
+      - region
+      - volume
+  /project/{projectId}/region/{regionId}/volumes:
+    get:
+      description: Returns the IDs of storage volume objects.
+      operationId: ListProjectRegionVolumes
+      parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/RegionID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of storage volume IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - project
+      - region
+      - volume
+    parameters:
+    - $ref: '#/components/parameters/ProjectID'
+    - $ref: '#/components/parameters/RegionID'
+  /project/{projectId}/zone/{zoneId}/instance:
+    parameters:
+    - $ref: '#/components/parameters/ProjectID'
+    - $ref: '#/components/parameters/ZoneID'
+    post:
+      description: Creates a new virtual machine instance.
+      operationId: CreateProjectZoneInstance
+      parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/ZoneID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Instance'
+        description: Instance payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Instance'
+          description: Returns the newly created virtual machine instance object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - project
+      - zone
+      - instance
+  /project/{projectId}/zone/{zoneId}/instances:
+    get:
+      description: Returns the IDs of virtual machine instance objects.
+      operationId: ListProjectZoneInstances
+      parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/ZoneID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of virtual machine instance IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - project
+      - zone
+      - instance
+    parameters:
+    - $ref: '#/components/parameters/ProjectID'
+    - $ref: '#/components/parameters/ZoneID'
+  /project/{projectId}/zone/{zoneId}/kce:
+    parameters:
+    - $ref: '#/components/parameters/ProjectID'
+    - $ref: '#/components/parameters/ZoneID'
+    - $ref: '#/components/parameters/OptionalQueryPoolID'
+    - $ref: '#/components/parameters/OptionalQueryTemplateID'
+    - $ref: '#/components/parameters/OptionalQueryKcePublic'
+    post:
+      description: Creates a new KCE (Kowabunga Compute Engine).
+      operationId: CreateProjectZoneKCE
+      parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/ZoneID'
+      - $ref: '#/components/parameters/OptionalQueryPoolID'
+      - $ref: '#/components/parameters/OptionalQueryTemplateID'
+      - $ref: '#/components/parameters/OptionalQueryKcePublic'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KCE'
+        description: KCE payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KCE'
+          description: Returns the newly created KCE (Kowabunga Compute Engine) object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - project
+      - zone
+      - kce
+  /project/{projectId}/zone/{zoneId}/kces:
+    get:
+      description: Returns the IDs of KCE (Kowabunga Compute Engine) objects.
+      operationId: ListProjectZoneKCEs
+      parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/ZoneID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of KCE (Kowabunga Compute Engine) IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - project
+      - zone
+      - kce
+    parameters:
+    - $ref: '#/components/parameters/ProjectID'
+    - $ref: '#/components/parameters/ZoneID'
+  /project/{projectId}/region/{regionId}/kfs:
+    get:
+      description: Returns the IDs of KFS (Kowabunga File System) objects.
+      operationId: ListProjectRegionKFSs
+      parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/RegionID'
+      - $ref: '#/components/parameters/OptionalQueryNfsID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of KFS (Kowabunga File System) IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - project
+      - region
+      - kfs
+    parameters:
+    - $ref: '#/components/parameters/ProjectID'
+    - $ref: '#/components/parameters/RegionID'
+    - $ref: '#/components/parameters/OptionalQueryNfsID'
+    post:
+      description: Creates a new KFS (Kowabunga File System).
+      operationId: CreateProjectRegionKFS
+      parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/RegionID'
+      - $ref: '#/components/parameters/OptionalQueryNfsID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KFS'
+        description: KFS payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KFS'
+          description: Returns the newly created KFS (Kowabunga File System) object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - project
+      - region
+      - kfs
+  /project/{projectId}/region/{regionId}/kgw:
+    parameters:
+    - $ref: '#/components/parameters/ProjectID'
+    - $ref: '#/components/parameters/RegionID'
+    post:
+      description: Creates a new KGW (Kowabunga Network Gateway).
+      operationId: CreateProjectRegionKGW
+      parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/RegionID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KGW'
+        description: KGW payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KGW'
+          description: Returns the newly created KGW (Kowabunga Network Gateway) object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - project
+      - region
+      - kgw
+  /project/{projectId}/region/{regionId}/kgws:
+    get:
+      description: Returns the IDs of KGW (Kowabunga Network Gateway) objects.
+      operationId: ListProjectRegionKGWs
+      parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/RegionID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of KGW (Kowabunga Network Gateway) IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - project
+      - region
+      - kgw
+    parameters:
+    - $ref: '#/components/parameters/ProjectID'
+    - $ref: '#/components/parameters/RegionID'
+  /region:
+    get:
+      description: Returns the IDs of region objects.
+      operationId: ListRegions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of region IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - region
+    post:
+      description: Creates a new region.
+      operationId: CreateRegion
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Region'
+        description: Region payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Region'
+          description: Returns the newly created region object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - region
+  /region/{regionId}:
+    delete:
+      description: Deletes an existing region.
+      operationId: DeleteRegion
+      parameters:
+      - $ref: '#/components/parameters/RegionID'
+      responses:
+        "200":
+          description: The region has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - region
+    get:
+      description: Returns a region.
+      operationId: ReadRegion
+      parameters:
+      - $ref: '#/components/parameters/RegionID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Region'
+          description: Returns the region object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - region
+    parameters:
+    - $ref: '#/components/parameters/RegionID'
+    put:
+      description: Updates a region configuration.
+      operationId: UpdateRegion
+      parameters:
+      - $ref: '#/components/parameters/RegionID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Region'
+        description: Region payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Region'
+          description: Returns the region object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - region
+  /region/{regionId}/zone:
+    parameters:
+    - $ref: '#/components/parameters/RegionID'
+    post:
+      description: Creates a new availability zone.
+      operationId: CreateZone
+      parameters:
+      - $ref: '#/components/parameters/RegionID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zone'
+        description: Zone payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zone'
+          description: Returns the newly created availability zone object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - region
+      - zone
+  /region/{regionId}/zones:
+    get:
+      description: Returns the IDs of availability zone objects.
+      operationId: ListRegionZones
+      parameters:
+      - $ref: '#/components/parameters/RegionID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of availability zone IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - region
+      - zone
+    parameters:
+    - $ref: '#/components/parameters/RegionID'
+  /region/{regionId}/pool:
+    parameters:
+    - $ref: '#/components/parameters/RegionID'
+    post:
+      description: Creates a new storage pool.
+      operationId: CreateStoragePool
+      parameters:
+      - $ref: '#/components/parameters/RegionID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoragePool'
+        description: StoragePool payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoragePool'
+          description: Returns the newly created storage pool object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - region
+      - pool
+  /region/{regionId}/netgw:
+    parameters:
+    - $ref: '#/components/parameters/RegionID'
+    post:
+      description: Creates a new Iris network gateway.
+      operationId: CreateNetGW
+      parameters:
+      - $ref: '#/components/parameters/RegionID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetGW'
+        description: NetGW payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetGW'
+          description: Returns the newly created Iris network gateway object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - region
+      - netgw
+  /region/{regionId}/netgws:
+    get:
+      description: Returns the IDs of Iris network gateway objects.
+      operationId: ListRegionNetGWs
+      parameters:
+      - $ref: '#/components/parameters/RegionID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of Iris network gateway IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - region
+      - netgw
+    parameters:
+    - $ref: '#/components/parameters/RegionID'
+  /region/{regionId}/vnet:
+    parameters:
+    - $ref: '#/components/parameters/RegionID'
+    post:
+      description: Creates a new virtual network.
+      operationId: CreateVNet
+      parameters:
+      - $ref: '#/components/parameters/RegionID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VNet'
+        description: VNet payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VNet'
+          description: Returns the newly created virtual network object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - region
+      - vnet
+  /region/{regionId}/vnets:
+    get:
+      description: Returns the IDs of virtual network objects.
+      operationId: ListRegionVNets
+      parameters:
+      - $ref: '#/components/parameters/RegionID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of virtual network IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - region
+      - vnet
+    parameters:
+    - $ref: '#/components/parameters/RegionID'
+  /region/{regionId}/pool/{poolId}/default:
+    parameters:
+    - $ref: '#/components/parameters/RegionID'
+    - $ref: '#/components/parameters/PoolID'
+    patch:
+      description: Performs a region setting of default storage pool.
+      operationId: SetRegionDefaultStoragePool
+      parameters:
+      - $ref: '#/components/parameters/RegionID'
+      - $ref: '#/components/parameters/PoolID'
+      responses:
+        "200":
+          description: The region setting of default storage pool is successful.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - region
+      - pool
+  /region/{regionId}/pools:
+    get:
+      description: Returns the IDs of storage pool objects.
+      operationId: ListRegionStoragePools
+      parameters:
+      - $ref: '#/components/parameters/RegionID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of storage pool IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - region
+      - pool
+    parameters:
+    - $ref: '#/components/parameters/RegionID'
+  /region/{regionId}/nfs:
+    get:
+      description: Returns the IDs of NFS storage objects.
+      operationId: ListRegionStorageNFSs
+      parameters:
+      - $ref: '#/components/parameters/RegionID'
+      - $ref: '#/components/parameters/OptionalQueryPoolID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of NFS storage IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - region
+      - nfs
+    parameters:
+    - $ref: '#/components/parameters/RegionID'
+    - $ref: '#/components/parameters/OptionalQueryPoolID'
+    post:
+      description: Creates a new NFS storage.
+      operationId: CreateStorageNFS
+      parameters:
+      - $ref: '#/components/parameters/RegionID'
+      - $ref: '#/components/parameters/OptionalQueryPoolID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StorageNFS'
+        description: StorageNFS payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StorageNFS'
+          description: Returns the newly created NFS storage object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - region
+      - nfs
+  /region/{regionId}/nfs/{nfsId}/default:
+    parameters:
+    - $ref: '#/components/parameters/RegionID'
+    - $ref: '#/components/parameters/NfsID'
+    patch:
+      description: Performs a region setting of default NFS storage.
+      operationId: SetRegionDefaultStorageNFS
+      parameters:
+      - $ref: '#/components/parameters/RegionID'
+      - $ref: '#/components/parameters/NfsID'
+      responses:
+        "200":
+          description: The region setting of default NFS storage is successful.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - region
+      - nfs
+  /nfs:
+    get:
+      description: Returns the IDs of NFS storage objects.
+      operationId: ListStorageNFSs
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of NFS storage IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - nfs
+  /nfs/{nfsId}:
+    delete:
+      description: Deletes an existing NFS storage.
+      operationId: DeleteStorageNFS
+      parameters:
+      - $ref: '#/components/parameters/NfsID'
+      responses:
+        "200":
+          description: The NFS storage has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - nfs
+    get:
+      description: Returns a NFS storage.
+      operationId: ReadStorageNFS
+      parameters:
+      - $ref: '#/components/parameters/NfsID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StorageNFS'
+          description: Returns the NFS storage object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - nfs
+    parameters:
+    - $ref: '#/components/parameters/NfsID'
+    put:
+      description: Updates a NFS storage configuration.
+      operationId: UpdateStorageNFS
+      parameters:
+      - $ref: '#/components/parameters/NfsID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StorageNFS'
+        description: StorageNFS payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StorageNFS'
+          description: Returns the NFS storage object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - nfs
+  /nfs/{nfsId}/kfs:
+    get:
+      description: Returns the IDs of KFS (Kowabunga File System) objects.
+      operationId: ListStorageNFSKFSs
+      parameters:
+      - $ref: '#/components/parameters/NfsID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of KFS (Kowabunga File System) IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - nfs
+      - kfs
+    parameters:
+    - $ref: '#/components/parameters/NfsID'
+  /pool:
+    get:
+      description: Returns the IDs of storage pool objects.
+      operationId: ListStoragePools
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of storage pool IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - pool
+  /pool/{poolId}:
+    delete:
+      description: Deletes an existing storage pool.
+      operationId: DeleteStoragePool
+      parameters:
+      - $ref: '#/components/parameters/PoolID'
+      responses:
+        "200":
+          description: The storage pool has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - pool
+    get:
+      description: Returns a storage pool.
+      operationId: ReadStoragePool
+      parameters:
+      - $ref: '#/components/parameters/PoolID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoragePool'
+          description: Returns the storage pool object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - pool
+    parameters:
+    - $ref: '#/components/parameters/PoolID'
+    put:
+      description: Updates a storage pool configuration.
+      operationId: UpdateStoragePool
+      parameters:
+      - $ref: '#/components/parameters/PoolID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoragePool'
+        description: StoragePool payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoragePool'
+          description: Returns the storage pool object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - pool
+  /pool/{poolId}/volumes:
+    get:
+      description: Returns the IDs of storage volume objects.
+      operationId: ListStoragePoolVolumes
+      parameters:
+      - $ref: '#/components/parameters/PoolID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of storage volume IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - pool
+      - volume
+    parameters:
+    - $ref: '#/components/parameters/PoolID'
+  /pool/{poolId}/template:
+    parameters:
+    - $ref: '#/components/parameters/PoolID'
+    post:
+      description: Creates a new image template.
+      operationId: CreateTemplate
+      parameters:
+      - $ref: '#/components/parameters/PoolID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Template'
+        description: Template payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Template'
+          description: Returns the newly created image template object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - pool
+      - template
+  /pool/{poolId}/template/{templateId}/default:
+    parameters:
+    - $ref: '#/components/parameters/PoolID'
+    - $ref: '#/components/parameters/TemplateID'
+    patch:
+      description: Performs a storage pool setting of default template.
+      operationId: SetStoragePoolDefaultTemplate
+      parameters:
+      - $ref: '#/components/parameters/PoolID'
+      - $ref: '#/components/parameters/TemplateID'
+      responses:
+        "200":
+          description: The storage pool setting of default template is successful.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - pool
+      - template
+  /pool/{poolId}/templates:
+    get:
+      description: Returns the IDs of image template objects.
+      operationId: ListStoragePoolTemplates
+      parameters:
+      - $ref: '#/components/parameters/PoolID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of image template IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - pool
+      - template
+    parameters:
+    - $ref: '#/components/parameters/PoolID'
+  /subnet:
+    get:
+      description: Returns the IDs of network subnet objects.
+      operationId: ListSubnets
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of network subnet IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - subnet
+  /subnet/{subnetId}:
+    delete:
+      description: Deletes an existing network subnet.
+      operationId: DeleteSubnet
+      parameters:
+      - $ref: '#/components/parameters/SubnetID'
+      responses:
+        "200":
+          description: The network subnet has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - subnet
+    get:
+      description: Returns a network subnet.
+      operationId: ReadSubnet
+      parameters:
+      - $ref: '#/components/parameters/SubnetID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subnet'
+          description: Returns the network subnet object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - subnet
+    parameters:
+    - $ref: '#/components/parameters/SubnetID'
+    put:
+      description: Updates a network subnet configuration.
+      operationId: UpdateSubnet
+      parameters:
+      - $ref: '#/components/parameters/SubnetID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subnet'
+        description: Subnet payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subnet'
+          description: Returns the network subnet object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - subnet
+  /subnet/{subnetId}/adapter:
+    parameters:
+    - $ref: '#/components/parameters/SubnetID'
+    - $ref: '#/components/parameters/OptionalQueryAssignIP'
+    post:
+      description: Creates a new network adapter.
+      operationId: CreateAdapter
+      parameters:
+      - $ref: '#/components/parameters/SubnetID'
+      - $ref: '#/components/parameters/OptionalQueryAssignIP'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Adapter'
+        description: Adapter payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Adapter'
+          description: Returns the newly created network adapter object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - subnet
+      - adapter
+  /subnet/{subnetId}/adapters:
+    get:
+      description: Returns the IDs of network adapter objects.
+      operationId: ListSubnetAdapters
+      parameters:
+      - $ref: '#/components/parameters/SubnetID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of network adapter IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - subnet
+      - adapter
+    parameters:
+    - $ref: '#/components/parameters/SubnetID'
+  /template:
+    get:
+      description: Returns the IDs of image template objects.
+      operationId: ListTemplates
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of image template IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - template
+  /template/{templateId}:
+    delete:
+      description: Deletes an existing image template.
+      operationId: DeleteTemplate
+      parameters:
+      - $ref: '#/components/parameters/TemplateID'
+      responses:
+        "200":
+          description: The image template has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - template
+    get:
+      description: Returns a image template.
+      operationId: ReadTemplate
+      parameters:
+      - $ref: '#/components/parameters/TemplateID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Template'
+          description: Returns the image template object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - template
+    parameters:
+    - $ref: '#/components/parameters/TemplateID'
+    put:
+      description: Updates a image template configuration.
+      operationId: UpdateTemplate
+      parameters:
+      - $ref: '#/components/parameters/TemplateID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Template'
+        description: Template payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Template'
+          description: Returns the image template object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - template
+  /token:
+    get:
+      description: Returns the IDs of server-to-server authentication security token
+        objects.
+      operationId: ListApiTokens
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of server-to-server authentication security
+            token IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - token
+  /token/{tokenId}:
+    delete:
+      description: Deletes an existing server-to-server authentication security token.
+      operationId: DeleteApiToken
+      parameters:
+      - $ref: '#/components/parameters/TokenID'
+      responses:
+        "200":
+          description: The server-to-server authentication security token has been
+            successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - token
+    get:
+      description: Returns a server-to-server authentication security token.
+      operationId: ReadApiToken
+      parameters:
+      - $ref: '#/components/parameters/TokenID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiToken'
+          description: Returns the server-to-server authentication security token
+            object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - token
+    parameters:
+    - $ref: '#/components/parameters/TokenID'
+    put:
+      description: Updates a server-to-server authentication security token configuration.
+      operationId: UpdateApiToken
+      parameters:
+      - $ref: '#/components/parameters/TokenID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiToken'
+        description: ApiToken payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiToken'
+          description: Returns the server-to-server authentication security token
+            object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - token
+  /login:
+    post:
+      description: Creates a new Kowabunga user login credentials.
+      operationId: Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCredentials'
+        description: UserCredentials payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCredentials'
+          description: Returns the newly created Kowabunga user login credentials
+            object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - user
+  /user:
+    get:
+      description: Returns the IDs of Kowabunga user objects.
+      operationId: ListUsers
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of Kowabunga user IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - user
+    post:
+      description: Creates a new Kowabunga user.
+      operationId: CreateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        description: User payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Returns the newly created Kowabunga user object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - user
+  /user/{userId}:
+    delete:
+      description: Deletes an existing Kowabunga user.
+      operationId: DeleteUser
+      parameters:
+      - $ref: '#/components/parameters/UserID'
+      responses:
+        "200":
+          description: The Kowabunga user has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - user
+    get:
+      description: Returns a Kowabunga user.
+      operationId: ReadUser
+      parameters:
+      - $ref: '#/components/parameters/UserID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Returns the Kowabunga user object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - user
+    parameters:
+    - $ref: '#/components/parameters/UserID'
+    put:
+      description: Updates a Kowabunga user configuration.
+      operationId: UpdateUser
+      parameters:
+      - $ref: '#/components/parameters/UserID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        description: User payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Returns the Kowabunga user object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - user
+  /user/{userId}/password:
+    parameters:
+    - $ref: '#/components/parameters/UserID'
+    put:
+      description: Updates a Kowabunga user password (will replace any existing one)
+        configuration.
+      operationId: SetUserPassword
+      parameters:
+      - $ref: '#/components/parameters/UserID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Password'
+        description: Password payload.
+        required: true
+      responses:
+        "200":
+          description: The Kowabunga user password (will replace any existing one)
+            has been updated.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - user
+  /user/{userId}/resetPassword:
+    parameters:
+    - $ref: '#/components/parameters/UserID'
+    patch:
+      description: "Performs a Kowabunga user reset of password (server-side generated,\
+        \ will replace any existing one)."
+      operationId: ResetUserPassword
+      parameters:
+      - $ref: '#/components/parameters/UserID'
+      responses:
+        "200":
+          description: "The Kowabunga user reset of password (server-side generated,\
+            \ will replace any existing one) is successful."
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - user
+  /user/{userId}/token:
+    parameters:
+    - $ref: '#/components/parameters/UserID'
+    - $ref: '#/components/parameters/OptionalQueryExpire'
+    - $ref: '#/components/parameters/OptionalQueryExpirationDate'
+    patch:
+      description: Performs a Kowabunga user setting of API token (will replace any
+        existing one).
+      operationId: SetUserApiToken
+      parameters:
+      - $ref: '#/components/parameters/UserID'
+      - $ref: '#/components/parameters/OptionalQueryExpire'
+      - $ref: '#/components/parameters/OptionalQueryExpirationDate'
+      responses:
+        "200":
+          description: The Kowabunga user setting of API token (will replace any existing
+            one) is successful.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - user
+      - token
+  /vnet:
+    get:
+      description: Returns the IDs of virtual network objects.
+      operationId: ListVNets
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of virtual network IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - vnet
+  /vnet/{vnetId}:
+    delete:
+      description: Deletes an existing virtual network.
+      operationId: DeleteVNet
+      parameters:
+      - $ref: '#/components/parameters/VnetID'
+      responses:
+        "200":
+          description: The virtual network has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - vnet
+    get:
+      description: Returns a virtual network.
+      operationId: ReadVNet
+      parameters:
+      - $ref: '#/components/parameters/VnetID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VNet'
+          description: Returns the virtual network object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - vnet
+    parameters:
+    - $ref: '#/components/parameters/VnetID'
+    put:
+      description: Updates a virtual network configuration.
+      operationId: UpdateVNet
+      parameters:
+      - $ref: '#/components/parameters/VnetID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VNet'
+        description: VNet payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VNet'
+          description: Returns the virtual network object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - vnet
+  /vnet/{vnetId}/subnet:
+    parameters:
+    - $ref: '#/components/parameters/VnetID'
+    post:
+      description: Creates a new network subnet.
+      operationId: CreateSubnet
+      parameters:
+      - $ref: '#/components/parameters/VnetID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subnet'
+        description: Subnet payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subnet'
+          description: Returns the newly created network subnet object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - vnet
+      - subnet
+  /vnet/{vnetId}/subnet/{subnetId}/default:
+    parameters:
+    - $ref: '#/components/parameters/VnetID'
+    - $ref: '#/components/parameters/SubnetID'
+    patch:
+      description: Performs a virtual network setting of default network subnet.
+      operationId: SetVNetDefaultSubnet
+      parameters:
+      - $ref: '#/components/parameters/VnetID'
+      - $ref: '#/components/parameters/SubnetID'
+      responses:
+        "200":
+          description: The virtual network setting of default network subnet is successful.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - vnet
+      - subnet
+  /vnet/{vnetId}/subnets:
+    get:
+      description: Returns the IDs of network subnet objects.
+      operationId: ListVNetSubnets
+      parameters:
+      - $ref: '#/components/parameters/VnetID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of network subnet IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - vnet
+      - subnet
+    parameters:
+    - $ref: '#/components/parameters/VnetID'
+  /volume:
+    get:
+      description: Returns the IDs of storage volume objects.
+      operationId: ListVolumes
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of storage volume IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - volume
+  /volume/{volumeId}:
+    delete:
+      description: Deletes an existing storage volume.
+      operationId: DeleteVolume
+      parameters:
+      - $ref: '#/components/parameters/VolumeID'
+      responses:
+        "200":
+          description: The storage volume has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - volume
+    get:
+      description: Returns a storage volume.
+      operationId: ReadVolume
+      parameters:
+      - $ref: '#/components/parameters/VolumeID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Volume'
+          description: Returns the storage volume object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - volume
+    parameters:
+    - $ref: '#/components/parameters/VolumeID'
+    put:
+      description: Updates a storage volume configuration.
+      operationId: UpdateVolume
+      parameters:
+      - $ref: '#/components/parameters/VolumeID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Volume'
+        description: Volume payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Volume'
+          description: Returns the storage volume object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - volume
+  /zone:
+    get:
+      description: Returns the IDs of availability zone objects.
+      operationId: ListZones
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of availability zone IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - zone
+  /zone/{zoneId}:
+    delete:
+      description: Deletes an existing availability zone.
+      operationId: DeleteZone
+      parameters:
+      - $ref: '#/components/parameters/ZoneID'
+      responses:
+        "200":
+          description: The availability zone has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - zone
+    get:
+      description: Returns a availability zone.
+      operationId: ReadZone
+      parameters:
+      - $ref: '#/components/parameters/ZoneID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zone'
+          description: Returns the availability zone object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - zone
+    parameters:
+    - $ref: '#/components/parameters/ZoneID'
+    put:
+      description: Updates a availability zone configuration.
+      operationId: UpdateZone
+      parameters:
+      - $ref: '#/components/parameters/ZoneID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zone'
+        description: Zone payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zone'
+          description: Returns the availability zone object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - zone
+  /zone/{zoneId}/host:
+    parameters:
+    - $ref: '#/components/parameters/ZoneID'
+    post:
+      description: Creates a new computing host.
+      operationId: CreateHost
+      parameters:
+      - $ref: '#/components/parameters/ZoneID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Host'
+        description: Host payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Host'
+          description: Returns the newly created computing host object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - zone
+      - host
+  /zone/{zoneId}/hosts:
+    get:
+      description: Returns the IDs of computing host objects.
+      operationId: ListZoneHosts
+      parameters:
+      - $ref: '#/components/parameters/ZoneID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of computing host IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - zone
+      - host
+    parameters:
+    - $ref: '#/components/parameters/ZoneID'
+components:
+  parameters:
+    AdapterID:
+      description: The ID of the network adapter.
+      explode: false
+      in: path
+      name: adapterId
+      required: true
+      schema:
+        type: string
+      style: simple
+    AgentID:
+      description: The ID of the Kowabunga remote agent.
+      explode: false
+      in: path
+      name: agentId
+      required: true
+      schema:
+        type: string
+      style: simple
+    RecordID:
+      description: The ID of the DNS record.
+      explode: false
+      in: path
+      name: recordId
+      required: true
+      schema:
+        type: string
+      style: simple
+    GroupID:
+      description: The ID of the Kowabunga users group.
+      explode: false
+      in: path
+      name: groupId
+      required: true
+      schema:
+        type: string
+      style: simple
+    HostID:
+      description: The ID of the computing host.
+      explode: false
+      in: path
+      name: hostId
+      required: true
+      schema:
+        type: string
+      style: simple
+    InstanceID:
+      description: The ID of the virtual machine instance.
+      explode: false
+      in: path
+      name: instanceId
+      required: true
+      schema:
+        type: string
+      style: simple
+    KceID:
+      description: The ID of the KCE (Kowabunga Compute Engine).
+      explode: false
+      in: path
+      name: kceId
+      required: true
+      schema:
+        type: string
+      style: simple
+    OptionalQueryKcePublic:
+      description: "Should KCE be exposed over public Internet ? (a public IPv4 address\
+        \ will then be auto-assigned, default to false)."
+      explode: true
+      in: query
+      name: public
+      required: false
+      schema:
+        type: boolean
+      style: form
+    KfsID:
+      description: The ID of the KFS (Kowabunga File System).
+      explode: false
+      in: path
+      name: kfsId
+      required: true
+      schema:
+        type: string
+      style: simple
+    KgwID:
+      description: The ID of the KGW (Kowabunga Network Gateway).
+      explode: false
+      in: path
+      name: kgwId
+      required: true
+      schema:
+        type: string
+      style: simple
+    NetgwID:
+      description: The ID of the Iris network gateway.
+      explode: false
+      in: path
+      name: netgwId
+      required: true
+      schema:
+        type: string
+      style: simple
+    ProjectID:
+      description: The ID of the project.
+      explode: false
+      in: path
+      name: projectId
+      required: true
+      schema:
+        type: string
+      style: simple
+    RegionID:
+      description: The ID of the region.
+      explode: false
+      in: path
+      name: regionId
+      required: true
+      schema:
+        type: string
+      style: simple
+    NfsID:
+      description: The ID of the NFS storage.
+      explode: false
+      in: path
+      name: nfsId
+      required: true
+      schema:
+        type: string
+      style: simple
+    OptionalQueryNfsID:
+      description: "NFS storage ID (optional, region's default if unspecified)."
+      explode: true
+      in: query
+      name: nfsId
+      required: false
+      schema:
+        type: string
+      style: form
+    PoolID:
+      description: The ID of the storage pool.
+      explode: false
+      in: path
+      name: poolId
+      required: true
+      schema:
+        type: string
+      style: simple
+    OptionalQueryPoolID:
+      description: "Storage pool ID (optional, region's default if unspecified)."
+      explode: true
+      in: query
+      name: poolId
+      required: false
+      schema:
+        type: string
+      style: form
+    SubnetID:
+      description: The ID of the network subnet.
+      explode: false
+      in: path
+      name: subnetId
+      required: true
+      schema:
+        type: string
+      style: simple
+    OptionalQueryAssignIP:
+      description: Whether Kowabunga should pick and assign an IP address to this
+        adapter.
+      explode: true
+      in: query
+      name: assignIP
+      required: false
+      schema:
+        type: boolean
+      style: form
+    OptionalQuerySubnetSize:
+      description: "The minimum VPC subnet size to be affected to the project. WARNING,\
+        \ this cannot be changed later."
+      explode: true
+      in: query
+      name: subnetSize
+      required: false
+      schema:
+        type: integer
+      style: form
+    TemplateID:
+      description: The ID of the image template.
+      explode: false
+      in: path
+      name: templateId
+      required: true
+      schema:
+        type: string
+      style: simple
+    OptionalQueryTemplateID:
+      description: "Template to clone the storage volume from (optional, region's\
+        \ default if unspecified)."
+      explode: true
+      in: query
+      name: templateId
+      required: false
+      schema:
+        type: string
+      style: form
+    TokenID:
+      description: The ID of the server-to-server authentication security token.
+      explode: false
+      in: path
+      name: tokenId
+      required: true
+      schema:
+        type: string
+      style: simple
+    OptionalQueryExpire:
+      description: Whether or not the token should expire.
+      explode: true
+      in: query
+      name: expire
+      required: false
+      schema:
+        type: boolean
+      style: form
+    OptionalQueryExpirationDate:
+      description: Token's expiration date (YYYY-MM-DD format).
+      explode: true
+      in: query
+      name: expiration_date
+      required: false
+      schema:
+        format: date
+        type: string
+      style: form
+    UserID:
+      description: The ID of the Kowabunga user.
+      explode: false
+      in: path
+      name: userId
+      required: true
+      schema:
+        type: string
+      style: simple
+    VnetID:
+      description: The ID of the virtual network.
+      explode: false
+      in: path
+      name: vnetId
+      required: true
+      schema:
+        type: string
+      style: simple
+    VolumeID:
+      description: The ID of the storage volume.
+      explode: false
+      in: path
+      name: volumeId
+      required: true
+      schema:
+        type: string
+      style: simple
+    ZoneID:
+      description: The ID of the availability zone.
+      explode: false
+      in: path
+      name: zoneId
+      required: true
+      schema:
+        type: string
+      style: simple
+  responses:
+    BadRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorBadRequest'
+      description: "BadRequest error: Bad request (wrong input parameters)."
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorUnauthorized'
+      description: "Unauthorized error: Unauthorized resource access (wrong auth/credentials)."
+    Forbidden:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorForbidden'
+      description: "Forbidden error: Forbidden resource access (restricted access\
+        \ control)."
+    NotFound:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorNotFound'
+      description: "NotFound error: Specified resource does not exist."
+    Conflict:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorConflict'
+      description: "Conflict error: A similar resource already exists or resource\
+        \ is still being referenced somewhere."
+    UnprocessableEntity:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorUnprocessableEntity'
+      description: "UnprocessableEntity error: Server can't process request."
+    InsufficientStorage:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorInsufficientStorage'
+      description: "InsufficientStorage error: Server can't process allocate resources\
+        \ (logical quotas or physical limits hit)."
+  schemas:
+    Adapter:
+      description: A network adapter.
+      example:
+        addresses:
+        - addresses
+        - addresses
+        reserved: false
+        name: name
+        description: description
+        id: id
+        mac: mac
+      properties:
+        id:
+          description: The network adapter ID (auto-generated).
+          type: string
+        name:
+          description: The network adapter name.
+          type: string
+        description:
+          description: The network adapter description.
+          type: string
+        mac:
+          description: The network adapter hardware address (e.g. 00:11:22:33:44:55).
+            Auto-generated if unspecified.
+          type: string
+        addresses:
+          description: The network adapter list of associated IPv4 addresses.
+          items:
+            type: string
+          type: array
+        reserved:
+          default: false
+          description: "The network adapter is a reserved adapter (e.g. router), where\
+            \ the same hardware address can be reused over several subnets."
+          type: boolean
+      required:
+      - name
+    Agent:
+      description: A Kowabunga remote agent.
+      example:
+        name: name
+        description: description
+        id: id
+        type: KCA
+      properties:
+        id:
+          description: The Kowabunga remote agent ID (auto-generated).
+          type: string
+        name:
+          description: The Kowabunga remote agent name.
+          type: string
+        description:
+          description: The Kowabunga remote agent description.
+          type: string
+        type:
+          description: The Kowabunga agent type.
+          enum:
+          - KCA
+          - KSA
+          - KNA
+          type: string
+      required:
+      - name
+      - type
+    Cost:
+      description: A resource cost.
+      example:
+        price: 0.8008282
+        currency: currency
+      properties:
+        price:
+          description: The unit price information.
+          format: float
+          type: number
+        currency:
+          description: The associated currency.
+          type: string
+      required:
+      - currency
+      - price
+    DnsRecord:
+      description: A DNS record.
+      example:
+        addresses:
+        - addresses
+        - addresses
+        domain: domain
+        name: name
+        description: description
+        id: id
+      properties:
+        id:
+          description: The DNS record ID (auto-generated).
+          type: string
+        name:
+          description: The DNS record name.
+          type: string
+        description:
+          description: The DNS record description.
+          type: string
+        domain:
+          description: The DNS record associated domain (inherited from associated
+            project).
+          type: string
+        addresses:
+          description: A list of IPv4 addresses to be associated to the record.
+          items:
+            type: string
+          type: array
+      required:
+      - addresses
+      - name
+    ApiErrorBadRequest:
+      properties:
+        status:
+          example: 400
+          format: int32
+          type: integer
+        error:
+          example: Bad request (wrong input parameters).
+          type: string
+        reason:
+          example: server_side_details
+          type: string
+      required:
+      - error
+      - reason
+      - status
+    ApiErrorUnauthorized:
+      properties:
+        status:
+          example: 401
+          format: int32
+          type: integer
+        error:
+          example: Unauthorized resource access (wrong auth/credentials).
+          type: string
+        reason:
+          example: server_side_details
+          type: string
+      required:
+      - error
+      - reason
+      - status
+    ApiErrorForbidden:
+      properties:
+        status:
+          example: 403
+          format: int32
+          type: integer
+        error:
+          example: Forbidden resource access (restricted access control).
+          type: string
+        reason:
+          example: server_side_details
+          type: string
+      required:
+      - error
+      - reason
+      - status
+    ApiErrorNotFound:
+      properties:
+        status:
+          example: 404
+          format: int32
+          type: integer
+        error:
+          example: Specified resource does not exist.
+          type: string
+        reason:
+          example: server_side_details
+          type: string
+      required:
+      - error
+      - reason
+      - status
+    ApiErrorConflict:
+      properties:
+        status:
+          example: 409
+          format: int32
+          type: integer
+        error:
+          example: A similar resource already exists or resource is still being referenced
+            somewhere.
+          type: string
+        reason:
+          example: server_side_details
+          type: string
+      required:
+      - error
+      - reason
+      - status
+    ApiErrorUnprocessableEntity:
+      properties:
+        status:
+          example: 422
+          format: int32
+          type: integer
+        error:
+          example: Server can't process request.
+          type: string
+        reason:
+          example: server_side_details
+          type: string
+      required:
+      - error
+      - reason
+      - status
+    ApiErrorInsufficientStorage:
+      properties:
+        status:
+          example: 507
+          format: int32
+          type: integer
+        error:
+          example: Server can't process allocate resources (logical quotas or physical
+            limits hit).
+          type: string
+        reason:
+          example: server_side_details
+          type: string
+      required:
+      - error
+      - reason
+      - status
+    ObjectIds:
+      description: A list of resource IDs.
+      items:
+        type: string
+      type: array
+    Password:
+      description: A user plain-text password.
+      example:
+        value: value
+      properties:
+        value:
+          description: The plain-text password.
+          type: string
+      required:
+      - value
+    Group:
+      description: A Kowabunga users group.
+      example:
+        name: name
+        description: description
+        id: id
+        users:
+        - users
+        - users
+      properties:
+        id:
+          description: The Kowabunga users group ID (auto-generated).
+          type: string
+        name:
+          description: The Kowabunga users group name.
+          type: string
+        description:
+          description: The Kowabunga users group description.
+          type: string
+        users:
+          description: List of user IDs that are part of the group.
+          items:
+            type: string
+          type: array
+      required:
+      - name
+      - users
+    Host:
+      description: A computing host.
+      example:
+        memory_cost:
+          price: 0.8008282
+          currency: currency
+        name: name
+        description: description
+        overcommit_memory_ratio: 1
+        cpu_cost:
+          price: 0.8008282
+          currency: currency
+        id: id
+        overcommit_cpu_ratio: 6
+        agents:
+        - agents
+        - agents
+      properties:
+        id:
+          description: The computing host ID (auto-generated).
+          type: string
+        name:
+          description: The computing host name.
+          type: string
+        description:
+          description: The computing host description.
+          type: string
+        cpu_cost:
+          $ref: '#/components/schemas/Cost'
+        memory_cost:
+          $ref: '#/components/schemas/Cost'
+        overcommit_cpu_ratio:
+          default: 3
+          description: The host CPU resource over-commit ratio. Overcommitting CPU
+            resources for VMs means allocating more virtual CPUs (vCPUs) to the virtual
+            machines (VMs) than the physical cores available on the host. This can
+            help optimize the utilization of the host CPU and increase the density
+            of VMs per host.
+          format: int64
+          type: integer
+        overcommit_memory_ratio:
+          default: 2
+          description: "The host memory resource over-commit ratio. Memory overcommitment\
+            \ is a concept in computing that covers the assignment of more memory\
+            \ to virtual computing devices (or processes) than the physical machine\
+            \ they are hosted, or running on, actually has."
+          format: int64
+          type: integer
+        agents:
+          description: a list of existing remote agents managing the host.
+          items:
+            type: string
+          type: array
+      required:
+      - agents
+      - name
+    HostCaps:
+      description: A computing host capability.
+      example:
+        memory: 5
+        cpu:
+          cores: 6
+          vendor: vendor
+          threads: 1
+          model: model
+          arch: arch
+          sockets: 0
+      properties:
+        cpu:
+          $ref: '#/components/schemas/HostCPU'
+        memory:
+          description: The computing host memory size (bytes).
+          format: int64
+          type: integer
+      required:
+      - cpu
+      - memory
+    HostCPU:
+      description: A computing host CPU characteristics.
+      example:
+        cores: 6
+        vendor: vendor
+        threads: 1
+        model: model
+        arch: arch
+        sockets: 0
+      properties:
+        arch:
+          description: The computing host CPU architecture.
+          type: string
+        model:
+          description: The computing host CPU model.
+          type: string
+        vendor:
+          description: The computing host CPU vendor.
+          type: string
+        sockets:
+          description: The computing host CPU number of sockets.
+          format: int64
+          type: integer
+        cores:
+          description: The computing host CPU number of cores.
+          format: int64
+          type: integer
+        threads:
+          description: The computing host CPU number of threads.
+          format: int64
+          type: integer
+      required:
+      - arch
+      - cores
+      - model
+      - sockets
+      - threads
+      - vendor
+    Instance:
+      description: A virtual machine instance.
+      example:
+        memory: 0
+        adapters:
+        - adapters
+        - adapters
+        name: name
+        volumes:
+        - volumes
+        - volumes
+        description: description
+        id: id
+        vcpus: 6
+      properties:
+        id:
+          description: The virtual machine instance ID (auto-generated).
+          type: string
+        name:
+          description: The virtual machine instance name.
+          type: string
+        description:
+          description: The virtual machine instance description.
+          type: string
+        memory:
+          description: The virtual machine instance memory size (in bytes).
+          format: int64
+          type: integer
+        vcpus:
+          description: The virtual machine instance number of vCPUs.
+          format: int64
+          type: integer
+        adapters:
+          description: a list of existing network adapters to be connected to the
+            instance.
+          items:
+            type: string
+          type: array
+        volumes:
+          description: volumes list of existing storage volumes (i.e. disks) to be
+            connected to the instance.
+          items:
+            type: string
+          type: array
+      required:
+      - memory
+      - name
+      - vcpus
+    InstanceState:
+      description: A virtual machine instance state.
+      example:
+        reason: reason
+        state: state
+      properties:
+        state:
+          description: The virtual machine instance state.
+          type: string
+        reason:
+          description: The virtual machine instance reason of the state.
+          type: string
+      required:
+      - reason
+      - state
+    InstanceRemoteAccess:
+      description: A virtual machine instance remote access characteristics.
+      example:
+        url: url
+      properties:
+        url:
+          description: The virtual machine instance remote access URL.
+          type: string
+      required:
+      - url
+    KCE:
+      description: "A Kowabunga Compute Engine (KCE) is a wrapper object for bare\
+        \ virtual machines. It consists of an instance, one to several attached volumes\
+        \ and 2 network adapters (a private one, a public one). This is the prefered\
+        \ way for creating virtual machines. IP addresses will be automatically assigned."
+      example:
+        disk: 1
+        data_disk: 5
+        memory: 0
+        ip: ip
+        name: name
+        description: description
+        id: id
+        vcpus: 6
+      properties:
+        id:
+          description: The KCE (Kowabunga Compute Engine) ID (auto-generated).
+          type: string
+        name:
+          description: The KCE (Kowabunga Compute Engine) name.
+          type: string
+        description:
+          description: The KCE (Kowabunga Compute Engine) description.
+          type: string
+        memory:
+          description: The KCE (Kowabunga Compute Engine) memory size (in bytes).
+          format: int64
+          type: integer
+        vcpus:
+          description: The KCE (Kowabunga Compute Engine) number of vCPUs.
+          format: int64
+          type: integer
+        disk:
+          description: The KCE (Kowabunga Compute Engine) OS disk size (in bytes).
+          format: int64
+          type: integer
+        data_disk:
+          default: 0
+          description: "The KCE (Kowabunga Compute Engine) extra data disk size (in\
+            \ bytes). If unspecified, no extra data disk will be assigned."
+          format: int64
+          type: integer
+        ip:
+          description: The KCE (Kowabunga Compute Engine) assigned private IPv4 address
+            (read-only).
+          type: string
+      required:
+      - disk
+      - memory
+      - name
+      - vcpus
+    KFS:
+      description: A Kowabunga File System (KFS) provides an elastic NFS-like remote
+        storage volume.
+      example:
+        endpoint: endpoint
+        access: RW
+        size: 6
+        name: name
+        description: description
+        id: id
+        protocols:
+        - 0
+        - 0
+      properties:
+        id:
+          description: The KFS (Kowabunga File System) ID (auto-generated).
+          type: string
+        name:
+          description: The KFS (Kowabunga File System) name.
+          type: string
+        description:
+          description: The KFS (Kowabunga File System) description.
+          type: string
+        access:
+          default: RW
+          description: The KFS (Kowabunga File System) volume access type.
+          enum:
+          - RO
+          - RW
+          type: string
+        protocols:
+          default:
+          - 3
+          - 4
+          description: The KFS (Kowabunga File System) NFS protocol versions to be
+            supported.
+          items:
+            enum:
+            - 3
+            - 4
+            type: integer
+          type: array
+        endpoint:
+          description: The KFS (Kowabunga File System) endpoint FQDN (read-only).
+          type: string
+        size:
+          description: The KFS (Kowabunga File System) volume bytes used (read-only).
+          format: int64
+          type: integer
+      required:
+      - name
+    KGW:
+      description: A Kowabunga Network Gateway is a network gateway used for your
+        internet inbound and outbound traffic.
+      example:
+        nats:
+        - public_ip: public_ip
+          ports: ports
+          private_ip: private_ip
+        - public_ip: public_ip
+          ports: ports
+          private_ip: private_ip
+        public_ip: public_ip
+        name: name
+        description: description
+        id: id
+        private_ip: private_ip
+      properties:
+        id:
+          description: The KGW (Kowabunga Network Gateway) ID (auto-generated).
+          type: string
+        name:
+          description: The KGW (Kowabunga Network Gateway) name.
+          type: string
+        description:
+          description: The KGW (Kowabunga Network Gateway) description.
+          type: string
+        public_ip:
+          description: The KGW (Kowabunga Network Gateway) public IP (read-only).
+          type: string
+        private_ip:
+          description: The KGW (Kowabunga Network Gateway) private IP (read-only).
+          type: string
+        nats:
+          description: The KGW (Kowabunga Network Gateway) list of NAT entries.
+          items:
+            $ref: '#/components/schemas/KGWNat'
+          type: array
+    KGWNat:
+      description: A KGW NAT mapping.
+      example:
+        public_ip: public_ip
+        ports: ports
+        private_ip: private_ip
+      properties:
+        private_ip:
+          description: Target Private IP. Leave blank for a new generated one.
+          type: string
+        public_ip:
+          description: Public IP from created adapter. Leave empty to use the default
+            public IP.
+          type: string
+        ports:
+          description: Ports being forwarded from the public to the private IP. Accept
+            Ranges.
+          type: string
+      required:
+      - private_ip
+    Metadata:
+      description: A key/value metadata.
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          description: The metadata key.
+          type: string
+        value:
+          description: The metadata value.
+          type: string
+    NetGW:
+      description: A Iris network gateway.
+      example:
+        name: name
+        description: description
+        id: id
+        agents:
+        - agents
+        - agents
+      properties:
+        id:
+          description: The Iris network gateway ID (auto-generated).
+          type: string
+        name:
+          description: The Iris network gateway name.
+          type: string
+        description:
+          description: The Iris network gateway description.
+          type: string
+        agents:
+          description: a list of existing remote agents managing the network gateway.
+          items:
+            type: string
+          type: array
+      required:
+      - name
+    Project:
+      description: "A Kowabunga project corresponds to a single tenant, isolated set\
+        \ of resources."
+      example:
+        quotas:
+          memory: 6
+          instances: 5
+          storage: 1
+          vcpus: 0
+        regions:
+        - regions
+        - regions
+        metadatas:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        root_password: root_password
+        description: description
+        groups:
+        - groups
+        - groups
+        bootstrap_user: bootstrap_user
+        tags:
+        - tags
+        - tags
+        bootstrap_pubkey: bootstrap_pubkey
+        private_subnets:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        domain: domain
+        name: name
+        id: id
+      properties:
+        id:
+          description: The project ID (auto-generated).
+          type: string
+        name:
+          description: The project name.
+          type: string
+        description:
+          description: The project description.
+          type: string
+        domain:
+          description: Internal domain name (e.g. myproject.acme.com).
+          type: string
+        root_password:
+          description: "Default root password, set at cloud-init instance bootstrap\
+            \ phase. Will be randomly auto-generated at each instance creation if\
+            \ unspecified."
+          type: string
+        bootstrap_user:
+          description: "Default service user name, created at cloud-init instance\
+            \ bootstrap phase. Will use Kowabunga's default configuration one if unspecified."
+          type: string
+        bootstrap_pubkey:
+          description: "Default public SSH key, to be associated to bootstrap user.\
+            \ Will use Kowabunga's default configuration one if unspecified."
+          type: string
+        tags:
+          description: A list of tags to be associated to the project.
+          items:
+            type: string
+          type: array
+        metadatas:
+          description: A list of metadata to be associated to the project.
+          items:
+            $ref: '#/components/schemas/Metadata'
+          type: array
+        quotas:
+          $ref: '#/components/schemas/ProjectResources'
+        private_subnets:
+          description: The assigned project VPC private subnets IDs (read-only).
+          items:
+            $ref: '#/components/schemas/RegionSubnet'
+          type: array
+        groups:
+          description: A list of user groups allowed to administrate the project (i.e.
+            capable of managing internal resources).
+          items:
+            type: string
+          type: array
+        regions:
+          description: A list of Kowabunga regions the project is managing resources
+            from.
+          items:
+            type: string
+          type: array
+      required:
+      - groups
+      - name
+      - regions
+    ProjectResources:
+      description: A global project resource quotas/usage (0 for unlimited).
+      example:
+        memory: 6
+        instances: 5
+        storage: 1
+        vcpus: 0
+      properties:
+        vcpus:
+          description: The maximum total number of vCPUs allowed to be consumed by
+            sum of all instances.
+          format: int32
+          type: integer
+        memory:
+          description: The maximum total memory (in bytes) allowed to be consumed
+            by sum of all instances.
+          format: int64
+          type: integer
+        storage:
+          description: The maximum total disk capacity allowed to be consumed by sum
+            of all instances.
+          format: int64
+          type: integer
+        instances:
+          description: The maximum number of instances allowed to be spawned.
+          format: int32
+          type: integer
+    Region:
+      description: A region.
+      example:
+        name: name
+        description: description
+        id: id
+      properties:
+        id:
+          description: The region ID (auto-generated).
+          type: string
+        name:
+          description: The region name.
+          type: string
+        description:
+          description: The region description.
+          type: string
+      required:
+      - name
+    StorageNFS:
+      description: A NFS storage.
+      example:
+        endpoint: endpoint
+        port: 0
+        name: name
+        description: description
+        id: id
+        fs: nfs
+        backends:
+        - backends
+        - backends
+      properties:
+        id:
+          description: The NFS storage ID (auto-generated).
+          type: string
+        name:
+          description: The NFS storage name.
+          type: string
+        description:
+          description: The NFS storage description.
+          type: string
+        endpoint:
+          description: The associated NFS endpoint FQDN.
+          type: string
+        fs:
+          default: nfs
+          description: The underlying associated Ceph volume name.
+          type: string
+        backends:
+          description: List of NFS Ganesha API server IP addresses.
+          items:
+            type: string
+          type: array
+        port:
+          default: 54934
+          description: NFS Ganesha API server port (default 54934).
+          format: int64
+          type: integer
+      required:
+      - endpoint
+      - name
+    StoragePool:
+      description: A storage pool.
+      example:
+        ceph_secret_uuid: ceph_secret_uuid
+        cost:
+          price: 0.8008282
+          currency: currency
+        name: name
+        pool: pool
+        ceph_port: 0
+        description: description
+        id: id
+        ceph_address: localhost
+        agents:
+        - agents
+        - agents
+      properties:
+        id:
+          description: The storage pool ID (auto-generated).
+          type: string
+        name:
+          description: The storage pool name.
+          type: string
+        description:
+          description: The storage pool description.
+          type: string
+        pool:
+          description: Ceph pool name.
+          type: string
+        ceph_address:
+          default: localhost
+          description: Ceph Monitor(s) address or FQDN.
+          type: string
+        ceph_port:
+          default: 3300
+          description: Ceph Monitor(s) port (default 3300).
+          format: int64
+          type: integer
+        ceph_secret_uuid:
+          description: The libvirt secret UUID for CephX authentication.
+          type: string
+        cost:
+          $ref: '#/components/schemas/Cost'
+        agents:
+          description: a list of existing remote agents managing the storage pool.
+          items:
+            type: string
+          type: array
+      required:
+      - agents
+      - name
+      - pool
+    Subnet:
+      description: A network subnet.
+      example:
+        extra_routes:
+        - extra_routes
+        - extra_routes
+        reserved:
+        - last: last
+          first: first
+        - last: last
+          first: first
+        name: name
+        dns: dns
+        description: description
+        cidr: cidr
+        id: id
+        gateway: gateway
+      properties:
+        id:
+          description: The network subnet ID (auto-generated).
+          type: string
+        name:
+          description: The network subnet name.
+          type: string
+        description:
+          description: The network subnet description.
+          type: string
+        cidr:
+          description: The network subnet CIDR (e.g. 192.168.0.0/24).
+          type: string
+        gateway:
+          description: The network subnet router/gateway IP address (e.g. 192.168.0.254).
+          type: string
+        dns:
+          description: The network subnet DNS server IP address (gateway value if
+            unspecified).
+          type: string
+        extra_routes:
+          description: The list of extra routes to be access through designated gateway
+            (format is 10.0.0.0/8).
+          items:
+            type: string
+          type: array
+        reserved:
+          description: The network subnet reserved IPv4 ranges (i.e. no IP address
+            can be assigned from there).
+          items:
+            $ref: '#/components/schemas/IpRange'
+          type: array
+      required:
+      - cidr
+      - gateway
+      - name
+    IpRange:
+      description: "A reserved IPv4 addresses pool range, non-addressable by Kowabunga."
+      example:
+        last: last
+        first: first
+      properties:
+        first:
+          description: The range's first IP address.
+          type: string
+        last:
+          description: The range's last IP address.
+          type: string
+      required:
+      - first
+      - last
+    RegionSubnet:
+      description: A region/subnet map.
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          description: The region key.
+          type: string
+        value:
+          description: The subnet ID.
+          type: string
+    Template:
+      description: A image template.
+      example:
+        os: linux
+        name: name
+        description: description
+        id: id
+        source: source
+      properties:
+        id:
+          description: The image template ID (auto-generated).
+          type: string
+        name:
+          description: The image template name.
+          type: string
+        description:
+          description: The image template description.
+          type: string
+        os:
+          default: linux
+          description: Type of operating system if OS kind (useful to determine cloud-init
+            parameters for instance).
+          enum:
+          - linux
+          - windows
+          type: string
+        source:
+          description: HTTP(s) source URL of the KVM-ready OS image.
+          type: string
+      required:
+      - name
+      - source
+    ApiToken:
+      description: A Kowabunga authentication security token consists of an API key
+        granting access to resources.
+      example:
+        expire: false
+        name: name
+        description: description
+        id: id
+        expiration_date: 2000-01-23
+      properties:
+        id:
+          description: The server-to-server authentication security token ID (auto-generated).
+          type: string
+        name:
+          description: The server-to-server authentication security token name.
+          type: string
+        description:
+          description: The server-to-server authentication security token description.
+          type: string
+        expire:
+          default: false
+          description: Does the API token expires at some stage ?.
+          type: boolean
+        expiration_date:
+          description: Expiration date of the token (YYYY-MM-DD format).
+          format: date
+          type: string
+      required:
+      - expire
+      - name
+    User:
+      description: A Kowabunga user.
+      example:
+        role: superAdmin
+        name: name
+        description: description
+        id: id
+        email: email
+        notifications: false
+      properties:
+        id:
+          description: The Kowabunga user ID (auto-generated).
+          type: string
+        name:
+          description: The Kowabunga user name.
+          type: string
+        description:
+          description: The Kowabunga user description.
+          type: string
+        email:
+          description: User email address.
+          type: string
+        role:
+          description: The Kowabunga user role.
+          enum:
+          - superAdmin
+          - projectAdmin
+          - user
+          type: string
+        notifications:
+          default: false
+          description: Whether or not to receive email notifications on events.
+          type: boolean
+      required:
+      - email
+      - name
+      - role
+    UserCredentials:
+      description: A Kowabunga user login credentials.
+      example:
+        password: password
+        jwt: jwt
+        email: email
+      properties:
+        email:
+          description: The user email address for login.
+          type: string
+        password:
+          description: The user password for login.
+          type: string
+        jwt:
+          description: The resulting server-generated JWT token for Bearer Authentication
+            (read-only).
+          type: string
+      required:
+      - email
+      - password
+    VNet:
+      description: A virtual network.
+      example:
+        private: true
+        vlan: 0
+        name: name
+        description: description
+        id: id
+        interface: interface
+      properties:
+        id:
+          description: The virtual network ID (auto-generated).
+          type: string
+        name:
+          description: The virtual network name.
+          type: string
+        description:
+          description: The virtual network description.
+          type: string
+        vlan:
+          description: The VLAN identifier (0 if unspecified).
+          format: int64
+          type: integer
+        interface:
+          description: The libvirt's bridge network interface (brX).
+          type: string
+        private:
+          description: Is the virtual network adapter connected to private (LAN) or
+            public (WAN) physical network ?.
+          type: boolean
+      required:
+      - interface
+      - name
+      - private
+    Volume:
+      description: A storage volume.
+      example:
+        size: 0
+        name: name
+        description: description
+        id: id
+        type: os
+      properties:
+        id:
+          description: The storage volume ID (auto-generated).
+          type: string
+        name:
+          description: The storage volume name.
+          type: string
+        description:
+          description: The storage volume description.
+          type: string
+        type:
+          description: The storage volume type.
+          enum:
+          - os
+          - iso
+          - raw
+          type: string
+        size:
+          description: The storage volume size (in bytes).
+          format: int64
+          type: integer
+      required:
+      - name
+      - size
+      - type
+    Zone:
+      description: A availability zone.
+      example:
+        name: name
+        description: description
+        id: id
+      properties:
+        id:
+          description: The availability zone ID (auto-generated).
+          type: string
+        name:
+          description: The availability zone name.
+          type: string
+        description:
+          description: The availability zone description.
+          type: string
+      required:
+      - name
+  securitySchemes:
+    ApiKeyAuth:
+      description: API key to authorize machine-to-machine requests.
+      in: header
+      name: X-API-Key
+      type: apiKey
+    BearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http

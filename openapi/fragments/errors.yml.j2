@@ -1,0 +1,12 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
+components:
+  schemas:
+{% for key, err in errors.items() %}
+{{ oas.ErrorSchema(err) }}
+{% endfor %}
+
+  responses:
+{% for key, err in errors.items() %}
+{{ oas.ErrorResponse(err) }}
+{% endfor %}

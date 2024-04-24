@@ -1,0 +1,204 @@
+resources:
+  adapter:
+    tag: adapter
+    desc: network adapter
+    schema: Adapter
+    paramId: adapterId
+    paramSchema: AdapterID
+  agent:
+    tag: agent
+    desc: Kowabunga remote agent
+    schema: Agent
+    paramId: agentId
+    paramSchema: AgentID
+  cost:
+    desc: resource cost
+    schema: Cost
+  record:
+    tag: record
+    desc: DNS record
+    schema: DnsRecord
+    paramId: recordId
+    paramSchema: RecordID
+  group:
+    tag: group
+    desc: Kowabunga users group
+    schema: Group
+    paramId: groupId
+    paramSchema: GroupID
+  host:
+    tag: host
+    desc: computing host
+    schema: Host
+    paramId: hostId
+    paramSchema: HostID
+  host_caps:
+    desc: computing host capability
+    schema: HostCaps
+  host_cpu:
+    desc: computing host CPU characteristics
+    schema: HostCPU
+  instance:
+    tag: instance
+    desc: virtual machine instance
+    schema: Instance
+    paramId: instanceId
+    paramSchema: InstanceID
+  instance_state:
+    desc: virtual machine instance state
+    schema: InstanceState
+  instance_ra:
+    desc: virtual machine instance remote access characteristics
+    schema: InstanceRemoteAccess
+  ip_range:
+    desc: reserved IPv4 addresses pool range, non-addressable by Kowabunga
+    schema: IpRange
+  kce:
+    tag: kce
+    desc: KCE (Kowabunga Compute Engine)
+    extended_desc: Kowabunga Compute Engine (KCE) is a wrapper object for bare virtual machines. It consists of an instance, one to several attached volumes and 2 network adapters (a private one, a public one). This is the prefered way for creating virtual machines. IP addresses will be automatically assigned
+    schema: KCE
+    paramId: kceId
+    paramSchema: KceID
+    paramPublicId: public
+    paramPublicSchema: KcePublic
+  kfs:
+    tag: kfs
+    desc: KFS (Kowabunga File System)
+    extended_desc: Kowabunga File System (KFS) provides an elastic NFS-like remote storage volume
+    schema: KFS
+    paramId: kfsId
+    paramSchema: KfsID
+  kgw:
+    tag: kgw
+    desc: KGW (Kowabunga Network Gateway)
+    extended_desc: Kowabunga Network Gateway is a network gateway used for your internet inbound and outbound traffic
+    schema: KGW
+    paramId: kgwId
+    paramSchema: KgwID
+  kgw_nat:
+    desc: KGW NAT mapping
+    schema: KGWNat
+  metadata:
+    desc: key/value metadata
+    schema: Metadata
+  netgw:
+    tag: netgw
+    desc: Iris network gateway
+    schema: NetGW
+    paramId: netgwId
+    paramSchema: NetgwID
+  password:
+    desc: user plain-text password
+    schema: Password
+  project:
+    tag: project
+    desc: project
+    extended_desc: Kowabunga project corresponds to a single tenant, isolated set of resources
+    schema: Project
+    paramId: projectId
+    paramSchema: ProjectID
+  project_resources:
+    desc: global project resource quotas/usage (0 for unlimited)
+    schema: ProjectResources
+  region:
+    tag: region
+    desc: region
+    schema: Region
+    paramId: regionId
+    paramSchema: RegionID
+  nfs:
+    tag: nfs
+    desc: NFS storage
+    schema: StorageNFS
+    paramId: nfsId
+    paramSchema: NfsID
+  pool:
+    tag: pool
+    desc: storage pool
+    schema: StoragePool
+    paramId: poolId
+    paramSchema: PoolID
+  subnet:
+    tag: subnet
+    desc: network subnet
+    schema: Subnet
+    paramId: subnetId
+    paramSchema: SubnetID
+    paramAssignIpId: assignIP
+    paramAssignIpSchema: AssignIP
+    paramSubnetSizeId: subnetSize
+    paramSubnetSizeSchema: SubnetSize
+  token:
+    tag: token
+    desc: server-to-server authentication security token
+    extended_desc: Kowabunga authentication security token consists of an API key granting access to resources
+    schema: ApiToken
+    paramId: tokenId
+    paramSchema: TokenID
+  template:
+    tag: template
+    desc: image template
+    schema: Template
+    paramId: templateId
+    paramSchema: TemplateID
+  user:
+    tag: user
+    desc: Kowabunga user
+    schema: User
+    paramId: userId
+    paramSchema: UserID
+  user_credentials:
+    desc: Kowabunga user login credentials
+    schema: UserCredentials
+  vnet:
+    tag: vnet
+    desc: virtual network
+    schema: VNet
+    paramId: vnetId
+    paramSchema: VnetID
+  volume:
+    tag: volume
+    desc: storage volume
+    schema: Volume
+    paramId: volumeId
+    paramSchema: VolumeID
+  zone:
+    tag: zone
+    desc: availability zone
+    schema: Zone
+    paramId: zoneId
+    paramSchema: ZoneID
+  region_subnet:
+    desc: region/subnet map
+    schema: RegionSubnet
+
+errors:
+  BadRequest:
+    code: 400
+    schema: BadRequest
+    desc: Bad request (wrong input parameters)
+  Unauthorized:
+    code: 401
+    schema: Unauthorized
+    desc: Unauthorized resource access (wrong auth/credentials)
+  Forbidden:
+    code: 403
+    schema: Forbidden
+    desc: Forbidden resource access (restricted access control)
+  NotFound:
+    code: 404
+    schema: NotFound
+    desc: Specified resource does not exist
+  Conflict:
+    code: 409
+    schema: Conflict
+    desc: A similar resource already exists or resource is still being referenced somewhere
+  UnprocessableEntity:
+    code: 422
+    schema: UnprocessableEntity
+    desc: Server can't process request
+  InsufficientStorage:
+    code: 507
+    schema: InsufficientStorage
+    desc: Server can't process allocate resources (logical quotas or physical limits hit)

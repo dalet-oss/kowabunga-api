@@ -1,0 +1,38 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
+components:
+  schemas:
+{{ oas.SchemaBaseResource(resources.subnet, ['name', 'cidr', 'gateway']) }}
+{{ oas.StringProperty('cidr', 'The ' + resources.subnet.desc + ' CIDR (e.g. 192.168.0.0/24)') }}
+{{ oas.StringProperty('gateway', 'The ' + resources.subnet.desc + ' router/gateway IP address (e.g. 192.168.0.254)') }}
+{{ oas.StringProperty('dns', 'The ' + resources.subnet.desc + ' DNS server IP address (gateway value if unspecified)') }}
+{{ oas.StringArrayProperty('extra_routes', 'The list of extra routes to be access through designated gateway (format is 10.0.0.0/8)') }}
+{{ oas.ObjectArrayProperty('reserved', 'The ' + resources.subnet.desc + ' reserved IPv4 ranges (i.e. no IP address can be assigned from there)', resources.ip_range.schema) }}
+
+{{ oas.Schema(resources.ip_range, ['first', 'last']) }}
+{{ oas.StringProperty('first', "The range's first IP address") }}
+{{ oas.StringProperty('last', "The range's last IP address") }}
+
+{{ oas.Schema(resources.region_subnet) }}
+{{ oas.StringProperty('key', 'The region key') }}
+{{ oas.StringProperty('value', 'The subnet ID') }}
+
+  parameters:
+{{ oas.PathParamID(resources.subnet) }}
+{{ oas.BoolQueryParam(resources.subnet.paramAssignIpSchema, resources.subnet.paramAssignIpId, 'Whether Kowabunga should pick and assign an IP address to this adapter') }}
+{{ oas.IntQueryParam(resources.subnet.paramSubnetSizeSchema, resources.subnet.paramSubnetSizeId, 'The minimum VPC subnet size to be affected to the project. WARNING, this cannot be changed later') }}
+
+paths:
+  /subnet:
+{{ oas.List(resources.subnet, [resources.subnet.tag]) }}
+
+  /subnet/{{ '{' + resources.subnet.paramId + '}' }}:
+{{ oas.RUD(resources.subnet, [resources.subnet.tag], [resources.subnet.paramSchema]) }}
+
+  /subnet/{{ '{' + resources.subnet.paramId + '}' }}/adapter:
+{{ oas.Parameters([resources.subnet.paramSchema, 'OptionalQuery' + resources.subnet.paramAssignIpSchema]) }}
+{{ oas.Create('Create' + resources.adapter.schema, resources.adapter.schema, resources.adapter.desc, [resources.subnet.tag, resources.adapter.tag]) }}
+
+  /subnet/{{ '{' + resources.subnet.paramId + '}' }}/adapters:
+{{ oas.Parameters([resources.subnet.paramSchema]) }}
+{{ oas.GetAll('List' + resources.subnet.schema + resources.adapter.schema + 's', resources.adapter.desc, [resources.subnet.tag, resources.adapter.tag], True) }}

@@ -1,0 +1,423 @@
+{% macro ErrorSchema(err) %}
+    ApiError{{ err.schema }}:
+      type: object
+      required:
+        - status
+        - error
+        - reason
+      properties:
+        status:
+          type: integer
+          format: int32
+          example: {{ err.code }}
+        error:
+          type: string
+          example: {{ err.desc }}.
+        reason:
+          type: string
+          example: server_side_details
+{% endmacro %}
+
+{% macro ErrorResponse(err) %}
+    {{ err.schema }}:
+      description: "{{ err.schema }} error: {{ err.desc }}."
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError{{ err.schema }}'
+{% endmacro %}
+
+{% macro SchemaRaw(schema, desc, required=[]) %}
+    {{ schema }}:
+      type: object
+      description: A {{ desc }}.
+{%if required != [] %}
+      required:
+{% for r in required %}
+        - {{ r }}
+{% endfor %}
+{% endif %}
+      properties:
+{% endmacro %}
+
+{% macro Schema(obj, required=[]) %}
+{{ SchemaRaw(obj.schema, obj.extended_desc | default(obj.desc), required) }}
+{% endmacro %}
+
+{% macro ArraySchema(name, desc, type) %}
+    {{ name }}:
+      type: array
+      description: A {{ desc }}.
+      items:
+        type: {{ type }}
+{% endmacro %}
+
+{% macro StringArraySchema(name, desc) %}
+{{ ArraySchema(name, desc, 'string') }}
+{% endmacro %}
+
+{% macro Property(name, type, desc, values=[], default=None, format=None) %}
+        {{ name }}:
+          type: {{ type }}
+{% if format != None %}
+          format: {{ format }}
+{% endif %}
+          description: {{ desc }}.
+{% if values != [] %}
+          enum:
+{% for v in values %}
+            - {{ v }}
+{% endfor %}
+{% endif %}
+{% if default != None %}
+          default: {{ default }}
+{% endif %}
+{% endmacro %}
+
+{% macro StringProperty(name, desc, values=[], default=None) %}
+{{ Property(name, 'string', desc, values, default) }}
+{% endmacro %}
+
+{% macro DateProperty(name, desc, values=[], default=None) %}
+{{ Property(name, 'string', desc, values, default, format='date') }}
+{% endmacro %}
+
+{% macro DateTimeProperty(name, desc, values=[], default=None) %}
+{{ Property(name, 'string', desc, values, default, format='date-time') }}
+{% endmacro %}
+
+{% macro BoolProperty(name, desc, values=[], default=None) %}
+{{ Property(name, 'boolean', desc, values, default) }}
+{% endmacro %}
+
+{% macro IntProperty(name, desc, values=[], default=None) %}
+{{ Property(name, 'integer', desc, values, default, format='int64') }}
+{% endmacro %}
+
+{% macro ShortIntProperty(name, desc, values=[], default=None) %}
+{{ Property(name, 'integer', desc, values, default, format='int32') }}
+{% endmacro %}
+
+{% macro LongIntProperty(name, desc, values=[], default=None) %}
+{{ Property(name, 'integer', desc, values, default, format='int64') }}
+{% endmacro %}
+
+{% macro FloatProperty(name, desc, values=[], default=None) %}
+{{ Property(name, 'number', desc, values, default, format='float') }}
+{% endmacro %}
+
+{% macro ObjectProperty(name, desc, schema) %}
+        {{ name }}:
+          type: object
+          description: {{ desc }}.
+          $ref: '#/components/schemas/{{ schema }}'
+{% endmacro %}
+
+{% macro ArrayProperty(name, type, desc, values=[], default=None) %}
+        {{ name }}:
+          type: array
+          description: {{ desc }}.
+          items:
+            type: {{ type }}
+{% if values != [] %}
+            enum:
+{% for v in values %}
+              - {{ v }}
+{% endfor %}
+{% endif %}
+{% if default != None %}
+          default: {{ default }}
+{% endif %}
+{% endmacro %}
+
+{% macro StringArrayProperty(name, desc, values=[], default=None) %}
+{{ ArrayProperty(name, 'string', desc, values, default) }}
+{% endmacro %}
+
+{% macro IntArrayProperty(name, desc, values=[], default=None) %}
+{{ ArrayProperty(name, 'integer', desc, values, default) }}
+{% endmacro %}
+
+{% macro ObjectArrayProperty(name, desc, schema) %}
+        {{ name }}:
+          type: array
+          description: {{ desc }}.
+          items:
+            $ref:  '#/components/schemas/{{ schema }}'
+{% endmacro %}
+
+{% macro SchemaBaseResource(obj, required=[]) %}
+{{ Schema(obj, required) }}
+{{ StringProperty('id', 'The ' + obj.desc + ' ID (auto-generated)') }}
+{{ StringProperty('name', 'The ' + obj.desc + ' name') }}
+{{ StringProperty('description', 'The ' + obj.desc + ' description') }}
+{% endmacro %}
+
+{% macro PathParam(key, name, desc, t) %}
+    {{ key }}:
+      name: {{ name }}
+      in: path
+      description: {{ desc }}.
+      required: true
+      schema:
+        type: {{ t }}
+{% endmacro %}
+
+{% macro StringPathParam(key, name, desc) %}
+{{ PathParam(key, name, desc, 'string') }}
+{% endmacro %}
+
+{% macro PathParamID(obj) %}
+{{ StringPathParam(obj.paramSchema, obj.paramId, 'The ID of the ' + obj.desc) }}
+{% endmacro %}
+
+{% macro QueryParam(key, name, desc, t, format=None) %}
+    OptionalQuery{{ key }}:
+      name: {{ name }}
+      in: query
+      description: {{ desc }}.
+      schema:
+        type: {{ t }}
+{% if format != None %}
+        format: {{ format }}
+{% endif %}
+{% endmacro %}
+
+{% macro BoolQueryParam(key, name, desc) %}
+{{ QueryParam(key, name, desc, 'boolean') }}
+{% endmacro %}
+
+{% macro StringQueryParam(key, name, desc) %}
+{{ QueryParam(key, name, desc, 'string') }}
+{% endmacro %}
+
+{% macro DateQueryParam(key, name, desc) %}
+{{ QueryParam(key, name, desc, 'string', format='date') }}
+{% endmacro %}
+
+{% macro DateTimeQueryParam(key, name, desc) %}
+{{ QueryParam(key, name, desc, 'string', format='date-time') }}
+{% endmacro %}
+
+{% macro IntQueryParam(key, name, desc) %}
+{{ QueryParam(key, name, desc, 'integer') }}
+{% endmacro %}
+
+{% macro Tags(tgs) %}
+      tags:
+{% for t in tgs %}
+        - {{ t }}
+{% endfor %}
+{% endmacro %}
+
+{% macro ErrorDefinition(err) %}
+        '{{ err.code }}':
+          $ref: '#/components/responses/{{ err.schema }}'
+{% endmacro %}
+
+{% macro ErrorsWrongParams() %}
+{{ ErrorDefinition(errors.BadRequest) }}
+{% endmacro %}
+
+{% macro ErrorsAuth() %}
+{{ ErrorDefinition(errors.Unauthorized) }}
+{{ ErrorDefinition(errors.Forbidden) }}
+{% endmacro %}
+
+{% macro ErrorsUnknownResource() %}
+{{ ErrorDefinition(errors.NotFound) }}
+{% endmacro %}
+
+{% macro ErrorsConflict() %}
+{{ ErrorDefinition(errors.Conflict) }}
+{% endmacro %}
+
+{% macro ErrorsQuotas() %}
+{{ ErrorDefinition(errors.InsufficientStorage) }}
+{% endmacro %}
+
+{% macro ErrorsProcessing() %}
+{{ ErrorDefinition(errors.UnprocessableEntity) }}
+{% endmacro %}
+
+{% macro ErrorsGetAll(childOf=False) %}
+{{ ErrorsAuth() }}
+{% if childOf %}
+{{ ErrorsUnknownResource() }}
+{% endif %}
+{% endmacro %}
+
+{% macro ErrorsGetOne() %}
+{{ ErrorsAuth() }}
+{{ ErrorsUnknownResource() }}
+{% endmacro %}
+
+{% macro ErrorsCreate() %}
+{{ ErrorsWrongParams() }}
+{{ ErrorsGetOne() }}
+{{ ErrorsConflict() }}
+{{ ErrorsProcessing() }}
+{{ ErrorsQuotas() }}
+{% endmacro %}
+
+{% macro ErrorsUpdate() %}
+{{ ErrorsWrongParams() }}
+{{ ErrorsGetOne() }}
+{{ ErrorsProcessing() }}
+{{ ErrorsQuotas() }}
+{% endmacro %}
+
+{% macro ErrorsPatch() %}
+{{ ErrorsGetOne() }}
+{{ ErrorsProcessing() }}
+{% endmacro %}
+
+{% macro ErrorsDelete() %}
+{{ ErrorsGetOne() }}
+{{ ErrorsConflict() }}
+{{ ErrorsProcessing() }}
+{% endmacro %}
+
+{% macro Parameters(params=[]) %}
+{% if params != [] %}
+    parameters:
+{% for p in params %}
+      - $ref: '#/components/parameters/{{ p }}'
+{% endfor %}
+{% endif %}
+{% endmacro %}
+
+{% macro ResponseOk(desc) %}
+        '200':
+          description: {{ desc }}.
+{% endmacro %}
+
+{% macro GetResource(code, schema, desc) %}
+        '{{ code }}':
+          description: {{ desc }}.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/{{ schema }}'
+{% endmacro %}
+
+{% macro Payload(schema) %}
+      requestBody:
+        description: {{ schema }} payload.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/{{ schema }}'
+        required: true
+{% endmacro %}
+
+{% macro CreateOneResource(schema, desc) %}
+{{ GetResource(201, schema, 'Returns the newly created ' + desc + ' object') }}
+{% endmacro %}
+
+{% macro GetOneResource(schema, desc) %}
+{{ GetResource(200, schema, 'Returns the ' + desc + ' object') }}
+{% endmacro %}
+
+{% macro GetAllResource(desc) %}
+{{ GetResource(200, 'ObjectIds', 'Returns an array of ' + desc + ' IDs') }}
+{% endmacro %}
+
+{% macro GetAll(opId, desc, tags, childOf=False) %}
+    get:
+{{ Tags(tags) }}
+      description: Returns the IDs of {{ desc }} objects.
+      operationId: {{ opId }}
+      responses:
+{{ GetAllResource(desc) }}
+{{ ErrorsGetAll(childOf) }}
+{% endmacro %}
+
+{% macro Create(opId, schema, desc, tags) %}
+    post:
+{{ Tags(tags) }}
+      description: Creates a new {{ desc }}.
+      operationId: {{ opId }}
+{{ Payload(schema) }}
+      responses:
+{{ CreateOneResource(schema, desc) }}
+{{ ErrorsCreate() }}
+{% endmacro %}
+
+{% macro Read(opId, schema, desc, tags) %}
+    get:
+{{ Tags(tags) }}
+      description: Returns a {{ desc }}.
+      operationId: {{ opId }}
+      responses:
+{{ GetOneResource(schema, desc) }}
+{{ ErrorsGetOne() }}
+{% endmacro %}
+
+{% macro Update(opId, schema, desc, tags, output=True) %}
+    put:
+{{ Tags(tags) }}
+      description: Updates a {{ desc }} configuration.
+      operationId: {{ opId }}
+{{ Payload(schema) }}
+      responses:
+{% if output %}
+{{ GetOneResource(schema, desc) }}
+{% else %}
+{{ ResponseOk('The ' + desc + ' has been updated' ) }}
+{% endif %}
+{{ ErrorsUpdate() }}
+{% endmacro %}
+
+{% macro Patch(opId, desc, action, tags, schema=None) %}
+    patch:
+{{ Tags(tags) }}
+      description: Performs a {{ desc }} {{ action }}.
+      operationId: {{ opId }}
+      responses:
+{% if schema != None %}
+{{ GetOneResource(schema, desc) }}
+{% else %}
+{{ ResponseOk('The ' + desc + ' ' + action + ' is successful') }}
+{% endif %}
+{{ ErrorsPatch() }}
+{% endmacro %}
+
+{% macro Delete(opId, desc, tags) %}
+    delete:
+{{ Tags(tags) }}
+      description: Deletes an existing {{ desc }}.
+      operationId: {{ opId }}
+      responses:
+{{ ResponseOk('The ' + desc + ' has been successfully removed') }}
+{{ ErrorsDelete() }}
+{% endmacro %}
+
+{% macro List(obj, tags, params=[]) %}
+{{ Parameters(params) }}
+{{ GetAll('List' + obj.schema + 's', obj.desc, tags) }}
+{% endmacro %}
+
+{% macro REST(obj, tags, params=[], create=False) %}
+{{ Parameters(params) }}
+{% if create %}
+{{ Create('Create' + obj.schema, obj.schema, obj.desc, tags) }}
+{% endif %}
+{{ Read('Read' + obj.schema, obj.schema, obj.desc, tags) }}
+{{ Update('Update' + obj.schema, obj.schema, obj.desc, tags) }}
+{{ Delete('Delete' + obj.schema, obj.desc, tags) }}
+{% endmacro %}
+
+{% macro CRUD(obj, tags, params=[]) %}
+{{ REST(obj, tags, params, True) }}
+{% endmacro %}
+
+{% macro LC(obj, tags, params=[]) %}
+{{ Parameters(params) }}
+{{ List(obj, tags) }}
+{{ Create('Create' + obj.schema, obj.schema, obj.desc, tags) }}
+{% endmacro %}
+
+{% macro RUD(obj, tags, params=[]) %}
+{{ REST(obj, tags, params, False) }}
+{% endmacro %}

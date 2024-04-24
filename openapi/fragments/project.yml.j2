@@ -1,0 +1,84 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
+components:
+  schemas:
+{{ oas.SchemaBaseResource(resources.project, ['name', 'groups', 'regions']) }}
+{{ oas.StringProperty('domain', 'Internal domain name (e.g. myproject.acme.com)') }}
+{{ oas.StringProperty('root_password', 'Default root password, set at cloud-init instance bootstrap phase. Will be randomly auto-generated at each instance creation if unspecified') }}
+{{ oas.StringProperty('bootstrap_user', "Default service user name, created at cloud-init instance bootstrap phase. Will use Kowabunga's default configuration one if unspecified") }}
+{{ oas.StringProperty('bootstrap_pubkey', "Default public SSH key, to be associated to bootstrap user. Will use Kowabunga's default configuration one if unspecified") }}
+{{ oas.StringArrayProperty('tags', 'A list of tags to be associated to the project') }}
+{{ oas.ObjectArrayProperty('metadatas', 'A list of metadata to be associated to the project', resources.metadata.schema) }}
+{{ oas.ObjectProperty('quotas', 'The global project resource quotas (0 for unlimited)', resources.project_resources.schema) }}
+{{ oas.ObjectArrayProperty('private_subnets', 'The assigned project VPC private subnets IDs (read-only)', resources.region_subnet.schema) }}
+{{ oas.StringArrayProperty('groups', 'A list of user groups allowed to administrate the project (i.e. capable of managing internal resources)') }}
+{{ oas.StringArrayProperty('regions', 'A list of Kowabunga regions the project is managing resources from') }}
+
+{{ oas.Schema(resources.project_resources) }}
+{{ oas.ShortIntProperty('vcpus', 'The maximum total number of vCPUs allowed to be consumed by sum of all instances') }}
+{{ oas.LongIntProperty('memory', 'The maximum total memory (in bytes) allowed to be consumed by sum of all instances') }}
+{{ oas.LongIntProperty('storage', 'The maximum total disk capacity allowed to be consumed by sum of all instances') }}
+{{ oas.ShortIntProperty('instances', 'The maximum number of instances allowed to be spawned') }}
+
+  parameters:
+{{ oas.PathParamID(resources.project) }}
+
+paths:
+  /project:
+{{ oas.LC(resources.project, [resources.project.tag], ['OptionalQuery' + resources.subnet.paramSubnetSizeSchema]) }}
+
+  /project/{{ '{' + resources.project.paramId + '}' }}:
+{{ oas.RUD(resources.project, [resources.project.tag], [resources.project.paramSchema]) }}
+
+  /project/{{ '{' + resources.project.paramId + '}' }}/cost:
+{{ oas.Parameters([resources.project.paramSchema]) }}
+{{ oas.Read('Read' + resources.project.schema + resources.cost.schema, resources.cost.schema, resources.cost.desc, [resources.project.tag]) }}
+
+  /project/{{ '{' + resources.project.paramId + '}' }}/usage:
+{{ oas.Parameters([resources.project.paramSchema]) }}
+{{ oas.Read('Read' + resources.project.schema + 'Usage', resources.project_resources.schema, resources.project_resources.desc, [resources.project.tag]) }}
+
+  /project/{{ '{' + resources.project.paramId + '}' }}/record:
+{{ oas.Parameters([resources.project.paramSchema]) }}
+{{ oas.Create('Create' + resources.project.schema + resources.record.schema, resources.record.schema, resources.record.desc, [resources.project.tag, resources.record.tag]) }}
+
+  /project/{{ '{' + resources.project.paramId }}}/records:
+{{ oas.Parameters([resources.project.paramSchema]) }}
+{{ oas.GetAll('List' + resources.project.schema + resources.record.schema + 's', resources.record.desc, [resources.project.tag, resources.record.tag], True) }}
+
+  /project/{{ '{' + resources.project.paramId + '}' }}/region/{{ '{' + resources.region.paramId + '}' }}/volume:
+{{ oas.Parameters([resources.project.paramSchema, resources.region.paramSchema, 'OptionalQuery' + resources.pool.paramSchema, 'OptionalQuery' + resources.template.paramSchema]) }}
+{{ oas.Create('Create' + resources.project.schema + resources.region.schema + resources.volume.schema, resources.volume.schema, resources.volume.desc, [resources.project.tag, resources.region.tag, resources.volume.tag]) }}
+
+  /project/{{ '{' + resources.project.paramId + '}' }}/region/{{ '{' + resources.region.paramId + '}' }}/volumes:
+{{ oas.Parameters([resources.project.paramSchema, resources.region.paramSchema]) }}
+{{ oas.GetAll('List' + resources.project.schema + resources.region.schema + resources.volume.schema + 's', resources.volume.desc, [resources.project.tag, resources.region.tag, resources.volume.tag], True) }}
+
+  /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/instance:
+{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema]) }}
+{{ oas.Create('Create' + resources.project.schema + resources.zone.schema + resources.instance.schema, resources.instance.schema, resources.instance.desc, [resources.project.tag, resources.zone.tag, resources.instance.tag]) }}
+
+  /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/instances:
+{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema]) }}
+{{ oas.GetAll('List' + resources.project.schema + resources.zone.schema + resources.instance.schema + 's', resources.instance.desc, [resources.project.tag, resources.zone.tag, resources.instance.tag], True) }}
+
+  /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/kce:
+{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema, 'OptionalQuery' + resources.pool.paramSchema, 'OptionalQuery' + resources.template.paramSchema, 'OptionalQuery' + resources.kce.paramPublicSchema]) }}
+{{ oas.Create('Create' + resources.project.schema + resources.zone.schema + resources.kce.schema, resources.kce.schema, resources.kce.desc, [resources.project.tag, resources.zone.tag, resources.kce.tag]) }}
+
+  /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/kces:
+{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema]) }}
+{{ oas.GetAll('List' + resources.project.schema + resources.zone.schema + resources.kce.schema + 's', resources.kce.desc, [resources.project.tag, resources.zone.tag, resources.kce.tag], True) }}
+
+  /project/{{ '{' + resources.project.paramId + '}' }}/region/{{ '{' + resources.region.paramId + '}' }}/kfs:
+{{ oas.Parameters([resources.project.paramSchema, resources.region.paramSchema, 'OptionalQuery' + resources.nfs.paramSchema]) }}
+{{ oas.GetAll('List' + resources.project.schema + resources.region.schema + resources.kfs.schema + 's', resources.kfs.desc, [resources.project.tag, resources.region.tag, resources.kfs.tag], True) }}
+{{ oas.Create('Create' + resources.project.schema + resources.region.schema + resources.kfs.schema, resources.kfs.schema, resources.kfs.desc, [resources.project.tag, resources.region.tag, resources.kfs.tag]) }}
+
+  /project/{{ '{' + resources.project.paramId + '}' }}/region/{{ '{' + resources.region.paramId + '}' }}/kgw:
+{{ oas.Parameters([resources.project.paramSchema, resources.region.paramSchema]) }}
+{{ oas.Create('Create' + resources.project.schema + resources.region.schema + resources.kgw.schema, resources.kgw.schema, resources.kgw.desc, [resources.project.tag, resources.region.tag, resources.kgw.tag]) }}
+
+  /project/{{ '{' + resources.project.paramId + '}' }}/region/{{ '{' + resources.region.paramId + '}' }}/kgws:
+{{ oas.Parameters([resources.project.paramSchema, resources.region.paramSchema]) }}
+{{ oas.GetAll('List' + resources.project.schema + resources.region.schema + resources.kgw.schema + 's', resources.kgw.desc, [resources.project.tag, resources.region.tag, resources.kgw.tag], True) }}

@@ -1,0 +1,20 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
+components:
+  schemas:
+{{ oas.SchemaBaseResource(resources.agent, ['name', 'type']) }}
+{{ oas.StringProperty('type', 'The Kowabunga agent type', values=['KCA', 'KSA', 'KNA']) }}
+
+  parameters:
+{{ oas.PathParamID(resources.agent) }}
+
+paths:
+  /agent:
+{{ oas.LC(resources.agent, [resources.agent.tag]) }}
+
+  /agent/{{ '{' + resources.agent.paramId + '}' }}:
+{{ oas.RUD(resources.agent, [resources.agent.tag], [resources.agent.paramSchema]) }}
+
+  /agent/{{ '{' + resources.agent.paramId + '}' }}/token:
+{{ oas.Parameters([resources.agent.paramSchema, 'OptionalQueryExpire', 'OptionalQueryExpirationDate']) }}
+{{ oas.Patch('Set' + resources.agent.schema + resources.token.schema, resources.agent.desc, 'setting of API token (will replace any existing one)', [resources.agent.tag, resources.token.tag], resources.token.schema) }}

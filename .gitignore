@@ -15,9 +15,12 @@
 # vendor/
 
 # generated code & bins we don't care about
+.openapi-generator
+.openapi-generator-ignore
 bin/
 cmd/
-swagger.generated.yml
+openapi/templates
+openapi/openapi.generated.yml
 node_modules/
 package.json
 package-lock.json
@@ -27,4 +30,3 @@ sdk/typescript/angular/.gitignore
 sdk/typescript/angular/.openapi-generator
 sdk/typescript/angular/.openapi-generator-ignore
 sdk/typescript/angular/git_push.sh
-

@@ -1,0 +1,24 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
+components:
+  schemas:
+{{ oas.SchemaBaseResource(resources.nfs, ['name', 'endpoint']) }}
+{{ oas.StringProperty('endpoint', 'The associated NFS endpoint FQDN') }}
+{{ oas.StringProperty('fs', 'The underlying associated Ceph volume name', default='nfs') }}
+{{ oas.StringArrayProperty('backends', 'List of NFS Ganesha API server IP addresses') }}
+{{ oas.IntProperty('port', 'NFS Ganesha API server port (default 54934)', default=54934) }}
+
+  parameters:
+{{ oas.PathParamID(resources.nfs) }}
+{{ oas.StringQueryParam(resources.nfs.paramSchema, resources.nfs.paramId, "NFS storage ID (optional, region's default if unspecified)") }}
+
+paths:
+  /nfs:
+{{ oas.List(resources.nfs, [resources.nfs.tag]) }}
+
+  /nfs/{{ '{' + resources.nfs.paramId + '}' }}:
+{{ oas.RUD(resources.nfs, [resources.nfs.tag], [resources.nfs.paramSchema]) }}
+
+  /nfs/{{ '{' + resources.nfs.paramId + '}' }}/kfs:
+{{ oas.Parameters([resources.nfs.paramSchema]) }}
+{{ oas.GetAll('List' + resources.nfs.schema + resources.kfs.schema + 's', resources.kfs.desc, [resources.nfs.tag, resources.kfs.tag], True) }}

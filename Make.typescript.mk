@@ -23,10 +23,11 @@ typescript-sdk: typescript-sdk-client ; @
 typescript-sdk-client: typescript-sdk-client-angular ; @
 
 .PHONY: typescript-sdk-client-angular
-typescript-sdk-client-angular: get-openapi-generator ; $(info $(M) [OpenAPIv2] generate TypeScript Angular SDK client code…) @
+typescript-sdk-client-angular: get-openapi-generator ; $(info $(M) [OpenAPIv3] generate TypeScript Angular SDK client code…) @
 	$Q $(OPENAPI_GENERATOR) generate \
 	  -g typescript-angular \
 	  --package-name $(SDK_ANGULAR_CLIENT_NAME) \
+	  --openapi-normalizer KEEP_ONLY_FIRST_TAG_IN_OPERATION=true \
 	  -i $(OPENAPI_DEFINITION) \
 	  -o $(SDK_ANGULAR_DIR) \
 	  --additional-properties=ngVersion=$(SDK_ANGULAR_VERSION) \

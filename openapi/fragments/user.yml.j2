@@ -1,0 +1,38 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
+components:
+  schemas:
+{{ oas.SchemaBaseResource(resources.user, ['name', 'email', 'role']) }}
+{{ oas.StringProperty('email', 'User email address') }}
+{{ oas.StringProperty('role', 'The Kowabunga user role', values=['superAdmin', 'projectAdmin', 'user']) }}
+{{ oas.BoolProperty('notifications', 'Whether or not to receive email notifications on events', default=False) }}
+
+{{ oas.Schema(resources.user_credentials, ['email', 'password']) }}
+{{ oas.StringProperty('email', 'The user email address for login') }}
+{{ oas.StringProperty('password', 'The user password for login') }}
+{{ oas.StringProperty('jwt', 'The resulting server-generated JWT token for Bearer Authentication (read-only)') }}
+
+  parameters:
+{{ oas.PathParamID(resources.user) }}
+
+paths:
+  /login:
+{{ oas.Create('Login', resources.user_credentials.schema, resources.user_credentials.desc, [resources.user.tag]) }}
+
+  /user:
+{{ oas.LC(resources.user, [resources.user.tag]) }}
+
+  /user/{{ '{' + resources.user.paramId + '}' }}:
+{{ oas.RUD(resources.user, [resources.user.tag], [resources.user.paramSchema]) }}
+
+  /user/{{ '{' + resources.user.paramId + '}' }}/password:
+{{ oas.Parameters([resources.user.paramSchema]) }}
+{{ oas.Update('Set' + resources.user.schema + resources.password.schema, resources.password.schema, resources.user.desc + ' password (will replace any existing one)', [resources.user.tag], False) }}
+
+  /user/{{ '{' + resources.user.paramId + '}' }}/resetPassword:
+{{ oas.Parameters([resources.user.paramSchema]) }}
+{{ oas.Patch('Reset' + resources.user.schema + resources.password.schema, resources.user.desc, 'reset of password (server-side generated, will replace any existing one)', [resources.user.tag]) }}
+
+  /user/{{ '{' + resources.user.paramId + '}' }}/token:
+{{ oas.Parameters([resources.user.paramSchema, 'OptionalQueryExpire', 'OptionalQueryExpirationDate']) }}
+{{ oas.Patch('Set' + resources.user.schema + resources.token.schema, resources.user.desc, 'setting of API token (will replace any existing one)', [resources.user.tag, resources.token.tag]) }}

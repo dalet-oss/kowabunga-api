@@ -1,0 +1,23 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
+components:
+  schemas:
+{{ oas.SchemaBaseResource(resources.zone, ['name']) }}
+
+  parameters:
+{{ oas.PathParamID(resources.zone) }}
+
+paths:
+  /zone:
+{{ oas.List(resources.zone, [resources.zone.tag]) }}
+
+  /zone/{{ '{' + resources.zone.paramId + '}' }}:
+{{ oas.RUD(resources.zone, [resources.zone.tag], [resources.zone.paramSchema]) }}
+
+  /zone/{{ '{' + resources.zone.paramId + '}' }}/host:
+{{ oas.Parameters([resources.zone.paramSchema]) }}
+{{ oas.Create('Create' + resources.host.schema, resources.host.schema, resources.host.desc, [resources.zone.tag, resources.host.tag]) }}
+
+  /zone/{{ '{' + resources.zone.paramId + '}' }}/hosts:
+{{ oas.Parameters([resources.zone.paramSchema]) }}
+{{ oas.GetAll('List' + resources.zone.schema + resources.host.schema + 's', resources.host.desc, [resources.zone.tag, resources.host.tag], True) }}

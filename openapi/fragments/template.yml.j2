@@ -1,0 +1,18 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
+components:
+  schemas:
+{{ oas.SchemaBaseResource(resources.template, ['name', 'source']) }}
+{{ oas.StringProperty('os', 'Type of operating system if OS kind (useful to determine cloud-init parameters for instance)', values=['linux', 'windows'], default='linux') }}
+{{ oas.StringProperty('source', 'HTTP(s) source URL of the KVM-ready OS image') }}
+
+  parameters:
+{{ oas.PathParamID(resources.template) }}
+{{ oas.StringQueryParam(resources.template.paramSchema, resources.template.paramId, "Template to clone the storage volume from (optional, region's default if unspecified)") }}
+
+paths:
+  /template:
+{{ oas.List(resources.template, [resources.template.tag]) }}
+
+  /template/{{ '{' + resources.template.paramId + '}' }}:
+{{ oas.RUD(resources.template, [resources.template.tag], [resources.template.paramSchema]) }}

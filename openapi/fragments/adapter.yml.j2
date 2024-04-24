@@ -1,0 +1,18 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
+components:
+  schemas:
+{{ oas.SchemaBaseResource(resources.adapter, ['name']) }}
+{{ oas.StringProperty('mac', 'The network adapter hardware address (e.g. 00:11:22:33:44:55). Auto-generated if unspecified') }}
+{{ oas.StringArrayProperty('addresses', 'The network adapter list of associated IPv4 addresses') }}
+{{ oas.BoolProperty('reserved', 'The network adapter is a reserved adapter (e.g. router), where the same hardware address can be reused over several subnets', default='false') }}
+
+  parameters:
+{{ oas.PathParamID(resources.adapter) }}
+
+paths:
+  /adapter:
+{{ oas.List(resources.adapter, [resources.adapter.tag]) }}
+
+  /adapter/{{ '{' + resources.adapter.paramId + '}' }}:
+{{ oas.RUD(resources.adapter, [resources.adapter.tag], [resources.adapter.paramSchema]) }}

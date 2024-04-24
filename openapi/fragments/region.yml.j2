@@ -1,0 +1,60 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
+components:
+  schemas:
+{{ oas.SchemaBaseResource(resources.region, ['name']) }}
+
+  parameters:
+{{ oas.PathParamID(resources.region) }}
+
+paths:
+  /region:
+{{ oas.LC(resources.region, [resources.region.tag]) }}
+
+  /region/{{ '{' + resources.region.paramId + '}' }}:
+{{ oas.RUD(resources.region, [resources.region.tag], [resources.region.paramSchema]) }}
+
+  /region/{{ '{' + resources.region.paramId + '}' }}/zone:
+{{ oas.Parameters([resources.region.paramSchema]) }}
+{{ oas.Create('Create' + resources.zone.schema, resources.zone.schema, resources.zone.desc, [resources.region.tag, resources.zone.tag]) }}
+
+  /region/{{ '{' + resources.region.paramId + '}' }}/zones:
+{{ oas.Parameters([resources.region.paramSchema]) }}
+{{ oas.GetAll('ListRegionZones', resources.zone.desc, [resources.region.tag, resources.zone.tag], True) }}
+
+  /region/{{ '{' + resources.region.paramId + '}' }}/pool:
+{{ oas.Parameters([resources.region.paramSchema]) }}
+{{ oas.Create('Create' + resources.pool.schema, resources.pool.schema, resources.pool.desc, [resources.region.tag, resources.pool.tag]) }}
+
+  /region/{{ '{' + resources.region.paramId + '}' }}/netgw:
+{{ oas.Parameters([resources.region.paramSchema]) }}
+{{ oas.Create('Create' + resources.netgw.schema, resources.netgw.schema, resources.netgw.desc, [resources.region.tag, resources.netgw.tag]) }}
+
+  /region/{{ '{' + resources.region.paramId + '}' }}/netgws:
+{{ oas.Parameters([resources.region.paramSchema]) }}
+{{ oas.GetAll('List' + resources.region.schema + resources.netgw.schema + 's', resources.netgw.desc, [resources.region.tag, resources.netgw.tag], True) }}
+
+  /region/{{ '{' + resources.region.paramId + '}' }}/vnet:
+{{ oas.Parameters([resources.region.paramSchema]) }}
+{{ oas.Create('Create' + resources.vnet.schema, resources.vnet.schema, resources.vnet.desc, [resources.region.tag, resources.vnet.tag]) }}
+
+  /region/{{ '{' + resources.region.paramId + '}' }}/vnets:
+{{ oas.Parameters([resources.region.paramSchema]) }}
+{{ oas.GetAll('List' + resources.region.schema + resources.vnet.schema + 's', resources.vnet.desc, [resources.region.tag, resources.vnet.tag], True) }}
+
+  /region/{{ '{' + resources.region.paramId + '}' }}/pool/{{ '{' + resources.pool.paramId + '}' }}/default:
+{{ oas.Parameters([resources.region.paramSchema, resources.pool.paramSchema]) }}
+{{ oas.Patch('Set' + resources.region.schema + 'Default' + resources.pool.schema, resources.region.desc, 'setting of default ' + resources.pool.desc, [resources.region.tag, resources.pool.tag]) }}
+
+  /region/{{ '{' + resources.region.paramId + '}' }}/pools:
+{{ oas.Parameters([resources.region.paramSchema]) }}
+{{ oas.GetAll('List' + resources.region.schema + resources.pool.schema + 's', resources.pool.desc, [resources.region.tag, resources.pool.tag], True) }}
+
+  /region/{{ '{' + resources.region.paramId + '}' }}/nfs:
+{{ oas.Parameters([resources.region.paramSchema, 'OptionalQuery' + resources.pool.paramSchema]) }}
+{{ oas.GetAll('List' + resources.region.schema + resources.nfs.schema + 's', resources.nfs.desc, [resources.region.tag, resources.nfs.tag], True) }}
+{{ oas.Create('Create' + resources.nfs.schema, resources.nfs.schema, resources.nfs.desc, [resources.region.tag, resources.nfs.tag]) }}
+
+  /region/{{ '{' + resources.region.paramId + '}' }}/nfs/{{ '{' + resources.nfs.paramId + '}' }}/default:
+{{ oas.Parameters([resources.region.paramSchema, resources.nfs.paramSchema]) }}
+{{ oas.Patch('Set' + resources.region.schema + 'Default' + resources.nfs.schema, resources.region.desc, 'setting of default ' + resources.nfs.desc, [resources.region.tag, resources.nfs.tag]) }}

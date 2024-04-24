@@ -1,0 +1,30 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
+components:
+  schemas:
+{{ oas.SchemaBaseResource(resources.vnet, ['name', 'interface', 'private']) }}
+{{ oas.IntProperty('vlan', 'The VLAN identifier (0 if unspecified)') }}
+{{ oas.StringProperty('interface', "The libvirt's bridge network interface (brX)") }}
+{{ oas.BoolProperty('private', 'Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?') }}
+
+  parameters:
+{{ oas.PathParamID(resources.vnet) }}
+
+paths:
+  /vnet:
+{{ oas.List(resources.vnet, [resources.vnet.tag]) }}
+
+  /vnet/{{ '{' + resources.vnet.paramId + '}' }}:
+{{ oas.RUD(resources.vnet, [resources.vnet.tag], [resources.vnet.paramSchema]) }}
+
+  /vnet/{{ '{' + resources.vnet.paramId + '}' }}/subnet:
+{{ oas.Parameters([resources.vnet.paramSchema]) }}
+{{ oas.Create('Create' + resources.subnet.schema, resources.subnet.schema, resources.subnet.desc, [resources.vnet.tag, resources.subnet.tag]) }}
+
+  /vnet/{{ '{' + resources.vnet.paramId + '}' }}/subnet/{{ '{' + resources.subnet.paramId + '}' }}/default:
+{{ oas.Parameters([resources.vnet.paramSchema, resources.subnet.paramSchema]) }}
+{{ oas.Patch('Set' + resources.vnet.schema + 'Default' + resources.subnet.schema, resources.vnet.desc, 'setting of default ' + resources.subnet.desc, [resources.vnet.tag, resources.subnet.tag]) }}
+
+  /vnet/{{ '{' + resources.vnet.paramId + '}' }}/subnets:
+{{ oas.Parameters([resources.vnet.paramSchema]) }}
+{{ oas.GetAll('List' + resources.vnet.schema + resources.subnet.schema + 's', resources.subnet.desc, [resources.vnet.tag, resources.subnet.tag], True) }}

@@ -1,0 +1,14 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
+components:
+  schemas:
+{{ oas.SchemaBaseResource(resources.record, ['name', 'addresses']) }}
+{{ oas.StringProperty('domain', 'The DNS record associated domain (inherited from associated project)') }}
+{{ oas.StringArrayProperty('addresses', 'A list of IPv4 addresses to be associated to the record') }}
+
+  parameters:
+{{ oas.PathParamID(resources.record) }}
+
+paths:
+  /record/{{ '{' + resources.record.paramId + '}' }}:
+{{ oas.RUD(resources.record, [resources.record.tag], [resources.record.paramSchema]) }}

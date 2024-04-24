@@ -1,0 +1,17 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
+components:
+  schemas:
+{{ oas.SchemaBaseResource(resources.volume, ['name', 'type', 'size']) }}
+{{ oas.StringProperty('type', 'The ' + resources.volume.desc + ' type', values=['os', 'iso', 'raw']) }}
+{{ oas.IntProperty('size', 'The ' + resources.volume.desc + ' size (in bytes)') }}
+
+  parameters:
+{{ oas.PathParamID(resources.volume) }}
+
+paths:
+  /volume:
+{{ oas.List(resources.volume, [resources.volume.tag]) }}
+
+  /volume/{{ '{' + resources.volume.paramId + '}' }}:
+{{ oas.RUD(resources.volume, [resources.volume.tag], [resources.volume.paramSchema]) }}
