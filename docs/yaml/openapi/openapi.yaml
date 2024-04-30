@@ -9,7 +9,7 @@ info:
     name: AGPLv3
     url: https://www.gnu.org/licenses/agpl-3.0.en.html
   title: Kowabunga API documentation
-  version: 0.32.0
+  version: 0.33.0
 servers:
 - url: /api/v1
 security:
@@ -4687,6 +4687,9 @@ components:
         \ and 2 network adapters (a private one, a public one). This is the prefered\
         \ way for creating virtual machines. IP addresses will be automatically assigned."
       example:
+        extra_adapters:
+        - extra_adapters
+        - extra_adapters
         disk: 1
         data_disk: 5
         memory: 0
@@ -4723,6 +4726,11 @@ components:
             \ bytes). If unspecified, no extra data disk will be assigned."
           format: int64
           type: integer
+        extra_adapters:
+          description: The KCE (Kowabunga Compute Engine) extra Adapters.
+          items:
+            type: string
+          type: array
         ip:
           description: The KCE (Kowabunga Compute Engine) assigned private IPv4 address
             (read-only).

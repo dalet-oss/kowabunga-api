@@ -3,7 +3,7 @@ Kowabunga API documentation
 
 Kvm Orchestrator With A BUNch of Goods Added
 
-API version: 0.32.0
+API version: 0.33.0
 Contact: csops@dalet.com
 */
 
@@ -36,6 +36,8 @@ type KCE struct {
 	Disk int64 `json:"disk"`
 	// The KCE (Kowabunga Compute Engine) extra data disk size (in bytes). If unspecified, no extra data disk will be assigned.
 	DataDisk *int64 `json:"data_disk,omitempty"`
+	// The KCE (Kowabunga Compute Engine) extra Adapters.
+	ExtraAdapters []string `json:"extra_adapters,omitempty"`
 	// The KCE (Kowabunga Compute Engine) assigned private IPv4 address (read-only).
 	Ip *string `json:"ip,omitempty"`
 }
@@ -259,6 +261,38 @@ func (o *KCE) SetDataDisk(v int64) {
 	o.DataDisk = &v
 }
 
+// GetExtraAdapters returns the ExtraAdapters field value if set, zero value otherwise.
+func (o *KCE) GetExtraAdapters() []string {
+	if o == nil || IsNil(o.ExtraAdapters) {
+		var ret []string
+		return ret
+	}
+	return o.ExtraAdapters
+}
+
+// GetExtraAdaptersOk returns a tuple with the ExtraAdapters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KCE) GetExtraAdaptersOk() ([]string, bool) {
+	if o == nil || IsNil(o.ExtraAdapters) {
+		return nil, false
+	}
+	return o.ExtraAdapters, true
+}
+
+// HasExtraAdapters returns a boolean if a field has been set.
+func (o *KCE) HasExtraAdapters() bool {
+	if o != nil && !IsNil(o.ExtraAdapters) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtraAdapters gets a reference to the given []string and assigns it to the ExtraAdapters field.
+func (o *KCE) SetExtraAdapters(v []string) {
+	o.ExtraAdapters = v
+}
+
 // GetIp returns the Ip field value if set, zero value otherwise.
 func (o *KCE) GetIp() string {
 	if o == nil || IsNil(o.Ip) {
@@ -313,6 +347,9 @@ func (o KCE) ToMap() (map[string]interface{}, error) {
 	toSerialize["disk"] = o.Disk
 	if !IsNil(o.DataDisk) {
 		toSerialize["data_disk"] = o.DataDisk
+	}
+	if !IsNil(o.ExtraAdapters) {
+		toSerialize["extra_adapters"] = o.ExtraAdapters
 	}
 	if !IsNil(o.Ip) {
 		toSerialize["ip"] = o.Ip

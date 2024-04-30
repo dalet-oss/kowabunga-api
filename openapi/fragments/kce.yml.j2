@@ -7,6 +7,7 @@ components:
 {{ oas.IntProperty('vcpus', 'The ' + resources.kce.desc + ' number of vCPUs') }}
 {{ oas.IntProperty('disk', 'The ' + resources.kce.desc + ' OS disk size (in bytes)') }}
 {{ oas.IntProperty('data_disk', 'The ' + resources.kce.desc + ' extra data disk size (in bytes). If unspecified, no extra data disk will be assigned', default=0) }}
+{{ oas.ArrayProperty('extra_adapters', 'string', 'The ' + resources.kce.desc + ' extra Adapters') }}
 {{ oas.StringProperty('ip', 'The ' + resources.kce.desc + ' assigned private IPv4 address (read-only)') }}
 
   parameters:
