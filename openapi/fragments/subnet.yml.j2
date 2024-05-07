@@ -8,6 +8,8 @@ components:
 {{ oas.StringProperty('dns', 'The ' + resources.subnet.desc + ' DNS server IP address (gateway value if unspecified)') }}
 {{ oas.StringArrayProperty('extra_routes', 'The list of extra routes to be access through designated gateway (format is 10.0.0.0/8)') }}
 {{ oas.ObjectArrayProperty('reserved', 'The ' + resources.subnet.desc + ' reserved IPv4 ranges (i.e. no IP address can be assigned from there)', resources.ip_range.schema) }}
+{{ oas.ObjectArrayProperty('gw_pool', 'The ' + resources.subnet.desc + ' IPv4 ranges reserved for per-zone local network gateways (range size must be at least equal to region number of zones)', resources.ip_range.schema) }}
+{{ oas.StringProperty('application', 'Optional application service type', values=['ceph', 'user'], default='user') }}
 
 {{ oas.Schema(resources.ip_range, ['first', 'last']) }}
 {{ oas.StringProperty('first', "The range's first IP address") }}

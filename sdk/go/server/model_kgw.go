@@ -25,20 +25,30 @@ type Kgw struct {
 	// The KGW (Kowabunga Network Gateway) description.
 	Description string `json:"description,omitempty"`
 
-	// The KGW (Kowabunga Network Gateway) public IP (read-only).
-	PublicIp string `json:"public_ip,omitempty"`
-
-	// The KGW (Kowabunga Network Gateway) private IP (read-only).
-	PrivateIp string `json:"private_ip,omitempty"`
+	// The KGW (Kowabunga Network Gateway) list of per-zone addresses.
+	Adresses []KgwZoneSettings `json:"adresses,omitempty"`
 
 	// The KGW (Kowabunga Network Gateway) list of NAT entries.
 	Nats []KgwNat `json:"nats,omitempty"`
+
+	// The KGW (Kowabunga Network Gateway) list of Kowabunga private VNet peering entries.
+	VnetPeerings []KgwVnetPeering `json:"vnet_peerings,omitempty"`
 }
 
 // AssertKgwRequired checks if the required fields are not zero-ed
 func AssertKgwRequired(obj Kgw) error {
+	for _, el := range obj.Adresses {
+		if err := AssertKgwZoneSettingsRequired(el); err != nil {
+			return err
+		}
+	}
 	for _, el := range obj.Nats {
 		if err := AssertKgwNatRequired(el); err != nil {
+			return err
+		}
+	}
+	for _, el := range obj.VnetPeerings {
+		if err := AssertKgwVnetPeeringRequired(el); err != nil {
 			return err
 		}
 	}

@@ -38,6 +38,10 @@ type Subnet struct {
 	ExtraRoutes []string `json:"extra_routes,omitempty"`
 	// The network subnet reserved IPv4 ranges (i.e. no IP address can be assigned from there).
 	Reserved []IpRange `json:"reserved,omitempty"`
+	// The network subnet IPv4 ranges reserved for per-zone local network gateways (range size must be at least equal to region number of zones).
+	GwPool []IpRange `json:"gw_pool,omitempty"`
+	// Optional application service type.
+	Application *string `json:"application,omitempty"`
 }
 
 type _Subnet Subnet
@@ -51,6 +55,8 @@ func NewSubnet(name string, cidr string, gateway string) *Subnet {
 	this.Name = name
 	this.Cidr = cidr
 	this.Gateway = gateway
+	var application string = "user"
+	this.Application = &application
 	return &this
 }
 
@@ -59,6 +65,8 @@ func NewSubnet(name string, cidr string, gateway string) *Subnet {
 // but it doesn't guarantee that properties required by API are set
 func NewSubnetWithDefaults() *Subnet {
 	this := Subnet{}
+	var application string = "user"
+	this.Application = &application
 	return &this
 }
 
@@ -294,6 +302,70 @@ func (o *Subnet) SetReserved(v []IpRange) {
 	o.Reserved = v
 }
 
+// GetGwPool returns the GwPool field value if set, zero value otherwise.
+func (o *Subnet) GetGwPool() []IpRange {
+	if o == nil || IsNil(o.GwPool) {
+		var ret []IpRange
+		return ret
+	}
+	return o.GwPool
+}
+
+// GetGwPoolOk returns a tuple with the GwPool field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Subnet) GetGwPoolOk() ([]IpRange, bool) {
+	if o == nil || IsNil(o.GwPool) {
+		return nil, false
+	}
+	return o.GwPool, true
+}
+
+// HasGwPool returns a boolean if a field has been set.
+func (o *Subnet) HasGwPool() bool {
+	if o != nil && !IsNil(o.GwPool) {
+		return true
+	}
+
+	return false
+}
+
+// SetGwPool gets a reference to the given []IpRange and assigns it to the GwPool field.
+func (o *Subnet) SetGwPool(v []IpRange) {
+	o.GwPool = v
+}
+
+// GetApplication returns the Application field value if set, zero value otherwise.
+func (o *Subnet) GetApplication() string {
+	if o == nil || IsNil(o.Application) {
+		var ret string
+		return ret
+	}
+	return *o.Application
+}
+
+// GetApplicationOk returns a tuple with the Application field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Subnet) GetApplicationOk() (*string, bool) {
+	if o == nil || IsNil(o.Application) {
+		return nil, false
+	}
+	return o.Application, true
+}
+
+// HasApplication returns a boolean if a field has been set.
+func (o *Subnet) HasApplication() bool {
+	if o != nil && !IsNil(o.Application) {
+		return true
+	}
+
+	return false
+}
+
+// SetApplication gets a reference to the given string and assigns it to the Application field.
+func (o *Subnet) SetApplication(v string) {
+	o.Application = &v
+}
+
 func (o Subnet) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -321,6 +393,12 @@ func (o Subnet) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Reserved) {
 		toSerialize["reserved"] = o.Reserved
+	}
+	if !IsNil(o.GwPool) {
+		toSerialize["gw_pool"] = o.GwPool
+	}
+	if !IsNil(o.Application) {
+		toSerialize["application"] = o.Application
 	}
 	return toSerialize, nil
 }

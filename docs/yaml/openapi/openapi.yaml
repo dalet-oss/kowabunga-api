@@ -4787,6 +4787,19 @@ components:
       description: A Kowabunga Network Gateway is a network gateway used for your
         internet inbound and outbound traffic.
       example:
+        vnet_peerings:
+        - vnet: vnet
+          subnet: subnet
+          ports: ports
+          ips:
+          - ips
+          - ips
+        - vnet: vnet
+          subnet: subnet
+          ports: ports
+          ips:
+          - ips
+          - ips
         nats:
         - public_ip: public_ip
           ports: ports
@@ -4794,11 +4807,16 @@ components:
         - public_ip: public_ip
           ports: ports
           private_ip: private_ip
-        public_ip: public_ip
         name: name
         description: description
+        adresses:
+        - public_ip: public_ip
+          zone: zone
+          private_ip: private_ip
+        - public_ip: public_ip
+          zone: zone
+          private_ip: private_ip
         id: id
-        private_ip: private_ip
       properties:
         id:
           description: The KGW (Kowabunga Network Gateway) ID (auto-generated).
@@ -4809,17 +4827,42 @@ components:
         description:
           description: The KGW (Kowabunga Network Gateway) description.
           type: string
-        public_ip:
-          description: The KGW (Kowabunga Network Gateway) public IP (read-only).
-          type: string
-        private_ip:
-          description: The KGW (Kowabunga Network Gateway) private IP (read-only).
-          type: string
+        adresses:
+          description: The KGW (Kowabunga Network Gateway) list of per-zone addresses.
+          items:
+            $ref: '#/components/schemas/KGWZoneSettings'
+          type: array
         nats:
           description: The KGW (Kowabunga Network Gateway) list of NAT entries.
           items:
             $ref: '#/components/schemas/KGWNat'
           type: array
+        vnet_peerings:
+          description: The KGW (Kowabunga Network Gateway) list of Kowabunga private
+            VNet peering entries.
+          items:
+            $ref: '#/components/schemas/KGWVnetPeering'
+          type: array
+    KGWZoneSettings:
+      description: A KGW Zone network settings.
+      example:
+        public_ip: public_ip
+        zone: zone
+        private_ip: private_ip
+      properties:
+        zone:
+          description: The KGW (Kowabunga Network Gateway) zone ID (read-only).
+          type: string
+        public_ip:
+          description: The KGW (Kowabunga Network Gateway) public virtual IP (read-only).
+          type: string
+        private_ip:
+          description: The KGW (Kowabunga Network Gateway) private virtual IP (read-only).
+          type: string
+      required:
+      - private_ip
+      - public_ip
+      - zone
     KGWNat:
       description: A KGW NAT mapping.
       example:
@@ -4840,6 +4883,37 @@ components:
           type: string
       required:
       - private_ip
+    KGWVnetPeering:
+      description: A KGW internal VNet peering.
+      example:
+        vnet: vnet
+        subnet: subnet
+        ports: ports
+        ips:
+        - ips
+        - ips
+      properties:
+        vnet:
+          description: Kowabunga VNET ID to be peered with..
+          type: string
+        subnet:
+          description: Kowabunga Subnet ID to be peered with (IP addresses will be
+            automatically assigned)..
+          type: string
+        ports:
+          description: "Ports to be reachable from peered subnet. Accept Ranges. Unless\
+            \ specified, traffic will be filtered.."
+          type: string
+        ips:
+          description: The KGW (Kowabunga Network Gateway) auto-assigned private IPs
+            in peered subnet (read-only).
+          items:
+            type: string
+          type: array
+      required:
+      - ips
+      - subnet
+      - vnet
     Metadata:
       description: A key/value metadata.
       example:
@@ -5117,6 +5191,7 @@ components:
         extra_routes:
         - extra_routes
         - extra_routes
+        application: user
         reserved:
         - last: last
           first: first
@@ -5126,6 +5201,11 @@ components:
         dns: dns
         description: description
         cidr: cidr
+        gw_pool:
+        - last: last
+          first: first
+        - last: last
+          first: first
         id: id
         gateway: gateway
       properties:
@@ -5160,6 +5240,20 @@ components:
           items:
             $ref: '#/components/schemas/IpRange'
           type: array
+        gw_pool:
+          description: The network subnet IPv4 ranges reserved for per-zone local
+            network gateways (range size must be at least equal to region number of
+            zones).
+          items:
+            $ref: '#/components/schemas/IpRange'
+          type: array
+        application:
+          default: user
+          description: Optional application service type.
+          enum:
+          - ceph
+          - user
+          type: string
       required:
       - cidr
       - gateway

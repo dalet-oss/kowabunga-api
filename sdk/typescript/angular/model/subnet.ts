@@ -48,5 +48,21 @@ export interface Subnet {
      * The network subnet reserved IPv4 ranges (i.e. no IP address can be assigned from there).
      */
     reserved?: Array<IpRange>;
+    /**
+     * The network subnet IPv4 ranges reserved for per-zone local network gateways (range size must be at least equal to region number of zones).
+     */
+    gw_pool?: Array<IpRange>;
+    /**
+     * Optional application service type.
+     */
+    application?: Subnet.ApplicationEnum;
 }
+export namespace Subnet {
+    export type ApplicationEnum = 'ceph' | 'user';
+    export const ApplicationEnum = {
+        Ceph: 'ceph' as ApplicationEnum,
+        User: 'user' as ApplicationEnum
+    };
+}
+
 

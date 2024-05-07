@@ -76,9 +76,15 @@ resources:
     schema: KGW
     paramId: kgwId
     paramSchema: KgwID
+  kgw_zone_settings:
+    desc: KGW Zone network settings
+    schema: KGWZoneSettings
   kgw_nat:
     desc: KGW NAT mapping
     schema: KGWNat
+  kgw_vnet_peering:
+    desc: KGW internal VNet peering
+    schema: KGWVnetPeering
   metadata:
     desc: key/value metadata
     schema: Metadata

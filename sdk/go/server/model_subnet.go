@@ -39,6 +39,12 @@ type Subnet struct {
 
 	// The network subnet reserved IPv4 ranges (i.e. no IP address can be assigned from there).
 	Reserved []IpRange `json:"reserved,omitempty"`
+
+	// The network subnet IPv4 ranges reserved for per-zone local network gateways (range size must be at least equal to region number of zones).
+	GwPool []IpRange `json:"gw_pool,omitempty"`
+
+	// Optional application service type.
+	Application string `json:"application,omitempty"`
 }
 
 // AssertSubnetRequired checks if the required fields are not zero-ed
@@ -55,6 +61,11 @@ func AssertSubnetRequired(obj Subnet) error {
 	}
 
 	for _, el := range obj.Reserved {
+		if err := AssertIpRangeRequired(el); err != nil {
+			return err
+		}
+	}
+	for _, el := range obj.GwPool {
 		if err := AssertIpRangeRequired(el); err != nil {
 			return err
 		}

@@ -26,12 +26,12 @@ type KGW struct {
 	Name *string `json:"name,omitempty"`
 	// The KGW (Kowabunga Network Gateway) description.
 	Description *string `json:"description,omitempty"`
-	// The KGW (Kowabunga Network Gateway) public IP (read-only).
-	PublicIp *string `json:"public_ip,omitempty"`
-	// The KGW (Kowabunga Network Gateway) private IP (read-only).
-	PrivateIp *string `json:"private_ip,omitempty"`
+	// The KGW (Kowabunga Network Gateway) list of per-zone addresses.
+	Adresses []KGWZoneSettings `json:"adresses,omitempty"`
 	// The KGW (Kowabunga Network Gateway) list of NAT entries.
 	Nats []KGWNat `json:"nats,omitempty"`
+	// The KGW (Kowabunga Network Gateway) list of Kowabunga private VNet peering entries.
+	VnetPeerings []KGWVnetPeering `json:"vnet_peerings,omitempty"`
 }
 
 // NewKGW instantiates a new KGW object
@@ -147,68 +147,36 @@ func (o *KGW) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetPublicIp returns the PublicIp field value if set, zero value otherwise.
-func (o *KGW) GetPublicIp() string {
-	if o == nil || IsNil(o.PublicIp) {
-		var ret string
+// GetAdresses returns the Adresses field value if set, zero value otherwise.
+func (o *KGW) GetAdresses() []KGWZoneSettings {
+	if o == nil || IsNil(o.Adresses) {
+		var ret []KGWZoneSettings
 		return ret
 	}
-	return *o.PublicIp
+	return o.Adresses
 }
 
-// GetPublicIpOk returns a tuple with the PublicIp field value if set, nil otherwise
+// GetAdressesOk returns a tuple with the Adresses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *KGW) GetPublicIpOk() (*string, bool) {
-	if o == nil || IsNil(o.PublicIp) {
+func (o *KGW) GetAdressesOk() ([]KGWZoneSettings, bool) {
+	if o == nil || IsNil(o.Adresses) {
 		return nil, false
 	}
-	return o.PublicIp, true
+	return o.Adresses, true
 }
 
-// HasPublicIp returns a boolean if a field has been set.
-func (o *KGW) HasPublicIp() bool {
-	if o != nil && !IsNil(o.PublicIp) {
+// HasAdresses returns a boolean if a field has been set.
+func (o *KGW) HasAdresses() bool {
+	if o != nil && !IsNil(o.Adresses) {
 		return true
 	}
 
 	return false
 }
 
-// SetPublicIp gets a reference to the given string and assigns it to the PublicIp field.
-func (o *KGW) SetPublicIp(v string) {
-	o.PublicIp = &v
-}
-
-// GetPrivateIp returns the PrivateIp field value if set, zero value otherwise.
-func (o *KGW) GetPrivateIp() string {
-	if o == nil || IsNil(o.PrivateIp) {
-		var ret string
-		return ret
-	}
-	return *o.PrivateIp
-}
-
-// GetPrivateIpOk returns a tuple with the PrivateIp field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *KGW) GetPrivateIpOk() (*string, bool) {
-	if o == nil || IsNil(o.PrivateIp) {
-		return nil, false
-	}
-	return o.PrivateIp, true
-}
-
-// HasPrivateIp returns a boolean if a field has been set.
-func (o *KGW) HasPrivateIp() bool {
-	if o != nil && !IsNil(o.PrivateIp) {
-		return true
-	}
-
-	return false
-}
-
-// SetPrivateIp gets a reference to the given string and assigns it to the PrivateIp field.
-func (o *KGW) SetPrivateIp(v string) {
-	o.PrivateIp = &v
+// SetAdresses gets a reference to the given []KGWZoneSettings and assigns it to the Adresses field.
+func (o *KGW) SetAdresses(v []KGWZoneSettings) {
+	o.Adresses = v
 }
 
 // GetNats returns the Nats field value if set, zero value otherwise.
@@ -243,6 +211,38 @@ func (o *KGW) SetNats(v []KGWNat) {
 	o.Nats = v
 }
 
+// GetVnetPeerings returns the VnetPeerings field value if set, zero value otherwise.
+func (o *KGW) GetVnetPeerings() []KGWVnetPeering {
+	if o == nil || IsNil(o.VnetPeerings) {
+		var ret []KGWVnetPeering
+		return ret
+	}
+	return o.VnetPeerings
+}
+
+// GetVnetPeeringsOk returns a tuple with the VnetPeerings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KGW) GetVnetPeeringsOk() ([]KGWVnetPeering, bool) {
+	if o == nil || IsNil(o.VnetPeerings) {
+		return nil, false
+	}
+	return o.VnetPeerings, true
+}
+
+// HasVnetPeerings returns a boolean if a field has been set.
+func (o *KGW) HasVnetPeerings() bool {
+	if o != nil && !IsNil(o.VnetPeerings) {
+		return true
+	}
+
+	return false
+}
+
+// SetVnetPeerings gets a reference to the given []KGWVnetPeering and assigns it to the VnetPeerings field.
+func (o *KGW) SetVnetPeerings(v []KGWVnetPeering) {
+	o.VnetPeerings = v
+}
+
 func (o KGW) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -262,14 +262,14 @@ func (o KGW) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.PublicIp) {
-		toSerialize["public_ip"] = o.PublicIp
-	}
-	if !IsNil(o.PrivateIp) {
-		toSerialize["private_ip"] = o.PrivateIp
+	if !IsNil(o.Adresses) {
+		toSerialize["adresses"] = o.Adresses
 	}
 	if !IsNil(o.Nats) {
 		toSerialize["nats"] = o.Nats
+	}
+	if !IsNil(o.VnetPeerings) {
+		toSerialize["vnet_peerings"] = o.VnetPeerings
 	}
 	return toSerialize, nil
 }
