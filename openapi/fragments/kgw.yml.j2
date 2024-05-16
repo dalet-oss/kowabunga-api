@@ -3,7 +3,7 @@
 components:
   schemas:
 {{ oas.SchemaBaseResource(resources.kgw) }}
-{{ oas.ObjectArrayProperty('adresses', 'The ' + resources.kgw.desc + ' list of per-zone addresses', resources.kgw_zone_settings.schema) }}
+{{ oas.ObjectArrayProperty('addresses', 'The ' + resources.kgw.desc + ' list of per-zone addresses', resources.kgw_zone_settings.schema) }}
 {{ oas.ObjectArrayProperty('nats', 'The ' + resources.kgw.desc + ' list of NAT entries', resources.kgw_nat.schema) }}
 {{ oas.ObjectArrayProperty('vnet_peerings', 'The ' + resources.kgw.desc + ' list of Kowabunga private VNet peering entries', resources.kgw_vnet_peering.schema) }}
 

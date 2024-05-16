@@ -33,7 +33,7 @@ export interface KGW {
     /**
      * The KGW (Kowabunga Network Gateway) list of per-zone addresses.
      */
-    adresses?: Array<KGWZoneSettings>;
+    addresses?: Array<KGWZoneSettings>;
     /**
      * The KGW (Kowabunga Network Gateway) list of NAT entries.
      */

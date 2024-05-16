@@ -4807,15 +4807,15 @@ components:
         - public_ip: public_ip
           ports: ports
           private_ip: private_ip
+        addresses:
+        - public_ip: public_ip
+          zone: zone
+          private_ip: private_ip
+        - public_ip: public_ip
+          zone: zone
+          private_ip: private_ip
         name: name
         description: description
-        adresses:
-        - public_ip: public_ip
-          zone: zone
-          private_ip: private_ip
-        - public_ip: public_ip
-          zone: zone
-          private_ip: private_ip
         id: id
       properties:
         id:
@@ -4827,7 +4827,7 @@ components:
         description:
           description: The KGW (Kowabunga Network Gateway) description.
           type: string
-        adresses:
+        addresses:
           description: The KGW (Kowabunga Network Gateway) list of per-zone addresses.
           items:
             $ref: '#/components/schemas/KGWZoneSettings'

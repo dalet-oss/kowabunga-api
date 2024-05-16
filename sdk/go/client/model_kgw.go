@@ -27,7 +27,7 @@ type KGW struct {
 	// The KGW (Kowabunga Network Gateway) description.
 	Description *string `json:"description,omitempty"`
 	// The KGW (Kowabunga Network Gateway) list of per-zone addresses.
-	Adresses []KGWZoneSettings `json:"adresses,omitempty"`
+	Addresses []KGWZoneSettings `json:"addresses,omitempty"`
 	// The KGW (Kowabunga Network Gateway) list of NAT entries.
 	Nats []KGWNat `json:"nats,omitempty"`
 	// The KGW (Kowabunga Network Gateway) list of Kowabunga private VNet peering entries.
@@ -147,36 +147,36 @@ func (o *KGW) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetAdresses returns the Adresses field value if set, zero value otherwise.
-func (o *KGW) GetAdresses() []KGWZoneSettings {
-	if o == nil || IsNil(o.Adresses) {
+// GetAddresses returns the Addresses field value if set, zero value otherwise.
+func (o *KGW) GetAddresses() []KGWZoneSettings {
+	if o == nil || IsNil(o.Addresses) {
 		var ret []KGWZoneSettings
 		return ret
 	}
-	return o.Adresses
+	return o.Addresses
 }
 
-// GetAdressesOk returns a tuple with the Adresses field value if set, nil otherwise
+// GetAddressesOk returns a tuple with the Addresses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *KGW) GetAdressesOk() ([]KGWZoneSettings, bool) {
-	if o == nil || IsNil(o.Adresses) {
+func (o *KGW) GetAddressesOk() ([]KGWZoneSettings, bool) {
+	if o == nil || IsNil(o.Addresses) {
 		return nil, false
 	}
-	return o.Adresses, true
+	return o.Addresses, true
 }
 
-// HasAdresses returns a boolean if a field has been set.
-func (o *KGW) HasAdresses() bool {
-	if o != nil && !IsNil(o.Adresses) {
+// HasAddresses returns a boolean if a field has been set.
+func (o *KGW) HasAddresses() bool {
+	if o != nil && !IsNil(o.Addresses) {
 		return true
 	}
 
 	return false
 }
 
-// SetAdresses gets a reference to the given []KGWZoneSettings and assigns it to the Adresses field.
-func (o *KGW) SetAdresses(v []KGWZoneSettings) {
-	o.Adresses = v
+// SetAddresses gets a reference to the given []KGWZoneSettings and assigns it to the Addresses field.
+func (o *KGW) SetAddresses(v []KGWZoneSettings) {
+	o.Addresses = v
 }
 
 // GetNats returns the Nats field value if set, zero value otherwise.
@@ -262,8 +262,8 @@ func (o KGW) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.Adresses) {
-		toSerialize["adresses"] = o.Adresses
+	if !IsNil(o.Addresses) {
+		toSerialize["addresses"] = o.Addresses
 	}
 	if !IsNil(o.Nats) {
 		toSerialize["nats"] = o.Nats

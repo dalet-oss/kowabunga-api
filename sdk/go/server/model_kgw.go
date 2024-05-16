@@ -26,7 +26,7 @@ type Kgw struct {
 	Description string `json:"description,omitempty"`
 
 	// The KGW (Kowabunga Network Gateway) list of per-zone addresses.
-	Adresses []KgwZoneSettings `json:"adresses,omitempty"`
+	Addresses []KgwZoneSettings `json:"addresses,omitempty"`
 
 	// The KGW (Kowabunga Network Gateway) list of NAT entries.
 	Nats []KgwNat `json:"nats,omitempty"`
@@ -37,7 +37,7 @@ type Kgw struct {
 
 // AssertKgwRequired checks if the required fields are not zero-ed
 func AssertKgwRequired(obj Kgw) error {
-	for _, el := range obj.Adresses {
+	for _, el := range obj.Addresses {
 		if err := AssertKgwZoneSettingsRequired(el); err != nil {
 			return err
 		}
