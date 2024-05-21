@@ -5,7 +5,7 @@ components:
 {{ oas.SchemaBaseResource(resources.kgw) }}
 {{ oas.ObjectArrayProperty('addresses', 'The ' + resources.kgw.desc + ' list of per-zone addresses', resources.kgw_zone_settings.schema) }}
 {{ oas.ObjectArrayProperty('nats', 'The ' + resources.kgw.desc + ' list of NAT entries', resources.kgw_nat.schema) }}
-{{ oas.ObjectArrayProperty('vnet_peerings', 'The ' + resources.kgw.desc + ' list of Kowabunga private VNet peering entries', resources.kgw_vnet_peering.schema) }}
+{{ oas.ObjectArrayProperty('vpc_peerings', 'The ' + resources.kgw.desc + ' list of Kowabunga private VPC subnet peering entries', resources.kgw_vnet_peering.schema) }}
 
 {{ oas.Schema(resources.kgw_zone_settings, ['zone', 'public_ip', 'private_ip']) }}
 {{ oas.StringProperty('zone', 'The ' + resources.kgw.desc + ' zone ID (read-only)') }}
@@ -17,8 +17,7 @@ components:
 {{ oas.StringProperty('public_ip', 'Public IP from created adapter. Leave empty to use the default public IP') }}
 {{ oas.StringProperty('ports', 'Ports being forwarded from the public to the private IP. Accept Ranges') }}
 
-{{ oas.Schema(resources.kgw_vnet_peering, ['vnet', 'subnet']) }}
-{{ oas.StringProperty('vnet', 'Kowabunga VNET ID to be peered with.') }}
+{{ oas.Schema(resources.kgw_vpc_peering, ['subnet']) }}
 {{ oas.StringProperty('subnet', 'Kowabunga Subnet ID to be peered with (IP addresses will be automatically assigned into).') }}
 {{ oas.StringProperty('ports', 'Ports to be reachable from peered subnet. Accept Ranges. If specified, traffic will be filtered.') }}
 {{ oas.StringArrayProperty('ips', 'The ' + resources.kgw.desc + ' auto-assigned private IPs in peered subnet (read-only)') }}
