@@ -19,8 +19,8 @@ components:
 
 {{ oas.Schema(resources.kgw_vnet_peering, ['vnet', 'subnet']) }}
 {{ oas.StringProperty('vnet', 'Kowabunga VNET ID to be peered with.') }}
-{{ oas.StringProperty('subnet', 'Kowabunga Subnet ID to be peered with (IP addresses will be automatically assigned).') }}
-{{ oas.StringProperty('ports', 'Ports to be reachable from peered subnet. Accept Ranges. Unless specified, traffic will be filtered.') }}
+{{ oas.StringProperty('subnet', 'Kowabunga Subnet ID to be peered with (IP addresses will be automatically assigned into).') }}
+{{ oas.StringProperty('ports', 'Ports to be reachable from peered subnet. Accept Ranges. If specified, traffic will be filtered.') }}
 {{ oas.StringArrayProperty('ips', 'The ' + resources.kgw.desc + ' auto-assigned private IPs in peered subnet (read-only)') }}
 
   parameters:
