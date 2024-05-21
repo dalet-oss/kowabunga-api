@@ -17,7 +17,7 @@ components:
 {{ oas.StringProperty('public_ip', 'Public IP from created adapter. Leave empty to use the default public IP') }}
 {{ oas.StringProperty('ports', 'Ports being forwarded from the public to the private IP. Accept Ranges') }}
 
-{{ oas.Schema(resources.kgw_vnet_peering, ['vnet', 'subnet', 'ips']) }}
+{{ oas.Schema(resources.kgw_vnet_peering, ['vnet', 'subnet']) }}
 {{ oas.StringProperty('vnet', 'Kowabunga VNET ID to be peered with.') }}
 {{ oas.StringProperty('subnet', 'Kowabunga Subnet ID to be peered with (IP addresses will be automatically assigned).') }}
 {{ oas.StringProperty('ports', 'Ports to be reachable from peered subnet. Accept Ranges. Unless specified, traffic will be filtered.') }}
