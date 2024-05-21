@@ -31,8 +31,8 @@ type Kgw struct {
 	// The KGW (Kowabunga Network Gateway) list of NAT entries.
 	Nats []KgwNat `json:"nats,omitempty"`
 
-	// The KGW (Kowabunga Network Gateway) list of Kowabunga private VNet peering entries.
-	VnetPeerings []KgwVnetPeering `json:"vnet_peerings,omitempty"`
+	// The KGW (Kowabunga Network Gateway) list of Kowabunga private VPC subnet peering entries.
+	VpcPeerings []KgwVpcPeering `json:"vpc_peerings,omitempty"`
 }
 
 // AssertKgwRequired checks if the required fields are not zero-ed
@@ -47,8 +47,8 @@ func AssertKgwRequired(obj Kgw) error {
 			return err
 		}
 	}
-	for _, el := range obj.VnetPeerings {
-		if err := AssertKgwVnetPeeringRequired(el); err != nil {
+	for _, el := range obj.VpcPeerings {
+		if err := AssertKgwVpcPeeringRequired(el); err != nil {
 			return err
 		}
 	}

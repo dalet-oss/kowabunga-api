@@ -22,7 +22,7 @@ export * from './kCE';
 export * from './kFS';
 export * from './kGW';
 export * from './kGWNat';
-export * from './kGWVnetPeering';
+export * from './kGWVpcPeering';
 export * from './kGWZoneSettings';
 export * from './metadata';
 export * from './netGW';

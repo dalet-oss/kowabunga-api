@@ -9,8 +9,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { KGWVpcPeering } from './kGWVpcPeering';
 import { KGWZoneSettings } from './kGWZoneSettings';
-import { KGWVnetPeering } from './kGWVnetPeering';
 import { KGWNat } from './kGWNat';
 
 
@@ -39,8 +39,8 @@ export interface KGW {
      */
     nats?: Array<KGWNat>;
     /**
-     * The KGW (Kowabunga Network Gateway) list of Kowabunga private VNet peering entries.
+     * The KGW (Kowabunga Network Gateway) list of Kowabunga private VPC subnet peering entries.
      */
-    vnet_peerings?: Array<KGWVnetPeering>;
+    vpc_peerings?: Array<KGWVpcPeering>;
 }
 

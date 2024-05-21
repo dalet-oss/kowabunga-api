@@ -30,8 +30,8 @@ type KGW struct {
 	Addresses []KGWZoneSettings `json:"addresses,omitempty"`
 	// The KGW (Kowabunga Network Gateway) list of NAT entries.
 	Nats []KGWNat `json:"nats,omitempty"`
-	// The KGW (Kowabunga Network Gateway) list of Kowabunga private VNet peering entries.
-	VnetPeerings []KGWVnetPeering `json:"vnet_peerings,omitempty"`
+	// The KGW (Kowabunga Network Gateway) list of Kowabunga private VPC subnet peering entries.
+	VpcPeerings []KGWVpcPeering `json:"vpc_peerings,omitempty"`
 }
 
 // NewKGW instantiates a new KGW object
@@ -211,36 +211,36 @@ func (o *KGW) SetNats(v []KGWNat) {
 	o.Nats = v
 }
 
-// GetVnetPeerings returns the VnetPeerings field value if set, zero value otherwise.
-func (o *KGW) GetVnetPeerings() []KGWVnetPeering {
-	if o == nil || IsNil(o.VnetPeerings) {
-		var ret []KGWVnetPeering
+// GetVpcPeerings returns the VpcPeerings field value if set, zero value otherwise.
+func (o *KGW) GetVpcPeerings() []KGWVpcPeering {
+	if o == nil || IsNil(o.VpcPeerings) {
+		var ret []KGWVpcPeering
 		return ret
 	}
-	return o.VnetPeerings
+	return o.VpcPeerings
 }
 
-// GetVnetPeeringsOk returns a tuple with the VnetPeerings field value if set, nil otherwise
+// GetVpcPeeringsOk returns a tuple with the VpcPeerings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *KGW) GetVnetPeeringsOk() ([]KGWVnetPeering, bool) {
-	if o == nil || IsNil(o.VnetPeerings) {
+func (o *KGW) GetVpcPeeringsOk() ([]KGWVpcPeering, bool) {
+	if o == nil || IsNil(o.VpcPeerings) {
 		return nil, false
 	}
-	return o.VnetPeerings, true
+	return o.VpcPeerings, true
 }
 
-// HasVnetPeerings returns a boolean if a field has been set.
-func (o *KGW) HasVnetPeerings() bool {
-	if o != nil && !IsNil(o.VnetPeerings) {
+// HasVpcPeerings returns a boolean if a field has been set.
+func (o *KGW) HasVpcPeerings() bool {
+	if o != nil && !IsNil(o.VpcPeerings) {
 		return true
 	}
 
 	return false
 }
 
-// SetVnetPeerings gets a reference to the given []KGWVnetPeering and assigns it to the VnetPeerings field.
-func (o *KGW) SetVnetPeerings(v []KGWVnetPeering) {
-	o.VnetPeerings = v
+// SetVpcPeerings gets a reference to the given []KGWVpcPeering and assigns it to the VpcPeerings field.
+func (o *KGW) SetVpcPeerings(v []KGWVpcPeering) {
+	o.VpcPeerings = v
 }
 
 func (o KGW) MarshalJSON() ([]byte, error) {
@@ -268,8 +268,8 @@ func (o KGW) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Nats) {
 		toSerialize["nats"] = o.Nats
 	}
-	if !IsNil(o.VnetPeerings) {
-		toSerialize["vnet_peerings"] = o.VnetPeerings
+	if !IsNil(o.VpcPeerings) {
+		toSerialize["vpc_peerings"] = o.VpcPeerings
 	}
 	return toSerialize, nil
 }

@@ -235,7 +235,7 @@ All URIs are relative to */api/v1*
  - [KFS](./Models/KFS.md)
  - [KGW](./Models/KGW.md)
  - [KGWNat](./Models/KGWNat.md)
- - [KGWVnetPeering](./Models/KGWVnetPeering.md)
+ - [KGWVpcPeering](./Models/KGWVpcPeering.md)
  - [KGWZoneSettings](./Models/KGWZoneSettings.md)
  - [Metadata](./Models/Metadata.md)
  - [NetGW](./Models/NetGW.md)

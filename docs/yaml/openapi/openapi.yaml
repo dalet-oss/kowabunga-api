@@ -4787,19 +4787,6 @@ components:
       description: A Kowabunga Network Gateway is a network gateway used for your
         internet inbound and outbound traffic.
       example:
-        vnet_peerings:
-        - vnet: vnet
-          subnet: subnet
-          ports: ports
-          ips:
-          - ips
-          - ips
-        - vnet: vnet
-          subnet: subnet
-          ports: ports
-          ips:
-          - ips
-          - ips
         nats:
         - public_ip: public_ip
           ports: ports
@@ -4817,6 +4804,17 @@ components:
         name: name
         description: description
         id: id
+        vpc_peerings:
+        - subnet: subnet
+          ports: ports
+          ips:
+          - ips
+          - ips
+        - subnet: subnet
+          ports: ports
+          ips:
+          - ips
+          - ips
       properties:
         id:
           description: The KGW (Kowabunga Network Gateway) ID (auto-generated).
@@ -4837,11 +4835,11 @@ components:
           items:
             $ref: '#/components/schemas/KGWNat'
           type: array
-        vnet_peerings:
+        vpc_peerings:
           description: The KGW (Kowabunga Network Gateway) list of Kowabunga private
-            VNet peering entries.
+            VPC subnet peering entries.
           items:
-            $ref: '#/components/schemas/KGWVnetPeering'
+            $ref: '#/components/schemas/KGWVpcPeering'
           type: array
     KGWZoneSettings:
       description: A KGW Zone network settings.
@@ -4883,25 +4881,21 @@ components:
           type: string
       required:
       - private_ip
-    KGWVnetPeering:
-      description: A KGW internal VNet peering.
+    KGWVpcPeering:
+      description: A KGW internal VPC subnet peering.
       example:
-        vnet: vnet
         subnet: subnet
         ports: ports
         ips:
         - ips
         - ips
       properties:
-        vnet:
-          description: Kowabunga VNET ID to be peered with..
-          type: string
         subnet:
           description: Kowabunga Subnet ID to be peered with (IP addresses will be
-            automatically assigned)..
+            automatically assigned into)..
           type: string
         ports:
-          description: "Ports to be reachable from peered subnet. Accept Ranges. Unless\
+          description: "Ports to be reachable from peered subnet. Accept Ranges. If\
             \ specified, traffic will be filtered.."
           type: string
         ips:
@@ -4911,9 +4905,7 @@ components:
             type: string
           type: array
       required:
-      - ips
       - subnet
-      - vnet
     Metadata:
       description: A key/value metadata.
       example:

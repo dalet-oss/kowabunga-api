@@ -5,7 +5,7 @@ components:
 {{ oas.SchemaBaseResource(resources.kgw) }}
 {{ oas.ObjectArrayProperty('addresses', 'The ' + resources.kgw.desc + ' list of per-zone addresses', resources.kgw_zone_settings.schema) }}
 {{ oas.ObjectArrayProperty('nats', 'The ' + resources.kgw.desc + ' list of NAT entries', resources.kgw_nat.schema) }}
-{{ oas.ObjectArrayProperty('vpc_peerings', 'The ' + resources.kgw.desc + ' list of Kowabunga private VPC subnet peering entries', resources.kgw_vnet_peering.schema) }}
+{{ oas.ObjectArrayProperty('vpc_peerings', 'The ' + resources.kgw.desc + ' list of Kowabunga private VPC subnet peering entries', resources.kgw_vpc_peering.schema) }}
 
 {{ oas.Schema(resources.kgw_zone_settings, ['zone', 'public_ip', 'private_ip']) }}
 {{ oas.StringProperty('zone', 'The ' + resources.kgw.desc + ' zone ID (read-only)') }}
