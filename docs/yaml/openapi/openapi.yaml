@@ -9,7 +9,7 @@ info:
     name: AGPLv3
     url: https://www.gnu.org/licenses/agpl-3.0.en.html
   title: Kowabunga API documentation
-  version: 0.36.0
+  version: 0.37.0
 servers:
 - url: /api/v1
 security:
@@ -4971,8 +4971,8 @@ components:
         - tags
         - tags
         reserved_vrrp_ids:
-        - reserved_vrrp_ids
-        - reserved_vrrp_ids
+        - 5
+        - 5
         bootstrap_pubkey: bootstrap_pubkey
         private_subnets:
         - value: value
@@ -5031,7 +5031,7 @@ components:
             \ VRRP for service redundancy, you should use different IDs to prevent\
             \ issues.."
           items:
-            type: string
+            type: integer
           type: array
         groups:
           description: A list of user groups allowed to administrate the project (i.e.

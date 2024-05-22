@@ -3,7 +3,7 @@ Kowabunga API documentation
 
 Kvm Orchestrator With A BUNch of Goods Added
 
-API version: 0.36.0
+API version: 0.37.0
 Contact: csops@dalet.com
 */
 
@@ -45,7 +45,7 @@ type Project struct {
 	// The assigned project VPC private subnets IDs (read-only).
 	PrivateSubnets []RegionSubnet `json:"private_subnets,omitempty"`
 	// The list of VRRP IDs used by -as-a-service resources within the project virtual network (read-only). Should your application use VRRP for service redundancy, you should use different IDs to prevent issues..
-	ReservedVrrpIds []string `json:"reserved_vrrp_ids,omitempty"`
+	ReservedVrrpIds []int32 `json:"reserved_vrrp_ids,omitempty"`
 	// A list of user groups allowed to administrate the project (i.e. capable of managing internal resources).
 	Groups []string `json:"groups"`
 	// A list of Kowabunga regions the project is managing resources from.
@@ -419,9 +419,9 @@ func (o *Project) SetPrivateSubnets(v []RegionSubnet) {
 }
 
 // GetReservedVrrpIds returns the ReservedVrrpIds field value if set, zero value otherwise.
-func (o *Project) GetReservedVrrpIds() []string {
+func (o *Project) GetReservedVrrpIds() []int32 {
 	if o == nil || IsNil(o.ReservedVrrpIds) {
-		var ret []string
+		var ret []int32
 		return ret
 	}
 	return o.ReservedVrrpIds
@@ -429,7 +429,7 @@ func (o *Project) GetReservedVrrpIds() []string {
 
 // GetReservedVrrpIdsOk returns a tuple with the ReservedVrrpIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Project) GetReservedVrrpIdsOk() ([]string, bool) {
+func (o *Project) GetReservedVrrpIdsOk() ([]int32, bool) {
 	if o == nil || IsNil(o.ReservedVrrpIds) {
 		return nil, false
 	}
@@ -445,8 +445,8 @@ func (o *Project) HasReservedVrrpIds() bool {
 	return false
 }
 
-// SetReservedVrrpIds gets a reference to the given []string and assigns it to the ReservedVrrpIds field.
-func (o *Project) SetReservedVrrpIds(v []string) {
+// SetReservedVrrpIds gets a reference to the given []int32 and assigns it to the ReservedVrrpIds field.
+func (o *Project) SetReservedVrrpIds(v []int32) {
 	o.ReservedVrrpIds = v
 }
 
