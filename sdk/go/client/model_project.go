@@ -3,7 +3,7 @@ Kowabunga API documentation
 
 Kvm Orchestrator With A BUNch of Goods Added
 
-API version: 0.35.0
+API version: 0.36.0
 Contact: csops@dalet.com
 */
 
@@ -44,6 +44,8 @@ type Project struct {
 	Quotas ProjectResources `json:"quotas,omitempty"`
 	// The assigned project VPC private subnets IDs (read-only).
 	PrivateSubnets []RegionSubnet `json:"private_subnets,omitempty"`
+	// The list of VRRP IDs used by -as-a-service resources within the project virtual network (read-only). Should your application use VRRP for service redundancy, you should use different IDs to prevent issues..
+	ReservedVrrpIds []string `json:"reserved_vrrp_ids,omitempty"`
 	// A list of user groups allowed to administrate the project (i.e. capable of managing internal resources).
 	Groups []string `json:"groups"`
 	// A list of Kowabunga regions the project is managing resources from.
@@ -416,6 +418,38 @@ func (o *Project) SetPrivateSubnets(v []RegionSubnet) {
 	o.PrivateSubnets = v
 }
 
+// GetReservedVrrpIds returns the ReservedVrrpIds field value if set, zero value otherwise.
+func (o *Project) GetReservedVrrpIds() []string {
+	if o == nil || IsNil(o.ReservedVrrpIds) {
+		var ret []string
+		return ret
+	}
+	return o.ReservedVrrpIds
+}
+
+// GetReservedVrrpIdsOk returns a tuple with the ReservedVrrpIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Project) GetReservedVrrpIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ReservedVrrpIds) {
+		return nil, false
+	}
+	return o.ReservedVrrpIds, true
+}
+
+// HasReservedVrrpIds returns a boolean if a field has been set.
+func (o *Project) HasReservedVrrpIds() bool {
+	if o != nil && !IsNil(o.ReservedVrrpIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetReservedVrrpIds gets a reference to the given []string and assigns it to the ReservedVrrpIds field.
+func (o *Project) SetReservedVrrpIds(v []string) {
+	o.ReservedVrrpIds = v
+}
+
 // GetGroups returns the Groups field value
 func (o *Project) GetGroups() []string {
 	if o == nil {
@@ -504,6 +538,9 @@ func (o Project) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.PrivateSubnets) {
 		toSerialize["private_subnets"] = o.PrivateSubnets
+	}
+	if !IsNil(o.ReservedVrrpIds) {
+		toSerialize["reserved_vrrp_ids"] = o.ReservedVrrpIds
 	}
 	toSerialize["groups"] = o.Groups
 	toSerialize["regions"] = o.Regions
