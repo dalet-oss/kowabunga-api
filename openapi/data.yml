@@ -72,19 +72,40 @@ resources:
   kgw:
     tag: kgw
     desc: KGW (Kowabunga Network Gateway)
-    extended_desc: Kowabunga Network Gateway is a network gateway used for your internet inbound and outbound traffic
+    extended_desc: Kowabunga Network Gateway is a network gateway used for your Internet inbound and outbound traffic
     schema: KGW
     paramId: kgwId
     paramSchema: KgwID
-  kgw_zone_settings:
-    desc: KGW Zone network settings
-    schema: KGWZoneSettings
-  kgw_nat:
-    desc: KGW NAT mapping
-    schema: KGWNat
+  kgw_netip:
+    desc: KGW Network IP settings
+    schema: KGWNetIp
+  kgw_netip_zone:
+    desc: KGW Network IP zone settings
+    schema: KGWNetIpZone
+  kgw_firewall:
+    desc: KGW public firewall settings
+    schema: KGWFirewall
+  kgw_firewall_ingress_rule:
+    desc: KGW public firewall ingress rule
+    schema: KGWFirewallIngressRule
+  kgw_firewall_egress_rule:
+    desc: KGW public firewall egress rule
+    schema: KGWFirewallEgressRule
+  kgw_dnat:
+    desc: KGW destination NAT configuration
+    schema: KGWDNat
+  kgw_dnat_rule:
+    desc: KGW public firewall destination NAT rule
+    schema: KGWDNatRule
   kgw_vpc_peering:
     desc: KGW internal VPC subnet peering
     schema: KGWVpcPeering
+  kgw_vpc_forward_rule:
+    desc: KGW VPC firewall forwarding rule
+    schema: KGWVpcForwardRule
+  kgw_vpc_netip_zone:
+    desc: KGW VPC Network IP zone settings
+    schema: KGWVpcNetIpZone
   metadata:
     desc: key/value metadata
     schema: Metadata

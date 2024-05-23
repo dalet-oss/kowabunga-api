@@ -9,6 +9,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { KGWVpcForwardRule } from './kGWVpcForwardRule';
+import { KGWVpcNetIpZone } from './kGWVpcNetIpZone';
 
 
 /**
@@ -16,16 +18,32 @@
  */
 export interface KGWVpcPeering { 
     /**
-     * Kowabunga Subnet ID to be peered with (IP addresses will be automatically assigned into)..
+     * Kowabunga Subnet ID to be peered with (subnet local IP addresses will be automatically assigned to KGW instances)..
      */
     subnet: string;
     /**
-     * Ports to be reachable from peered subnet. Accept Ranges. If specified, traffic will be filtered..
+     * The default VPC traffic forwarding policy.
      */
-    ports?: string;
+    policy?: KGWVpcPeering.PolicyEnum;
     /**
-     * The KGW (Kowabunga Network Gateway) auto-assigned private IPs in peered subnet (read-only).
+     * The firewall list of forwarding ingress rules from VPC peered subnet. ICMP traffic is always accepted. The specified ruleset will be explicitly accepted if drop is the default policy (useless otherwise).
      */
-    ips?: Array<string>;
+    ingress?: Array<KGWVpcForwardRule>;
+    /**
+     * The firewall list of forwarding egress rules to VPC peered subnet. ICMP traffic is always accepted. The specified ruleset will be explicitly accepted if drop is the default policy (useless otherwise).
+     */
+    egress?: Array<KGWVpcForwardRule>;
+    /**
+     * The per-zone auto-assigned private IPs in peered subnet (read-only).
+     */
+    netip?: Array<KGWVpcNetIpZone>;
 }
+export namespace KGWVpcPeering {
+    export type PolicyEnum = 'accept' | 'drop';
+    export const PolicyEnum = {
+        Accept: 'accept' as PolicyEnum,
+        Drop: 'drop' as PolicyEnum
+    };
+}
+
 

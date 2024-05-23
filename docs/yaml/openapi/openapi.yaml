@@ -4785,36 +4785,103 @@ components:
       - name
     KGW:
       description: A Kowabunga Network Gateway is a network gateway used for your
-        internet inbound and outbound traffic.
+        Internet inbound and outbound traffic.
       example:
-        nats:
-        - public_ip: public_ip
+        dnat:
+        - protocol: tcp
+          destination: destination
           ports: ports
-          private_ip: private_ip
-        - public_ip: public_ip
+        - protocol: tcp
+          destination: destination
           ports: ports
-          private_ip: private_ip
-        addresses:
-        - public_ip: public_ip
-          zone: zone
-          private_ip: private_ip
-        - public_ip: public_ip
-          zone: zone
-          private_ip: private_ip
+        firewall:
+        - ingress:
+          - protocol: tcp
+            source: 0.0.0.0/0
+            ports: ports
+          - protocol: tcp
+            source: 0.0.0.0/0
+            ports: ports
+          egress_policy: accept
+          egress:
+          - protocol: tcp
+            destination: 0.0.0.0/0
+            ports: ports
+          - protocol: tcp
+            destination: 0.0.0.0/0
+            ports: ports
+        - ingress:
+          - protocol: tcp
+            source: 0.0.0.0/0
+            ports: ports
+          - protocol: tcp
+            source: 0.0.0.0/0
+            ports: ports
+          egress_policy: accept
+          egress:
+          - protocol: tcp
+            destination: 0.0.0.0/0
+            ports: ports
+          - protocol: tcp
+            destination: 0.0.0.0/0
+            ports: ports
         name: name
         description: description
+        netip:
+        - private: private
+          public: public
+          zones:
+          - private: private
+            public: public
+            zone: zone
+          - private: private
+            public: public
+            zone: zone
+        - private: private
+          public: public
+          zones:
+          - private: private
+            public: public
+            zone: zone
+          - private: private
+            public: public
+            zone: zone
         id: id
         vpc_peerings:
         - subnet: subnet
-          ports: ports
-          ips:
-          - ips
-          - ips
+          ingress:
+          - protocol: tcp
+            ports: ports
+          - protocol: tcp
+            ports: ports
+          netip:
+          - private: private
+            zone: zone
+          - private: private
+            zone: zone
+          policy: drop
+          egress:
+          - protocol: tcp
+            ports: ports
+          - protocol: tcp
+            ports: ports
         - subnet: subnet
-          ports: ports
-          ips:
-          - ips
-          - ips
+          ingress:
+          - protocol: tcp
+            ports: ports
+          - protocol: tcp
+            ports: ports
+          netip:
+          - private: private
+            zone: zone
+          - private: private
+            zone: zone
+          policy: drop
+          egress:
+          - protocol: tcp
+            ports: ports
+          - protocol: tcp
+            ports: ports
       properties:
         id:
           description: The KGW (Kowabunga Network Gateway) ID (auto-generated).
@@ -4825,15 +4892,24 @@ components:
         description:
           description: The KGW (Kowabunga Network Gateway) description.
           type: string
-        addresses:
-          description: The KGW (Kowabunga Network Gateway) list of per-zone addresses.
+        netip:
+          description: The KGW (Kowabunga Network Gateway) list of assigned virtual
+            IPs per-zone addresses (read-only).
           items:
-            $ref: '#/components/schemas/KGWZoneSettings'
+            $ref: '#/components/schemas/KGWNetIp'
           type: array
-        nats:
-          description: The KGW (Kowabunga Network Gateway) list of NAT entries.
+        firewall:
+          description: The KGW (Kowabunga Network Gateway) firewall settings from/to
+            public Internet).
           items:
-            $ref: '#/components/schemas/KGWNat'
+            $ref: '#/components/schemas/KGWFirewall'
+          type: array
+        dnat:
+          description: The KGW (Kowabunga Network Gateway) list of NAT forwarding
+            entries. KGW will forward public Internet traffic from all public virtual
+            IPs to requested private subnet IP addresses.
+          items:
+            $ref: '#/components/schemas/KGWDNatRule'
           type: array
         vpc_peerings:
           description: The KGW (Kowabunga Network Gateway) list of Kowabunga private
@@ -4841,71 +4917,262 @@ components:
           items:
             $ref: '#/components/schemas/KGWVpcPeering'
           type: array
-    KGWZoneSettings:
-      description: A KGW Zone network settings.
+    KGWNetIp:
+      description: A KGW Network IP settings.
       example:
-        public_ip: public_ip
+        private: private
+        public: public
+        zones:
+        - private: private
+          public: public
+          zone: zone
+        - private: private
+          public: public
+          zone: zone
+      properties:
+        public:
+          description: The KGW (Kowabunga Network Gateway) global public gateways
+            virtual IP addresses (read-only).
+          type: string
+        private:
+          description: The KGW (Kowabunga Network Gateway) global private gateways
+            virtual IP addresses (read-only).
+          type: string
+        zones:
+          description: The KGW (Kowabunga Network Gateway) per-zone list of Kowabunga
+            virtual IP addresses.
+          items:
+            $ref: '#/components/schemas/KGWNetIpZone'
+          type: array
+      required:
+      - private
+      - public
+      - zones
+    KGWNetIpZone:
+      description: A KGW Network IP zone settings.
+      example:
+        private: private
+        public: public
         zone: zone
-        private_ip: private_ip
       properties:
         zone:
-          description: The KGW (Kowabunga Network Gateway) zone ID (read-only).
+          description: The KGW (Kowabunga Network Gateway) zone name (read-only).
           type: string
-        public_ip:
-          description: The KGW (Kowabunga Network Gateway) public virtual IP (read-only).
+        public:
+          description: The KGW (Kowabunga Network Gateway) zone gateway public virtual
+            IP (read-only).
           type: string
-        private_ip:
-          description: The KGW (Kowabunga Network Gateway) private virtual IP (read-only).
+        private:
+          description: The KGW (Kowabunga Network Gateway) zone gateway private virtual
+            IP (read-only).
           type: string
       required:
-      - private_ip
-      - public_ip
+      - private
+      - public
       - zone
-    KGWNat:
-      description: A KGW NAT mapping.
+    KGWFirewall:
+      description: A KGW public firewall settings.
       example:
-        public_ip: public_ip
-        ports: ports
-        private_ip: private_ip
+        ingress:
+        - protocol: tcp
+          source: 0.0.0.0/0
+          ports: ports
+        - protocol: tcp
+          source: 0.0.0.0/0
+          ports: ports
+        egress_policy: accept
+        egress:
+        - protocol: tcp
+          destination: 0.0.0.0/0
+          ports: ports
+        - protocol: tcp
+          destination: 0.0.0.0/0
+          ports: ports
       properties:
-        private_ip:
-          description: Target Private IP. Leave blank for a new generated one.
+        ingress:
+          description: "The KGW (Kowabunga Network Gateway) public firewall list of\
+            \ ingress rules. KGW default policy is to drop all incoming traffic, including\
+            \ ICMP. Specified ruleset will be explicitly accepted."
+          items:
+            $ref: '#/components/schemas/KGWFirewallIngressRule'
+          type: array
+        egress_policy:
+          default: accept
+          description: The default public traffic egress policy.
+          enum:
+          - accept
+          - drop
           type: string
-        public_ip:
-          description: Public IP from created adapter. Leave empty to use the default
-            public IP.
+        egress:
+          description: "The KGW (Kowabunga Network Gateway) public firewall list of\
+            \ egress rules. KGW default policy is to accept all outgoing traffic,\
+            \ including ICMP. Specified ruleset will be explicitly dropped if egress_policy\
+            \ is set to accept, and explicitly accepted if egress policy is set to\
+            \ drop.."
+          items:
+            $ref: '#/components/schemas/KGWFirewallEgressRule'
+          type: array
+    KGWFirewallIngressRule:
+      description: A KGW public firewall ingress rule.
+      example:
+        protocol: tcp
+        source: 0.0.0.0/0
+        ports: ports
+      properties:
+        source:
+          default: 0.0.0.0/0
+          description: The source IP or CIDR to accept public traffic from.
+          type: string
+        protocol:
+          default: tcp
+          description: The transport layer protocol to accept public traffic from.
+          enum:
+          - tcp
+          - udp
           type: string
         ports:
-          description: Ports being forwarded from the public to the private IP. Accept
-            Ranges.
+          description: "The port (or list of ports) to accept public traffic from.\
+            \ Ranges are accepted. Format is a-b,c-d (e.g. 443; 22,80,443; 80,443,3000-3005)."
           type: string
       required:
-      - private_ip
+      - ports
+    KGWFirewallEgressRule:
+      description: A KGW public firewall egress rule.
+      example:
+        protocol: tcp
+        destination: 0.0.0.0/0
+        ports: ports
+      properties:
+        destination:
+          default: 0.0.0.0/0
+          description: The destination IP or CIDR to accept/drop public traffic to.
+          type: string
+        protocol:
+          default: tcp
+          description: The transport layer protocol to accept/drop public traffic
+            to.
+          enum:
+          - tcp
+          - udp
+          type: string
+        ports:
+          description: "The port (or list of ports) to accept/drop public traffic\
+            \ from. Ranges are accepted. Format is a-b,c-d (e.g. 443; 22,80,443; 80,443,3000-3005)."
+          type: string
+      required:
+      - ports
+    KGWDNatRule:
+      description: A KGW public firewall destination NAT rule.
+      example:
+        protocol: tcp
+        destination: destination
+        ports: ports
+      properties:
+        destination:
+          description: Target private IP address to forward public traffic to.
+          type: string
+        protocol:
+          default: tcp
+          description: The transport layer protocol to forward public traffic to.
+          enum:
+          - tcp
+          - udp
+          type: string
+        ports:
+          description: "The port (or list of ports) to forward public traffic from.\
+            \ Ranges are accepted. Format is a-b,c-d (e.g. 443; 22,80,443; 80,443,3000-3005)."
+          type: string
+      required:
+      - destination
+      - ports
     KGWVpcPeering:
       description: A KGW internal VPC subnet peering.
       example:
         subnet: subnet
-        ports: ports
-        ips:
-        - ips
-        - ips
+        ingress:
+        - protocol: tcp
+          ports: ports
+        - protocol: tcp
+          ports: ports
+        netip:
+        - private: private
+          zone: zone
+        - private: private
+          zone: zone
+        policy: drop
+        egress:
+        - protocol: tcp
+          ports: ports
+        - protocol: tcp
+          ports: ports
       properties:
         subnet:
-          description: Kowabunga Subnet ID to be peered with (IP addresses will be
-            automatically assigned into)..
+          description: Kowabunga Subnet ID to be peered with (subnet local IP addresses
+            will be automatically assigned to KGW instances)..
           type: string
-        ports:
-          description: "Ports to be reachable from peered subnet. Accept Ranges. If\
-            \ specified, traffic will be filtered.."
+        policy:
+          default: drop
+          description: The default VPC traffic forwarding policy.
+          enum:
+          - accept
+          - drop
           type: string
-        ips:
-          description: The KGW (Kowabunga Network Gateway) auto-assigned private IPs
-            in peered subnet (read-only).
+        ingress:
+          description: The firewall list of forwarding ingress rules from VPC peered
+            subnet. ICMP traffic is always accepted. The specified ruleset will be
+            explicitly accepted if drop is the default policy (useless otherwise).
           items:
-            type: string
+            $ref: '#/components/schemas/KGWVpcForwardRule'
+          type: array
+        egress:
+          description: The firewall list of forwarding egress rules to VPC peered
+            subnet. ICMP traffic is always accepted. The specified ruleset will be
+            explicitly accepted if drop is the default policy (useless otherwise).
+          items:
+            $ref: '#/components/schemas/KGWVpcForwardRule'
+          type: array
+        netip:
+          description: The per-zone auto-assigned private IPs in peered subnet (read-only).
+          items:
+            $ref: '#/components/schemas/KGWVpcNetIpZone'
           type: array
       required:
       - subnet
+    KGWVpcForwardRule:
+      description: A KGW VPC firewall forwarding rule.
+      example:
+        protocol: tcp
+        ports: ports
+      properties:
+        protocol:
+          default: tcp
+          description: The transport layer protocol to forward public traffic to.
+          enum:
+          - tcp
+          - udp
+          type: string
+        ports:
+          description: "The port (or list of ports) to forward public traffic from.\
+            \ Ranges are accepted. Format is a-b,c-d (e.g. 443; 22,80,443; 80,443,3000-3005)."
+          type: string
+      required:
+      - ports
+    KGWVpcNetIpZone:
+      description: A KGW VPC Network IP zone settings.
+      example:
+        private: private
+        zone: zone
+      properties:
+        zone:
+          description: The KGW (Kowabunga Network Gateway) zone name (read-only).
+          type: string
+        private:
+          description: The KGW (Kowabunga Network Gateway) zone gateway private IP
+            address in VPC peered subnet  (read-only).
+          type: string
+      required:
+      - private
+      - zone
     Metadata:
       description: A key/value metadata.
       example:

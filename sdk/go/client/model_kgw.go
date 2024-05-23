@@ -18,7 +18,7 @@ import (
 // checks if the KGW type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &KGW{}
 
-// KGW A Kowabunga Network Gateway is a network gateway used for your internet inbound and outbound traffic.
+// KGW A Kowabunga Network Gateway is a network gateway used for your Internet inbound and outbound traffic.
 type KGW struct {
 	// The KGW (Kowabunga Network Gateway) ID (auto-generated).
 	Id *string `json:"id,omitempty"`
@@ -26,10 +26,12 @@ type KGW struct {
 	Name *string `json:"name,omitempty"`
 	// The KGW (Kowabunga Network Gateway) description.
 	Description *string `json:"description,omitempty"`
-	// The KGW (Kowabunga Network Gateway) list of per-zone addresses.
-	Addresses []KGWZoneSettings `json:"addresses,omitempty"`
-	// The KGW (Kowabunga Network Gateway) list of NAT entries.
-	Nats []KGWNat `json:"nats,omitempty"`
+	// The KGW (Kowabunga Network Gateway) list of assigned virtual IPs per-zone addresses (read-only).
+	Netip []KGWNetIp `json:"netip,omitempty"`
+	// The KGW (Kowabunga Network Gateway) firewall settings from/to public Internet).
+	Firewall []KGWFirewall `json:"firewall,omitempty"`
+	// The KGW (Kowabunga Network Gateway) list of NAT forwarding entries. KGW will forward public Internet traffic from all public virtual IPs to requested private subnet IP addresses.
+	Dnat []KGWDNatRule `json:"dnat,omitempty"`
 	// The KGW (Kowabunga Network Gateway) list of Kowabunga private VPC subnet peering entries.
 	VpcPeerings []KGWVpcPeering `json:"vpc_peerings,omitempty"`
 }
@@ -147,68 +149,100 @@ func (o *KGW) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetAddresses returns the Addresses field value if set, zero value otherwise.
-func (o *KGW) GetAddresses() []KGWZoneSettings {
-	if o == nil || IsNil(o.Addresses) {
-		var ret []KGWZoneSettings
+// GetNetip returns the Netip field value if set, zero value otherwise.
+func (o *KGW) GetNetip() []KGWNetIp {
+	if o == nil || IsNil(o.Netip) {
+		var ret []KGWNetIp
 		return ret
 	}
-	return o.Addresses
+	return o.Netip
 }
 
-// GetAddressesOk returns a tuple with the Addresses field value if set, nil otherwise
+// GetNetipOk returns a tuple with the Netip field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *KGW) GetAddressesOk() ([]KGWZoneSettings, bool) {
-	if o == nil || IsNil(o.Addresses) {
+func (o *KGW) GetNetipOk() ([]KGWNetIp, bool) {
+	if o == nil || IsNil(o.Netip) {
 		return nil, false
 	}
-	return o.Addresses, true
+	return o.Netip, true
 }
 
-// HasAddresses returns a boolean if a field has been set.
-func (o *KGW) HasAddresses() bool {
-	if o != nil && !IsNil(o.Addresses) {
+// HasNetip returns a boolean if a field has been set.
+func (o *KGW) HasNetip() bool {
+	if o != nil && !IsNil(o.Netip) {
 		return true
 	}
 
 	return false
 }
 
-// SetAddresses gets a reference to the given []KGWZoneSettings and assigns it to the Addresses field.
-func (o *KGW) SetAddresses(v []KGWZoneSettings) {
-	o.Addresses = v
+// SetNetip gets a reference to the given []KGWNetIp and assigns it to the Netip field.
+func (o *KGW) SetNetip(v []KGWNetIp) {
+	o.Netip = v
 }
 
-// GetNats returns the Nats field value if set, zero value otherwise.
-func (o *KGW) GetNats() []KGWNat {
-	if o == nil || IsNil(o.Nats) {
-		var ret []KGWNat
+// GetFirewall returns the Firewall field value if set, zero value otherwise.
+func (o *KGW) GetFirewall() []KGWFirewall {
+	if o == nil || IsNil(o.Firewall) {
+		var ret []KGWFirewall
 		return ret
 	}
-	return o.Nats
+	return o.Firewall
 }
 
-// GetNatsOk returns a tuple with the Nats field value if set, nil otherwise
+// GetFirewallOk returns a tuple with the Firewall field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *KGW) GetNatsOk() ([]KGWNat, bool) {
-	if o == nil || IsNil(o.Nats) {
+func (o *KGW) GetFirewallOk() ([]KGWFirewall, bool) {
+	if o == nil || IsNil(o.Firewall) {
 		return nil, false
 	}
-	return o.Nats, true
+	return o.Firewall, true
 }
 
-// HasNats returns a boolean if a field has been set.
-func (o *KGW) HasNats() bool {
-	if o != nil && !IsNil(o.Nats) {
+// HasFirewall returns a boolean if a field has been set.
+func (o *KGW) HasFirewall() bool {
+	if o != nil && !IsNil(o.Firewall) {
 		return true
 	}
 
 	return false
 }
 
-// SetNats gets a reference to the given []KGWNat and assigns it to the Nats field.
-func (o *KGW) SetNats(v []KGWNat) {
-	o.Nats = v
+// SetFirewall gets a reference to the given []KGWFirewall and assigns it to the Firewall field.
+func (o *KGW) SetFirewall(v []KGWFirewall) {
+	o.Firewall = v
+}
+
+// GetDnat returns the Dnat field value if set, zero value otherwise.
+func (o *KGW) GetDnat() []KGWDNatRule {
+	if o == nil || IsNil(o.Dnat) {
+		var ret []KGWDNatRule
+		return ret
+	}
+	return o.Dnat
+}
+
+// GetDnatOk returns a tuple with the Dnat field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KGW) GetDnatOk() ([]KGWDNatRule, bool) {
+	if o == nil || IsNil(o.Dnat) {
+		return nil, false
+	}
+	return o.Dnat, true
+}
+
+// HasDnat returns a boolean if a field has been set.
+func (o *KGW) HasDnat() bool {
+	if o != nil && !IsNil(o.Dnat) {
+		return true
+	}
+
+	return false
+}
+
+// SetDnat gets a reference to the given []KGWDNatRule and assigns it to the Dnat field.
+func (o *KGW) SetDnat(v []KGWDNatRule) {
+	o.Dnat = v
 }
 
 // GetVpcPeerings returns the VpcPeerings field value if set, zero value otherwise.
@@ -262,11 +296,14 @@ func (o KGW) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.Addresses) {
-		toSerialize["addresses"] = o.Addresses
+	if !IsNil(o.Netip) {
+		toSerialize["netip"] = o.Netip
 	}
-	if !IsNil(o.Nats) {
-		toSerialize["nats"] = o.Nats
+	if !IsNil(o.Firewall) {
+		toSerialize["firewall"] = o.Firewall
+	}
+	if !IsNil(o.Dnat) {
+		toSerialize["dnat"] = o.Dnat
 	}
 	if !IsNil(o.VpcPeerings) {
 		toSerialize["vpc_peerings"] = o.VpcPeerings

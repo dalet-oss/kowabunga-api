@@ -13,7 +13,7 @@ package server
 
 
 
-// Kgw - A Kowabunga Network Gateway is a network gateway used for your internet inbound and outbound traffic.
+// Kgw - A Kowabunga Network Gateway is a network gateway used for your Internet inbound and outbound traffic.
 type Kgw struct {
 
 	// The KGW (Kowabunga Network Gateway) ID (auto-generated).
@@ -25,11 +25,14 @@ type Kgw struct {
 	// The KGW (Kowabunga Network Gateway) description.
 	Description string `json:"description,omitempty"`
 
-	// The KGW (Kowabunga Network Gateway) list of per-zone addresses.
-	Addresses []KgwZoneSettings `json:"addresses,omitempty"`
+	// The KGW (Kowabunga Network Gateway) list of assigned virtual IPs per-zone addresses (read-only).
+	Netip []KgwNetIp `json:"netip,omitempty"`
 
-	// The KGW (Kowabunga Network Gateway) list of NAT entries.
-	Nats []KgwNat `json:"nats,omitempty"`
+	// The KGW (Kowabunga Network Gateway) firewall settings from/to public Internet).
+	Firewall []KgwFirewall `json:"firewall,omitempty"`
+
+	// The KGW (Kowabunga Network Gateway) list of NAT forwarding entries. KGW will forward public Internet traffic from all public virtual IPs to requested private subnet IP addresses.
+	Dnat []KgwdNatRule `json:"dnat,omitempty"`
 
 	// The KGW (Kowabunga Network Gateway) list of Kowabunga private VPC subnet peering entries.
 	VpcPeerings []KgwVpcPeering `json:"vpc_peerings,omitempty"`
@@ -37,13 +40,18 @@ type Kgw struct {
 
 // AssertKgwRequired checks if the required fields are not zero-ed
 func AssertKgwRequired(obj Kgw) error {
-	for _, el := range obj.Addresses {
-		if err := AssertKgwZoneSettingsRequired(el); err != nil {
+	for _, el := range obj.Netip {
+		if err := AssertKgwNetIpRequired(el); err != nil {
 			return err
 		}
 	}
-	for _, el := range obj.Nats {
-		if err := AssertKgwNatRequired(el); err != nil {
+	for _, el := range obj.Firewall {
+		if err := AssertKgwFirewallRequired(el); err != nil {
+			return err
+		}
+	}
+	for _, el := range obj.Dnat {
+		if err := AssertKgwdNatRuleRequired(el); err != nil {
 			return err
 		}
 	}

@@ -16,14 +16,20 @@ package server
 // KgwVpcPeering - A KGW internal VPC subnet peering.
 type KgwVpcPeering struct {
 
-	// Kowabunga Subnet ID to be peered with (IP addresses will be automatically assigned into)..
+	// Kowabunga Subnet ID to be peered with (subnet local IP addresses will be automatically assigned to KGW instances)..
 	Subnet string `json:"subnet"`
 
-	// Ports to be reachable from peered subnet. Accept Ranges. If specified, traffic will be filtered..
-	Ports string `json:"ports,omitempty"`
+	// The default VPC traffic forwarding policy.
+	Policy string `json:"policy,omitempty"`
 
-	// The KGW (Kowabunga Network Gateway) auto-assigned private IPs in peered subnet (read-only).
-	Ips []string `json:"ips,omitempty"`
+	// The firewall list of forwarding ingress rules from VPC peered subnet. ICMP traffic is always accepted. The specified ruleset will be explicitly accepted if drop is the default policy (useless otherwise).
+	Ingress []KgwVpcForwardRule `json:"ingress,omitempty"`
+
+	// The firewall list of forwarding egress rules to VPC peered subnet. ICMP traffic is always accepted. The specified ruleset will be explicitly accepted if drop is the default policy (useless otherwise).
+	Egress []KgwVpcForwardRule `json:"egress,omitempty"`
+
+	// The per-zone auto-assigned private IPs in peered subnet (read-only).
+	Netip []KgwVpcNetIpZone `json:"netip,omitempty"`
 }
 
 // AssertKgwVpcPeeringRequired checks if the required fields are not zero-ed
@@ -37,6 +43,21 @@ func AssertKgwVpcPeeringRequired(obj KgwVpcPeering) error {
 		}
 	}
 
+	for _, el := range obj.Ingress {
+		if err := AssertKgwVpcForwardRuleRequired(el); err != nil {
+			return err
+		}
+	}
+	for _, el := range obj.Egress {
+		if err := AssertKgwVpcForwardRuleRequired(el); err != nil {
+			return err
+		}
+	}
+	for _, el := range obj.Netip {
+		if err := AssertKgwVpcNetIpZoneRequired(el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

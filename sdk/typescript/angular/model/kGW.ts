@@ -10,12 +10,13 @@
  * Do not edit the class manually.
  */
 import { KGWVpcPeering } from './kGWVpcPeering';
-import { KGWZoneSettings } from './kGWZoneSettings';
-import { KGWNat } from './kGWNat';
+import { KGWDNatRule } from './kGWDNatRule';
+import { KGWNetIp } from './kGWNetIp';
+import { KGWFirewall } from './kGWFirewall';
 
 
 /**
- * A Kowabunga Network Gateway is a network gateway used for your internet inbound and outbound traffic.
+ * A Kowabunga Network Gateway is a network gateway used for your Internet inbound and outbound traffic.
  */
 export interface KGW { 
     /**
@@ -31,13 +32,17 @@ export interface KGW {
      */
     description?: string;
     /**
-     * The KGW (Kowabunga Network Gateway) list of per-zone addresses.
+     * The KGW (Kowabunga Network Gateway) list of assigned virtual IPs per-zone addresses (read-only).
      */
-    addresses?: Array<KGWZoneSettings>;
+    netip?: Array<KGWNetIp>;
     /**
-     * The KGW (Kowabunga Network Gateway) list of NAT entries.
+     * The KGW (Kowabunga Network Gateway) firewall settings from/to public Internet).
      */
-    nats?: Array<KGWNat>;
+    firewall?: Array<KGWFirewall>;
+    /**
+     * The KGW (Kowabunga Network Gateway) list of NAT forwarding entries. KGW will forward public Internet traffic from all public virtual IPs to requested private subnet IP addresses.
+     */
+    dnat?: Array<KGWDNatRule>;
     /**
      * The KGW (Kowabunga Network Gateway) list of Kowabunga private VPC subnet peering entries.
      */

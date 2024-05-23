@@ -3,9 +3,11 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **subnet** | **String** | Kowabunga Subnet ID to be peered with (IP addresses will be automatically assigned into).. | [default to null] |
-| **ports** | **String** | Ports to be reachable from peered subnet. Accept Ranges. If specified, traffic will be filtered.. | [optional] [default to null] |
-| **ips** | **List** | The KGW (Kowabunga Network Gateway) auto-assigned private IPs in peered subnet (read-only). | [optional] [default to null] |
+| **subnet** | **String** | Kowabunga Subnet ID to be peered with (subnet local IP addresses will be automatically assigned to KGW instances).. | [default to null] |
+| **policy** | **String** | The default VPC traffic forwarding policy. | [optional] [default to drop] |
+| **ingress** | [**List**](KGWVpcForwardRule.md) | The firewall list of forwarding ingress rules from VPC peered subnet. ICMP traffic is always accepted. The specified ruleset will be explicitly accepted if drop is the default policy (useless otherwise). | [optional] [default to null] |
+| **egress** | [**List**](KGWVpcForwardRule.md) | The firewall list of forwarding egress rules to VPC peered subnet. ICMP traffic is always accepted. The specified ruleset will be explicitly accepted if drop is the default policy (useless otherwise). | [optional] [default to null] |
+| **netip** | [**List**](KGWVpcNetIpZone.md) | The per-zone auto-assigned private IPs in peered subnet (read-only). | [optional] [default to null] |
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

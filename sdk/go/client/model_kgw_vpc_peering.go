@@ -22,12 +22,16 @@ var _ MappedNullable = &KGWVpcPeering{}
 
 // KGWVpcPeering A KGW internal VPC subnet peering.
 type KGWVpcPeering struct {
-	// Kowabunga Subnet ID to be peered with (IP addresses will be automatically assigned into)..
+	// Kowabunga Subnet ID to be peered with (subnet local IP addresses will be automatically assigned to KGW instances)..
 	Subnet string `json:"subnet"`
-	// Ports to be reachable from peered subnet. Accept Ranges. If specified, traffic will be filtered..
-	Ports *string `json:"ports,omitempty"`
-	// The KGW (Kowabunga Network Gateway) auto-assigned private IPs in peered subnet (read-only).
-	Ips []string `json:"ips,omitempty"`
+	// The default VPC traffic forwarding policy.
+	Policy *string `json:"policy,omitempty"`
+	// The firewall list of forwarding ingress rules from VPC peered subnet. ICMP traffic is always accepted. The specified ruleset will be explicitly accepted if drop is the default policy (useless otherwise).
+	Ingress []KGWVpcForwardRule `json:"ingress,omitempty"`
+	// The firewall list of forwarding egress rules to VPC peered subnet. ICMP traffic is always accepted. The specified ruleset will be explicitly accepted if drop is the default policy (useless otherwise).
+	Egress []KGWVpcForwardRule `json:"egress,omitempty"`
+	// The per-zone auto-assigned private IPs in peered subnet (read-only).
+	Netip []KGWVpcNetIpZone `json:"netip,omitempty"`
 }
 
 type _KGWVpcPeering KGWVpcPeering
@@ -39,6 +43,8 @@ type _KGWVpcPeering KGWVpcPeering
 func NewKGWVpcPeering(subnet string) *KGWVpcPeering {
 	this := KGWVpcPeering{}
 	this.Subnet = subnet
+	var policy string = "drop"
+	this.Policy = &policy
 	return &this
 }
 
@@ -47,6 +53,8 @@ func NewKGWVpcPeering(subnet string) *KGWVpcPeering {
 // but it doesn't guarantee that properties required by API are set
 func NewKGWVpcPeeringWithDefaults() *KGWVpcPeering {
 	this := KGWVpcPeering{}
+	var policy string = "drop"
+	this.Policy = &policy
 	return &this
 }
 
@@ -74,68 +82,132 @@ func (o *KGWVpcPeering) SetSubnet(v string) {
 	o.Subnet = v
 }
 
-// GetPorts returns the Ports field value if set, zero value otherwise.
-func (o *KGWVpcPeering) GetPorts() string {
-	if o == nil || IsNil(o.Ports) {
+// GetPolicy returns the Policy field value if set, zero value otherwise.
+func (o *KGWVpcPeering) GetPolicy() string {
+	if o == nil || IsNil(o.Policy) {
 		var ret string
 		return ret
 	}
-	return *o.Ports
+	return *o.Policy
 }
 
-// GetPortsOk returns a tuple with the Ports field value if set, nil otherwise
+// GetPolicyOk returns a tuple with the Policy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *KGWVpcPeering) GetPortsOk() (*string, bool) {
-	if o == nil || IsNil(o.Ports) {
+func (o *KGWVpcPeering) GetPolicyOk() (*string, bool) {
+	if o == nil || IsNil(o.Policy) {
 		return nil, false
 	}
-	return o.Ports, true
+	return o.Policy, true
 }
 
-// HasPorts returns a boolean if a field has been set.
-func (o *KGWVpcPeering) HasPorts() bool {
-	if o != nil && !IsNil(o.Ports) {
+// HasPolicy returns a boolean if a field has been set.
+func (o *KGWVpcPeering) HasPolicy() bool {
+	if o != nil && !IsNil(o.Policy) {
 		return true
 	}
 
 	return false
 }
 
-// SetPorts gets a reference to the given string and assigns it to the Ports field.
-func (o *KGWVpcPeering) SetPorts(v string) {
-	o.Ports = &v
+// SetPolicy gets a reference to the given string and assigns it to the Policy field.
+func (o *KGWVpcPeering) SetPolicy(v string) {
+	o.Policy = &v
 }
 
-// GetIps returns the Ips field value if set, zero value otherwise.
-func (o *KGWVpcPeering) GetIps() []string {
-	if o == nil || IsNil(o.Ips) {
-		var ret []string
+// GetIngress returns the Ingress field value if set, zero value otherwise.
+func (o *KGWVpcPeering) GetIngress() []KGWVpcForwardRule {
+	if o == nil || IsNil(o.Ingress) {
+		var ret []KGWVpcForwardRule
 		return ret
 	}
-	return o.Ips
+	return o.Ingress
 }
 
-// GetIpsOk returns a tuple with the Ips field value if set, nil otherwise
+// GetIngressOk returns a tuple with the Ingress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *KGWVpcPeering) GetIpsOk() ([]string, bool) {
-	if o == nil || IsNil(o.Ips) {
+func (o *KGWVpcPeering) GetIngressOk() ([]KGWVpcForwardRule, bool) {
+	if o == nil || IsNil(o.Ingress) {
 		return nil, false
 	}
-	return o.Ips, true
+	return o.Ingress, true
 }
 
-// HasIps returns a boolean if a field has been set.
-func (o *KGWVpcPeering) HasIps() bool {
-	if o != nil && !IsNil(o.Ips) {
+// HasIngress returns a boolean if a field has been set.
+func (o *KGWVpcPeering) HasIngress() bool {
+	if o != nil && !IsNil(o.Ingress) {
 		return true
 	}
 
 	return false
 }
 
-// SetIps gets a reference to the given []string and assigns it to the Ips field.
-func (o *KGWVpcPeering) SetIps(v []string) {
-	o.Ips = v
+// SetIngress gets a reference to the given []KGWVpcForwardRule and assigns it to the Ingress field.
+func (o *KGWVpcPeering) SetIngress(v []KGWVpcForwardRule) {
+	o.Ingress = v
+}
+
+// GetEgress returns the Egress field value if set, zero value otherwise.
+func (o *KGWVpcPeering) GetEgress() []KGWVpcForwardRule {
+	if o == nil || IsNil(o.Egress) {
+		var ret []KGWVpcForwardRule
+		return ret
+	}
+	return o.Egress
+}
+
+// GetEgressOk returns a tuple with the Egress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KGWVpcPeering) GetEgressOk() ([]KGWVpcForwardRule, bool) {
+	if o == nil || IsNil(o.Egress) {
+		return nil, false
+	}
+	return o.Egress, true
+}
+
+// HasEgress returns a boolean if a field has been set.
+func (o *KGWVpcPeering) HasEgress() bool {
+	if o != nil && !IsNil(o.Egress) {
+		return true
+	}
+
+	return false
+}
+
+// SetEgress gets a reference to the given []KGWVpcForwardRule and assigns it to the Egress field.
+func (o *KGWVpcPeering) SetEgress(v []KGWVpcForwardRule) {
+	o.Egress = v
+}
+
+// GetNetip returns the Netip field value if set, zero value otherwise.
+func (o *KGWVpcPeering) GetNetip() []KGWVpcNetIpZone {
+	if o == nil || IsNil(o.Netip) {
+		var ret []KGWVpcNetIpZone
+		return ret
+	}
+	return o.Netip
+}
+
+// GetNetipOk returns a tuple with the Netip field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KGWVpcPeering) GetNetipOk() ([]KGWVpcNetIpZone, bool) {
+	if o == nil || IsNil(o.Netip) {
+		return nil, false
+	}
+	return o.Netip, true
+}
+
+// HasNetip returns a boolean if a field has been set.
+func (o *KGWVpcPeering) HasNetip() bool {
+	if o != nil && !IsNil(o.Netip) {
+		return true
+	}
+
+	return false
+}
+
+// SetNetip gets a reference to the given []KGWVpcNetIpZone and assigns it to the Netip field.
+func (o *KGWVpcPeering) SetNetip(v []KGWVpcNetIpZone) {
+	o.Netip = v
 }
 
 func (o KGWVpcPeering) MarshalJSON() ([]byte, error) {
@@ -149,11 +221,17 @@ func (o KGWVpcPeering) MarshalJSON() ([]byte, error) {
 func (o KGWVpcPeering) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["subnet"] = o.Subnet
-	if !IsNil(o.Ports) {
-		toSerialize["ports"] = o.Ports
+	if !IsNil(o.Policy) {
+		toSerialize["policy"] = o.Policy
 	}
-	if !IsNil(o.Ips) {
-		toSerialize["ips"] = o.Ips
+	if !IsNil(o.Ingress) {
+		toSerialize["ingress"] = o.Ingress
+	}
+	if !IsNil(o.Egress) {
+		toSerialize["egress"] = o.Egress
+	}
+	if !IsNil(o.Netip) {
+		toSerialize["netip"] = o.Netip
 	}
 	return toSerialize, nil
 }
