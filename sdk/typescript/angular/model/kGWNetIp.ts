@@ -19,11 +19,11 @@ export interface KGWNetIp {
     /**
      * The KGW (Kowabunga Network Gateway) global public gateways virtual IP addresses (read-only).
      */
-    _public: string;
+    _public: Array<string>;
     /**
      * The KGW (Kowabunga Network Gateway) global private gateways virtual IP addresses (read-only).
      */
-    _private: string;
+    _private: Array<string>;
     /**
      * The KGW (Kowabunga Network Gateway) per-zone list of Kowabunga virtual IP addresses.
      */

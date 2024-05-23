@@ -9,8 +9,8 @@ components:
 {{ oas.ObjectArrayProperty('vpc_peerings', 'The ' + resources.kgw.desc + ' list of Kowabunga private VPC subnet peering entries', resources.kgw_vpc_peering.schema) }}
 
 {{ oas.Schema(resources.kgw_netip, ['private', 'public', 'zones']) }}
-{{ oas.StringProperty('public', 'The ' + resources.kgw.desc + ' global public gateways virtual IP addresses (read-only)') }}
-{{ oas.StringProperty('private', 'The ' + resources.kgw.desc + ' global private gateways virtual IP addresses (read-only)') }}
+{{ oas.StringArrayProperty('public', 'The ' + resources.kgw.desc + ' global public gateways virtual IP addresses (read-only)') }}
+{{ oas.StringArrayProperty('private', 'The ' + resources.kgw.desc + ' global private gateways virtual IP addresses (read-only)') }}
 {{ oas.ObjectArrayProperty('zones', 'The ' + resources.kgw.desc + ' per-zone list of Kowabunga virtual IP addresses', resources.kgw_netip_zone.schema) }}
 
 {{ oas.Schema(resources.kgw_netip_zone, ['zone', 'private', 'public']) }}

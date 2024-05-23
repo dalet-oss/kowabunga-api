@@ -23,9 +23,9 @@ var _ MappedNullable = &KGWNetIp{}
 // KGWNetIp A KGW Network IP settings.
 type KGWNetIp struct {
 	// The KGW (Kowabunga Network Gateway) global public gateways virtual IP addresses (read-only).
-	Public string `json:"public"`
+	Public []string `json:"public"`
 	// The KGW (Kowabunga Network Gateway) global private gateways virtual IP addresses (read-only).
-	Private string `json:"private"`
+	Private []string `json:"private"`
 	// The KGW (Kowabunga Network Gateway) per-zone list of Kowabunga virtual IP addresses.
 	Zones []KGWNetIpZone `json:"zones"`
 }
@@ -36,7 +36,7 @@ type _KGWNetIp KGWNetIp
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewKGWNetIp(public string, private string, zones []KGWNetIpZone) *KGWNetIp {
+func NewKGWNetIp(public []string, private []string, zones []KGWNetIpZone) *KGWNetIp {
 	this := KGWNetIp{}
 	this.Public = public
 	this.Private = private
@@ -53,9 +53,9 @@ func NewKGWNetIpWithDefaults() *KGWNetIp {
 }
 
 // GetPublic returns the Public field value
-func (o *KGWNetIp) GetPublic() string {
+func (o *KGWNetIp) GetPublic() []string {
 	if o == nil {
-		var ret string
+		var ret []string
 		return ret
 	}
 
@@ -64,22 +64,22 @@ func (o *KGWNetIp) GetPublic() string {
 
 // GetPublicOk returns a tuple with the Public field value
 // and a boolean to check if the value has been set.
-func (o *KGWNetIp) GetPublicOk() (*string, bool) {
+func (o *KGWNetIp) GetPublicOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Public, true
+	return o.Public, true
 }
 
 // SetPublic sets field value
-func (o *KGWNetIp) SetPublic(v string) {
+func (o *KGWNetIp) SetPublic(v []string) {
 	o.Public = v
 }
 
 // GetPrivate returns the Private field value
-func (o *KGWNetIp) GetPrivate() string {
+func (o *KGWNetIp) GetPrivate() []string {
 	if o == nil {
-		var ret string
+		var ret []string
 		return ret
 	}
 
@@ -88,15 +88,15 @@ func (o *KGWNetIp) GetPrivate() string {
 
 // GetPrivateOk returns a tuple with the Private field value
 // and a boolean to check if the value has been set.
-func (o *KGWNetIp) GetPrivateOk() (*string, bool) {
+func (o *KGWNetIp) GetPrivateOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Private, true
+	return o.Private, true
 }
 
 // SetPrivate sets field value
-func (o *KGWNetIp) SetPrivate(v string) {
+func (o *KGWNetIp) SetPrivate(v []string) {
 	o.Private = v
 }
 

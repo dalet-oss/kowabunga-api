@@ -17,10 +17,10 @@ package server
 type KgwNetIp struct {
 
 	// The KGW (Kowabunga Network Gateway) global public gateways virtual IP addresses (read-only).
-	Public string `json:"public"`
+	Public []string `json:"public"`
 
 	// The KGW (Kowabunga Network Gateway) global private gateways virtual IP addresses (read-only).
-	Private string `json:"private"`
+	Private []string `json:"private"`
 
 	// The KGW (Kowabunga Network Gateway) per-zone list of Kowabunga virtual IP addresses.
 	Zones []KgwNetIpZone `json:"zones"`

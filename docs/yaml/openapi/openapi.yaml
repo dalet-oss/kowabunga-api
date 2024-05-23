@@ -4813,8 +4813,12 @@ components:
         name: name
         description: description
         netip:
-          private: private
-          public: public
+          private:
+          - private
+          - private
+          public:
+          - public
+          - public
           zones:
           - private: private
             public: public
@@ -4888,8 +4892,12 @@ components:
     KGWNetIp:
       description: A KGW Network IP settings.
       example:
-        private: private
-        public: public
+        private:
+        - private
+        - private
+        public:
+        - public
+        - public
         zones:
         - private: private
           public: public
@@ -4901,11 +4909,15 @@ components:
         public:
           description: The KGW (Kowabunga Network Gateway) global public gateways
             virtual IP addresses (read-only).
-          type: string
+          items:
+            type: string
+          type: array
         private:
           description: The KGW (Kowabunga Network Gateway) global private gateways
             virtual IP addresses (read-only).
-          type: string
+          items:
+            type: string
+          type: array
         zones:
           description: The KGW (Kowabunga Network Gateway) per-zone list of Kowabunga
             virtual IP addresses.
