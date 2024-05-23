@@ -3,8 +3,8 @@
 components:
   schemas:
 {{ oas.SchemaBaseResource(resources.kgw) }}
-{{ oas.ObjectArrayProperty('netip', 'The ' + resources.kgw.desc + ' list of assigned virtual IPs per-zone addresses (read-only)', resources.kgw_netip.schema) }}
-{{ oas.ObjectArrayProperty('firewall', 'The ' + resources.kgw.desc + ' firewall settings from/to public Internet)', resources.kgw_firewall.schema) }}
+{{ oas.ObjectProperty('netip', 'The ' + resources.kgw.desc + ' list of assigned virtual IPs per-zone addresses (read-only)', resources.kgw_netip.schema) }}
+{{ oas.ObjectProperty('firewall', 'The ' + resources.kgw.desc + ' firewall settings from/to public Internet)', resources.kgw_firewall.schema) }}
 {{ oas.ObjectArrayProperty('dnat', 'The ' + resources.kgw.desc + ' list of NAT forwarding entries. KGW will forward public Internet traffic from all public virtual IPs to requested private subnet IP addresses', resources.kgw_dnat_rule.schema) }}
 {{ oas.ObjectArrayProperty('vpc_peerings', 'The ' + resources.kgw.desc + ' list of Kowabunga private VPC subnet peering entries', resources.kgw_vpc_peering.schema) }}
 

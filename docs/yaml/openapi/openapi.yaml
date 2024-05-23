@@ -4795,22 +4795,7 @@ components:
           destination: destination
           ports: ports
         firewall:
-        - ingress:
-          - protocol: tcp
-            source: 0.0.0.0/0
-            ports: ports
-          - protocol: tcp
-            source: 0.0.0.0/0
-            ports: ports
-          egress_policy: accept
-          egress:
-          - protocol: tcp
-            destination: 0.0.0.0/0
-            ports: ports
-          - protocol: tcp
-            destination: 0.0.0.0/0
-            ports: ports
-        - ingress:
+          ingress:
           - protocol: tcp
             source: 0.0.0.0/0
             ports: ports
@@ -4828,16 +4813,7 @@ components:
         name: name
         description: description
         netip:
-        - private: private
-          public: public
-          zones:
-          - private: private
-            public: public
-            zone: zone
-          - private: private
-            public: public
-            zone: zone
-        - private: private
+          private: private
           public: public
           zones:
           - private: private
@@ -4893,17 +4869,9 @@ components:
           description: The KGW (Kowabunga Network Gateway) description.
           type: string
         netip:
-          description: The KGW (Kowabunga Network Gateway) list of assigned virtual
-            IPs per-zone addresses (read-only).
-          items:
-            $ref: '#/components/schemas/KGWNetIp'
-          type: array
+          $ref: '#/components/schemas/KGWNetIp'
         firewall:
-          description: The KGW (Kowabunga Network Gateway) firewall settings from/to
-            public Internet).
-          items:
-            $ref: '#/components/schemas/KGWFirewall'
-          type: array
+          $ref: '#/components/schemas/KGWFirewall'
         dnat:
           description: The KGW (Kowabunga Network Gateway) list of NAT forwarding
             entries. KGW will forward public Internet traffic from all public virtual

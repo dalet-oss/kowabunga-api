@@ -26,10 +26,10 @@ type Kgw struct {
 	Description string `json:"description,omitempty"`
 
 	// The KGW (Kowabunga Network Gateway) list of assigned virtual IPs per-zone addresses (read-only).
-	Netip []KgwNetIp `json:"netip,omitempty"`
+	Netip KgwNetIp `json:"netip,omitempty"`
 
 	// The KGW (Kowabunga Network Gateway) firewall settings from/to public Internet).
-	Firewall []KgwFirewall `json:"firewall,omitempty"`
+	Firewall KgwFirewall `json:"firewall,omitempty"`
 
 	// The KGW (Kowabunga Network Gateway) list of NAT forwarding entries. KGW will forward public Internet traffic from all public virtual IPs to requested private subnet IP addresses.
 	Dnat []KgwdNatRule `json:"dnat,omitempty"`
@@ -40,16 +40,6 @@ type Kgw struct {
 
 // AssertKgwRequired checks if the required fields are not zero-ed
 func AssertKgwRequired(obj Kgw) error {
-	for _, el := range obj.Netip {
-		if err := AssertKgwNetIpRequired(el); err != nil {
-			return err
-		}
-	}
-	for _, el := range obj.Firewall {
-		if err := AssertKgwFirewallRequired(el); err != nil {
-			return err
-		}
-	}
 	for _, el := range obj.Dnat {
 		if err := AssertKgwdNatRuleRequired(el); err != nil {
 			return err

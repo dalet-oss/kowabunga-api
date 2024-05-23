@@ -27,9 +27,9 @@ type KGW struct {
 	// The KGW (Kowabunga Network Gateway) description.
 	Description *string `json:"description,omitempty"`
 	// The KGW (Kowabunga Network Gateway) list of assigned virtual IPs per-zone addresses (read-only).
-	Netip []KGWNetIp `json:"netip,omitempty"`
+	Netip KGWNetIp `json:"netip,omitempty"`
 	// The KGW (Kowabunga Network Gateway) firewall settings from/to public Internet).
-	Firewall []KGWFirewall `json:"firewall,omitempty"`
+	Firewall KGWFirewall `json:"firewall,omitempty"`
 	// The KGW (Kowabunga Network Gateway) list of NAT forwarding entries. KGW will forward public Internet traffic from all public virtual IPs to requested private subnet IP addresses.
 	Dnat []KGWDNatRule `json:"dnat,omitempty"`
 	// The KGW (Kowabunga Network Gateway) list of Kowabunga private VPC subnet peering entries.
@@ -150,9 +150,9 @@ func (o *KGW) SetDescription(v string) {
 }
 
 // GetNetip returns the Netip field value if set, zero value otherwise.
-func (o *KGW) GetNetip() []KGWNetIp {
+func (o *KGW) GetNetip() KGWNetIp {
 	if o == nil || IsNil(o.Netip) {
-		var ret []KGWNetIp
+		var ret KGWNetIp
 		return ret
 	}
 	return o.Netip
@@ -160,9 +160,9 @@ func (o *KGW) GetNetip() []KGWNetIp {
 
 // GetNetipOk returns a tuple with the Netip field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *KGW) GetNetipOk() ([]KGWNetIp, bool) {
+func (o *KGW) GetNetipOk() (KGWNetIp, bool) {
 	if o == nil || IsNil(o.Netip) {
-		return nil, false
+		return KGWNetIp{}, false
 	}
 	return o.Netip, true
 }
@@ -176,15 +176,15 @@ func (o *KGW) HasNetip() bool {
 	return false
 }
 
-// SetNetip gets a reference to the given []KGWNetIp and assigns it to the Netip field.
-func (o *KGW) SetNetip(v []KGWNetIp) {
+// SetNetip gets a reference to the given KGWNetIp and assigns it to the Netip field.
+func (o *KGW) SetNetip(v KGWNetIp) {
 	o.Netip = v
 }
 
 // GetFirewall returns the Firewall field value if set, zero value otherwise.
-func (o *KGW) GetFirewall() []KGWFirewall {
+func (o *KGW) GetFirewall() KGWFirewall {
 	if o == nil || IsNil(o.Firewall) {
-		var ret []KGWFirewall
+		var ret KGWFirewall
 		return ret
 	}
 	return o.Firewall
@@ -192,9 +192,9 @@ func (o *KGW) GetFirewall() []KGWFirewall {
 
 // GetFirewallOk returns a tuple with the Firewall field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *KGW) GetFirewallOk() ([]KGWFirewall, bool) {
+func (o *KGW) GetFirewallOk() (KGWFirewall, bool) {
 	if o == nil || IsNil(o.Firewall) {
-		return nil, false
+		return KGWFirewall{}, false
 	}
 	return o.Firewall, true
 }
@@ -208,8 +208,8 @@ func (o *KGW) HasFirewall() bool {
 	return false
 }
 
-// SetFirewall gets a reference to the given []KGWFirewall and assigns it to the Firewall field.
-func (o *KGW) SetFirewall(v []KGWFirewall) {
+// SetFirewall gets a reference to the given KGWFirewall and assigns it to the Firewall field.
+func (o *KGW) SetFirewall(v KGWFirewall) {
 	o.Firewall = v
 }
 

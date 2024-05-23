@@ -34,11 +34,11 @@ export interface KGW {
     /**
      * The KGW (Kowabunga Network Gateway) list of assigned virtual IPs per-zone addresses (read-only).
      */
-    netip?: Array<KGWNetIp>;
+    netip?: KGWNetIp;
     /**
      * The KGW (Kowabunga Network Gateway) firewall settings from/to public Internet).
      */
-    firewall?: Array<KGWFirewall>;
+    firewall?: KGWFirewall;
     /**
      * The KGW (Kowabunga Network Gateway) list of NAT forwarding entries. KGW will forward public Internet traffic from all public virtual IPs to requested private subnet IP addresses.
      */
