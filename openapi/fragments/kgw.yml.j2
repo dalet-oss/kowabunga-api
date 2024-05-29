@@ -8,17 +8,17 @@ components:
 {{ oas.ObjectArrayProperty('dnat', 'The ' + resources.kgw.desc + ' list of NAT forwarding entries. KGW will forward public Internet traffic from all public virtual IPs to requested private subnet IP addresses', resources.kgw_dnat_rule.schema) }}
 {{ oas.ObjectArrayProperty('vpc_peerings', 'The ' + resources.kgw.desc + ' list of Kowabunga private VPC subnet peering entries', resources.kgw_vpc_peering.schema) }}
 
-{{ oas.Schema(resources.kgw_netip, ['private', 'public', 'zones']) }}
+{{ oas.Schema(resources.kgw_netip, ['public', 'private', 'zones']) }}
 {{ oas.StringArrayProperty('public', 'The ' + resources.kgw.desc + ' global public gateways virtual IP addresses (read-only)') }}
 {{ oas.StringArrayProperty('private', 'The ' + resources.kgw.desc + ' global private gateways virtual IP addresses (read-only)') }}
 {{ oas.ObjectArrayProperty('zones', 'The ' + resources.kgw.desc + ' per-zone list of Kowabunga virtual IP addresses', resources.kgw_netip_zone.schema) }}
 
-{{ oas.Schema(resources.kgw_netip_zone, ['zone', 'private', 'public']) }}
+{{ oas.Schema(resources.kgw_netip_zone, ['zone', 'public', 'private']) }}
 {{ oas.StringProperty('zone', 'The ' + resources.kgw.desc + ' zone name (read-only)') }}
 {{ oas.StringProperty('public', 'The ' + resources.kgw.desc + ' zone gateway public virtual IP (read-only)') }}
 {{ oas.StringProperty('private', 'The ' + resources.kgw.desc + ' zone gateway private virtual IP (read-only)') }}
 
-{{ oas.Schema(resources.kgw_firewall, ['zone', 'private', 'public']) }}
+{{ oas.Schema(resources.kgw_firewall) }}
 {{ oas.ObjectArrayProperty('ingress', 'The ' + resources.kgw.desc + ' public firewall list of ingress rules. KGW default policy is to drop all incoming traffic, including ICMP. Specified ruleset will be explicitly accepted', resources.kgw_firewall_ingress_rule.schema) }}
 {{ oas.StringProperty('egress_policy', 'The default public traffic egress policy', default='accept', values=['accept', 'drop']) }}
 {{ oas.ObjectArrayProperty('egress', 'The ' + resources.kgw.desc + ' public firewall list of egress rules. KGW default policy is to accept all outgoing traffic, including ICMP. Specified ruleset will be explicitly dropped if egress_policy is set to accept, and explicitly accepted if egress policy is set to drop.', resources.kgw_firewall_egress_rule.schema) }}
