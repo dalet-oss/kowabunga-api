@@ -17,14 +17,24 @@ package server
 type Metadata struct {
 
 	// The metadata key.
-	Key string `json:"key,omitempty"`
+	Key string `json:"key"`
 
 	// The metadata value.
-	Value string `json:"value,omitempty"`
+	Value string `json:"value"`
 }
 
 // AssertMetadataRequired checks if the required fields are not zero-ed
 func AssertMetadataRequired(obj Metadata) error {
+	elements := map[string]interface{}{
+		"key": obj.Key,
+		"value": obj.Value,
+	}
+	for name, el := range elements {
+		if isZero := IsZeroValue(el); isZero {
+			return &RequiredError{Field: name}
+		}
+	}
+
 	return nil
 }
 

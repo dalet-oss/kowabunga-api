@@ -45,7 +45,7 @@ components:
 {{ oas.ObjectArrayProperty('egress', 'The firewall list of forwarding egress rules to VPC peered subnet. ICMP traffic is always accepted. The specified ruleset will be explicitly accepted if drop is the default policy (useless otherwise)', resources.kgw_vpc_forward_rule.schema) }}
 {{ oas.ObjectArrayProperty('netip', 'The per-zone auto-assigned private IPs in peered subnet (read-only)', resources.kgw_vpc_netip_zone.schema) }}
 
-{{ oas.Schema(resources.kgw_vpc_forward_rule, ['destination', 'ports']) }}
+{{ oas.Schema(resources.kgw_vpc_forward_rule, ['ports']) }}
 {{ oas.StringProperty('protocol', 'The transport layer protocol to forward public traffic to', default='tcp', values=['tcp', 'udp']) }}
 {{ oas.StringProperty('ports', 'The port (or list of ports) to forward public traffic from. Ranges are accepted. Format is a-b,c-d (e.g. 443; 22,80,443; 80,443,3000-3005)') }}
 

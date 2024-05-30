@@ -2,6 +2,6 @@
 
 components:
   schemas:
-{{ oas.Schema(resources.metadata) }}
+{{ oas.Schema(resources.metadata, ['key', 'value']) }}
 {{ oas.StringProperty('key', 'The metadata key') }}
 {{ oas.StringProperty('value', 'The metadata value') }}

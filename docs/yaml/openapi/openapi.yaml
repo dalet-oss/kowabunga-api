@@ -5165,6 +5165,9 @@ components:
         value:
           description: The metadata value.
           type: string
+      required:
+      - key
+      - value
     NetGW:
       description: A Iris network gateway.
       example:
