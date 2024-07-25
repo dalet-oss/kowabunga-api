@@ -106,6 +106,19 @@ resources:
   kgw_vpc_netip_zone:
     desc: KGW VPC Network IP zone settings
     schema: KGWVpcNetIpZone
+  konvey:
+    tag: konvey
+    desc: Konvey (Kowabunga Network Load-Balancer)
+    extended_desc: Kowabunga Konvey is a layer-4 network load-balancer used to distribute service requests to associated backend instances
+    schema: Konvey
+    paramId: konveyId
+    paramSchema: KonveyID
+  konvey_endpoint:
+    desc: Konvey Endpoint Service settings
+    schema: KonveyEndpoint
+  konvey_backends:
+    desc: Konvey Backends settings
+    schema: KonveyBackends
   metadata:
     desc: key/value metadata
     schema: Metadata

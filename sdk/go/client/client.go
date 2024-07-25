@@ -66,6 +66,8 @@ type APIClient struct {
 
 	KgwAPI *KgwAPIService
 
+	KonveyAPI *KonveyAPIService
+
 	NetgwAPI *NetgwAPIService
 
 	NfsAPI *NfsAPIService
@@ -117,6 +119,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.KceAPI = (*KceAPIService)(&c.common)
 	c.KfsAPI = (*KfsAPIService)(&c.common)
 	c.KgwAPI = (*KgwAPIService)(&c.common)
+	c.KonveyAPI = (*KonveyAPIService)(&c.common)
 	c.NetgwAPI = (*NetgwAPIService)(&c.common)
 	c.NfsAPI = (*NfsAPIService)(&c.common)
 	c.PoolAPI = (*PoolAPIService)(&c.common)

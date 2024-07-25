@@ -111,6 +111,15 @@ type KgwAPIRouter interface {
 	ReadKGW(http.ResponseWriter, *http.Request)
 	UpdateKGW(http.ResponseWriter, *http.Request)
 }
+// KonveyAPIRouter defines the required methods for binding the api requests to a responses for the KonveyAPI
+// The KonveyAPIRouter implementation should parse necessary information from the http request,
+// pass the data to a KonveyAPIServicer to perform the required actions, then write the service results to the http response.
+type KonveyAPIRouter interface { 
+	DeleteKonvey(http.ResponseWriter, *http.Request)
+	ListKonveys(http.ResponseWriter, *http.Request)
+	ReadKonvey(http.ResponseWriter, *http.Request)
+	UpdateKonvey(http.ResponseWriter, *http.Request)
+}
 // NetgwAPIRouter defines the required methods for binding the api requests to a responses for the NetgwAPI
 // The NetgwAPIRouter implementation should parse necessary information from the http request,
 // pass the data to a NetgwAPIServicer to perform the required actions, then write the service results to the http response.
@@ -151,16 +160,20 @@ type ProjectAPIRouter interface {
 	CreateProjectDnsRecord(http.ResponseWriter, *http.Request)
 	CreateProjectRegionKFS(http.ResponseWriter, *http.Request)
 	CreateProjectRegionKGW(http.ResponseWriter, *http.Request)
+	CreateProjectRegionKonvey(http.ResponseWriter, *http.Request)
 	CreateProjectRegionVolume(http.ResponseWriter, *http.Request)
 	CreateProjectZoneInstance(http.ResponseWriter, *http.Request)
 	CreateProjectZoneKCE(http.ResponseWriter, *http.Request)
+	CreateProjectZoneKonvey(http.ResponseWriter, *http.Request)
 	DeleteProject(http.ResponseWriter, *http.Request)
 	ListProjectDnsRecords(http.ResponseWriter, *http.Request)
 	ListProjectRegionKFSs(http.ResponseWriter, *http.Request)
 	ListProjectRegionKGWs(http.ResponseWriter, *http.Request)
+	ListProjectRegionKonveys(http.ResponseWriter, *http.Request)
 	ListProjectRegionVolumes(http.ResponseWriter, *http.Request)
 	ListProjectZoneInstances(http.ResponseWriter, *http.Request)
 	ListProjectZoneKCEs(http.ResponseWriter, *http.Request)
+	ListProjectZoneKonveys(http.ResponseWriter, *http.Request)
 	ListProjects(http.ResponseWriter, *http.Request)
 	ReadProject(http.ResponseWriter, *http.Request)
 	ReadProjectCost(http.ResponseWriter, *http.Request)
@@ -392,6 +405,18 @@ type KgwAPIServicer interface {
 }
 
 
+// KonveyAPIServicer defines the api actions for the KonveyAPI service
+// This interface intended to stay up to date with the openapi yaml used to generate it,
+// while the service implementation can be ignored with the .openapi-generator-ignore file
+// and updated with the logic required for the API.
+type KonveyAPIServicer interface { 
+	DeleteKonvey(context.Context, string) (ImplResponse, error)
+	ListKonveys(context.Context) (ImplResponse, error)
+	ReadKonvey(context.Context, string) (ImplResponse, error)
+	UpdateKonvey(context.Context, string, Konvey) (ImplResponse, error)
+}
+
+
 // NetgwAPIServicer defines the api actions for the NetgwAPI service
 // This interface intended to stay up to date with the openapi yaml used to generate it,
 // while the service implementation can be ignored with the .openapi-generator-ignore file
@@ -442,16 +467,20 @@ type ProjectAPIServicer interface {
 	CreateProjectDnsRecord(context.Context, string, DnsRecord) (ImplResponse, error)
 	CreateProjectRegionKFS(context.Context, string, string, Kfs, string) (ImplResponse, error)
 	CreateProjectRegionKGW(context.Context, string, string, Kgw) (ImplResponse, error)
+	CreateProjectRegionKonvey(context.Context, string, string, Konvey) (ImplResponse, error)
 	CreateProjectRegionVolume(context.Context, string, string, Volume, string, string) (ImplResponse, error)
 	CreateProjectZoneInstance(context.Context, string, string, Instance) (ImplResponse, error)
 	CreateProjectZoneKCE(context.Context, string, string, Kce, string, string, bool) (ImplResponse, error)
+	CreateProjectZoneKonvey(context.Context, string, string, Konvey) (ImplResponse, error)
 	DeleteProject(context.Context, string) (ImplResponse, error)
 	ListProjectDnsRecords(context.Context, string) (ImplResponse, error)
 	ListProjectRegionKFSs(context.Context, string, string, string) (ImplResponse, error)
 	ListProjectRegionKGWs(context.Context, string, string) (ImplResponse, error)
+	ListProjectRegionKonveys(context.Context, string, string) (ImplResponse, error)
 	ListProjectRegionVolumes(context.Context, string, string) (ImplResponse, error)
 	ListProjectZoneInstances(context.Context, string, string) (ImplResponse, error)
 	ListProjectZoneKCEs(context.Context, string, string) (ImplResponse, error)
+	ListProjectZoneKonveys(context.Context, string, string) (ImplResponse, error)
 	ListProjects(context.Context, int32) (ImplResponse, error)
 	ReadProject(context.Context, string) (ImplResponse, error)
 	ReadProjectCost(context.Context, string) (ImplResponse, error)

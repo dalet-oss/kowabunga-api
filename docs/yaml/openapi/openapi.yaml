@@ -34,6 +34,8 @@ tags:
   name: kfs
 - description: Everything about KGW (Kowabunga Network Gateway)
   name: kgw
+- description: Everything about Konvey (Kowabunga Network Load-Balancer)
+  name: konvey
 - description: Everything about Iris network gateway
   name: netgw
 - description: Everything about project
@@ -1387,6 +1389,101 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - kgw
+  /konvey:
+    get:
+      description: Returns the IDs of Konvey (Kowabunga Network Load-Balancer) objects.
+      operationId: ListKonveys
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of Konvey (Kowabunga Network Load-Balancer)
+            IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - konvey
+  /konvey/{konveyId}:
+    delete:
+      description: Deletes an existing Konvey (Kowabunga Network Load-Balancer).
+      operationId: DeleteKonvey
+      parameters:
+      - $ref: '#/components/parameters/KonveyID'
+      responses:
+        "200":
+          description: The Konvey (Kowabunga Network Load-Balancer) has been successfully
+            removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - konvey
+    get:
+      description: Returns a Konvey (Kowabunga Network Load-Balancer).
+      operationId: ReadKonvey
+      parameters:
+      - $ref: '#/components/parameters/KonveyID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Konvey'
+          description: Returns the Konvey (Kowabunga Network Load-Balancer) object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - konvey
+    parameters:
+    - $ref: '#/components/parameters/KonveyID'
+    put:
+      description: Updates a Konvey (Kowabunga Network Load-Balancer) configuration.
+      operationId: UpdateKonvey
+      parameters:
+      - $ref: '#/components/parameters/KonveyID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Konvey'
+        description: Konvey payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Konvey'
+          description: Returns the Konvey (Kowabunga Network Load-Balancer) object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - konvey
   /netgw:
     get:
       description: Returns the IDs of Iris network gateway objects.
@@ -2073,6 +2170,148 @@ paths:
       - project
       - region
       - kgw
+    parameters:
+    - $ref: '#/components/parameters/ProjectID'
+    - $ref: '#/components/parameters/RegionID'
+  /project/{projectId}/zone/{zoneId}/konvey:
+    parameters:
+    - $ref: '#/components/parameters/ProjectID'
+    - $ref: '#/components/parameters/ZoneID'
+    post:
+      description: Creates a new Konvey (Kowabunga Network Load-Balancer).
+      operationId: CreateProjectZoneKonvey
+      parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/ZoneID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Konvey'
+        description: Konvey payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Konvey'
+          description: Returns the newly created Konvey (Kowabunga Network Load-Balancer)
+            object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - project
+      - zone
+      - konvey
+  /project/{projectId}/zone/{zoneId}/konveys:
+    get:
+      description: Returns the IDs of Konvey (Kowabunga Network Load-Balancer) objects.
+      operationId: ListProjectZoneKonveys
+      parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/ZoneID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of Konvey (Kowabunga Network Load-Balancer)
+            IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - project
+      - zone
+      - konvey
+    parameters:
+    - $ref: '#/components/parameters/ProjectID'
+    - $ref: '#/components/parameters/ZoneID'
+  /project/{projectId}/region/{regionId}/konvey:
+    parameters:
+    - $ref: '#/components/parameters/ProjectID'
+    - $ref: '#/components/parameters/RegionID'
+    post:
+      description: Creates a new Konvey (Kowabunga Network Load-Balancer).
+      operationId: CreateProjectRegionKonvey
+      parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/RegionID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Konvey'
+        description: Konvey payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Konvey'
+          description: Returns the newly created Konvey (Kowabunga Network Load-Balancer)
+            object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - project
+      - region
+      - konvey
+  /project/{projectId}/region/{regionId}/konveys:
+    get:
+      description: Returns the IDs of Konvey (Kowabunga Network Load-Balancer) objects.
+      operationId: ListProjectRegionKonveys
+      parameters:
+      - $ref: '#/components/parameters/ProjectID'
+      - $ref: '#/components/parameters/RegionID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of Konvey (Kowabunga Network Load-Balancer)
+            IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - project
+      - region
+      - konvey
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/RegionID'
@@ -4003,6 +4242,15 @@ components:
       schema:
         type: string
       style: simple
+    KonveyID:
+      description: The ID of the Konvey (Kowabunga Network Load-Balancer).
+      explode: false
+      in: path
+      name: konveyId
+      required: true
+      schema:
+        type: string
+      style: simple
     NetgwID:
       description: The ID of the Iris network gateway.
       explode: false
@@ -5153,6 +5401,114 @@ components:
       required:
       - private
       - zone
+    Konvey:
+      description: A Kowabunga Konvey is a layer-4 network load-balancer used to distribute
+        service requests to associated backend instances.
+      example:
+        endpoints:
+        - protocol: tcp
+          port: 0
+          name: name
+          backends:
+            port: 6
+            hosts:
+            - hosts
+            - hosts
+        - protocol: tcp
+          port: 0
+          name: name
+          backends:
+            port: 6
+            hosts:
+            - hosts
+            - hosts
+        failover: true
+        name: name
+        description: description
+        id: id
+        vip: vip
+      properties:
+        id:
+          description: The Konvey (Kowabunga Network Load-Balancer) ID (auto-generated).
+          type: string
+        name:
+          description: The Konvey (Kowabunga Network Load-Balancer) name.
+          type: string
+        description:
+          description: The Konvey (Kowabunga Network Load-Balancer) description.
+          type: string
+        vip:
+          description: The Konvey (Kowabunga Network Load-Balancer) assigned private
+            virtual IP address (read-only).
+          type: string
+        failover:
+          default: true
+          description: Whether Konvey (Kowabunga Network Load-Balancer) must be deployed
+            in a highly-available replicated state to support service failover.
+          type: boolean
+        endpoints:
+          description: The Konvey (Kowabunga Network Load-Balancer) list of load-balanced
+            endpoints.
+          items:
+            $ref: '#/components/schemas/KonveyEndpoint'
+          type: array
+      required:
+      - endpoints
+    KonveyEndpoint:
+      description: A Konvey Endpoint Service settings.
+      example:
+        protocol: tcp
+        port: 0
+        name: name
+        backends:
+          port: 6
+          hosts:
+          - hosts
+          - hosts
+      properties:
+        name:
+          description: The Konvey (Kowabunga Network Load-Balancer) endpoint name.
+          type: string
+        port:
+          description: The port to be exposed.
+          format: int64
+          type: integer
+        protocol:
+          default: tcp
+          description: The transport layer protocol to be exposed.
+          enum:
+          - tcp
+          - udp
+          type: string
+        backends:
+          $ref: '#/components/schemas/KonveyBackends'
+      required:
+      - backends
+      - name
+      - port
+      - protocol
+    KonveyBackends:
+      description: A Konvey Backends settings.
+      example:
+        port: 6
+        hosts:
+        - hosts
+        - hosts
+      properties:
+        hosts:
+          description: The Konvey (Kowabunga Network Load-Balancer) endpoint list
+            of load-balanced backend hosts.
+          items:
+            type: string
+          type: array
+        port:
+          description: The Konvey (Kowabunga Network Load-Balancer) endpoint backend
+            service port.
+          format: int64
+          type: integer
+      required:
+      - hosts
+      - port
     Metadata:
       description: A key/value metadata.
       example:

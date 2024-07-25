@@ -71,6 +71,11 @@ func (c *ProjectAPIController) Routes() Routes {
 			"/api/v1/project/{projectId}/region/{regionId}/kgw",
 			c.CreateProjectRegionKGW,
 		},
+		"CreateProjectRegionKonvey": Route{
+			strings.ToUpper("Post"),
+			"/api/v1/project/{projectId}/region/{regionId}/konvey",
+			c.CreateProjectRegionKonvey,
+		},
 		"CreateProjectRegionVolume": Route{
 			strings.ToUpper("Post"),
 			"/api/v1/project/{projectId}/region/{regionId}/volume",
@@ -85,6 +90,11 @@ func (c *ProjectAPIController) Routes() Routes {
 			strings.ToUpper("Post"),
 			"/api/v1/project/{projectId}/zone/{zoneId}/kce",
 			c.CreateProjectZoneKCE,
+		},
+		"CreateProjectZoneKonvey": Route{
+			strings.ToUpper("Post"),
+			"/api/v1/project/{projectId}/zone/{zoneId}/konvey",
+			c.CreateProjectZoneKonvey,
 		},
 		"DeleteProject": Route{
 			strings.ToUpper("Delete"),
@@ -106,6 +116,11 @@ func (c *ProjectAPIController) Routes() Routes {
 			"/api/v1/project/{projectId}/region/{regionId}/kgws",
 			c.ListProjectRegionKGWs,
 		},
+		"ListProjectRegionKonveys": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/project/{projectId}/region/{regionId}/konveys",
+			c.ListProjectRegionKonveys,
+		},
 		"ListProjectRegionVolumes": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/project/{projectId}/region/{regionId}/volumes",
@@ -120,6 +135,11 @@ func (c *ProjectAPIController) Routes() Routes {
 			strings.ToUpper("Get"),
 			"/api/v1/project/{projectId}/zone/{zoneId}/kces",
 			c.ListProjectZoneKCEs,
+		},
+		"ListProjectZoneKonveys": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/project/{projectId}/zone/{zoneId}/konveys",
+			c.ListProjectZoneKonveys,
 		},
 		"ListProjects": Route{
 			strings.ToUpper("Get"),
@@ -316,6 +336,44 @@ func (c *ProjectAPIController) CreateProjectRegionKGW(w http.ResponseWriter, r *
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
+// CreateProjectRegionKonvey - 
+func (c *ProjectAPIController) CreateProjectRegionKonvey(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	projectIdParam := params["projectId"]
+	if projectIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
+		return
+	}
+	regionIdParam := params["regionId"]
+	if regionIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
+		return
+	}
+	konveyParam := Konvey{}
+	d := json.NewDecoder(r.Body)
+	d.DisallowUnknownFields()
+	if err := d.Decode(&konveyParam); err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	if err := AssertKonveyRequired(konveyParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	if err := AssertKonveyConstraints(konveyParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	result, err := c.service.CreateProjectRegionKonvey(r.Context(), projectIdParam, regionIdParam, konveyParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
 // CreateProjectRegionVolume - 
 func (c *ProjectAPIController) CreateProjectRegionVolume(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -482,6 +540,44 @@ func (c *ProjectAPIController) CreateProjectZoneKCE(w http.ResponseWriter, r *ht
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
+// CreateProjectZoneKonvey - 
+func (c *ProjectAPIController) CreateProjectZoneKonvey(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	projectIdParam := params["projectId"]
+	if projectIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
+		return
+	}
+	zoneIdParam := params["zoneId"]
+	if zoneIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
+		return
+	}
+	konveyParam := Konvey{}
+	d := json.NewDecoder(r.Body)
+	d.DisallowUnknownFields()
+	if err := d.Decode(&konveyParam); err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	if err := AssertKonveyRequired(konveyParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	if err := AssertKonveyConstraints(konveyParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	result, err := c.service.CreateProjectZoneKonvey(r.Context(), projectIdParam, zoneIdParam, konveyParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
 // DeleteProject - 
 func (c *ProjectAPIController) DeleteProject(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -576,6 +672,29 @@ func (c *ProjectAPIController) ListProjectRegionKGWs(w http.ResponseWriter, r *h
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
+// ListProjectRegionKonveys - 
+func (c *ProjectAPIController) ListProjectRegionKonveys(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	projectIdParam := params["projectId"]
+	if projectIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
+		return
+	}
+	regionIdParam := params["regionId"]
+	if regionIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
+		return
+	}
+	result, err := c.service.ListProjectRegionKonveys(r.Context(), projectIdParam, regionIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
 // ListProjectRegionVolumes - 
 func (c *ProjectAPIController) ListProjectRegionVolumes(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -636,6 +755,29 @@ func (c *ProjectAPIController) ListProjectZoneKCEs(w http.ResponseWriter, r *htt
 		return
 	}
 	result, err := c.service.ListProjectZoneKCEs(r.Context(), projectIdParam, zoneIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListProjectZoneKonveys - 
+func (c *ProjectAPIController) ListProjectZoneKonveys(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	projectIdParam := params["projectId"]
+	if projectIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
+		return
+	}
+	zoneIdParam := params["zoneId"]
+	if zoneIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
+		return
+	}
+	result, err := c.service.ListProjectZoneKonveys(r.Context(), projectIdParam, zoneIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

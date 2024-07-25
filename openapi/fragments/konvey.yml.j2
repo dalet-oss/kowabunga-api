@@ -1,0 +1,28 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
+components:
+  schemas:
+{{ oas.SchemaBaseResource(resources.konvey, ['endpoints']) }}
+{{ oas.StringProperty('vip', 'The ' + resources.konvey.desc + ' assigned private virtual IP address (read-only)') }}
+{{ oas.BoolProperty('failover', 'Whether ' + resources.konvey.desc + ' must be deployed in a highly-available replicated state to support service failover', default=True) }}
+{{ oas.ObjectArrayProperty('endpoints', 'The ' + resources.konvey.desc + ' list of load-balanced endpoints', resources.konvey_endpoint.schema) }}
+
+{{ oas.Schema(resources.konvey_endpoint, ['name', 'port', 'protocol', 'backends']) }}
+{{ oas.StringProperty('name', 'The ' + resources.konvey.desc + ' endpoint name') }}
+{{ oas.IntProperty('port', 'The port to be exposed') }}
+{{ oas.StringProperty('protocol', 'The transport layer protocol to be exposed', default='tcp', values=['tcp', 'udp']) }}
+{{ oas.ObjectProperty('backends', 'The ' + resources.konvey.desc + ' list of load-balanced backends', resources.konvey_backends.schema) }}
+
+{{ oas.Schema(resources.konvey_backends, ['hosts', 'port']) }}
+{{ oas.StringArrayProperty('hosts', 'The ' + resources.konvey.desc + ' endpoint list of load-balanced backend hosts') }}
+{{ oas.IntProperty('port', 'The ' + resources.konvey.desc + ' endpoint backend service port') }}
+
+  parameters:
+{{ oas.PathParamID(resources.konvey) }}
+
+paths:
+  /konvey:
+{{ oas.List(resources.konvey, [resources.konvey.tag]) }}
+
+  /konvey/{{ '{' + resources.konvey.paramId + '}' }}:
+{{ oas.RUD(resources.konvey, [resources.konvey.tag], [resources.konvey.paramSchema]) }}

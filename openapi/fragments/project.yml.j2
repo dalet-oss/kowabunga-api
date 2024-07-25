@@ -83,3 +83,19 @@ paths:
   /project/{{ '{' + resources.project.paramId + '}' }}/region/{{ '{' + resources.region.paramId + '}' }}/kgws:
 {{ oas.Parameters([resources.project.paramSchema, resources.region.paramSchema]) }}
 {{ oas.GetAll('List' + resources.project.schema + resources.region.schema + resources.kgw.schema + 's', resources.kgw.desc, [resources.project.tag, resources.region.tag, resources.kgw.tag], True) }}
+
+  /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/konvey:
+{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema]) }}
+{{ oas.Create('Create' + resources.project.schema + resources.zone.schema + resources.konvey.schema, resources.konvey.schema, resources.konvey.desc, [resources.project.tag, resources.zone.tag, resources.konvey.tag]) }}
+
+  /project/{{ '{' + resources.project.paramId + '}' }}/zone/{{ '{' + resources.zone.paramId + '}' }}/konveys:
+{{ oas.Parameters([resources.project.paramSchema, resources.zone.paramSchema]) }}
+{{ oas.GetAll('List' + resources.project.schema + resources.zone.schema + resources.konvey.schema + 's', resources.konvey.desc, [resources.project.tag, resources.zone.tag, resources.konvey.tag], True) }}
+
+  /project/{{ '{' + resources.project.paramId + '}' }}/region/{{ '{' + resources.region.paramId + '}' }}/konvey:
+{{ oas.Parameters([resources.project.paramSchema, resources.region.paramSchema]) }}
+{{ oas.Create('Create' + resources.project.schema + resources.region.schema + resources.konvey.schema, resources.konvey.schema, resources.konvey.desc, [resources.project.tag, resources.region.tag, resources.konvey.tag]) }}
+
+  /project/{{ '{' + resources.project.paramId + '}' }}/region/{{ '{' + resources.region.paramId + '}' }}/konveys:
+{{ oas.Parameters([resources.project.paramSchema, resources.region.paramSchema]) }}
+{{ oas.GetAll('List' + resources.project.schema + resources.region.schema + resources.konvey.schema + 's', resources.konvey.desc, [resources.project.tag, resources.region.tag, resources.konvey.tag], True) }}
