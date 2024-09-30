@@ -19,6 +19,6 @@ paths:
   /nfs/{{ '{' + resources.nfs.paramId + '}' }}:
 {{ oas.RUD(resources.nfs, [resources.nfs.tag], [resources.nfs.paramSchema]) }}
 
-  /nfs/{{ '{' + resources.nfs.paramId + '}' }}/kfs:
+  /nfs/{{ '{' + resources.nfs.paramId + '}' }}/kylo:
 {{ oas.Parameters([resources.nfs.paramSchema]) }}
-{{ oas.GetAll('List' + resources.nfs.schema + resources.kfs.schema + 's', resources.kfs.desc, [resources.nfs.tag, resources.kfs.tag], True) }}
+{{ oas.GetAll('List' + resources.nfs.schema + resources.kylo.schema + 's', resources.kylo.desc, [resources.nfs.tag, resources.kylo.tag], True) }}

@@ -1,0 +1,53 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
+components:
+  schemas:
+{{ oas.SchemaBaseResource(resources.kompute, ['name', 'memory', 'vcpus', 'disk']) }}
+{{ oas.IntProperty('memory', 'The ' + resources.kompute.desc + ' memory size (in bytes)') }}
+{{ oas.IntProperty('vcpus', 'The ' + resources.kompute.desc + ' number of vCPUs') }}
+{{ oas.IntProperty('disk', 'The ' + resources.kompute.desc + ' OS disk size (in bytes)') }}
+{{ oas.IntProperty('data_disk', 'The ' + resources.kompute.desc + ' extra data disk size (in bytes). If unspecified, no extra data disk will be assigned', default=0) }}
+{{ oas.StringProperty('ip', 'The ' + resources.kompute.desc + ' assigned private IPv4 address (read-only)') }}
+
+  parameters:
+{{ oas.PathParamID(resources.kompute) }}
+{{ oas.BoolQueryParam(resources.kompute.paramPublicSchema, resources.kompute.paramPublicId, 'Should Kompute be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false)') }}
+
+paths:
+  /kompute:
+{{ oas.List(resources.kompute, [resources.kompute.tag]) }}
+
+  /kompute/{{ '{' + resources.kompute.paramId + '}' }}:
+{{ oas.RUD(resources.kompute, [resources.kompute.tag], [resources.kompute.paramSchema]) }}
+
+  /kompute/{{ '{' + resources.kompute.paramId + '}' }}/state:
+{{ oas.Parameters([resources.kompute.paramSchema]) }}
+{{ oas.Read('ReadKomputeState', resources.instance_state.schema, resources.instance_state.desc, [resources.kompute.tag]) }}
+
+  /kompute/{{ '{' + resources.kompute.paramId + '}' }}/reboot:
+{{ oas.Parameters([resources.kompute.paramSchema]) }}
+{{ oas.Patch('RebootKompute', resources.kompute.desc, 'software reboot', [resources.kompute.tag]) }}
+
+  /kompute/{{ '{' + resources.kompute.paramId + '}' }}/reset:
+{{ oas.Parameters([resources.kompute.paramSchema]) }}
+{{ oas.Patch('ResetKompute', resources.kompute.desc, 'hardware reset', [resources.kompute.tag]) }}
+
+  /kompute/{{ '{' + resources.kompute.paramId + '}' }}/suspend:
+{{ oas.Parameters([resources.kompute.paramSchema]) }}
+{{ oas.Patch('SuspendKompute', resources.kompute.desc, 'software PM suspend', [resources.kompute.tag]) }}
+
+  /kompute/{{ '{' + resources.kompute.paramId + '}' }}/resume:
+{{ oas.Parameters([resources.kompute.paramSchema]) }}
+{{ oas.Patch('ResumeKompute', resources.kompute.desc, 'software PM resume', [resources.kompute.tag]) }}
+
+  /kompute/{{ '{' + resources.kompute.paramId + '}' }}/start:
+{{ oas.Parameters([resources.kompute.paramSchema]) }}
+{{ oas.Patch('StartKompute', resources.kompute.desc, 'hardware boot-up', [resources.kompute.tag]) }}
+
+  /kompute/{{ '{' + resources.kompute.paramId + '}' }}/stop:
+{{ oas.Parameters([resources.kompute.paramSchema]) }}
+{{ oas.Patch('StopKompute', resources.kompute.desc, 'hardware stop', [resources.kompute.tag]) }}
+
+  /kompute/{{ '{' + resources.kompute.paramId + '}' }}/shutdown:
+{{ oas.Parameters([resources.kompute.paramSchema]) }}
+{{ oas.Patch('ShutdownKompute', resources.kompute.desc, 'software shutdown', [resources.kompute.tag]) }}

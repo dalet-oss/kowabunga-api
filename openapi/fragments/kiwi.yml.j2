@@ -1,0 +1,16 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
+components:
+  schemas:
+{{ oas.SchemaBaseResource(resources.kiwi, ['name']) }}
+{{ oas.StringArrayProperty('agents', 'a list of existing remote agents managing the network gateway') }}
+
+  parameters:
+{{ oas.PathParamID(resources.kiwi) }}
+
+paths:
+  /kiwi:
+{{ oas.List(resources.kiwi, [resources.kiwi.tag]) }}
+
+  /kiwi/{{ '{' + resources.kiwi.paramId + '}' }}:
+{{ oas.RUD(resources.kiwi, [resources.kiwi.tag], [resources.kiwi.paramSchema]) }}

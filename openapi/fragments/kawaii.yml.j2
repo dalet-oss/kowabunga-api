@@ -1,0 +1,64 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
+components:
+  schemas:
+{{ oas.SchemaBaseResource(resources.kawaii) }}
+{{ oas.ObjectProperty('netip', 'The ' + resources.kawaii.desc + ' list of assigned virtual IPs per-zone addresses (read-only)', resources.kawaii_netip.schema) }}
+{{ oas.ObjectProperty('firewall', 'The ' + resources.kawaii.desc + ' firewall settings from/to public Internet)', resources.kawaii_firewall.schema) }}
+{{ oas.ObjectArrayProperty('dnat', 'The ' + resources.kawaii.desc + ' list of NAT forwarding entries. Kawaii will forward public Internet traffic from all public virtual IPs to requested private subnet IP addresses', resources.kawaii_dnat_rule.schema) }}
+{{ oas.ObjectArrayProperty('vpc_peerings', 'The ' + resources.kawaii.desc + ' list of Kowabunga private VPC subnet peering entries', resources.kawaii_vpc_peering.schema) }}
+
+{{ oas.Schema(resources.kawaii_netip, ['public', 'private', 'zones']) }}
+{{ oas.StringArrayProperty('public', 'The ' + resources.kawaii.desc + ' global public gateways virtual IP addresses (read-only)') }}
+{{ oas.StringArrayProperty('private', 'The ' + resources.kawaii.desc + ' global private gateways virtual IP addresses (read-only)') }}
+{{ oas.ObjectArrayProperty('zones', 'The ' + resources.kawaii.desc + ' per-zone list of Kowabunga virtual IP addresses', resources.kawaii_netip_zone.schema) }}
+
+{{ oas.Schema(resources.kawaii_netip_zone, ['zone', 'public', 'private']) }}
+{{ oas.StringProperty('zone', 'The ' + resources.kawaii.desc + ' zone name (read-only)') }}
+{{ oas.StringProperty('public', 'The ' + resources.kawaii.desc + ' zone gateway public virtual IP (read-only)') }}
+{{ oas.StringProperty('private', 'The ' + resources.kawaii.desc + ' zone gateway private virtual IP (read-only)') }}
+
+{{ oas.Schema(resources.kawaii_firewall) }}
+{{ oas.ObjectArrayProperty('ingress', 'The ' + resources.kawaii.desc + ' public firewall list of ingress rules. Kawaii default policy is to drop all incoming traffic, including ICMP. Specified ruleset will be explicitly accepted', resources.kawaii_firewall_ingress_rule.schema) }}
+{{ oas.StringProperty('egress_policy', 'The default public traffic egress policy', default='accept', values=['accept', 'drop']) }}
+{{ oas.ObjectArrayProperty('egress', 'The ' + resources.kawaii.desc + ' public firewall list of egress rules. Kawaii default policy is to accept all outgoing traffic, including ICMP. Specified ruleset will be explicitly dropped if egress_policy is set to accept, and explicitly accepted if egress policy is set to drop.', resources.kawaii_firewall_egress_rule.schema) }}
+
+{{ oas.Schema(resources.kawaii_firewall_ingress_rule, ['ports']) }}
+{{ oas.StringProperty('source', 'The source IP or CIDR to accept public traffic from', default='0.0.0.0/0') }}
+{{ oas.StringProperty('protocol', 'The transport layer protocol to accept public traffic from', default='tcp', values=['tcp', 'udp']) }}
+{{ oas.StringProperty('ports', 'The port (or list of ports) to accept public traffic from. Ranges are accepted. Format is a-b,c-d (e.g. 443; 22,80,443; 80,443,3000-3005)') }}
+
+{{ oas.Schema(resources.kawaii_firewall_egress_rule, ['ports']) }}
+{{ oas.StringProperty('destination', 'The destination IP or CIDR to accept/drop public traffic to', default='0.0.0.0/0') }}
+{{ oas.StringProperty('protocol', 'The transport layer protocol to accept/drop public traffic to', default='tcp', values=['tcp', 'udp']) }}
+{{ oas.StringProperty('ports', 'The port (or list of ports) to accept/drop public traffic from. Ranges are accepted. Format is a-b,c-d (e.g. 443; 22,80,443; 80,443,3000-3005)') }}
+
+{{ oas.Schema(resources.kawaii_dnat_rule, ['destination', 'ports']) }}
+{{ oas.StringProperty('destination', 'Target private IP address to forward public traffic to') }}
+{{ oas.StringProperty('protocol', 'The transport layer protocol to forward public traffic to', default='tcp', values=['tcp', 'udp']) }}
+{{ oas.StringProperty('ports', 'The port (or list of ports) to forward public traffic from. Ranges are accepted. Format is a-b,c-d (e.g. 443; 22,80,443; 80,443,3000-3005)') }}
+
+{{ oas.Schema(resources.kawaii_vpc_peering, ['subnet']) }}
+{{ oas.StringProperty('subnet', 'Kowabunga Subnet ID to be peered with (subnet local IP addresses will be automatically assigned to Kawaii instances).') }}
+{{ oas.StringProperty('policy', 'The default VPC traffic forwarding policy', default='drop', values=['accept', 'drop']) }}
+{{ oas.ObjectArrayProperty('ingress', 'The firewall list of forwarding ingress rules from VPC peered subnet. ICMP traffic is always accepted. The specified ruleset will be explicitly accepted if drop is the default policy (useless otherwise)', resources.kawaii_vpc_forward_rule.schema) }}
+{{ oas.ObjectArrayProperty('egress', 'The firewall list of forwarding egress rules to VPC peered subnet. ICMP traffic is always accepted. The specified ruleset will be explicitly accepted if drop is the default policy (useless otherwise)', resources.kawaii_vpc_forward_rule.schema) }}
+{{ oas.ObjectArrayProperty('netip', 'The per-zone auto-assigned private IPs in peered subnet (read-only)', resources.kawaii_vpc_netip_zone.schema) }}
+
+{{ oas.Schema(resources.kawaii_vpc_forward_rule, ['ports']) }}
+{{ oas.StringProperty('protocol', 'The transport layer protocol to forward public traffic to', default='tcp', values=['tcp', 'udp']) }}
+{{ oas.StringProperty('ports', 'The port (or list of ports) to forward public traffic from. Ranges are accepted. Format is a-b,c-d (e.g. 443; 22,80,443; 80,443,3000-3005)') }}
+
+{{ oas.Schema(resources.kawaii_vpc_netip_zone, ['zone', 'private']) }}
+{{ oas.StringProperty('zone', 'The ' + resources.kawaii.desc + ' zone name (read-only)') }}
+{{ oas.StringProperty('private', 'The ' + resources.kawaii.desc + ' zone gateway private IP address in VPC peered subnet  (read-only)') }}
+
+  parameters:
+{{ oas.PathParamID(resources.kawaii) }}
+
+paths:
+  /kawaii:
+{{ oas.List(resources.kawaii, [resources.kawaii.tag]) }}
+
+  /kawaii/{{ '{' + resources.kawaii.paramId + '}' }}:
+{{ oas.RUD(resources.kawaii, [resources.kawaii.tag], [resources.kawaii.paramSchema]) }}

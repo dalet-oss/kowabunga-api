@@ -1,0 +1,19 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
+components:
+  schemas:
+{{ oas.SchemaBaseResource(resources.kylo, ['name']) }}
+{{ oas.StringProperty('access', 'The ' + resources.kylo.desc + ' volume access type', values=['RO', 'RW'], default='RW') }}
+{{ oas.IntArrayProperty('protocols', 'The ' + resources.kylo.desc + ' NFS protocol versions to be supported', values=[3, 4], default=[3, 4]) }}
+{{ oas.StringProperty('endpoint', 'The ' + resources.kylo.desc + ' endpoint FQDN (read-only)') }}
+{{ oas.IntProperty('size', 'The ' + resources.kylo.desc + ' volume bytes used (read-only)') }}
+
+  parameters:
+{{ oas.PathParamID(resources.kylo) }}
+
+paths:
+  /kylo:
+{{ oas.List(resources.kylo, [resources.kylo.tag]) }}
+
+  /kylo/{{ '{' + resources.kylo.paramId + '}' }}:
+{{ oas.RUD(resources.kylo, [resources.kylo.tag], [resources.kylo.paramSchema]) }}
