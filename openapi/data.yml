@@ -20,12 +20,12 @@ resources:
     schema: DnsRecord
     paramId: recordId
     paramSchema: RecordID
-  group:
-    tag: group
-    desc: Kowabunga users group
-    schema: Group
-    paramId: groupId
-    paramSchema: GroupID
+  team:
+    tag: team
+    desc: Kowabunga users team
+    schema: Team
+    paramId: teamId
+    paramSchema: TeamID
   host:
     tag: host
     desc: computing host

@@ -51,10 +51,10 @@ func NewRegionAPIController(s RegionAPIServicer, opts ...RegionAPIOption) Router
 // Routes returns all the api routes for the RegionAPIController
 func (c *RegionAPIController) Routes() Routes {
 	return Routes{
-		"CreateNetGW": Route{
+		"CreateKiwi": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/region/{regionId}/netgw",
-			c.CreateNetGW,
+			"/api/v1/region/{regionId}/kiwi",
+			c.CreateKiwi,
 		},
 		"CreateRegion": Route{
 			strings.ToUpper("Post"),
@@ -86,10 +86,10 @@ func (c *RegionAPIController) Routes() Routes {
 			"/api/v1/region/{regionId}",
 			c.DeleteRegion,
 		},
-		"ListRegionNetGWs": Route{
+		"ListRegionKiwis": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/region/{regionId}/netgws",
-			c.ListRegionNetGWs,
+			"/api/v1/region/{regionId}/kiwis",
+			c.ListRegionKiwis,
 		},
 		"ListRegionStorageNFSs": Route{
 			strings.ToUpper("Get"),
@@ -139,30 +139,30 @@ func (c *RegionAPIController) Routes() Routes {
 	}
 }
 
-// CreateNetGW - 
-func (c *RegionAPIController) CreateNetGW(w http.ResponseWriter, r *http.Request) {
+// CreateKiwi - 
+func (c *RegionAPIController) CreateKiwi(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	regionIdParam := params["regionId"]
 	if regionIdParam == "" {
 		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
 		return
 	}
-	netGwParam := NetGw{}
+	kiwiParam := Kiwi{}
 	d := json.NewDecoder(r.Body)
 	d.DisallowUnknownFields()
-	if err := d.Decode(&netGwParam); err != nil {
+	if err := d.Decode(&kiwiParam); err != nil {
 		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
 		return
 	}
-	if err := AssertNetGwRequired(netGwParam); err != nil {
+	if err := AssertKiwiRequired(kiwiParam); err != nil {
 		c.errorHandler(w, r, err, nil)
 		return
 	}
-	if err := AssertNetGwConstraints(netGwParam); err != nil {
+	if err := AssertKiwiConstraints(kiwiParam); err != nil {
 		c.errorHandler(w, r, err, nil)
 		return
 	}
-	result, err := c.service.CreateNetGW(r.Context(), regionIdParam, netGwParam)
+	result, err := c.service.CreateKiwi(r.Context(), regionIdParam, kiwiParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -361,15 +361,15 @@ func (c *RegionAPIController) DeleteRegion(w http.ResponseWriter, r *http.Reques
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// ListRegionNetGWs - 
-func (c *RegionAPIController) ListRegionNetGWs(w http.ResponseWriter, r *http.Request) {
+// ListRegionKiwis - 
+func (c *RegionAPIController) ListRegionKiwis(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	regionIdParam := params["regionId"]
 	if regionIdParam == "" {
 		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
 		return
 	}
-	result, err := c.service.ListRegionNetGWs(r.Context(), regionIdParam)
+	result, err := c.service.ListRegionKiwis(r.Context(), regionIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

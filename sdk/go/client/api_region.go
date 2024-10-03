@@ -24,34 +24,34 @@ import (
 // RegionAPIService RegionAPI service
 type RegionAPIService service
 
-type ApiCreateNetGWRequest struct {
+type ApiCreateKiwiRequest struct {
 	ctx context.Context
 	ApiService *RegionAPIService
 	regionId string
-	netGW *NetGW
+	kiwi *Kiwi
 }
 
-// NetGW payload.
-func (r ApiCreateNetGWRequest) NetGW(netGW NetGW) ApiCreateNetGWRequest {
-	r.netGW = &netGW
+// Kiwi payload.
+func (r ApiCreateKiwiRequest) Kiwi(kiwi Kiwi) ApiCreateKiwiRequest {
+	r.kiwi = &kiwi
 	return r
 }
 
-func (r ApiCreateNetGWRequest) Execute() (*NetGW, *http.Response, error) {
-	return r.ApiService.CreateNetGWExecute(r)
+func (r ApiCreateKiwiRequest) Execute() (*Kiwi, *http.Response, error) {
+	return r.ApiService.CreateKiwiExecute(r)
 }
 
 /*
-CreateNetGW Method for CreateNetGW
+CreateKiwi Method for CreateKiwi
 
-Creates a new Iris network gateway.
+Creates a new Kiwi (Kowabunga Inner Wan Interface) provides edge-network services..
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param regionId The ID of the region.
- @return ApiCreateNetGWRequest
+ @return ApiCreateKiwiRequest
 */
-func (a *RegionAPIService) CreateNetGW(ctx context.Context, regionId string) ApiCreateNetGWRequest {
-	return ApiCreateNetGWRequest{
+func (a *RegionAPIService) CreateKiwi(ctx context.Context, regionId string) ApiCreateKiwiRequest {
+	return ApiCreateKiwiRequest{
 		ApiService: a,
 		ctx: ctx,
 		regionId: regionId,
@@ -59,28 +59,28 @@ func (a *RegionAPIService) CreateNetGW(ctx context.Context, regionId string) Api
 }
 
 // Execute executes the request
-//  @return NetGW
-func (a *RegionAPIService) CreateNetGWExecute(r ApiCreateNetGWRequest) (*NetGW, *http.Response, error) {
+//  @return Kiwi
+func (a *RegionAPIService) CreateKiwiExecute(r ApiCreateKiwiRequest) (*Kiwi, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *NetGW
+		localVarReturnValue  *Kiwi
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RegionAPIService.CreateNetGW")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RegionAPIService.CreateKiwi")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/region/{regionId}/netgw"
+	localVarPath := localBasePath + "/region/{regionId}/kiwi"
 	localVarPath = strings.Replace(localVarPath, "{"+"regionId"+"}", url.PathEscape(parameterValueToString(r.regionId, "regionId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.netGW == nil {
-		return localVarReturnValue, nil, reportError("netGW is required and must be specified")
+	if r.kiwi == nil {
+		return localVarReturnValue, nil, reportError("kiwi is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -101,7 +101,7 @@ func (a *RegionAPIService) CreateNetGWExecute(r ApiCreateNetGWRequest) (*NetGW, 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.netGW
+	localVarPostBody = r.kiwi
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1420,27 +1420,27 @@ func (a *RegionAPIService) DeleteRegionExecute(r ApiDeleteRegionRequest) (*http.
 	return localVarHTTPResponse, nil
 }
 
-type ApiListRegionNetGWsRequest struct {
+type ApiListRegionKiwisRequest struct {
 	ctx context.Context
 	ApiService *RegionAPIService
 	regionId string
 }
 
-func (r ApiListRegionNetGWsRequest) Execute() ([]string, *http.Response, error) {
-	return r.ApiService.ListRegionNetGWsExecute(r)
+func (r ApiListRegionKiwisRequest) Execute() ([]string, *http.Response, error) {
+	return r.ApiService.ListRegionKiwisExecute(r)
 }
 
 /*
-ListRegionNetGWs Method for ListRegionNetGWs
+ListRegionKiwis Method for ListRegionKiwis
 
-Returns the IDs of Iris network gateway objects.
+Returns the IDs of Kiwi (Kowabunga Inner Wan Interface) provides edge-network services. objects.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param regionId The ID of the region.
- @return ApiListRegionNetGWsRequest
+ @return ApiListRegionKiwisRequest
 */
-func (a *RegionAPIService) ListRegionNetGWs(ctx context.Context, regionId string) ApiListRegionNetGWsRequest {
-	return ApiListRegionNetGWsRequest{
+func (a *RegionAPIService) ListRegionKiwis(ctx context.Context, regionId string) ApiListRegionKiwisRequest {
+	return ApiListRegionKiwisRequest{
 		ApiService: a,
 		ctx: ctx,
 		regionId: regionId,
@@ -1449,7 +1449,7 @@ func (a *RegionAPIService) ListRegionNetGWs(ctx context.Context, regionId string
 
 // Execute executes the request
 //  @return []string
-func (a *RegionAPIService) ListRegionNetGWsExecute(r ApiListRegionNetGWsRequest) ([]string, *http.Response, error) {
+func (a *RegionAPIService) ListRegionKiwisExecute(r ApiListRegionKiwisRequest) ([]string, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1457,12 +1457,12 @@ func (a *RegionAPIService) ListRegionNetGWsExecute(r ApiListRegionNetGWsRequest)
 		localVarReturnValue  []string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RegionAPIService.ListRegionNetGWs")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RegionAPIService.ListRegionKiwis")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/region/{regionId}/netgws"
+	localVarPath := localBasePath + "/region/{regionId}/kiwis"
 	localVarPath = strings.Replace(localVarPath, "{"+"regionId"+"}", url.PathEscape(parameterValueToString(r.regionId, "regionId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

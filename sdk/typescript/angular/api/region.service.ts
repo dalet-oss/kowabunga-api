@@ -33,7 +33,7 @@ import { ApiErrorUnauthorized } from '../model/apiErrorUnauthorized';
 // @ts-ignore
 import { ApiErrorUnprocessableEntity } from '../model/apiErrorUnprocessableEntity';
 // @ts-ignore
-import { NetGW } from '../model/netGW';
+import { Kiwi } from '../model/kiwi';
 // @ts-ignore
 import { Region } from '../model/region';
 // @ts-ignore
@@ -116,21 +116,21 @@ export class RegionService {
     }
 
     /**
-     * Creates a new Iris network gateway.
+     * Creates a new Kiwi (Kowabunga Inner Wan Interface) provides edge-network services..
      * @param regionId The ID of the region.
-     * @param netGW NetGW payload.
+     * @param kiwi Kiwi payload.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createNetGW(regionId: string, netGW: NetGW, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<NetGW>;
-    public createNetGW(regionId: string, netGW: NetGW, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<NetGW>>;
-    public createNetGW(regionId: string, netGW: NetGW, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<NetGW>>;
-    public createNetGW(regionId: string, netGW: NetGW, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public createKiwi(regionId: string, kiwi: Kiwi, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Kiwi>;
+    public createKiwi(regionId: string, kiwi: Kiwi, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Kiwi>>;
+    public createKiwi(regionId: string, kiwi: Kiwi, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Kiwi>>;
+    public createKiwi(regionId: string, kiwi: Kiwi, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (regionId === null || regionId === undefined) {
-            throw new Error('Required parameter regionId was null or undefined when calling createNetGW.');
+            throw new Error('Required parameter regionId was null or undefined when calling createKiwi.');
         }
-        if (netGW === null || netGW === undefined) {
-            throw new Error('Required parameter netGW was null or undefined when calling createNetGW.');
+        if (kiwi === null || kiwi === undefined) {
+            throw new Error('Required parameter kiwi was null or undefined when calling createKiwi.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -186,11 +186,11 @@ export class RegionService {
             }
         }
 
-        let localVarPath = `/region/${this.configuration.encodeParam({name: "regionId", value: regionId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/netgw`;
-        return this.httpClient.request<NetGW>('post', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/region/${this.configuration.encodeParam({name: "regionId", value: regionId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kiwi`;
+        return this.httpClient.request<Kiwi>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: netGW,
+                body: kiwi,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -701,17 +701,17 @@ export class RegionService {
     }
 
     /**
-     * Returns the IDs of Iris network gateway objects.
+     * Returns the IDs of Kiwi (Kowabunga Inner Wan Interface) provides edge-network services. objects.
      * @param regionId The ID of the region.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public listRegionNetGWs(regionId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
-    public listRegionNetGWs(regionId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
-    public listRegionNetGWs(regionId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
-    public listRegionNetGWs(regionId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public listRegionKiwis(regionId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
+    public listRegionKiwis(regionId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
+    public listRegionKiwis(regionId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
+    public listRegionKiwis(regionId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (regionId === null || regionId === undefined) {
-            throw new Error('Required parameter regionId was null or undefined when calling listRegionNetGWs.');
+            throw new Error('Required parameter regionId was null or undefined when calling listRegionKiwis.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -758,7 +758,7 @@ export class RegionService {
             }
         }
 
-        let localVarPath = `/region/${this.configuration.encodeParam({name: "regionId", value: regionId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/netgws`;
+        let localVarPath = `/region/${this.configuration.encodeParam({name: "regionId", value: regionId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kiwis`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

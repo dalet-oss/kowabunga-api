@@ -37,16 +37,6 @@ type AgentAPIRouter interface {
 	SetAgentApiToken(http.ResponseWriter, *http.Request)
 	UpdateAgent(http.ResponseWriter, *http.Request)
 }
-// GroupAPIRouter defines the required methods for binding the api requests to a responses for the GroupAPI
-// The GroupAPIRouter implementation should parse necessary information from the http request,
-// pass the data to a GroupAPIServicer to perform the required actions, then write the service results to the http response.
-type GroupAPIRouter interface { 
-	CreateGroup(http.ResponseWriter, *http.Request)
-	DeleteGroup(http.ResponseWriter, *http.Request)
-	ListGroups(http.ResponseWriter, *http.Request)
-	ReadGroup(http.ResponseWriter, *http.Request)
-	UpdateGroup(http.ResponseWriter, *http.Request)
-}
 // HostAPIRouter defines the required methods for binding the api requests to a responses for the HostAPI
 // The HostAPIRouter implementation should parse necessary information from the http request,
 // pass the data to a HostAPIServicer to perform the required actions, then write the service results to the http response.
@@ -76,40 +66,40 @@ type InstanceAPIRouter interface {
 	SuspendInstance(http.ResponseWriter, *http.Request)
 	UpdateInstance(http.ResponseWriter, *http.Request)
 }
-// KceAPIRouter defines the required methods for binding the api requests to a responses for the KceAPI
-// The KceAPIRouter implementation should parse necessary information from the http request,
-// pass the data to a KceAPIServicer to perform the required actions, then write the service results to the http response.
-type KceAPIRouter interface { 
-	DeleteKCE(http.ResponseWriter, *http.Request)
-	ListKCEs(http.ResponseWriter, *http.Request)
-	ReadKCE(http.ResponseWriter, *http.Request)
-	ReadKCEState(http.ResponseWriter, *http.Request)
-	RebootKCE(http.ResponseWriter, *http.Request)
-	ResetKCE(http.ResponseWriter, *http.Request)
-	ResumeKCE(http.ResponseWriter, *http.Request)
-	ShutdownKCE(http.ResponseWriter, *http.Request)
-	StartKCE(http.ResponseWriter, *http.Request)
-	StopKCE(http.ResponseWriter, *http.Request)
-	SuspendKCE(http.ResponseWriter, *http.Request)
-	UpdateKCE(http.ResponseWriter, *http.Request)
+// KawaiiAPIRouter defines the required methods for binding the api requests to a responses for the KawaiiAPI
+// The KawaiiAPIRouter implementation should parse necessary information from the http request,
+// pass the data to a KawaiiAPIServicer to perform the required actions, then write the service results to the http response.
+type KawaiiAPIRouter interface { 
+	DeleteKawaii(http.ResponseWriter, *http.Request)
+	ListKawaiis(http.ResponseWriter, *http.Request)
+	ReadKawaii(http.ResponseWriter, *http.Request)
+	UpdateKawaii(http.ResponseWriter, *http.Request)
 }
-// KfsAPIRouter defines the required methods for binding the api requests to a responses for the KfsAPI
-// The KfsAPIRouter implementation should parse necessary information from the http request,
-// pass the data to a KfsAPIServicer to perform the required actions, then write the service results to the http response.
-type KfsAPIRouter interface { 
-	DeleteKFS(http.ResponseWriter, *http.Request)
-	ListKFSs(http.ResponseWriter, *http.Request)
-	ReadKFS(http.ResponseWriter, *http.Request)
-	UpdateKFS(http.ResponseWriter, *http.Request)
+// KiwiAPIRouter defines the required methods for binding the api requests to a responses for the KiwiAPI
+// The KiwiAPIRouter implementation should parse necessary information from the http request,
+// pass the data to a KiwiAPIServicer to perform the required actions, then write the service results to the http response.
+type KiwiAPIRouter interface { 
+	DeleteKiwi(http.ResponseWriter, *http.Request)
+	ListKiwis(http.ResponseWriter, *http.Request)
+	ReadKiwi(http.ResponseWriter, *http.Request)
+	UpdateKiwi(http.ResponseWriter, *http.Request)
 }
-// KgwAPIRouter defines the required methods for binding the api requests to a responses for the KgwAPI
-// The KgwAPIRouter implementation should parse necessary information from the http request,
-// pass the data to a KgwAPIServicer to perform the required actions, then write the service results to the http response.
-type KgwAPIRouter interface { 
-	DeleteKGW(http.ResponseWriter, *http.Request)
-	ListKGWs(http.ResponseWriter, *http.Request)
-	ReadKGW(http.ResponseWriter, *http.Request)
-	UpdateKGW(http.ResponseWriter, *http.Request)
+// KomputeAPIRouter defines the required methods for binding the api requests to a responses for the KomputeAPI
+// The KomputeAPIRouter implementation should parse necessary information from the http request,
+// pass the data to a KomputeAPIServicer to perform the required actions, then write the service results to the http response.
+type KomputeAPIRouter interface { 
+	DeleteKompute(http.ResponseWriter, *http.Request)
+	ListKomputes(http.ResponseWriter, *http.Request)
+	ReadKompute(http.ResponseWriter, *http.Request)
+	ReadKomputeState(http.ResponseWriter, *http.Request)
+	RebootKompute(http.ResponseWriter, *http.Request)
+	ResetKompute(http.ResponseWriter, *http.Request)
+	ResumeKompute(http.ResponseWriter, *http.Request)
+	ShutdownKompute(http.ResponseWriter, *http.Request)
+	StartKompute(http.ResponseWriter, *http.Request)
+	StopKompute(http.ResponseWriter, *http.Request)
+	SuspendKompute(http.ResponseWriter, *http.Request)
+	UpdateKompute(http.ResponseWriter, *http.Request)
 }
 // KonveyAPIRouter defines the required methods for binding the api requests to a responses for the KonveyAPI
 // The KonveyAPIRouter implementation should parse necessary information from the http request,
@@ -120,21 +110,21 @@ type KonveyAPIRouter interface {
 	ReadKonvey(http.ResponseWriter, *http.Request)
 	UpdateKonvey(http.ResponseWriter, *http.Request)
 }
-// NetgwAPIRouter defines the required methods for binding the api requests to a responses for the NetgwAPI
-// The NetgwAPIRouter implementation should parse necessary information from the http request,
-// pass the data to a NetgwAPIServicer to perform the required actions, then write the service results to the http response.
-type NetgwAPIRouter interface { 
-	DeleteNetGW(http.ResponseWriter, *http.Request)
-	ListNetGWs(http.ResponseWriter, *http.Request)
-	ReadNetGW(http.ResponseWriter, *http.Request)
-	UpdateNetGW(http.ResponseWriter, *http.Request)
+// KyloAPIRouter defines the required methods for binding the api requests to a responses for the KyloAPI
+// The KyloAPIRouter implementation should parse necessary information from the http request,
+// pass the data to a KyloAPIServicer to perform the required actions, then write the service results to the http response.
+type KyloAPIRouter interface { 
+	DeleteKylo(http.ResponseWriter, *http.Request)
+	ListKylos(http.ResponseWriter, *http.Request)
+	ReadKylo(http.ResponseWriter, *http.Request)
+	UpdateKylo(http.ResponseWriter, *http.Request)
 }
 // NfsAPIRouter defines the required methods for binding the api requests to a responses for the NfsAPI
 // The NfsAPIRouter implementation should parse necessary information from the http request,
 // pass the data to a NfsAPIServicer to perform the required actions, then write the service results to the http response.
 type NfsAPIRouter interface { 
 	DeleteStorageNFS(http.ResponseWriter, *http.Request)
-	ListStorageNFSKFSs(http.ResponseWriter, *http.Request)
+	ListStorageNFSKylos(http.ResponseWriter, *http.Request)
 	ListStorageNFSs(http.ResponseWriter, *http.Request)
 	ReadStorageNFS(http.ResponseWriter, *http.Request)
 	UpdateStorageNFS(http.ResponseWriter, *http.Request)
@@ -158,21 +148,21 @@ type PoolAPIRouter interface {
 type ProjectAPIRouter interface { 
 	CreateProject(http.ResponseWriter, *http.Request)
 	CreateProjectDnsRecord(http.ResponseWriter, *http.Request)
-	CreateProjectRegionKFS(http.ResponseWriter, *http.Request)
-	CreateProjectRegionKGW(http.ResponseWriter, *http.Request)
+	CreateProjectRegionKawaii(http.ResponseWriter, *http.Request)
 	CreateProjectRegionKonvey(http.ResponseWriter, *http.Request)
+	CreateProjectRegionKylo(http.ResponseWriter, *http.Request)
 	CreateProjectRegionVolume(http.ResponseWriter, *http.Request)
 	CreateProjectZoneInstance(http.ResponseWriter, *http.Request)
-	CreateProjectZoneKCE(http.ResponseWriter, *http.Request)
+	CreateProjectZoneKompute(http.ResponseWriter, *http.Request)
 	CreateProjectZoneKonvey(http.ResponseWriter, *http.Request)
 	DeleteProject(http.ResponseWriter, *http.Request)
 	ListProjectDnsRecords(http.ResponseWriter, *http.Request)
-	ListProjectRegionKFSs(http.ResponseWriter, *http.Request)
-	ListProjectRegionKGWs(http.ResponseWriter, *http.Request)
+	ListProjectRegionKawaiis(http.ResponseWriter, *http.Request)
 	ListProjectRegionKonveys(http.ResponseWriter, *http.Request)
+	ListProjectRegionKylos(http.ResponseWriter, *http.Request)
 	ListProjectRegionVolumes(http.ResponseWriter, *http.Request)
 	ListProjectZoneInstances(http.ResponseWriter, *http.Request)
-	ListProjectZoneKCEs(http.ResponseWriter, *http.Request)
+	ListProjectZoneKomputes(http.ResponseWriter, *http.Request)
 	ListProjectZoneKonveys(http.ResponseWriter, *http.Request)
 	ListProjects(http.ResponseWriter, *http.Request)
 	ReadProject(http.ResponseWriter, *http.Request)
@@ -192,14 +182,14 @@ type RecordAPIRouter interface {
 // The RegionAPIRouter implementation should parse necessary information from the http request,
 // pass the data to a RegionAPIServicer to perform the required actions, then write the service results to the http response.
 type RegionAPIRouter interface { 
-	CreateNetGW(http.ResponseWriter, *http.Request)
+	CreateKiwi(http.ResponseWriter, *http.Request)
 	CreateRegion(http.ResponseWriter, *http.Request)
 	CreateStorageNFS(http.ResponseWriter, *http.Request)
 	CreateStoragePool(http.ResponseWriter, *http.Request)
 	CreateVNet(http.ResponseWriter, *http.Request)
 	CreateZone(http.ResponseWriter, *http.Request)
 	DeleteRegion(http.ResponseWriter, *http.Request)
-	ListRegionNetGWs(http.ResponseWriter, *http.Request)
+	ListRegionKiwis(http.ResponseWriter, *http.Request)
 	ListRegionStorageNFSs(http.ResponseWriter, *http.Request)
 	ListRegionStoragePools(http.ResponseWriter, *http.Request)
 	ListRegionVNets(http.ResponseWriter, *http.Request)
@@ -220,6 +210,16 @@ type SubnetAPIRouter interface {
 	ListSubnets(http.ResponseWriter, *http.Request)
 	ReadSubnet(http.ResponseWriter, *http.Request)
 	UpdateSubnet(http.ResponseWriter, *http.Request)
+}
+// TeamAPIRouter defines the required methods for binding the api requests to a responses for the TeamAPI
+// The TeamAPIRouter implementation should parse necessary information from the http request,
+// pass the data to a TeamAPIServicer to perform the required actions, then write the service results to the http response.
+type TeamAPIRouter interface { 
+	CreateTeam(http.ResponseWriter, *http.Request)
+	DeleteTeam(http.ResponseWriter, *http.Request)
+	ListTeams(http.ResponseWriter, *http.Request)
+	ReadTeam(http.ResponseWriter, *http.Request)
+	UpdateTeam(http.ResponseWriter, *http.Request)
 }
 // TemplateAPIRouter defines the required methods for binding the api requests to a responses for the TemplateAPI
 // The TemplateAPIRouter implementation should parse necessary information from the http request,
@@ -313,19 +313,6 @@ type AgentAPIServicer interface {
 }
 
 
-// GroupAPIServicer defines the api actions for the GroupAPI service
-// This interface intended to stay up to date with the openapi yaml used to generate it,
-// while the service implementation can be ignored with the .openapi-generator-ignore file
-// and updated with the logic required for the API.
-type GroupAPIServicer interface { 
-	CreateGroup(context.Context, Group) (ImplResponse, error)
-	DeleteGroup(context.Context, string) (ImplResponse, error)
-	ListGroups(context.Context) (ImplResponse, error)
-	ReadGroup(context.Context, string) (ImplResponse, error)
-	UpdateGroup(context.Context, string, Group) (ImplResponse, error)
-}
-
-
 // HostAPIServicer defines the api actions for the HostAPI service
 // This interface intended to stay up to date with the openapi yaml used to generate it,
 // while the service implementation can be ignored with the .openapi-generator-ignore file
@@ -361,47 +348,47 @@ type InstanceAPIServicer interface {
 }
 
 
-// KceAPIServicer defines the api actions for the KceAPI service
+// KawaiiAPIServicer defines the api actions for the KawaiiAPI service
 // This interface intended to stay up to date with the openapi yaml used to generate it,
 // while the service implementation can be ignored with the .openapi-generator-ignore file
 // and updated with the logic required for the API.
-type KceAPIServicer interface { 
-	DeleteKCE(context.Context, string) (ImplResponse, error)
-	ListKCEs(context.Context) (ImplResponse, error)
-	ReadKCE(context.Context, string) (ImplResponse, error)
-	ReadKCEState(context.Context, string) (ImplResponse, error)
-	RebootKCE(context.Context, string) (ImplResponse, error)
-	ResetKCE(context.Context, string) (ImplResponse, error)
-	ResumeKCE(context.Context, string) (ImplResponse, error)
-	ShutdownKCE(context.Context, string) (ImplResponse, error)
-	StartKCE(context.Context, string) (ImplResponse, error)
-	StopKCE(context.Context, string) (ImplResponse, error)
-	SuspendKCE(context.Context, string) (ImplResponse, error)
-	UpdateKCE(context.Context, string, Kce) (ImplResponse, error)
+type KawaiiAPIServicer interface { 
+	DeleteKawaii(context.Context, string) (ImplResponse, error)
+	ListKawaiis(context.Context) (ImplResponse, error)
+	ReadKawaii(context.Context, string) (ImplResponse, error)
+	UpdateKawaii(context.Context, string, Kawaii) (ImplResponse, error)
 }
 
 
-// KfsAPIServicer defines the api actions for the KfsAPI service
+// KiwiAPIServicer defines the api actions for the KiwiAPI service
 // This interface intended to stay up to date with the openapi yaml used to generate it,
 // while the service implementation can be ignored with the .openapi-generator-ignore file
 // and updated with the logic required for the API.
-type KfsAPIServicer interface { 
-	DeleteKFS(context.Context, string) (ImplResponse, error)
-	ListKFSs(context.Context) (ImplResponse, error)
-	ReadKFS(context.Context, string) (ImplResponse, error)
-	UpdateKFS(context.Context, string, Kfs) (ImplResponse, error)
+type KiwiAPIServicer interface { 
+	DeleteKiwi(context.Context, string) (ImplResponse, error)
+	ListKiwis(context.Context) (ImplResponse, error)
+	ReadKiwi(context.Context, string) (ImplResponse, error)
+	UpdateKiwi(context.Context, string, Kiwi) (ImplResponse, error)
 }
 
 
-// KgwAPIServicer defines the api actions for the KgwAPI service
+// KomputeAPIServicer defines the api actions for the KomputeAPI service
 // This interface intended to stay up to date with the openapi yaml used to generate it,
 // while the service implementation can be ignored with the .openapi-generator-ignore file
 // and updated with the logic required for the API.
-type KgwAPIServicer interface { 
-	DeleteKGW(context.Context, string) (ImplResponse, error)
-	ListKGWs(context.Context) (ImplResponse, error)
-	ReadKGW(context.Context, string) (ImplResponse, error)
-	UpdateKGW(context.Context, string, Kgw) (ImplResponse, error)
+type KomputeAPIServicer interface { 
+	DeleteKompute(context.Context, string) (ImplResponse, error)
+	ListKomputes(context.Context) (ImplResponse, error)
+	ReadKompute(context.Context, string) (ImplResponse, error)
+	ReadKomputeState(context.Context, string) (ImplResponse, error)
+	RebootKompute(context.Context, string) (ImplResponse, error)
+	ResetKompute(context.Context, string) (ImplResponse, error)
+	ResumeKompute(context.Context, string) (ImplResponse, error)
+	ShutdownKompute(context.Context, string) (ImplResponse, error)
+	StartKompute(context.Context, string) (ImplResponse, error)
+	StopKompute(context.Context, string) (ImplResponse, error)
+	SuspendKompute(context.Context, string) (ImplResponse, error)
+	UpdateKompute(context.Context, string, Kompute) (ImplResponse, error)
 }
 
 
@@ -417,15 +404,15 @@ type KonveyAPIServicer interface {
 }
 
 
-// NetgwAPIServicer defines the api actions for the NetgwAPI service
+// KyloAPIServicer defines the api actions for the KyloAPI service
 // This interface intended to stay up to date with the openapi yaml used to generate it,
 // while the service implementation can be ignored with the .openapi-generator-ignore file
 // and updated with the logic required for the API.
-type NetgwAPIServicer interface { 
-	DeleteNetGW(context.Context, string) (ImplResponse, error)
-	ListNetGWs(context.Context) (ImplResponse, error)
-	ReadNetGW(context.Context, string) (ImplResponse, error)
-	UpdateNetGW(context.Context, string, NetGw) (ImplResponse, error)
+type KyloAPIServicer interface { 
+	DeleteKylo(context.Context, string) (ImplResponse, error)
+	ListKylos(context.Context) (ImplResponse, error)
+	ReadKylo(context.Context, string) (ImplResponse, error)
+	UpdateKylo(context.Context, string, Kylo) (ImplResponse, error)
 }
 
 
@@ -435,7 +422,7 @@ type NetgwAPIServicer interface {
 // and updated with the logic required for the API.
 type NfsAPIServicer interface { 
 	DeleteStorageNFS(context.Context, string) (ImplResponse, error)
-	ListStorageNFSKFSs(context.Context, string) (ImplResponse, error)
+	ListStorageNFSKylos(context.Context, string) (ImplResponse, error)
 	ListStorageNFSs(context.Context) (ImplResponse, error)
 	ReadStorageNFS(context.Context, string) (ImplResponse, error)
 	UpdateStorageNFS(context.Context, string, StorageNfs) (ImplResponse, error)
@@ -465,21 +452,21 @@ type PoolAPIServicer interface {
 type ProjectAPIServicer interface { 
 	CreateProject(context.Context, Project, int32) (ImplResponse, error)
 	CreateProjectDnsRecord(context.Context, string, DnsRecord) (ImplResponse, error)
-	CreateProjectRegionKFS(context.Context, string, string, Kfs, string) (ImplResponse, error)
-	CreateProjectRegionKGW(context.Context, string, string, Kgw) (ImplResponse, error)
+	CreateProjectRegionKawaii(context.Context, string, string, Kawaii) (ImplResponse, error)
 	CreateProjectRegionKonvey(context.Context, string, string, Konvey) (ImplResponse, error)
+	CreateProjectRegionKylo(context.Context, string, string, Kylo, string) (ImplResponse, error)
 	CreateProjectRegionVolume(context.Context, string, string, Volume, string, string) (ImplResponse, error)
 	CreateProjectZoneInstance(context.Context, string, string, Instance) (ImplResponse, error)
-	CreateProjectZoneKCE(context.Context, string, string, Kce, string, string, bool) (ImplResponse, error)
+	CreateProjectZoneKompute(context.Context, string, string, Kompute, string, string, bool) (ImplResponse, error)
 	CreateProjectZoneKonvey(context.Context, string, string, Konvey) (ImplResponse, error)
 	DeleteProject(context.Context, string) (ImplResponse, error)
 	ListProjectDnsRecords(context.Context, string) (ImplResponse, error)
-	ListProjectRegionKFSs(context.Context, string, string, string) (ImplResponse, error)
-	ListProjectRegionKGWs(context.Context, string, string) (ImplResponse, error)
+	ListProjectRegionKawaiis(context.Context, string, string) (ImplResponse, error)
 	ListProjectRegionKonveys(context.Context, string, string) (ImplResponse, error)
+	ListProjectRegionKylos(context.Context, string, string, string) (ImplResponse, error)
 	ListProjectRegionVolumes(context.Context, string, string) (ImplResponse, error)
 	ListProjectZoneInstances(context.Context, string, string) (ImplResponse, error)
-	ListProjectZoneKCEs(context.Context, string, string) (ImplResponse, error)
+	ListProjectZoneKomputes(context.Context, string, string) (ImplResponse, error)
 	ListProjectZoneKonveys(context.Context, string, string) (ImplResponse, error)
 	ListProjects(context.Context, int32) (ImplResponse, error)
 	ReadProject(context.Context, string) (ImplResponse, error)
@@ -505,14 +492,14 @@ type RecordAPIServicer interface {
 // while the service implementation can be ignored with the .openapi-generator-ignore file
 // and updated with the logic required for the API.
 type RegionAPIServicer interface { 
-	CreateNetGW(context.Context, string, NetGw) (ImplResponse, error)
+	CreateKiwi(context.Context, string, Kiwi) (ImplResponse, error)
 	CreateRegion(context.Context, Region) (ImplResponse, error)
 	CreateStorageNFS(context.Context, string, StorageNfs, string) (ImplResponse, error)
 	CreateStoragePool(context.Context, string, StoragePool) (ImplResponse, error)
 	CreateVNet(context.Context, string, VNet) (ImplResponse, error)
 	CreateZone(context.Context, string, Zone) (ImplResponse, error)
 	DeleteRegion(context.Context, string) (ImplResponse, error)
-	ListRegionNetGWs(context.Context, string) (ImplResponse, error)
+	ListRegionKiwis(context.Context, string) (ImplResponse, error)
 	ListRegionStorageNFSs(context.Context, string, string) (ImplResponse, error)
 	ListRegionStoragePools(context.Context, string) (ImplResponse, error)
 	ListRegionVNets(context.Context, string) (ImplResponse, error)
@@ -536,6 +523,19 @@ type SubnetAPIServicer interface {
 	ListSubnets(context.Context) (ImplResponse, error)
 	ReadSubnet(context.Context, string) (ImplResponse, error)
 	UpdateSubnet(context.Context, string, Subnet) (ImplResponse, error)
+}
+
+
+// TeamAPIServicer defines the api actions for the TeamAPI service
+// This interface intended to stay up to date with the openapi yaml used to generate it,
+// while the service implementation can be ignored with the .openapi-generator-ignore file
+// and updated with the logic required for the API.
+type TeamAPIServicer interface { 
+	CreateTeam(context.Context, Team) (ImplResponse, error)
+	DeleteTeam(context.Context, string) (ImplResponse, error)
+	ListTeams(context.Context) (ImplResponse, error)
+	ReadTeam(context.Context, string) (ImplResponse, error)
+	UpdateTeam(context.Context, string, Team) (ImplResponse, error)
 }
 
 

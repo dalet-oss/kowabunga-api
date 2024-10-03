@@ -53,9 +53,9 @@ func (s *NfsAPIService) DeleteStorageNFS(ctx context.Context, nfsId string) (Imp
 	return Response(http.StatusNotImplemented, nil), errors.New("DeleteStorageNFS method not implemented")
 }
 
-// ListStorageNFSKFSs - 
-func (s *NfsAPIService) ListStorageNFSKFSs(ctx context.Context, nfsId string) (ImplResponse, error) {
-	// TODO - update ListStorageNFSKFSs with the required logic for this service method.
+// ListStorageNFSKylos - 
+func (s *NfsAPIService) ListStorageNFSKylos(ctx context.Context, nfsId string) (ImplResponse, error) {
+	// TODO - update ListStorageNFSKylos with the required logic for this service method.
 	// Add api_nfs_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
 	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
@@ -70,7 +70,7 @@ func (s *NfsAPIService) ListStorageNFSKFSs(ctx context.Context, nfsId string) (I
 	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
 	// return Response(404, ApiErrorNotFound{}), nil
 
-	return Response(http.StatusNotImplemented, nil), errors.New("ListStorageNFSKFSs method not implemented")
+	return Response(http.StatusNotImplemented, nil), errors.New("ListStorageNFSKylos method not implemented")
 }
 
 // ListStorageNFSs - 

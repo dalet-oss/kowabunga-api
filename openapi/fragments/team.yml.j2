@@ -1,0 +1,16 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
+components:
+  schemas:
+{{ oas.SchemaBaseResource(resources.team, ['name', 'users']) }}
+{{ oas.StringArrayProperty('users', 'List of user IDs that are part of the team') }}
+
+  parameters:
+{{ oas.PathParamID(resources.team) }}
+
+paths:
+  /team:
+{{ oas.LC(resources.team, [resources.team.tag]) }}
+
+  /team/{{ '{' + resources.team.paramId + '}' }}:
+{{ oas.RUD(resources.team, [resources.team.tag], [resources.team.paramSchema]) }}

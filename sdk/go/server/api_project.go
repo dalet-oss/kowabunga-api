@@ -61,20 +61,20 @@ func (c *ProjectAPIController) Routes() Routes {
 			"/api/v1/project/{projectId}/record",
 			c.CreateProjectDnsRecord,
 		},
-		"CreateProjectRegionKFS": Route{
+		"CreateProjectRegionKawaii": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{projectId}/region/{regionId}/kfs",
-			c.CreateProjectRegionKFS,
-		},
-		"CreateProjectRegionKGW": Route{
-			strings.ToUpper("Post"),
-			"/api/v1/project/{projectId}/region/{regionId}/kgw",
-			c.CreateProjectRegionKGW,
+			"/api/v1/project/{projectId}/region/{regionId}/kawaii",
+			c.CreateProjectRegionKawaii,
 		},
 		"CreateProjectRegionKonvey": Route{
 			strings.ToUpper("Post"),
 			"/api/v1/project/{projectId}/region/{regionId}/konvey",
 			c.CreateProjectRegionKonvey,
+		},
+		"CreateProjectRegionKylo": Route{
+			strings.ToUpper("Post"),
+			"/api/v1/project/{projectId}/region/{regionId}/kylo",
+			c.CreateProjectRegionKylo,
 		},
 		"CreateProjectRegionVolume": Route{
 			strings.ToUpper("Post"),
@@ -86,10 +86,10 @@ func (c *ProjectAPIController) Routes() Routes {
 			"/api/v1/project/{projectId}/zone/{zoneId}/instance",
 			c.CreateProjectZoneInstance,
 		},
-		"CreateProjectZoneKCE": Route{
+		"CreateProjectZoneKompute": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/kce",
-			c.CreateProjectZoneKCE,
+			"/api/v1/project/{projectId}/zone/{zoneId}/kompute",
+			c.CreateProjectZoneKompute,
 		},
 		"CreateProjectZoneKonvey": Route{
 			strings.ToUpper("Post"),
@@ -106,20 +106,20 @@ func (c *ProjectAPIController) Routes() Routes {
 			"/api/v1/project/{projectId}/records",
 			c.ListProjectDnsRecords,
 		},
-		"ListProjectRegionKFSs": Route{
+		"ListProjectRegionKawaiis": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{projectId}/region/{regionId}/kfs",
-			c.ListProjectRegionKFSs,
-		},
-		"ListProjectRegionKGWs": Route{
-			strings.ToUpper("Get"),
-			"/api/v1/project/{projectId}/region/{regionId}/kgws",
-			c.ListProjectRegionKGWs,
+			"/api/v1/project/{projectId}/region/{regionId}/kawaiis",
+			c.ListProjectRegionKawaiis,
 		},
 		"ListProjectRegionKonveys": Route{
 			strings.ToUpper("Get"),
 			"/api/v1/project/{projectId}/region/{regionId}/konveys",
 			c.ListProjectRegionKonveys,
+		},
+		"ListProjectRegionKylos": Route{
+			strings.ToUpper("Get"),
+			"/api/v1/project/{projectId}/region/{regionId}/kylo",
+			c.ListProjectRegionKylos,
 		},
 		"ListProjectRegionVolumes": Route{
 			strings.ToUpper("Get"),
@@ -131,10 +131,10 @@ func (c *ProjectAPIController) Routes() Routes {
 			"/api/v1/project/{projectId}/zone/{zoneId}/instances",
 			c.ListProjectZoneInstances,
 		},
-		"ListProjectZoneKCEs": Route{
+		"ListProjectZoneKomputes": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/project/{projectId}/zone/{zoneId}/kces",
-			c.ListProjectZoneKCEs,
+			"/api/v1/project/{projectId}/zone/{zoneId}/komputes",
+			c.ListProjectZoneKomputes,
 		},
 		"ListProjectZoneKonveys": Route{
 			strings.ToUpper("Get"),
@@ -248,58 +248,8 @@ func (c *ProjectAPIController) CreateProjectDnsRecord(w http.ResponseWriter, r *
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// CreateProjectRegionKFS - 
-func (c *ProjectAPIController) CreateProjectRegionKFS(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	query, err := parseQuery(r.URL.RawQuery)
-	if err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	projectIdParam := params["projectId"]
-	if projectIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
-		return
-	}
-	regionIdParam := params["regionId"]
-	if regionIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
-		return
-	}
-	kfsParam := Kfs{}
-	d := json.NewDecoder(r.Body)
-	d.DisallowUnknownFields()
-	if err := d.Decode(&kfsParam); err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	if err := AssertKfsRequired(kfsParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	if err := AssertKfsConstraints(kfsParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	var nfsIdParam string
-	if query.Has("nfsId") {
-		param := query.Get("nfsId")
-
-		nfsIdParam = param
-	} else {
-	}
-	result, err := c.service.CreateProjectRegionKFS(r.Context(), projectIdParam, regionIdParam, kfsParam, nfsIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// CreateProjectRegionKGW - 
-func (c *ProjectAPIController) CreateProjectRegionKGW(w http.ResponseWriter, r *http.Request) {
+// CreateProjectRegionKawaii - 
+func (c *ProjectAPIController) CreateProjectRegionKawaii(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	projectIdParam := params["projectId"]
 	if projectIdParam == "" {
@@ -311,22 +261,22 @@ func (c *ProjectAPIController) CreateProjectRegionKGW(w http.ResponseWriter, r *
 		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
 		return
 	}
-	kgwParam := Kgw{}
+	kawaiiParam := Kawaii{}
 	d := json.NewDecoder(r.Body)
 	d.DisallowUnknownFields()
-	if err := d.Decode(&kgwParam); err != nil {
+	if err := d.Decode(&kawaiiParam); err != nil {
 		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
 		return
 	}
-	if err := AssertKgwRequired(kgwParam); err != nil {
+	if err := AssertKawaiiRequired(kawaiiParam); err != nil {
 		c.errorHandler(w, r, err, nil)
 		return
 	}
-	if err := AssertKgwConstraints(kgwParam); err != nil {
+	if err := AssertKawaiiConstraints(kawaiiParam); err != nil {
 		c.errorHandler(w, r, err, nil)
 		return
 	}
-	result, err := c.service.CreateProjectRegionKGW(r.Context(), projectIdParam, regionIdParam, kgwParam)
+	result, err := c.service.CreateProjectRegionKawaii(r.Context(), projectIdParam, regionIdParam, kawaiiParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -365,6 +315,56 @@ func (c *ProjectAPIController) CreateProjectRegionKonvey(w http.ResponseWriter, 
 		return
 	}
 	result, err := c.service.CreateProjectRegionKonvey(r.Context(), projectIdParam, regionIdParam, konveyParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// CreateProjectRegionKylo - 
+func (c *ProjectAPIController) CreateProjectRegionKylo(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	query, err := parseQuery(r.URL.RawQuery)
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	projectIdParam := params["projectId"]
+	if projectIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
+		return
+	}
+	regionIdParam := params["regionId"]
+	if regionIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
+		return
+	}
+	kyloParam := Kylo{}
+	d := json.NewDecoder(r.Body)
+	d.DisallowUnknownFields()
+	if err := d.Decode(&kyloParam); err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	if err := AssertKyloRequired(kyloParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	if err := AssertKyloConstraints(kyloParam); err != nil {
+		c.errorHandler(w, r, err, nil)
+		return
+	}
+	var nfsIdParam string
+	if query.Has("nfsId") {
+		param := query.Get("nfsId")
+
+		nfsIdParam = param
+	} else {
+	}
+	result, err := c.service.CreateProjectRegionKylo(r.Context(), projectIdParam, regionIdParam, kyloParam, nfsIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -469,8 +469,8 @@ func (c *ProjectAPIController) CreateProjectZoneInstance(w http.ResponseWriter, 
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// CreateProjectZoneKCE - 
-func (c *ProjectAPIController) CreateProjectZoneKCE(w http.ResponseWriter, r *http.Request) {
+// CreateProjectZoneKompute - 
+func (c *ProjectAPIController) CreateProjectZoneKompute(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	query, err := parseQuery(r.URL.RawQuery)
 	if err != nil {
@@ -487,18 +487,18 @@ func (c *ProjectAPIController) CreateProjectZoneKCE(w http.ResponseWriter, r *ht
 		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
 		return
 	}
-	kceParam := Kce{}
+	komputeParam := Kompute{}
 	d := json.NewDecoder(r.Body)
 	d.DisallowUnknownFields()
-	if err := d.Decode(&kceParam); err != nil {
+	if err := d.Decode(&komputeParam); err != nil {
 		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
 		return
 	}
-	if err := AssertKceRequired(kceParam); err != nil {
+	if err := AssertKomputeRequired(komputeParam); err != nil {
 		c.errorHandler(w, r, err, nil)
 		return
 	}
-	if err := AssertKceConstraints(kceParam); err != nil {
+	if err := AssertKomputeConstraints(komputeParam); err != nil {
 		c.errorHandler(w, r, err, nil)
 		return
 	}
@@ -530,7 +530,7 @@ func (c *ProjectAPIController) CreateProjectZoneKCE(w http.ResponseWriter, r *ht
 		publicParam = param
 	} else {
 	}
-	result, err := c.service.CreateProjectZoneKCE(r.Context(), projectIdParam, zoneIdParam, kceParam, poolIdParam, templateIdParam, publicParam)
+	result, err := c.service.CreateProjectZoneKompute(r.Context(), projectIdParam, zoneIdParam, komputeParam, poolIdParam, templateIdParam, publicParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -614,43 +614,8 @@ func (c *ProjectAPIController) ListProjectDnsRecords(w http.ResponseWriter, r *h
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// ListProjectRegionKFSs - 
-func (c *ProjectAPIController) ListProjectRegionKFSs(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	query, err := parseQuery(r.URL.RawQuery)
-	if err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	projectIdParam := params["projectId"]
-	if projectIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
-		return
-	}
-	regionIdParam := params["regionId"]
-	if regionIdParam == "" {
-		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
-		return
-	}
-	var nfsIdParam string
-	if query.Has("nfsId") {
-		param := query.Get("nfsId")
-
-		nfsIdParam = param
-	} else {
-	}
-	result, err := c.service.ListProjectRegionKFSs(r.Context(), projectIdParam, regionIdParam, nfsIdParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-}
-
-// ListProjectRegionKGWs - 
-func (c *ProjectAPIController) ListProjectRegionKGWs(w http.ResponseWriter, r *http.Request) {
+// ListProjectRegionKawaiis - 
+func (c *ProjectAPIController) ListProjectRegionKawaiis(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	projectIdParam := params["projectId"]
 	if projectIdParam == "" {
@@ -662,7 +627,7 @@ func (c *ProjectAPIController) ListProjectRegionKGWs(w http.ResponseWriter, r *h
 		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
 		return
 	}
-	result, err := c.service.ListProjectRegionKGWs(r.Context(), projectIdParam, regionIdParam)
+	result, err := c.service.ListProjectRegionKawaiis(r.Context(), projectIdParam, regionIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -686,6 +651,41 @@ func (c *ProjectAPIController) ListProjectRegionKonveys(w http.ResponseWriter, r
 		return
 	}
 	result, err := c.service.ListProjectRegionKonveys(r.Context(), projectIdParam, regionIdParam)
+	// If an error occurred, encode the error with the status code
+	if err != nil {
+		c.errorHandler(w, r, err, &result)
+		return
+	}
+	// If no error, encode the body and the result code
+	EncodeJSONResponse(result.Body, &result.Code, w)
+}
+
+// ListProjectRegionKylos - 
+func (c *ProjectAPIController) ListProjectRegionKylos(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	query, err := parseQuery(r.URL.RawQuery)
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	projectIdParam := params["projectId"]
+	if projectIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"projectId"}, nil)
+		return
+	}
+	regionIdParam := params["regionId"]
+	if regionIdParam == "" {
+		c.errorHandler(w, r, &RequiredError{"regionId"}, nil)
+		return
+	}
+	var nfsIdParam string
+	if query.Has("nfsId") {
+		param := query.Get("nfsId")
+
+		nfsIdParam = param
+	} else {
+	}
+	result, err := c.service.ListProjectRegionKylos(r.Context(), projectIdParam, regionIdParam, nfsIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -741,8 +741,8 @@ func (c *ProjectAPIController) ListProjectZoneInstances(w http.ResponseWriter, r
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// ListProjectZoneKCEs - 
-func (c *ProjectAPIController) ListProjectZoneKCEs(w http.ResponseWriter, r *http.Request) {
+// ListProjectZoneKomputes - 
+func (c *ProjectAPIController) ListProjectZoneKomputes(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	projectIdParam := params["projectId"]
 	if projectIdParam == "" {
@@ -754,7 +754,7 @@ func (c *ProjectAPIController) ListProjectZoneKCEs(w http.ResponseWriter, r *htt
 		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
 		return
 	}
-	result, err := c.service.ListProjectZoneKCEs(r.Context(), projectIdParam, zoneIdParam)
+	result, err := c.service.ListProjectZoneKomputes(r.Context(), projectIdParam, zoneIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

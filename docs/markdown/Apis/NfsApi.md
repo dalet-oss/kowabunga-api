@@ -7,7 +7,7 @@ All URIs are relative to */api/v1*
 | [**createStorageNFS**](NfsApi.md#createStorageNFS) | **POST** /region/{regionId}/nfs |  |
 | [**deleteStorageNFS**](NfsApi.md#deleteStorageNFS) | **DELETE** /nfs/{nfsId} |  |
 | [**listRegionStorageNFSs**](NfsApi.md#listRegionStorageNFSs) | **GET** /region/{regionId}/nfs |  |
-| [**listStorageNFSKFSs**](NfsApi.md#listStorageNFSKFSs) | **GET** /nfs/{nfsId}/kfs |  |
+| [**listStorageNFSKylos**](NfsApi.md#listStorageNFSKylos) | **GET** /nfs/{nfsId}/kylo |  |
 | [**listStorageNFSs**](NfsApi.md#listStorageNFSs) | **GET** /nfs |  |
 | [**readStorageNFS**](NfsApi.md#readStorageNFS) | **GET** /nfs/{nfsId} |  |
 | [**setRegionDefaultStorageNFS**](NfsApi.md#setRegionDefaultStorageNFS) | **PATCH** /region/{regionId}/nfs/{nfsId}/default |  |
@@ -98,13 +98,13 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listStorageNFSKFSs"></a>
-# **listStorageNFSKFSs**
-> List listStorageNFSKFSs(nfsId)
+<a name="listStorageNFSKylos"></a>
+# **listStorageNFSKylos**
+> List listStorageNFSKylos(nfsId)
 
 
 
-    Returns the IDs of KFS (Kowabunga File System) objects.
+    Returns the IDs of Kylo objects.
 
 ### Parameters
 

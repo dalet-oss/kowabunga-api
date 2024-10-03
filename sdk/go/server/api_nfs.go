@@ -56,10 +56,10 @@ func (c *NfsAPIController) Routes() Routes {
 			"/api/v1/nfs/{nfsId}",
 			c.DeleteStorageNFS,
 		},
-		"ListStorageNFSKFSs": Route{
+		"ListStorageNFSKylos": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/nfs/{nfsId}/kfs",
-			c.ListStorageNFSKFSs,
+			"/api/v1/nfs/{nfsId}/kylo",
+			c.ListStorageNFSKylos,
 		},
 		"ListStorageNFSs": Route{
 			strings.ToUpper("Get"),
@@ -97,15 +97,15 @@ func (c *NfsAPIController) DeleteStorageNFS(w http.ResponseWriter, r *http.Reque
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// ListStorageNFSKFSs - 
-func (c *NfsAPIController) ListStorageNFSKFSs(w http.ResponseWriter, r *http.Request) {
+// ListStorageNFSKylos - 
+func (c *NfsAPIController) ListStorageNFSKylos(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	nfsIdParam := params["nfsId"]
 	if nfsIdParam == "" {
 		c.errorHandler(w, r, &RequiredError{"nfsId"}, nil)
 		return
 	}
-	result, err := c.service.ListStorageNFSKFSs(r.Context(), nfsIdParam)
+	result, err := c.service.ListStorageNFSKylos(r.Context(), nfsIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

@@ -177,17 +177,17 @@ export class NfsService {
     }
 
     /**
-     * Returns the IDs of KFS (Kowabunga File System) objects.
+     * Returns the IDs of Kylo objects.
      * @param nfsId The ID of the NFS storage.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public listStorageNFSKFSs(nfsId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
-    public listStorageNFSKFSs(nfsId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
-    public listStorageNFSKFSs(nfsId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
-    public listStorageNFSKFSs(nfsId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public listStorageNFSKylos(nfsId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
+    public listStorageNFSKylos(nfsId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
+    public listStorageNFSKylos(nfsId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
+    public listStorageNFSKylos(nfsId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (nfsId === null || nfsId === undefined) {
-            throw new Error('Required parameter nfsId was null or undefined when calling listStorageNFSKFSs.');
+            throw new Error('Required parameter nfsId was null or undefined when calling listStorageNFSKylos.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -234,7 +234,7 @@ export class NfsService {
             }
         }
 
-        let localVarPath = `/nfs/${this.configuration.encodeParam({name: "nfsId", value: nfsId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kfs`;
+        let localVarPath = `/nfs/${this.configuration.encodeParam({name: "nfsId", value: nfsId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kylo`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

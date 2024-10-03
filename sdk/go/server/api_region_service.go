@@ -27,13 +27,13 @@ func NewRegionAPIService() RegionAPIServicer {
 	return &RegionAPIService{}
 }
 
-// CreateNetGW - 
-func (s *RegionAPIService) CreateNetGW(ctx context.Context, regionId string, netGw NetGw) (ImplResponse, error) {
-	// TODO - update CreateNetGW with the required logic for this service method.
+// CreateKiwi - 
+func (s *RegionAPIService) CreateKiwi(ctx context.Context, regionId string, kiwi Kiwi) (ImplResponse, error) {
+	// TODO - update CreateKiwi with the required logic for this service method.
 	// Add api_region_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
-	// TODO: Uncomment the next line to return response Response(201, NetGw{}) or use other options such as http.Ok ...
-	// return Response(201, NetGw{}), nil
+	// TODO: Uncomment the next line to return response Response(201, Kiwi{}) or use other options such as http.Ok ...
+	// return Response(201, Kiwi{}), nil
 
 	// TODO: Uncomment the next line to return response Response(400, ApiErrorBadRequest{}) or use other options such as http.Ok ...
 	// return Response(400, ApiErrorBadRequest{}), nil
@@ -56,7 +56,7 @@ func (s *RegionAPIService) CreateNetGW(ctx context.Context, regionId string, net
 	// TODO: Uncomment the next line to return response Response(507, ApiErrorInsufficientStorage{}) or use other options such as http.Ok ...
 	// return Response(507, ApiErrorInsufficientStorage{}), nil
 
-	return Response(http.StatusNotImplemented, nil), errors.New("CreateNetGW method not implemented")
+	return Response(http.StatusNotImplemented, nil), errors.New("CreateKiwi method not implemented")
 }
 
 // CreateRegion - 
@@ -245,9 +245,9 @@ func (s *RegionAPIService) DeleteRegion(ctx context.Context, regionId string) (I
 	return Response(http.StatusNotImplemented, nil), errors.New("DeleteRegion method not implemented")
 }
 
-// ListRegionNetGWs - 
-func (s *RegionAPIService) ListRegionNetGWs(ctx context.Context, regionId string) (ImplResponse, error) {
-	// TODO - update ListRegionNetGWs with the required logic for this service method.
+// ListRegionKiwis - 
+func (s *RegionAPIService) ListRegionKiwis(ctx context.Context, regionId string) (ImplResponse, error) {
+	// TODO - update ListRegionKiwis with the required logic for this service method.
 	// Add api_region_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
 	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
@@ -262,7 +262,7 @@ func (s *RegionAPIService) ListRegionNetGWs(ctx context.Context, regionId string
 	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
 	// return Response(404, ApiErrorNotFound{}), nil
 
-	return Response(http.StatusNotImplemented, nil), errors.New("ListRegionNetGWs method not implemented")
+	return Response(http.StatusNotImplemented, nil), errors.New("ListRegionKiwis method not implemented")
 }
 
 // ListRegionStorageNFSs - 

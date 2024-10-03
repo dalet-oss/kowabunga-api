@@ -33,11 +33,10 @@ export interface Agent {
     type: Agent.TypeEnum;
 }
 export namespace Agent {
-    export type TypeEnum = 'KCA' | 'KSA' | 'KNA';
+    export type TypeEnum = 'Kiwi' | 'Kaktus';
     export const TypeEnum = {
-        Kca: 'KCA' as TypeEnum,
-        Ksa: 'KSA' as TypeEnum,
-        Kna: 'KNA' as TypeEnum
+        Kiwi: 'Kiwi' as TypeEnum,
+        Kaktus: 'Kaktus' as TypeEnum
     };
 }
 

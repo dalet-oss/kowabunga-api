@@ -54,21 +54,19 @@ type APIClient struct {
 
 	AgentAPI *AgentAPIService
 
-	GroupAPI *GroupAPIService
-
 	HostAPI *HostAPIService
 
 	InstanceAPI *InstanceAPIService
 
-	KceAPI *KceAPIService
+	KawaiiAPI *KawaiiAPIService
 
-	KfsAPI *KfsAPIService
+	KiwiAPI *KiwiAPIService
 
-	KgwAPI *KgwAPIService
+	KomputeAPI *KomputeAPIService
 
 	KonveyAPI *KonveyAPIService
 
-	NetgwAPI *NetgwAPIService
+	KyloAPI *KyloAPIService
 
 	NfsAPI *NfsAPIService
 
@@ -81,6 +79,8 @@ type APIClient struct {
 	RegionAPI *RegionAPIService
 
 	SubnetAPI *SubnetAPIService
+
+	TeamAPI *TeamAPIService
 
 	TemplateAPI *TemplateAPIService
 
@@ -113,20 +113,20 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	// API Services
 	c.AdapterAPI = (*AdapterAPIService)(&c.common)
 	c.AgentAPI = (*AgentAPIService)(&c.common)
-	c.GroupAPI = (*GroupAPIService)(&c.common)
 	c.HostAPI = (*HostAPIService)(&c.common)
 	c.InstanceAPI = (*InstanceAPIService)(&c.common)
-	c.KceAPI = (*KceAPIService)(&c.common)
-	c.KfsAPI = (*KfsAPIService)(&c.common)
-	c.KgwAPI = (*KgwAPIService)(&c.common)
+	c.KawaiiAPI = (*KawaiiAPIService)(&c.common)
+	c.KiwiAPI = (*KiwiAPIService)(&c.common)
+	c.KomputeAPI = (*KomputeAPIService)(&c.common)
 	c.KonveyAPI = (*KonveyAPIService)(&c.common)
-	c.NetgwAPI = (*NetgwAPIService)(&c.common)
+	c.KyloAPI = (*KyloAPIService)(&c.common)
 	c.NfsAPI = (*NfsAPIService)(&c.common)
 	c.PoolAPI = (*PoolAPIService)(&c.common)
 	c.ProjectAPI = (*ProjectAPIService)(&c.common)
 	c.RecordAPI = (*RecordAPIService)(&c.common)
 	c.RegionAPI = (*RegionAPIService)(&c.common)
 	c.SubnetAPI = (*SubnetAPIService)(&c.common)
+	c.TeamAPI = (*TeamAPIService)(&c.common)
 	c.TemplateAPI = (*TemplateAPIService)(&c.common)
 	c.TokenAPI = (*TokenAPIService)(&c.common)
 	c.UserAPI = (*UserAPIService)(&c.common)

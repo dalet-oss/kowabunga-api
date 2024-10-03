@@ -184,27 +184,27 @@ func (a *NfsAPIService) DeleteStorageNFSExecute(r ApiDeleteStorageNFSRequest) (*
 	return localVarHTTPResponse, nil
 }
 
-type ApiListStorageNFSKFSsRequest struct {
+type ApiListStorageNFSKylosRequest struct {
 	ctx context.Context
 	ApiService *NfsAPIService
 	nfsId string
 }
 
-func (r ApiListStorageNFSKFSsRequest) Execute() ([]string, *http.Response, error) {
-	return r.ApiService.ListStorageNFSKFSsExecute(r)
+func (r ApiListStorageNFSKylosRequest) Execute() ([]string, *http.Response, error) {
+	return r.ApiService.ListStorageNFSKylosExecute(r)
 }
 
 /*
-ListStorageNFSKFSs Method for ListStorageNFSKFSs
+ListStorageNFSKylos Method for ListStorageNFSKylos
 
-Returns the IDs of KFS (Kowabunga File System) objects.
+Returns the IDs of Kylo objects.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param nfsId The ID of the NFS storage.
- @return ApiListStorageNFSKFSsRequest
+ @return ApiListStorageNFSKylosRequest
 */
-func (a *NfsAPIService) ListStorageNFSKFSs(ctx context.Context, nfsId string) ApiListStorageNFSKFSsRequest {
-	return ApiListStorageNFSKFSsRequest{
+func (a *NfsAPIService) ListStorageNFSKylos(ctx context.Context, nfsId string) ApiListStorageNFSKylosRequest {
+	return ApiListStorageNFSKylosRequest{
 		ApiService: a,
 		ctx: ctx,
 		nfsId: nfsId,
@@ -213,7 +213,7 @@ func (a *NfsAPIService) ListStorageNFSKFSs(ctx context.Context, nfsId string) Ap
 
 // Execute executes the request
 //  @return []string
-func (a *NfsAPIService) ListStorageNFSKFSsExecute(r ApiListStorageNFSKFSsRequest) ([]string, *http.Response, error) {
+func (a *NfsAPIService) ListStorageNFSKylosExecute(r ApiListStorageNFSKylosRequest) ([]string, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -221,12 +221,12 @@ func (a *NfsAPIService) ListStorageNFSKFSsExecute(r ApiListStorageNFSKFSsRequest
 		localVarReturnValue  []string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NfsAPIService.ListStorageNFSKFSs")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NfsAPIService.ListStorageNFSKylos")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/nfs/{nfsId}/kfs"
+	localVarPath := localBasePath + "/nfs/{nfsId}/kylo"
 	localVarPath = strings.Replace(localVarPath, "{"+"nfsId"+"}", url.PathEscape(parameterValueToString(r.nfsId, "nfsId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

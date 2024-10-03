@@ -4,10 +4,10 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createNetGW**](RegionApi.md#createNetGW) | **POST** /region/{regionId}/netgw |  |
-| [**createProjectRegionKFS**](RegionApi.md#createProjectRegionKFS) | **POST** /project/{projectId}/region/{regionId}/kfs |  |
-| [**createProjectRegionKGW**](RegionApi.md#createProjectRegionKGW) | **POST** /project/{projectId}/region/{regionId}/kgw |  |
+| [**createKiwi**](RegionApi.md#createKiwi) | **POST** /region/{regionId}/kiwi |  |
+| [**createProjectRegionKawaii**](RegionApi.md#createProjectRegionKawaii) | **POST** /project/{projectId}/region/{regionId}/kawaii |  |
 | [**createProjectRegionKonvey**](RegionApi.md#createProjectRegionKonvey) | **POST** /project/{projectId}/region/{regionId}/konvey |  |
+| [**createProjectRegionKylo**](RegionApi.md#createProjectRegionKylo) | **POST** /project/{projectId}/region/{regionId}/kylo |  |
 | [**createProjectRegionVolume**](RegionApi.md#createProjectRegionVolume) | **POST** /project/{projectId}/region/{regionId}/volume |  |
 | [**createRegion**](RegionApi.md#createRegion) | **POST** /region |  |
 | [**createStorageNFS**](RegionApi.md#createStorageNFS) | **POST** /region/{regionId}/nfs |  |
@@ -15,11 +15,11 @@ All URIs are relative to */api/v1*
 | [**createVNet**](RegionApi.md#createVNet) | **POST** /region/{regionId}/vnet |  |
 | [**createZone**](RegionApi.md#createZone) | **POST** /region/{regionId}/zone |  |
 | [**deleteRegion**](RegionApi.md#deleteRegion) | **DELETE** /region/{regionId} |  |
-| [**listProjectRegionKFSs**](RegionApi.md#listProjectRegionKFSs) | **GET** /project/{projectId}/region/{regionId}/kfs |  |
-| [**listProjectRegionKGWs**](RegionApi.md#listProjectRegionKGWs) | **GET** /project/{projectId}/region/{regionId}/kgws |  |
+| [**listProjectRegionKawaiis**](RegionApi.md#listProjectRegionKawaiis) | **GET** /project/{projectId}/region/{regionId}/kawaiis |  |
 | [**listProjectRegionKonveys**](RegionApi.md#listProjectRegionKonveys) | **GET** /project/{projectId}/region/{regionId}/konveys |  |
+| [**listProjectRegionKylos**](RegionApi.md#listProjectRegionKylos) | **GET** /project/{projectId}/region/{regionId}/kylo |  |
 | [**listProjectRegionVolumes**](RegionApi.md#listProjectRegionVolumes) | **GET** /project/{projectId}/region/{regionId}/volumes |  |
-| [**listRegionNetGWs**](RegionApi.md#listRegionNetGWs) | **GET** /region/{regionId}/netgws |  |
+| [**listRegionKiwis**](RegionApi.md#listRegionKiwis) | **GET** /region/{regionId}/kiwis |  |
 | [**listRegionStorageNFSs**](RegionApi.md#listRegionStorageNFSs) | **GET** /region/{regionId}/nfs |  |
 | [**listRegionStoragePools**](RegionApi.md#listRegionStoragePools) | **GET** /region/{regionId}/pools |  |
 | [**listRegionVNets**](RegionApi.md#listRegionVNets) | **GET** /region/{regionId}/vnets |  |
@@ -31,24 +31,24 @@ All URIs are relative to */api/v1*
 | [**updateRegion**](RegionApi.md#updateRegion) | **PUT** /region/{regionId} |  |
 
 
-<a name="createNetGW"></a>
-# **createNetGW**
-> NetGW createNetGW(regionId, NetGW)
+<a name="createKiwi"></a>
+# **createKiwi**
+> Kiwi createKiwi(regionId, Kiwi)
 
 
 
-    Creates a new Iris network gateway.
+    Creates a new Kiwi (Kowabunga Inner Wan Interface) provides edge-network services..
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **regionId** | **String**| The ID of the region. | [default to null] |
-| **NetGW** | [**NetGW**](../Models/NetGW.md)| NetGW payload. | |
+| **Kiwi** | [**Kiwi**](../Models/Kiwi.md)| Kiwi payload. | |
 
 ### Return type
 
-[**NetGW**](../Models/NetGW.md)
+[**Kiwi**](../Models/Kiwi.md)
 
 ### Authorization
 
@@ -59,43 +59,13 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createProjectRegionKFS"></a>
-# **createProjectRegionKFS**
-> KFS createProjectRegionKFS(projectId, regionId, KFS, nfsId)
+<a name="createProjectRegionKawaii"></a>
+# **createProjectRegionKawaii**
+> Kawaii createProjectRegionKawaii(projectId, regionId, Kawaii)
 
 
 
-    Creates a new KFS (Kowabunga File System).
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the project. | [default to null] |
-| **regionId** | **String**| The ID of the region. | [default to null] |
-| **KFS** | [**KFS**](../Models/KFS.md)| KFS payload. | |
-| **nfsId** | **String**| NFS storage ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
-
-### Return type
-
-[**KFS**](../Models/KFS.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-<a name="createProjectRegionKGW"></a>
-# **createProjectRegionKGW**
-> KGW createProjectRegionKGW(projectId, regionId, KGW)
-
-
-
-    Creates a new KGW (Kowabunga Network Gateway).
+    Creates a new Kawaii.
 
 ### Parameters
 
@@ -103,11 +73,11 @@ All URIs are relative to */api/v1*
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the project. | [default to null] |
 | **regionId** | **String**| The ID of the region. | [default to null] |
-| **KGW** | [**KGW**](../Models/KGW.md)| KGW payload. | |
+| **Kawaii** | [**Kawaii**](../Models/Kawaii.md)| Kawaii payload. | |
 
 ### Return type
 
-[**KGW**](../Models/KGW.md)
+[**Kawaii**](../Models/Kawaii.md)
 
 ### Authorization
 
@@ -137,6 +107,36 @@ All URIs are relative to */api/v1*
 ### Return type
 
 [**Konvey**](../Models/Konvey.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+<a name="createProjectRegionKylo"></a>
+# **createProjectRegionKylo**
+> Kylo createProjectRegionKylo(projectId, regionId, Kylo, nfsId)
+
+
+
+    Creates a new Kylo.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
+| **regionId** | **String**| The ID of the region. | [default to null] |
+| **Kylo** | [**Kylo**](../Models/Kylo.md)| Kylo payload. | |
+| **nfsId** | **String**| NFS storage ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
+
+### Return type
+
+[**Kylo**](../Models/Kylo.md)
 
 ### Authorization
 
@@ -345,42 +345,13 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectRegionKFSs"></a>
-# **listProjectRegionKFSs**
-> List listProjectRegionKFSs(projectId, regionId, nfsId)
+<a name="listProjectRegionKawaiis"></a>
+# **listProjectRegionKawaiis**
+> List listProjectRegionKawaiis(projectId, regionId)
 
 
 
-    Returns the IDs of KFS (Kowabunga File System) objects.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **projectId** | **String**| The ID of the project. | [default to null] |
-| **regionId** | **String**| The ID of the region. | [default to null] |
-| **nfsId** | **String**| NFS storage ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-<a name="listProjectRegionKGWs"></a>
-# **listProjectRegionKGWs**
-> List listProjectRegionKGWs(projectId, regionId)
-
-
-
-    Returns the IDs of KGW (Kowabunga Network Gateway) objects.
+    Returns the IDs of Kawaii objects.
 
 ### Parameters
 
@@ -430,6 +401,35 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+<a name="listProjectRegionKylos"></a>
+# **listProjectRegionKylos**
+> List listProjectRegionKylos(projectId, regionId, nfsId)
+
+
+
+    Returns the IDs of Kylo objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
+| **regionId** | **String**| The ID of the region. | [default to null] |
+| **nfsId** | **String**| NFS storage ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 <a name="listProjectRegionVolumes"></a>
 # **listProjectRegionVolumes**
 > List listProjectRegionVolumes(projectId, regionId)
@@ -458,13 +458,13 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listRegionNetGWs"></a>
-# **listRegionNetGWs**
-> List listRegionNetGWs(regionId)
+<a name="listRegionKiwis"></a>
+# **listRegionKiwis**
+> List listRegionKiwis(regionId)
 
 
 
-    Returns the IDs of Iris network gateway objects.
+    Returns the IDs of Kiwi (Kowabunga Inner Wan Interface) provides edge-network services. objects.
 
 ### Parameters
 

@@ -22,22 +22,23 @@ tags:
   name: agent
 - description: Everything about DNS record
   name: record
-- description: Everything about Kowabunga users group
-  name: group
+- description: Everything about Kowabunga users team
+  name: team
 - description: Everything about computing host
   name: host
 - description: Everything about virtual machine instance
   name: instance
-- description: Everything about KCE (Kowabunga Compute Engine)
-  name: kce
-- description: Everything about KFS (Kowabunga File System)
-  name: kfs
-- description: Everything about KGW (Kowabunga Network Gateway)
-  name: kgw
+- description: Everything about Kawaii
+  name: kawaii
+- description: Everything about Kiwi (Kowabunga Inner Wan Interface) provides edge-network
+    services.
+  name: kiwi
+- description: Everything about Kompute
+  name: kompute
 - description: Everything about Konvey (Kowabunga Network Load-Balancer)
   name: konvey
-- description: Everything about Iris network gateway
-  name: netgw
+- description: Everything about Kylo
+  name: kylo
 - description: Everything about project
   name: project
 - description: Everything about region
@@ -387,132 +388,6 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - record
-  /group:
-    get:
-      description: Returns the IDs of Kowabunga users group objects.
-      operationId: ListGroups
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of Kowabunga users group IDs.
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-      tags:
-      - group
-    post:
-      description: Creates a new Kowabunga users group.
-      operationId: CreateGroup
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Group'
-        description: Group payload.
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Group'
-          description: Returns the newly created Kowabunga users group object.
-        "400":
-          $ref: '#/components/responses/BadRequest'
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-        "409":
-          $ref: '#/components/responses/Conflict'
-        "422":
-          $ref: '#/components/responses/UnprocessableEntity'
-        "507":
-          $ref: '#/components/responses/InsufficientStorage'
-      tags:
-      - group
-  /group/{groupId}:
-    delete:
-      description: Deletes an existing Kowabunga users group.
-      operationId: DeleteGroup
-      parameters:
-      - $ref: '#/components/parameters/GroupID'
-      responses:
-        "200":
-          description: The Kowabunga users group has been successfully removed.
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-        "409":
-          $ref: '#/components/responses/Conflict'
-        "422":
-          $ref: '#/components/responses/UnprocessableEntity'
-      tags:
-      - group
-    get:
-      description: Returns a Kowabunga users group.
-      operationId: ReadGroup
-      parameters:
-      - $ref: '#/components/parameters/GroupID'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Group'
-          description: Returns the Kowabunga users group object.
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-      tags:
-      - group
-    parameters:
-    - $ref: '#/components/parameters/GroupID'
-    put:
-      description: Updates a Kowabunga users group configuration.
-      operationId: UpdateGroup
-      parameters:
-      - $ref: '#/components/parameters/GroupID'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Group'
-        description: Group payload.
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Group'
-          description: Returns the Kowabunga users group object.
-        "400":
-          $ref: '#/components/responses/BadRequest'
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-        "422":
-          $ref: '#/components/responses/UnprocessableEntity'
-        "507":
-          $ref: '#/components/responses/InsufficientStorage'
-      tags:
-      - group
   /host:
     get:
       description: Returns the IDs of computing host objects.
@@ -940,32 +815,32 @@ paths:
       - instance
     parameters:
     - $ref: '#/components/parameters/InstanceID'
-  /kce:
+  /kawaii:
     get:
-      description: Returns the IDs of KCE (Kowabunga Compute Engine) objects.
-      operationId: ListKCEs
+      description: Returns the IDs of Kawaii objects.
+      operationId: ListKawaiis
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of KCE (Kowabunga Compute Engine) IDs.
+          description: Returns an array of Kawaii IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
           $ref: '#/components/responses/Forbidden'
       tags:
-      - kce
-  /kce/{kceId}:
+      - kawaii
+  /kawaii/{kawaiiId}:
     delete:
-      description: Deletes an existing KCE (Kowabunga Compute Engine).
-      operationId: DeleteKCE
+      description: Deletes an existing Kawaii.
+      operationId: DeleteKawaii
       parameters:
-      - $ref: '#/components/parameters/KceID'
+      - $ref: '#/components/parameters/KawaiiID'
       responses:
         "200":
-          description: The KCE (Kowabunga Compute Engine) has been successfully removed.
+          description: The Kawaii has been successfully removed.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -977,19 +852,19 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
-      - kce
+      - kawaii
     get:
-      description: Returns a KCE (Kowabunga Compute Engine).
-      operationId: ReadKCE
+      description: Returns a Kawaii.
+      operationId: ReadKawaii
       parameters:
-      - $ref: '#/components/parameters/KceID'
+      - $ref: '#/components/parameters/KawaiiID'
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/KCE'
-          description: Returns the KCE (Kowabunga Compute Engine) object.
+                $ref: '#/components/schemas/Kawaii'
+          description: Returns the Kawaii object.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -997,28 +872,28 @@ paths:
         "404":
           $ref: '#/components/responses/NotFound'
       tags:
-      - kce
+      - kawaii
     parameters:
-    - $ref: '#/components/parameters/KceID'
+    - $ref: '#/components/parameters/KawaiiID'
     put:
-      description: Updates a KCE (Kowabunga Compute Engine) configuration.
-      operationId: UpdateKCE
+      description: Updates a Kawaii configuration.
+      operationId: UpdateKawaii
       parameters:
-      - $ref: '#/components/parameters/KceID'
+      - $ref: '#/components/parameters/KawaiiID'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/KCE'
-        description: KCE payload.
+              $ref: '#/components/schemas/Kawaii'
+        description: Kawaii payload.
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/KCE'
-          description: Returns the KCE (Kowabunga Compute Engine) object.
+                $ref: '#/components/schemas/Kawaii'
+          description: Returns the Kawaii object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -1032,13 +907,207 @@ paths:
         "507":
           $ref: '#/components/responses/InsufficientStorage'
       tags:
-      - kce
-  /kce/{kceId}/state:
+      - kawaii
+  /kiwi:
+    get:
+      description: Returns the IDs of Kiwi (Kowabunga Inner Wan Interface) provides
+        edge-network services. objects.
+      operationId: ListKiwis
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of Kiwi (Kowabunga Inner Wan Interface) provides
+            edge-network services. IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - kiwi
+  /kiwi/{kiwiId}:
+    delete:
+      description: Deletes an existing Kiwi (Kowabunga Inner Wan Interface) provides
+        edge-network services..
+      operationId: DeleteKiwi
+      parameters:
+      - $ref: '#/components/parameters/KiwiID'
+      responses:
+        "200":
+          description: The Kiwi (Kowabunga Inner Wan Interface) provides edge-network
+            services. has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - kiwi
+    get:
+      description: Returns a Kiwi (Kowabunga Inner Wan Interface) provides edge-network
+        services..
+      operationId: ReadKiwi
+      parameters:
+      - $ref: '#/components/parameters/KiwiID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kiwi'
+          description: Returns the Kiwi (Kowabunga Inner Wan Interface) provides edge-network
+            services. object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - kiwi
+    parameters:
+    - $ref: '#/components/parameters/KiwiID'
+    put:
+      description: Updates a Kiwi (Kowabunga Inner Wan Interface) provides edge-network
+        services. configuration.
+      operationId: UpdateKiwi
+      parameters:
+      - $ref: '#/components/parameters/KiwiID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kiwi'
+        description: Kiwi payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kiwi'
+          description: Returns the Kiwi (Kowabunga Inner Wan Interface) provides edge-network
+            services. object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - kiwi
+  /kompute:
+    get:
+      description: Returns the IDs of Kompute objects.
+      operationId: ListKomputes
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of Kompute IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - kompute
+  /kompute/{komputeId}:
+    delete:
+      description: Deletes an existing Kompute.
+      operationId: DeleteKompute
+      parameters:
+      - $ref: '#/components/parameters/KomputeID'
+      responses:
+        "200":
+          description: The Kompute has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - kompute
+    get:
+      description: Returns a Kompute.
+      operationId: ReadKompute
+      parameters:
+      - $ref: '#/components/parameters/KomputeID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kompute'
+          description: Returns the Kompute object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - kompute
+    parameters:
+    - $ref: '#/components/parameters/KomputeID'
+    put:
+      description: Updates a Kompute configuration.
+      operationId: UpdateKompute
+      parameters:
+      - $ref: '#/components/parameters/KomputeID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kompute'
+        description: Kompute payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kompute'
+          description: Returns the Kompute object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - kompute
+  /kompute/{komputeId}/state:
     get:
       description: Returns a virtual machine instance state.
-      operationId: ReadKCEState
+      operationId: ReadKomputeState
       parameters:
-      - $ref: '#/components/parameters/KceID'
+      - $ref: '#/components/parameters/KomputeID'
       responses:
         "200":
           content:
@@ -1053,20 +1122,20 @@ paths:
         "404":
           $ref: '#/components/responses/NotFound'
       tags:
-      - kce
+      - kompute
     parameters:
-    - $ref: '#/components/parameters/KceID'
-  /kce/{kceId}/reboot:
+    - $ref: '#/components/parameters/KomputeID'
+  /kompute/{komputeId}/reboot:
     parameters:
-    - $ref: '#/components/parameters/KceID'
+    - $ref: '#/components/parameters/KomputeID'
     patch:
-      description: Performs a KCE (Kowabunga Compute Engine) software reboot.
-      operationId: RebootKCE
+      description: Performs a Kompute software reboot.
+      operationId: RebootKompute
       parameters:
-      - $ref: '#/components/parameters/KceID'
+      - $ref: '#/components/parameters/KomputeID'
       responses:
         "200":
-          description: The KCE (Kowabunga Compute Engine) software reboot is successful.
+          description: The Kompute software reboot is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -1076,18 +1145,18 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
-      - kce
-  /kce/{kceId}/reset:
+      - kompute
+  /kompute/{komputeId}/reset:
     parameters:
-    - $ref: '#/components/parameters/KceID'
+    - $ref: '#/components/parameters/KomputeID'
     patch:
-      description: Performs a KCE (Kowabunga Compute Engine) hardware reset.
-      operationId: ResetKCE
+      description: Performs a Kompute hardware reset.
+      operationId: ResetKompute
       parameters:
-      - $ref: '#/components/parameters/KceID'
+      - $ref: '#/components/parameters/KomputeID'
       responses:
         "200":
-          description: The KCE (Kowabunga Compute Engine) hardware reset is successful.
+          description: The Kompute hardware reset is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -1097,18 +1166,18 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
-      - kce
-  /kce/{kceId}/suspend:
+      - kompute
+  /kompute/{komputeId}/suspend:
     parameters:
-    - $ref: '#/components/parameters/KceID'
+    - $ref: '#/components/parameters/KomputeID'
     patch:
-      description: Performs a KCE (Kowabunga Compute Engine) software PM suspend.
-      operationId: SuspendKCE
+      description: Performs a Kompute software PM suspend.
+      operationId: SuspendKompute
       parameters:
-      - $ref: '#/components/parameters/KceID'
+      - $ref: '#/components/parameters/KomputeID'
       responses:
         "200":
-          description: The KCE (Kowabunga Compute Engine) software PM suspend is successful.
+          description: The Kompute software PM suspend is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -1118,18 +1187,18 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
-      - kce
-  /kce/{kceId}/resume:
+      - kompute
+  /kompute/{komputeId}/resume:
     parameters:
-    - $ref: '#/components/parameters/KceID'
+    - $ref: '#/components/parameters/KomputeID'
     patch:
-      description: Performs a KCE (Kowabunga Compute Engine) software PM resume.
-      operationId: ResumeKCE
+      description: Performs a Kompute software PM resume.
+      operationId: ResumeKompute
       parameters:
-      - $ref: '#/components/parameters/KceID'
+      - $ref: '#/components/parameters/KomputeID'
       responses:
         "200":
-          description: The KCE (Kowabunga Compute Engine) software PM resume is successful.
+          description: The Kompute software PM resume is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -1139,18 +1208,18 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
-      - kce
-  /kce/{kceId}/start:
+      - kompute
+  /kompute/{komputeId}/start:
     parameters:
-    - $ref: '#/components/parameters/KceID'
+    - $ref: '#/components/parameters/KomputeID'
     patch:
-      description: Performs a KCE (Kowabunga Compute Engine) hardware boot-up.
-      operationId: StartKCE
+      description: Performs a Kompute hardware boot-up.
+      operationId: StartKompute
       parameters:
-      - $ref: '#/components/parameters/KceID'
+      - $ref: '#/components/parameters/KomputeID'
       responses:
         "200":
-          description: The KCE (Kowabunga Compute Engine) hardware boot-up is successful.
+          description: The Kompute hardware boot-up is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -1160,18 +1229,18 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
-      - kce
-  /kce/{kceId}/stop:
+      - kompute
+  /kompute/{komputeId}/stop:
     parameters:
-    - $ref: '#/components/parameters/KceID'
+    - $ref: '#/components/parameters/KomputeID'
     patch:
-      description: Performs a KCE (Kowabunga Compute Engine) hardware stop.
-      operationId: StopKCE
+      description: Performs a Kompute hardware stop.
+      operationId: StopKompute
       parameters:
-      - $ref: '#/components/parameters/KceID'
+      - $ref: '#/components/parameters/KomputeID'
       responses:
         "200":
-          description: The KCE (Kowabunga Compute Engine) hardware stop is successful.
+          description: The Kompute hardware stop is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -1181,18 +1250,18 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
-      - kce
-  /kce/{kceId}/shutdown:
+      - kompute
+  /kompute/{komputeId}/shutdown:
     parameters:
-    - $ref: '#/components/parameters/KceID'
+    - $ref: '#/components/parameters/KomputeID'
     patch:
-      description: Performs a KCE (Kowabunga Compute Engine) software shutdown.
-      operationId: ShutdownKCE
+      description: Performs a Kompute software shutdown.
+      operationId: ShutdownKompute
       parameters:
-      - $ref: '#/components/parameters/KceID'
+      - $ref: '#/components/parameters/KomputeID'
       responses:
         "200":
-          description: The KCE (Kowabunga Compute Engine) software shutdown is successful.
+          description: The Kompute software shutdown is successful.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -1202,193 +1271,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
-      - kce
-  /kfs:
-    get:
-      description: Returns the IDs of KFS (Kowabunga File System) objects.
-      operationId: ListKFSs
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of KFS (Kowabunga File System) IDs.
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-      tags:
-      - kfs
-  /kfs/{kfsId}:
-    delete:
-      description: Deletes an existing KFS (Kowabunga File System).
-      operationId: DeleteKFS
-      parameters:
-      - $ref: '#/components/parameters/KfsID'
-      responses:
-        "200":
-          description: The KFS (Kowabunga File System) has been successfully removed.
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-        "409":
-          $ref: '#/components/responses/Conflict'
-        "422":
-          $ref: '#/components/responses/UnprocessableEntity'
-      tags:
-      - kfs
-    get:
-      description: Returns a KFS (Kowabunga File System).
-      operationId: ReadKFS
-      parameters:
-      - $ref: '#/components/parameters/KfsID'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/KFS'
-          description: Returns the KFS (Kowabunga File System) object.
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-      tags:
-      - kfs
-    parameters:
-    - $ref: '#/components/parameters/KfsID'
-    put:
-      description: Updates a KFS (Kowabunga File System) configuration.
-      operationId: UpdateKFS
-      parameters:
-      - $ref: '#/components/parameters/KfsID'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/KFS'
-        description: KFS payload.
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/KFS'
-          description: Returns the KFS (Kowabunga File System) object.
-        "400":
-          $ref: '#/components/responses/BadRequest'
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-        "422":
-          $ref: '#/components/responses/UnprocessableEntity'
-        "507":
-          $ref: '#/components/responses/InsufficientStorage'
-      tags:
-      - kfs
-  /kgw:
-    get:
-      description: Returns the IDs of KGW (Kowabunga Network Gateway) objects.
-      operationId: ListKGWs
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of KGW (Kowabunga Network Gateway) IDs.
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-      tags:
-      - kgw
-  /kgw/{kgwId}:
-    delete:
-      description: Deletes an existing KGW (Kowabunga Network Gateway).
-      operationId: DeleteKGW
-      parameters:
-      - $ref: '#/components/parameters/KgwID'
-      responses:
-        "200":
-          description: The KGW (Kowabunga Network Gateway) has been successfully removed.
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-        "409":
-          $ref: '#/components/responses/Conflict'
-        "422":
-          $ref: '#/components/responses/UnprocessableEntity'
-      tags:
-      - kgw
-    get:
-      description: Returns a KGW (Kowabunga Network Gateway).
-      operationId: ReadKGW
-      parameters:
-      - $ref: '#/components/parameters/KgwID'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/KGW'
-          description: Returns the KGW (Kowabunga Network Gateway) object.
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-      tags:
-      - kgw
-    parameters:
-    - $ref: '#/components/parameters/KgwID'
-    put:
-      description: Updates a KGW (Kowabunga Network Gateway) configuration.
-      operationId: UpdateKGW
-      parameters:
-      - $ref: '#/components/parameters/KgwID'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/KGW'
-        description: KGW payload.
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/KGW'
-          description: Returns the KGW (Kowabunga Network Gateway) object.
-        "400":
-          $ref: '#/components/responses/BadRequest'
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-        "422":
-          $ref: '#/components/responses/UnprocessableEntity'
-        "507":
-          $ref: '#/components/responses/InsufficientStorage'
-      tags:
-      - kgw
+      - kompute
   /konvey:
     get:
       description: Returns the IDs of Konvey (Kowabunga Network Load-Balancer) objects.
@@ -1484,32 +1367,32 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - konvey
-  /netgw:
+  /kylo:
     get:
-      description: Returns the IDs of Iris network gateway objects.
-      operationId: ListNetGWs
+      description: Returns the IDs of Kylo objects.
+      operationId: ListKylos
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of Iris network gateway IDs.
+          description: Returns an array of Kylo IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
           $ref: '#/components/responses/Forbidden'
       tags:
-      - netgw
-  /netgw/{netgwId}:
+      - kylo
+  /kylo/{kyloId}:
     delete:
-      description: Deletes an existing Iris network gateway.
-      operationId: DeleteNetGW
+      description: Deletes an existing Kylo.
+      operationId: DeleteKylo
       parameters:
-      - $ref: '#/components/parameters/NetgwID'
+      - $ref: '#/components/parameters/KyloID'
       responses:
         "200":
-          description: The Iris network gateway has been successfully removed.
+          description: The Kylo has been successfully removed.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -1521,19 +1404,19 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
       tags:
-      - netgw
+      - kylo
     get:
-      description: Returns a Iris network gateway.
-      operationId: ReadNetGW
+      description: Returns a Kylo.
+      operationId: ReadKylo
       parameters:
-      - $ref: '#/components/parameters/NetgwID'
+      - $ref: '#/components/parameters/KyloID'
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NetGW'
-          description: Returns the Iris network gateway object.
+                $ref: '#/components/schemas/Kylo'
+          description: Returns the Kylo object.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -1541,28 +1424,28 @@ paths:
         "404":
           $ref: '#/components/responses/NotFound'
       tags:
-      - netgw
+      - kylo
     parameters:
-    - $ref: '#/components/parameters/NetgwID'
+    - $ref: '#/components/parameters/KyloID'
     put:
-      description: Updates a Iris network gateway configuration.
-      operationId: UpdateNetGW
+      description: Updates a Kylo configuration.
+      operationId: UpdateKylo
       parameters:
-      - $ref: '#/components/parameters/NetgwID'
+      - $ref: '#/components/parameters/KyloID'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NetGW'
-        description: NetGW payload.
+              $ref: '#/components/schemas/Kylo'
+        description: Kylo payload.
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NetGW'
-          description: Returns the Iris network gateway object.
+                $ref: '#/components/schemas/Kylo'
+          description: Returns the Kylo object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -1576,7 +1459,7 @@ paths:
         "507":
           $ref: '#/components/responses/InsufficientStorage'
       tags:
-      - netgw
+      - kylo
   /project:
     get:
       description: Returns the IDs of project objects.
@@ -1961,36 +1844,36 @@ paths:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/ZoneID'
-  /project/{projectId}/zone/{zoneId}/kce:
+  /project/{projectId}/zone/{zoneId}/kompute:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/ZoneID'
     - $ref: '#/components/parameters/OptionalQueryPoolID'
     - $ref: '#/components/parameters/OptionalQueryTemplateID'
-    - $ref: '#/components/parameters/OptionalQueryKcePublic'
+    - $ref: '#/components/parameters/OptionalQueryKomputePublic'
     post:
-      description: Creates a new KCE (Kowabunga Compute Engine).
-      operationId: CreateProjectZoneKCE
+      description: Creates a new Kompute.
+      operationId: CreateProjectZoneKompute
       parameters:
       - $ref: '#/components/parameters/ProjectID'
       - $ref: '#/components/parameters/ZoneID'
       - $ref: '#/components/parameters/OptionalQueryPoolID'
       - $ref: '#/components/parameters/OptionalQueryTemplateID'
-      - $ref: '#/components/parameters/OptionalQueryKcePublic'
+      - $ref: '#/components/parameters/OptionalQueryKomputePublic'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/KCE'
-        description: KCE payload.
+              $ref: '#/components/schemas/Kompute'
+        description: Kompute payload.
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/KCE'
-          description: Returns the newly created KCE (Kowabunga Compute Engine) object.
+                $ref: '#/components/schemas/Kompute'
+          description: Returns the newly created Kompute object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -2008,11 +1891,11 @@ paths:
       tags:
       - project
       - zone
-      - kce
-  /project/{projectId}/zone/{zoneId}/kces:
+      - kompute
+  /project/{projectId}/zone/{zoneId}/komputes:
     get:
-      description: Returns the IDs of KCE (Kowabunga Compute Engine) objects.
-      operationId: ListProjectZoneKCEs
+      description: Returns the IDs of Kompute objects.
+      operationId: ListProjectZoneKomputes
       parameters:
       - $ref: '#/components/parameters/ProjectID'
       - $ref: '#/components/parameters/ZoneID'
@@ -2022,7 +1905,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of KCE (Kowabunga Compute Engine) IDs.
+          description: Returns an array of Kompute IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -2032,14 +1915,14 @@ paths:
       tags:
       - project
       - zone
-      - kce
+      - kompute
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/ZoneID'
-  /project/{projectId}/region/{regionId}/kfs:
+  /project/{projectId}/region/{regionId}/kylo:
     get:
-      description: Returns the IDs of KFS (Kowabunga File System) objects.
-      operationId: ListProjectRegionKFSs
+      description: Returns the IDs of Kylo objects.
+      operationId: ListProjectRegionKylos
       parameters:
       - $ref: '#/components/parameters/ProjectID'
       - $ref: '#/components/parameters/RegionID'
@@ -2050,7 +1933,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of KFS (Kowabunga File System) IDs.
+          description: Returns an array of Kylo IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -2060,14 +1943,14 @@ paths:
       tags:
       - project
       - region
-      - kfs
+      - kylo
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/RegionID'
     - $ref: '#/components/parameters/OptionalQueryNfsID'
     post:
-      description: Creates a new KFS (Kowabunga File System).
-      operationId: CreateProjectRegionKFS
+      description: Creates a new Kylo.
+      operationId: CreateProjectRegionKylo
       parameters:
       - $ref: '#/components/parameters/ProjectID'
       - $ref: '#/components/parameters/RegionID'
@@ -2076,16 +1959,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/KFS'
-        description: KFS payload.
+              $ref: '#/components/schemas/Kylo'
+        description: Kylo payload.
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/KFS'
-          description: Returns the newly created KFS (Kowabunga File System) object.
+                $ref: '#/components/schemas/Kylo'
+          description: Returns the newly created Kylo object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -2103,14 +1986,14 @@ paths:
       tags:
       - project
       - region
-      - kfs
-  /project/{projectId}/region/{regionId}/kgw:
+      - kylo
+  /project/{projectId}/region/{regionId}/kawaii:
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/RegionID'
     post:
-      description: Creates a new KGW (Kowabunga Network Gateway).
-      operationId: CreateProjectRegionKGW
+      description: Creates a new Kawaii.
+      operationId: CreateProjectRegionKawaii
       parameters:
       - $ref: '#/components/parameters/ProjectID'
       - $ref: '#/components/parameters/RegionID'
@@ -2118,16 +2001,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/KGW'
-        description: KGW payload.
+              $ref: '#/components/schemas/Kawaii'
+        description: Kawaii payload.
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/KGW'
-          description: Returns the newly created KGW (Kowabunga Network Gateway) object.
+                $ref: '#/components/schemas/Kawaii'
+          description: Returns the newly created Kawaii object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -2145,11 +2028,11 @@ paths:
       tags:
       - project
       - region
-      - kgw
-  /project/{projectId}/region/{regionId}/kgws:
+      - kawaii
+  /project/{projectId}/region/{regionId}/kawaiis:
     get:
-      description: Returns the IDs of KGW (Kowabunga Network Gateway) objects.
-      operationId: ListProjectRegionKGWs
+      description: Returns the IDs of Kawaii objects.
+      operationId: ListProjectRegionKawaiis
       parameters:
       - $ref: '#/components/parameters/ProjectID'
       - $ref: '#/components/parameters/RegionID'
@@ -2159,7 +2042,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of KGW (Kowabunga Network Gateway) IDs.
+          description: Returns an array of Kawaii IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -2169,7 +2052,7 @@ paths:
       tags:
       - project
       - region
-      - kgw
+      - kawaii
     parameters:
     - $ref: '#/components/parameters/ProjectID'
     - $ref: '#/components/parameters/RegionID'
@@ -2543,28 +2426,30 @@ paths:
       tags:
       - region
       - pool
-  /region/{regionId}/netgw:
+  /region/{regionId}/kiwi:
     parameters:
     - $ref: '#/components/parameters/RegionID'
     post:
-      description: Creates a new Iris network gateway.
-      operationId: CreateNetGW
+      description: Creates a new Kiwi (Kowabunga Inner Wan Interface) provides edge-network
+        services..
+      operationId: CreateKiwi
       parameters:
       - $ref: '#/components/parameters/RegionID'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NetGW'
-        description: NetGW payload.
+              $ref: '#/components/schemas/Kiwi'
+        description: Kiwi payload.
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NetGW'
-          description: Returns the newly created Iris network gateway object.
+                $ref: '#/components/schemas/Kiwi'
+          description: Returns the newly created Kiwi (Kowabunga Inner Wan Interface)
+            provides edge-network services. object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -2581,11 +2466,12 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - region
-      - netgw
-  /region/{regionId}/netgws:
+      - kiwi
+  /region/{regionId}/kiwis:
     get:
-      description: Returns the IDs of Iris network gateway objects.
-      operationId: ListRegionNetGWs
+      description: Returns the IDs of Kiwi (Kowabunga Inner Wan Interface) provides
+        edge-network services. objects.
+      operationId: ListRegionKiwis
       parameters:
       - $ref: '#/components/parameters/RegionID'
       responses:
@@ -2594,7 +2480,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of Iris network gateway IDs.
+          description: Returns an array of Kiwi (Kowabunga Inner Wan Interface) provides
+            edge-network services. IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -2603,7 +2490,7 @@ paths:
           $ref: '#/components/responses/NotFound'
       tags:
       - region
-      - netgw
+      - kiwi
     parameters:
     - $ref: '#/components/parameters/RegionID'
   /region/{regionId}/vnet:
@@ -2897,10 +2784,10 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - nfs
-  /nfs/{nfsId}/kfs:
+  /nfs/{nfsId}/kylo:
     get:
-      description: Returns the IDs of KFS (Kowabunga File System) objects.
-      operationId: ListStorageNFSKFSs
+      description: Returns the IDs of Kylo objects.
+      operationId: ListStorageNFSKylos
       parameters:
       - $ref: '#/components/parameters/NfsID'
       responses:
@@ -2909,7 +2796,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of KFS (Kowabunga File System) IDs.
+          description: Returns an array of Kylo IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -2918,7 +2805,7 @@ paths:
           $ref: '#/components/responses/NotFound'
       tags:
       - nfs
-      - kfs
+      - kylo
     parameters:
     - $ref: '#/components/parameters/NfsID'
   /pool:
@@ -3283,6 +3170,132 @@ paths:
       - adapter
     parameters:
     - $ref: '#/components/parameters/SubnetID'
+  /team:
+    get:
+      description: Returns the IDs of Kowabunga users team objects.
+      operationId: ListTeams
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of Kowabunga users team IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - team
+    post:
+      description: Creates a new Kowabunga users team.
+      operationId: CreateTeam
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Team'
+        description: Team payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+          description: Returns the newly created Kowabunga users team object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - team
+  /team/{teamId}:
+    delete:
+      description: Deletes an existing Kowabunga users team.
+      operationId: DeleteTeam
+      parameters:
+      - $ref: '#/components/parameters/TeamID'
+      responses:
+        "200":
+          description: The Kowabunga users team has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - team
+    get:
+      description: Returns a Kowabunga users team.
+      operationId: ReadTeam
+      parameters:
+      - $ref: '#/components/parameters/TeamID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+          description: Returns the Kowabunga users team object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - team
+    parameters:
+    - $ref: '#/components/parameters/TeamID'
+    put:
+      description: Updates a Kowabunga users team configuration.
+      operationId: UpdateTeam
+      parameters:
+      - $ref: '#/components/parameters/TeamID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Team'
+        description: Team payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+          description: Returns the Kowabunga users team object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - team
   /template:
     get:
       description: Returns the IDs of image template objects.
@@ -4178,15 +4191,6 @@ components:
       schema:
         type: string
       style: simple
-    GroupID:
-      description: The ID of the Kowabunga users group.
-      explode: false
-      in: path
-      name: groupId
-      required: true
-      schema:
-        type: string
-      style: simple
     HostID:
       description: The ID of the computing host.
       explode: false
@@ -4205,18 +4209,37 @@ components:
       schema:
         type: string
       style: simple
-    KceID:
-      description: The ID of the KCE (Kowabunga Compute Engine).
+    KawaiiID:
+      description: The ID of the Kawaii.
       explode: false
       in: path
-      name: kceId
+      name: kawaiiId
       required: true
       schema:
         type: string
       style: simple
-    OptionalQueryKcePublic:
-      description: "Should KCE be exposed over public Internet ? (a public IPv4 address\
-        \ will then be auto-assigned, default to false)."
+    KiwiID:
+      description: The ID of the Kiwi (Kowabunga Inner Wan Interface) provides edge-network
+        services..
+      explode: false
+      in: path
+      name: kiwiId
+      required: true
+      schema:
+        type: string
+      style: simple
+    KomputeID:
+      description: The ID of the Kompute.
+      explode: false
+      in: path
+      name: komputeId
+      required: true
+      schema:
+        type: string
+      style: simple
+    OptionalQueryKomputePublic:
+      description: "Should Kompute be exposed over public Internet ? (a public IPv4\
+        \ address will then be auto-assigned, default to false)."
       explode: true
       in: query
       name: public
@@ -4224,24 +4247,6 @@ components:
       schema:
         type: boolean
       style: form
-    KfsID:
-      description: The ID of the KFS (Kowabunga File System).
-      explode: false
-      in: path
-      name: kfsId
-      required: true
-      schema:
-        type: string
-      style: simple
-    KgwID:
-      description: The ID of the KGW (Kowabunga Network Gateway).
-      explode: false
-      in: path
-      name: kgwId
-      required: true
-      schema:
-        type: string
-      style: simple
     KonveyID:
       description: The ID of the Konvey (Kowabunga Network Load-Balancer).
       explode: false
@@ -4251,11 +4256,11 @@ components:
       schema:
         type: string
       style: simple
-    NetgwID:
-      description: The ID of the Iris network gateway.
+    KyloID:
+      description: The ID of the Kylo.
       explode: false
       in: path
-      name: netgwId
+      name: kyloId
       required: true
       schema:
         type: string
@@ -4343,6 +4348,15 @@ components:
       schema:
         type: integer
       style: form
+    TeamID:
+      description: The ID of the Kowabunga users team.
+      explode: false
+      in: path
+      name: teamId
+      required: true
+      schema:
+        type: string
+      style: simple
     TemplateID:
       description: The ID of the image template.
       explode: false
@@ -4516,7 +4530,7 @@ components:
         name: name
         description: description
         id: id
-        type: KCA
+        type: Kiwi
       properties:
         id:
           description: The Kowabunga remote agent ID (auto-generated).
@@ -4530,9 +4544,8 @@ components:
         type:
           description: The Kowabunga agent type.
           enum:
-          - KCA
-          - KSA
-          - KNA
+          - Kiwi
+          - Kaktus
           type: string
       required:
       - name
@@ -4714,33 +4727,6 @@ components:
           type: string
       required:
       - value
-    Group:
-      description: A Kowabunga users group.
-      example:
-        name: name
-        description: description
-        id: id
-        users:
-        - users
-        - users
-      properties:
-        id:
-          description: The Kowabunga users group ID (auto-generated).
-          type: string
-        name:
-          description: The Kowabunga users group name.
-          type: string
-        description:
-          description: The Kowabunga users group description.
-          type: string
-        users:
-          description: List of user IDs that are part of the group.
-          items:
-            type: string
-          type: array
-      required:
-      - name
-      - users
     Host:
       description: A computing host.
       example:
@@ -4929,111 +4915,9 @@ components:
           type: string
       required:
       - url
-    KCE:
-      description: "A Kowabunga Compute Engine (KCE) is a wrapper object for bare\
-        \ virtual machines. It consists of an instance, one to several attached volumes\
-        \ and 2 network adapters (a private one, a public one). This is the prefered\
-        \ way for creating virtual machines. IP addresses will be automatically assigned."
-      example:
-        disk: 1
-        data_disk: 5
-        memory: 0
-        ip: ip
-        name: name
-        description: description
-        id: id
-        vcpus: 6
-      properties:
-        id:
-          description: The KCE (Kowabunga Compute Engine) ID (auto-generated).
-          type: string
-        name:
-          description: The KCE (Kowabunga Compute Engine) name.
-          type: string
-        description:
-          description: The KCE (Kowabunga Compute Engine) description.
-          type: string
-        memory:
-          description: The KCE (Kowabunga Compute Engine) memory size (in bytes).
-          format: int64
-          type: integer
-        vcpus:
-          description: The KCE (Kowabunga Compute Engine) number of vCPUs.
-          format: int64
-          type: integer
-        disk:
-          description: The KCE (Kowabunga Compute Engine) OS disk size (in bytes).
-          format: int64
-          type: integer
-        data_disk:
-          default: 0
-          description: "The KCE (Kowabunga Compute Engine) extra data disk size (in\
-            \ bytes). If unspecified, no extra data disk will be assigned."
-          format: int64
-          type: integer
-        ip:
-          description: The KCE (Kowabunga Compute Engine) assigned private IPv4 address
-            (read-only).
-          type: string
-      required:
-      - disk
-      - memory
-      - name
-      - vcpus
-    KFS:
-      description: A Kowabunga File System (KFS) provides an elastic NFS-like remote
-        storage volume.
-      example:
-        endpoint: endpoint
-        access: RW
-        size: 6
-        name: name
-        description: description
-        id: id
-        protocols:
-        - 0
-        - 0
-      properties:
-        id:
-          description: The KFS (Kowabunga File System) ID (auto-generated).
-          type: string
-        name:
-          description: The KFS (Kowabunga File System) name.
-          type: string
-        description:
-          description: The KFS (Kowabunga File System) description.
-          type: string
-        access:
-          default: RW
-          description: The KFS (Kowabunga File System) volume access type.
-          enum:
-          - RO
-          - RW
-          type: string
-        protocols:
-          default:
-          - 3
-          - 4
-          description: The KFS (Kowabunga File System) NFS protocol versions to be
-            supported.
-          items:
-            enum:
-            - 3
-            - 4
-            type: integer
-          type: array
-        endpoint:
-          description: The KFS (Kowabunga File System) endpoint FQDN (read-only).
-          type: string
-        size:
-          description: The KFS (Kowabunga File System) volume bytes used (read-only).
-          format: int64
-          type: integer
-      required:
-      - name
-    KGW:
-      description: A Kowabunga Network Gateway is a network gateway used for your
-        Internet inbound and outbound traffic.
+    Kawaii:
+      description: A Kawaii (Kowabunga Adapative WAn Intelligent Interface) is a network
+        gateway used for your Internet inbound and outbound traffic.
       example:
         dnat:
         - protocol: tcp
@@ -5112,33 +4996,32 @@ components:
             ports: ports
       properties:
         id:
-          description: The KGW (Kowabunga Network Gateway) ID (auto-generated).
+          description: The Kawaii ID (auto-generated).
           type: string
         name:
-          description: The KGW (Kowabunga Network Gateway) name.
+          description: The Kawaii name.
           type: string
         description:
-          description: The KGW (Kowabunga Network Gateway) description.
+          description: The Kawaii description.
           type: string
         netip:
-          $ref: '#/components/schemas/KGWNetIp'
+          $ref: '#/components/schemas/KawaiiNetIp'
         firewall:
-          $ref: '#/components/schemas/KGWFirewall'
+          $ref: '#/components/schemas/KawaiiFirewall'
         dnat:
-          description: The KGW (Kowabunga Network Gateway) list of NAT forwarding
-            entries. KGW will forward public Internet traffic from all public virtual
-            IPs to requested private subnet IP addresses.
+          description: The Kawaii list of NAT forwarding entries. Kawaii will forward
+            public Internet traffic from all public virtual IPs to requested private
+            subnet IP addresses.
           items:
-            $ref: '#/components/schemas/KGWDNatRule'
+            $ref: '#/components/schemas/KawaiiDNatRule'
           type: array
         vpc_peerings:
-          description: The KGW (Kowabunga Network Gateway) list of Kowabunga private
-            VPC subnet peering entries.
+          description: The Kawaii list of Kowabunga private VPC subnet peering entries.
           items:
-            $ref: '#/components/schemas/KGWVpcPeering'
+            $ref: '#/components/schemas/KawaiiVpcPeering'
           type: array
-    KGWNetIp:
-      description: A KGW Network IP settings.
+    KawaiiNetIp:
+      description: A Kawaii Network IP settings.
       example:
         private:
         - private
@@ -5155,51 +5038,46 @@ components:
           zone: zone
       properties:
         public:
-          description: The KGW (Kowabunga Network Gateway) global public gateways
-            virtual IP addresses (read-only).
+          description: The Kawaii global public gateways virtual IP addresses (read-only).
           items:
             type: string
           type: array
         private:
-          description: The KGW (Kowabunga Network Gateway) global private gateways
-            virtual IP addresses (read-only).
+          description: The Kawaii global private gateways virtual IP addresses (read-only).
           items:
             type: string
           type: array
         zones:
-          description: The KGW (Kowabunga Network Gateway) per-zone list of Kowabunga
-            virtual IP addresses.
+          description: The Kawaii per-zone list of Kowabunga virtual IP addresses.
           items:
-            $ref: '#/components/schemas/KGWNetIpZone'
+            $ref: '#/components/schemas/KawaiiNetIpZone'
           type: array
       required:
       - private
       - public
       - zones
-    KGWNetIpZone:
-      description: A KGW Network IP zone settings.
+    KawaiiNetIpZone:
+      description: A Kawaii Network IP zone settings.
       example:
         private: private
         public: public
         zone: zone
       properties:
         zone:
-          description: The KGW (Kowabunga Network Gateway) zone name (read-only).
+          description: The Kawaii zone name (read-only).
           type: string
         public:
-          description: The KGW (Kowabunga Network Gateway) zone gateway public virtual
-            IP (read-only).
+          description: The Kawaii zone gateway public virtual IP (read-only).
           type: string
         private:
-          description: The KGW (Kowabunga Network Gateway) zone gateway private virtual
-            IP (read-only).
+          description: The Kawaii zone gateway private virtual IP (read-only).
           type: string
       required:
       - private
       - public
       - zone
-    KGWFirewall:
-      description: A KGW public firewall settings.
+    KawaiiFirewall:
+      description: A Kawaii public firewall settings.
       example:
         ingress:
         - protocol: tcp
@@ -5218,11 +5096,11 @@ components:
           ports: ports
       properties:
         ingress:
-          description: "The KGW (Kowabunga Network Gateway) public firewall list of\
-            \ ingress rules. KGW default policy is to drop all incoming traffic, including\
-            \ ICMP. Specified ruleset will be explicitly accepted."
+          description: "The Kawaii public firewall list of ingress rules. Kawaii default\
+            \ policy is to drop all incoming traffic, including ICMP. Specified ruleset\
+            \ will be explicitly accepted."
           items:
-            $ref: '#/components/schemas/KGWFirewallIngressRule'
+            $ref: '#/components/schemas/KawaiiFirewallIngressRule'
           type: array
         egress_policy:
           default: accept
@@ -5232,16 +5110,15 @@ components:
           - drop
           type: string
         egress:
-          description: "The KGW (Kowabunga Network Gateway) public firewall list of\
-            \ egress rules. KGW default policy is to accept all outgoing traffic,\
-            \ including ICMP. Specified ruleset will be explicitly dropped if egress_policy\
-            \ is set to accept, and explicitly accepted if egress policy is set to\
-            \ drop.."
+          description: "The Kawaii public firewall list of egress rules. Kawaii default\
+            \ policy is to accept all outgoing traffic, including ICMP. Specified\
+            \ ruleset will be explicitly dropped if egress_policy is set to accept,\
+            \ and explicitly accepted if egress policy is set to drop.."
           items:
-            $ref: '#/components/schemas/KGWFirewallEgressRule'
+            $ref: '#/components/schemas/KawaiiFirewallEgressRule'
           type: array
-    KGWFirewallIngressRule:
-      description: A KGW public firewall ingress rule.
+    KawaiiFirewallIngressRule:
+      description: A Kawaii public firewall ingress rule.
       example:
         protocol: tcp
         source: 0.0.0.0/0
@@ -5264,8 +5141,8 @@ components:
           type: string
       required:
       - ports
-    KGWFirewallEgressRule:
-      description: A KGW public firewall egress rule.
+    KawaiiFirewallEgressRule:
+      description: A Kawaii public firewall egress rule.
       example:
         protocol: tcp
         destination: 0.0.0.0/0
@@ -5289,8 +5166,8 @@ components:
           type: string
       required:
       - ports
-    KGWDNatRule:
-      description: A KGW public firewall destination NAT rule.
+    KawaiiDNatRule:
+      description: A Kawaii public firewall destination NAT rule.
       example:
         protocol: tcp
         destination: destination
@@ -5313,8 +5190,8 @@ components:
       required:
       - destination
       - ports
-    KGWVpcPeering:
-      description: A KGW internal VPC subnet peering.
+    KawaiiVpcPeering:
+      description: A Kawaii internal VPC subnet peering.
       example:
         subnet: subnet
         ingress:
@@ -5336,7 +5213,7 @@ components:
       properties:
         subnet:
           description: Kowabunga Subnet ID to be peered with (subnet local IP addresses
-            will be automatically assigned to KGW instances)..
+            will be automatically assigned to Kawaii instances)..
           type: string
         policy:
           default: drop
@@ -5350,24 +5227,24 @@ components:
             subnet. ICMP traffic is always accepted. The specified ruleset will be
             explicitly accepted if drop is the default policy (useless otherwise).
           items:
-            $ref: '#/components/schemas/KGWVpcForwardRule'
+            $ref: '#/components/schemas/KawaiiVpcForwardRule'
           type: array
         egress:
           description: The firewall list of forwarding egress rules to VPC peered
             subnet. ICMP traffic is always accepted. The specified ruleset will be
             explicitly accepted if drop is the default policy (useless otherwise).
           items:
-            $ref: '#/components/schemas/KGWVpcForwardRule'
+            $ref: '#/components/schemas/KawaiiVpcForwardRule'
           type: array
         netip:
           description: The per-zone auto-assigned private IPs in peered subnet (read-only).
           items:
-            $ref: '#/components/schemas/KGWVpcNetIpZone'
+            $ref: '#/components/schemas/KawaiiVpcNetIpZone'
           type: array
       required:
       - subnet
-    KGWVpcForwardRule:
-      description: A KGW VPC firewall forwarding rule.
+    KawaiiVpcForwardRule:
+      description: A Kawaii VPC firewall forwarding rule.
       example:
         protocol: tcp
         ports: ports
@@ -5385,22 +5262,100 @@ components:
           type: string
       required:
       - ports
-    KGWVpcNetIpZone:
-      description: A KGW VPC Network IP zone settings.
+    KawaiiVpcNetIpZone:
+      description: A Kawaii VPC Network IP zone settings.
       example:
         private: private
         zone: zone
       properties:
         zone:
-          description: The KGW (Kowabunga Network Gateway) zone name (read-only).
+          description: The Kawaii zone name (read-only).
           type: string
         private:
-          description: The KGW (Kowabunga Network Gateway) zone gateway private IP
-            address in VPC peered subnet  (read-only).
+          description: The Kawaii zone gateway private IP address in VPC peered subnet  (read-only).
           type: string
       required:
       - private
       - zone
+    Kiwi:
+      description: A Kiwi (Kowabunga Inner Wan Interface) provides edge-network services..
+      example:
+        name: name
+        description: description
+        id: id
+        agents:
+        - agents
+        - agents
+      properties:
+        id:
+          description: The Kiwi (Kowabunga Inner Wan Interface) provides edge-network
+            services. ID (auto-generated).
+          type: string
+        name:
+          description: The Kiwi (Kowabunga Inner Wan Interface) provides edge-network
+            services. name.
+          type: string
+        description:
+          description: The Kiwi (Kowabunga Inner Wan Interface) provides edge-network
+            services. description.
+          type: string
+        agents:
+          description: a list of existing remote agents managing the network gateway.
+          items:
+            type: string
+          type: array
+      required:
+      - name
+    Kompute:
+      description: "A Kompute is a wrapper object for bare virtual machines. It consists\
+        \ of an instance, one to several attached volumes and 2 network adapters (a\
+        \ private one, a public one). This is the prefered way for creating virtual\
+        \ machines. IP addresses will be automatically assigned."
+      example:
+        disk: 1
+        data_disk: 5
+        memory: 0
+        ip: ip
+        name: name
+        description: description
+        id: id
+        vcpus: 6
+      properties:
+        id:
+          description: The Kompute ID (auto-generated).
+          type: string
+        name:
+          description: The Kompute name.
+          type: string
+        description:
+          description: The Kompute description.
+          type: string
+        memory:
+          description: The Kompute memory size (in bytes).
+          format: int64
+          type: integer
+        vcpus:
+          description: The Kompute number of vCPUs.
+          format: int64
+          type: integer
+        disk:
+          description: The Kompute OS disk size (in bytes).
+          format: int64
+          type: integer
+        data_disk:
+          default: 0
+          description: "The Kompute extra data disk size (in bytes). If unspecified,\
+            \ no extra data disk will be assigned."
+          format: int64
+          type: integer
+        ip:
+          description: The Kompute assigned private IPv4 address (read-only).
+          type: string
+      required:
+      - disk
+      - memory
+      - name
+      - vcpus
     Konvey:
       description: A Kowabunga Konvey is a layer-4 network load-balancer used to distribute
         service requests to associated backend instances.
@@ -5509,6 +5464,55 @@ components:
       required:
       - hosts
       - port
+    Kylo:
+      description: A Kylo provides an elastic NFS-like remote storage volume.
+      example:
+        endpoint: endpoint
+        access: RW
+        size: 6
+        name: name
+        description: description
+        id: id
+        protocols:
+        - 0
+        - 0
+      properties:
+        id:
+          description: The Kylo ID (auto-generated).
+          type: string
+        name:
+          description: The Kylo name.
+          type: string
+        description:
+          description: The Kylo description.
+          type: string
+        access:
+          default: RW
+          description: The Kylo volume access type.
+          enum:
+          - RO
+          - RW
+          type: string
+        protocols:
+          default:
+          - 3
+          - 4
+          description: The Kylo NFS protocol versions to be supported.
+          items:
+            enum:
+            - 3
+            - 4
+            type: integer
+          type: array
+        endpoint:
+          description: The Kylo endpoint FQDN (read-only).
+          type: string
+        size:
+          description: The Kylo volume bytes used (read-only).
+          format: int64
+          type: integer
+      required:
+      - name
     Metadata:
       description: A key/value metadata.
       example:
@@ -5524,32 +5528,6 @@ components:
       required:
       - key
       - value
-    NetGW:
-      description: A Iris network gateway.
-      example:
-        name: name
-        description: description
-        id: id
-        agents:
-        - agents
-        - agents
-      properties:
-        id:
-          description: The Iris network gateway ID (auto-generated).
-          type: string
-        name:
-          description: The Iris network gateway name.
-          type: string
-        description:
-          description: The Iris network gateway description.
-          type: string
-        agents:
-          description: a list of existing remote agents managing the network gateway.
-          items:
-            type: string
-          type: array
-      required:
-      - name
     Project:
       description: "A Kowabunga project corresponds to a single tenant, isolated set\
         \ of resources."
@@ -5894,6 +5872,33 @@ components:
         value:
           description: The subnet ID.
           type: string
+    Team:
+      description: A Kowabunga users team.
+      example:
+        name: name
+        description: description
+        id: id
+        users:
+        - users
+        - users
+      properties:
+        id:
+          description: The Kowabunga users team ID (auto-generated).
+          type: string
+        name:
+          description: The Kowabunga users team name.
+          type: string
+        description:
+          description: The Kowabunga users team description.
+          type: string
+        users:
+          description: List of user IDs that are part of the team.
+          items:
+            type: string
+          type: array
+      required:
+      - name
+      - users
     Template:
       description: A image template.
       example:

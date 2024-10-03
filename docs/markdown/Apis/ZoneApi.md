@@ -6,12 +6,12 @@ All URIs are relative to */api/v1*
 |------------- | ------------- | -------------|
 | [**createHost**](ZoneApi.md#createHost) | **POST** /zone/{zoneId}/host |  |
 | [**createProjectZoneInstance**](ZoneApi.md#createProjectZoneInstance) | **POST** /project/{projectId}/zone/{zoneId}/instance |  |
-| [**createProjectZoneKCE**](ZoneApi.md#createProjectZoneKCE) | **POST** /project/{projectId}/zone/{zoneId}/kce |  |
+| [**createProjectZoneKompute**](ZoneApi.md#createProjectZoneKompute) | **POST** /project/{projectId}/zone/{zoneId}/kompute |  |
 | [**createProjectZoneKonvey**](ZoneApi.md#createProjectZoneKonvey) | **POST** /project/{projectId}/zone/{zoneId}/konvey |  |
 | [**createZone**](ZoneApi.md#createZone) | **POST** /region/{regionId}/zone |  |
 | [**deleteZone**](ZoneApi.md#deleteZone) | **DELETE** /zone/{zoneId} |  |
 | [**listProjectZoneInstances**](ZoneApi.md#listProjectZoneInstances) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
-| [**listProjectZoneKCEs**](ZoneApi.md#listProjectZoneKCEs) | **GET** /project/{projectId}/zone/{zoneId}/kces |  |
+| [**listProjectZoneKomputes**](ZoneApi.md#listProjectZoneKomputes) | **GET** /project/{projectId}/zone/{zoneId}/komputes |  |
 | [**listProjectZoneKonveys**](ZoneApi.md#listProjectZoneKonveys) | **GET** /project/{projectId}/zone/{zoneId}/konveys |  |
 | [**listRegionZones**](ZoneApi.md#listRegionZones) | **GET** /region/{regionId}/zones |  |
 | [**listZoneHosts**](ZoneApi.md#listZoneHosts) | **GET** /zone/{zoneId}/hosts |  |
@@ -77,13 +77,13 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createProjectZoneKCE"></a>
-# **createProjectZoneKCE**
-> KCE createProjectZoneKCE(projectId, zoneId, KCE, poolId, templateId, public)
+<a name="createProjectZoneKompute"></a>
+# **createProjectZoneKompute**
+> Kompute createProjectZoneKompute(projectId, zoneId, Kompute, poolId, templateId, public)
 
 
 
-    Creates a new KCE (Kowabunga Compute Engine).
+    Creates a new Kompute.
 
 ### Parameters
 
@@ -91,14 +91,14 @@ All URIs are relative to */api/v1*
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **KCE** | [**KCE**](../Models/KCE.md)| KCE payload. | |
+| **Kompute** | [**Kompute**](../Models/Kompute.md)| Kompute payload. | |
 | **poolId** | **String**| Storage pool ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
 | **templateId** | **String**| Template to clone the storage volume from (optional, region&#39;s default if unspecified). | [optional] [default to null] |
-| **public** | **Boolean**| Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false). | [optional] [default to null] |
+| **public** | **Boolean**| Should Kompute be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false). | [optional] [default to null] |
 
 ### Return type
 
-[**KCE**](../Models/KCE.md)
+[**Kompute**](../Models/Kompute.md)
 
 ### Authorization
 
@@ -221,13 +221,13 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectZoneKCEs"></a>
-# **listProjectZoneKCEs**
-> List listProjectZoneKCEs(projectId, zoneId)
+<a name="listProjectZoneKomputes"></a>
+# **listProjectZoneKomputes**
+> List listProjectZoneKomputes(projectId, zoneId)
 
 
 
-    Returns the IDs of KCE (Kowabunga Compute Engine) objects.
+    Returns the IDs of Kompute objects.
 
 ### Parameters
 
