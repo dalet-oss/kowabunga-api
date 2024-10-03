@@ -5540,6 +5540,9 @@ components:
         regions:
         - regions
         - regions
+        teams:
+        - teams
+        - teams
         metadatas:
         - value: value
           key: key
@@ -5547,9 +5550,6 @@ components:
           key: key
         root_password: root_password
         description: description
-        groups:
-        - groups
-        - groups
         bootstrap_user: bootstrap_user
         tags:
         - tags
@@ -5617,8 +5617,8 @@ components:
           items:
             type: integer
           type: array
-        groups:
-          description: A list of user groups allowed to administrate the project (i.e.
+        teams:
+          description: A list of user teams allowed to administrate the project (i.e.
             capable of managing internal resources).
           items:
             type: string
@@ -5630,9 +5630,9 @@ components:
             type: string
           type: array
       required:
-      - groups
       - name
       - regions
+      - teams
     ProjectResources:
       description: A global project resource quotas/usage (0 for unlimited).
       example:

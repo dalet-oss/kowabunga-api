@@ -46,8 +46,8 @@ type Project struct {
 	PrivateSubnets []RegionSubnet `json:"private_subnets,omitempty"`
 	// The list of VRRP IDs used by -as-a-service resources within the project virtual network (read-only). Should your application use VRRP for service redundancy, you should use different IDs to prevent issues..
 	ReservedVrrpIds []int32 `json:"reserved_vrrp_ids,omitempty"`
-	// A list of user groups allowed to administrate the project (i.e. capable of managing internal resources).
-	Groups []string `json:"groups"`
+	// A list of user teams allowed to administrate the project (i.e. capable of managing internal resources).
+	Teams []string `json:"teams"`
 	// A list of Kowabunga regions the project is managing resources from.
 	Regions []string `json:"regions"`
 }
@@ -58,10 +58,10 @@ type _Project Project
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProject(name string, groups []string, regions []string) *Project {
+func NewProject(name string, teams []string, regions []string) *Project {
 	this := Project{}
 	this.Name = name
-	this.Groups = groups
+	this.Teams = teams
 	this.Regions = regions
 	return &this
 }
@@ -450,28 +450,28 @@ func (o *Project) SetReservedVrrpIds(v []int32) {
 	o.ReservedVrrpIds = v
 }
 
-// GetGroups returns the Groups field value
-func (o *Project) GetGroups() []string {
+// GetTeams returns the Teams field value
+func (o *Project) GetTeams() []string {
 	if o == nil {
 		var ret []string
 		return ret
 	}
 
-	return o.Groups
+	return o.Teams
 }
 
-// GetGroupsOk returns a tuple with the Groups field value
+// GetTeamsOk returns a tuple with the Teams field value
 // and a boolean to check if the value has been set.
-func (o *Project) GetGroupsOk() ([]string, bool) {
+func (o *Project) GetTeamsOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Groups, true
+	return o.Teams, true
 }
 
-// SetGroups sets field value
-func (o *Project) SetGroups(v []string) {
-	o.Groups = v
+// SetTeams sets field value
+func (o *Project) SetTeams(v []string) {
+	o.Teams = v
 }
 
 // GetRegions returns the Regions field value
@@ -542,7 +542,7 @@ func (o Project) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReservedVrrpIds) {
 		toSerialize["reserved_vrrp_ids"] = o.ReservedVrrpIds
 	}
-	toSerialize["groups"] = o.Groups
+	toSerialize["teams"] = o.Teams
 	toSerialize["regions"] = o.Regions
 	return toSerialize, nil
 }
@@ -553,7 +553,7 @@ func (o *Project) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"name",
-		"groups",
+		"teams",
 		"regions",
 	}
 

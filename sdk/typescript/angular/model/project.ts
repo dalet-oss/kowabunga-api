@@ -67,9 +67,9 @@ export interface Project {
      */
     reserved_vrrp_ids?: Array<number>;
     /**
-     * A list of user groups allowed to administrate the project (i.e. capable of managing internal resources).
+     * A list of user teams allowed to administrate the project (i.e. capable of managing internal resources).
      */
-    groups: Array<string>;
+    teams: Array<string>;
     /**
      * A list of Kowabunga regions the project is managing resources from.
      */

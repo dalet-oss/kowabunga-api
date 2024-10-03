@@ -2,7 +2,7 @@
 
 components:
   schemas:
-{{ oas.SchemaBaseResource(resources.project, ['name', 'groups', 'regions']) }}
+{{ oas.SchemaBaseResource(resources.project, ['name', 'teams', 'regions']) }}
 {{ oas.StringProperty('domain', 'Internal domain name (e.g. myproject.acme.com)') }}
 {{ oas.StringProperty('root_password', 'Default root password, set at cloud-init instance bootstrap phase. Will be randomly auto-generated at each instance creation if unspecified') }}
 {{ oas.StringProperty('bootstrap_user', "Default service user name, created at cloud-init instance bootstrap phase. Will use Kowabunga's default configuration one if unspecified") }}
@@ -12,7 +12,7 @@ components:
 {{ oas.ObjectProperty('quotas', 'The global project resource quotas (0 for unlimited)', resources.project_resources.schema) }}
 {{ oas.ObjectArrayProperty('private_subnets', 'The assigned project VPC private subnets IDs (read-only)', resources.region_subnet.schema) }}
 {{ oas.IntArrayProperty('reserved_vrrp_ids', 'The list of VRRP IDs used by -as-a-service resources within the project virtual network (read-only). Should your application use VRRP for service redundancy, you should use different IDs to prevent issues.') }}
-{{ oas.StringArrayProperty('groups', 'A list of user groups allowed to administrate the project (i.e. capable of managing internal resources)') }}
+{{ oas.StringArrayProperty('teams', 'A list of user teams allowed to administrate the project (i.e. capable of managing internal resources)') }}
 {{ oas.StringArrayProperty('regions', 'A list of Kowabunga regions the project is managing resources from') }}
 
 {{ oas.Schema(resources.project_resources) }}

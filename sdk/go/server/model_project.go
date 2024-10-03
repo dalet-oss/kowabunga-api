@@ -52,8 +52,8 @@ type Project struct {
 	// The list of VRRP IDs used by -as-a-service resources within the project virtual network (read-only). Should your application use VRRP for service redundancy, you should use different IDs to prevent issues..
 	ReservedVrrpIds []int32 `json:"reserved_vrrp_ids,omitempty"`
 
-	// A list of user groups allowed to administrate the project (i.e. capable of managing internal resources).
-	Groups []string `json:"groups"`
+	// A list of user teams allowed to administrate the project (i.e. capable of managing internal resources).
+	Teams []string `json:"teams"`
 
 	// A list of Kowabunga regions the project is managing resources from.
 	Regions []string `json:"regions"`
@@ -63,7 +63,7 @@ type Project struct {
 func AssertProjectRequired(obj Project) error {
 	elements := map[string]interface{}{
 		"name": obj.Name,
-		"groups": obj.Groups,
+		"teams": obj.Teams,
 		"regions": obj.Regions,
 	}
 	for name, el := range elements {
