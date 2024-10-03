@@ -389,27 +389,27 @@ func (a *ZoneAPIService) DeleteZoneExecute(r ApiDeleteZoneRequest) (*http.Respon
 	return localVarHTTPResponse, nil
 }
 
-type ApiListZoneKaktussRequest struct {
+type ApiListZoneKaktusesRequest struct {
 	ctx context.Context
 	ApiService *ZoneAPIService
 	zoneId string
 }
 
-func (r ApiListZoneKaktussRequest) Execute() ([]string, *http.Response, error) {
-	return r.ApiService.ListZoneKaktussExecute(r)
+func (r ApiListZoneKaktusesRequest) Execute() ([]string, *http.Response, error) {
+	return r.ApiService.ListZoneKaktusesExecute(r)
 }
 
 /*
-ListZoneKaktuss Method for ListZoneKaktuss
+ListZoneKaktuses Method for ListZoneKaktuses
 
 Returns the IDs of Kaktus computing node objects.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param zoneId The ID of the availability zone.
- @return ApiListZoneKaktussRequest
+ @return ApiListZoneKaktusesRequest
 */
-func (a *ZoneAPIService) ListZoneKaktuss(ctx context.Context, zoneId string) ApiListZoneKaktussRequest {
-	return ApiListZoneKaktussRequest{
+func (a *ZoneAPIService) ListZoneKaktuses(ctx context.Context, zoneId string) ApiListZoneKaktusesRequest {
+	return ApiListZoneKaktusesRequest{
 		ApiService: a,
 		ctx: ctx,
 		zoneId: zoneId,
@@ -418,7 +418,7 @@ func (a *ZoneAPIService) ListZoneKaktuss(ctx context.Context, zoneId string) Api
 
 // Execute executes the request
 //  @return []string
-func (a *ZoneAPIService) ListZoneKaktussExecute(r ApiListZoneKaktussRequest) ([]string, *http.Response, error) {
+func (a *ZoneAPIService) ListZoneKaktusesExecute(r ApiListZoneKaktusesRequest) ([]string, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -426,12 +426,12 @@ func (a *ZoneAPIService) ListZoneKaktussExecute(r ApiListZoneKaktussRequest) ([]
 		localVarReturnValue  []string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ZoneAPIService.ListZoneKaktuss")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ZoneAPIService.ListZoneKaktuses")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{zoneId}/kaktuss"
+	localVarPath := localBasePath + "/zone/{zoneId}/kaktuses"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

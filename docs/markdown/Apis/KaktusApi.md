@@ -8,7 +8,7 @@ All URIs are relative to */api/v1*
 | [**deleteKaktus**](KaktusApi.md#deleteKaktus) | **DELETE** /kaktus/{kaktusId} |  |
 | [**listKaktusInstances**](KaktusApi.md#listKaktusInstances) | **GET** /kaktus/{kaktusId}/instances |  |
 | [**listKaktuss**](KaktusApi.md#listKaktuss) | **GET** /kaktus |  |
-| [**listZoneKaktuss**](KaktusApi.md#listZoneKaktuss) | **GET** /zone/{zoneId}/kaktuss |  |
+| [**listZoneKaktuses**](KaktusApi.md#listZoneKaktuses) | **GET** /zone/{zoneId}/kaktuses |  |
 | [**readKaktus**](KaktusApi.md#readKaktus) | **GET** /kaktus/{kaktusId} |  |
 | [**readKaktusCaps**](KaktusApi.md#readKaktusCaps) | **GET** /kaktus/{kaktusId}/caps |  |
 | [**updateKaktus**](KaktusApi.md#updateKaktus) | **PUT** /kaktus/{kaktusId} |  |
@@ -120,9 +120,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listZoneKaktuss"></a>
-# **listZoneKaktuss**
-> List listZoneKaktuss(zoneId)
+<a name="listZoneKaktuses"></a>
+# **listZoneKaktuses**
+> List listZoneKaktuses(zoneId)
 
 
 

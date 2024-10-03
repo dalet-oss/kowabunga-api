@@ -18,6 +18,6 @@ paths:
 {{ oas.Parameters([resources.zone.paramSchema]) }}
 {{ oas.Create('Create' + resources.kaktus.schema, resources.kaktus.schema, resources.kaktus.desc, [resources.zone.tag, resources.kaktus.tag]) }}
 
-  /zone/{{ '{' + resources.zone.paramId + '}' }}/kaktuss:
+  /zone/{{ '{' + resources.zone.paramId + '}' }}/kaktuses:
 {{ oas.Parameters([resources.zone.paramSchema]) }}
-{{ oas.GetAll('List' + resources.zone.schema + resources.kaktus.schema + 's', resources.kaktus.desc, [resources.zone.tag, resources.kaktus.tag], True) }}
+{{ oas.GetAll('List' + resources.zone.schema + resources.kaktus.schema + 'es', resources.kaktus.desc, [resources.zone.tag, resources.kaktus.tag], True) }}

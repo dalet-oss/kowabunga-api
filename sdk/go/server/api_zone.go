@@ -61,10 +61,10 @@ func (c *ZoneAPIController) Routes() Routes {
 			"/api/v1/zone/{zoneId}",
 			c.DeleteZone,
 		},
-		"ListZoneKaktuss": Route{
+		"ListZoneKaktuses": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/zone/{zoneId}/kaktuss",
-			c.ListZoneKaktuss,
+			"/api/v1/zone/{zoneId}/kaktuses",
+			c.ListZoneKaktuses,
 		},
 		"ListZones": Route{
 			strings.ToUpper("Get"),
@@ -135,15 +135,15 @@ func (c *ZoneAPIController) DeleteZone(w http.ResponseWriter, r *http.Request) {
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// ListZoneKaktuss - 
-func (c *ZoneAPIController) ListZoneKaktuss(w http.ResponseWriter, r *http.Request) {
+// ListZoneKaktuses - 
+func (c *ZoneAPIController) ListZoneKaktuses(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	zoneIdParam := params["zoneId"]
 	if zoneIdParam == "" {
 		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
 		return
 	}
-	result, err := c.service.ListZoneKaktuss(r.Context(), zoneIdParam)
+	result, err := c.service.ListZoneKaktuses(r.Context(), zoneIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

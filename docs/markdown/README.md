@@ -39,7 +39,7 @@ All URIs are relative to */api/v1*
 *KaktusApi* | [**deleteKaktus**](Apis/KaktusApi.md#deletekaktus) | **DELETE** /kaktus/{kaktusId} | Deletes an existing Kaktus computing node. |
 *KaktusApi* | [**listKaktusInstances**](Apis/KaktusApi.md#listkaktusinstances) | **GET** /kaktus/{kaktusId}/instances | Returns the IDs of virtual machine instance objects. |
 *KaktusApi* | [**listKaktuss**](Apis/KaktusApi.md#listkaktuss) | **GET** /kaktus | Returns the IDs of Kaktus computing node objects. |
-*KaktusApi* | [**listZoneKaktuss**](Apis/KaktusApi.md#listzonekaktuss) | **GET** /zone/{zoneId}/kaktuss | Returns the IDs of Kaktus computing node objects. |
+*KaktusApi* | [**listZoneKaktuses**](Apis/KaktusApi.md#listzonekaktuses) | **GET** /zone/{zoneId}/kaktuses | Returns the IDs of Kaktus computing node objects. |
 *KaktusApi* | [**readKaktus**](Apis/KaktusApi.md#readkaktus) | **GET** /kaktus/{kaktusId} | Returns a Kaktus computing node. |
 *KaktusApi* | [**readKaktusCaps**](Apis/KaktusApi.md#readkaktuscaps) | **GET** /kaktus/{kaktusId}/caps | Returns a Kaktus computing node capability. |
 *KaktusApi* | [**updateKaktus**](Apis/KaktusApi.md#updatekaktus) | **PUT** /kaktus/{kaktusId} | Updates a Kaktus computing node configuration. |
@@ -218,7 +218,7 @@ All URIs are relative to */api/v1*
 *ZoneApi* | [**listProjectZoneKomputes**](Apis/ZoneApi.md#listprojectzonekomputes) | **GET** /project/{projectId}/zone/{zoneId}/komputes | Returns the IDs of Kompute objects. |
 *ZoneApi* | [**listProjectZoneKonveys**](Apis/ZoneApi.md#listprojectzonekonveys) | **GET** /project/{projectId}/zone/{zoneId}/konveys | Returns the IDs of Konvey (Kowabunga Network Load-Balancer) objects. |
 *ZoneApi* | [**listRegionZones**](Apis/ZoneApi.md#listregionzones) | **GET** /region/{regionId}/zones | Returns the IDs of availability zone objects. |
-*ZoneApi* | [**listZoneKaktuss**](Apis/ZoneApi.md#listzonekaktuss) | **GET** /zone/{zoneId}/kaktuss | Returns the IDs of Kaktus computing node objects. |
+*ZoneApi* | [**listZoneKaktuses**](Apis/ZoneApi.md#listzonekaktuses) | **GET** /zone/{zoneId}/kaktuses | Returns the IDs of Kaktus computing node objects. |
 *ZoneApi* | [**listZones**](Apis/ZoneApi.md#listzones) | **GET** /zone | Returns the IDs of availability zone objects. |
 *ZoneApi* | [**readZone**](Apis/ZoneApi.md#readzone) | **GET** /zone/{zoneId} | Returns a availability zone. |
 *ZoneApi* | [**updateZone**](Apis/ZoneApi.md#updatezone) | **PUT** /zone/{zoneId} | Updates a availability zone configuration. |

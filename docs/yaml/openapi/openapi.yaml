@@ -4138,10 +4138,10 @@ paths:
       tags:
       - zone
       - kaktus
-  /zone/{zoneId}/kaktuss:
+  /zone/{zoneId}/kaktuses:
     get:
       description: Returns the IDs of Kaktus computing node objects.
-      operationId: ListZoneKaktuss
+      operationId: ListZoneKaktuses
       parameters:
       - $ref: '#/components/parameters/ZoneID'
       responses:

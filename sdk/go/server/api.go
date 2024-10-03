@@ -280,7 +280,7 @@ type VolumeAPIRouter interface {
 type ZoneAPIRouter interface { 
 	CreateKaktus(http.ResponseWriter, *http.Request)
 	DeleteZone(http.ResponseWriter, *http.Request)
-	ListZoneKaktuss(http.ResponseWriter, *http.Request)
+	ListZoneKaktuses(http.ResponseWriter, *http.Request)
 	ListZones(http.ResponseWriter, *http.Request)
 	ReadZone(http.ResponseWriter, *http.Request)
 	UpdateZone(http.ResponseWriter, *http.Request)
@@ -614,7 +614,7 @@ type VolumeAPIServicer interface {
 type ZoneAPIServicer interface { 
 	CreateKaktus(context.Context, string, Kaktus) (ImplResponse, error)
 	DeleteZone(context.Context, string) (ImplResponse, error)
-	ListZoneKaktuss(context.Context, string) (ImplResponse, error)
+	ListZoneKaktuses(context.Context, string) (ImplResponse, error)
 	ListZones(context.Context) (ImplResponse, error)
 	ReadZone(context.Context, string) (ImplResponse, error)
 	UpdateZone(context.Context, string, Zone) (ImplResponse, error)

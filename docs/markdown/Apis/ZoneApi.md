@@ -14,7 +14,7 @@ All URIs are relative to */api/v1*
 | [**listProjectZoneKomputes**](ZoneApi.md#listProjectZoneKomputes) | **GET** /project/{projectId}/zone/{zoneId}/komputes |  |
 | [**listProjectZoneKonveys**](ZoneApi.md#listProjectZoneKonveys) | **GET** /project/{projectId}/zone/{zoneId}/konveys |  |
 | [**listRegionZones**](ZoneApi.md#listRegionZones) | **GET** /region/{regionId}/zones |  |
-| [**listZoneKaktuss**](ZoneApi.md#listZoneKaktuss) | **GET** /zone/{zoneId}/kaktuss |  |
+| [**listZoneKaktuses**](ZoneApi.md#listZoneKaktuses) | **GET** /zone/{zoneId}/kaktuses |  |
 | [**listZones**](ZoneApi.md#listZones) | **GET** /zone |  |
 | [**readZone**](ZoneApi.md#readZone) | **GET** /zone/{zoneId} |  |
 | [**updateZone**](ZoneApi.md#updateZone) | **PUT** /zone/{zoneId} |  |
@@ -304,9 +304,9 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listZoneKaktuss"></a>
-# **listZoneKaktuss**
-> List listZoneKaktuss(zoneId)
+<a name="listZoneKaktuses"></a>
+# **listZoneKaktuses**
+> List listZoneKaktuses(zoneId)
 
 
 
