@@ -24,10 +24,10 @@ tags:
   name: record
 - description: Everything about Kowabunga users team
   name: team
-- description: Everything about computing host
-  name: host
 - description: Everything about virtual machine instance
   name: instance
+- description: Everything about Kaktus computing node
+  name: kaktus
 - description: Everything about Kawaii
   name: kawaii
 - description: Everything about Kiwi (Kowabunga Inner Wan Interface) provides edge-network
@@ -388,146 +388,6 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - record
-  /host:
-    get:
-      description: Returns the IDs of computing host objects.
-      operationId: ListHosts
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of computing host IDs.
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-      tags:
-      - host
-  /host/{hostId}:
-    delete:
-      description: Deletes an existing computing host.
-      operationId: DeleteHost
-      parameters:
-      - $ref: '#/components/parameters/HostID'
-      responses:
-        "200":
-          description: The computing host has been successfully removed.
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-        "409":
-          $ref: '#/components/responses/Conflict'
-        "422":
-          $ref: '#/components/responses/UnprocessableEntity'
-      tags:
-      - host
-    get:
-      description: Returns a computing host.
-      operationId: ReadHost
-      parameters:
-      - $ref: '#/components/parameters/HostID'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Host'
-          description: Returns the computing host object.
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-      tags:
-      - host
-    parameters:
-    - $ref: '#/components/parameters/HostID'
-    put:
-      description: Updates a computing host configuration.
-      operationId: UpdateHost
-      parameters:
-      - $ref: '#/components/parameters/HostID'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Host'
-        description: Host payload.
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Host'
-          description: Returns the computing host object.
-        "400":
-          $ref: '#/components/responses/BadRequest'
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-        "422":
-          $ref: '#/components/responses/UnprocessableEntity'
-        "507":
-          $ref: '#/components/responses/InsufficientStorage'
-      tags:
-      - host
-  /host/{hostId}/caps:
-    get:
-      description: Returns a computing host capability.
-      operationId: ReadHostCaps
-      parameters:
-      - $ref: '#/components/parameters/HostID'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HostCaps'
-          description: Returns the computing host capability object.
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-      tags:
-      - host
-    parameters:
-    - $ref: '#/components/parameters/HostID'
-  /host/{hostId}/instances:
-    get:
-      description: Returns the IDs of virtual machine instance objects.
-      operationId: ListHostInstances
-      parameters:
-      - $ref: '#/components/parameters/HostID'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of virtual machine instance IDs.
-        "401":
-          $ref: '#/components/responses/Unauthorized'
-        "403":
-          $ref: '#/components/responses/Forbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-      tags:
-      - host
-      - instance
-    parameters:
-    - $ref: '#/components/parameters/HostID'
   /instance:
     get:
       description: Returns the IDs of virtual machine instance objects.
@@ -815,6 +675,146 @@ paths:
       - instance
     parameters:
     - $ref: '#/components/parameters/InstanceID'
+  /kaktus:
+    get:
+      description: Returns the IDs of Kaktus computing node objects.
+      operationId: ListKaktuss
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of Kaktus computing node IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - kaktus
+  /kaktus/{kaktusId}:
+    delete:
+      description: Deletes an existing Kaktus computing node.
+      operationId: DeleteKaktus
+      parameters:
+      - $ref: '#/components/parameters/KaktusID'
+      responses:
+        "200":
+          description: The Kaktus computing node has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - kaktus
+    get:
+      description: Returns a Kaktus computing node.
+      operationId: ReadKaktus
+      parameters:
+      - $ref: '#/components/parameters/KaktusID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kaktus'
+          description: Returns the Kaktus computing node object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - kaktus
+    parameters:
+    - $ref: '#/components/parameters/KaktusID'
+    put:
+      description: Updates a Kaktus computing node configuration.
+      operationId: UpdateKaktus
+      parameters:
+      - $ref: '#/components/parameters/KaktusID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kaktus'
+        description: Kaktus payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kaktus'
+          description: Returns the Kaktus computing node object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - kaktus
+  /kaktus/{kaktusId}/caps:
+    get:
+      description: Returns a Kaktus computing node capability.
+      operationId: ReadKaktusCaps
+      parameters:
+      - $ref: '#/components/parameters/KaktusID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KaktusCaps'
+          description: Returns the Kaktus computing node capability object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - kaktus
+    parameters:
+    - $ref: '#/components/parameters/KaktusID'
+  /kaktus/{kaktusId}/instances:
+    get:
+      description: Returns the IDs of virtual machine instance objects.
+      operationId: ListKaktusInstances
+      parameters:
+      - $ref: '#/components/parameters/KaktusID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of virtual machine instance IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - kaktus
+      - instance
+    parameters:
+    - $ref: '#/components/parameters/KaktusID'
   /kawaii:
     get:
       description: Returns the IDs of Kawaii objects.
@@ -4099,28 +4099,28 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - zone
-  /zone/{zoneId}/host:
+  /zone/{zoneId}/kaktus:
     parameters:
     - $ref: '#/components/parameters/ZoneID'
     post:
-      description: Creates a new computing host.
-      operationId: CreateHost
+      description: Creates a new Kaktus computing node.
+      operationId: CreateKaktus
       parameters:
       - $ref: '#/components/parameters/ZoneID'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Host'
-        description: Host payload.
+              $ref: '#/components/schemas/Kaktus'
+        description: Kaktus payload.
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Host'
-          description: Returns the newly created computing host object.
+                $ref: '#/components/schemas/Kaktus'
+          description: Returns the newly created Kaktus computing node object.
         "400":
           $ref: '#/components/responses/BadRequest'
         "401":
@@ -4137,11 +4137,11 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - zone
-      - host
-  /zone/{zoneId}/hosts:
+      - kaktus
+  /zone/{zoneId}/kaktuss:
     get:
-      description: Returns the IDs of computing host objects.
-      operationId: ListZoneHosts
+      description: Returns the IDs of Kaktus computing node objects.
+      operationId: ListZoneKaktuss
       parameters:
       - $ref: '#/components/parameters/ZoneID'
       responses:
@@ -4150,7 +4150,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ObjectIds'
-          description: Returns an array of computing host IDs.
+          description: Returns an array of Kaktus computing node IDs.
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -4159,7 +4159,7 @@ paths:
           $ref: '#/components/responses/NotFound'
       tags:
       - zone
-      - host
+      - kaktus
     parameters:
     - $ref: '#/components/parameters/ZoneID'
 components:
@@ -4191,20 +4191,20 @@ components:
       schema:
         type: string
       style: simple
-    HostID:
-      description: The ID of the computing host.
-      explode: false
-      in: path
-      name: hostId
-      required: true
-      schema:
-        type: string
-      style: simple
     InstanceID:
       description: The ID of the virtual machine instance.
       explode: false
       in: path
       name: instanceId
+      required: true
+      schema:
+        type: string
+      style: simple
+    KaktusID:
+      description: The ID of the Kaktus computing node.
+      explode: false
+      in: path
+      name: kaktusId
       required: true
       schema:
         type: string
@@ -4727,121 +4727,6 @@ components:
           type: string
       required:
       - value
-    Host:
-      description: A computing host.
-      example:
-        memory_cost:
-          price: 0.8008282
-          currency: currency
-        name: name
-        description: description
-        overcommit_memory_ratio: 1
-        cpu_cost:
-          price: 0.8008282
-          currency: currency
-        id: id
-        overcommit_cpu_ratio: 6
-        agents:
-        - agents
-        - agents
-      properties:
-        id:
-          description: The computing host ID (auto-generated).
-          type: string
-        name:
-          description: The computing host name.
-          type: string
-        description:
-          description: The computing host description.
-          type: string
-        cpu_cost:
-          $ref: '#/components/schemas/Cost'
-        memory_cost:
-          $ref: '#/components/schemas/Cost'
-        overcommit_cpu_ratio:
-          default: 3
-          description: The host CPU resource over-commit ratio. Overcommitting CPU
-            resources for VMs means allocating more virtual CPUs (vCPUs) to the virtual
-            machines (VMs) than the physical cores available on the host. This can
-            help optimize the utilization of the host CPU and increase the density
-            of VMs per host.
-          format: int64
-          type: integer
-        overcommit_memory_ratio:
-          default: 2
-          description: "The host memory resource over-commit ratio. Memory overcommitment\
-            \ is a concept in computing that covers the assignment of more memory\
-            \ to virtual computing devices (or processes) than the physical machine\
-            \ they are hosted, or running on, actually has."
-          format: int64
-          type: integer
-        agents:
-          description: a list of existing remote agents managing the host.
-          items:
-            type: string
-          type: array
-      required:
-      - agents
-      - name
-    HostCaps:
-      description: A computing host capability.
-      example:
-        memory: 5
-        cpu:
-          cores: 6
-          vendor: vendor
-          threads: 1
-          model: model
-          arch: arch
-          sockets: 0
-      properties:
-        cpu:
-          $ref: '#/components/schemas/HostCPU'
-        memory:
-          description: The computing host memory size (bytes).
-          format: int64
-          type: integer
-      required:
-      - cpu
-      - memory
-    HostCPU:
-      description: A computing host CPU characteristics.
-      example:
-        cores: 6
-        vendor: vendor
-        threads: 1
-        model: model
-        arch: arch
-        sockets: 0
-      properties:
-        arch:
-          description: The computing host CPU architecture.
-          type: string
-        model:
-          description: The computing host CPU model.
-          type: string
-        vendor:
-          description: The computing host CPU vendor.
-          type: string
-        sockets:
-          description: The computing host CPU number of sockets.
-          format: int64
-          type: integer
-        cores:
-          description: The computing host CPU number of cores.
-          format: int64
-          type: integer
-        threads:
-          description: The computing host CPU number of threads.
-          format: int64
-          type: integer
-      required:
-      - arch
-      - cores
-      - model
-      - sockets
-      - threads
-      - vendor
     Instance:
       description: A virtual machine instance.
       example:
@@ -4915,6 +4800,123 @@ components:
           type: string
       required:
       - url
+    Kaktus:
+      description: A Kaktus (Kowabunga Affordable KVM and Tight Underneath Storage)
+        is an hyper-converged infrastructure (HCI) bare-metal node offering computing
+        and distributed storage capabilites.
+      example:
+        memory_cost:
+          price: 0.8008282
+          currency: currency
+        name: name
+        description: description
+        overcommit_memory_ratio: 1
+        cpu_cost:
+          price: 0.8008282
+          currency: currency
+        id: id
+        overcommit_cpu_ratio: 6
+        agents:
+        - agents
+        - agents
+      properties:
+        id:
+          description: The Kaktus computing node ID (auto-generated).
+          type: string
+        name:
+          description: The Kaktus computing node name.
+          type: string
+        description:
+          description: The Kaktus computing node description.
+          type: string
+        cpu_cost:
+          $ref: '#/components/schemas/Cost'
+        memory_cost:
+          $ref: '#/components/schemas/Cost'
+        overcommit_cpu_ratio:
+          default: 3
+          description: The Kaktus node CPU resource over-commit ratio. Overcommitting
+            CPU resources for VMs means allocating more virtual CPUs (vCPUs) to the
+            virtual machines (VMs) than the physical cores available on the node.
+            This can help optimize the utilization of the node CPU and increase the
+            density of VMs per node.
+          format: int64
+          type: integer
+        overcommit_memory_ratio:
+          default: 2
+          description: "The Kaktus node memory resource over-commit ratio. Memory\
+            \ overcommitment is a concept in computing that covers the assignment\
+            \ of more memory to virtual computing devices (or processes) than the\
+            \ physical machine they are hosted, or running on, actually has."
+          format: int64
+          type: integer
+        agents:
+          description: a list of existing remote agents managing the Kaktus node.
+          items:
+            type: string
+          type: array
+      required:
+      - agents
+      - name
+    KaktusCaps:
+      description: A Kaktus computing node capability.
+      example:
+        memory: 5
+        cpu:
+          cores: 6
+          vendor: vendor
+          threads: 1
+          model: model
+          arch: arch
+          sockets: 0
+      properties:
+        cpu:
+          $ref: '#/components/schemas/KaktusCPU'
+        memory:
+          description: The Kaktus computing node memory size (bytes).
+          format: int64
+          type: integer
+      required:
+      - cpu
+      - memory
+    KaktusCPU:
+      description: A Kaktus computing node CPU characteristics.
+      example:
+        cores: 6
+        vendor: vendor
+        threads: 1
+        model: model
+        arch: arch
+        sockets: 0
+      properties:
+        arch:
+          description: The Kaktus computing node CPU architecture.
+          type: string
+        model:
+          description: The Kaktus computing node CPU model.
+          type: string
+        vendor:
+          description: The Kaktus computing node CPU vendor.
+          type: string
+        sockets:
+          description: The Kaktus computing node CPU number of sockets.
+          format: int64
+          type: integer
+        cores:
+          description: The Kaktus computing node CPU number of cores.
+          format: int64
+          type: integer
+        threads:
+          description: The Kaktus computing node CPU number of threads.
+          format: int64
+          type: integer
+      required:
+      - arch
+      - cores
+      - model
+      - sockets
+      - threads
+      - vendor
     Kawaii:
       description: A Kawaii (Kowabunga Adapative WAn Intelligent Interface) is a network
         gateway used for your Internet inbound and outbound traffic.

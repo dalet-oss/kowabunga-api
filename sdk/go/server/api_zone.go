@@ -51,20 +51,20 @@ func NewZoneAPIController(s ZoneAPIServicer, opts ...ZoneAPIOption) Router {
 // Routes returns all the api routes for the ZoneAPIController
 func (c *ZoneAPIController) Routes() Routes {
 	return Routes{
-		"CreateHost": Route{
+		"CreateKaktus": Route{
 			strings.ToUpper("Post"),
-			"/api/v1/zone/{zoneId}/host",
-			c.CreateHost,
+			"/api/v1/zone/{zoneId}/kaktus",
+			c.CreateKaktus,
 		},
 		"DeleteZone": Route{
 			strings.ToUpper("Delete"),
 			"/api/v1/zone/{zoneId}",
 			c.DeleteZone,
 		},
-		"ListZoneHosts": Route{
+		"ListZoneKaktuss": Route{
 			strings.ToUpper("Get"),
-			"/api/v1/zone/{zoneId}/hosts",
-			c.ListZoneHosts,
+			"/api/v1/zone/{zoneId}/kaktuss",
+			c.ListZoneKaktuss,
 		},
 		"ListZones": Route{
 			strings.ToUpper("Get"),
@@ -84,30 +84,30 @@ func (c *ZoneAPIController) Routes() Routes {
 	}
 }
 
-// CreateHost - 
-func (c *ZoneAPIController) CreateHost(w http.ResponseWriter, r *http.Request) {
+// CreateKaktus - 
+func (c *ZoneAPIController) CreateKaktus(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	zoneIdParam := params["zoneId"]
 	if zoneIdParam == "" {
 		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
 		return
 	}
-	hostParam := Host{}
+	kaktusParam := Kaktus{}
 	d := json.NewDecoder(r.Body)
 	d.DisallowUnknownFields()
-	if err := d.Decode(&hostParam); err != nil {
+	if err := d.Decode(&kaktusParam); err != nil {
 		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
 		return
 	}
-	if err := AssertHostRequired(hostParam); err != nil {
+	if err := AssertKaktusRequired(kaktusParam); err != nil {
 		c.errorHandler(w, r, err, nil)
 		return
 	}
-	if err := AssertHostConstraints(hostParam); err != nil {
+	if err := AssertKaktusConstraints(kaktusParam); err != nil {
 		c.errorHandler(w, r, err, nil)
 		return
 	}
-	result, err := c.service.CreateHost(r.Context(), zoneIdParam, hostParam)
+	result, err := c.service.CreateKaktus(r.Context(), zoneIdParam, kaktusParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -135,15 +135,15 @@ func (c *ZoneAPIController) DeleteZone(w http.ResponseWriter, r *http.Request) {
 	EncodeJSONResponse(result.Body, &result.Code, w)
 }
 
-// ListZoneHosts - 
-func (c *ZoneAPIController) ListZoneHosts(w http.ResponseWriter, r *http.Request) {
+// ListZoneKaktuss - 
+func (c *ZoneAPIController) ListZoneKaktuss(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	zoneIdParam := params["zoneId"]
 	if zoneIdParam == "" {
 		c.errorHandler(w, r, &RequiredError{"zoneId"}, nil)
 		return
 	}
-	result, err := c.service.ListZoneHosts(r.Context(), zoneIdParam)
+	result, err := c.service.ListZoneKaktuss(r.Context(), zoneIdParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

@@ -27,13 +27,13 @@ func NewZoneAPIService() ZoneAPIServicer {
 	return &ZoneAPIService{}
 }
 
-// CreateHost - 
-func (s *ZoneAPIService) CreateHost(ctx context.Context, zoneId string, host Host) (ImplResponse, error) {
-	// TODO - update CreateHost with the required logic for this service method.
+// CreateKaktus - 
+func (s *ZoneAPIService) CreateKaktus(ctx context.Context, zoneId string, kaktus Kaktus) (ImplResponse, error) {
+	// TODO - update CreateKaktus with the required logic for this service method.
 	// Add api_zone_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
-	// TODO: Uncomment the next line to return response Response(201, Host{}) or use other options such as http.Ok ...
-	// return Response(201, Host{}), nil
+	// TODO: Uncomment the next line to return response Response(201, Kaktus{}) or use other options such as http.Ok ...
+	// return Response(201, Kaktus{}), nil
 
 	// TODO: Uncomment the next line to return response Response(400, ApiErrorBadRequest{}) or use other options such as http.Ok ...
 	// return Response(400, ApiErrorBadRequest{}), nil
@@ -56,7 +56,7 @@ func (s *ZoneAPIService) CreateHost(ctx context.Context, zoneId string, host Hos
 	// TODO: Uncomment the next line to return response Response(507, ApiErrorInsufficientStorage{}) or use other options such as http.Ok ...
 	// return Response(507, ApiErrorInsufficientStorage{}), nil
 
-	return Response(http.StatusNotImplemented, nil), errors.New("CreateHost method not implemented")
+	return Response(http.StatusNotImplemented, nil), errors.New("CreateKaktus method not implemented")
 }
 
 // DeleteZone - 
@@ -85,9 +85,9 @@ func (s *ZoneAPIService) DeleteZone(ctx context.Context, zoneId string) (ImplRes
 	return Response(http.StatusNotImplemented, nil), errors.New("DeleteZone method not implemented")
 }
 
-// ListZoneHosts - 
-func (s *ZoneAPIService) ListZoneHosts(ctx context.Context, zoneId string) (ImplResponse, error) {
-	// TODO - update ListZoneHosts with the required logic for this service method.
+// ListZoneKaktuss - 
+func (s *ZoneAPIService) ListZoneKaktuss(ctx context.Context, zoneId string) (ImplResponse, error) {
+	// TODO - update ListZoneKaktuss with the required logic for this service method.
 	// Add api_zone_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
 	// TODO: Uncomment the next line to return response Response(200, []string{}) or use other options such as http.Ok ...
@@ -102,7 +102,7 @@ func (s *ZoneAPIService) ListZoneHosts(ctx context.Context, zoneId string) (Impl
 	// TODO: Uncomment the next line to return response Response(404, ApiErrorNotFound{}) or use other options such as http.Ok ...
 	// return Response(404, ApiErrorNotFound{}), nil
 
-	return Response(http.StatusNotImplemented, nil), errors.New("ListZoneHosts method not implemented")
+	return Response(http.StatusNotImplemented, nil), errors.New("ListZoneKaktuss method not implemented")
 }
 
 // ListZones - 

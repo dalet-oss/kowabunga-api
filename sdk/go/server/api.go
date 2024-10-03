@@ -37,17 +37,6 @@ type AgentAPIRouter interface {
 	SetAgentApiToken(http.ResponseWriter, *http.Request)
 	UpdateAgent(http.ResponseWriter, *http.Request)
 }
-// HostAPIRouter defines the required methods for binding the api requests to a responses for the HostAPI
-// The HostAPIRouter implementation should parse necessary information from the http request,
-// pass the data to a HostAPIServicer to perform the required actions, then write the service results to the http response.
-type HostAPIRouter interface { 
-	DeleteHost(http.ResponseWriter, *http.Request)
-	ListHostInstances(http.ResponseWriter, *http.Request)
-	ListHosts(http.ResponseWriter, *http.Request)
-	ReadHost(http.ResponseWriter, *http.Request)
-	ReadHostCaps(http.ResponseWriter, *http.Request)
-	UpdateHost(http.ResponseWriter, *http.Request)
-}
 // InstanceAPIRouter defines the required methods for binding the api requests to a responses for the InstanceAPI
 // The InstanceAPIRouter implementation should parse necessary information from the http request,
 // pass the data to a InstanceAPIServicer to perform the required actions, then write the service results to the http response.
@@ -65,6 +54,17 @@ type InstanceAPIRouter interface {
 	StopInstance(http.ResponseWriter, *http.Request)
 	SuspendInstance(http.ResponseWriter, *http.Request)
 	UpdateInstance(http.ResponseWriter, *http.Request)
+}
+// KaktusAPIRouter defines the required methods for binding the api requests to a responses for the KaktusAPI
+// The KaktusAPIRouter implementation should parse necessary information from the http request,
+// pass the data to a KaktusAPIServicer to perform the required actions, then write the service results to the http response.
+type KaktusAPIRouter interface { 
+	DeleteKaktus(http.ResponseWriter, *http.Request)
+	ListKaktusInstances(http.ResponseWriter, *http.Request)
+	ListKaktuss(http.ResponseWriter, *http.Request)
+	ReadKaktus(http.ResponseWriter, *http.Request)
+	ReadKaktusCaps(http.ResponseWriter, *http.Request)
+	UpdateKaktus(http.ResponseWriter, *http.Request)
 }
 // KawaiiAPIRouter defines the required methods for binding the api requests to a responses for the KawaiiAPI
 // The KawaiiAPIRouter implementation should parse necessary information from the http request,
@@ -278,9 +278,9 @@ type VolumeAPIRouter interface {
 // The ZoneAPIRouter implementation should parse necessary information from the http request,
 // pass the data to a ZoneAPIServicer to perform the required actions, then write the service results to the http response.
 type ZoneAPIRouter interface { 
-	CreateHost(http.ResponseWriter, *http.Request)
+	CreateKaktus(http.ResponseWriter, *http.Request)
 	DeleteZone(http.ResponseWriter, *http.Request)
-	ListZoneHosts(http.ResponseWriter, *http.Request)
+	ListZoneKaktuss(http.ResponseWriter, *http.Request)
 	ListZones(http.ResponseWriter, *http.Request)
 	ReadZone(http.ResponseWriter, *http.Request)
 	UpdateZone(http.ResponseWriter, *http.Request)
@@ -313,20 +313,6 @@ type AgentAPIServicer interface {
 }
 
 
-// HostAPIServicer defines the api actions for the HostAPI service
-// This interface intended to stay up to date with the openapi yaml used to generate it,
-// while the service implementation can be ignored with the .openapi-generator-ignore file
-// and updated with the logic required for the API.
-type HostAPIServicer interface { 
-	DeleteHost(context.Context, string) (ImplResponse, error)
-	ListHostInstances(context.Context, string) (ImplResponse, error)
-	ListHosts(context.Context) (ImplResponse, error)
-	ReadHost(context.Context, string) (ImplResponse, error)
-	ReadHostCaps(context.Context, string) (ImplResponse, error)
-	UpdateHost(context.Context, string, Host) (ImplResponse, error)
-}
-
-
 // InstanceAPIServicer defines the api actions for the InstanceAPI service
 // This interface intended to stay up to date with the openapi yaml used to generate it,
 // while the service implementation can be ignored with the .openapi-generator-ignore file
@@ -345,6 +331,20 @@ type InstanceAPIServicer interface {
 	StopInstance(context.Context, string) (ImplResponse, error)
 	SuspendInstance(context.Context, string) (ImplResponse, error)
 	UpdateInstance(context.Context, string, Instance) (ImplResponse, error)
+}
+
+
+// KaktusAPIServicer defines the api actions for the KaktusAPI service
+// This interface intended to stay up to date with the openapi yaml used to generate it,
+// while the service implementation can be ignored with the .openapi-generator-ignore file
+// and updated with the logic required for the API.
+type KaktusAPIServicer interface { 
+	DeleteKaktus(context.Context, string) (ImplResponse, error)
+	ListKaktusInstances(context.Context, string) (ImplResponse, error)
+	ListKaktuss(context.Context) (ImplResponse, error)
+	ReadKaktus(context.Context, string) (ImplResponse, error)
+	ReadKaktusCaps(context.Context, string) (ImplResponse, error)
+	UpdateKaktus(context.Context, string, Kaktus) (ImplResponse, error)
 }
 
 
@@ -612,9 +612,9 @@ type VolumeAPIServicer interface {
 // while the service implementation can be ignored with the .openapi-generator-ignore file
 // and updated with the logic required for the API.
 type ZoneAPIServicer interface { 
-	CreateHost(context.Context, string, Host) (ImplResponse, error)
+	CreateKaktus(context.Context, string, Kaktus) (ImplResponse, error)
 	DeleteZone(context.Context, string) (ImplResponse, error)
-	ListZoneHosts(context.Context, string) (ImplResponse, error)
+	ListZoneKaktuss(context.Context, string) (ImplResponse, error)
 	ListZones(context.Context) (ImplResponse, error)
 	ReadZone(context.Context, string) (ImplResponse, error)
 	UpdateZone(context.Context, string, Zone) (ImplResponse, error)

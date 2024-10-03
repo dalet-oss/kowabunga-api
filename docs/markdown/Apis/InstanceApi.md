@@ -6,8 +6,8 @@ All URIs are relative to */api/v1*
 |------------- | ------------- | -------------|
 | [**createProjectZoneInstance**](InstanceApi.md#createProjectZoneInstance) | **POST** /project/{projectId}/zone/{zoneId}/instance |  |
 | [**deleteInstance**](InstanceApi.md#deleteInstance) | **DELETE** /instance/{instanceId} |  |
-| [**listHostInstances**](InstanceApi.md#listHostInstances) | **GET** /host/{hostId}/instances |  |
 | [**listInstances**](InstanceApi.md#listInstances) | **GET** /instance |  |
+| [**listKaktusInstances**](InstanceApi.md#listKaktusInstances) | **GET** /kaktus/{kaktusId}/instances |  |
 | [**listProjectZoneInstances**](InstanceApi.md#listProjectZoneInstances) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
 | [**readInstance**](InstanceApi.md#readInstance) | **GET** /instance/{instanceId} |  |
 | [**readInstanceRemoteConnection**](InstanceApi.md#readInstanceRemoteConnection) | **GET** /instance/{instanceId}/connect |  |
@@ -78,19 +78,16 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listHostInstances"></a>
-# **listHostInstances**
-> List listHostInstances(hostId)
+<a name="listInstances"></a>
+# **listInstances**
+> List listInstances()
 
 
 
     Returns the IDs of virtual machine instance objects.
 
 ### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **hostId** | **String**| The ID of the computing host. | [default to null] |
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -105,16 +102,19 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listInstances"></a>
-# **listInstances**
-> List listInstances()
+<a name="listKaktusInstances"></a>
+# **listKaktusInstances**
+> List listKaktusInstances(kaktusId)
 
 
 
     Returns the IDs of virtual machine instance objects.
 
 ### Parameters
-This endpoint does not need any parameter.
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **kaktusId** | **String**| The ID of the Kaktus computing node. | [default to null] |
 
 ### Return type
 

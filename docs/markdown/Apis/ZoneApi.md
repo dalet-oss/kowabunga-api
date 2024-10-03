@@ -4,7 +4,7 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createHost**](ZoneApi.md#createHost) | **POST** /zone/{zoneId}/host |  |
+| [**createKaktus**](ZoneApi.md#createKaktus) | **POST** /zone/{zoneId}/kaktus |  |
 | [**createProjectZoneInstance**](ZoneApi.md#createProjectZoneInstance) | **POST** /project/{projectId}/zone/{zoneId}/instance |  |
 | [**createProjectZoneKompute**](ZoneApi.md#createProjectZoneKompute) | **POST** /project/{projectId}/zone/{zoneId}/kompute |  |
 | [**createProjectZoneKonvey**](ZoneApi.md#createProjectZoneKonvey) | **POST** /project/{projectId}/zone/{zoneId}/konvey |  |
@@ -14,30 +14,30 @@ All URIs are relative to */api/v1*
 | [**listProjectZoneKomputes**](ZoneApi.md#listProjectZoneKomputes) | **GET** /project/{projectId}/zone/{zoneId}/komputes |  |
 | [**listProjectZoneKonveys**](ZoneApi.md#listProjectZoneKonveys) | **GET** /project/{projectId}/zone/{zoneId}/konveys |  |
 | [**listRegionZones**](ZoneApi.md#listRegionZones) | **GET** /region/{regionId}/zones |  |
-| [**listZoneHosts**](ZoneApi.md#listZoneHosts) | **GET** /zone/{zoneId}/hosts |  |
+| [**listZoneKaktuss**](ZoneApi.md#listZoneKaktuss) | **GET** /zone/{zoneId}/kaktuss |  |
 | [**listZones**](ZoneApi.md#listZones) | **GET** /zone |  |
 | [**readZone**](ZoneApi.md#readZone) | **GET** /zone/{zoneId} |  |
 | [**updateZone**](ZoneApi.md#updateZone) | **PUT** /zone/{zoneId} |  |
 
 
-<a name="createHost"></a>
-# **createHost**
-> Host createHost(zoneId, Host)
+<a name="createKaktus"></a>
+# **createKaktus**
+> Kaktus createKaktus(zoneId, Kaktus)
 
 
 
-    Creates a new computing host.
+    Creates a new Kaktus computing node.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **Host** | [**Host**](../Models/Host.md)| Host payload. | |
+| **Kaktus** | [**Kaktus**](../Models/Kaktus.md)| Kaktus payload. | |
 
 ### Return type
 
-[**Host**](../Models/Host.md)
+[**Kaktus**](../Models/Kaktus.md)
 
 ### Authorization
 
@@ -304,13 +304,13 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listZoneHosts"></a>
-# **listZoneHosts**
-> List listZoneHosts(zoneId)
+<a name="listZoneKaktuss"></a>
+# **listZoneKaktuss**
+> List listZoneKaktuss(zoneId)
 
 
 
-    Returns the IDs of computing host objects.
+    Returns the IDs of Kaktus computing node objects.
 
 ### Parameters
 

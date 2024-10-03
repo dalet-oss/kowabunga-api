@@ -19,18 +19,10 @@ All URIs are relative to */api/v1*
 *AgentApi* | [**readAgent**](Apis/AgentApi.md#readagent) | **GET** /agent/{agentId} | Returns a Kowabunga remote agent. |
 *AgentApi* | [**setAgentApiToken**](Apis/AgentApi.md#setagentapitoken) | **PATCH** /agent/{agentId}/token | Performs a Kowabunga remote agent setting of API token (will replace any existing one). |
 *AgentApi* | [**updateAgent**](Apis/AgentApi.md#updateagent) | **PUT** /agent/{agentId} | Updates a Kowabunga remote agent configuration. |
-| *HostApi* | [**createHost**](Apis/HostApi.md#createhost) | **POST** /zone/{zoneId}/host | Creates a new computing host. |
-*HostApi* | [**deleteHost**](Apis/HostApi.md#deletehost) | **DELETE** /host/{hostId} | Deletes an existing computing host. |
-*HostApi* | [**listHostInstances**](Apis/HostApi.md#listhostinstances) | **GET** /host/{hostId}/instances | Returns the IDs of virtual machine instance objects. |
-*HostApi* | [**listHosts**](Apis/HostApi.md#listhosts) | **GET** /host | Returns the IDs of computing host objects. |
-*HostApi* | [**listZoneHosts**](Apis/HostApi.md#listzonehosts) | **GET** /zone/{zoneId}/hosts | Returns the IDs of computing host objects. |
-*HostApi* | [**readHost**](Apis/HostApi.md#readhost) | **GET** /host/{hostId} | Returns a computing host. |
-*HostApi* | [**readHostCaps**](Apis/HostApi.md#readhostcaps) | **GET** /host/{hostId}/caps | Returns a computing host capability. |
-*HostApi* | [**updateHost**](Apis/HostApi.md#updatehost) | **PUT** /host/{hostId} | Updates a computing host configuration. |
 | *InstanceApi* | [**createProjectZoneInstance**](Apis/InstanceApi.md#createprojectzoneinstance) | **POST** /project/{projectId}/zone/{zoneId}/instance | Creates a new virtual machine instance. |
 *InstanceApi* | [**deleteInstance**](Apis/InstanceApi.md#deleteinstance) | **DELETE** /instance/{instanceId} | Deletes an existing virtual machine instance. |
-*InstanceApi* | [**listHostInstances**](Apis/InstanceApi.md#listhostinstances) | **GET** /host/{hostId}/instances | Returns the IDs of virtual machine instance objects. |
 *InstanceApi* | [**listInstances**](Apis/InstanceApi.md#listinstances) | **GET** /instance | Returns the IDs of virtual machine instance objects. |
+*InstanceApi* | [**listKaktusInstances**](Apis/InstanceApi.md#listkaktusinstances) | **GET** /kaktus/{kaktusId}/instances | Returns the IDs of virtual machine instance objects. |
 *InstanceApi* | [**listProjectZoneInstances**](Apis/InstanceApi.md#listprojectzoneinstances) | **GET** /project/{projectId}/zone/{zoneId}/instances | Returns the IDs of virtual machine instance objects. |
 *InstanceApi* | [**readInstance**](Apis/InstanceApi.md#readinstance) | **GET** /instance/{instanceId} | Returns a virtual machine instance. |
 *InstanceApi* | [**readInstanceRemoteConnection**](Apis/InstanceApi.md#readinstanceremoteconnection) | **GET** /instance/{instanceId}/connect | Returns a virtual machine instance remote access characteristics. |
@@ -43,6 +35,14 @@ All URIs are relative to */api/v1*
 *InstanceApi* | [**stopInstance**](Apis/InstanceApi.md#stopinstance) | **PATCH** /instance/{instanceId}/stop | Performs a virtual machine instance hardware stop. |
 *InstanceApi* | [**suspendInstance**](Apis/InstanceApi.md#suspendinstance) | **PATCH** /instance/{instanceId}/suspend | Performs a virtual machine instance software PM suspend. |
 *InstanceApi* | [**updateInstance**](Apis/InstanceApi.md#updateinstance) | **PUT** /instance/{instanceId} | Updates a virtual machine instance configuration. |
+| *KaktusApi* | [**createKaktus**](Apis/KaktusApi.md#createkaktus) | **POST** /zone/{zoneId}/kaktus | Creates a new Kaktus computing node. |
+*KaktusApi* | [**deleteKaktus**](Apis/KaktusApi.md#deletekaktus) | **DELETE** /kaktus/{kaktusId} | Deletes an existing Kaktus computing node. |
+*KaktusApi* | [**listKaktusInstances**](Apis/KaktusApi.md#listkaktusinstances) | **GET** /kaktus/{kaktusId}/instances | Returns the IDs of virtual machine instance objects. |
+*KaktusApi* | [**listKaktuss**](Apis/KaktusApi.md#listkaktuss) | **GET** /kaktus | Returns the IDs of Kaktus computing node objects. |
+*KaktusApi* | [**listZoneKaktuss**](Apis/KaktusApi.md#listzonekaktuss) | **GET** /zone/{zoneId}/kaktuss | Returns the IDs of Kaktus computing node objects. |
+*KaktusApi* | [**readKaktus**](Apis/KaktusApi.md#readkaktus) | **GET** /kaktus/{kaktusId} | Returns a Kaktus computing node. |
+*KaktusApi* | [**readKaktusCaps**](Apis/KaktusApi.md#readkaktuscaps) | **GET** /kaktus/{kaktusId}/caps | Returns a Kaktus computing node capability. |
+*KaktusApi* | [**updateKaktus**](Apis/KaktusApi.md#updatekaktus) | **PUT** /kaktus/{kaktusId} | Updates a Kaktus computing node configuration. |
 | *KawaiiApi* | [**createProjectRegionKawaii**](Apis/KawaiiApi.md#createprojectregionkawaii) | **POST** /project/{projectId}/region/{regionId}/kawaii | Creates a new Kawaii. |
 *KawaiiApi* | [**deleteKawaii**](Apis/KawaiiApi.md#deletekawaii) | **DELETE** /kawaii/{kawaiiId} | Deletes an existing Kawaii. |
 *KawaiiApi* | [**listKawaiis**](Apis/KawaiiApi.md#listkawaiis) | **GET** /kawaii | Returns the IDs of Kawaii objects. |
@@ -208,7 +208,7 @@ All URIs are relative to */api/v1*
 *VolumeApi* | [**listVolumes**](Apis/VolumeApi.md#listvolumes) | **GET** /volume | Returns the IDs of storage volume objects. |
 *VolumeApi* | [**readVolume**](Apis/VolumeApi.md#readvolume) | **GET** /volume/{volumeId} | Returns a storage volume. |
 *VolumeApi* | [**updateVolume**](Apis/VolumeApi.md#updatevolume) | **PUT** /volume/{volumeId} | Updates a storage volume configuration. |
-| *ZoneApi* | [**createHost**](Apis/ZoneApi.md#createhost) | **POST** /zone/{zoneId}/host | Creates a new computing host. |
+| *ZoneApi* | [**createKaktus**](Apis/ZoneApi.md#createkaktus) | **POST** /zone/{zoneId}/kaktus | Creates a new Kaktus computing node. |
 *ZoneApi* | [**createProjectZoneInstance**](Apis/ZoneApi.md#createprojectzoneinstance) | **POST** /project/{projectId}/zone/{zoneId}/instance | Creates a new virtual machine instance. |
 *ZoneApi* | [**createProjectZoneKompute**](Apis/ZoneApi.md#createprojectzonekompute) | **POST** /project/{projectId}/zone/{zoneId}/kompute | Creates a new Kompute. |
 *ZoneApi* | [**createProjectZoneKonvey**](Apis/ZoneApi.md#createprojectzonekonvey) | **POST** /project/{projectId}/zone/{zoneId}/konvey | Creates a new Konvey (Kowabunga Network Load-Balancer). |
@@ -218,7 +218,7 @@ All URIs are relative to */api/v1*
 *ZoneApi* | [**listProjectZoneKomputes**](Apis/ZoneApi.md#listprojectzonekomputes) | **GET** /project/{projectId}/zone/{zoneId}/komputes | Returns the IDs of Kompute objects. |
 *ZoneApi* | [**listProjectZoneKonveys**](Apis/ZoneApi.md#listprojectzonekonveys) | **GET** /project/{projectId}/zone/{zoneId}/konveys | Returns the IDs of Konvey (Kowabunga Network Load-Balancer) objects. |
 *ZoneApi* | [**listRegionZones**](Apis/ZoneApi.md#listregionzones) | **GET** /region/{regionId}/zones | Returns the IDs of availability zone objects. |
-*ZoneApi* | [**listZoneHosts**](Apis/ZoneApi.md#listzonehosts) | **GET** /zone/{zoneId}/hosts | Returns the IDs of computing host objects. |
+*ZoneApi* | [**listZoneKaktuss**](Apis/ZoneApi.md#listzonekaktuss) | **GET** /zone/{zoneId}/kaktuss | Returns the IDs of Kaktus computing node objects. |
 *ZoneApi* | [**listZones**](Apis/ZoneApi.md#listzones) | **GET** /zone | Returns the IDs of availability zone objects. |
 *ZoneApi* | [**readZone**](Apis/ZoneApi.md#readzone) | **GET** /zone/{zoneId} | Returns a availability zone. |
 *ZoneApi* | [**updateZone**](Apis/ZoneApi.md#updatezone) | **PUT** /zone/{zoneId} | Updates a availability zone configuration. |
@@ -239,13 +239,13 @@ All URIs are relative to */api/v1*
  - [ApiToken](./Models/ApiToken.md)
  - [Cost](./Models/Cost.md)
  - [DnsRecord](./Models/DnsRecord.md)
- - [Host](./Models/Host.md)
- - [HostCPU](./Models/HostCPU.md)
- - [HostCaps](./Models/HostCaps.md)
  - [Instance](./Models/Instance.md)
  - [InstanceRemoteAccess](./Models/InstanceRemoteAccess.md)
  - [InstanceState](./Models/InstanceState.md)
  - [IpRange](./Models/IpRange.md)
+ - [Kaktus](./Models/Kaktus.md)
+ - [KaktusCPU](./Models/KaktusCPU.md)
+ - [KaktusCaps](./Models/KaktusCaps.md)
  - [Kawaii](./Models/Kawaii.md)
  - [KawaiiDNatRule](./Models/KawaiiDNatRule.md)
  - [KawaiiFirewall](./Models/KawaiiFirewall.md)

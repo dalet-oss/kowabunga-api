@@ -24,34 +24,34 @@ import (
 // ZoneAPIService ZoneAPI service
 type ZoneAPIService service
 
-type ApiCreateHostRequest struct {
+type ApiCreateKaktusRequest struct {
 	ctx context.Context
 	ApiService *ZoneAPIService
 	zoneId string
-	host *Host
+	kaktus *Kaktus
 }
 
-// Host payload.
-func (r ApiCreateHostRequest) Host(host Host) ApiCreateHostRequest {
-	r.host = &host
+// Kaktus payload.
+func (r ApiCreateKaktusRequest) Kaktus(kaktus Kaktus) ApiCreateKaktusRequest {
+	r.kaktus = &kaktus
 	return r
 }
 
-func (r ApiCreateHostRequest) Execute() (*Host, *http.Response, error) {
-	return r.ApiService.CreateHostExecute(r)
+func (r ApiCreateKaktusRequest) Execute() (*Kaktus, *http.Response, error) {
+	return r.ApiService.CreateKaktusExecute(r)
 }
 
 /*
-CreateHost Method for CreateHost
+CreateKaktus Method for CreateKaktus
 
-Creates a new computing host.
+Creates a new Kaktus computing node.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param zoneId The ID of the availability zone.
- @return ApiCreateHostRequest
+ @return ApiCreateKaktusRequest
 */
-func (a *ZoneAPIService) CreateHost(ctx context.Context, zoneId string) ApiCreateHostRequest {
-	return ApiCreateHostRequest{
+func (a *ZoneAPIService) CreateKaktus(ctx context.Context, zoneId string) ApiCreateKaktusRequest {
+	return ApiCreateKaktusRequest{
 		ApiService: a,
 		ctx: ctx,
 		zoneId: zoneId,
@@ -59,28 +59,28 @@ func (a *ZoneAPIService) CreateHost(ctx context.Context, zoneId string) ApiCreat
 }
 
 // Execute executes the request
-//  @return Host
-func (a *ZoneAPIService) CreateHostExecute(r ApiCreateHostRequest) (*Host, *http.Response, error) {
+//  @return Kaktus
+func (a *ZoneAPIService) CreateKaktusExecute(r ApiCreateKaktusRequest) (*Kaktus, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Host
+		localVarReturnValue  *Kaktus
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ZoneAPIService.CreateHost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ZoneAPIService.CreateKaktus")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{zoneId}/host"
+	localVarPath := localBasePath + "/zone/{zoneId}/kaktus"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.host == nil {
-		return localVarReturnValue, nil, reportError("host is required and must be specified")
+	if r.kaktus == nil {
+		return localVarReturnValue, nil, reportError("kaktus is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -101,7 +101,7 @@ func (a *ZoneAPIService) CreateHostExecute(r ApiCreateHostRequest) (*Host, *http
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.host
+	localVarPostBody = r.kaktus
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -389,27 +389,27 @@ func (a *ZoneAPIService) DeleteZoneExecute(r ApiDeleteZoneRequest) (*http.Respon
 	return localVarHTTPResponse, nil
 }
 
-type ApiListZoneHostsRequest struct {
+type ApiListZoneKaktussRequest struct {
 	ctx context.Context
 	ApiService *ZoneAPIService
 	zoneId string
 }
 
-func (r ApiListZoneHostsRequest) Execute() ([]string, *http.Response, error) {
-	return r.ApiService.ListZoneHostsExecute(r)
+func (r ApiListZoneKaktussRequest) Execute() ([]string, *http.Response, error) {
+	return r.ApiService.ListZoneKaktussExecute(r)
 }
 
 /*
-ListZoneHosts Method for ListZoneHosts
+ListZoneKaktuss Method for ListZoneKaktuss
 
-Returns the IDs of computing host objects.
+Returns the IDs of Kaktus computing node objects.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param zoneId The ID of the availability zone.
- @return ApiListZoneHostsRequest
+ @return ApiListZoneKaktussRequest
 */
-func (a *ZoneAPIService) ListZoneHosts(ctx context.Context, zoneId string) ApiListZoneHostsRequest {
-	return ApiListZoneHostsRequest{
+func (a *ZoneAPIService) ListZoneKaktuss(ctx context.Context, zoneId string) ApiListZoneKaktussRequest {
+	return ApiListZoneKaktussRequest{
 		ApiService: a,
 		ctx: ctx,
 		zoneId: zoneId,
@@ -418,7 +418,7 @@ func (a *ZoneAPIService) ListZoneHosts(ctx context.Context, zoneId string) ApiLi
 
 // Execute executes the request
 //  @return []string
-func (a *ZoneAPIService) ListZoneHostsExecute(r ApiListZoneHostsRequest) ([]string, *http.Response, error) {
+func (a *ZoneAPIService) ListZoneKaktussExecute(r ApiListZoneKaktussRequest) ([]string, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -426,12 +426,12 @@ func (a *ZoneAPIService) ListZoneHostsExecute(r ApiListZoneHostsRequest) ([]stri
 		localVarReturnValue  []string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ZoneAPIService.ListZoneHosts")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ZoneAPIService.ListZoneKaktuss")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/zone/{zoneId}/hosts"
+	localVarPath := localBasePath + "/zone/{zoneId}/kaktuss"
 	localVarPath = strings.Replace(localVarPath, "{"+"zoneId"+"}", url.PathEscape(parameterValueToString(r.zoneId, "zoneId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

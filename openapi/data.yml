@@ -26,18 +26,6 @@ resources:
     schema: Team
     paramId: teamId
     paramSchema: TeamID
-  host:
-    tag: host
-    desc: computing host
-    schema: Host
-    paramId: hostId
-    paramSchema: HostID
-  host_caps:
-    desc: computing host capability
-    schema: HostCaps
-  host_cpu:
-    desc: computing host CPU characteristics
-    schema: HostCPU
   instance:
     tag: instance
     desc: virtual machine instance
@@ -53,6 +41,19 @@ resources:
   ip_range:
     desc: reserved IPv4 addresses pool range, non-addressable by Kowabunga
     schema: IpRange
+  kaktus:
+    tag: kaktus
+    desc: Kaktus computing node
+    extended_desc: Kaktus (Kowabunga Affordable KVM and Tight Underneath Storage) is an hyper-converged infrastructure (HCI) bare-metal node offering computing and distributed storage capabilites
+    schema: Kaktus
+    paramId: kaktusId
+    paramSchema: KaktusID
+  kaktus_caps:
+    desc: Kaktus computing node capability
+    schema: KaktusCaps
+  kaktus_cpu:
+    desc: Kaktus computing node CPU characteristics
+    schema: KaktusCPU
   kawaii:
     tag: kawaii
     desc: Kawaii

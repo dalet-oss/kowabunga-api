@@ -33,7 +33,7 @@ import { ApiErrorUnauthorized } from '../model/apiErrorUnauthorized';
 // @ts-ignore
 import { ApiErrorUnprocessableEntity } from '../model/apiErrorUnprocessableEntity';
 // @ts-ignore
-import { Host } from '../model/host';
+import { Kaktus } from '../model/kaktus';
 // @ts-ignore
 import { Zone } from '../model/zone';
 
@@ -108,21 +108,21 @@ export class ZoneService {
     }
 
     /**
-     * Creates a new computing host.
+     * Creates a new Kaktus computing node.
      * @param zoneId The ID of the availability zone.
-     * @param host Host payload.
+     * @param kaktus Kaktus payload.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createHost(zoneId: string, host: Host, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Host>;
-    public createHost(zoneId: string, host: Host, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Host>>;
-    public createHost(zoneId: string, host: Host, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Host>>;
-    public createHost(zoneId: string, host: Host, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public createKaktus(zoneId: string, kaktus: Kaktus, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Kaktus>;
+    public createKaktus(zoneId: string, kaktus: Kaktus, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Kaktus>>;
+    public createKaktus(zoneId: string, kaktus: Kaktus, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Kaktus>>;
+    public createKaktus(zoneId: string, kaktus: Kaktus, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (zoneId === null || zoneId === undefined) {
-            throw new Error('Required parameter zoneId was null or undefined when calling createHost.');
+            throw new Error('Required parameter zoneId was null or undefined when calling createKaktus.');
         }
-        if (host === null || host === undefined) {
-            throw new Error('Required parameter host was null or undefined when calling createHost.');
+        if (kaktus === null || kaktus === undefined) {
+            throw new Error('Required parameter kaktus was null or undefined when calling createKaktus.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -178,11 +178,11 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/host`;
-        return this.httpClient.request<Host>('post', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kaktus`;
+        return this.httpClient.request<Kaktus>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: host,
+                body: kaktus,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -264,17 +264,17 @@ export class ZoneService {
     }
 
     /**
-     * Returns the IDs of computing host objects.
+     * Returns the IDs of Kaktus computing node objects.
      * @param zoneId The ID of the availability zone.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public listZoneHosts(zoneId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
-    public listZoneHosts(zoneId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
-    public listZoneHosts(zoneId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
-    public listZoneHosts(zoneId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public listZoneKaktuss(zoneId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<string>>;
+    public listZoneKaktuss(zoneId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<string>>>;
+    public listZoneKaktuss(zoneId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<string>>>;
+    public listZoneKaktuss(zoneId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (zoneId === null || zoneId === undefined) {
-            throw new Error('Required parameter zoneId was null or undefined when calling listZoneHosts.');
+            throw new Error('Required parameter zoneId was null or undefined when calling listZoneKaktuss.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -321,7 +321,7 @@ export class ZoneService {
             }
         }
 
-        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/hosts`;
+        let localVarPath = `/zone/${this.configuration.encodeParam({name: "zoneId", value: zoneId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/kaktuss`;
         return this.httpClient.request<Array<string>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
