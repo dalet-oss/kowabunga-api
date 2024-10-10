@@ -3,7 +3,7 @@ Kowabunga API documentation
 
 Kvm Orchestrator With A BUNch of Goods Added
 
-API version: 0.42.0
+API version: 0.50.0
 Contact: csops@dalet.com
 */
 
