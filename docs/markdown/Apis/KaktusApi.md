@@ -4,19 +4,19 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createKaktus**](KaktusApi.md#createKaktus) | **POST** /zone/{zoneId}/kaktus |  |
+| [**createKaktus_0**](KaktusApi.md#createKaktus_0) | **POST** /zone/{zoneId}/kaktus |  |
 | [**deleteKaktus**](KaktusApi.md#deleteKaktus) | **DELETE** /kaktus/{kaktusId} |  |
 | [**listKaktusInstances**](KaktusApi.md#listKaktusInstances) | **GET** /kaktus/{kaktusId}/instances |  |
 | [**listKaktuss**](KaktusApi.md#listKaktuss) | **GET** /kaktus |  |
-| [**listZoneKaktuses**](KaktusApi.md#listZoneKaktuses) | **GET** /zone/{zoneId}/kaktuses |  |
+| [**listZoneKaktuses_0**](KaktusApi.md#listZoneKaktuses_0) | **GET** /zone/{zoneId}/kaktuses |  |
 | [**readKaktus**](KaktusApi.md#readKaktus) | **GET** /kaktus/{kaktusId} |  |
 | [**readKaktusCaps**](KaktusApi.md#readKaktusCaps) | **GET** /kaktus/{kaktusId}/caps |  |
 | [**updateKaktus**](KaktusApi.md#updateKaktus) | **PUT** /kaktus/{kaktusId} |  |
 
 
-<a name="createKaktus"></a>
-# **createKaktus**
-> Kaktus createKaktus(zoneId, Kaktus)
+<a name="createKaktus_0"></a>
+# **createKaktus_0**
+> Kaktus createKaktus_0(zoneId, Kaktus)
 
 
 
@@ -120,9 +120,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listZoneKaktuses"></a>
-# **listZoneKaktuses**
-> List listZoneKaktuses(zoneId)
+<a name="listZoneKaktuses_0"></a>
+# **listZoneKaktuses_0**
+> List listZoneKaktuses_0(zoneId)
 
 
 

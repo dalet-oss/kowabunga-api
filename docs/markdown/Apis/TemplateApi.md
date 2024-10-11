@@ -4,18 +4,18 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createTemplate**](TemplateApi.md#createTemplate) | **POST** /pool/{poolId}/template |  |
+| [**createTemplate_0**](TemplateApi.md#createTemplate_0) | **POST** /pool/{poolId}/template |  |
 | [**deleteTemplate**](TemplateApi.md#deleteTemplate) | **DELETE** /template/{templateId} |  |
-| [**listStoragePoolTemplates**](TemplateApi.md#listStoragePoolTemplates) | **GET** /pool/{poolId}/templates |  |
+| [**listStoragePoolTemplates_0**](TemplateApi.md#listStoragePoolTemplates_0) | **GET** /pool/{poolId}/templates |  |
 | [**listTemplates**](TemplateApi.md#listTemplates) | **GET** /template |  |
 | [**readTemplate**](TemplateApi.md#readTemplate) | **GET** /template/{templateId} |  |
-| [**setStoragePoolDefaultTemplate**](TemplateApi.md#setStoragePoolDefaultTemplate) | **PATCH** /pool/{poolId}/template/{templateId}/default |  |
+| [**setStoragePoolDefaultTemplate_0**](TemplateApi.md#setStoragePoolDefaultTemplate_0) | **PATCH** /pool/{poolId}/template/{templateId}/default |  |
 | [**updateTemplate**](TemplateApi.md#updateTemplate) | **PUT** /template/{templateId} |  |
 
 
-<a name="createTemplate"></a>
-# **createTemplate**
-> Template createTemplate(poolId, Template)
+<a name="createTemplate_0"></a>
+# **createTemplate_0**
+> Template createTemplate_0(poolId, Template)
 
 
 
@@ -68,9 +68,9 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listStoragePoolTemplates"></a>
-# **listStoragePoolTemplates**
-> List listStoragePoolTemplates(poolId)
+<a name="listStoragePoolTemplates_0"></a>
+# **listStoragePoolTemplates_0**
+> List listStoragePoolTemplates_0(poolId)
 
 
 
@@ -146,9 +146,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="setStoragePoolDefaultTemplate"></a>
-# **setStoragePoolDefaultTemplate**
-> setStoragePoolDefaultTemplate(poolId, templateId)
+<a name="setStoragePoolDefaultTemplate_0"></a>
+# **setStoragePoolDefaultTemplate_0**
+> setStoragePoolDefaultTemplate_0(poolId, templateId)
 
 
 

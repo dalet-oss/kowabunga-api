@@ -4,19 +4,19 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createProjectRegionKonvey**](KonveyApi.md#createProjectRegionKonvey) | **POST** /project/{projectId}/region/{regionId}/konvey |  |
-| [**createProjectZoneKonvey**](KonveyApi.md#createProjectZoneKonvey) | **POST** /project/{projectId}/zone/{zoneId}/konvey |  |
+| [**createProjectRegionKonvey_1**](KonveyApi.md#createProjectRegionKonvey_1) | **POST** /project/{projectId}/region/{regionId}/konvey |  |
+| [**createProjectZoneKonvey_1**](KonveyApi.md#createProjectZoneKonvey_1) | **POST** /project/{projectId}/zone/{zoneId}/konvey |  |
 | [**deleteKonvey**](KonveyApi.md#deleteKonvey) | **DELETE** /konvey/{konveyId} |  |
 | [**listKonveys**](KonveyApi.md#listKonveys) | **GET** /konvey |  |
-| [**listProjectRegionKonveys**](KonveyApi.md#listProjectRegionKonveys) | **GET** /project/{projectId}/region/{regionId}/konveys |  |
-| [**listProjectZoneKonveys**](KonveyApi.md#listProjectZoneKonveys) | **GET** /project/{projectId}/zone/{zoneId}/konveys |  |
+| [**listProjectRegionKonveys_1**](KonveyApi.md#listProjectRegionKonveys_1) | **GET** /project/{projectId}/region/{regionId}/konveys |  |
+| [**listProjectZoneKonveys_1**](KonveyApi.md#listProjectZoneKonveys_1) | **GET** /project/{projectId}/zone/{zoneId}/konveys |  |
 | [**readKonvey**](KonveyApi.md#readKonvey) | **GET** /konvey/{konveyId} |  |
 | [**updateKonvey**](KonveyApi.md#updateKonvey) | **PUT** /konvey/{konveyId} |  |
 
 
-<a name="createProjectRegionKonvey"></a>
-# **createProjectRegionKonvey**
-> Konvey createProjectRegionKonvey(projectId, regionId, Konvey)
+<a name="createProjectRegionKonvey_1"></a>
+# **createProjectRegionKonvey_1**
+> Konvey createProjectRegionKonvey_1(projectId, regionId, Konvey)
 
 
 
@@ -43,9 +43,9 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createProjectZoneKonvey"></a>
-# **createProjectZoneKonvey**
-> Konvey createProjectZoneKonvey(projectId, zoneId, Konvey)
+<a name="createProjectZoneKonvey_1"></a>
+# **createProjectZoneKonvey_1**
+> Konvey createProjectZoneKonvey_1(projectId, zoneId, Konvey)
 
 
 
@@ -123,9 +123,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectRegionKonveys"></a>
-# **listProjectRegionKonveys**
-> List listProjectRegionKonveys(projectId, regionId)
+<a name="listProjectRegionKonveys_1"></a>
+# **listProjectRegionKonveys_1**
+> List listProjectRegionKonveys_1(projectId, regionId)
 
 
 
@@ -151,9 +151,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectZoneKonveys"></a>
-# **listProjectZoneKonveys**
-> List listProjectZoneKonveys(projectId, zoneId)
+<a name="listProjectZoneKonveys_1"></a>
+# **listProjectZoneKonveys_1**
+> List listProjectZoneKonveys_1(projectId, zoneId)
 
 
 

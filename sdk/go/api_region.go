@@ -3,7 +3,7 @@ Kowabunga API documentation
 
 Kvm Orchestrator With A BUNch of Goods Added
 
-API version: 0.50.0
+API version: 0.50.1
 Contact: csops@dalet.com
 */
 
@@ -497,7 +497,7 @@ func (a *RegionAPIService) CreateStorageNFSExecute(r ApiCreateStorageNFSRequest)
 	}
 
 	if r.poolId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "poolId", r.poolId, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "poolId", r.poolId, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1626,7 +1626,7 @@ func (a *RegionAPIService) ListRegionStorageNFSsExecute(r ApiListRegionStorageNF
 	localVarFormParams := url.Values{}
 
 	if r.poolId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "poolId", r.poolId, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "poolId", r.poolId, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

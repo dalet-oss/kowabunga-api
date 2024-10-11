@@ -4,18 +4,18 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createProjectRegionKylo**](KyloApi.md#createProjectRegionKylo) | **POST** /project/{projectId}/region/{regionId}/kylo |  |
+| [**createProjectRegionKylo_1**](KyloApi.md#createProjectRegionKylo_1) | **POST** /project/{projectId}/region/{regionId}/kylo |  |
 | [**deleteKylo**](KyloApi.md#deleteKylo) | **DELETE** /kylo/{kyloId} |  |
 | [**listKylos**](KyloApi.md#listKylos) | **GET** /kylo |  |
-| [**listProjectRegionKylos**](KyloApi.md#listProjectRegionKylos) | **GET** /project/{projectId}/region/{regionId}/kylo |  |
-| [**listStorageNFSKylos**](KyloApi.md#listStorageNFSKylos) | **GET** /nfs/{nfsId}/kylo |  |
+| [**listProjectRegionKylos_1**](KyloApi.md#listProjectRegionKylos_1) | **GET** /project/{projectId}/region/{regionId}/kylo |  |
+| [**listStorageNFSKylos_0**](KyloApi.md#listStorageNFSKylos_0) | **GET** /nfs/{nfsId}/kylo |  |
 | [**readKylo**](KyloApi.md#readKylo) | **GET** /kylo/{kyloId} |  |
 | [**updateKylo**](KyloApi.md#updateKylo) | **PUT** /kylo/{kyloId} |  |
 
 
-<a name="createProjectRegionKylo"></a>
-# **createProjectRegionKylo**
-> Kylo createProjectRegionKylo(projectId, regionId, Kylo, nfsId)
+<a name="createProjectRegionKylo_1"></a>
+# **createProjectRegionKylo_1**
+> Kylo createProjectRegionKylo_1(projectId, regionId, Kylo, nfsId)
 
 
 
@@ -94,9 +94,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectRegionKylos"></a>
-# **listProjectRegionKylos**
-> List listProjectRegionKylos(projectId, regionId, nfsId)
+<a name="listProjectRegionKylos_1"></a>
+# **listProjectRegionKylos_1**
+> List listProjectRegionKylos_1(projectId, regionId, nfsId)
 
 
 
@@ -123,9 +123,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listStorageNFSKylos"></a>
-# **listStorageNFSKylos**
-> List listStorageNFSKylos(nfsId)
+<a name="listStorageNFSKylos_0"></a>
+# **listStorageNFSKylos_0**
+> List listStorageNFSKylos_0(nfsId)
 
 
 

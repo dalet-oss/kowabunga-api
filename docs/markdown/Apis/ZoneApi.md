@@ -5,15 +5,15 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createKaktus**](ZoneApi.md#createKaktus) | **POST** /zone/{zoneId}/kaktus |  |
-| [**createProjectZoneInstance**](ZoneApi.md#createProjectZoneInstance) | **POST** /project/{projectId}/zone/{zoneId}/instance |  |
-| [**createProjectZoneKompute**](ZoneApi.md#createProjectZoneKompute) | **POST** /project/{projectId}/zone/{zoneId}/kompute |  |
-| [**createProjectZoneKonvey**](ZoneApi.md#createProjectZoneKonvey) | **POST** /project/{projectId}/zone/{zoneId}/konvey |  |
-| [**createZone**](ZoneApi.md#createZone) | **POST** /region/{regionId}/zone |  |
+| [**createProjectZoneInstance_0**](ZoneApi.md#createProjectZoneInstance_0) | **POST** /project/{projectId}/zone/{zoneId}/instance |  |
+| [**createProjectZoneKompute_0**](ZoneApi.md#createProjectZoneKompute_0) | **POST** /project/{projectId}/zone/{zoneId}/kompute |  |
+| [**createProjectZoneKonvey_0**](ZoneApi.md#createProjectZoneKonvey_0) | **POST** /project/{projectId}/zone/{zoneId}/konvey |  |
+| [**createZone_0**](ZoneApi.md#createZone_0) | **POST** /region/{regionId}/zone |  |
 | [**deleteZone**](ZoneApi.md#deleteZone) | **DELETE** /zone/{zoneId} |  |
-| [**listProjectZoneInstances**](ZoneApi.md#listProjectZoneInstances) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
-| [**listProjectZoneKomputes**](ZoneApi.md#listProjectZoneKomputes) | **GET** /project/{projectId}/zone/{zoneId}/komputes |  |
-| [**listProjectZoneKonveys**](ZoneApi.md#listProjectZoneKonveys) | **GET** /project/{projectId}/zone/{zoneId}/konveys |  |
-| [**listRegionZones**](ZoneApi.md#listRegionZones) | **GET** /region/{regionId}/zones |  |
+| [**listProjectZoneInstances_0**](ZoneApi.md#listProjectZoneInstances_0) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
+| [**listProjectZoneKomputes_0**](ZoneApi.md#listProjectZoneKomputes_0) | **GET** /project/{projectId}/zone/{zoneId}/komputes |  |
+| [**listProjectZoneKonveys_0**](ZoneApi.md#listProjectZoneKonveys_0) | **GET** /project/{projectId}/zone/{zoneId}/konveys |  |
+| [**listRegionZones_0**](ZoneApi.md#listRegionZones_0) | **GET** /region/{regionId}/zones |  |
 | [**listZoneKaktuses**](ZoneApi.md#listZoneKaktuses) | **GET** /zone/{zoneId}/kaktuses |  |
 | [**listZones**](ZoneApi.md#listZones) | **GET** /zone |  |
 | [**readZone**](ZoneApi.md#readZone) | **GET** /zone/{zoneId} |  |
@@ -48,9 +48,9 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createProjectZoneInstance"></a>
-# **createProjectZoneInstance**
-> Instance createProjectZoneInstance(projectId, zoneId, Instance)
+<a name="createProjectZoneInstance_0"></a>
+# **createProjectZoneInstance_0**
+> Instance createProjectZoneInstance_0(projectId, zoneId, Instance)
 
 
 
@@ -77,9 +77,9 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createProjectZoneKompute"></a>
-# **createProjectZoneKompute**
-> Kompute createProjectZoneKompute(projectId, zoneId, Kompute, poolId, templateId, public)
+<a name="createProjectZoneKompute_0"></a>
+# **createProjectZoneKompute_0**
+> Kompute createProjectZoneKompute_0(projectId, zoneId, Kompute, poolId, templateId, public)
 
 
 
@@ -109,9 +109,9 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createProjectZoneKonvey"></a>
-# **createProjectZoneKonvey**
-> Konvey createProjectZoneKonvey(projectId, zoneId, Konvey)
+<a name="createProjectZoneKonvey_0"></a>
+# **createProjectZoneKonvey_0**
+> Konvey createProjectZoneKonvey_0(projectId, zoneId, Konvey)
 
 
 
@@ -138,9 +138,9 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createZone"></a>
-# **createZone**
-> Zone createZone(regionId, Zone)
+<a name="createZone_0"></a>
+# **createZone_0**
+> Zone createZone_0(regionId, Zone)
 
 
 
@@ -193,9 +193,9 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectZoneInstances"></a>
-# **listProjectZoneInstances**
-> List listProjectZoneInstances(projectId, zoneId)
+<a name="listProjectZoneInstances_0"></a>
+# **listProjectZoneInstances_0**
+> List listProjectZoneInstances_0(projectId, zoneId)
 
 
 
@@ -221,9 +221,9 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectZoneKomputes"></a>
-# **listProjectZoneKomputes**
-> List listProjectZoneKomputes(projectId, zoneId)
+<a name="listProjectZoneKomputes_0"></a>
+# **listProjectZoneKomputes_0**
+> List listProjectZoneKomputes_0(projectId, zoneId)
 
 
 
@@ -249,9 +249,9 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectZoneKonveys"></a>
-# **listProjectZoneKonveys**
-> List listProjectZoneKonveys(projectId, zoneId)
+<a name="listProjectZoneKonveys_0"></a>
+# **listProjectZoneKonveys_0**
+> List listProjectZoneKonveys_0(projectId, zoneId)
 
 
 
@@ -277,9 +277,9 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listRegionZones"></a>
-# **listRegionZones**
-> List listRegionZones(regionId)
+<a name="listRegionZones_0"></a>
+# **listRegionZones_0**
+> List listRegionZones_0(regionId)
 
 
 

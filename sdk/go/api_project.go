@@ -3,7 +3,7 @@ Kowabunga API documentation
 
 Kvm Orchestrator With A BUNch of Goods Added
 
-API version: 0.50.0
+API version: 0.50.1
 Contact: csops@dalet.com
 */
 
@@ -87,7 +87,7 @@ func (a *ProjectAPIService) CreateProjectExecute(r ApiCreateProjectRequest) (*Pr
 	}
 
 	if r.subnetSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "subnetSize", r.subnetSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "subnetSize", r.subnetSize, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -929,7 +929,7 @@ func (a *ProjectAPIService) CreateProjectRegionKyloExecute(r ApiCreateProjectReg
 	}
 
 	if r.nfsId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "nfsId", r.nfsId, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "nfsId", r.nfsId, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1155,10 +1155,10 @@ func (a *ProjectAPIService) CreateProjectRegionVolumeExecute(r ApiCreateProjectR
 	}
 
 	if r.poolId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "poolId", r.poolId, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "poolId", r.poolId, "form", "")
 	}
 	if r.templateId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "templateId", r.templateId, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "templateId", r.templateId, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1600,13 +1600,13 @@ func (a *ProjectAPIService) CreateProjectZoneKomputeExecute(r ApiCreateProjectZo
 	}
 
 	if r.poolId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "poolId", r.poolId, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "poolId", r.poolId, "form", "")
 	}
 	if r.templateId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "templateId", r.templateId, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "templateId", r.templateId, "form", "")
 	}
 	if r.public != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "public", r.public, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "public", r.public, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -2639,7 +2639,7 @@ func (a *ProjectAPIService) ListProjectRegionKylosExecute(r ApiListProjectRegion
 	localVarFormParams := url.Values{}
 
 	if r.nfsId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "nfsId", r.nfsId, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "nfsId", r.nfsId, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3406,7 +3406,7 @@ func (a *ProjectAPIService) ListProjectsExecute(r ApiListProjectsRequest) ([]str
 	localVarFormParams := url.Values{}
 
 	if r.subnetSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "subnetSize", r.subnetSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "subnetSize", r.subnetSize, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

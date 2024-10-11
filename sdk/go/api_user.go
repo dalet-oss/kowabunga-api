@@ -3,7 +3,7 @@ Kowabunga API documentation
 
 Kvm Orchestrator With A BUNch of Goods Added
 
-API version: 0.50.0
+API version: 0.50.1
 Contact: csops@dalet.com
 */
 
@@ -1080,10 +1080,10 @@ func (a *UserAPIService) SetUserApiTokenExecute(r ApiSetUserApiTokenRequest) (*h
 	localVarFormParams := url.Values{}
 
 	if r.expire != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "expire", r.expire, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "expire", r.expire, "form", "")
 	}
 	if r.expirationDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "expiration_date", r.expirationDate, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "expiration_date", r.expirationDate, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

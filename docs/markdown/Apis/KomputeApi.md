@@ -4,10 +4,10 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createProjectZoneKompute**](KomputeApi.md#createProjectZoneKompute) | **POST** /project/{projectId}/zone/{zoneId}/kompute |  |
+| [**createProjectZoneKompute_1**](KomputeApi.md#createProjectZoneKompute_1) | **POST** /project/{projectId}/zone/{zoneId}/kompute |  |
 | [**deleteKompute**](KomputeApi.md#deleteKompute) | **DELETE** /kompute/{komputeId} |  |
 | [**listKomputes**](KomputeApi.md#listKomputes) | **GET** /kompute |  |
-| [**listProjectZoneKomputes**](KomputeApi.md#listProjectZoneKomputes) | **GET** /project/{projectId}/zone/{zoneId}/komputes |  |
+| [**listProjectZoneKomputes_1**](KomputeApi.md#listProjectZoneKomputes_1) | **GET** /project/{projectId}/zone/{zoneId}/komputes |  |
 | [**readKompute**](KomputeApi.md#readKompute) | **GET** /kompute/{komputeId} |  |
 | [**readKomputeState**](KomputeApi.md#readKomputeState) | **GET** /kompute/{komputeId}/state |  |
 | [**rebootKompute**](KomputeApi.md#rebootKompute) | **PATCH** /kompute/{komputeId}/reboot |  |
@@ -20,9 +20,9 @@ All URIs are relative to */api/v1*
 | [**updateKompute**](KomputeApi.md#updateKompute) | **PUT** /kompute/{komputeId} |  |
 
 
-<a name="createProjectZoneKompute"></a>
-# **createProjectZoneKompute**
-> Kompute createProjectZoneKompute(projectId, zoneId, Kompute, poolId, templateId, public)
+<a name="createProjectZoneKompute_1"></a>
+# **createProjectZoneKompute_1**
+> Kompute createProjectZoneKompute_1(projectId, zoneId, Kompute, poolId, templateId, public)
 
 
 
@@ -103,9 +103,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectZoneKomputes"></a>
-# **listProjectZoneKomputes**
-> List listProjectZoneKomputes(projectId, zoneId)
+<a name="listProjectZoneKomputes_1"></a>
+# **listProjectZoneKomputes_1**
+> List listProjectZoneKomputes_1(projectId, zoneId)
 
 
 

@@ -4,17 +4,17 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createAdapter**](AdapterApi.md#createAdapter) | **POST** /subnet/{subnetId}/adapter |  |
+| [**createAdapter_0**](AdapterApi.md#createAdapter_0) | **POST** /subnet/{subnetId}/adapter |  |
 | [**deleteAdapter**](AdapterApi.md#deleteAdapter) | **DELETE** /adapter/{adapterId} |  |
 | [**listAdapters**](AdapterApi.md#listAdapters) | **GET** /adapter |  |
-| [**listSubnetAdapters**](AdapterApi.md#listSubnetAdapters) | **GET** /subnet/{subnetId}/adapters |  |
+| [**listSubnetAdapters_0**](AdapterApi.md#listSubnetAdapters_0) | **GET** /subnet/{subnetId}/adapters |  |
 | [**readAdapter**](AdapterApi.md#readAdapter) | **GET** /adapter/{adapterId} |  |
 | [**updateAdapter**](AdapterApi.md#updateAdapter) | **PUT** /adapter/{adapterId} |  |
 
 
-<a name="createAdapter"></a>
-# **createAdapter**
-> Adapter createAdapter(subnetId, Adapter, assignIP)
+<a name="createAdapter_0"></a>
+# **createAdapter_0**
+> Adapter createAdapter_0(subnetId, Adapter, assignIP)
 
 
 
@@ -92,9 +92,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listSubnetAdapters"></a>
-# **listSubnetAdapters**
-> List listSubnetAdapters(subnetId)
+<a name="listSubnetAdapters_0"></a>
+# **listSubnetAdapters_0**
+> List listSubnetAdapters_0(subnetId)
 
 
 

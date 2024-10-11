@@ -5,20 +5,20 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createKiwi**](RegionApi.md#createKiwi) | **POST** /region/{regionId}/kiwi |  |
-| [**createProjectRegionKawaii**](RegionApi.md#createProjectRegionKawaii) | **POST** /project/{projectId}/region/{regionId}/kawaii |  |
-| [**createProjectRegionKonvey**](RegionApi.md#createProjectRegionKonvey) | **POST** /project/{projectId}/region/{regionId}/konvey |  |
-| [**createProjectRegionKylo**](RegionApi.md#createProjectRegionKylo) | **POST** /project/{projectId}/region/{regionId}/kylo |  |
-| [**createProjectRegionVolume**](RegionApi.md#createProjectRegionVolume) | **POST** /project/{projectId}/region/{regionId}/volume |  |
+| [**createProjectRegionKawaii_0**](RegionApi.md#createProjectRegionKawaii_0) | **POST** /project/{projectId}/region/{regionId}/kawaii |  |
+| [**createProjectRegionKonvey_0**](RegionApi.md#createProjectRegionKonvey_0) | **POST** /project/{projectId}/region/{regionId}/konvey |  |
+| [**createProjectRegionKylo_0**](RegionApi.md#createProjectRegionKylo_0) | **POST** /project/{projectId}/region/{regionId}/kylo |  |
+| [**createProjectRegionVolume_0**](RegionApi.md#createProjectRegionVolume_0) | **POST** /project/{projectId}/region/{regionId}/volume |  |
 | [**createRegion**](RegionApi.md#createRegion) | **POST** /region |  |
 | [**createStorageNFS**](RegionApi.md#createStorageNFS) | **POST** /region/{regionId}/nfs |  |
 | [**createStoragePool**](RegionApi.md#createStoragePool) | **POST** /region/{regionId}/pool |  |
 | [**createVNet**](RegionApi.md#createVNet) | **POST** /region/{regionId}/vnet |  |
 | [**createZone**](RegionApi.md#createZone) | **POST** /region/{regionId}/zone |  |
 | [**deleteRegion**](RegionApi.md#deleteRegion) | **DELETE** /region/{regionId} |  |
-| [**listProjectRegionKawaiis**](RegionApi.md#listProjectRegionKawaiis) | **GET** /project/{projectId}/region/{regionId}/kawaiis |  |
-| [**listProjectRegionKonveys**](RegionApi.md#listProjectRegionKonveys) | **GET** /project/{projectId}/region/{regionId}/konveys |  |
-| [**listProjectRegionKylos**](RegionApi.md#listProjectRegionKylos) | **GET** /project/{projectId}/region/{regionId}/kylo |  |
-| [**listProjectRegionVolumes**](RegionApi.md#listProjectRegionVolumes) | **GET** /project/{projectId}/region/{regionId}/volumes |  |
+| [**listProjectRegionKawaiis_0**](RegionApi.md#listProjectRegionKawaiis_0) | **GET** /project/{projectId}/region/{regionId}/kawaiis |  |
+| [**listProjectRegionKonveys_0**](RegionApi.md#listProjectRegionKonveys_0) | **GET** /project/{projectId}/region/{regionId}/konveys |  |
+| [**listProjectRegionKylos_0**](RegionApi.md#listProjectRegionKylos_0) | **GET** /project/{projectId}/region/{regionId}/kylo |  |
+| [**listProjectRegionVolumes_0**](RegionApi.md#listProjectRegionVolumes_0) | **GET** /project/{projectId}/region/{regionId}/volumes |  |
 | [**listRegionKiwis**](RegionApi.md#listRegionKiwis) | **GET** /region/{regionId}/kiwis |  |
 | [**listRegionStorageNFSs**](RegionApi.md#listRegionStorageNFSs) | **GET** /region/{regionId}/nfs |  |
 | [**listRegionStoragePools**](RegionApi.md#listRegionStoragePools) | **GET** /region/{regionId}/pools |  |
@@ -59,9 +59,9 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createProjectRegionKawaii"></a>
-# **createProjectRegionKawaii**
-> Kawaii createProjectRegionKawaii(projectId, regionId, Kawaii)
+<a name="createProjectRegionKawaii_0"></a>
+# **createProjectRegionKawaii_0**
+> Kawaii createProjectRegionKawaii_0(projectId, regionId, Kawaii)
 
 
 
@@ -88,9 +88,9 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createProjectRegionKonvey"></a>
-# **createProjectRegionKonvey**
-> Konvey createProjectRegionKonvey(projectId, regionId, Konvey)
+<a name="createProjectRegionKonvey_0"></a>
+# **createProjectRegionKonvey_0**
+> Konvey createProjectRegionKonvey_0(projectId, regionId, Konvey)
 
 
 
@@ -117,9 +117,9 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createProjectRegionKylo"></a>
-# **createProjectRegionKylo**
-> Kylo createProjectRegionKylo(projectId, regionId, Kylo, nfsId)
+<a name="createProjectRegionKylo_0"></a>
+# **createProjectRegionKylo_0**
+> Kylo createProjectRegionKylo_0(projectId, regionId, Kylo, nfsId)
 
 
 
@@ -147,9 +147,9 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createProjectRegionVolume"></a>
-# **createProjectRegionVolume**
-> Volume createProjectRegionVolume(projectId, regionId, Volume, poolId, templateId)
+<a name="createProjectRegionVolume_0"></a>
+# **createProjectRegionVolume_0**
+> Volume createProjectRegionVolume_0(projectId, regionId, Volume, poolId, templateId)
 
 
 
@@ -345,9 +345,9 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectRegionKawaiis"></a>
-# **listProjectRegionKawaiis**
-> List listProjectRegionKawaiis(projectId, regionId)
+<a name="listProjectRegionKawaiis_0"></a>
+# **listProjectRegionKawaiis_0**
+> List listProjectRegionKawaiis_0(projectId, regionId)
 
 
 
@@ -373,9 +373,9 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectRegionKonveys"></a>
-# **listProjectRegionKonveys**
-> List listProjectRegionKonveys(projectId, regionId)
+<a name="listProjectRegionKonveys_0"></a>
+# **listProjectRegionKonveys_0**
+> List listProjectRegionKonveys_0(projectId, regionId)
 
 
 
@@ -401,9 +401,9 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectRegionKylos"></a>
-# **listProjectRegionKylos**
-> List listProjectRegionKylos(projectId, regionId, nfsId)
+<a name="listProjectRegionKylos_0"></a>
+# **listProjectRegionKylos_0**
+> List listProjectRegionKylos_0(projectId, regionId, nfsId)
 
 
 
@@ -430,9 +430,9 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectRegionVolumes"></a>
-# **listProjectRegionVolumes**
-> List listProjectRegionVolumes(projectId, regionId)
+<a name="listProjectRegionVolumes_0"></a>
+# **listProjectRegionVolumes_0**
+> List listProjectRegionVolumes_0(projectId, regionId)
 
 
 

@@ -4,17 +4,17 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createProjectRegionKawaii**](KawaiiApi.md#createProjectRegionKawaii) | **POST** /project/{projectId}/region/{regionId}/kawaii |  |
+| [**createProjectRegionKawaii_1**](KawaiiApi.md#createProjectRegionKawaii_1) | **POST** /project/{projectId}/region/{regionId}/kawaii |  |
 | [**deleteKawaii**](KawaiiApi.md#deleteKawaii) | **DELETE** /kawaii/{kawaiiId} |  |
 | [**listKawaiis**](KawaiiApi.md#listKawaiis) | **GET** /kawaii |  |
-| [**listProjectRegionKawaiis**](KawaiiApi.md#listProjectRegionKawaiis) | **GET** /project/{projectId}/region/{regionId}/kawaiis |  |
+| [**listProjectRegionKawaiis_1**](KawaiiApi.md#listProjectRegionKawaiis_1) | **GET** /project/{projectId}/region/{regionId}/kawaiis |  |
 | [**readKawaii**](KawaiiApi.md#readKawaii) | **GET** /kawaii/{kawaiiId} |  |
 | [**updateKawaii**](KawaiiApi.md#updateKawaii) | **PUT** /kawaii/{kawaiiId} |  |
 
 
-<a name="createProjectRegionKawaii"></a>
-# **createProjectRegionKawaii**
-> Kawaii createProjectRegionKawaii(projectId, regionId, Kawaii)
+<a name="createProjectRegionKawaii_1"></a>
+# **createProjectRegionKawaii_1**
+> Kawaii createProjectRegionKawaii_1(projectId, regionId, Kawaii)
 
 
 
@@ -92,9 +92,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectRegionKawaiis"></a>
-# **listProjectRegionKawaiis**
-> List listProjectRegionKawaiis(projectId, regionId)
+<a name="listProjectRegionKawaiis_1"></a>
+# **listProjectRegionKawaiis_1**
+> List listProjectRegionKawaiis_1(projectId, regionId)
 
 
 

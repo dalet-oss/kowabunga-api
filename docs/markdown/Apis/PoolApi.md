@@ -4,22 +4,22 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createStoragePool**](PoolApi.md#createStoragePool) | **POST** /region/{regionId}/pool |  |
+| [**createStoragePool_0**](PoolApi.md#createStoragePool_0) | **POST** /region/{regionId}/pool |  |
 | [**createTemplate**](PoolApi.md#createTemplate) | **POST** /pool/{poolId}/template |  |
 | [**deleteStoragePool**](PoolApi.md#deleteStoragePool) | **DELETE** /pool/{poolId} |  |
-| [**listRegionStoragePools**](PoolApi.md#listRegionStoragePools) | **GET** /region/{regionId}/pools |  |
+| [**listRegionStoragePools_0**](PoolApi.md#listRegionStoragePools_0) | **GET** /region/{regionId}/pools |  |
 | [**listStoragePoolTemplates**](PoolApi.md#listStoragePoolTemplates) | **GET** /pool/{poolId}/templates |  |
 | [**listStoragePoolVolumes**](PoolApi.md#listStoragePoolVolumes) | **GET** /pool/{poolId}/volumes |  |
 | [**listStoragePools**](PoolApi.md#listStoragePools) | **GET** /pool |  |
 | [**readStoragePool**](PoolApi.md#readStoragePool) | **GET** /pool/{poolId} |  |
-| [**setRegionDefaultStoragePool**](PoolApi.md#setRegionDefaultStoragePool) | **PATCH** /region/{regionId}/pool/{poolId}/default |  |
+| [**setRegionDefaultStoragePool_0**](PoolApi.md#setRegionDefaultStoragePool_0) | **PATCH** /region/{regionId}/pool/{poolId}/default |  |
 | [**setStoragePoolDefaultTemplate**](PoolApi.md#setStoragePoolDefaultTemplate) | **PATCH** /pool/{poolId}/template/{templateId}/default |  |
 | [**updateStoragePool**](PoolApi.md#updateStoragePool) | **PUT** /pool/{poolId} |  |
 
 
-<a name="createStoragePool"></a>
-# **createStoragePool**
-> StoragePool createStoragePool(regionId, StoragePool)
+<a name="createStoragePool_0"></a>
+# **createStoragePool_0**
+> StoragePool createStoragePool_0(regionId, StoragePool)
 
 
 
@@ -100,9 +100,9 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listRegionStoragePools"></a>
-# **listRegionStoragePools**
-> List listRegionStoragePools(regionId)
+<a name="listRegionStoragePools_0"></a>
+# **listRegionStoragePools_0**
+> List listRegionStoragePools_0(regionId)
 
 
 
@@ -232,9 +232,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="setRegionDefaultStoragePool"></a>
-# **setRegionDefaultStoragePool**
-> setRegionDefaultStoragePool(regionId, poolId)
+<a name="setRegionDefaultStoragePool_0"></a>
+# **setRegionDefaultStoragePool_0**
+> setRegionDefaultStoragePool_0(regionId, poolId)
 
 
 

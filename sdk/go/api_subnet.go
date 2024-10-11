@@ -3,7 +3,7 @@ Kowabunga API documentation
 
 Kvm Orchestrator With A BUNch of Goods Added
 
-API version: 0.50.0
+API version: 0.50.1
 Contact: csops@dalet.com
 */
 
@@ -91,7 +91,7 @@ func (a *SubnetAPIService) CreateAdapterExecute(r ApiCreateAdapterRequest) (*Ada
 	}
 
 	if r.assignIP != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "assignIP", r.assignIP, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "assignIP", r.assignIP, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

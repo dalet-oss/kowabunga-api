@@ -4,17 +4,17 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createKiwi**](KiwiApi.md#createKiwi) | **POST** /region/{regionId}/kiwi |  |
+| [**createKiwi_0**](KiwiApi.md#createKiwi_0) | **POST** /region/{regionId}/kiwi |  |
 | [**deleteKiwi**](KiwiApi.md#deleteKiwi) | **DELETE** /kiwi/{kiwiId} |  |
 | [**listKiwis**](KiwiApi.md#listKiwis) | **GET** /kiwi |  |
-| [**listRegionKiwis**](KiwiApi.md#listRegionKiwis) | **GET** /region/{regionId}/kiwis |  |
+| [**listRegionKiwis_0**](KiwiApi.md#listRegionKiwis_0) | **GET** /region/{regionId}/kiwis |  |
 | [**readKiwi**](KiwiApi.md#readKiwi) | **GET** /kiwi/{kiwiId} |  |
 | [**updateKiwi**](KiwiApi.md#updateKiwi) | **PUT** /kiwi/{kiwiId} |  |
 
 
-<a name="createKiwi"></a>
-# **createKiwi**
-> Kiwi createKiwi(regionId, Kiwi)
+<a name="createKiwi_0"></a>
+# **createKiwi_0**
+> Kiwi createKiwi_0(regionId, Kiwi)
 
 
 
@@ -91,9 +91,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listRegionKiwis"></a>
-# **listRegionKiwis**
-> List listRegionKiwis(regionId)
+<a name="listRegionKiwis_0"></a>
+# **listRegionKiwis_0**
+> List listRegionKiwis_0(regionId)
 
 
 
