@@ -19,6 +19,12 @@ paths:
   /login:
 {{ oas.Create('Login', resources.user_credentials.schema, resources.user_credentials.desc, [resources.user.tag]) }}
 
+  /logout:
+{{ oas.CreateEmpty('Logout', resources.user_logout.desc, [resources.user.tag]) }}
+
+  /resetPassword:
+{{ oas.Patch('Reset' + resources.password.schema, resources.user.desc, 'reset of password (server-side generated, will replace any existing one)', [resources.user.tag]) }}
+
   /user:
 {{ oas.LC(resources.user, [resources.user.tag]) }}
 

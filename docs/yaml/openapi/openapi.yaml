@@ -3522,6 +3522,48 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - user
+  /logout:
+    post:
+      description: Creates a new Kowabunga user logout session.
+      operationId: Logout
+      responses:
+        "204":
+          description: Kowabunga user logout session has been created.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - user
+  /resetPassword:
+    patch:
+      description: "Performs a Kowabunga user reset of password (server-side generated,\
+        \ will replace any existing one)."
+      operationId: ResetPassword
+      responses:
+        "200":
+          description: "The Kowabunga user reset of password (server-side generated,\
+            \ will replace any existing one) is successful."
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - user
   /user:
     get:
       description: Returns the IDs of Kowabunga user objects.

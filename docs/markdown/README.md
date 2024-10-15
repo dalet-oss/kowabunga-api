@@ -187,7 +187,9 @@ All URIs are relative to */api/v1*
 *UserApi* | [**deleteUser**](Apis/UserApi.md#deleteuser) | **DELETE** /user/{userId} | Deletes an existing Kowabunga user. |
 *UserApi* | [**listUsers**](Apis/UserApi.md#listusers) | **GET** /user | Returns the IDs of Kowabunga user objects. |
 *UserApi* | [**login**](Apis/UserApi.md#login) | **POST** /login | Creates a new Kowabunga user login credentials. |
+*UserApi* | [**logout**](Apis/UserApi.md#logout) | **POST** /logout | Creates a new Kowabunga user logout session. |
 *UserApi* | [**readUser**](Apis/UserApi.md#readuser) | **GET** /user/{userId} | Returns a Kowabunga user. |
+*UserApi* | [**resetPassword**](Apis/UserApi.md#resetpassword) | **PATCH** /resetPassword | Performs a Kowabunga user reset of password (server-side generated, will replace any existing one). |
 *UserApi* | [**resetUserPassword**](Apis/UserApi.md#resetuserpassword) | **PATCH** /user/{userId}/resetPassword | Performs a Kowabunga user reset of password (server-side generated, will replace any existing one). |
 *UserApi* | [**setUserApiToken**](Apis/UserApi.md#setuserapitoken) | **PATCH** /user/{userId}/token | Performs a Kowabunga user setting of API token (will replace any existing one). |
 *UserApi* | [**setUserPassword**](Apis/UserApi.md#setuserpassword) | **PUT** /user/{userId}/password | Updates a Kowabunga user password (will replace any existing one) configuration. |

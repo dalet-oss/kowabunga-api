@@ -192,6 +192,8 @@ resources:
   user_credentials:
     desc: Kowabunga user login credentials
     schema: UserCredentials
+  user_logout:
+    desc: Kowabunga user logout session
   vnet:
     tag: vnet
     desc: virtual network

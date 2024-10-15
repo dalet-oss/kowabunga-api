@@ -311,8 +311,8 @@
         required: true
 {% endmacro %}
 
-{% macro CreateOneResource(schema, desc) %}
-{{ GetResource(201, schema, 'Returns the newly created ' + desc + ' object') }}
+{% macro CreateOneResource(schema, desc, httpCode=201) %}
+{{ GetResource(httpCode, schema, 'Returns the newly created ' + desc + ' object') }}
 {% endmacro %}
 
 {% macro GetOneResource(schema, desc) %}
@@ -333,14 +333,25 @@
 {{ ErrorsGetAll(childOf) }}
 {% endmacro %}
 
-{% macro Create(opId, schema, desc, tags) %}
+{% macro Create(opId, schema, desc, tags, httpCode=201) %}
     post:
 {{ Tags(tags) }}
       description: Creates a new {{ desc }}.
       operationId: {{ opId }}
 {{ Payload(schema) }}
       responses:
-{{ CreateOneResource(schema, desc) }}
+{{ CreateOneResource(schema, desc, httpCode) }}
+{{ ErrorsCreate() }}
+{% endmacro %}
+
+{% macro CreateEmpty(opId, desc, tags, httpCode=204) %}
+    post:
+{{ Tags(tags) }}
+      description: Creates a new {{ desc }}.
+      operationId: {{ opId }}
+      responses:
+        '{{ httpCode }}':
+          description: "{{ desc }} has been created."
 {{ ErrorsCreate() }}
 {% endmacro %}
 
