@@ -10,7 +10,7 @@ All URIs are relative to */api/v1*
 | [**login**](UserApi.md#login) | **POST** /login |  |
 | [**logout**](UserApi.md#logout) | **POST** /logout |  |
 | [**readUser**](UserApi.md#readUser) | **GET** /user/{userId} |  |
-| [**resetPassword**](UserApi.md#resetPassword) | **PATCH** /resetPassword |  |
+| [**resetPassword**](UserApi.md#resetPassword) | **PUT** /resetPassword |  |
 | [**resetUserPassword**](UserApi.md#resetUserPassword) | **PATCH** /user/{userId}/resetPassword |  |
 | [**setUserApiToken**](UserApi.md#setUserApiToken) | **PATCH** /user/{userId}/token |  |
 | [**setUserPassword**](UserApi.md#setUserPassword) | **PUT** /user/{userId}/password |  |
@@ -175,14 +175,17 @@ null (empty response body)
 
 <a name="resetPassword"></a>
 # **resetPassword**
-> resetPassword()
+> resetPassword(UserEmail)
 
 
 
-    Performs a Kowabunga user reset of password (server-side generated, will replace any existing one).
+    Updates a Kowabunga userreset of password for the provided email (server-side generated, will replace any existing one) configuration.
 
 ### Parameters
-This endpoint does not need any parameter.
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **UserEmail** | [**UserEmail**](../Models/UserEmail.md)| UserEmail payload. | |
 
 ### Return type
 
@@ -194,7 +197,7 @@ null (empty response body)
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 <a name="resetUserPassword"></a>

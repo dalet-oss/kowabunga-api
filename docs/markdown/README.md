@@ -189,7 +189,7 @@ All URIs are relative to */api/v1*
 *UserApi* | [**login**](Apis/UserApi.md#login) | **POST** /login | Creates a new Kowabunga user login credentials. |
 *UserApi* | [**logout**](Apis/UserApi.md#logout) | **POST** /logout | Creates a new Kowabunga user logout session. |
 *UserApi* | [**readUser**](Apis/UserApi.md#readuser) | **GET** /user/{userId} | Returns a Kowabunga user. |
-*UserApi* | [**resetPassword**](Apis/UserApi.md#resetpassword) | **PATCH** /resetPassword | Performs a Kowabunga user reset of password (server-side generated, will replace any existing one). |
+*UserApi* | [**resetPassword**](Apis/UserApi.md#resetpassword) | **PUT** /resetPassword | Updates a Kowabunga userreset of password for the provided email (server-side generated, will replace any existing one) configuration. |
 *UserApi* | [**resetUserPassword**](Apis/UserApi.md#resetuserpassword) | **PATCH** /user/{userId}/resetPassword | Performs a Kowabunga user reset of password (server-side generated, will replace any existing one). |
 *UserApi* | [**setUserApiToken**](Apis/UserApi.md#setuserapitoken) | **PATCH** /user/{userId}/token | Performs a Kowabunga user setting of API token (will replace any existing one). |
 *UserApi* | [**setUserPassword**](Apis/UserApi.md#setuserpassword) | **PUT** /user/{userId}/password | Updates a Kowabunga user password (will replace any existing one) configuration. |
@@ -277,6 +277,7 @@ All URIs are relative to */api/v1*
  - [Template](./Models/Template.md)
  - [User](./Models/User.md)
  - [UserCredentials](./Models/UserCredentials.md)
+ - [UserEmail](./Models/UserEmail.md)
  - [VNet](./Models/VNet.md)
  - [Volume](./Models/Volume.md)
  - [Zone](./Models/Zone.md)

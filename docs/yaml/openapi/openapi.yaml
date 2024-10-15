@@ -3546,14 +3546,23 @@ paths:
       tags:
       - user
   /resetPassword:
-    patch:
-      description: "Performs a Kowabunga user reset of password (server-side generated,\
-        \ will replace any existing one)."
+    put:
+      description: "Updates a Kowabunga userreset of password for the provided email\
+        \ (server-side generated, will replace any existing one) configuration."
       operationId: ResetPassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserEmail'
+        description: UserEmail payload.
+        required: true
       responses:
         "200":
-          description: "The Kowabunga user reset of password (server-side generated,\
-            \ will replace any existing one) is successful."
+          description: "The Kowabunga userreset of password for the provided email\
+            \ (server-side generated, will replace any existing one) has been updated."
+        "400":
+          $ref: '#/components/responses/BadRequest'
         "401":
           $ref: '#/components/responses/Unauthorized'
         "403":
@@ -3562,6 +3571,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
       tags:
       - user
   /user:
@@ -6062,6 +6073,16 @@ components:
       required:
       - email
       - password
+    UserEmail:
+      description: A Kowabunga user email.
+      example:
+        email: email
+      properties:
+        email:
+          description: The user email address used for login.
+          type: string
+      required:
+      - email
     VNet:
       description: A virtual network.
       example:

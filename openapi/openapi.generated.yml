@@ -1117,6 +1117,15 @@ components:
         jwt:
           type: string
           description: The resulting server-generated JWT token for Bearer Authentication (read-only).
+    UserEmail:
+      type: object
+      description: A Kowabunga user email.
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          description: The user email address used for login.
     VNet:
       type: object
       description: A virtual network.
@@ -4647,14 +4656,23 @@ paths:
         '507':
           $ref: '#/components/responses/InsufficientStorage'
   /resetPassword:
-    patch:
+    put:
       tags:
         - user
-      description: Performs a Kowabunga user reset of password (server-side generated, will replace any existing one).
+      description: Updates a Kowabunga userreset of password for the provided email (server-side generated, will replace any existing one) configuration.
       operationId: ResetPassword
+      requestBody:
+        description: UserEmail payload.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserEmail'
+        required: true
       responses:
         '200':
-          description: The Kowabunga user reset of password (server-side generated, will replace any existing one) is successful.
+          description: The Kowabunga userreset of password for the provided email (server-side generated, will replace any existing one) has been updated.
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
@@ -4663,6 +4681,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
+        '507':
+          $ref: '#/components/responses/InsufficientStorage'
   /user:
     get:
       tags:

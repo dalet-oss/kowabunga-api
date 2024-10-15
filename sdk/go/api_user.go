@@ -1050,6 +1050,13 @@ func (a *UserAPIService) ReadUserExecute(r ApiReadUserRequest) (*User, *http.Res
 type ApiResetPasswordRequest struct {
 	ctx context.Context
 	ApiService *UserAPIService
+	userEmail *UserEmail
+}
+
+// UserEmail payload.
+func (r ApiResetPasswordRequest) UserEmail(userEmail UserEmail) ApiResetPasswordRequest {
+	r.userEmail = &userEmail
+	return r
 }
 
 func (r ApiResetPasswordRequest) Execute() (*http.Response, error) {
@@ -1059,7 +1066,7 @@ func (r ApiResetPasswordRequest) Execute() (*http.Response, error) {
 /*
 ResetPassword Method for ResetPassword
 
-Performs a Kowabunga user reset of password (server-side generated, will replace any existing one).
+Updates a Kowabunga userreset of password for the provided email (server-side generated, will replace any existing one) configuration.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiResetPasswordRequest
@@ -1074,7 +1081,7 @@ func (a *UserAPIService) ResetPassword(ctx context.Context) ApiResetPasswordRequ
 // Execute executes the request
 func (a *UserAPIService) ResetPasswordExecute(r ApiResetPasswordRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
+		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
@@ -1089,9 +1096,12 @@ func (a *UserAPIService) ResetPasswordExecute(r ApiResetPasswordRequest) (*http.
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.userEmail == nil {
+		return nil, reportError("userEmail is required and must be specified")
+	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1107,6 +1117,8 @@ func (a *UserAPIService) ResetPasswordExecute(r ApiResetPasswordRequest) (*http.
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.userEmail
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1143,6 +1155,17 @@ func (a *UserAPIService) ResetPasswordExecute(r ApiResetPasswordRequest) (*http.
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiErrorBadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v ApiErrorUnauthorized
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1178,6 +1201,17 @@ func (a *UserAPIService) ResetPasswordExecute(r ApiResetPasswordRequest) (*http.
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v ApiErrorUnprocessableEntity
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 507 {
+			var v ApiErrorInsufficientStorage
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

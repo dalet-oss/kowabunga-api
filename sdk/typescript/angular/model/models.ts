@@ -46,6 +46,7 @@ export * from './team';
 export * from './template';
 export * from './user';
 export * from './userCredentials';
+export * from './userEmail';
 export * from './vNet';
 export * from './volume';
 export * from './zone';

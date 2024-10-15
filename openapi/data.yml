@@ -192,6 +192,9 @@ resources:
   user_credentials:
     desc: Kowabunga user login credentials
     schema: UserCredentials
+  user_email:
+    desc: Kowabunga user email
+    schema: UserEmail
   user_logout:
     desc: Kowabunga user logout session
   vnet:
