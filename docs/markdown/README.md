@@ -253,6 +253,7 @@ All URIs are relative to */api/v1*
  - [KawaiiFirewall](./Models/KawaiiFirewall.md)
  - [KawaiiFirewallEgressRule](./Models/KawaiiFirewallEgressRule.md)
  - [KawaiiFirewallIngressRule](./Models/KawaiiFirewallIngressRule.md)
+ - [KawaiiIpSec](./Models/KawaiiIpSec.md)
  - [KawaiiNetIp](./Models/KawaiiNetIp.md)
  - [KawaiiNetIpZone](./Models/KawaiiNetIpZone.md)
  - [KawaiiVpcForwardRule](./Models/KawaiiVpcForwardRule.md)

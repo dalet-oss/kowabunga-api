@@ -396,6 +396,11 @@ components:
           description: The Kawaii list of Kowabunga private VPC subnet peering entries.
           items:
             $ref: '#/components/schemas/KawaiiVpcPeering'
+        ipsec_connections:
+          type: array
+          description: The Kawaii list of Kowabunga ipsecs connections.
+          items:
+            $ref: '#/components/schemas/KawaiiIpSec'
     KawaiiNetIp:
       type: object
       description: A Kawaii Network IP settings.
@@ -577,6 +582,26 @@ components:
         private:
           type: string
           description: The Kawaii zone gateway private IP address in VPC peered subnet  (read-only).
+    KawaiiIpSec:
+      type: object
+      description: A Kawaii IPsec connection.
+      properties:
+        name:
+          type: string
+          description: The Kawaii IPsec connection name.
+        remote_ip:
+          type: string
+          description: The Kawaii IPsec connection remote peer VPN Gateway.
+        remote_subnet:
+          type: string
+          description: The Kawaii IPsec connection remote subnet.
+        pre_shared_key:
+          type: string
+          description: The Kawaii IPsec connection pre-shared key(PSK).
+        firewall:
+          type: object
+          description: The Kawaii IPsec connection firewall settings on the ipsec interface.
+          $ref: '#/components/schemas/KawaiiFirewall'
     Kiwi:
       type: object
       description: A Kiwi (Kowabunga Inner Wan Interface) provides edge-network services..

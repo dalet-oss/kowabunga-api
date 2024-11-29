@@ -34,6 +34,8 @@ type Kawaii struct {
 	Dnat []KawaiiDNatRule `json:"dnat,omitempty"`
 	// The Kawaii list of Kowabunga private VPC subnet peering entries.
 	VpcPeerings []KawaiiVpcPeering `json:"vpc_peerings,omitempty"`
+	// The Kawaii list of Kowabunga ipsecs connections.
+	IpsecConnections []KawaiiIpSec `json:"ipsec_connections,omitempty"`
 }
 
 // NewKawaii instantiates a new Kawaii object
@@ -277,6 +279,38 @@ func (o *Kawaii) SetVpcPeerings(v []KawaiiVpcPeering) {
 	o.VpcPeerings = v
 }
 
+// GetIpsecConnections returns the IpsecConnections field value if set, zero value otherwise.
+func (o *Kawaii) GetIpsecConnections() []KawaiiIpSec {
+	if o == nil || IsNil(o.IpsecConnections) {
+		var ret []KawaiiIpSec
+		return ret
+	}
+	return o.IpsecConnections
+}
+
+// GetIpsecConnectionsOk returns a tuple with the IpsecConnections field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Kawaii) GetIpsecConnectionsOk() ([]KawaiiIpSec, bool) {
+	if o == nil || IsNil(o.IpsecConnections) {
+		return nil, false
+	}
+	return o.IpsecConnections, true
+}
+
+// HasIpsecConnections returns a boolean if a field has been set.
+func (o *Kawaii) HasIpsecConnections() bool {
+	if o != nil && !IsNil(o.IpsecConnections) {
+		return true
+	}
+
+	return false
+}
+
+// SetIpsecConnections gets a reference to the given []KawaiiIpSec and assigns it to the IpsecConnections field.
+func (o *Kawaii) SetIpsecConnections(v []KawaiiIpSec) {
+	o.IpsecConnections = v
+}
+
 func (o Kawaii) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -307,6 +341,9 @@ func (o Kawaii) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.VpcPeerings) {
 		toSerialize["vpc_peerings"] = o.VpcPeerings
+	}
+	if !IsNil(o.IpsecConnections) {
+		toSerialize["ipsec_connections"] = o.IpsecConnections
 	}
 	return toSerialize, nil
 }

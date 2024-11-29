@@ -4974,6 +4974,47 @@ components:
       description: A Kawaii (Kowabunga Adapative WAn Intelligent Interface) is a network
         gateway used for your Internet inbound and outbound traffic.
       example:
+        ipsec_connections:
+        - pre_shared_key: pre_shared_key
+          remote_ip: remote_ip
+          firewall:
+            ingress:
+            - protocol: tcp
+              source: 0.0.0.0/0
+              ports: ports
+            - protocol: tcp
+              source: 0.0.0.0/0
+              ports: ports
+            egress_policy: accept
+            egress:
+            - protocol: tcp
+              destination: 0.0.0.0/0
+              ports: ports
+            - protocol: tcp
+              destination: 0.0.0.0/0
+              ports: ports
+          name: name
+          remote_subnet: remote_subnet
+        - pre_shared_key: pre_shared_key
+          remote_ip: remote_ip
+          firewall:
+            ingress:
+            - protocol: tcp
+              source: 0.0.0.0/0
+              ports: ports
+            - protocol: tcp
+              source: 0.0.0.0/0
+              ports: ports
+            egress_policy: accept
+            egress:
+            - protocol: tcp
+              destination: 0.0.0.0/0
+              ports: ports
+            - protocol: tcp
+              destination: 0.0.0.0/0
+              ports: ports
+          name: name
+          remote_subnet: remote_subnet
         dnat:
         - protocol: tcp
           destination: destination
@@ -5074,6 +5115,11 @@ components:
           description: The Kawaii list of Kowabunga private VPC subnet peering entries.
           items:
             $ref: '#/components/schemas/KawaiiVpcPeering'
+          type: array
+        ipsec_connections:
+          description: The Kawaii list of Kowabunga ipsecs connections.
+          items:
+            $ref: '#/components/schemas/KawaiiIpSec'
           type: array
     KawaiiNetIp:
       description: A Kawaii Network IP settings.
@@ -5332,6 +5378,44 @@ components:
       required:
       - private
       - zone
+    KawaiiIpSec:
+      description: A Kawaii IPsec connection.
+      example:
+        pre_shared_key: pre_shared_key
+        remote_ip: remote_ip
+        firewall:
+          ingress:
+          - protocol: tcp
+            source: 0.0.0.0/0
+            ports: ports
+          - protocol: tcp
+            source: 0.0.0.0/0
+            ports: ports
+          egress_policy: accept
+          egress:
+          - protocol: tcp
+            destination: 0.0.0.0/0
+            ports: ports
+          - protocol: tcp
+            destination: 0.0.0.0/0
+            ports: ports
+        name: name
+        remote_subnet: remote_subnet
+      properties:
+        name:
+          description: The Kawaii IPsec connection name.
+          type: string
+        remote_ip:
+          description: The Kawaii IPsec connection remote peer VPN Gateway.
+          type: string
+        remote_subnet:
+          description: The Kawaii IPsec connection remote subnet.
+          type: string
+        pre_shared_key:
+          description: The Kawaii IPsec connection pre-shared key(PSK).
+          type: string
+        firewall:
+          $ref: '#/components/schemas/KawaiiFirewall'
     Kiwi:
       description: A Kiwi (Kowabunga Inner Wan Interface) provides edge-network services..
       example:

@@ -7,6 +7,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { KawaiiIpSec } from './kawaiiIpSec';
 import { KawaiiDNatRule } from './kawaiiDNatRule';
 import { KawaiiFirewall } from './kawaiiFirewall';
 import { KawaiiVpcPeering } from './kawaiiVpcPeering';
@@ -45,5 +46,9 @@ export interface Kawaii {
      * The Kawaii list of Kowabunga private VPC subnet peering entries.
      */
     vpc_peerings?: Array<KawaiiVpcPeering>;
+    /**
+     * The Kawaii list of Kowabunga ipsecs connections.
+     */
+    ipsec_connections?: Array<KawaiiIpSec>;
 }
 

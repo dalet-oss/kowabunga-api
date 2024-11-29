@@ -22,6 +22,7 @@ export * from './kawaiiDNatRule';
 export * from './kawaiiFirewall';
 export * from './kawaiiFirewallEgressRule';
 export * from './kawaiiFirewallIngressRule';
+export * from './kawaiiIpSec';
 export * from './kawaiiNetIp';
 export * from './kawaiiNetIpZone';
 export * from './kawaiiVpcForwardRule';
