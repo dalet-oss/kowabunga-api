@@ -7,8 +7,7 @@ Any change to the API must be performed in the **openapi** directory files.
 
 Makefile and build scripts will take care of auto-generating:
 
-* Golang code for Server SDK
-* Golang code for Client SDKs
+* Golang code for Client SDK
 * Typescript Angular code for Client SDK
 
 Everything is ready-to-be-consumed by your favorite apps.

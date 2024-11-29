@@ -7,8 +7,8 @@ All URIs are relative to */api/v1*
 | [**deleteApiToken**](TokenApi.md#deleteApiToken) | **DELETE** /token/{tokenId} |  |
 | [**listApiTokens**](TokenApi.md#listApiTokens) | **GET** /token |  |
 | [**readApiToken**](TokenApi.md#readApiToken) | **GET** /token/{tokenId} |  |
-| [**setAgentApiToken**](TokenApi.md#setAgentApiToken) | **PATCH** /agent/{agentId}/token |  |
-| [**setUserApiToken**](TokenApi.md#setUserApiToken) | **PATCH** /user/{userId}/token |  |
+| [**setAgentApiToken_0**](TokenApi.md#setAgentApiToken_0) | **PATCH** /agent/{agentId}/token |  |
+| [**setUserApiToken_0**](TokenApi.md#setUserApiToken_0) | **PATCH** /user/{userId}/token |  |
 | [**updateApiToken**](TokenApi.md#updateApiToken) | **PUT** /token/{tokenId} |  |
 
 
@@ -90,9 +90,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="setAgentApiToken"></a>
-# **setAgentApiToken**
-> ApiToken setAgentApiToken(agentId, expire, expiration\_date)
+<a name="setAgentApiToken_0"></a>
+# **setAgentApiToken_0**
+> ApiToken setAgentApiToken_0(agentId, expire, expiration\_date)
 
 
 
@@ -119,9 +119,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="setUserApiToken"></a>
-# **setUserApiToken**
-> setUserApiToken(userId, expire, expiration\_date)
+<a name="setUserApiToken_0"></a>
+# **setUserApiToken_0**
+> setUserApiToken_0(userId, expire, expiration\_date)
 
 
 

@@ -6,18 +6,22 @@ All URIs are relative to */api/v1*
 |------------- | ------------- | -------------|
 | [**createProject**](ProjectApi.md#createProject) | **POST** /project |  |
 | [**createProjectDnsRecord**](ProjectApi.md#createProjectDnsRecord) | **POST** /project/{projectId}/record |  |
-| [**createProjectRegionKFS**](ProjectApi.md#createProjectRegionKFS) | **POST** /project/{projectId}/region/{regionId}/kfs |  |
-| [**createProjectRegionKGW**](ProjectApi.md#createProjectRegionKGW) | **POST** /project/{projectId}/region/{regionId}/kgw |  |
+| [**createProjectRegionKawaii**](ProjectApi.md#createProjectRegionKawaii) | **POST** /project/{projectId}/region/{regionId}/kawaii |  |
+| [**createProjectRegionKonvey**](ProjectApi.md#createProjectRegionKonvey) | **POST** /project/{projectId}/region/{regionId}/konvey |  |
+| [**createProjectRegionKylo**](ProjectApi.md#createProjectRegionKylo) | **POST** /project/{projectId}/region/{regionId}/kylo |  |
 | [**createProjectRegionVolume**](ProjectApi.md#createProjectRegionVolume) | **POST** /project/{projectId}/region/{regionId}/volume |  |
 | [**createProjectZoneInstance**](ProjectApi.md#createProjectZoneInstance) | **POST** /project/{projectId}/zone/{zoneId}/instance |  |
-| [**createProjectZoneKCE**](ProjectApi.md#createProjectZoneKCE) | **POST** /project/{projectId}/zone/{zoneId}/kce |  |
+| [**createProjectZoneKompute**](ProjectApi.md#createProjectZoneKompute) | **POST** /project/{projectId}/zone/{zoneId}/kompute |  |
+| [**createProjectZoneKonvey**](ProjectApi.md#createProjectZoneKonvey) | **POST** /project/{projectId}/zone/{zoneId}/konvey |  |
 | [**deleteProject**](ProjectApi.md#deleteProject) | **DELETE** /project/{projectId} |  |
 | [**listProjectDnsRecords**](ProjectApi.md#listProjectDnsRecords) | **GET** /project/{projectId}/records |  |
-| [**listProjectRegionKFSs**](ProjectApi.md#listProjectRegionKFSs) | **GET** /project/{projectId}/region/{regionId}/kfs |  |
-| [**listProjectRegionKGWs**](ProjectApi.md#listProjectRegionKGWs) | **GET** /project/{projectId}/region/{regionId}/kgws |  |
+| [**listProjectRegionKawaiis**](ProjectApi.md#listProjectRegionKawaiis) | **GET** /project/{projectId}/region/{regionId}/kawaiis |  |
+| [**listProjectRegionKonveys**](ProjectApi.md#listProjectRegionKonveys) | **GET** /project/{projectId}/region/{regionId}/konveys |  |
+| [**listProjectRegionKylos**](ProjectApi.md#listProjectRegionKylos) | **GET** /project/{projectId}/region/{regionId}/kylo |  |
 | [**listProjectRegionVolumes**](ProjectApi.md#listProjectRegionVolumes) | **GET** /project/{projectId}/region/{regionId}/volumes |  |
 | [**listProjectZoneInstances**](ProjectApi.md#listProjectZoneInstances) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
-| [**listProjectZoneKCEs**](ProjectApi.md#listProjectZoneKCEs) | **GET** /project/{projectId}/zone/{zoneId}/kces |  |
+| [**listProjectZoneKomputes**](ProjectApi.md#listProjectZoneKomputes) | **GET** /project/{projectId}/zone/{zoneId}/komputes |  |
+| [**listProjectZoneKonveys**](ProjectApi.md#listProjectZoneKonveys) | **GET** /project/{projectId}/zone/{zoneId}/konveys |  |
 | [**listProjects**](ProjectApi.md#listProjects) | **GET** /project |  |
 | [**readProject**](ProjectApi.md#readProject) | **GET** /project/{projectId} |  |
 | [**readProjectCost**](ProjectApi.md#readProjectCost) | **GET** /project/{projectId}/cost |  |
@@ -81,13 +85,13 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createProjectRegionKFS"></a>
-# **createProjectRegionKFS**
-> KFS createProjectRegionKFS(projectId, regionId, KFS, nfsId)
+<a name="createProjectRegionKawaii"></a>
+# **createProjectRegionKawaii**
+> Kawaii createProjectRegionKawaii(projectId, regionId, Kawaii)
 
 
 
-    Creates a new KFS (Kowabunga File System).
+    Creates a new Kawaii.
 
 ### Parameters
 
@@ -95,12 +99,11 @@ All URIs are relative to */api/v1*
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the project. | [default to null] |
 | **regionId** | **String**| The ID of the region. | [default to null] |
-| **KFS** | [**KFS**](../Models/KFS.md)| KFS payload. | |
-| **nfsId** | **String**| NFS storage ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
+| **Kawaii** | [**Kawaii**](../Models/Kawaii.md)| Kawaii payload. | |
 
 ### Return type
 
-[**KFS**](../Models/KFS.md)
+[**Kawaii**](../Models/Kawaii.md)
 
 ### Authorization
 
@@ -111,13 +114,13 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createProjectRegionKGW"></a>
-# **createProjectRegionKGW**
-> KGW createProjectRegionKGW(projectId, regionId, KGW)
+<a name="createProjectRegionKonvey"></a>
+# **createProjectRegionKonvey**
+> Konvey createProjectRegionKonvey(projectId, regionId, Konvey)
 
 
 
-    Creates a new KGW (Kowabunga Network Gateway).
+    Creates a new Konvey (Kowabunga Network Load-Balancer).
 
 ### Parameters
 
@@ -125,11 +128,41 @@ All URIs are relative to */api/v1*
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the project. | [default to null] |
 | **regionId** | **String**| The ID of the region. | [default to null] |
-| **KGW** | [**KGW**](../Models/KGW.md)| KGW payload. | |
+| **Konvey** | [**Konvey**](../Models/Konvey.md)| Konvey payload. | |
 
 ### Return type
 
-[**KGW**](../Models/KGW.md)
+[**Konvey**](../Models/Konvey.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+<a name="createProjectRegionKylo"></a>
+# **createProjectRegionKylo**
+> Kylo createProjectRegionKylo(projectId, regionId, Kylo, nfsId)
+
+
+
+    Creates a new Kylo.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
+| **regionId** | **String**| The ID of the region. | [default to null] |
+| **Kylo** | [**Kylo**](../Models/Kylo.md)| Kylo payload. | |
+| **nfsId** | **String**| NFS storage ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
+
+### Return type
+
+[**Kylo**](../Models/Kylo.md)
 
 ### Authorization
 
@@ -200,13 +233,13 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createProjectZoneKCE"></a>
-# **createProjectZoneKCE**
-> KCE createProjectZoneKCE(projectId, zoneId, KCE, poolId, templateId, public)
+<a name="createProjectZoneKompute"></a>
+# **createProjectZoneKompute**
+> Kompute createProjectZoneKompute(projectId, zoneId, Kompute, poolId, templateId, public)
 
 
 
-    Creates a new KCE (Kowabunga Compute Engine).
+    Creates a new Kompute.
 
 ### Parameters
 
@@ -214,14 +247,43 @@ All URIs are relative to */api/v1*
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the project. | [default to null] |
 | **zoneId** | **String**| The ID of the availability zone. | [default to null] |
-| **KCE** | [**KCE**](../Models/KCE.md)| KCE payload. | |
+| **Kompute** | [**Kompute**](../Models/Kompute.md)| Kompute payload. | |
 | **poolId** | **String**| Storage pool ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
 | **templateId** | **String**| Template to clone the storage volume from (optional, region&#39;s default if unspecified). | [optional] [default to null] |
-| **public** | **Boolean**| Should KCE be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false). | [optional] [default to null] |
+| **public** | **Boolean**| Should Kompute be exposed over public Internet ? (a public IPv4 address will then be auto-assigned, default to false). | [optional] [default to null] |
 
 ### Return type
 
-[**KCE**](../Models/KCE.md)
+[**Kompute**](../Models/Kompute.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+<a name="createProjectZoneKonvey"></a>
+# **createProjectZoneKonvey**
+> Konvey createProjectZoneKonvey(projectId, zoneId, Konvey)
+
+
+
+    Creates a new Konvey (Kowabunga Network Load-Balancer).
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+| **Konvey** | [**Konvey**](../Models/Konvey.md)| Konvey payload. | |
+
+### Return type
+
+[**Konvey**](../Models/Konvey.md)
 
 ### Authorization
 
@@ -286,13 +348,13 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectRegionKFSs"></a>
-# **listProjectRegionKFSs**
-> List listProjectRegionKFSs(projectId, regionId, nfsId)
+<a name="listProjectRegionKawaiis"></a>
+# **listProjectRegionKawaiis**
+> List listProjectRegionKawaiis(projectId, regionId)
 
 
 
-    Returns the IDs of KFS (Kowabunga File System) objects.
+    Returns the IDs of Kawaii objects.
 
 ### Parameters
 
@@ -300,7 +362,6 @@ null (empty response body)
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the project. | [default to null] |
 | **regionId** | **String**| The ID of the region. | [default to null] |
-| **nfsId** | **String**| NFS storage ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
 
 ### Return type
 
@@ -315,13 +376,13 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectRegionKGWs"></a>
-# **listProjectRegionKGWs**
-> List listProjectRegionKGWs(projectId, regionId)
+<a name="listProjectRegionKonveys"></a>
+# **listProjectRegionKonveys**
+> List listProjectRegionKonveys(projectId, regionId)
 
 
 
-    Returns the IDs of KGW (Kowabunga Network Gateway) objects.
+    Returns the IDs of Konvey (Kowabunga Network Load-Balancer) objects.
 
 ### Parameters
 
@@ -329,6 +390,35 @@ null (empty response body)
 |------------- | ------------- | ------------- | -------------|
 | **projectId** | **String**| The ID of the project. | [default to null] |
 | **regionId** | **String**| The ID of the region. | [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listProjectRegionKylos"></a>
+# **listProjectRegionKylos**
+> List listProjectRegionKylos(projectId, regionId, nfsId)
+
+
+
+    Returns the IDs of Kylo objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
+| **regionId** | **String**| The ID of the region. | [default to null] |
+| **nfsId** | **String**| NFS storage ID (optional, region&#39;s default if unspecified). | [optional] [default to null] |
 
 ### Return type
 
@@ -399,13 +489,41 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectZoneKCEs"></a>
-# **listProjectZoneKCEs**
-> List listProjectZoneKCEs(projectId, zoneId)
+<a name="listProjectZoneKomputes"></a>
+# **listProjectZoneKomputes**
+> List listProjectZoneKomputes(projectId, zoneId)
 
 
 
-    Returns the IDs of KCE (Kowabunga Compute Engine) objects.
+    Returns the IDs of Kompute objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **projectId** | **String**| The ID of the project. | [default to null] |
+| **zoneId** | **String**| The ID of the availability zone. | [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listProjectZoneKonveys"></a>
+# **listProjectZoneKonveys**
+> List listProjectZoneKonveys(projectId, zoneId)
+
+
+
+    Returns the IDs of Konvey (Kowabunga Network Load-Balancer) objects.
 
 ### Parameters
 

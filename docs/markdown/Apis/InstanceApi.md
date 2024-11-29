@@ -4,11 +4,11 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createProjectZoneInstance**](InstanceApi.md#createProjectZoneInstance) | **POST** /project/{projectId}/zone/{zoneId}/instance |  |
+| [**createProjectZoneInstance_1**](InstanceApi.md#createProjectZoneInstance_1) | **POST** /project/{projectId}/zone/{zoneId}/instance |  |
 | [**deleteInstance**](InstanceApi.md#deleteInstance) | **DELETE** /instance/{instanceId} |  |
-| [**listHostInstances**](InstanceApi.md#listHostInstances) | **GET** /host/{hostId}/instances |  |
 | [**listInstances**](InstanceApi.md#listInstances) | **GET** /instance |  |
-| [**listProjectZoneInstances**](InstanceApi.md#listProjectZoneInstances) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
+| [**listKaktusInstances_0**](InstanceApi.md#listKaktusInstances_0) | **GET** /kaktus/{kaktusId}/instances |  |
+| [**listProjectZoneInstances_1**](InstanceApi.md#listProjectZoneInstances_1) | **GET** /project/{projectId}/zone/{zoneId}/instances |  |
 | [**readInstance**](InstanceApi.md#readInstance) | **GET** /instance/{instanceId} |  |
 | [**readInstanceRemoteConnection**](InstanceApi.md#readInstanceRemoteConnection) | **GET** /instance/{instanceId}/connect |  |
 | [**readInstanceState**](InstanceApi.md#readInstanceState) | **GET** /instance/{instanceId}/state |  |
@@ -22,9 +22,9 @@ All URIs are relative to */api/v1*
 | [**updateInstance**](InstanceApi.md#updateInstance) | **PUT** /instance/{instanceId} |  |
 
 
-<a name="createProjectZoneInstance"></a>
-# **createProjectZoneInstance**
-> Instance createProjectZoneInstance(projectId, zoneId, Instance)
+<a name="createProjectZoneInstance_1"></a>
+# **createProjectZoneInstance_1**
+> Instance createProjectZoneInstance_1(projectId, zoneId, Instance)
 
 
 
@@ -78,33 +78,6 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listHostInstances"></a>
-# **listHostInstances**
-> List listHostInstances(hostId)
-
-
-
-    Returns the IDs of virtual machine instance objects.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **hostId** | **String**| The ID of the computing host. | [default to null] |
-
-### Return type
-
-**List**
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
 <a name="listInstances"></a>
 # **listInstances**
 > List listInstances()
@@ -129,9 +102,36 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectZoneInstances"></a>
-# **listProjectZoneInstances**
-> List listProjectZoneInstances(projectId, zoneId)
+<a name="listKaktusInstances_0"></a>
+# **listKaktusInstances_0**
+> List listKaktusInstances_0(kaktusId)
+
+
+
+    Returns the IDs of virtual machine instance objects.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **kaktusId** | **String**| The ID of the Kaktus computing node. | [default to null] |
+
+### Return type
+
+**List**
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="listProjectZoneInstances_1"></a>
+# **listProjectZoneInstances_1**
+> List listProjectZoneInstances_1(projectId, zoneId)
 
 
 

@@ -4,18 +4,18 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createProjectRegionVolume**](VolumeApi.md#createProjectRegionVolume) | **POST** /project/{projectId}/region/{regionId}/volume |  |
+| [**createProjectRegionVolume_1**](VolumeApi.md#createProjectRegionVolume_1) | **POST** /project/{projectId}/region/{regionId}/volume |  |
 | [**deleteVolume**](VolumeApi.md#deleteVolume) | **DELETE** /volume/{volumeId} |  |
-| [**listProjectRegionVolumes**](VolumeApi.md#listProjectRegionVolumes) | **GET** /project/{projectId}/region/{regionId}/volumes |  |
-| [**listStoragePoolVolumes**](VolumeApi.md#listStoragePoolVolumes) | **GET** /pool/{poolId}/volumes |  |
+| [**listProjectRegionVolumes_1**](VolumeApi.md#listProjectRegionVolumes_1) | **GET** /project/{projectId}/region/{regionId}/volumes |  |
+| [**listStoragePoolVolumes_0**](VolumeApi.md#listStoragePoolVolumes_0) | **GET** /pool/{poolId}/volumes |  |
 | [**listVolumes**](VolumeApi.md#listVolumes) | **GET** /volume |  |
 | [**readVolume**](VolumeApi.md#readVolume) | **GET** /volume/{volumeId} |  |
 | [**updateVolume**](VolumeApi.md#updateVolume) | **PUT** /volume/{volumeId} |  |
 
 
-<a name="createProjectRegionVolume"></a>
-# **createProjectRegionVolume**
-> Volume createProjectRegionVolume(projectId, regionId, Volume, poolId, templateId)
+<a name="createProjectRegionVolume_1"></a>
+# **createProjectRegionVolume_1**
+> Volume createProjectRegionVolume_1(projectId, regionId, Volume, poolId, templateId)
 
 
 
@@ -71,9 +71,9 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectRegionVolumes"></a>
-# **listProjectRegionVolumes**
-> List listProjectRegionVolumes(projectId, regionId)
+<a name="listProjectRegionVolumes_1"></a>
+# **listProjectRegionVolumes_1**
+> List listProjectRegionVolumes_1(projectId, regionId)
 
 
 
@@ -99,9 +99,9 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listStoragePoolVolumes"></a>
-# **listStoragePoolVolumes**
-> List listStoragePoolVolumes(poolId)
+<a name="listStoragePoolVolumes_0"></a>
+# **listStoragePoolVolumes_0**
+> List listStoragePoolVolumes_0(poolId)
 
 
 

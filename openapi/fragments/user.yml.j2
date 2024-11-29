@@ -12,12 +12,21 @@ components:
 {{ oas.StringProperty('password', 'The user password for login') }}
 {{ oas.StringProperty('jwt', 'The resulting server-generated JWT token for Bearer Authentication (read-only)') }}
 
+{{ oas.Schema(resources.user_email, ['email']) }}
+{{ oas.StringProperty('email', 'The user email address used for login') }}
+
   parameters:
 {{ oas.PathParamID(resources.user) }}
 
 paths:
   /login:
 {{ oas.Create('Login', resources.user_credentials.schema, resources.user_credentials.desc, [resources.user.tag]) }}
+
+  /logout:
+{{ oas.CreateEmpty('Logout', resources.user_logout.desc, [resources.user.tag]) }}
+
+  /resetPassword:
+{{ oas.Update('Reset' + resources.password.schema, resources.user_email.schema, resources.user.desc + 'reset of password for the provided email (server-side generated, will replace any existing one)', [resources.user.tag], False) }}
 
   /user:
 {{ oas.LC(resources.user, [resources.user.tag]) }}

@@ -1,31 +1,11 @@
 SDK_GO_DIR = $(SDK_DIR)/go
 
-SDK_GO_SERVER_DIR = $(SDK_GO_DIR)/server
-SDK_GO_SERVER_GENERATOR = go-server
-SDK_GO_SERVER_NAME = server
-
-SDK_GO_CLIENT_DIR = $(SDK_GO_DIR)/client
+SDK_GO_CLIENT_DIR = $(SDK_GO_DIR)
 SDK_GO_CLIENT_GENERATOR = go
 SDK_GO_CLIENT_NAME = client
 
 .PHONY: go-sdk
-go-sdk: go-sdk-server go-sdk-client ; @
-
-.PHONY: go-sdk-server
-go-sdk-server: get-openapi-generator ; $(info $(M) [OpenAPIv3] generate Golang SDK Server code…) @
-	$Q $(OPENAPI_GENERATOR) generate \
-	  -g $(SDK_GO_SERVER_GENERATOR) \
-	  --package-name $(SDK_GO_SERVER_NAME) \
-	  --openapi-normalizer KEEP_ONLY_FIRST_TAG_IN_OPERATION=true \
-	  -p outputAsLibrary=true \
-	  -p sourceFolder=$(SDK_GO_SERVER_NAME) \
-	  -i $(OPENAPI_DEFINITION) \
-	  -o $(SDK_GO_DIR) \
-	  $(OUT)
-	$Q rm -f $(SDK_GO_DIR)/README.md
-	$Q rm -f $(SDK_GO_DIR)/.openapi-generator-ignore
-	$Q rm -rf $(SDK_GO_DIR)/.openapi-generator
-	$Q rm -rf $(SDK_GO_DIR)/api
+go-sdk: go-sdk-client ; @
 
 .PHONY: go-sdk-client
 go-sdk-client: get-openapi-generator ; $(info $(M) [OpenAPIv3] generate Golang SDK client code…) @

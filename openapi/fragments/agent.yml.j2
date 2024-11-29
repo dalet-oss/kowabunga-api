@@ -3,7 +3,7 @@
 components:
   schemas:
 {{ oas.SchemaBaseResource(resources.agent, ['name', 'type']) }}
-{{ oas.StringProperty('type', 'The Kowabunga agent type', values=['KCA', 'KSA', 'KNA']) }}
+{{ oas.StringProperty('type', 'The Kowabunga agent type', values=['Kiwi', 'Kaktus']) }}
 
   parameters:
 {{ oas.PathParamID(resources.agent) }}

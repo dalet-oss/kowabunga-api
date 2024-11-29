@@ -20,24 +20,12 @@ resources:
     schema: DnsRecord
     paramId: recordId
     paramSchema: RecordID
-  group:
-    tag: group
-    desc: Kowabunga users group
-    schema: Group
-    paramId: groupId
-    paramSchema: GroupID
-  host:
-    tag: host
-    desc: computing host
-    schema: Host
-    paramId: hostId
-    paramSchema: HostID
-  host_caps:
-    desc: computing host capability
-    schema: HostCaps
-  host_cpu:
-    desc: computing host CPU characteristics
-    schema: HostCPU
+  team:
+    tag: team
+    desc: Kowabunga users team
+    schema: Team
+    paramId: teamId
+    paramSchema: TeamID
   instance:
     tag: instance
     desc: virtual machine instance
@@ -53,41 +41,94 @@ resources:
   ip_range:
     desc: reserved IPv4 addresses pool range, non-addressable by Kowabunga
     schema: IpRange
-  kce:
-    tag: kce
-    desc: KCE (Kowabunga Compute Engine)
-    extended_desc: Kowabunga Compute Engine (KCE) is a wrapper object for bare virtual machines. It consists of an instance, one to several attached volumes and 2 network adapters (a private one, a public one). This is the prefered way for creating virtual machines. IP addresses will be automatically assigned
-    schema: KCE
-    paramId: kceId
-    paramSchema: KceID
+  kaktus:
+    tag: kaktus
+    desc: Kaktus computing node
+    extended_desc: Kaktus (Kowabunga Affordable KVM and Tight Underneath Storage) is an hyper-converged infrastructure (HCI) bare-metal node offering computing and distributed storage capabilites
+    schema: Kaktus
+    paramId: kaktusId
+    paramSchema: KaktusID
+  kaktus_caps:
+    desc: Kaktus computing node capability
+    schema: KaktusCaps
+  kaktus_cpu:
+    desc: Kaktus computing node CPU characteristics
+    schema: KaktusCPU
+  kawaii:
+    tag: kawaii
+    desc: Kawaii
+    extended_desc: Kawaii (Kowabunga Adapative WAn Intelligent Interface) is a network gateway used for your Internet inbound and outbound traffic
+    schema: Kawaii
+    paramId: kawaiiId
+    paramSchema: KawaiiID
+  kawaii_netip:
+    desc: Kawaii Network IP settings
+    schema: KawaiiNetIp
+  kawaii_netip_zone:
+    desc: Kawaii Network IP zone settings
+    schema: KawaiiNetIpZone
+  kawaii_firewall:
+    desc: Kawaii public firewall settings
+    schema: KawaiiFirewall
+  kawaii_firewall_ingress_rule:
+    desc: Kawaii public firewall ingress rule
+    schema: KawaiiFirewallIngressRule
+  kawaii_firewall_egress_rule:
+    desc: Kawaii public firewall egress rule
+    schema: KawaiiFirewallEgressRule
+  kawaii_dnat:
+    desc: Kawaii destination NAT configuration
+    schema: KawaiiDNat
+  kawaii_dnat_rule:
+    desc: Kawaii public firewall destination NAT rule
+    schema: KawaiiDNatRule
+  kawaii_vpc_peering:
+    desc: Kawaii internal VPC subnet peering
+    schema: KawaiiVpcPeering
+  kawaii_vpc_forward_rule:
+    desc: Kawaii VPC firewall forwarding rule
+    schema: KawaiiVpcForwardRule
+  kawaii_vpc_netip_zone:
+    desc: Kawaii VPC Network IP zone settings
+    schema: KawaiiVpcNetIpZone
+  kiwi:
+    tag: kiwi
+    desc: Kiwi (Kowabunga Inner Wan Interface) provides edge-network services.
+    schema: Kiwi
+    paramId: kiwiId
+    paramSchema: KiwiID
+  kompute:
+    tag: kompute
+    desc: Kompute
+    extended_desc: Kompute is a wrapper object for bare virtual machines. It consists of an instance, one to several attached volumes and 2 network adapters (a private one, a public one). This is the prefered way for creating virtual machines. IP addresses will be automatically assigned
+    schema: Kompute
+    paramId: komputeId
+    paramSchema: KomputeID
     paramPublicId: public
-    paramPublicSchema: KcePublic
-  kfs:
-    tag: kfs
-    desc: KFS (Kowabunga File System)
-    extended_desc: Kowabunga File System (KFS) provides an elastic NFS-like remote storage volume
-    schema: KFS
-    paramId: kfsId
-    paramSchema: KfsID
-  kgw:
-    tag: kgw
-    desc: KGW (Kowabunga Network Gateway)
-    extended_desc: Kowabunga Network Gateway is a network gateway used for your internet inbound and outbound traffic
-    schema: KGW
-    paramId: kgwId
-    paramSchema: KgwID
-  kgw_nat:
-    desc: KGW NAT mapping
-    schema: KGWNat
+    paramPublicSchema: KomputePublic
+  konvey:
+    tag: konvey
+    desc: Konvey (Kowabunga Network Load-Balancer)
+    extended_desc: Kowabunga Konvey is a layer-4 network load-balancer used to distribute service requests to associated backend instances
+    schema: Konvey
+    paramId: konveyId
+    paramSchema: KonveyID
+  konvey_endpoint:
+    desc: Konvey Endpoint Service settings
+    schema: KonveyEndpoint
+  konvey_backends:
+    desc: Konvey Backends settings
+    schema: KonveyBackends
+  kylo:
+    tag: kylo
+    desc: Kylo
+    extended_desc: Kylo provides an elastic NFS-like remote storage volume
+    schema: Kylo
+    paramId: kyloId
+    paramSchema: KyloID
   metadata:
     desc: key/value metadata
     schema: Metadata
-  netgw:
-    tag: netgw
-    desc: Iris network gateway
-    schema: NetGW
-    paramId: netgwId
-    paramSchema: NetgwID
   password:
     desc: user plain-text password
     schema: Password
@@ -151,6 +192,11 @@ resources:
   user_credentials:
     desc: Kowabunga user login credentials
     schema: UserCredentials
+  user_email:
+    desc: Kowabunga user email
+    schema: UserEmail
+  user_logout:
+    desc: Kowabunga user logout session
   vnet:
     tag: vnet
     desc: virtual network

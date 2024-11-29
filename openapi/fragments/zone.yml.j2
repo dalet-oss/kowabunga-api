@@ -14,10 +14,10 @@ paths:
   /zone/{{ '{' + resources.zone.paramId + '}' }}:
 {{ oas.RUD(resources.zone, [resources.zone.tag], [resources.zone.paramSchema]) }}
 
-  /zone/{{ '{' + resources.zone.paramId + '}' }}/host:
+  /zone/{{ '{' + resources.zone.paramId + '}' }}/kaktus:
 {{ oas.Parameters([resources.zone.paramSchema]) }}
-{{ oas.Create('Create' + resources.host.schema, resources.host.schema, resources.host.desc, [resources.zone.tag, resources.host.tag]) }}
+{{ oas.Create('Create' + resources.kaktus.schema, resources.kaktus.schema, resources.kaktus.desc, [resources.zone.tag, resources.kaktus.tag]) }}
 
-  /zone/{{ '{' + resources.zone.paramId + '}' }}/hosts:
+  /zone/{{ '{' + resources.zone.paramId + '}' }}/kaktuses:
 {{ oas.Parameters([resources.zone.paramSchema]) }}
-{{ oas.GetAll('List' + resources.zone.schema + resources.host.schema + 's', resources.host.desc, [resources.zone.tag, resources.host.tag], True) }}
+{{ oas.GetAll('List' + resources.zone.schema + resources.kaktus.schema + 'es', resources.kaktus.desc, [resources.zone.tag, resources.kaktus.tag], True) }}

@@ -20,7 +20,6 @@
 bin/
 cmd/
 openapi/templates
-openapi/openapi.generated.yml
 node_modules/
 package.json
 package-lock.json

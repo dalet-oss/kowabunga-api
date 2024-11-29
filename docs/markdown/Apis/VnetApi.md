@@ -5,9 +5,9 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createSubnet**](VnetApi.md#createSubnet) | **POST** /vnet/{vnetId}/subnet |  |
-| [**createVNet**](VnetApi.md#createVNet) | **POST** /region/{regionId}/vnet |  |
+| [**createVNet_0**](VnetApi.md#createVNet_0) | **POST** /region/{regionId}/vnet |  |
 | [**deleteVNet**](VnetApi.md#deleteVNet) | **DELETE** /vnet/{vnetId} |  |
-| [**listRegionVNets**](VnetApi.md#listRegionVNets) | **GET** /region/{regionId}/vnets |  |
+| [**listRegionVNets_0**](VnetApi.md#listRegionVNets_0) | **GET** /region/{regionId}/vnets |  |
 | [**listVNetSubnets**](VnetApi.md#listVNetSubnets) | **GET** /vnet/{vnetId}/subnets |  |
 | [**listVNets**](VnetApi.md#listVNets) | **GET** /vnet |  |
 | [**readVNet**](VnetApi.md#readVNet) | **GET** /vnet/{vnetId} |  |
@@ -43,9 +43,9 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createVNet"></a>
-# **createVNet**
-> VNet createVNet(regionId, VNet)
+<a name="createVNet_0"></a>
+# **createVNet_0**
+> VNet createVNet_0(regionId, VNet)
 
 
 
@@ -98,9 +98,9 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listRegionVNets"></a>
-# **listRegionVNets**
-> List listRegionVNets(regionId)
+<a name="listRegionVNets_0"></a>
+# **listRegionVNets_0**
+> List listRegionVNets_0(regionId)
 
 
 

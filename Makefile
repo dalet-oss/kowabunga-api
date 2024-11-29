@@ -23,6 +23,12 @@ endif
 all: pre sdk post ; @
 	$Q echo "done"
 
+# Updates all go modules
+.PHONY: update
+update: ; $(info $(M) updating modules…) @
+	$Q go get -u ./...
+	$Q go mod tidy
+
 .PHONY: pre
 pre: ; $(info $(M) [Git] cleaning up auto-generated code…) @
 	$Q git rm -rf --quiet $(DOCS_DIR) $(SDK_DIR) || true

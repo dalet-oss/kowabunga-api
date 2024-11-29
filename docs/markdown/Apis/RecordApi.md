@@ -4,16 +4,16 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createProjectDnsRecord**](RecordApi.md#createProjectDnsRecord) | **POST** /project/{projectId}/record |  |
+| [**createProjectDnsRecord_0**](RecordApi.md#createProjectDnsRecord_0) | **POST** /project/{projectId}/record |  |
 | [**deleteDnsRecord**](RecordApi.md#deleteDnsRecord) | **DELETE** /record/{recordId} |  |
-| [**listProjectDnsRecords**](RecordApi.md#listProjectDnsRecords) | **GET** /project/{projectId}/records |  |
+| [**listProjectDnsRecords_0**](RecordApi.md#listProjectDnsRecords_0) | **GET** /project/{projectId}/records |  |
 | [**readDnsRecord**](RecordApi.md#readDnsRecord) | **GET** /record/{recordId} |  |
 | [**updateDnsRecord**](RecordApi.md#updateDnsRecord) | **PUT** /record/{recordId} |  |
 
 
-<a name="createProjectDnsRecord"></a>
-# **createProjectDnsRecord**
-> DnsRecord createProjectDnsRecord(projectId, DnsRecord)
+<a name="createProjectDnsRecord_0"></a>
+# **createProjectDnsRecord_0**
+> DnsRecord createProjectDnsRecord_0(projectId, DnsRecord)
 
 
 
@@ -66,9 +66,9 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listProjectDnsRecords"></a>
-# **listProjectDnsRecords**
-> List listProjectDnsRecords(projectId)
+<a name="listProjectDnsRecords_0"></a>
+# **listProjectDnsRecords_0**
+> List listProjectDnsRecords_0(projectId)
 
 
 

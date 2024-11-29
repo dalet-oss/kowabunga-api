@@ -8,7 +8,9 @@ All URIs are relative to */api/v1*
 | [**deleteUser**](UserApi.md#deleteUser) | **DELETE** /user/{userId} |  |
 | [**listUsers**](UserApi.md#listUsers) | **GET** /user |  |
 | [**login**](UserApi.md#login) | **POST** /login |  |
+| [**logout**](UserApi.md#logout) | **POST** /logout |  |
 | [**readUser**](UserApi.md#readUser) | **GET** /user/{userId} |  |
+| [**resetPassword**](UserApi.md#resetPassword) | **PUT** /resetPassword |  |
 | [**resetUserPassword**](UserApi.md#resetUserPassword) | **PATCH** /user/{userId}/resetPassword |  |
 | [**setUserApiToken**](UserApi.md#setUserApiToken) | **PATCH** /user/{userId}/token |  |
 | [**setUserPassword**](UserApi.md#setUserPassword) | **PUT** /user/{userId}/password |  |
@@ -120,6 +122,30 @@ This endpoint does not need any parameter.
 - **Content-Type**: application/json
 - **Accept**: application/json
 
+<a name="logout"></a>
+# **logout**
+> logout()
+
+
+
+    Creates a new Kowabunga user logout session.
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 <a name="readUser"></a>
 # **readUser**
 > User readUser(userId)
@@ -145,6 +171,33 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="resetPassword"></a>
+# **resetPassword**
+> resetPassword(UserEmail)
+
+
+
+    Updates a Kowabunga userreset of password for the provided email (server-side generated, will replace any existing one) configuration.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **UserEmail** | [**UserEmail**](../Models/UserEmail.md)| UserEmail payload. | |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth), [BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 <a name="resetUserPassword"></a>

@@ -4,19 +4,19 @@ All URIs are relative to */api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createStorageNFS**](NfsApi.md#createStorageNFS) | **POST** /region/{regionId}/nfs |  |
+| [**createStorageNFS_0**](NfsApi.md#createStorageNFS_0) | **POST** /region/{regionId}/nfs |  |
 | [**deleteStorageNFS**](NfsApi.md#deleteStorageNFS) | **DELETE** /nfs/{nfsId} |  |
-| [**listRegionStorageNFSs**](NfsApi.md#listRegionStorageNFSs) | **GET** /region/{regionId}/nfs |  |
-| [**listStorageNFSKFSs**](NfsApi.md#listStorageNFSKFSs) | **GET** /nfs/{nfsId}/kfs |  |
+| [**listRegionStorageNFSs_0**](NfsApi.md#listRegionStorageNFSs_0) | **GET** /region/{regionId}/nfs |  |
+| [**listStorageNFSKylos**](NfsApi.md#listStorageNFSKylos) | **GET** /nfs/{nfsId}/kylo |  |
 | [**listStorageNFSs**](NfsApi.md#listStorageNFSs) | **GET** /nfs |  |
 | [**readStorageNFS**](NfsApi.md#readStorageNFS) | **GET** /nfs/{nfsId} |  |
-| [**setRegionDefaultStorageNFS**](NfsApi.md#setRegionDefaultStorageNFS) | **PATCH** /region/{regionId}/nfs/{nfsId}/default |  |
+| [**setRegionDefaultStorageNFS_0**](NfsApi.md#setRegionDefaultStorageNFS_0) | **PATCH** /region/{regionId}/nfs/{nfsId}/default |  |
 | [**updateStorageNFS**](NfsApi.md#updateStorageNFS) | **PUT** /nfs/{nfsId} |  |
 
 
-<a name="createStorageNFS"></a>
-# **createStorageNFS**
-> StorageNFS createStorageNFS(regionId, StorageNFS, poolId)
+<a name="createStorageNFS_0"></a>
+# **createStorageNFS_0**
+> StorageNFS createStorageNFS_0(regionId, StorageNFS, poolId)
 
 
 
@@ -70,9 +70,9 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listRegionStorageNFSs"></a>
-# **listRegionStorageNFSs**
-> List listRegionStorageNFSs(regionId, poolId)
+<a name="listRegionStorageNFSs_0"></a>
+# **listRegionStorageNFSs_0**
+> List listRegionStorageNFSs_0(regionId, poolId)
 
 
 
@@ -98,13 +98,13 @@ null (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listStorageNFSKFSs"></a>
-# **listStorageNFSKFSs**
-> List listStorageNFSKFSs(nfsId)
+<a name="listStorageNFSKylos"></a>
+# **listStorageNFSKylos**
+> List listStorageNFSKylos(nfsId)
 
 
 
-    Returns the IDs of KFS (Kowabunga File System) objects.
+    Returns the IDs of Kylo objects.
 
 ### Parameters
 
@@ -176,9 +176,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="setRegionDefaultStorageNFS"></a>
-# **setRegionDefaultStorageNFS**
-> setRegionDefaultStorageNFS(regionId, nfsId)
+<a name="setRegionDefaultStorageNFS_0"></a>
+# **setRegionDefaultStorageNFS_0**
+> setRegionDefaultStorageNFS_0(regionId, nfsId)
 
 
 

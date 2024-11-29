@@ -1,5 +1,9 @@
 ## @
 
+Kvm Orchestrator With A BUNch of Goods Added
+
+The version of the OpenAPI document: 0.51.1
+
 ### Building
 
 To install the required dependencies and to build the typescript sources run:

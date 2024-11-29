@@ -5,13 +5,13 @@ All URIs are relative to */api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createAdapter**](SubnetApi.md#createAdapter) | **POST** /subnet/{subnetId}/adapter |  |
-| [**createSubnet**](SubnetApi.md#createSubnet) | **POST** /vnet/{vnetId}/subnet |  |
+| [**createSubnet_0**](SubnetApi.md#createSubnet_0) | **POST** /vnet/{vnetId}/subnet |  |
 | [**deleteSubnet**](SubnetApi.md#deleteSubnet) | **DELETE** /subnet/{subnetId} |  |
 | [**listSubnetAdapters**](SubnetApi.md#listSubnetAdapters) | **GET** /subnet/{subnetId}/adapters |  |
 | [**listSubnets**](SubnetApi.md#listSubnets) | **GET** /subnet |  |
-| [**listVNetSubnets**](SubnetApi.md#listVNetSubnets) | **GET** /vnet/{vnetId}/subnets |  |
+| [**listVNetSubnets_0**](SubnetApi.md#listVNetSubnets_0) | **GET** /vnet/{vnetId}/subnets |  |
 | [**readSubnet**](SubnetApi.md#readSubnet) | **GET** /subnet/{subnetId} |  |
-| [**setVNetDefaultSubnet**](SubnetApi.md#setVNetDefaultSubnet) | **PATCH** /vnet/{vnetId}/subnet/{subnetId}/default |  |
+| [**setVNetDefaultSubnet_0**](SubnetApi.md#setVNetDefaultSubnet_0) | **PATCH** /vnet/{vnetId}/subnet/{subnetId}/default |  |
 | [**updateSubnet**](SubnetApi.md#updateSubnet) | **PUT** /subnet/{subnetId} |  |
 
 
@@ -44,9 +44,9 @@ All URIs are relative to */api/v1*
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="createSubnet"></a>
-# **createSubnet**
-> Subnet createSubnet(vnetId, Subnet)
+<a name="createSubnet_0"></a>
+# **createSubnet_0**
+> Subnet createSubnet_0(vnetId, Subnet)
 
 
 
@@ -150,9 +150,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="listVNetSubnets"></a>
-# **listVNetSubnets**
-> List listVNetSubnets(vnetId)
+<a name="listVNetSubnets_0"></a>
+# **listVNetSubnets_0**
+> List listVNetSubnets_0(vnetId)
 
 
 
@@ -204,9 +204,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="setVNetDefaultSubnet"></a>
-# **setVNetDefaultSubnet**
-> setVNetDefaultSubnet(vnetId, subnetId)
+<a name="setVNetDefaultSubnet_0"></a>
+# **setVNetDefaultSubnet_0**
+> setVNetDefaultSubnet_0(vnetId, subnetId)
 
 
 

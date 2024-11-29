@@ -26,13 +26,13 @@ paths:
 {{ oas.Parameters([resources.region.paramSchema]) }}
 {{ oas.Create('Create' + resources.pool.schema, resources.pool.schema, resources.pool.desc, [resources.region.tag, resources.pool.tag]) }}
 
-  /region/{{ '{' + resources.region.paramId + '}' }}/netgw:
+  /region/{{ '{' + resources.region.paramId + '}' }}/kiwi:
 {{ oas.Parameters([resources.region.paramSchema]) }}
-{{ oas.Create('Create' + resources.netgw.schema, resources.netgw.schema, resources.netgw.desc, [resources.region.tag, resources.netgw.tag]) }}
+{{ oas.Create('Create' + resources.kiwi.schema, resources.kiwi.schema, resources.kiwi.desc, [resources.region.tag, resources.kiwi.tag]) }}
 
-  /region/{{ '{' + resources.region.paramId + '}' }}/netgws:
+  /region/{{ '{' + resources.region.paramId + '}' }}/kiwis:
 {{ oas.Parameters([resources.region.paramSchema]) }}
-{{ oas.GetAll('List' + resources.region.schema + resources.netgw.schema + 's', resources.netgw.desc, [resources.region.tag, resources.netgw.tag], True) }}
+{{ oas.GetAll('List' + resources.region.schema + resources.kiwi.schema + 's', resources.kiwi.desc, [resources.region.tag, resources.kiwi.tag], True) }}
 
   /region/{{ '{' + resources.region.paramId + '}' }}/vnet:
 {{ oas.Parameters([resources.region.paramSchema]) }}

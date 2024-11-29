@@ -1,5 +1,5 @@
 YQ = $(BIN_DIR)/yq
-YQ_VERSION = v4.34.1
+YQ_VERSION = v4.44.3
 
 JINJA = jinjanate
 
