@@ -43,17 +43,22 @@ All URIs are relative to */api/v1*
 *KaktusApi* | [**readKaktus**](Apis/KaktusApi.md#readkaktus) | **GET** /kaktus/{kaktusId} | Returns a Kaktus computing node. |
 *KaktusApi* | [**readKaktusCaps**](Apis/KaktusApi.md#readkaktuscaps) | **GET** /kaktus/{kaktusId}/caps | Returns a Kaktus computing node capability. |
 *KaktusApi* | [**updateKaktus**](Apis/KaktusApi.md#updatekaktus) | **PUT** /kaktus/{kaktusId} | Updates a Kaktus computing node configuration. |
-| *KawaiiApi* | [**createProjectRegionKawaii_1**](Apis/KawaiiApi.md#createprojectregionkawaii_1) | **POST** /project/{projectId}/region/{regionId}/kawaii | Creates a new Kawaii. |
+| *KawaiiApi* | [**createKawaiiIpSec**](Apis/KawaiiApi.md#createkawaiiipsec) | **POST** /kawaii/{kawaiiId}/ipsec | Creates a new Kawaii IPsec connection. |
+*KawaiiApi* | [**createProjectRegionKawaii_1**](Apis/KawaiiApi.md#createprojectregionkawaii_1) | **POST** /project/{projectId}/region/{regionId}/kawaii | Creates a new Kawaii. |
 *KawaiiApi* | [**deleteKawaii**](Apis/KawaiiApi.md#deletekawaii) | **DELETE** /kawaii/{kawaiiId} | Deletes an existing Kawaii. |
+*KawaiiApi* | [**deleteKawaiiIpSec**](Apis/KawaiiApi.md#deletekawaiiipsec) | **DELETE** /kawaii/{kawaiiId}/ipsec/{KawaiiIpSecId} | Deletes an existing Kawaii IPsec connection. |
+*KawaiiApi* | [**listKawaiiIpSecs**](Apis/KawaiiApi.md#listkawaiiipsecs) | **GET** /kawaii/{kawaiiId}/ipsec | Returns the IDs of Kawaii IPsec connection objects. |
 *KawaiiApi* | [**listKawaiis**](Apis/KawaiiApi.md#listkawaiis) | **GET** /kawaii | Returns the IDs of Kawaii objects. |
 *KawaiiApi* | [**listProjectRegionKawaiis_1**](Apis/KawaiiApi.md#listprojectregionkawaiis_1) | **GET** /project/{projectId}/region/{regionId}/kawaiis | Returns the IDs of Kawaii objects. |
 *KawaiiApi* | [**readKawaii**](Apis/KawaiiApi.md#readkawaii) | **GET** /kawaii/{kawaiiId} | Returns a Kawaii. |
+*KawaiiApi* | [**readKawaiiIpSec**](Apis/KawaiiApi.md#readkawaiiipsec) | **GET** /kawaii/{kawaiiId}/ipsec/{KawaiiIpSecId} | Returns a Kawaii IPsec connection. |
 *KawaiiApi* | [**updateKawaii**](Apis/KawaiiApi.md#updatekawaii) | **PUT** /kawaii/{kawaiiId} | Updates a Kawaii configuration. |
-| *KawaiiIpsecApi* | [**createKawaiiIpSec**](Apis/KawaiiIpsecApi.md#createkawaiiipsec) | **POST** /kawaii/{kawaiiId}/ipsec | Creates a new Kawaii IPsec connection. |
-*KawaiiIpsecApi* | [**deleteKawaiiIpSec**](Apis/KawaiiIpsecApi.md#deletekawaiiipsec) | **DELETE** /kawaii/{kawaiiId}/ipsec/{KawaiiIpSecId} | Deletes an existing Kawaii IPsec connection. |
-*KawaiiIpsecApi* | [**listKawaiiIpSecs**](Apis/KawaiiIpsecApi.md#listkawaiiipsecs) | **GET** /kawaii/{kawaiiId}/ipsec | Returns the IDs of Kawaii IPsec connection objects. |
-*KawaiiIpsecApi* | [**readKawaiiIpSec**](Apis/KawaiiIpsecApi.md#readkawaiiipsec) | **GET** /kawaii/{kawaiiId}/ipsec/{KawaiiIpSecId} | Returns a Kawaii IPsec connection. |
-*KawaiiIpsecApi* | [**updateKawaiiIpSec**](Apis/KawaiiIpsecApi.md#updatekawaiiipsec) | **PUT** /kawaii/{kawaiiId}/ipsec/{KawaiiIpSecId} | Updates a Kawaii IPsec connection configuration. |
+*KawaiiApi* | [**updateKawaiiIpSec**](Apis/KawaiiApi.md#updatekawaiiipsec) | **PUT** /kawaii/{kawaiiId}/ipsec/{KawaiiIpSecId} | Updates a Kawaii IPsec connection configuration. |
+| *KawaiiIpsecApi* | [**createKawaiiIpSec_0**](Apis/KawaiiIpsecApi.md#createkawaiiipsec_0) | **POST** /kawaii/{kawaiiId}/ipsec | Creates a new Kawaii IPsec connection. |
+*KawaiiIpsecApi* | [**deleteKawaiiIpSec_0**](Apis/KawaiiIpsecApi.md#deletekawaiiipsec_0) | **DELETE** /kawaii/{kawaiiId}/ipsec/{KawaiiIpSecId} | Deletes an existing Kawaii IPsec connection. |
+*KawaiiIpsecApi* | [**listKawaiiIpSecs_0**](Apis/KawaiiIpsecApi.md#listkawaiiipsecs_0) | **GET** /kawaii/{kawaiiId}/ipsec | Returns the IDs of Kawaii IPsec connection objects. |
+*KawaiiIpsecApi* | [**readKawaiiIpSec_0**](Apis/KawaiiIpsecApi.md#readkawaiiipsec_0) | **GET** /kawaii/{kawaiiId}/ipsec/{KawaiiIpSecId} | Returns a Kawaii IPsec connection. |
+*KawaiiIpsecApi* | [**updateKawaiiIpSec_0**](Apis/KawaiiIpsecApi.md#updatekawaiiipsec_0) | **PUT** /kawaii/{kawaiiId}/ipsec/{KawaiiIpSecId} | Updates a Kawaii IPsec connection configuration. |
 | *KiwiApi* | [**createKiwi_0**](Apis/KiwiApi.md#createkiwi_0) | **POST** /region/{regionId}/kiwi | Creates a new Kiwi (Kowabunga Inner Wan Interface) provides edge-network services.. |
 *KiwiApi* | [**deleteKiwi**](Apis/KiwiApi.md#deletekiwi) | **DELETE** /kiwi/{kiwiId} | Deletes an existing Kiwi (Kowabunga Inner Wan Interface) provides edge-network services.. |
 *KiwiApi* | [**listKiwis**](Apis/KiwiApi.md#listkiwis) | **GET** /kiwi | Returns the IDs of Kiwi (Kowabunga Inner Wan Interface) provides edge-network services. objects. |

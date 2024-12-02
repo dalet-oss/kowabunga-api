@@ -87,7 +87,7 @@ resources:
     desc: Kawaii IPsec connection
     schema: KawaiiIpSec
     paramId: KawaiiIpSecId
-    paramSchema: KawaiiIpSec
+    paramSchema: KawaiiIpSecID
   kawaii_vpc_peering:
     desc: Kawaii internal VPC subnet peering
     schema: KawaiiVpcPeering

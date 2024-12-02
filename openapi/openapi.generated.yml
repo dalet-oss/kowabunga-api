@@ -585,6 +585,11 @@ components:
     KawaiiIpSec:
       type: object
       description: A Kawaii IPsec connection.
+      required:
+        - name
+        - remote_ip
+        - remote_subnet
+        - pre_shared_key
       properties:
         id:
           type: string
@@ -608,11 +613,6 @@ components:
           type: object
           description: The Kawaii IPsec connection firewall settings on the ipsec interface.
           $ref: '#/components/schemas/KawaiiFirewall'
-      required:
-        - name
-        - remote_ip
-        - remote_subnet
-        - pre_shared_key
     Kiwi:
       type: object
       description: A Kiwi (Kowabunga Inner Wan Interface) provides edge-network services..
@@ -1275,7 +1275,7 @@ components:
       required: true
       schema:
         type: string
-    KawaiiIpSec:
+    KawaiiIpSecID:
       name: KawaiiIpSecId
       in: path
       description: The ID of the Kawaii IPsec connection.
@@ -2281,9 +2281,10 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
   /kawaii/{kawaiiId}/ipsec:
     parameters:
-      - $ref: '#/components/parameters/KawaiiIpSec'
+      - $ref: '#/components/parameters/KawaiiID'
     get:
       tags:
+        - kawaii
         - kawaii_ipsec
       description: Returns the IDs of Kawaii IPsec connection objects.
       operationId: ListKawaiiIpSecs
@@ -2300,6 +2301,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     post:
       tags:
+        - kawaii
         - kawaii_ipsec
       description: Creates a new Kawaii IPsec connection.
       operationId: CreateKawaiiIpSec
@@ -2333,9 +2335,11 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
   /kawaii/{kawaiiId}/ipsec/{KawaiiIpSecId}:
     parameters:
-      - $ref: '#/components/parameters/KawaiiIpSec'
+      - $ref: '#/components/parameters/KawaiiID'
+      - $ref: '#/components/parameters/KawaiiIpSecID'
     get:
       tags:
+        - kawaii
         - kawaii_ipsec
       description: Returns a Kawaii IPsec connection.
       operationId: ReadKawaiiIpSec
@@ -2354,6 +2358,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       tags:
+        - kawaii
         - kawaii_ipsec
       description: Updates a Kawaii IPsec connection configuration.
       operationId: UpdateKawaiiIpSec
@@ -2385,6 +2390,7 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
     delete:
       tags:
+        - kawaii
         - kawaii_ipsec
       description: Deletes an existing Kawaii IPsec connection.
       operationId: DeleteKawaiiIpSec
