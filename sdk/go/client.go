@@ -60,6 +60,8 @@ type APIClient struct {
 
 	KawaiiAPI *KawaiiAPIService
 
+	KawaiiIpsecAPI *KawaiiIpsecAPIService
+
 	KiwiAPI *KiwiAPIService
 
 	KomputeAPI *KomputeAPIService
@@ -116,6 +118,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.InstanceAPI = (*InstanceAPIService)(&c.common)
 	c.KaktusAPI = (*KaktusAPIService)(&c.common)
 	c.KawaiiAPI = (*KawaiiAPIService)(&c.common)
+	c.KawaiiIpsecAPI = (*KawaiiIpsecAPIService)(&c.common)
 	c.KiwiAPI = (*KiwiAPIService)(&c.common)
 	c.KomputeAPI = (*KomputeAPIService)(&c.common)
 	c.KonveyAPI = (*KonveyAPIService)(&c.common)

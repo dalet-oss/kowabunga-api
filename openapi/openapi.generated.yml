@@ -586,9 +586,15 @@ components:
       type: object
       description: A Kawaii IPsec connection.
       properties:
+        id:
+          type: string
+          description: The Kawaii IPsec connection ID (auto-generated).
         name:
           type: string
           description: The Kawaii IPsec connection name.
+        description:
+          type: string
+          description: The Kawaii IPsec connection description.
         remote_ip:
           type: string
           description: The Kawaii IPsec connection remote peer VPN Gateway.
@@ -602,6 +608,11 @@ components:
           type: object
           description: The Kawaii IPsec connection firewall settings on the ipsec interface.
           $ref: '#/components/schemas/KawaiiFirewall'
+      required:
+        - name
+        - remote_ip
+        - remote_subnet
+        - pre_shared_key
     Kiwi:
       type: object
       description: A Kiwi (Kowabunga Inner Wan Interface) provides edge-network services..
@@ -1261,6 +1272,13 @@ components:
       name: kawaiiId
       in: path
       description: The ID of the Kawaii.
+      required: true
+      schema:
+        type: string
+    KawaiiIpSec:
+      name: KawaiiIpSecId
+      in: path
+      description: The ID of the Kawaii IPsec connection.
       required: true
       schema:
         type: string
@@ -2251,6 +2269,128 @@ paths:
       responses:
         '200':
           description: The Kawaii has been successfully removed.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /kawaii/{kawaiiId}/ipsec:
+    parameters:
+      - $ref: '#/components/parameters/KawaiiIpSec'
+    get:
+      tags:
+        - kawaii_ipsec
+      description: Returns the IDs of Kawaii IPsec connection objects.
+      operationId: ListKawaiiIpSecs
+      responses:
+        '200':
+          description: Returns an array of Kawaii IPsec connection IDs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      tags:
+        - kawaii_ipsec
+      description: Creates a new Kawaii IPsec connection.
+      operationId: CreateKawaiiIpSec
+      requestBody:
+        description: KawaiiIpSec payload.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KawaiiIpSec'
+        required: true
+      responses:
+        '201':
+          description: Returns the newly created Kawaii IPsec connection object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KawaiiIpSec'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '507':
+          $ref: '#/components/responses/InsufficientStorage'
+  /kawaii/{kawaiiId}/ipsec/{KawaiiIpSecId}:
+    parameters:
+      - $ref: '#/components/parameters/KawaiiIpSec'
+    get:
+      tags:
+        - kawaii_ipsec
+      description: Returns a Kawaii IPsec connection.
+      operationId: ReadKawaiiIpSec
+      responses:
+        '200':
+          description: Returns the Kawaii IPsec connection object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KawaiiIpSec'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags:
+        - kawaii_ipsec
+      description: Updates a Kawaii IPsec connection configuration.
+      operationId: UpdateKawaiiIpSec
+      requestBody:
+        description: KawaiiIpSec payload.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KawaiiIpSec'
+        required: true
+      responses:
+        '200':
+          description: Returns the Kawaii IPsec connection object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KawaiiIpSec'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '507':
+          $ref: '#/components/responses/InsufficientStorage'
+    delete:
+      tags:
+        - kawaii_ipsec
+      description: Deletes an existing Kawaii IPsec connection.
+      operationId: DeleteKawaiiIpSec
+      responses:
+        '200':
+          description: The Kawaii IPsec connection has been successfully removed.
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
@@ -5332,6 +5472,8 @@ tags:
     description: Everything about Kaktus computing node
   - name: kawaii
     description: Everything about Kawaii
+  - name: kawaii_ipsec
+    description: Everything about Kawaii IPsec connection
   - name: kiwi
     description: Everything about Kiwi (Kowabunga Inner Wan Interface) provides edge-network services.
   - name: kompute

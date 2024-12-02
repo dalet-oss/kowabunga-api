@@ -13,6 +13,8 @@ package client
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the KawaiiIpSec type satisfies the MappedNullable interface at compile time
@@ -20,24 +22,34 @@ var _ MappedNullable = &KawaiiIpSec{}
 
 // KawaiiIpSec A Kawaii IPsec connection.
 type KawaiiIpSec struct {
+	// The Kawaii IPsec connection ID (auto-generated).
+	Id *string `json:"id,omitempty"`
 	// The Kawaii IPsec connection name.
-	Name *string `json:"name,omitempty"`
+	Name string `json:"name"`
+	// The Kawaii IPsec connection description.
+	Description *string `json:"description,omitempty"`
 	// The Kawaii IPsec connection remote peer VPN Gateway.
-	RemoteIp *string `json:"remote_ip,omitempty"`
+	RemoteIp string `json:"remote_ip"`
 	// The Kawaii IPsec connection remote subnet.
-	RemoteSubnet *string `json:"remote_subnet,omitempty"`
+	RemoteSubnet string `json:"remote_subnet"`
 	// The Kawaii IPsec connection pre-shared key(PSK).
-	PreSharedKey *string `json:"pre_shared_key,omitempty"`
+	PreSharedKey string `json:"pre_shared_key"`
 	// The Kawaii IPsec connection firewall settings on the ipsec interface.
 	Firewall KawaiiFirewall `json:"firewall,omitempty"`
 }
+
+type _KawaiiIpSec KawaiiIpSec
 
 // NewKawaiiIpSec instantiates a new KawaiiIpSec object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewKawaiiIpSec() *KawaiiIpSec {
+func NewKawaiiIpSec(name string, remoteIp string, remoteSubnet string, preSharedKey string) *KawaiiIpSec {
 	this := KawaiiIpSec{}
+	this.Name = name
+	this.RemoteIp = remoteIp
+	this.RemoteSubnet = remoteSubnet
+	this.PreSharedKey = preSharedKey
 	return &this
 }
 
@@ -49,132 +61,164 @@ func NewKawaiiIpSecWithDefaults() *KawaiiIpSec {
 	return &this
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *KawaiiIpSec) GetName() string {
-	if o == nil || IsNil(o.Name) {
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *KawaiiIpSec) GetId() string {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
-	return *o.Name
+	return *o.Id
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KawaiiIpSec) GetIdOk() (*string, bool) {
+	if o == nil || IsNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *KawaiiIpSec) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *KawaiiIpSec) SetId(v string) {
+	o.Id = &v
+}
+
+// GetName returns the Name field value
+func (o *KawaiiIpSec) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *KawaiiIpSec) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *KawaiiIpSec) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+// SetName sets field value
+func (o *KawaiiIpSec) SetName(v string) {
+	o.Name = v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *KawaiiIpSec) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KawaiiIpSec) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *KawaiiIpSec) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *KawaiiIpSec) SetName(v string) {
-	o.Name = &v
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *KawaiiIpSec) SetDescription(v string) {
+	o.Description = &v
 }
 
-// GetRemoteIp returns the RemoteIp field value if set, zero value otherwise.
+// GetRemoteIp returns the RemoteIp field value
 func (o *KawaiiIpSec) GetRemoteIp() string {
-	if o == nil || IsNil(o.RemoteIp) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.RemoteIp
+
+	return o.RemoteIp
 }
 
-// GetRemoteIpOk returns a tuple with the RemoteIp field value if set, nil otherwise
+// GetRemoteIpOk returns a tuple with the RemoteIp field value
 // and a boolean to check if the value has been set.
 func (o *KawaiiIpSec) GetRemoteIpOk() (*string, bool) {
-	if o == nil || IsNil(o.RemoteIp) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RemoteIp, true
+	return &o.RemoteIp, true
 }
 
-// HasRemoteIp returns a boolean if a field has been set.
-func (o *KawaiiIpSec) HasRemoteIp() bool {
-	if o != nil && !IsNil(o.RemoteIp) {
-		return true
-	}
-
-	return false
-}
-
-// SetRemoteIp gets a reference to the given string and assigns it to the RemoteIp field.
+// SetRemoteIp sets field value
 func (o *KawaiiIpSec) SetRemoteIp(v string) {
-	o.RemoteIp = &v
+	o.RemoteIp = v
 }
 
-// GetRemoteSubnet returns the RemoteSubnet field value if set, zero value otherwise.
+// GetRemoteSubnet returns the RemoteSubnet field value
 func (o *KawaiiIpSec) GetRemoteSubnet() string {
-	if o == nil || IsNil(o.RemoteSubnet) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.RemoteSubnet
+
+	return o.RemoteSubnet
 }
 
-// GetRemoteSubnetOk returns a tuple with the RemoteSubnet field value if set, nil otherwise
+// GetRemoteSubnetOk returns a tuple with the RemoteSubnet field value
 // and a boolean to check if the value has been set.
 func (o *KawaiiIpSec) GetRemoteSubnetOk() (*string, bool) {
-	if o == nil || IsNil(o.RemoteSubnet) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RemoteSubnet, true
+	return &o.RemoteSubnet, true
 }
 
-// HasRemoteSubnet returns a boolean if a field has been set.
-func (o *KawaiiIpSec) HasRemoteSubnet() bool {
-	if o != nil && !IsNil(o.RemoteSubnet) {
-		return true
-	}
-
-	return false
-}
-
-// SetRemoteSubnet gets a reference to the given string and assigns it to the RemoteSubnet field.
+// SetRemoteSubnet sets field value
 func (o *KawaiiIpSec) SetRemoteSubnet(v string) {
-	o.RemoteSubnet = &v
+	o.RemoteSubnet = v
 }
 
-// GetPreSharedKey returns the PreSharedKey field value if set, zero value otherwise.
+// GetPreSharedKey returns the PreSharedKey field value
 func (o *KawaiiIpSec) GetPreSharedKey() string {
-	if o == nil || IsNil(o.PreSharedKey) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.PreSharedKey
+
+	return o.PreSharedKey
 }
 
-// GetPreSharedKeyOk returns a tuple with the PreSharedKey field value if set, nil otherwise
+// GetPreSharedKeyOk returns a tuple with the PreSharedKey field value
 // and a boolean to check if the value has been set.
 func (o *KawaiiIpSec) GetPreSharedKeyOk() (*string, bool) {
-	if o == nil || IsNil(o.PreSharedKey) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PreSharedKey, true
+	return &o.PreSharedKey, true
 }
 
-// HasPreSharedKey returns a boolean if a field has been set.
-func (o *KawaiiIpSec) HasPreSharedKey() bool {
-	if o != nil && !IsNil(o.PreSharedKey) {
-		return true
-	}
-
-	return false
-}
-
-// SetPreSharedKey gets a reference to the given string and assigns it to the PreSharedKey field.
+// SetPreSharedKey sets field value
 func (o *KawaiiIpSec) SetPreSharedKey(v string) {
-	o.PreSharedKey = &v
+	o.PreSharedKey = v
 }
 
 // GetFirewall returns the Firewall field value if set, zero value otherwise.
@@ -219,22 +263,60 @@ func (o KawaiiIpSec) MarshalJSON() ([]byte, error) {
 
 func (o KawaiiIpSec) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
 	}
-	if !IsNil(o.RemoteIp) {
-		toSerialize["remote_ip"] = o.RemoteIp
+	toSerialize["name"] = o.Name
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.RemoteSubnet) {
-		toSerialize["remote_subnet"] = o.RemoteSubnet
-	}
-	if !IsNil(o.PreSharedKey) {
-		toSerialize["pre_shared_key"] = o.PreSharedKey
-	}
+	toSerialize["remote_ip"] = o.RemoteIp
+	toSerialize["remote_subnet"] = o.RemoteSubnet
+	toSerialize["pre_shared_key"] = o.PreSharedKey
 	if !IsNil(o.Firewall) {
 		toSerialize["firewall"] = o.Firewall
 	}
 	return toSerialize, nil
+}
+
+func (o *KawaiiIpSec) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+		"remote_ip",
+		"remote_subnet",
+		"pre_shared_key",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varKawaiiIpSec := _KawaiiIpSec{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varKawaiiIpSec)
+
+	if err != nil {
+		return err
+	}
+
+	*o = KawaiiIpSec(varKawaiiIpSec)
+
+	return err
 }
 
 type NullableKawaiiIpSec struct {

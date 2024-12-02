@@ -1,0 +1,13 @@
+{%- import "openapi/oas.macros.yml.j2" as oas with context %}
+
+components:
+  schemas:
+{{ oas.SchemaBaseResource(resources.kawaii_ipsec, ['name', 'remote_ip', 'remote_subnet', 'pre_shared_key']) }}
+{{ oas.StringProperty('remote_ip', 'The ' + resources.kawaii_ipsec.desc + ' remote peer VPN Gateway') }}
+{{ oas.StringProperty('remote_subnet', 'The ' + resources.kawaii_ipsec.desc + ' remote subnet' )}}
+{{ oas.StringProperty('pre_shared_key', 'The ' + resources.kawaii_ipsec.desc + ' pre-shared key(PSK)' )}}
+{{ oas.ObjectProperty('firewall', 'The ' + resources.kawaii_ipsec.desc + ' firewall settings on the ipsec interface', resources.kawaii_firewall.schema) }}
+
+
+  parameters:
+{{ oas.PathParamID(resources.kawaii_ipsec) }}

@@ -15,21 +15,29 @@ import { KawaiiFirewall } from './kawaiiFirewall';
  */
 export interface KawaiiIpSec { 
     /**
+     * The Kawaii IPsec connection ID (auto-generated).
+     */
+    id?: string;
+    /**
      * The Kawaii IPsec connection name.
      */
-    name?: string;
+    name: string;
+    /**
+     * The Kawaii IPsec connection description.
+     */
+    description?: string;
     /**
      * The Kawaii IPsec connection remote peer VPN Gateway.
      */
-    remote_ip?: string;
+    remote_ip: string;
     /**
      * The Kawaii IPsec connection remote subnet.
      */
-    remote_subnet?: string;
+    remote_subnet: string;
     /**
      * The Kawaii IPsec connection pre-shared key(PSK).
      */
-    pre_shared_key?: string;
+    pre_shared_key: string;
     /**
      * The Kawaii IPsec connection firewall settings on the ipsec interface.
      */

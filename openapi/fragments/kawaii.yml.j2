@@ -54,8 +54,7 @@ components:
 {{ oas.StringProperty('zone', 'The ' + resources.kawaii.desc + ' zone name (read-only)') }}
 {{ oas.StringProperty('private', 'The ' + resources.kawaii.desc + ' zone gateway private IP address in VPC peered subnet  (read-only)') }}
 
-{{ oas.Schema(resources.kawaii_ipsec) }}
-{{ oas.StringProperty('name', 'The ' + resources.kawaii_ipsec.desc + ' name') }}
+{{ oas.SchemaBaseResource(resources.kawaii_ipsec) }}
 {{ oas.StringProperty('remote_ip', 'The ' + resources.kawaii_ipsec.desc + ' remote peer VPN Gateway') }}
 {{ oas.StringProperty('remote_subnet', 'The ' + resources.kawaii_ipsec.desc + ' remote subnet' )}}
 {{ oas.StringProperty('pre_shared_key', 'The ' + resources.kawaii_ipsec.desc + ' pre-shared key(PSK)' )}}
@@ -70,3 +69,9 @@ paths:
 
   /kawaii/{{ '{' + resources.kawaii.paramId + '}' }}:
 {{ oas.RUD(resources.kawaii, [resources.kawaii.tag], [resources.kawaii.paramSchema]) }}
+
+  /kawaii/{{ '{' + resources.kawaii.paramId + '}' }}/ipsec:
+{{ oas.LC(resources.kawaii_ipsec, [resources.kawaii_ipsec.tag], [resources.kawaii_ipsec.paramSchema])}}
+
+  /kawaii/{{ '{' + resources.kawaii.paramId + '}' }}/ipsec/{{ '{' + resources.kawaii_ipsec.paramId + '}' }}:
+{{ oas.RUD(resources.kawaii_ipsec, [resources.kawaii_ipsec.tag], [resources.kawaii_ipsec.paramSchema])}}

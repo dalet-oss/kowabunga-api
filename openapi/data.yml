@@ -83,8 +83,11 @@ resources:
     desc: Kawaii public firewall destination NAT rule
     schema: KawaiiDNatRule
   kawaii_ipsec:
+    tag: kawaii_ipsec
     desc: Kawaii IPsec connection
     schema: KawaiiIpSec
+    paramId: KawaiiIpSecId
+    paramSchema: KawaiiIpSec
   kawaii_vpc_peering:
     desc: Kawaii internal VPC subnet peering
     schema: KawaiiVpcPeering
