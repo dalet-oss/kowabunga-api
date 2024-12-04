@@ -5128,7 +5128,20 @@ components:
       example:
         ipsec_connections:
         - pre_shared_key: pre_shared_key
+          phase1_dh_group_number: 0
+          phase1_encryption_algorithm: AES128
+          phase2_encryption_algorithm: AES128
+          ip: ip
+          phase1_integrity_algorithm: SHA1
+          phase1_lifetime: 1h
+          description: description
+          dpd_timeout: 240s
+          dpd_timeout_action: restart
+          start_action: start
+          rekey_time: 2h
           remote_ip: remote_ip
+          phase2_lifetime: 1h
+          phase2_dh_group_number: 6
           firewall:
             ingress:
             - protocol: tcp
@@ -5146,11 +5159,24 @@ components:
               destination: 0.0.0.0/0
               ports: ports
           name: name
-          description: description
+          phase2_integrity_algorithm: SHA1
           remote_subnet: remote_subnet
           id: id
         - pre_shared_key: pre_shared_key
+          phase1_dh_group_number: 0
+          phase1_encryption_algorithm: AES128
+          phase2_encryption_algorithm: AES128
+          ip: ip
+          phase1_integrity_algorithm: SHA1
+          phase1_lifetime: 1h
+          description: description
+          dpd_timeout: 240s
+          dpd_timeout_action: restart
+          start_action: start
+          rekey_time: 2h
           remote_ip: remote_ip
+          phase2_lifetime: 1h
+          phase2_dh_group_number: 6
           firewall:
             ingress:
             - protocol: tcp
@@ -5168,7 +5194,7 @@ components:
               destination: 0.0.0.0/0
               ports: ports
           name: name
-          description: description
+          phase2_integrity_algorithm: SHA1
           remote_subnet: remote_subnet
           id: id
         dnat:
@@ -5538,7 +5564,20 @@ components:
       description: A Kawaii IPsec connection.
       example:
         pre_shared_key: pre_shared_key
+        phase1_dh_group_number: 0
+        phase1_encryption_algorithm: AES128
+        phase2_encryption_algorithm: AES128
+        ip: ip
+        phase1_integrity_algorithm: SHA1
+        phase1_lifetime: 1h
+        description: description
+        dpd_timeout: 240s
+        dpd_timeout_action: restart
+        start_action: start
+        rekey_time: 2h
         remote_ip: remote_ip
+        phase2_lifetime: 1h
+        phase2_dh_group_number: 6
         firewall:
           ingress:
           - protocol: tcp
@@ -5556,7 +5595,7 @@ components:
             destination: 0.0.0.0/0
             ports: ports
         name: name
-        description: description
+        phase2_integrity_algorithm: SHA1
         remote_subnet: remote_subnet
         id: id
       properties:
@@ -5569,6 +5608,9 @@ components:
         description:
           description: The Kawaii IPsec connection description.
           type: string
+        ip:
+          description: The Kawaii IPsec connection IPSec IP.
+          type: string
         remote_ip:
           description: The Kawaii IPsec connection remote peer VPN Gateway.
           type: string
@@ -5577,6 +5619,107 @@ components:
           type: string
         pre_shared_key:
           description: The Kawaii IPsec connection pre-shared key(PSK).
+          type: string
+        dpd_timeout_action:
+          default: restart
+          description: "The Kawaii IPsec connection Dead Peer Detection Action (clear,restart\
+            \ or trap)."
+          enum:
+          - "clear,restart, start"
+          type: string
+        dpd_timeout:
+          default: 240s
+          description: The Kawaii IPsec connection Dead Peer Detection Timeout.
+          type: string
+        start_action:
+          default: start
+          description: "The Kawaii IPsec connection start action (none, start, trap)."
+          enum:
+          - none
+          - start
+          - trap
+          type: string
+        rekey_time:
+          default: 2h
+          description: The Kawaii IPsec connection rekey time. Default is 2h.
+          type: string
+        phase1_lifetime:
+          default: 1h
+          description: The Kawaii IPsec connection Lifetime for phase 1 negociation.
+            Default is 1h.
+          type: string
+        phase1_dh_group_number:
+          description: The Kawaii IPsec connection phase 1 Diffie Hellman IANA algorithm.
+          enum:
+          - 2
+          - 5
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
+          format: int64
+          type: integer
+        phase1_integrity_algorithm:
+          description: The Kawaii IPsec connection phase 1 integrity algorithm..
+          enum:
+          - SHA1
+          - SHA256
+          - SHA384
+          - SHA512
+          type: string
+        phase1_encryption_algorithm:
+          description: The Kawaii IPsec connection phase 1 encryption algorithm..
+          enum:
+          - AES128
+          - AES256
+          - CAMELLIA128
+          - CAMELLIA256
+          type: string
+        phase2_lifetime:
+          default: 1h
+          description: The Kawaii IPsec connection Lifetime for phase 2 negociation.
+            Default is 1h.
+          type: string
+        phase2_dh_group_number:
+          description: The Kawaii IPsec connection phase 2 Diffie Hellman IANA algorithm.
+          enum:
+          - 2
+          - 5
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
+          format: int64
+          type: integer
+        phase2_integrity_algorithm:
+          description: The Kawaii IPsec connection phase 2 integrity algorithm..
+          enum:
+          - SHA1
+          - SHA256
+          - SHA384
+          - SHA512
+          type: string
+        phase2_encryption_algorithm:
+          description: The Kawaii IPsec connection phase 2 encryption algorithm..
+          enum:
+          - AES128
+          - AES256
+          - CAMELLIA128
+          - CAMELLIA256
           type: string
         firewall:
           $ref: '#/components/schemas/KawaiiFirewall'

@@ -3,9 +3,22 @@
 components:
   schemas:
 {{ oas.SchemaBaseResource(resources.kawaii_ipsec, ['name', 'remote_ip', 'remote_subnet', 'pre_shared_key']) }}
+{{ oas.StringProperty('ip', 'The ' + resources.kawaii_ipsec.desc + ' IPSec IP') }}
 {{ oas.StringProperty('remote_ip', 'The ' + resources.kawaii_ipsec.desc + ' remote peer VPN Gateway') }}
 {{ oas.StringProperty('remote_subnet', 'The ' + resources.kawaii_ipsec.desc + ' remote subnet' )}}
 {{ oas.StringProperty('pre_shared_key', 'The ' + resources.kawaii_ipsec.desc + ' pre-shared key(PSK)' )}}
+{{ oas.StringProperty('dpd_timeout_action', 'The ' + resources.kawaii_ipsec.desc + ' Dead Peer Detection Action (clear,restart or trap)', ['clear,restart, start'], 'restart' )}}
+{{ oas.StringProperty('dpd_timeout', 'The ' + resources.kawaii_ipsec.desc + ' Dead Peer Detection Timeout', [], '240s')}}
+{{ oas.StringProperty('start_action', 'The ' + resources.kawaii_ipsec.desc + ' start action (none, start, trap)', ['none', 'start', 'trap'], 'start' )}}
+{{ oas.StringProperty('rekey_time', 'The ' + resources.kawaii_ipsec.desc + ' rekey time. Default is 2h', [], '2h' )}}
+{{ oas.StringProperty('phase1_lifetime', 'The ' + resources.kawaii_ipsec.desc + ' Lifetime for phase 1 negociation. Default is 1h', [], '1h' )}}
+{{ oas.IntProperty('phase1_dh_group_number', 'The ' + resources.kawaii_ipsec.desc + ' phase 1 Diffie Hellman IANA algorithm', [2, 5, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24] )}}
+{{ oas.StringProperty('phase1_integrity_algorithm', 'The ' + resources.kawaii_ipsec.desc + ' phase 1 integrity algorithm.', ['SHA1', 'SHA256', 'SHA384', 'SHA512'] )}}
+{{ oas.StringProperty('phase1_encryption_algorithm', 'The ' + resources.kawaii_ipsec.desc + ' phase 1 encryption algorithm.', ['AES128', 'AES256', 'CAMELLIA128', 'CAMELLIA256'] )}}
+{{ oas.StringProperty('phase2_lifetime', 'The ' + resources.kawaii_ipsec.desc + ' Lifetime for phase 2 negociation. Default is 1h', [], '1h' )}}
+{{ oas.IntProperty('phase2_dh_group_number', 'The ' + resources.kawaii_ipsec.desc + ' phase 2 Diffie Hellman IANA algorithm', [2, 5, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24] )}}
+{{ oas.StringProperty('phase2_integrity_algorithm', 'The ' + resources.kawaii_ipsec.desc + ' phase 2 integrity algorithm.', ['SHA1', 'SHA256', 'SHA384', 'SHA512'] )}}
+{{ oas.StringProperty('phase2_encryption_algorithm', 'The ' + resources.kawaii_ipsec.desc + ' phase 2 encryption algorithm.', ['AES128', 'AES256', 'CAMELLIA128', 'CAMELLIA256'] )}}
 {{ oas.ObjectProperty('firewall', 'The ' + resources.kawaii_ipsec.desc + ' firewall settings on the ipsec interface', resources.kawaii_firewall.schema) }}
 
 

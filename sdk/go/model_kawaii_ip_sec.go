@@ -28,12 +28,38 @@ type KawaiiIpSec struct {
 	Name string `json:"name"`
 	// The Kawaii IPsec connection description.
 	Description *string `json:"description,omitempty"`
+	// The Kawaii IPsec connection IPSec IP.
+	Ip *string `json:"ip,omitempty"`
 	// The Kawaii IPsec connection remote peer VPN Gateway.
 	RemoteIp string `json:"remote_ip"`
 	// The Kawaii IPsec connection remote subnet.
 	RemoteSubnet string `json:"remote_subnet"`
 	// The Kawaii IPsec connection pre-shared key(PSK).
 	PreSharedKey string `json:"pre_shared_key"`
+	// The Kawaii IPsec connection Dead Peer Detection Action (clear,restart or trap).
+	DpdTimeoutAction *string `json:"dpd_timeout_action,omitempty"`
+	// The Kawaii IPsec connection Dead Peer Detection Timeout.
+	DpdTimeout *string `json:"dpd_timeout,omitempty"`
+	// The Kawaii IPsec connection start action (none, start, trap).
+	StartAction *string `json:"start_action,omitempty"`
+	// The Kawaii IPsec connection rekey time. Default is 2h.
+	RekeyTime *string `json:"rekey_time,omitempty"`
+	// The Kawaii IPsec connection Lifetime for phase 1 negociation. Default is 1h.
+	Phase1Lifetime *string `json:"phase1_lifetime,omitempty"`
+	// The Kawaii IPsec connection phase 1 Diffie Hellman IANA algorithm.
+	Phase1DhGroupNumber *int64 `json:"phase1_dh_group_number,omitempty"`
+	// The Kawaii IPsec connection phase 1 integrity algorithm..
+	Phase1IntegrityAlgorithm *string `json:"phase1_integrity_algorithm,omitempty"`
+	// The Kawaii IPsec connection phase 1 encryption algorithm..
+	Phase1EncryptionAlgorithm *string `json:"phase1_encryption_algorithm,omitempty"`
+	// The Kawaii IPsec connection Lifetime for phase 2 negociation. Default is 1h.
+	Phase2Lifetime *string `json:"phase2_lifetime,omitempty"`
+	// The Kawaii IPsec connection phase 2 Diffie Hellman IANA algorithm.
+	Phase2DhGroupNumber *int64 `json:"phase2_dh_group_number,omitempty"`
+	// The Kawaii IPsec connection phase 2 integrity algorithm..
+	Phase2IntegrityAlgorithm *string `json:"phase2_integrity_algorithm,omitempty"`
+	// The Kawaii IPsec connection phase 2 encryption algorithm..
+	Phase2EncryptionAlgorithm *string `json:"phase2_encryption_algorithm,omitempty"`
 	// The Kawaii IPsec connection firewall settings on the ipsec interface.
 	Firewall KawaiiFirewall `json:"firewall,omitempty"`
 }
@@ -50,6 +76,18 @@ func NewKawaiiIpSec(name string, remoteIp string, remoteSubnet string, preShared
 	this.RemoteIp = remoteIp
 	this.RemoteSubnet = remoteSubnet
 	this.PreSharedKey = preSharedKey
+	var dpdTimeoutAction string = "restart"
+	this.DpdTimeoutAction = &dpdTimeoutAction
+	var dpdTimeout string = "240s"
+	this.DpdTimeout = &dpdTimeout
+	var startAction string = "start"
+	this.StartAction = &startAction
+	var rekeyTime string = "2h"
+	this.RekeyTime = &rekeyTime
+	var phase1Lifetime string = "1h"
+	this.Phase1Lifetime = &phase1Lifetime
+	var phase2Lifetime string = "1h"
+	this.Phase2Lifetime = &phase2Lifetime
 	return &this
 }
 
@@ -58,6 +96,18 @@ func NewKawaiiIpSec(name string, remoteIp string, remoteSubnet string, preShared
 // but it doesn't guarantee that properties required by API are set
 func NewKawaiiIpSecWithDefaults() *KawaiiIpSec {
 	this := KawaiiIpSec{}
+	var dpdTimeoutAction string = "restart"
+	this.DpdTimeoutAction = &dpdTimeoutAction
+	var dpdTimeout string = "240s"
+	this.DpdTimeout = &dpdTimeout
+	var startAction string = "start"
+	this.StartAction = &startAction
+	var rekeyTime string = "2h"
+	this.RekeyTime = &rekeyTime
+	var phase1Lifetime string = "1h"
+	this.Phase1Lifetime = &phase1Lifetime
+	var phase2Lifetime string = "1h"
+	this.Phase2Lifetime = &phase2Lifetime
 	return &this
 }
 
@@ -149,6 +199,38 @@ func (o *KawaiiIpSec) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetIp returns the Ip field value if set, zero value otherwise.
+func (o *KawaiiIpSec) GetIp() string {
+	if o == nil || IsNil(o.Ip) {
+		var ret string
+		return ret
+	}
+	return *o.Ip
+}
+
+// GetIpOk returns a tuple with the Ip field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KawaiiIpSec) GetIpOk() (*string, bool) {
+	if o == nil || IsNil(o.Ip) {
+		return nil, false
+	}
+	return o.Ip, true
+}
+
+// HasIp returns a boolean if a field has been set.
+func (o *KawaiiIpSec) HasIp() bool {
+	if o != nil && !IsNil(o.Ip) {
+		return true
+	}
+
+	return false
+}
+
+// SetIp gets a reference to the given string and assigns it to the Ip field.
+func (o *KawaiiIpSec) SetIp(v string) {
+	o.Ip = &v
+}
+
 // GetRemoteIp returns the RemoteIp field value
 func (o *KawaiiIpSec) GetRemoteIp() string {
 	if o == nil {
@@ -221,6 +303,390 @@ func (o *KawaiiIpSec) SetPreSharedKey(v string) {
 	o.PreSharedKey = v
 }
 
+// GetDpdTimeoutAction returns the DpdTimeoutAction field value if set, zero value otherwise.
+func (o *KawaiiIpSec) GetDpdTimeoutAction() string {
+	if o == nil || IsNil(o.DpdTimeoutAction) {
+		var ret string
+		return ret
+	}
+	return *o.DpdTimeoutAction
+}
+
+// GetDpdTimeoutActionOk returns a tuple with the DpdTimeoutAction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KawaiiIpSec) GetDpdTimeoutActionOk() (*string, bool) {
+	if o == nil || IsNil(o.DpdTimeoutAction) {
+		return nil, false
+	}
+	return o.DpdTimeoutAction, true
+}
+
+// HasDpdTimeoutAction returns a boolean if a field has been set.
+func (o *KawaiiIpSec) HasDpdTimeoutAction() bool {
+	if o != nil && !IsNil(o.DpdTimeoutAction) {
+		return true
+	}
+
+	return false
+}
+
+// SetDpdTimeoutAction gets a reference to the given string and assigns it to the DpdTimeoutAction field.
+func (o *KawaiiIpSec) SetDpdTimeoutAction(v string) {
+	o.DpdTimeoutAction = &v
+}
+
+// GetDpdTimeout returns the DpdTimeout field value if set, zero value otherwise.
+func (o *KawaiiIpSec) GetDpdTimeout() string {
+	if o == nil || IsNil(o.DpdTimeout) {
+		var ret string
+		return ret
+	}
+	return *o.DpdTimeout
+}
+
+// GetDpdTimeoutOk returns a tuple with the DpdTimeout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KawaiiIpSec) GetDpdTimeoutOk() (*string, bool) {
+	if o == nil || IsNil(o.DpdTimeout) {
+		return nil, false
+	}
+	return o.DpdTimeout, true
+}
+
+// HasDpdTimeout returns a boolean if a field has been set.
+func (o *KawaiiIpSec) HasDpdTimeout() bool {
+	if o != nil && !IsNil(o.DpdTimeout) {
+		return true
+	}
+
+	return false
+}
+
+// SetDpdTimeout gets a reference to the given string and assigns it to the DpdTimeout field.
+func (o *KawaiiIpSec) SetDpdTimeout(v string) {
+	o.DpdTimeout = &v
+}
+
+// GetStartAction returns the StartAction field value if set, zero value otherwise.
+func (o *KawaiiIpSec) GetStartAction() string {
+	if o == nil || IsNil(o.StartAction) {
+		var ret string
+		return ret
+	}
+	return *o.StartAction
+}
+
+// GetStartActionOk returns a tuple with the StartAction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KawaiiIpSec) GetStartActionOk() (*string, bool) {
+	if o == nil || IsNil(o.StartAction) {
+		return nil, false
+	}
+	return o.StartAction, true
+}
+
+// HasStartAction returns a boolean if a field has been set.
+func (o *KawaiiIpSec) HasStartAction() bool {
+	if o != nil && !IsNil(o.StartAction) {
+		return true
+	}
+
+	return false
+}
+
+// SetStartAction gets a reference to the given string and assigns it to the StartAction field.
+func (o *KawaiiIpSec) SetStartAction(v string) {
+	o.StartAction = &v
+}
+
+// GetRekeyTime returns the RekeyTime field value if set, zero value otherwise.
+func (o *KawaiiIpSec) GetRekeyTime() string {
+	if o == nil || IsNil(o.RekeyTime) {
+		var ret string
+		return ret
+	}
+	return *o.RekeyTime
+}
+
+// GetRekeyTimeOk returns a tuple with the RekeyTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KawaiiIpSec) GetRekeyTimeOk() (*string, bool) {
+	if o == nil || IsNil(o.RekeyTime) {
+		return nil, false
+	}
+	return o.RekeyTime, true
+}
+
+// HasRekeyTime returns a boolean if a field has been set.
+func (o *KawaiiIpSec) HasRekeyTime() bool {
+	if o != nil && !IsNil(o.RekeyTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetRekeyTime gets a reference to the given string and assigns it to the RekeyTime field.
+func (o *KawaiiIpSec) SetRekeyTime(v string) {
+	o.RekeyTime = &v
+}
+
+// GetPhase1Lifetime returns the Phase1Lifetime field value if set, zero value otherwise.
+func (o *KawaiiIpSec) GetPhase1Lifetime() string {
+	if o == nil || IsNil(o.Phase1Lifetime) {
+		var ret string
+		return ret
+	}
+	return *o.Phase1Lifetime
+}
+
+// GetPhase1LifetimeOk returns a tuple with the Phase1Lifetime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KawaiiIpSec) GetPhase1LifetimeOk() (*string, bool) {
+	if o == nil || IsNil(o.Phase1Lifetime) {
+		return nil, false
+	}
+	return o.Phase1Lifetime, true
+}
+
+// HasPhase1Lifetime returns a boolean if a field has been set.
+func (o *KawaiiIpSec) HasPhase1Lifetime() bool {
+	if o != nil && !IsNil(o.Phase1Lifetime) {
+		return true
+	}
+
+	return false
+}
+
+// SetPhase1Lifetime gets a reference to the given string and assigns it to the Phase1Lifetime field.
+func (o *KawaiiIpSec) SetPhase1Lifetime(v string) {
+	o.Phase1Lifetime = &v
+}
+
+// GetPhase1DhGroupNumber returns the Phase1DhGroupNumber field value if set, zero value otherwise.
+func (o *KawaiiIpSec) GetPhase1DhGroupNumber() int64 {
+	if o == nil || IsNil(o.Phase1DhGroupNumber) {
+		var ret int64
+		return ret
+	}
+	return *o.Phase1DhGroupNumber
+}
+
+// GetPhase1DhGroupNumberOk returns a tuple with the Phase1DhGroupNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KawaiiIpSec) GetPhase1DhGroupNumberOk() (*int64, bool) {
+	if o == nil || IsNil(o.Phase1DhGroupNumber) {
+		return nil, false
+	}
+	return o.Phase1DhGroupNumber, true
+}
+
+// HasPhase1DhGroupNumber returns a boolean if a field has been set.
+func (o *KawaiiIpSec) HasPhase1DhGroupNumber() bool {
+	if o != nil && !IsNil(o.Phase1DhGroupNumber) {
+		return true
+	}
+
+	return false
+}
+
+// SetPhase1DhGroupNumber gets a reference to the given int64 and assigns it to the Phase1DhGroupNumber field.
+func (o *KawaiiIpSec) SetPhase1DhGroupNumber(v int64) {
+	o.Phase1DhGroupNumber = &v
+}
+
+// GetPhase1IntegrityAlgorithm returns the Phase1IntegrityAlgorithm field value if set, zero value otherwise.
+func (o *KawaiiIpSec) GetPhase1IntegrityAlgorithm() string {
+	if o == nil || IsNil(o.Phase1IntegrityAlgorithm) {
+		var ret string
+		return ret
+	}
+	return *o.Phase1IntegrityAlgorithm
+}
+
+// GetPhase1IntegrityAlgorithmOk returns a tuple with the Phase1IntegrityAlgorithm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KawaiiIpSec) GetPhase1IntegrityAlgorithmOk() (*string, bool) {
+	if o == nil || IsNil(o.Phase1IntegrityAlgorithm) {
+		return nil, false
+	}
+	return o.Phase1IntegrityAlgorithm, true
+}
+
+// HasPhase1IntegrityAlgorithm returns a boolean if a field has been set.
+func (o *KawaiiIpSec) HasPhase1IntegrityAlgorithm() bool {
+	if o != nil && !IsNil(o.Phase1IntegrityAlgorithm) {
+		return true
+	}
+
+	return false
+}
+
+// SetPhase1IntegrityAlgorithm gets a reference to the given string and assigns it to the Phase1IntegrityAlgorithm field.
+func (o *KawaiiIpSec) SetPhase1IntegrityAlgorithm(v string) {
+	o.Phase1IntegrityAlgorithm = &v
+}
+
+// GetPhase1EncryptionAlgorithm returns the Phase1EncryptionAlgorithm field value if set, zero value otherwise.
+func (o *KawaiiIpSec) GetPhase1EncryptionAlgorithm() string {
+	if o == nil || IsNil(o.Phase1EncryptionAlgorithm) {
+		var ret string
+		return ret
+	}
+	return *o.Phase1EncryptionAlgorithm
+}
+
+// GetPhase1EncryptionAlgorithmOk returns a tuple with the Phase1EncryptionAlgorithm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KawaiiIpSec) GetPhase1EncryptionAlgorithmOk() (*string, bool) {
+	if o == nil || IsNil(o.Phase1EncryptionAlgorithm) {
+		return nil, false
+	}
+	return o.Phase1EncryptionAlgorithm, true
+}
+
+// HasPhase1EncryptionAlgorithm returns a boolean if a field has been set.
+func (o *KawaiiIpSec) HasPhase1EncryptionAlgorithm() bool {
+	if o != nil && !IsNil(o.Phase1EncryptionAlgorithm) {
+		return true
+	}
+
+	return false
+}
+
+// SetPhase1EncryptionAlgorithm gets a reference to the given string and assigns it to the Phase1EncryptionAlgorithm field.
+func (o *KawaiiIpSec) SetPhase1EncryptionAlgorithm(v string) {
+	o.Phase1EncryptionAlgorithm = &v
+}
+
+// GetPhase2Lifetime returns the Phase2Lifetime field value if set, zero value otherwise.
+func (o *KawaiiIpSec) GetPhase2Lifetime() string {
+	if o == nil || IsNil(o.Phase2Lifetime) {
+		var ret string
+		return ret
+	}
+	return *o.Phase2Lifetime
+}
+
+// GetPhase2LifetimeOk returns a tuple with the Phase2Lifetime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KawaiiIpSec) GetPhase2LifetimeOk() (*string, bool) {
+	if o == nil || IsNil(o.Phase2Lifetime) {
+		return nil, false
+	}
+	return o.Phase2Lifetime, true
+}
+
+// HasPhase2Lifetime returns a boolean if a field has been set.
+func (o *KawaiiIpSec) HasPhase2Lifetime() bool {
+	if o != nil && !IsNil(o.Phase2Lifetime) {
+		return true
+	}
+
+	return false
+}
+
+// SetPhase2Lifetime gets a reference to the given string and assigns it to the Phase2Lifetime field.
+func (o *KawaiiIpSec) SetPhase2Lifetime(v string) {
+	o.Phase2Lifetime = &v
+}
+
+// GetPhase2DhGroupNumber returns the Phase2DhGroupNumber field value if set, zero value otherwise.
+func (o *KawaiiIpSec) GetPhase2DhGroupNumber() int64 {
+	if o == nil || IsNil(o.Phase2DhGroupNumber) {
+		var ret int64
+		return ret
+	}
+	return *o.Phase2DhGroupNumber
+}
+
+// GetPhase2DhGroupNumberOk returns a tuple with the Phase2DhGroupNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KawaiiIpSec) GetPhase2DhGroupNumberOk() (*int64, bool) {
+	if o == nil || IsNil(o.Phase2DhGroupNumber) {
+		return nil, false
+	}
+	return o.Phase2DhGroupNumber, true
+}
+
+// HasPhase2DhGroupNumber returns a boolean if a field has been set.
+func (o *KawaiiIpSec) HasPhase2DhGroupNumber() bool {
+	if o != nil && !IsNil(o.Phase2DhGroupNumber) {
+		return true
+	}
+
+	return false
+}
+
+// SetPhase2DhGroupNumber gets a reference to the given int64 and assigns it to the Phase2DhGroupNumber field.
+func (o *KawaiiIpSec) SetPhase2DhGroupNumber(v int64) {
+	o.Phase2DhGroupNumber = &v
+}
+
+// GetPhase2IntegrityAlgorithm returns the Phase2IntegrityAlgorithm field value if set, zero value otherwise.
+func (o *KawaiiIpSec) GetPhase2IntegrityAlgorithm() string {
+	if o == nil || IsNil(o.Phase2IntegrityAlgorithm) {
+		var ret string
+		return ret
+	}
+	return *o.Phase2IntegrityAlgorithm
+}
+
+// GetPhase2IntegrityAlgorithmOk returns a tuple with the Phase2IntegrityAlgorithm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KawaiiIpSec) GetPhase2IntegrityAlgorithmOk() (*string, bool) {
+	if o == nil || IsNil(o.Phase2IntegrityAlgorithm) {
+		return nil, false
+	}
+	return o.Phase2IntegrityAlgorithm, true
+}
+
+// HasPhase2IntegrityAlgorithm returns a boolean if a field has been set.
+func (o *KawaiiIpSec) HasPhase2IntegrityAlgorithm() bool {
+	if o != nil && !IsNil(o.Phase2IntegrityAlgorithm) {
+		return true
+	}
+
+	return false
+}
+
+// SetPhase2IntegrityAlgorithm gets a reference to the given string and assigns it to the Phase2IntegrityAlgorithm field.
+func (o *KawaiiIpSec) SetPhase2IntegrityAlgorithm(v string) {
+	o.Phase2IntegrityAlgorithm = &v
+}
+
+// GetPhase2EncryptionAlgorithm returns the Phase2EncryptionAlgorithm field value if set, zero value otherwise.
+func (o *KawaiiIpSec) GetPhase2EncryptionAlgorithm() string {
+	if o == nil || IsNil(o.Phase2EncryptionAlgorithm) {
+		var ret string
+		return ret
+	}
+	return *o.Phase2EncryptionAlgorithm
+}
+
+// GetPhase2EncryptionAlgorithmOk returns a tuple with the Phase2EncryptionAlgorithm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KawaiiIpSec) GetPhase2EncryptionAlgorithmOk() (*string, bool) {
+	if o == nil || IsNil(o.Phase2EncryptionAlgorithm) {
+		return nil, false
+	}
+	return o.Phase2EncryptionAlgorithm, true
+}
+
+// HasPhase2EncryptionAlgorithm returns a boolean if a field has been set.
+func (o *KawaiiIpSec) HasPhase2EncryptionAlgorithm() bool {
+	if o != nil && !IsNil(o.Phase2EncryptionAlgorithm) {
+		return true
+	}
+
+	return false
+}
+
+// SetPhase2EncryptionAlgorithm gets a reference to the given string and assigns it to the Phase2EncryptionAlgorithm field.
+func (o *KawaiiIpSec) SetPhase2EncryptionAlgorithm(v string) {
+	o.Phase2EncryptionAlgorithm = &v
+}
+
 // GetFirewall returns the Firewall field value if set, zero value otherwise.
 func (o *KawaiiIpSec) GetFirewall() KawaiiFirewall {
 	if o == nil || IsNil(o.Firewall) {
@@ -270,9 +736,48 @@ func (o KawaiiIpSec) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
+	if !IsNil(o.Ip) {
+		toSerialize["ip"] = o.Ip
+	}
 	toSerialize["remote_ip"] = o.RemoteIp
 	toSerialize["remote_subnet"] = o.RemoteSubnet
 	toSerialize["pre_shared_key"] = o.PreSharedKey
+	if !IsNil(o.DpdTimeoutAction) {
+		toSerialize["dpd_timeout_action"] = o.DpdTimeoutAction
+	}
+	if !IsNil(o.DpdTimeout) {
+		toSerialize["dpd_timeout"] = o.DpdTimeout
+	}
+	if !IsNil(o.StartAction) {
+		toSerialize["start_action"] = o.StartAction
+	}
+	if !IsNil(o.RekeyTime) {
+		toSerialize["rekey_time"] = o.RekeyTime
+	}
+	if !IsNil(o.Phase1Lifetime) {
+		toSerialize["phase1_lifetime"] = o.Phase1Lifetime
+	}
+	if !IsNil(o.Phase1DhGroupNumber) {
+		toSerialize["phase1_dh_group_number"] = o.Phase1DhGroupNumber
+	}
+	if !IsNil(o.Phase1IntegrityAlgorithm) {
+		toSerialize["phase1_integrity_algorithm"] = o.Phase1IntegrityAlgorithm
+	}
+	if !IsNil(o.Phase1EncryptionAlgorithm) {
+		toSerialize["phase1_encryption_algorithm"] = o.Phase1EncryptionAlgorithm
+	}
+	if !IsNil(o.Phase2Lifetime) {
+		toSerialize["phase2_lifetime"] = o.Phase2Lifetime
+	}
+	if !IsNil(o.Phase2DhGroupNumber) {
+		toSerialize["phase2_dh_group_number"] = o.Phase2DhGroupNumber
+	}
+	if !IsNil(o.Phase2IntegrityAlgorithm) {
+		toSerialize["phase2_integrity_algorithm"] = o.Phase2IntegrityAlgorithm
+	}
+	if !IsNil(o.Phase2EncryptionAlgorithm) {
+		toSerialize["phase2_encryption_algorithm"] = o.Phase2EncryptionAlgorithm
+	}
 	if !IsNil(o.Firewall) {
 		toSerialize["firewall"] = o.Firewall
 	}
