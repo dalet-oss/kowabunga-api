@@ -7,6 +7,7 @@ components:
 {{ oas.ObjectProperty('firewall', 'The ' + resources.kawaii.desc + ' firewall settings from/to public Internet)', resources.kawaii_firewall.schema) }}
 {{ oas.ObjectArrayProperty('dnat', 'The ' + resources.kawaii.desc + ' list of NAT forwarding entries. Kawaii will forward public Internet traffic from all public virtual IPs to requested private subnet IP addresses', resources.kawaii_dnat_rule.schema) }}
 {{ oas.ObjectArrayProperty('vpc_peerings', 'The ' + resources.kawaii.desc + ' list of Kowabunga private VPC subnet peering entries', resources.kawaii_vpc_peering.schema) }}
+{{ oas.ObjectArrayProperty('ipsec_connections', 'The ' + resources.kawaii.desc + ' list of Kowabunga IPsec connections', resources.kawaii_ipsec.schema) }}
 
 {{ oas.Schema(resources.kawaii_netip, ['public', 'private', 'zones']) }}
 {{ oas.StringArrayProperty('public', 'The ' + resources.kawaii.desc + ' global public gateways virtual IP addresses (read-only)') }}
@@ -53,6 +54,7 @@ components:
 {{ oas.StringProperty('zone', 'The ' + resources.kawaii.desc + ' zone name (read-only)') }}
 {{ oas.StringProperty('private', 'The ' + resources.kawaii.desc + ' zone gateway private IP address in VPC peered subnet  (read-only)') }}
 
+
   parameters:
 {{ oas.PathParamID(resources.kawaii) }}
 
@@ -62,3 +64,9 @@ paths:
 
   /kawaii/{{ '{' + resources.kawaii.paramId + '}' }}:
 {{ oas.RUD(resources.kawaii, [resources.kawaii.tag], [resources.kawaii.paramSchema]) }}
+
+  /kawaii/{{ '{' + resources.kawaii.paramId + '}' }}/ipsec:
+{{ oas.LC(resources.kawaii_ipsec, [resources.kawaii.tag, resources.kawaii_ipsec.tag], [resources.kawaii.paramSchema])}}
+
+  /kawaii/{{ '{' + resources.kawaii.paramId + '}' }}/ipsec/{{ '{' + resources.kawaii_ipsec.paramId + '}' }}:
+{{ oas.RUD(resources.kawaii_ipsec, [resources.kawaii.tag, resources.kawaii_ipsec.tag], [resources.kawaii.paramSchema, resources.kawaii_ipsec.paramSchema])}}

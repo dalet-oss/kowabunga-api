@@ -9,7 +9,7 @@ info:
     name: AGPLv3
     url: https://www.gnu.org/licenses/agpl-3.0.en.html
   title: Kowabunga API documentation
-  version: 0.51.1
+  version: 0.52.0
 servers:
 - url: /api/v1
 security:
@@ -30,6 +30,8 @@ tags:
   name: kaktus
 - description: Everything about Kawaii
   name: kawaii
+- description: Everything about Kawaii IPsec connection
+  name: kawaii_ipsec
 - description: Everything about Kiwi (Kowabunga Inner Wan Interface) provides edge-network
     services.
   name: kiwi
@@ -908,6 +910,147 @@ paths:
           $ref: '#/components/responses/InsufficientStorage'
       tags:
       - kawaii
+  /kawaii/{kawaiiId}/ipsec:
+    get:
+      description: Returns the IDs of Kawaii IPsec connection objects.
+      operationId: ListKawaiiIpSecs
+      parameters:
+      - $ref: '#/components/parameters/KawaiiID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIds'
+          description: Returns an array of Kawaii IPsec connection IDs.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+      tags:
+      - kawaii
+      - kawaii_ipsec
+    parameters:
+    - $ref: '#/components/parameters/KawaiiID'
+    post:
+      description: Creates a new Kawaii IPsec connection.
+      operationId: CreateKawaiiIpSec
+      parameters:
+      - $ref: '#/components/parameters/KawaiiID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KawaiiIpSec'
+        description: KawaiiIpSec payload.
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KawaiiIpSec'
+          description: Returns the newly created Kawaii IPsec connection object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - kawaii
+      - kawaii_ipsec
+  /kawaii/{kawaiiId}/ipsec/{KawaiiIpSecId}:
+    delete:
+      description: Deletes an existing Kawaii IPsec connection.
+      operationId: DeleteKawaiiIpSec
+      parameters:
+      - $ref: '#/components/parameters/KawaiiID'
+      - $ref: '#/components/parameters/KawaiiIpSecID'
+      responses:
+        "200":
+          description: The Kawaii IPsec connection has been successfully removed.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+      tags:
+      - kawaii
+      - kawaii_ipsec
+    get:
+      description: Returns a Kawaii IPsec connection.
+      operationId: ReadKawaiiIpSec
+      parameters:
+      - $ref: '#/components/parameters/KawaiiID'
+      - $ref: '#/components/parameters/KawaiiIpSecID'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KawaiiIpSec'
+          description: Returns the Kawaii IPsec connection object.
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - kawaii
+      - kawaii_ipsec
+    parameters:
+    - $ref: '#/components/parameters/KawaiiID'
+    - $ref: '#/components/parameters/KawaiiIpSecID'
+    put:
+      description: Updates a Kawaii IPsec connection configuration.
+      operationId: UpdateKawaiiIpSec
+      parameters:
+      - $ref: '#/components/parameters/KawaiiID'
+      - $ref: '#/components/parameters/KawaiiIpSecID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KawaiiIpSec'
+        description: KawaiiIpSec payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KawaiiIpSec'
+          description: Returns the Kawaii IPsec connection object.
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "422":
+          $ref: '#/components/responses/UnprocessableEntity'
+        "507":
+          $ref: '#/components/responses/InsufficientStorage'
+      tags:
+      - kawaii
+      - kawaii_ipsec
   /kiwi:
     get:
       description: Returns the IDs of Kiwi (Kowabunga Inner Wan Interface) provides
@@ -4271,6 +4414,15 @@ components:
       schema:
         type: string
       style: simple
+    KawaiiIpSecID:
+      description: The ID of the Kawaii IPsec connection.
+      explode: false
+      in: path
+      name: KawaiiIpSecId
+      required: true
+      schema:
+        type: string
+      style: simple
     KiwiID:
       description: The ID of the Kiwi (Kowabunga Inner Wan Interface) provides edge-network
         services..
@@ -4974,6 +5126,77 @@ components:
       description: A Kawaii (Kowabunga Adapative WAn Intelligent Interface) is a network
         gateway used for your Internet inbound and outbound traffic.
       example:
+        ipsec_connections:
+        - pre_shared_key: pre_shared_key
+          phase1_dh_group_number: 0
+          phase1_encryption_algorithm: AES128
+          phase2_encryption_algorithm: AES128
+          ip: ip
+          phase1_integrity_algorithm: SHA1
+          phase1_lifetime: 1h
+          description: description
+          dpd_timeout: 240s
+          dpd_timeout_action: restart
+          start_action: start
+          rekey_time: 2h
+          remote_ip: remote_ip
+          phase2_lifetime: 1h
+          phase2_dh_group_number: 6
+          firewall:
+            ingress:
+            - protocol: tcp
+              source: 0.0.0.0/0
+              ports: ports
+            - protocol: tcp
+              source: 0.0.0.0/0
+              ports: ports
+            egress_policy: accept
+            egress:
+            - protocol: tcp
+              destination: 0.0.0.0/0
+              ports: ports
+            - protocol: tcp
+              destination: 0.0.0.0/0
+              ports: ports
+          name: name
+          phase2_integrity_algorithm: SHA1
+          remote_subnet: remote_subnet
+          id: id
+        - pre_shared_key: pre_shared_key
+          phase1_dh_group_number: 0
+          phase1_encryption_algorithm: AES128
+          phase2_encryption_algorithm: AES128
+          ip: ip
+          phase1_integrity_algorithm: SHA1
+          phase1_lifetime: 1h
+          description: description
+          dpd_timeout: 240s
+          dpd_timeout_action: restart
+          start_action: start
+          rekey_time: 2h
+          remote_ip: remote_ip
+          phase2_lifetime: 1h
+          phase2_dh_group_number: 6
+          firewall:
+            ingress:
+            - protocol: tcp
+              source: 0.0.0.0/0
+              ports: ports
+            - protocol: tcp
+              source: 0.0.0.0/0
+              ports: ports
+            egress_policy: accept
+            egress:
+            - protocol: tcp
+              destination: 0.0.0.0/0
+              ports: ports
+            - protocol: tcp
+              destination: 0.0.0.0/0
+              ports: ports
+          name: name
+          phase2_integrity_algorithm: SHA1
+          remote_subnet: remote_subnet
+          id: id
         dnat:
         - protocol: tcp
           destination: destination
@@ -5074,6 +5297,11 @@ components:
           description: The Kawaii list of Kowabunga private VPC subnet peering entries.
           items:
             $ref: '#/components/schemas/KawaiiVpcPeering'
+          type: array
+        ipsec_connections:
+          description: The Kawaii list of Kowabunga IPsec connections.
+          items:
+            $ref: '#/components/schemas/KawaiiIpSec'
           type: array
     KawaiiNetIp:
       description: A Kawaii Network IP settings.
@@ -5332,6 +5560,182 @@ components:
       required:
       - private
       - zone
+    KawaiiIpSec:
+      description: A Kawaii IPsec connection.
+      example:
+        pre_shared_key: pre_shared_key
+        phase1_dh_group_number: 0
+        phase1_encryption_algorithm: AES128
+        phase2_encryption_algorithm: AES128
+        ip: ip
+        phase1_integrity_algorithm: SHA1
+        phase1_lifetime: 1h
+        description: description
+        dpd_timeout: 240s
+        dpd_timeout_action: restart
+        start_action: start
+        rekey_time: 2h
+        remote_ip: remote_ip
+        phase2_lifetime: 1h
+        phase2_dh_group_number: 6
+        firewall:
+          ingress:
+          - protocol: tcp
+            source: 0.0.0.0/0
+            ports: ports
+          - protocol: tcp
+            source: 0.0.0.0/0
+            ports: ports
+          egress_policy: accept
+          egress:
+          - protocol: tcp
+            destination: 0.0.0.0/0
+            ports: ports
+          - protocol: tcp
+            destination: 0.0.0.0/0
+            ports: ports
+        name: name
+        phase2_integrity_algorithm: SHA1
+        remote_subnet: remote_subnet
+        id: id
+      properties:
+        id:
+          description: The Kawaii IPsec connection ID (auto-generated).
+          type: string
+        name:
+          description: The Kawaii IPsec connection name.
+          type: string
+        description:
+          description: The Kawaii IPsec connection description.
+          type: string
+        ip:
+          description: The Kawaii IPsec connection IPSec IP.
+          type: string
+        remote_ip:
+          description: The Kawaii IPsec connection remote peer VPN Gateway.
+          type: string
+        remote_subnet:
+          description: The Kawaii IPsec connection remote subnet.
+          type: string
+        pre_shared_key:
+          description: The Kawaii IPsec connection pre-shared key(PSK).
+          type: string
+        dpd_timeout_action:
+          default: restart
+          description: "The Kawaii IPsec connection Dead Peer Detection Action (clear,restart\
+            \ or trap)."
+          enum:
+          - clear
+          - restart
+          - start
+          type: string
+        dpd_timeout:
+          default: 240s
+          description: The Kawaii IPsec connection Dead Peer Detection Timeout.
+          type: string
+        start_action:
+          default: start
+          description: "The Kawaii IPsec connection start action (none, start, trap)."
+          enum:
+          - none
+          - start
+          - trap
+          type: string
+        rekey_time:
+          default: 2h
+          description: The Kawaii IPsec connection rekey time. Default is 2h.
+          type: string
+        phase1_lifetime:
+          default: 1h
+          description: The Kawaii IPsec connection Lifetime for phase 1 negociation.
+            Default is 1h.
+          type: string
+        phase1_dh_group_number:
+          description: The Kawaii IPsec connection phase 1 Diffie Hellman IANA algorithm.
+          enum:
+          - 2
+          - 5
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
+          format: int64
+          type: integer
+        phase1_integrity_algorithm:
+          description: The Kawaii IPsec connection phase 1 integrity algorithm..
+          enum:
+          - SHA1
+          - SHA256
+          - SHA384
+          - SHA512
+          type: string
+        phase1_encryption_algorithm:
+          description: The Kawaii IPsec connection phase 1 encryption algorithm..
+          enum:
+          - AES128
+          - AES256
+          - CAMELLIA128
+          - CAMELLIA256
+          type: string
+        phase2_lifetime:
+          default: 1h
+          description: The Kawaii IPsec connection Lifetime for phase 2 negociation.
+            Default is 1h.
+          type: string
+        phase2_dh_group_number:
+          description: The Kawaii IPsec connection phase 2 Diffie Hellman IANA algorithm.
+          enum:
+          - 2
+          - 5
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
+          format: int64
+          type: integer
+        phase2_integrity_algorithm:
+          description: The Kawaii IPsec connection phase 2 integrity algorithm..
+          enum:
+          - SHA1
+          - SHA256
+          - SHA384
+          - SHA512
+          type: string
+        phase2_encryption_algorithm:
+          description: The Kawaii IPsec connection phase 2 encryption algorithm..
+          enum:
+          - AES128
+          - AES256
+          - CAMELLIA128
+          - CAMELLIA256
+          type: string
+        firewall:
+          $ref: '#/components/schemas/KawaiiFirewall'
+      required:
+      - name
+      - phase1_dh_group_number
+      - phase1_encryption_algorithm
+      - phase1_integrity_algorithm
+      - phase2_dh_group_number
+      - phase2_encryption_algorithm
+      - phase2_integrity_algorithm
+      - pre_shared_key
+      - remote_ip
+      - remote_subnet
     Kiwi:
       description: A Kiwi (Kowabunga Inner Wan Interface) provides edge-network services..
       example:
