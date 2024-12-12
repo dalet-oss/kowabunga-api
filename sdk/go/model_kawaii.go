@@ -34,7 +34,7 @@ type Kawaii struct {
 	Dnat []KawaiiDNatRule `json:"dnat,omitempty"`
 	// The Kawaii list of Kowabunga private VPC subnet peering entries.
 	VpcPeerings []KawaiiVpcPeering `json:"vpc_peerings,omitempty"`
-	// The Kawaii list of Kowabunga ipsecs connections.
+	// The Kawaii list of Kowabunga IPsec connections.
 	IpsecConnections []KawaiiIpSec `json:"ipsec_connections,omitempty"`
 }
 

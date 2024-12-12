@@ -398,7 +398,7 @@ components:
             $ref: '#/components/schemas/KawaiiVpcPeering'
         ipsec_connections:
           type: array
-          description: The Kawaii list of Kowabunga ipsecs connections.
+          description: The Kawaii list of Kowabunga IPsec connections.
           items:
             $ref: '#/components/schemas/KawaiiIpSec'
     KawaiiNetIp:
@@ -616,7 +616,9 @@ components:
           type: string
           description: The Kawaii IPsec connection Dead Peer Detection Action (clear,restart or trap).
           enum:
-            - clear,restart, start
+            - clear
+            - restart
+            - start
           default: restart
         dpd_timeout:
           type: string
@@ -712,7 +714,7 @@ components:
             - CAMELLIA256
         firewall:
           type: object
-          description: The Kawaii IPsec connection firewall settings on the ipsec interface.
+          description: The Kawaii IPsec connection firewall settings on the IPsec interface.
           $ref: '#/components/schemas/KawaiiFirewall'
     Kiwi:
       type: object

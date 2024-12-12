@@ -5299,7 +5299,7 @@ components:
             $ref: '#/components/schemas/KawaiiVpcPeering'
           type: array
         ipsec_connections:
-          description: The Kawaii list of Kowabunga ipsecs connections.
+          description: The Kawaii list of Kowabunga IPsec connections.
           items:
             $ref: '#/components/schemas/KawaiiIpSec'
           type: array
@@ -5625,7 +5625,9 @@ components:
           description: "The Kawaii IPsec connection Dead Peer Detection Action (clear,restart\
             \ or trap)."
           enum:
-          - "clear,restart, start"
+          - clear
+          - restart
+          - start
           type: string
         dpd_timeout:
           default: 240s

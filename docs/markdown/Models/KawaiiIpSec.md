@@ -22,7 +22,7 @@
 | **phase2\_dh\_group\_number** | **Long** | The Kawaii IPsec connection phase 2 Diffie Hellman IANA algorithm. | [optional] [default to null] |
 | **phase2\_integrity\_algorithm** | **String** | The Kawaii IPsec connection phase 2 integrity algorithm.. | [optional] [default to null] |
 | **phase2\_encryption\_algorithm** | **String** | The Kawaii IPsec connection phase 2 encryption algorithm.. | [optional] [default to null] |
-| **firewall** | [**KawaiiFirewall**](.md) | The Kawaii IPsec connection firewall settings on the ipsec interface. | [optional] [default to null] |
+| **firewall** | [**KawaiiFirewall**](.md) | The Kawaii IPsec connection firewall settings on the IPsec interface. | [optional] [default to null] |
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

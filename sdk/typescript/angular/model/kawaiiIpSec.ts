@@ -91,14 +91,16 @@ export interface KawaiiIpSec {
      */
     phase2_encryption_algorithm?: KawaiiIpSec.Phase2EncryptionAlgorithmEnum;
     /**
-     * The Kawaii IPsec connection firewall settings on the ipsec interface.
+     * The Kawaii IPsec connection firewall settings on the IPsec interface.
      */
     firewall?: KawaiiFirewall;
 }
 export namespace KawaiiIpSec {
-    export type DpdTimeoutActionEnum = 'clear,restart, start';
+    export type DpdTimeoutActionEnum = 'clear' | 'restart' | 'start';
     export const DpdTimeoutActionEnum = {
-        ClearrestartStart: 'clear,restart, start' as DpdTimeoutActionEnum
+        Clear: 'clear' as DpdTimeoutActionEnum,
+        Restart: 'restart' as DpdTimeoutActionEnum,
+        Start: 'start' as DpdTimeoutActionEnum
     };
     export type StartActionEnum = 'none' | 'start' | 'trap';
     export const StartActionEnum = {

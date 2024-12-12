@@ -47,7 +47,7 @@ export interface Kawaii {
      */
     vpc_peerings?: Array<KawaiiVpcPeering>;
     /**
-     * The Kawaii list of Kowabunga ipsecs connections.
+     * The Kawaii list of Kowabunga IPsec connections.
      */
     ipsec_connections?: Array<KawaiiIpSec>;
 }

@@ -60,7 +60,7 @@ type KawaiiIpSec struct {
 	Phase2IntegrityAlgorithm *string `json:"phase2_integrity_algorithm,omitempty"`
 	// The Kawaii IPsec connection phase 2 encryption algorithm..
 	Phase2EncryptionAlgorithm *string `json:"phase2_encryption_algorithm,omitempty"`
-	// The Kawaii IPsec connection firewall settings on the ipsec interface.
+	// The Kawaii IPsec connection firewall settings on the IPsec interface.
 	Firewall KawaiiFirewall `json:"firewall,omitempty"`
 }
 
