@@ -5727,6 +5727,12 @@ components:
           $ref: '#/components/schemas/KawaiiFirewall'
       required:
       - name
+      - phase1_dh_group_number
+      - phase1_encryption_algorithm
+      - phase1_integrity_algorithm
+      - phase2_dh_group_number
+      - phase2_encryption_algorithm
+      - phase2_integrity_algorithm
       - pre_shared_key
       - remote_ip
       - remote_subnet

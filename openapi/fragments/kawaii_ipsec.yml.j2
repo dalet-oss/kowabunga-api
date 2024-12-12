@@ -2,7 +2,7 @@
 
 components:
   schemas:
-{{ oas.SchemaBaseResource(resources.kawaii_ipsec, ['name', 'remote_ip', 'remote_subnet', 'pre_shared_key']) }}
+{{ oas.SchemaBaseResource(resources.kawaii_ipsec, ['name', 'remote_ip', 'remote_subnet', 'pre_shared_key','phase1_dh_group_number', 'phase1_integrity_algorithm', 'phase1_encryption_algorithm', 'phase2_dh_group_number', 'phase2_integrity_algorithm', 'phase2_encryption_algorithm']) }}
 {{ oas.StringProperty('ip', 'The ' + resources.kawaii_ipsec.desc + ' IPSec IP') }}
 {{ oas.StringProperty('remote_ip', 'The ' + resources.kawaii_ipsec.desc + ' remote peer VPN Gateway') }}
 {{ oas.StringProperty('remote_subnet', 'The ' + resources.kawaii_ipsec.desc + ' remote subnet' )}}

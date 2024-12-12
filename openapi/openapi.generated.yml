@@ -590,6 +590,12 @@ components:
         - remote_ip
         - remote_subnet
         - pre_shared_key
+        - phase1_dh_group_number
+        - phase1_integrity_algorithm
+        - phase1_encryption_algorithm
+        - phase2_dh_group_number
+        - phase2_integrity_algorithm
+        - phase2_encryption_algorithm
       properties:
         id:
           type: string

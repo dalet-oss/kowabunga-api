@@ -65,15 +65,15 @@ export interface KawaiiIpSec {
     /**
      * The Kawaii IPsec connection phase 1 Diffie Hellman IANA algorithm.
      */
-    phase1_dh_group_number?: KawaiiIpSec.Phase1DhGroupNumberEnum;
+    phase1_dh_group_number: KawaiiIpSec.Phase1DhGroupNumberEnum;
     /**
      * The Kawaii IPsec connection phase 1 integrity algorithm..
      */
-    phase1_integrity_algorithm?: KawaiiIpSec.Phase1IntegrityAlgorithmEnum;
+    phase1_integrity_algorithm: KawaiiIpSec.Phase1IntegrityAlgorithmEnum;
     /**
      * The Kawaii IPsec connection phase 1 encryption algorithm..
      */
-    phase1_encryption_algorithm?: KawaiiIpSec.Phase1EncryptionAlgorithmEnum;
+    phase1_encryption_algorithm: KawaiiIpSec.Phase1EncryptionAlgorithmEnum;
     /**
      * The Kawaii IPsec connection Lifetime for phase 2 negociation. Default is 1h.
      */
@@ -81,15 +81,15 @@ export interface KawaiiIpSec {
     /**
      * The Kawaii IPsec connection phase 2 Diffie Hellman IANA algorithm.
      */
-    phase2_dh_group_number?: KawaiiIpSec.Phase2DhGroupNumberEnum;
+    phase2_dh_group_number: KawaiiIpSec.Phase2DhGroupNumberEnum;
     /**
      * The Kawaii IPsec connection phase 2 integrity algorithm..
      */
-    phase2_integrity_algorithm?: KawaiiIpSec.Phase2IntegrityAlgorithmEnum;
+    phase2_integrity_algorithm: KawaiiIpSec.Phase2IntegrityAlgorithmEnum;
     /**
      * The Kawaii IPsec connection phase 2 encryption algorithm..
      */
-    phase2_encryption_algorithm?: KawaiiIpSec.Phase2EncryptionAlgorithmEnum;
+    phase2_encryption_algorithm: KawaiiIpSec.Phase2EncryptionAlgorithmEnum;
     /**
      * The Kawaii IPsec connection firewall settings on the IPsec interface.
      */
