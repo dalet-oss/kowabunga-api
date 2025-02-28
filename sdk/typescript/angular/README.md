@@ -2,7 +2,7 @@
 
 Kvm Orchestrator With A BUNch of Goods Added
 
-The version of the OpenAPI document: 0.52.1
+The version of the OpenAPI document: 0.52.2
 
 ### Building
 
