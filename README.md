@@ -1,5 +1,5 @@
 # kowabunga-api
-Dalet's Kowabunga (Linux KVM Orchestrator) OpenAPI definition and SDKs
+Kowabunga (Linux KVM Orchestrator) OpenAPI definition and SDKs
 
 Kowabunga API is compliant with [OpenAPI v3](https://swagger.io/specification/v3/) specifications.
 

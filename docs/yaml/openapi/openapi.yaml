@@ -1,9 +1,9 @@
 openapi: 3.1.0
 info:
   contact:
-    email: csops@dalet.com
-    name: Dalet CS Ops
-    url: https://www.dalet.com/support/
+    email: maintainers@kowabunga.cloud
+    name: The Kowabunga Project
+    url: https://www.kowabunga.cloud/
   description: Kvm Orchestrator With A BUNch of Goods Added
   license:
     name: AGPLv3
