@@ -3,7 +3,7 @@ Kowabunga API documentation
 
 Kvm Orchestrator With A BUNch of Goods Added
 
-API version: 0.52.3
+API version: 0.52.4
 Contact: maintainers@kowabunga.cloud
 */
 
