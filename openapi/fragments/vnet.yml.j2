@@ -7,10 +7,10 @@
 
 components:
   schemas:
-{{ oas.SchemaBaseResource(resources.vnet, ['name', 'interface', 'private']) }}
+{{ oas.SchemaBaseResource(resources.vnet, ['name', 'interface']) }}
 {{ oas.IntProperty('vlan', 'The VLAN identifier (0 if unspecified)') }}
 {{ oas.StringProperty('interface', "The libvirt's bridge network interface (brX)") }}
-{{ oas.BoolProperty('private', 'Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?') }}
+{{ oas.BoolProperty('private', 'Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?', default='true') }}
 
   parameters:
 {{ oas.PathParamID(resources.vnet) }}

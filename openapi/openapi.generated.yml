@@ -1283,7 +1283,6 @@ components:
       required:
         - name
         - interface
-        - private
       properties:
         id:
           type: string
@@ -1304,6 +1303,7 @@ components:
         private:
           type: boolean
           description: Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?.
+          default: true
     Volume:
       type: object
       description: A storage volume.

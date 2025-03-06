@@ -33,7 +33,7 @@ type VNet struct {
 	// The libvirt's bridge network interface (brX).
 	Interface string `json:"interface"`
 	// Is the virtual network adapter connected to private (LAN) or public (WAN) physical network ?.
-	Private bool `json:"private"`
+	Private *bool `json:"private,omitempty"`
 }
 
 type _VNet VNet
@@ -42,11 +42,12 @@ type _VNet VNet
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVNet(name string, interface_ string, private bool) *VNet {
+func NewVNet(name string, interface_ string) *VNet {
 	this := VNet{}
 	this.Name = name
 	this.Interface = interface_
-	this.Private = private
+	var private bool = true
+	this.Private = &private
 	return &this
 }
 
@@ -55,6 +56,8 @@ func NewVNet(name string, interface_ string, private bool) *VNet {
 // but it doesn't guarantee that properties required by API are set
 func NewVNetWithDefaults() *VNet {
 	this := VNet{}
+	var private bool = true
+	this.Private = &private
 	return &this
 }
 
@@ -202,28 +205,36 @@ func (o *VNet) SetInterface(v string) {
 	o.Interface = v
 }
 
-// GetPrivate returns the Private field value
+// GetPrivate returns the Private field value if set, zero value otherwise.
 func (o *VNet) GetPrivate() bool {
-	if o == nil {
+	if o == nil || IsNil(o.Private) {
 		var ret bool
 		return ret
 	}
-
-	return o.Private
+	return *o.Private
 }
 
-// GetPrivateOk returns a tuple with the Private field value
+// GetPrivateOk returns a tuple with the Private field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VNet) GetPrivateOk() (*bool, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Private) {
 		return nil, false
 	}
-	return &o.Private, true
+	return o.Private, true
 }
 
-// SetPrivate sets field value
+// HasPrivate returns a boolean if a field has been set.
+func (o *VNet) HasPrivate() bool {
+	if o != nil && !IsNil(o.Private) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrivate gets a reference to the given bool and assigns it to the Private field.
 func (o *VNet) SetPrivate(v bool) {
-	o.Private = v
+	o.Private = &v
 }
 
 func (o VNet) MarshalJSON() ([]byte, error) {
@@ -247,7 +258,9 @@ func (o VNet) ToMap() (map[string]interface{}, error) {
 		toSerialize["vlan"] = o.Vlan
 	}
 	toSerialize["interface"] = o.Interface
-	toSerialize["private"] = o.Private
+	if !IsNil(o.Private) {
+		toSerialize["private"] = o.Private
+	}
 	return toSerialize, nil
 }
 
@@ -258,7 +271,6 @@ func (o *VNet) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"name",
 		"interface",
-		"private",
 	}
 
 	allProperties := make(map[string]interface{})
