@@ -9,7 +9,7 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.txt
   title: Kowabunga API documentation
-  version: 0.52.2
+  version: 0.52.3
 servers:
 - url: /api/v1
 security:

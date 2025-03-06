@@ -5568,7 +5568,7 @@ info:
   title: Kowabunga API documentation
   summary: Kowabunga API allows your client application to interact with Kowabunga's orchestrator.
   description: Kvm Orchestrator With A BUNch of Goods Added
-  version: 0.52.2
+  version: 0.52.3
   contact:
     name: The Kowabunga Project
     url: "https://www.kowabunga.cloud/"
