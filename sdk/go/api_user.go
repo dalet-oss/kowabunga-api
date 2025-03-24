@@ -201,7 +201,7 @@ func (a *UserAPIService) CreateUserExecute(r ApiCreateUserRequest) (*User, *http
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -696,7 +696,7 @@ func (a *UserAPIService) LoginExecute(r ApiLoginRequest) (*UserCredentials, *htt
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -883,7 +883,7 @@ func (a *UserAPIService) LogoutExecute(r ApiLogoutRequest) (*http.Response, erro
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1211,7 +1211,7 @@ func (a *UserAPIService) ResetPasswordExecute(r ApiResetPasswordRequest) (*http.
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1712,7 +1712,7 @@ func (a *UserAPIService) SetUserPasswordExecute(r ApiSetUserPasswordRequest) (*h
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1897,7 +1897,7 @@ func (a *UserAPIService) UpdateUserExecute(r ApiUpdateUserRequest) (*User, *http
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

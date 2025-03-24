@@ -205,7 +205,7 @@ func (a *KawaiiAPIService) CreateKawaiiIpSecExecute(r ApiCreateKawaiiIpSecReques
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1297,7 +1297,7 @@ func (a *KawaiiAPIService) UpdateKawaiiExecute(r ApiUpdateKawaiiRequest) (*Kawai
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1495,7 +1495,7 @@ func (a *KawaiiAPIService) UpdateKawaiiIpSecExecute(r ApiUpdateKawaiiIpSecReques
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

@@ -211,7 +211,7 @@ func (a *ProjectAPIService) CreateProjectExecute(r ApiCreateProjectRequest) (*Pr
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -416,7 +416,7 @@ func (a *ProjectAPIService) CreateProjectDnsRecordExecute(r ApiCreateProjectDnsR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -625,7 +625,7 @@ func (a *ProjectAPIService) CreateProjectRegionKawaiiExecute(r ApiCreateProjectR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -834,7 +834,7 @@ func (a *ProjectAPIService) CreateProjectRegionKonveyExecute(r ApiCreateProjectR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1053,7 +1053,7 @@ func (a *ProjectAPIService) CreateProjectRegionKyloExecute(r ApiCreateProjectReg
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1282,7 +1282,7 @@ func (a *ProjectAPIService) CreateProjectRegionVolumeExecute(r ApiCreateProjectR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1491,7 +1491,7 @@ func (a *ProjectAPIService) CreateProjectZoneInstanceExecute(r ApiCreateProjectZ
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1730,7 +1730,7 @@ func (a *ProjectAPIService) CreateProjectZoneKomputeExecute(r ApiCreateProjectZo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1939,7 +1939,7 @@ func (a *ProjectAPIService) CreateProjectZoneKonveyExecute(r ApiCreateProjectZon
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4114,7 +4114,7 @@ func (a *ProjectAPIService) UpdateProjectExecute(r ApiUpdateProjectRequest) (*Pr
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

@@ -3,7 +3,7 @@ export * from './agent';
 export * from './apiErrorBadRequest';
 export * from './apiErrorConflict';
 export * from './apiErrorForbidden';
-export * from './apiErrorInsufficientStorage';
+export * from './apiErrorInsufficientResource';
 export * from './apiErrorNotFound';
 export * from './apiErrorUnauthorized';
 export * from './apiErrorUnprocessableEntity';

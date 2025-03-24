@@ -17,40 +17,40 @@ import (
 	"fmt"
 )
 
-// checks if the ApiErrorInsufficientStorage type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ApiErrorInsufficientStorage{}
+// checks if the ApiErrorInsufficientResource type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ApiErrorInsufficientResource{}
 
-// ApiErrorInsufficientStorage struct for ApiErrorInsufficientStorage
-type ApiErrorInsufficientStorage struct {
+// ApiErrorInsufficientResource struct for ApiErrorInsufficientResource
+type ApiErrorInsufficientResource struct {
 	Status int32 `json:"status"`
 	Error string `json:"error"`
 	Reason string `json:"reason"`
 }
 
-type _ApiErrorInsufficientStorage ApiErrorInsufficientStorage
+type _ApiErrorInsufficientResource ApiErrorInsufficientResource
 
-// NewApiErrorInsufficientStorage instantiates a new ApiErrorInsufficientStorage object
+// NewApiErrorInsufficientResource instantiates a new ApiErrorInsufficientResource object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewApiErrorInsufficientStorage(status int32, error_ string, reason string) *ApiErrorInsufficientStorage {
-	this := ApiErrorInsufficientStorage{}
+func NewApiErrorInsufficientResource(status int32, error_ string, reason string) *ApiErrorInsufficientResource {
+	this := ApiErrorInsufficientResource{}
 	this.Status = status
 	this.Error = error_
 	this.Reason = reason
 	return &this
 }
 
-// NewApiErrorInsufficientStorageWithDefaults instantiates a new ApiErrorInsufficientStorage object
+// NewApiErrorInsufficientResourceWithDefaults instantiates a new ApiErrorInsufficientResource object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewApiErrorInsufficientStorageWithDefaults() *ApiErrorInsufficientStorage {
-	this := ApiErrorInsufficientStorage{}
+func NewApiErrorInsufficientResourceWithDefaults() *ApiErrorInsufficientResource {
+	this := ApiErrorInsufficientResource{}
 	return &this
 }
 
 // GetStatus returns the Status field value
-func (o *ApiErrorInsufficientStorage) GetStatus() int32 {
+func (o *ApiErrorInsufficientResource) GetStatus() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -61,7 +61,7 @@ func (o *ApiErrorInsufficientStorage) GetStatus() int32 {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *ApiErrorInsufficientStorage) GetStatusOk() (*int32, bool) {
+func (o *ApiErrorInsufficientResource) GetStatusOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,12 +69,12 @@ func (o *ApiErrorInsufficientStorage) GetStatusOk() (*int32, bool) {
 }
 
 // SetStatus sets field value
-func (o *ApiErrorInsufficientStorage) SetStatus(v int32) {
+func (o *ApiErrorInsufficientResource) SetStatus(v int32) {
 	o.Status = v
 }
 
 // GetError returns the Error field value
-func (o *ApiErrorInsufficientStorage) GetError() string {
+func (o *ApiErrorInsufficientResource) GetError() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -85,7 +85,7 @@ func (o *ApiErrorInsufficientStorage) GetError() string {
 
 // GetErrorOk returns a tuple with the Error field value
 // and a boolean to check if the value has been set.
-func (o *ApiErrorInsufficientStorage) GetErrorOk() (*string, bool) {
+func (o *ApiErrorInsufficientResource) GetErrorOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,12 +93,12 @@ func (o *ApiErrorInsufficientStorage) GetErrorOk() (*string, bool) {
 }
 
 // SetError sets field value
-func (o *ApiErrorInsufficientStorage) SetError(v string) {
+func (o *ApiErrorInsufficientResource) SetError(v string) {
 	o.Error = v
 }
 
 // GetReason returns the Reason field value
-func (o *ApiErrorInsufficientStorage) GetReason() string {
+func (o *ApiErrorInsufficientResource) GetReason() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -109,7 +109,7 @@ func (o *ApiErrorInsufficientStorage) GetReason() string {
 
 // GetReasonOk returns a tuple with the Reason field value
 // and a boolean to check if the value has been set.
-func (o *ApiErrorInsufficientStorage) GetReasonOk() (*string, bool) {
+func (o *ApiErrorInsufficientResource) GetReasonOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -117,11 +117,11 @@ func (o *ApiErrorInsufficientStorage) GetReasonOk() (*string, bool) {
 }
 
 // SetReason sets field value
-func (o *ApiErrorInsufficientStorage) SetReason(v string) {
+func (o *ApiErrorInsufficientResource) SetReason(v string) {
 	o.Reason = v
 }
 
-func (o ApiErrorInsufficientStorage) MarshalJSON() ([]byte, error) {
+func (o ApiErrorInsufficientResource) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -129,7 +129,7 @@ func (o ApiErrorInsufficientStorage) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ApiErrorInsufficientStorage) ToMap() (map[string]interface{}, error) {
+func (o ApiErrorInsufficientResource) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["status"] = o.Status
 	toSerialize["error"] = o.Error
@@ -137,7 +137,7 @@ func (o ApiErrorInsufficientStorage) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *ApiErrorInsufficientStorage) UnmarshalJSON(data []byte) (err error) {
+func (o *ApiErrorInsufficientResource) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -161,53 +161,53 @@ func (o *ApiErrorInsufficientStorage) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varApiErrorInsufficientStorage := _ApiErrorInsufficientStorage{}
+	varApiErrorInsufficientResource := _ApiErrorInsufficientResource{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varApiErrorInsufficientStorage)
+	err = decoder.Decode(&varApiErrorInsufficientResource)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ApiErrorInsufficientStorage(varApiErrorInsufficientStorage)
+	*o = ApiErrorInsufficientResource(varApiErrorInsufficientResource)
 
 	return err
 }
 
-type NullableApiErrorInsufficientStorage struct {
-	value *ApiErrorInsufficientStorage
+type NullableApiErrorInsufficientResource struct {
+	value *ApiErrorInsufficientResource
 	isSet bool
 }
 
-func (v NullableApiErrorInsufficientStorage) Get() *ApiErrorInsufficientStorage {
+func (v NullableApiErrorInsufficientResource) Get() *ApiErrorInsufficientResource {
 	return v.value
 }
 
-func (v *NullableApiErrorInsufficientStorage) Set(val *ApiErrorInsufficientStorage) {
+func (v *NullableApiErrorInsufficientResource) Set(val *ApiErrorInsufficientResource) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableApiErrorInsufficientStorage) IsSet() bool {
+func (v NullableApiErrorInsufficientResource) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableApiErrorInsufficientStorage) Unset() {
+func (v *NullableApiErrorInsufficientResource) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableApiErrorInsufficientStorage(val *ApiErrorInsufficientStorage) *NullableApiErrorInsufficientStorage {
-	return &NullableApiErrorInsufficientStorage{value: val, isSet: true}
+func NewNullableApiErrorInsufficientResource(val *ApiErrorInsufficientResource) *NullableApiErrorInsufficientResource {
+	return &NullableApiErrorInsufficientResource{value: val, isSet: true}
 }
 
-func (v NullableApiErrorInsufficientStorage) MarshalJSON() ([]byte, error) {
+func (v NullableApiErrorInsufficientResource) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableApiErrorInsufficientStorage) UnmarshalJSON(src []byte) error {
+func (v *NullableApiErrorInsufficientResource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

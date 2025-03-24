@@ -205,7 +205,7 @@ func (a *RegionAPIService) CreateKiwiExecute(r ApiCreateKiwiRequest) (*Kiwi, *ht
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -406,7 +406,7 @@ func (a *RegionAPIService) CreateRegionExecute(r ApiCreateRegionRequest) (*Regio
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -621,7 +621,7 @@ func (a *RegionAPIService) CreateStorageNFSExecute(r ApiCreateStorageNFSRequest)
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -826,7 +826,7 @@ func (a *RegionAPIService) CreateStoragePoolExecute(r ApiCreateStoragePoolReques
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1031,7 +1031,7 @@ func (a *RegionAPIService) CreateVNetExecute(r ApiCreateVNetRequest) (*VNet, *ht
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1236,7 +1236,7 @@ func (a *RegionAPIService) CreateZoneExecute(r ApiCreateZoneRequest) (*Zone, *ht
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2934,7 +2934,7 @@ func (a *RegionAPIService) UpdateRegionExecute(r ApiUpdateRegionRequest) (*Regio
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

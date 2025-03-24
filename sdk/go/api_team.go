@@ -201,7 +201,7 @@ func (a *TeamAPIService) CreateTeamExecute(r ApiCreateTeamRequest) (*Team, *http
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -838,7 +838,7 @@ func (a *TeamAPIService) UpdateTeamExecute(r ApiUpdateTeamRequest) (*Team, *http
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 507 {
-			var v ApiErrorInsufficientStorage
+			var v ApiErrorInsufficientResource
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

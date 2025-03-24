@@ -244,7 +244,7 @@ All URIs are relative to */api/v1*
  - [ApiErrorBadRequest](./Models/ApiErrorBadRequest.md)
  - [ApiErrorConflict](./Models/ApiErrorConflict.md)
  - [ApiErrorForbidden](./Models/ApiErrorForbidden.md)
- - [ApiErrorInsufficientStorage](./Models/ApiErrorInsufficientStorage.md)
+ - [ApiErrorInsufficientResource](./Models/ApiErrorInsufficientResource.md)
  - [ApiErrorNotFound](./Models/ApiErrorNotFound.md)
  - [ApiErrorUnauthorized](./Models/ApiErrorUnauthorized.md)
  - [ApiErrorUnprocessableEntity](./Models/ApiErrorUnprocessableEntity.md)

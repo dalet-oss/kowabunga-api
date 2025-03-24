@@ -25,7 +25,7 @@ import { ApiErrorConflict } from '../model/apiErrorConflict';
 // @ts-ignore
 import { ApiErrorForbidden } from '../model/apiErrorForbidden';
 // @ts-ignore
-import { ApiErrorInsufficientStorage } from '../model/apiErrorInsufficientStorage';
+import { ApiErrorInsufficientResource } from '../model/apiErrorInsufficientResource';
 // @ts-ignore
 import { ApiErrorNotFound } from '../model/apiErrorNotFound';
 // @ts-ignore

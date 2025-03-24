@@ -154,7 +154,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - adapter
   /agent:
@@ -204,7 +204,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - agent
   /agent/{agentId}:
@@ -280,7 +280,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - agent
   /agent/{agentId}/token:
@@ -387,7 +387,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - record
   /instance:
@@ -480,7 +480,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - instance
   /instance/{instanceId}/state:
@@ -767,7 +767,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - kaktus
   /kaktus/{kaktusId}/caps:
@@ -907,7 +907,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - kawaii
   /kawaii/{kawaiiId}/ipsec:
@@ -964,7 +964,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - kawaii
       - kawaii_ipsec
@@ -1047,7 +1047,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - kawaii
       - kawaii_ipsec
@@ -1149,7 +1149,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - kiwi
   /kompute:
@@ -1242,7 +1242,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - kompute
   /kompute/{komputeId}/state:
@@ -1507,7 +1507,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - konvey
   /kylo:
@@ -1600,7 +1600,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - kylo
   /project:
@@ -1656,7 +1656,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - project
   /project/{projectId}:
@@ -1732,7 +1732,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - project
   /project/{projectId}/cost:
@@ -1817,7 +1817,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - project
       - record
@@ -1886,7 +1886,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - project
       - region
@@ -1955,7 +1955,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - project
       - zone
@@ -2030,7 +2030,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - project
       - zone
@@ -2125,7 +2125,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - project
       - region
@@ -2167,7 +2167,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - project
       - region
@@ -2237,7 +2237,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - project
       - zone
@@ -2308,7 +2308,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - project
       - region
@@ -2388,7 +2388,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - region
   /region/{regionId}:
@@ -2464,7 +2464,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - region
   /region/{regionId}/zone:
@@ -2502,7 +2502,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - region
       - zone
@@ -2565,7 +2565,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - region
       - pool
@@ -2606,7 +2606,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - region
       - kiwi
@@ -2671,7 +2671,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - region
       - vnet
@@ -2806,7 +2806,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - region
       - nfs
@@ -2924,7 +2924,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - nfs
   /nfs/{nfsId}/kylo:
@@ -3041,7 +3041,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - pool
   /pool/{poolId}/volumes:
@@ -3103,7 +3103,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - pool
       - template
@@ -3245,7 +3245,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - subnet
   /subnet/{subnetId}/adapter:
@@ -3285,7 +3285,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - subnet
       - adapter
@@ -3360,7 +3360,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - team
   /team/{teamId}:
@@ -3436,7 +3436,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - team
   /template:
@@ -3529,7 +3529,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - template
   /token:
@@ -3627,7 +3627,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - token
   /login:
@@ -3662,7 +3662,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - user
   /logout:
@@ -3685,7 +3685,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - user
   /resetPassword:
@@ -3715,7 +3715,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - user
   /user:
@@ -3765,7 +3765,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - user
   /user/{userId}:
@@ -3841,7 +3841,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - user
   /user/{userId}/password:
@@ -3875,7 +3875,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - user
   /user/{userId}/resetPassword:
@@ -4019,7 +4019,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - vnet
   /vnet/{vnetId}/subnet:
@@ -4057,7 +4057,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - vnet
       - subnet
@@ -4199,7 +4199,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - volume
   /zone:
@@ -4292,7 +4292,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - zone
   /zone/{zoneId}/kaktus:
@@ -4330,7 +4330,7 @@ paths:
         "422":
           $ref: '#/components/responses/UnprocessableEntity'
         "507":
-          $ref: '#/components/responses/InsufficientStorage'
+          $ref: '#/components/responses/InsufficientResource'
       tags:
       - zone
       - kaktus
@@ -4684,13 +4684,13 @@ components:
           schema:
             $ref: '#/components/schemas/ApiErrorUnprocessableEntity'
       description: "UnprocessableEntity error: Server can't process request."
-    InsufficientStorage:
+    InsufficientResource:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ApiErrorInsufficientStorage'
-      description: "InsufficientStorage error: Server can't process allocate resources\
-        \ (logical quotas or physical limits hit)."
+            $ref: '#/components/schemas/ApiErrorInsufficientResource'
+      description: "InsufficientResource error: Server can't allocate resources (logical\
+        \ quotas or physical limits hit)."
   schemas:
     Adapter:
       description: A network adapter.
@@ -4900,15 +4900,15 @@ components:
       - error
       - reason
       - status
-    ApiErrorInsufficientStorage:
+    ApiErrorInsufficientResource:
       properties:
         status:
           example: 507
           format: int32
           type: integer
         error:
-          example: Server can't process allocate resources (logical quotas or physical
-            limits hit).
+          example: Server can't allocate resources (logical quotas or physical limits
+            hit).
           type: string
         reason:
           example: server_side_details

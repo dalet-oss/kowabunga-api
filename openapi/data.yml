@@ -255,7 +255,7 @@ errors:
     code: 422
     schema: UnprocessableEntity
     desc: Server can't process request
-  InsufficientStorage:
+  InsufficientResource:
     code: 507
-    schema: InsufficientStorage
-    desc: Server can't process allocate resources (logical quotas or physical limits hit)
+    schema: InsufficientResource
+    desc: Server can't allocate resources (logical quotas or physical limits hit)

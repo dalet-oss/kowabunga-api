@@ -1,4 +1,4 @@
-# ApiErrorInsufficientStorage
+# ApiErrorInsufficientResource
 ## Properties
 
 | Name | Type | Description | Notes |

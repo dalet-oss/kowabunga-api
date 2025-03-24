@@ -9,7 +9,7 @@
  */
 
 
-export interface ApiErrorInsufficientStorage { 
+export interface ApiErrorInsufficientResource { 
     status: number;
     error: string;
     reason: string;
